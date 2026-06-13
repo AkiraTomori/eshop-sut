@@ -132,8 +132,8 @@
   - Each report includes: Bug ID, Date, Problem Summary, Severity, Steps to Reproduce, Expected vs Actual Result, Environment (macOS Tahoe 26.1 / Edge), GitHub Issue placeholder, and Linked Test Case
   - Severity assigned per theory-test-report.md §5 (Fatal/Serious/Medium/Cosmetic)
   - Priority left blank for HITL/PM assignment per TR-BP-06
-- **Human Review Notes:** _(HITL must review severity assignments, file GitHub Issues for each bug, paste issue URLs into `FR06-bug-report.md`, and sign off below)_
-- **Verdict:** _(Accepted / Partially Accepted / Rejected — set by HITL after review)_
+- **Human Review Notes:** Approved
+- **Verdict:** Accepted
 
 ---
 ## Session: 2026-06-13 20:44 — Phase 5: Reporting (Bug Report — Remaining Test Cases)
@@ -156,5 +156,5 @@
   - Severity breakdown for all 20 bugs: 4 × Fatal, 12 × Serious, 3 × Medium, 0 × Cosmetic
   - BUG-FR06-016 and BUG-FR06-017 are noted as duplicate manifestations of BUG-FR06-001 (same root cause — category field not rendered)
   - BUG-FR06-018 is noted as a BVA-level confirmation of the price tampering vulnerability already identified in BUG-FR06-015
-- **Human Review Notes:** _(HITL must review severity assignments, merge duplicate issues where appropriate — especially BUG-FR06-001/016/017 and BUG-FR06-015/018 — file GitHub Issues for each unique defect, and sign off below)_
-- **Verdict:** _(Accepted / Partially Accepted / Rejected — set by HITL after review)_
+- **Human Review Notes:** Approved
+- **Verdict:** Accepted

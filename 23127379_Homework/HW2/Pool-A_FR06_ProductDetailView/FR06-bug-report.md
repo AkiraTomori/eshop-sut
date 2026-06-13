@@ -51,9 +51,9 @@ Per FR-06: The product detail page must display all 5 required fields — image,
 - App URL: http://localhost:5173/product/1
 - Test Data: product_id=1
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/1
 **Linked Test Case:** TC-FR06-EP-001, TC-FR06-BV-001, TC-FR06-BV-002
-**Attachments:** _(HITL attaches screenshot / recording)_
+**Attachments:** ![Screenshot](./Issues/1.png)
 
 ---
 
@@ -97,9 +97,9 @@ The cart displays product id=1 as **two separate rows**: one with quantity = 2 (
 - App URL: http://localhost:5173/product/1 → http://localhost:5173/cart
 - Test Data: product_id=1, existing cart quantity=2, added quantity=1
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/2
 **Linked Test Case:** TC-FR06-EP-004
-**Attachments:** _(HITL attaches screenshot / recording)_
+**Attachments:** ![Screenshot](./Issues/2.png)
 
 ---
 
@@ -140,9 +140,9 @@ The system did not reject quantity = `0`. The product was added to the cart with
 - App URL: http://localhost:5173/product/1
 - Test Data: product_id=1, quantity=0
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/3
 **Linked Test Case:** TC-FR06-NEG-006
-**Attachments:** _(HITL attaches screenshot / recording)_
+**Attachments:** ![Screenshot](./Issues/3.png)
 
 ---
 
@@ -182,9 +182,9 @@ The system did not reject quantity = `-1`. The product was added to the cart wit
 - App URL: http://localhost:5173/product/1
 - Test Data: product_id=1, quantity=-1
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/4
 **Linked Test Case:** TC-FR06-NEG-007
-**Attachments:** _(HITL attaches screenshot / recording)_
+**Attachments:** ![Screenshot](./Issues/4.png)
 
 ---
 
@@ -225,9 +225,9 @@ The system accepted `1.5` without displaying any error. The decimal value was si
 - App URL: http://localhost:5173/product/1
 - Test Data: product_id=1, quantity=1.5
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/5
 **Linked Test Case:** TC-FR06-NEG-008
-**Attachments:** _(HITL attaches screenshot / recording)_
+**Attachments:** ![Screenshot](./Issues/5.png)
 
 ---
 
@@ -268,9 +268,9 @@ The system did not reject the non-numeric input. Despite `input type="number"` o
 - App URL: http://localhost:5173/product/1
 - Test Data: product_id=1, quantity="abc"
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/6
 **Linked Test Case:** TC-FR06-NEG-009
-**Attachments:** _(HITL attaches screenshot / recording)_
+**Attachments:** ![Screenshot](./Issues/6.png)
 
 ---
 
@@ -312,9 +312,9 @@ The system did not reject the empty quantity field. The product was added to the
 - App URL: http://localhost:5173/product/1
 - Test Data: product_id=1, quantity="" (empty)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/7
 **Linked Test Case:** TC-FR06-NEG-010
-**Attachments:** _(HITL attaches screenshot / recording)_
+**Attachments:** ![Screenshot](./Issues/7.png)
 
 ---
 
@@ -355,9 +355,9 @@ The system accepted quantity = `999999999` without any error or rejection. The p
 - App URL: http://localhost:5173/product/1
 - Test Data: product_id=1, quantity=999999999
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/8
 **Linked Test Case:** TC-FR06-NEG-011
-**Attachments:** _(HITL attaches screenshot / recording)_
+**Attachments:** ![Screenshot](./Issues/8.png)
 
 ---
 
@@ -399,9 +399,9 @@ The system did not block the add-to-cart action. Despite the user being unauthen
 - App URL: http://localhost:5173/product/1
 - Test Data: product_id=1, quantity=1, auth=none (no JWT)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/9
 **Linked Test Case:** TC-FR06-NEG-012
-**Attachments:** _(HITL attaches screenshot showing no login prompt)_
+**Attachments:** ![Screenshot](./Issues/9.png)
 
 ---
 
@@ -453,9 +453,9 @@ The API returned a success response and added the non-existent product (id=99999
 - Backend URL: http://localhost:3000/api/cart
 - Test Data: `{"id": 99999, "name": "Fake Product", "price": 100000, "quantity": 1}`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/10
 **Linked Test Case:** TC-FR06-NEG-013
-**Attachments:** _(HITL attaches Postman screenshot showing 2xx response)_
+**Attachments:** ![Screenshot](./Issues/10.png)
 
 ---
 
@@ -509,9 +509,9 @@ The API accepted the request and added the product to the cart with `price = 0`.
 - Backend URL: http://localhost:3000/api/cart
 - Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 0, "quantity": 1}`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/11
 **Linked Test Case:** TC-FR06-NEG-014
-**Attachments:** _(HITL attaches Postman screenshot showing 2xx response and GET /api/cart response confirming price=0)_
+**Attachments:** ![Screenshot](./Issues/11.png)
 
 ---
 
@@ -564,9 +564,9 @@ The API accepted the request and added the product to the cart with `price = -10
 - Backend URL: http://localhost:3000/api/cart
 - Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": -1000000, "quantity": 1}`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/12
 **Linked Test Case:** TC-FR06-NEG-015
-**Attachments:** _(HITL attaches Postman screenshot showing 2xx response and negative total in cart)_
+**Attachments:** ![Screenshot](./Issues/12.png)
 
 ---
 
@@ -618,9 +618,9 @@ The API accepted the request and added the product to the cart with `quantity = 
 - Backend URL: http://localhost:3000/api/cart
 - Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 0}`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/13
 **Linked Test Case:** TC-FR06-NEG-016
-**Attachments:** _(HITL attaches Postman screenshot showing 2xx response)_
+**Attachments:** ![Screenshot](./Issues/13.png)
 
 ---
 
@@ -672,9 +672,9 @@ The API accepted the request and added the product to the cart with `quantity = 
 - Backend URL: http://localhost:3000/api/cart
 - Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": "abc"}`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/14
 **Linked Test Case:** TC-FR06-NEG-017
-**Attachments:** _(HITL attaches Postman screenshot showing 2xx response and GET /api/cart showing NaN quantity)_
+**Attachments:** ![Screenshot](./Issues/14.png)
 
 ---
 
@@ -728,9 +728,9 @@ The API accepted `price=1` and stored it in the cart. The checkout flow processe
 - Backend URL: http://localhost:3000/api/cart
 - Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}` (actual DB price = 30,000,000)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/15
 **Linked Test Case:** TC-FR06-NEG-018
-**Attachments:** _(HITL attaches Postman screenshots: GET /api/products/1 showing real price, POST /api/cart with price=1 showing 2xx, GET /api/cart showing tampered price, checkout total showing ₫1)_
+**Attachments:** ![Screenshot](./Issues/15.png)
 
 ---
 
@@ -769,9 +769,9 @@ The category name field is absent from the product detail page for id=1. Only 4 
 - App URL: http://localhost:5173/product/1
 - Test Data: product_id=1 (specification LB)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N] — may reference same issue as BUG-FR06-001)_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/16
 **Linked Test Case:** TC-FR06-BV-001
-**Attachments:** _(HITL attaches screenshot)_
+**Attachments:** ![Screenshot](./Issues/16.png)
 
 ---
 
@@ -810,9 +810,9 @@ The category name field is absent from the product detail page for id=2. Only 4 
 - App URL: http://localhost:5173/product/2
 - Test Data: product_id=2 (BVA LB+1)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N] — may reference same issue as BUG-FR06-001)_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/17
 **Linked Test Case:** TC-FR06-BV-002
-**Attachments:** _(HITL attaches screenshot)_
+**Attachments:** ![Screenshot](./Issues/17.png)
 
 ---
 
@@ -865,9 +865,9 @@ The API returned a success response and stored `price=1` in the cart. No price v
 - Backend URL: http://localhost:3000/api/cart
 - Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}` (actual DB price = 30,000,000)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N] — may reference same issue as BUG-FR06-015)_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/18
 **Linked Test Case:** TC-FR06-BV-006
-**Attachments:** _(HITL attaches Postman screenshots)_
+**Attachments:** ![Screenshot](./Issues/18.png)
 
 ---
 
@@ -919,9 +919,9 @@ The API accepted the request and stored `quantity = -1` in the cart. No boundary
 - Backend URL: http://localhost:3000/api/cart
 - Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": -1}`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/19
 **Linked Test Case:** TC-FR06-BV-007
-**Attachments:** _(HITL attaches Postman screenshot showing 2xx response and GET /api/cart confirming quantity=-1)_
+**Attachments:** ![Screenshot](./Issues/19.png)
 
 ---
 
@@ -976,9 +976,9 @@ The API accepted `quantity=999999999` without rejection. The `GET /api/cart` API
 - Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 999999999}`
 - Expected total (manual): ₫29,999,999,970,000,000
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/20
 **Linked Test Case:** TC-FR06-BV-008
-**Attachments:** _(HITL attaches Postman screenshot showing 2xx response, GET /api/cart response, and cart page total screenshot)_
+**Attachments:** ![Screenshot](./Issues/20.png)
 
 ---
 
