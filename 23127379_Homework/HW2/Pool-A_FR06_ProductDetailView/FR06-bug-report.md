@@ -17,7 +17,7 @@
 **Function Name:** FR-06 Product Detail View — Product Information Display
 **Problem Summary:** Product detail page is missing the category name field, missing breadcrumb navigation, and the "Add to Cart" button is displayed in green instead of the required blue colour (Expected: category name displayed, breadcrumbs visible, and button colour blue per FR-21/FR-24).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** High
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -63,7 +63,7 @@ Per FR-06: The product detail page must display all 5 required fields — image,
 **Function Name:** FR-06 Product Detail View / FR-07 Cart Management — Add to Cart Duplicate Row
 **Problem Summary:** Adding a product that already exists in the cart creates a new duplicate row instead of incrementing the existing row's quantity (Expected: existing cart entry quantity is incremented; no duplicate rows).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** High
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -109,7 +109,7 @@ The cart displays product id=1 as **two separate rows**: one with quantity = 2 (
 **Function Name:** FR-06 Product Detail View — Quantity Field Input Validation (Zero)
 **Problem Summary:** The quantity field on the product detail page accepts and processes a value of `0`, allowing a product to be added to the cart with zero quantity (Expected: quantity of 0 is rejected with an appropriate error message; product is NOT added to cart).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** High
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -152,7 +152,7 @@ The system did not reject quantity = `0`. The product was added to the cart with
 **Function Name:** FR-06 Product Detail View — Quantity Field Input Validation (Negative Integer)
 **Problem Summary:** The quantity field on the product detail page accepts and processes a negative value (`-1`), allowing a product to be added to the cart with a negative quantity (Expected: negative quantity is rejected with an appropriate error; product is NOT added to cart).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -194,7 +194,7 @@ The system did not reject quantity = `-1`. The product was added to the cart wit
 **Function Name:** FR-06 Product Detail View — Quantity Field Input Validation (Decimal)
 **Problem Summary:** The quantity field accepts a decimal value (`1.5`) and silently truncates it to `1` before adding to cart, without informing the user that their input was modified (Expected: decimal input is rejected with a clear error message OR the UI prevents decimal entry; silent truncation without notification is a defect).
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -237,7 +237,7 @@ The system accepted `1.5` without displaying any error. The decimal value was si
 **Function Name:** FR-06 Product Detail View — Quantity Field Input Validation (Non-Numeric / NaN)
 **Problem Summary:** The quantity field (`input type="number"`) accepts non-numeric text (e.g., `abc`), and the product is added to the cart — NaN quantity reaches the backend (Expected: non-numeric input is rejected at the frontend; the product must NOT be added to the cart with an invalid quantity).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** High
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -280,7 +280,7 @@ The system did not reject the non-numeric input. Despite `input type="number"` o
 **Function Name:** FR-06 Product Detail View — Quantity Field Input Validation (Empty Field)
 **Problem Summary:** Clearing the quantity field completely and clicking "Add to Cart" results in the product being added to the cart with a NaN quantity (Expected: empty quantity field is rejected; the product must NOT be added to the cart with an undefined or NaN quantity).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** High
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -324,7 +324,7 @@ The system did not reject the empty quantity field. The product was added to the
 **Function Name:** FR-06 Product Detail View — Quantity Field Input Validation (Extremely Large Value)
 **Problem Summary:** The quantity field accepts an extremely large value (`999999999`) without any upper-limit validation, allowing the product to be added to the cart with a quantity far exceeding any practical system limit (Expected: the system rejects or caps the quantity at a defined maximum).
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -367,7 +367,7 @@ The system accepted quantity = `999999999` without any error or rejection. The p
 **Function Name:** FR-06 Product Detail View / SEC-02 Authentication — Unauthenticated Add to Cart
 **Problem Summary:** An unauthenticated user (no session/JWT) is able to add a product to the cart without being redirected to login or shown an authentication error (Expected: unauthenticated add-to-cart is blocked; user is redirected to `/login` or shown a descriptive error toast).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -411,7 +411,7 @@ The system did not block the add-to-cart action. Despite the user being unauthen
 **Function Name:** FR-06 Product Detail View — API Cart Validation (Non-Existent Product ID)
 **Problem Summary:** The `POST /api/cart` endpoint accepts a cart request containing a non-existent product ID (`id=99999`) and adds the item to the user's cart without verifying product existence in the database (Expected: the API rejects the request with HTTP 400 or 404 when the product ID does not exist).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** High
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -467,7 +467,7 @@ The API returned a success response and added the non-existent product (id=99999
 **Function Name:** FR-06 Product Detail View — API Cart Price Validation (Zero Price)
 **Problem Summary:** The `POST /api/cart` endpoint accepts a cart request body with `price=0`, storing the item at zero cost — effectively making products free (Expected: the API rejects any request where `price ≤ 0` with HTTP 400; zero price must not be persisted in the cart).
 **Severity:** Fatal
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -521,7 +521,7 @@ The API accepted the request and added the product to the cart with `price = 0`.
 **Function Name:** FR-06 Product Detail View — API Cart Price Validation (Negative Price)
 **Problem Summary:** The `POST /api/cart` endpoint accepts a cart request body with a negative `price` (`-1000000`), which produces a negative cart total — a critical financial integrity defect (Expected: the API rejects any request where `price < 0` with HTTP 400).
 **Severity:** Fatal
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -576,7 +576,7 @@ The API accepted the request and added the product to the cart with `price = -10
 **Function Name:** FR-06 Product Detail View — API Cart Quantity Validation (Zero Quantity)
 **Problem Summary:** The `POST /api/cart` endpoint accepts a cart request with `quantity=0` at the API level, bypassing the frontend's specification minimum of 1 (Expected: the API rejects quantity=0 with HTTP 400 as a server-side guard independent of UI validation).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** High
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -630,7 +630,7 @@ The API accepted the request and added the product to the cart with `quantity = 
 **Function Name:** FR-06 Product Detail View — API Cart Quantity Validation (NaN / String Quantity)
 **Problem Summary:** The `POST /api/cart` endpoint accepts a string value (`"abc"`) in the `quantity` field and stores it in the cart as a NaN quantity, corrupting the cart data (Expected: the API rejects non-numeric quantity with HTTP 400 and enforces type validation server-side).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** High
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -684,7 +684,7 @@ The API accepted the request and added the product to the cart with `quantity = 
 **Function Name:** FR-06 Product Detail View — API Security: Price Tampering Attack
 **Problem Summary:** The `POST /api/cart` API blindly trusts the client-sent `price` field without cross-referencing the actual product price in the database. An attacker can set `price=1` for a product worth ₫30,000,000 and complete checkout at that fraudulent price — a critical security and financial integrity vulnerability (Expected: the API fetches the authoritative price from the database and ignores or overrides the client-sent value).
 **Severity:** Fatal
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -740,7 +740,7 @@ The API accepted `price=1` and stored it in the cart. The checkout flow processe
 **Function Name:** FR-06 Product Detail View — Product Information Display (BVA: id=1 Lower Boundary)
 **Problem Summary:** The product detail page for the smallest valid product ID (`id=1`) does not display the category name field — one of the 5 mandatory fields per FR-06 (Expected: category name is displayed). **Note: this is a duplicate manifestation of BUG-FR06-001 at the lower ID boundary; root cause is the same absent category field.**
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -781,7 +781,7 @@ The category name field is absent from the product detail page for id=1. Only 4 
 **Function Name:** FR-06 Product Detail View — Product Information Display (BVA: id=2, LB+1)
 **Problem Summary:** The product detail page for `id=2` (one above the lower boundary) also does not display the category name field — confirming the category omission defect is not isolated to id=1 and affects the product detail page globally (Expected: category name is displayed for all valid product IDs). **Note: duplicate manifestation of BUG-FR06-001; same root cause.**
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -822,7 +822,7 @@ The category name field is absent from the product detail page for id=2. Only 4 
 **Function Name:** FR-06 Product Detail View — API Cart Price Validation (BVA: Price LB = 1₫)
 **Problem Summary:** The `POST /api/cart` API accepts a client-supplied `price=1` (the price lower boundary) for a product whose actual database price is ₫30,000,000, confirming that the backend performs no server-side price validation against the database at any price value — including the boundary minimum (Expected: API fetches authoritative price from DB; price=1 sent by client is rejected or overridden when it doesn't match the DB price).
 **Severity:** Fatal
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -877,7 +877,7 @@ The API returned a success response and stored `price=1` in the cart. No price v
 **Function Name:** FR-06 Product Detail View — API Cart Quantity Validation (BVA: Quantity LB-1 = -1)
 **Problem Summary:** The `POST /api/cart` API accepts a `quantity=-1` (one below the specification lower boundary of 1) without rejection, confirming that the API has no server-side lower-boundary enforcement for the quantity field (Expected: API rejects quantity=-1 with HTTP 400).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -931,7 +931,7 @@ The API accepted the request and stored `quantity = -1` in the cart. No boundary
 **Function Name:** FR-06 Product Detail View — API Cart Quantity Validation (BVA: DB Stress — quantity=999999999)
 **Problem Summary:** The `POST /api/cart` API accepts an extremely large quantity (`999999999`) without rejection or upper-bound enforcement. While no server crash occurred, the API provides no way to retrieve the calculated cart total via `GET /api/cart`, preventing overflow verification — a system design gap (Expected: the API either rejects the extreme quantity or returns the total with overflow-safe calculation).
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
