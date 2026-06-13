@@ -27,7 +27,7 @@
   - EShop backend is running at `http://localhost:3000`
   - At least one product exists in the database (e.g., product id=1)
 **Steps:**
-  1. Open browser and navigate to `http://localhost:5173/products/1`
+  1. Open browser and navigate to `http://localhost:5173/product/1`
   2. Wait for the page to fully load
   3. Verify that the product's large image is displayed with a non-empty `alt` attribute
   4. Verify that the product name is displayed in full
@@ -36,14 +36,14 @@
   7. Verify that the product category name is displayed
   8. Verify that breadcrumb navigation is present on the page
   9. Inspect the page source — verify exactly one `<h1>` tag exists
-  10. Verify the entire interface is displayed in English
+  10. Verify the entire interface is displayed in Vietnamese
   11. Verify the "Add to Cart" button is blue (positive action colour)
   12. Verify tab order follows top-to-bottom, left-to-right sequence
 **Test Data:**
-  - Input: URL = `http://localhost:5173/products/1`
+  - Input: URL = `http://localhost:5173/product/1`
   - Expected Output: Product detail page with all 5 fields (image, name, price, description, category) rendered correctly
-**Expected Result:** The product detail page displays: (1) a large product image with descriptive non-empty `alt` attribute, (2) the product name in full text, (3) the price formatted as e.g. `150,000 ₫` with thousands separator, (4) the description rendered as escaped text (no HTML injection), (5) the category name. Additionally: breadcrumbs are visible, exactly one `<h1>` tag exists, all text is in English, the "Add to Cart" button is blue, and tab order is correct.
-**Observed Result:** Will reproduce later
+**Expected Result:** The product detail page displays: (1) a large product image with descriptive non-empty `alt` attribute, (2) the product name in full text, (3) the price formatted as e.g. `150,000 ₫` with thousands separator, (4) the description rendered as escaped text (no HTML injection), (5) the category name. Additionally: breadcrumbs are visible, exactly one `<h1>` tag exists, all text is in Vietnamese, the "Add to Cart" button is blue, and tab order is correct.
+**Observed Result:** The Product detail page only displays: a large product image with descriptive non-empty `alt`attribute, the product name in full text, the price formatted as expected, the description rendered as escaped text (no HTML injection). But there is no category name, no breadcrumb navigation in the page, "Add to Cart" button is Green not blue.
 **Status:** Fail
 **EC Coverage:** EC-FR06-001, EC-FR06-022, EC-FR06-028, EC-FR06-029, EC-FR06-030, EC-FR06-031, EC-FR06-032, EC-FR06-033
 **Req. Ref:** FR-06, FR-21, FR-23, FR-24, SEC-04
@@ -61,7 +61,7 @@
   - EShop frontend is running at `http://localhost:5173`
   - A product exists in the database (e.g., product id=1)
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Locate the quantity input field
   3. Verify the field's default/initial value is `1`
   4. Clear the field and type `5`
@@ -71,7 +71,7 @@
   - Expected Output: Field displays `1` initially, then `5` after user input
 **Expected Result:** The quantity input field is pre-populated with the value `1`. After the user clears and types `5`, the field displays `5` without error.
 **Observed Result:** As Expected Result
-**Status:** Pass
+**Status:** Passed
 **EC Coverage:** EC-FR06-007
 **Req. Ref:** FR-06
 **Bug ID:** None
@@ -91,7 +91,7 @@
   - The product is NOT currently in the user's cart (clean state)
 **Steps:**
   1. Log in with `test@eshop.com` / `Test1234!`
-  2. Navigate to `http://localhost:5173/products/1`
+  2. Navigate to `http://localhost:5173/product/1`
   3. Set quantity to `3`
   4. Click the "Add to Cart" button
   5. Observe the UI feedback (toast notification or badge update)
@@ -100,8 +100,8 @@
   - Input: product_id = `1`, quantity = `3`, auth = valid JWT
   - Expected Output: Toast notification displayed, cart badge shows updated item count
 **Expected Result:** After clicking "Add to Cart": (1) a visual feedback is shown — either a toast notification confirming the item was added or the cart badge updates, (2) the navbar cart badge reflects the new total number of items (incremented by 3).
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** A toast notification confirming the item was added to the cart is displayed.
+**Status:** Passed
 **EC Coverage:** EC-FR06-007, EC-FR06-014, EC-FR06-016, EC-FR06-018, EC-FR06-020, EC-FR06-024
 **Req. Ref:** FR-06, FR-24, FR-23, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -120,9 +120,9 @@
   - Product id=1 exists in the database
   - Product id=1 is already in the user's cart with quantity = 2
 **Steps:**
-  1. Log in and navigate to `http://localhost:5173/products/1`
+  1. Log in and navigate to `http://localhost:5173/product/1`
   2. Verify product id=1 is already in the cart (navigate to cart page to confirm quantity = 2)
-  3. Return to `http://localhost:5173/products/1`
+  3. Return to `http://localhost:5173/product/1`
   4. Set quantity to `1`
   5. Click "Add to Cart"
   6. Navigate to the cart page
@@ -132,8 +132,8 @@
   - Input: product_id = `1`, quantity = `1`, existing cart quantity = `2`
   - Expected Output: Cart shows product id=1 with quantity = `3`, no duplicate rows
 **Expected Result:** The cart page shows product id=1 as a single row with quantity = `3`. No new row was created. The cart total reflects the updated quantity.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The cart page shows product id=1 as multiple rows, one with quantity = `2`, one with quantity = `1`. New row was created. Status: Failed.
+**Status:** Failed
 **EC Coverage:** EC-FR06-025
 **Req. Ref:** FR-07, FR-06
 **Bug ID:** _(fill if fails)_
@@ -155,14 +155,14 @@
   - EShop frontend and backend are running
   - No product with id=99999 exists in the database
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/99999`
+  1. Navigate to `http://localhost:5173/product/99999`
   2. Observe the page response
 **Test Data:**
-  - Input: URL = `http://localhost:5173/products/99999`
+  - Input: URL = `http://localhost:5173/product/99999`
   - Expected Output: Error page or 404 message displayed
 **Expected Result:** The system displays an appropriate error page or "Product not found" message. No blank page, no crash, no unhandled exception. The API returns HTTP 404.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** "Product not found" message is displayed.
+**Status:** Passed
 **EC Coverage:** EC-FR06-002, EC-FR06-023
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -178,14 +178,14 @@
 **Pre-conditions:**
   - EShop frontend and backend are running
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/0`
+  1. Navigate to `http://localhost:5173/product/0`
   2. Observe the page response
 **Test Data:**
-  - Input: URL = `http://localhost:5173/products/0`
+  - Input: URL = `http://localhost:5173/product/0`
   - Expected Output: Error page or 404 message
 **Expected Result:** The system displays an appropriate error page or "Product not found" message. The API returns HTTP 404. No unhandled exception or blank page.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** "Product not found" message is displayed.
+**Status:** Passed
 **EC Coverage:** EC-FR06-003
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -201,14 +201,14 @@
 **Pre-conditions:**
   - EShop frontend and backend are running
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/-1`
+  1. Navigate to `http://localhost:5173/product/-1`
   2. Observe the page response
 **Test Data:**
-  - Input: URL = `http://localhost:5173/products/-1`
+  - Input: URL = `http://localhost:5173/product/-1`
   - Expected Output: Error page or 404 message
 **Expected Result:** The system displays an appropriate error page or "Product not found" message. No crash, no unhandled exception.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** "Product not found" message is displayed.
+**Status:** Passed
 **EC Coverage:** EC-FR06-004
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -224,14 +224,14 @@
 **Pre-conditions:**
   - EShop frontend and backend are running
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/abc`
+  1. Navigate to `http://localhost:5173/product/abc`
   2. Observe the page response
 **Test Data:**
-  - Input: URL = `http://localhost:5173/products/abc`
+  - Input: URL = `http://localhost:5173/product/abc`
   - Expected Output: Error page or 404 message
 **Expected Result:** The system displays an appropriate error page or "Product not found" message. No unhandled JavaScript error, no blank page. User-supplied data in the URL is safely handled (no XSS via URL parameter — SEC-04).
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** "Product not found" message is displayed.
+**Status:** Passed
 **EC Coverage:** EC-FR06-005
 **Req. Ref:** FR-06, SEC-04
 **Bug ID:** _(fill if fails)_
@@ -247,14 +247,14 @@
 **Pre-conditions:**
   - EShop frontend and backend are running
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/9999999999999`
+  1. Navigate to `http://localhost:5173/product/9999999999999`
   2. Observe the page response
 **Test Data:**
-  - Input: URL = `http://localhost:5173/products/9999999999999`
+  - Input: URL = `http://localhost:5173/product/9999999999999`
   - Expected Output: Error page or 404 message
 **Expected Result:** The system displays an appropriate error page or "Product not found" message. No server crash, no 500 Internal Server Error, no unhandled exception.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** "Product not found" message is displayed.
+**Status:** Passed
 **EC Coverage:** EC-FR06-006
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -272,7 +272,7 @@
   - A product exists (e.g., product id=1)
   - User is logged in
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Clear the quantity field and type `0`
   3. Click "Add to Cart"
   4. Observe the system response
@@ -280,8 +280,8 @@
   - Input: quantity = `0`, product_id = `1`
   - Expected Output: Error message or prevention of add-to-cart action
 **Expected Result:** The system rejects the quantity of 0. Either: (a) the input field prevents entry of 0 (e.g., HTML `min=1`), or (b) clicking "Add to Cart" displays an error message such as "Quantity must be at least 1", or (c) the API returns an error. The product is NOT added to the cart with quantity 0.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the quantity of O. It was added to the cart.
+**Status:** Failed
 **EC Coverage:** EC-FR06-008, EC-FR06-027
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -299,7 +299,7 @@
   - A product exists (e.g., product id=1)
   - User is logged in
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Clear the quantity field and type `-1`
   3. Click "Add to Cart"
   4. Observe the system response
@@ -307,8 +307,8 @@
   - Input: quantity = `-1`, product_id = `1`
   - Expected Output: Error message or prevention of add-to-cart action
 **Expected Result:** The system rejects the negative quantity. Either: (a) the input field prevents entry of negative values, or (b) an error message is displayed, or (c) the API returns an error. The product is NOT added to the cart with quantity -1.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the quantity of negative one. It was added to the cart.
+**Status:** Failed
 **EC Coverage:** EC-FR06-009, EC-FR06-027
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -326,7 +326,7 @@
   - A product exists (e.g., product id=1)
   - User is logged in
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Clear the quantity field and type `1.5`
   3. Click "Add to Cart"
   4. Observe the system response
@@ -335,8 +335,8 @@
   - Expected Output: Error message or truncation/rounding to integer
   
 **Expected Result:** The system rejects the decimal quantity or handles it safely. Either: (a) the input field prevents decimal entry, (b) the value is rounded/truncated to the nearest integer before processing, or (c) an error message is displayed. A decimal value must NOT be stored as-is in the cart.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the decimal quantity. It was added to the cart and quantity decimal truncate from 1.5 to 1.
+**Status:** Failed
 **EC Coverage:** EC-FR06-010, EC-FR06-027
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -354,7 +354,7 @@
   - A product exists (e.g., product id=1)
   - User is logged in
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Clear the quantity field and type `abc`
   3. Click "Add to Cart"
   4. Observe the system response
@@ -363,8 +363,8 @@
   - Input: quantity = `abc`, product_id = `1`
   - Expected Output: Error message; NaN must NOT reach the cart or API
 **Expected Result:** The system rejects the non-numeric input. Either: (a) the input field prevents non-numeric characters, or (b) the frontend validates and displays an error before sending to API, or (c) the API rejects NaN values. The product is NOT added to the cart with an invalid quantity. No NaN value persists in the system.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the non-numeric input with input type='number' in HTML. The product was added to the cart. Status: Failed.
+**Status:** Failed
 **EC Coverage:** EC-FR06-011, EC-FR06-027
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -382,7 +382,7 @@
   - A product exists (e.g., product id=1)
   - User is logged in
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Clear the quantity field completely (leave it blank)
   3. Click "Add to Cart"
   4. Observe the system response
@@ -390,8 +390,8 @@
   - Input: quantity = `` (empty), product_id = `1`
   - Expected Output: Error message or prevention of add-to-cart action
 **Expected Result:** The system rejects the empty quantity. Either: (a) the field retains its minimum value of 1 and does not allow clearing, or (b) an error message is displayed, or (c) the "Add to Cart" button is disabled. The product is NOT added to the cart with an undefined/empty quantity.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the empty quantity. The product was added to the cart with NaN quantity. Status: Failed.
+**Status:** Failed
 **EC Coverage:** EC-FR06-012, EC-FR06-027
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -409,7 +409,7 @@
   - A product exists (e.g., product id=1)
   - User is logged in
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Clear the quantity field and type `999999999`
   3. Click "Add to Cart"
   4. Observe the system response
@@ -418,8 +418,8 @@
   - Input: quantity = `999999999`, product_id = `1`
   - Expected Output: System rejects the value or handles overflow gracefully
 **Expected Result:** The system either: (a) rejects the extremely large quantity with an appropriate error message, (b) caps the quantity at a reasonable maximum, or (c) if it accepts the value, the cart total calculates correctly without integer overflow or NaN. No system crash or 500 error.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the extremely large quantity. It was added to the cart without interger overflow or NaN. No system crash or 500 Error either. 
+**Status:** Failed
 **EC Coverage:** EC-FR06-013
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -438,7 +438,7 @@
   - A product exists (e.g., product id=1)
 **Steps:**
   1. Open a browser in private/incognito mode (ensure no session exists)
-  2. Navigate to `http://localhost:5173/products/1`
+  2. Navigate to `http://localhost:5173/product/1`
   3. Verify the product detail page loads correctly (viewing does not require auth)
   4. Set quantity to `1`
   5. Click "Add to Cart"
@@ -447,8 +447,8 @@
   - Input: product_id = `1`, quantity = `1`, auth = none
   - Expected Output: Redirect to login page or descriptive error toast
 **Expected Result:** The system blocks the add-to-cart action. Either: (a) the user is redirected to `/login` page, or (b) a descriptive error toast/message is displayed (e.g., "Please log in to add items to your cart"). No silent failure, no UI crash, no product added to an anonymous cart.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't block the add-to-cart action with unauthenticated user. It still add the product to the cart. 
+**Status:** Failed
 **EC Coverage:** EC-FR06-015, EC-FR06-026
 **Req. Ref:** SEC-02, FR-06
 **Bug ID:** _(fill if fails)_
@@ -474,8 +474,8 @@
   - Input: `{"id": 99999, "name": "Fake Product", "price": 100000, "quantity": 1}`
   - Expected Output: HTTP 400/404 error response
 **Expected Result:** The API returns an error (HTTP 400 or 404) indicating the product does not exist. The item is NOT added to the user's cart.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't return an error (HTTP 400 or 404) indicating the product does not exist. The item is added to the user's cart.
+**Status:** Failed
 **EC Coverage:** EC-FR06-017
 **Req. Ref:** API §4.2
 **Bug ID:** _(fill if fails)_
@@ -499,11 +499,11 @@
   4. Observe the API response
   5. Check the cart via `GET /api/cart` — verify no zero-price item exists
 **Test Data:**
-  - Input: `{"id": 1, "name": "Product 1", "price": 0, "quantity": 1}`
+  - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 0, "quantity": 1}`
   - Expected Output: HTTP 400 error — price must be > 0
 **Expected Result:** The API rejects the request with an error indicating invalid price. The product is NOT added to the cart with price = 0. If the API accepts it (known vulnerability per HITL finding), this is a **bug** — report it.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't reject the request with zero price. The product was added to the cart with price = 0. 
+**Status:** Failed
 **EC Coverage:** EC-FR06-019
 **Req. Ref:** FR-15, API §4.2, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -522,16 +522,16 @@
   - Product id=1 exists
 **Steps:**
   1. Obtain a valid JWT token
-  2. Send `POST /api/cart` with body: `{"id": 1, "name": "Product 1", "price": -1000000, "quantity": 1}`
+  2. Send `POST /api/cart` with body: `{"id": 1, "name": "iPhone 15 Pro Max", "price": -1000000, "quantity": 1}`
   3. Include `Authorization: Bearer <token>` header
   4. Observe the API response
   5. Check the cart via `GET /api/cart`
 **Test Data:**
-  - Input: `{"id": 1, "name": "Product 1", "price": -1000000, "quantity": 1}`
+  - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": -1000000, "quantity": 1}`
   - Expected Output: HTTP 400 error — price must be positive
 **Expected Result:** The API rejects the request with an error. A negative price must NOT be stored in the cart. If accepted, this enables negative cart totals — a critical financial bug.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't reject the request with negative price. The product was added to the cart with negative price. 
+**Status:** Failed
 **EC Coverage:** EC-FR06-019
 **Req. Ref:** FR-15, API §4.2, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -550,15 +550,15 @@
   - Product id=1 exists
 **Steps:**
   1. Obtain a valid JWT token
-  2. Send `POST /api/cart` with body: `{"id": 1, "name": "Product 1", "price": 100000, "quantity": 0}`
+  2. Send `POST /api/cart` with body: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 0}`
   3. Include `Authorization: Bearer <token>` header
   4. Observe the API response
 **Test Data:**
-  - Input: `{"id": 1, "name": "Product 1", "price": 100000, "quantity": 0}`
+  - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 0}`
   - Expected Output: HTTP 400 error — quantity must be ≥ 1
 **Expected Result:** The API rejects the request. Zero quantity is below the specification minimum (FR-06: "minimum value of 1"). The product is NOT added to the cart.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't reject the request with zero quantity. The product was added to the cart with zero quantity. 
+**Status:** Failed
 **EC Coverage:** EC-FR06-021
 **Req. Ref:** FR-06, API §4.2
 **Bug ID:** _(fill if fails)_
@@ -577,16 +577,16 @@
   - Product id=1 exists
 **Steps:**
   1. Obtain a valid JWT token
-  2. Send `POST /api/cart` with body: `{"id": 1, "name": "Product 1", "price": 100000, "quantity": "abc"}`
+  2. Send `POST /api/cart` with body: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": "abc"}`
   3. Include `Authorization: Bearer <token>` header
   4. Observe the API response
   5. Check the cart via `GET /api/cart`
 **Test Data:**
-  - Input: `{"id": 1, "name": "Product 1", "price": 100000, "quantity": "abc"}`
+  - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": "abc"}`
   - Expected Output: HTTP 400 error — quantity must be a positive integer
 **Expected Result:** The API rejects the request with an error indicating invalid quantity type. The string "abc" must NOT be stored as the quantity. If accepted (known vulnerability per HITL), this is a **bug** — NaN quantity corrupts cart data.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't reject the request with NaN quantity. The product was added to the cart with NaN quantity. 
+**Status:** Failed
 **EC Coverage:** EC-FR06-021
 **Req. Ref:** FR-06, API §4.2
 **Bug ID:** _(fill if fails)_
@@ -602,21 +602,21 @@
 **Pre-conditions:**
   - EShop backend is running
   - User is logged in (valid JWT token)
-  - Product id=1 exists with actual price > 1 (e.g., price = 100000)
+  - Product id=1 exists with actual price > 1 (e.g., price = 30000000)
 **Steps:**
   1. Obtain a valid JWT token
-  2. Query the actual price: `GET /api/products/1` → note the real price (e.g., 100000)
-  3. Send `POST /api/cart` with body: `{"id": 1, "name": "Product 1", "price": 1, "quantity": 1}`
+  2. Query the actual price: `GET /api/products/1` → note the real price (e.g., 30000000)
+  3. Send `POST /api/cart` with body: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}`
   4. Include `Authorization: Bearer <token>` header
   5. Observe the API response
   6. Check the cart via `GET /api/cart` — check if price = 1 was accepted
   7. If accepted, proceed to checkout and verify the order total
 **Test Data:**
-  - Input: `{"id": 1, "name": "Product 1", "price": 1, "quantity": 1}` (actual DB price = 100000)
+  - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}` (actual DB price = 30000000)
   - Expected Output: API should reject or override with actual DB price
 **Expected Result:** The API either: (a) rejects the request because the price doesn't match the DB price, or (b) overrides the client-sent price with the actual DB price. If the API accepts price = 1 and allows checkout at that price, this is a **critical security bug** (price tampering attack).
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't reject the request with tampered low price. The product was added to the cart with tampered low price. 
+**Status:** Failed
 **EC Coverage:** EC-FR06-019
 **Req. Ref:** API §4.2, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -636,14 +636,14 @@
 **Pre-conditions:**
   - Product with id=1 exists in the database
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Verify the product detail page loads with all required fields
 **Test Data:**
-  - Input: URL = `http://localhost:5173/products/1`
+  - Input: URL = `http://localhost:5173/product/1`
   - Expected Output: Product detail page displayed correctly
 **Expected Result:** The product detail page for id=1 loads successfully with all 5 required fields (image, name, price, description, category).
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** There is no category name in product detail page
+**Status:** Failed
 **EC Coverage:** EC-FR06-001
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -659,14 +659,14 @@
 **Pre-conditions:**
   - Product with id=2 exists in the database
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/2`
+  1. Navigate to `http://localhost:5173/product/2`
   2. Verify the product detail page loads with all required fields
 **Test Data:**
-  - Input: URL = `http://localhost:5173/products/2`
+  - Input: URL = `http://localhost:5173/product/2`
   - Expected Output: Product detail page displayed correctly
 **Expected Result:** The product detail page for id=2 loads successfully with all 5 required fields.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** There is no category name in product detail page
+**Status:** Failed
 **EC Coverage:** EC-FR06-001
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -683,7 +683,7 @@
   - User is logged in
   - Product id=1 exists
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Set quantity to `1` (or verify default is `1`)
   3. Click "Add to Cart"
   4. Verify success feedback is shown
@@ -691,8 +691,8 @@
   - Input: quantity = `1`, product_id = `1`
   - Expected Output: Add to Cart succeeds; toast/badge feedback shown
 **Expected Result:** The system accepts quantity = 1 and adds the product to the cart. Visual feedback (toast or badge update) is displayed.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR06-007
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -710,7 +710,7 @@
   - User is logged in
   - Product id=1 exists
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Set quantity to `2`
   3. Click "Add to Cart"
   4. Verify success feedback is shown
@@ -718,8 +718,8 @@
   - Input: quantity = `2`, product_id = `1`
   - Expected Output: Add to Cart succeeds
 **Expected Result:** The system accepts quantity = 2 and adds the product to the cart with quantity 2.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR06-007
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -737,7 +737,7 @@
   - User is logged in
   - Product id=1 exists
 **Steps:**
-  1. Navigate to `http://localhost:5173/products/1`
+  1. Navigate to `http://localhost:5173/product/1`
   2. Clear the quantity field and type `999`
   3. Click "Add to Cart"
   4. Observe the system response
@@ -746,8 +746,8 @@
   - Input: quantity = `999`, product_id = `1`
   - Expected Output: System accepts or rejects gracefully (no crash, no overflow)
 **Expected Result:** The system either: (a) accepts quantity = 999 and the cart total is calculated correctly without overflow, or (b) displays a validation message indicating the quantity exceeds a practical limit. No server error or crash.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The server accepts quantity = 999 and the cart total is calculated correctly
+**Status:** Passed
 **EC Coverage:** EC-FR06-007, EC-FR06-013
 **Req. Ref:** FR-06
 **Bug ID:** _(fill if fails)_
@@ -767,15 +767,15 @@
   - Product id=1 exists
 **Steps:**
   1. Obtain a valid JWT token
-  2. Send `POST /api/cart` with body: `{"id": 1, "name": "Product 1", "price": 1, "quantity": 1}`
+  2. Send `POST /api/cart` with body: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}`
   3. Include `Authorization: Bearer <token>` header
   4. Observe the API response
 **Test Data:**
-  - Input: `{"id": 1, "name": "Product 1", "price": 1, "quantity": 1}`
+  - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}`
   - Expected Output: API processes the request (price = 1 is technically valid as it is > 0)
 **Expected Result:** The API accepts the request since price = 1 is a valid positive integer. Note: If the backend validates the price against the DB (it should but doesn't per HITL finding), this may be rejected. Document actual behaviour.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't reject the request. price = 1 is added to the cart
+**Status:** Failed
 **EC Coverage:** EC-FR06-018
 **Req. Ref:** FR-15, API §4.2
 **Bug ID:** _(fill if fails)_
@@ -795,15 +795,15 @@
   - Product id=1 exists
 **Steps:**
   1. Obtain a valid JWT token
-  2. Send `POST /api/cart` with body: `{"id": 1, "name": "Product 1", "price": 100000, "quantity": -1}`
+  2. Send `POST /api/cart` with body: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": -1}`
   3. Include `Authorization: Bearer <token>` header
   4. Observe the API response
 **Test Data:**
-  - Input: `{"id": 1, "name": "Product 1", "price": 100000, "quantity": -1}`
+  - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": -1}`
   - Expected Output: HTTP 400 error — quantity must be ≥ 1
 **Expected Result:** The API rejects the request. Negative quantity must NOT be stored in the cart.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't reject the request. Negative quantity = -1 is added to the cart
+**Status:** Failed
 **EC Coverage:** EC-FR06-021
 **Req. Ref:** FR-06, API §4.2
 **Bug ID:** _(fill if fails)_
@@ -819,19 +819,19 @@
 **Pre-conditions:**
   - EShop backend is running
   - User is logged in (valid JWT token)
-  - Product id=1 exists (price = 100000)
+  - Product id=1 exists (price = 30000000)
 **Steps:**
   1. Obtain a valid JWT token
-  2. Send `POST /api/cart` with body: `{"id": 1, "name": "Product 1", "price": 100000, "quantity": 999999999}`
+  2. Send `POST /api/cart` with body: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 999999999}`
   3. Include `Authorization: Bearer <token>` header
   4. Observe the API response
-  5. If accepted, check cart total (100000 × 999999999 = ~10^14 — potential overflow)
+  5. If accepted, check cart total (30000000 × 999999999 = ~3 × 10^16 — potential overflow)
 **Test Data:**
-  - Input: `{"id": 1, "name": "Product 1", "price": 100000, "quantity": 999999999}`
+  - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 999999999}`
   - Expected Output: Rejection, or if accepted, correct total without overflow
 **Expected Result:** The API either: (a) rejects the extremely large quantity with an error, or (b) if accepted, the cart total (approximately 99,999,999,900,000 ₫) calculates without integer overflow or NaN. No 500 server error.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't reject the extremely large quantiy with an error, it still accepted but the tester doesn't have a way to check to sum in API, the closest API required tester to calculate by hand with calculator
+**Status:** Failed
 **EC Coverage:** EC-FR06-013, EC-FR06-021
 **Req. Ref:** FR-06, API §4.2
 **Bug ID:** _(fill if fails)_
@@ -872,7 +872,7 @@
 | EC-FR06-027 | Invalid quantity error | INVALID OUTPUT | TC-FR06-NEG-006, NEG-007, NEG-008, NEG-009, NEG-010 |
 | EC-FR06-028 | Breadcrumbs displayed | VALID OUTPUT | TC-FR06-EP-001 |
 | EC-FR06-029 | Single `<h1>` tag | VALID OUTPUT | TC-FR06-EP-001 |
-| EC-FR06-030 | English language | VALID OUTPUT | TC-FR06-EP-001 |
+| EC-FR06-030 | Vietnamese language | VALID OUTPUT | TC-FR06-EP-001 |
 | EC-FR06-031 | Blue Add to Cart button | VALID OUTPUT | TC-FR06-EP-001 |
 | EC-FR06-032 | Correct tab order | VALID OUTPUT | TC-FR06-EP-001 |
 | EC-FR06-033 | Non-empty image alt | VALID OUTPUT | TC-FR06-EP-001 |
