@@ -44,10 +44,10 @@
   - Expected Output: Product detail page with all 5 fields (image, name, price, description, category) rendered correctly
 **Expected Result:** The product detail page displays: (1) a large product image with descriptive non-empty `alt` attribute, (2) the product name in full text, (3) the price formatted as e.g. `150,000 ₫` with thousands separator, (4) the description rendered as escaped text (no HTML injection), (5) the category name. Additionally: breadcrumbs are visible, exactly one `<h1>` tag exists, all text is in Vietnamese, the "Add to Cart" button is blue, and tab order is correct.
 **Observed Result:** The Product detail page only displays: a large product image with descriptive non-empty `alt`attribute, the product name in full text, the price formatted as expected, the description rendered as escaped text (no HTML injection). But there is no category name, no breadcrumb navigation in the page, "Add to Cart" button is Green not blue.
-**Status:** Fail
+**Status:** Failed
 **EC Coverage:** EC-FR06-001, EC-FR06-022, EC-FR06-028, EC-FR06-029, EC-FR06-030, EC-FR06-031, EC-FR06-032, EC-FR06-033
 **Req. Ref:** FR-06, FR-21, FR-23, FR-24, SEC-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-001
 
 ---
 
@@ -104,7 +104,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR06-007, EC-FR06-014, EC-FR06-016, EC-FR06-018, EC-FR06-020, EC-FR06-024
 **Req. Ref:** FR-06, FR-24, FR-23, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 **Cleanup:** Remove the product from the cart after the test.
 
 ---
@@ -136,7 +136,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-025
 **Req. Ref:** FR-07, FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-002
 **Cleanup:** Reset cart to empty state after test.
 
 ---
@@ -165,7 +165,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR06-002, EC-FR06-023
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -188,7 +188,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR06-003
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -211,7 +211,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR06-004
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -234,7 +234,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR06-005
 **Req. Ref:** FR-06, SEC-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -257,7 +257,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR06-006
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -284,7 +284,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-008, EC-FR06-027
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-003
 
 ---
 
@@ -311,7 +311,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-009, EC-FR06-027
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-004
 
 ---
 
@@ -339,7 +339,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-010, EC-FR06-027
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-005
 
 ---
 
@@ -367,7 +367,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-011, EC-FR06-027
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-006
 
 ---
 
@@ -394,7 +394,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-012, EC-FR06-027
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-007
 
 ---
 
@@ -422,7 +422,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-013
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-008
 
 ---
 
@@ -451,7 +451,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-015, EC-FR06-026
 **Req. Ref:** SEC-02, FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-009
 
 ---
 
@@ -478,7 +478,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-017
 **Req. Ref:** API §4.2
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-010
 
 ---
 
@@ -486,7 +486,7 @@
 
 **Test Case ID:** TC-FR06-NEG-014
 **Title:** Verify that API rejects Add to Cart request with a tampered zero price via direct API call
-**Description:** Tests the API's handling of a tampered price (price=0) in the cart request body. HITL confirmed backend blindly trusts client data — this is a critical security test. Isolates EC-FR06-019. **Execute via Postman/cURL only (per HITL mandate).**
+**Description:** Tests the API's handling of a tampered price (price=0) in the cart request body. HITL confirmed backend blindly trusts client data — this is a critical security test. Isolates EC-FR06-019. Execute via Postman/cURL only (per HITL mandate).
 **Priority:** High
 **Pre-conditions:**
   - EShop backend is running at `http://localhost:3000`
@@ -501,12 +501,12 @@
 **Test Data:**
   - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 0, "quantity": 1}`
   - Expected Output: HTTP 400 error — price must be > 0
-**Expected Result:** The API rejects the request with an error indicating invalid price. The product is NOT added to the cart with price = 0. If the API accepts it (known vulnerability per HITL finding), this is a **bug** — report it.
+**Expected Result:** The API rejects the request with an error indicating invalid price. The product is NOT added to the cart with price = 0. If the API accepts it (known vulnerability per HITL finding), this is a bug — report it.
 **Observed Result:** The API didn't reject the request with zero price. The product was added to the cart with price = 0. 
 **Status:** Failed
 **EC Coverage:** EC-FR06-019
 **Req. Ref:** FR-15, API §4.2, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-011
 
 ---
 
@@ -514,7 +514,7 @@
 
 **Test Case ID:** TC-FR06-NEG-015
 **Title:** Verify that API rejects Add to Cart request with a negative price via direct API call
-**Description:** Tests the API's handling of a negative price in the cart request body. Isolates the negative boundary of EC-FR06-019. **Execute via Postman/cURL only.**
+**Description:** Tests the API's handling of a negative price in the cart request body. Isolates the negative boundary of EC-FR06-019. Execute via Postman/cURL only.
 **Priority:** High
 **Pre-conditions:**
   - EShop backend is running at `http://localhost:3000`
@@ -534,7 +534,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-019
 **Req. Ref:** FR-15, API §4.2, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-012
 
 ---
 
@@ -561,7 +561,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-021
 **Req. Ref:** FR-06, API §4.2
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-013
 
 ---
 
@@ -584,12 +584,12 @@
 **Test Data:**
   - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": "abc"}`
   - Expected Output: HTTP 400 error — quantity must be a positive integer
-**Expected Result:** The API rejects the request with an error indicating invalid quantity type. The string "abc" must NOT be stored as the quantity. If accepted (known vulnerability per HITL), this is a **bug** — NaN quantity corrupts cart data.
+**Expected Result:** The API rejects the request with an error indicating invalid quantity type. The string "abc" must NOT be stored as the quantity. If accepted (known vulnerability per HITL), this is a bug — NaN quantity corrupts cart data.
 **Observed Result:** The API didn't reject the request with NaN quantity. The product was added to the cart with NaN quantity. 
 **Status:** Failed
 **EC Coverage:** EC-FR06-021
 **Req. Ref:** FR-06, API §4.2
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-014
 
 ---
 
@@ -597,7 +597,7 @@
 
 **Test Case ID:** TC-FR06-NEG-018
 **Title:** Verify that API rejects Add to Cart request with tampered low price via direct API call
-**Description:** Tests the critical **price tampering** vulnerability. The client sends a price of 1₫ when the actual DB price is 100,000₫. HITL confirmed the backend blindly trusts client-sent price. **Execute via Postman/cURL only (per HITL mandate).**
+**Description:** Tests the critical price tampering vulnerability. The client sends a price of 1₫ when the actual DB price is 100,000₫. HITL confirmed the backend blindly trusts client-sent price. Execute via Postman/cURL only (per HITL mandate).
 **Priority:** High
 **Pre-conditions:**
   - EShop backend is running
@@ -614,12 +614,12 @@
 **Test Data:**
   - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}` (actual DB price = 30000000)
   - Expected Output: API should reject or override with actual DB price
-**Expected Result:** The API either: (a) rejects the request because the price doesn't match the DB price, or (b) overrides the client-sent price with the actual DB price. If the API accepts price = 1 and allows checkout at that price, this is a **critical security bug** (price tampering attack).
+**Expected Result:** The API either: (a) rejects the request because the price doesn't match the DB price, or (b) overrides the client-sent price with the actual DB price. If the API accepts price = 1 and allows checkout at that price, this is a critical security bug (price tampering attack).
 **Observed Result:** The API didn't reject the request with tampered low price. The product was added to the cart with tampered low price. 
 **Status:** Failed
 **EC Coverage:** EC-FR06-019
 **Req. Ref:** API §4.2, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-015
 
 ---
 
@@ -631,7 +631,7 @@
 
 **Test Case ID:** TC-FR06-BV-001
 **Title:** Verify that product detail page loads correctly with the smallest valid product ID (id=1)
-**Description:** Tests the exact lower boundary of the product ID range. BVA point: LB = 1 (specification boundary).
+**Description:** Tests the exact lower boundary of the product ID range. BVA point: LB = 1 (specification boundary). This is the minimum valid product ID per FR-06.
 **Priority:** Medium
 **Pre-conditions:**
   - Product with id=1 exists in the database
@@ -646,7 +646,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-001
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-016
 
 ---
 
@@ -669,7 +669,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-001
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-017
 
 ---
 
@@ -695,7 +695,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR06-007
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 **Cleanup:** Remove item from cart after test.
 
 ---
@@ -722,7 +722,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR06-007
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 **Cleanup:** Remove item from cart after test.
 
 ---
@@ -750,7 +750,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR06-007, EC-FR06-013
 **Req. Ref:** FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 **Cleanup:** Remove item from cart after test.
 
 ---
@@ -766,7 +766,7 @@
   - User is logged in (valid JWT token)
   - Product id=1 exists
 **Steps:**
-  1. Obtain a valid JWT token
+  1. Obtain a valid JWT token by logging in via `POST /api/login`
   2. Send `POST /api/cart` with body: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}`
   3. Include `Authorization: Bearer <token>` header
   4. Observe the API response
@@ -778,7 +778,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-018
 **Req. Ref:** FR-15, API §4.2
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-018
 **Cleanup:** Remove item from cart after test.
 
 ---
@@ -806,7 +806,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-021
 **Req. Ref:** FR-06, API §4.2
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-019
 
 ---
 
@@ -834,7 +834,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR06-013, EC-FR06-021
 **Req. Ref:** FR-06, API §4.2
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR06-020
 **Cleanup:** Remove item from cart after test.
 
 ---
