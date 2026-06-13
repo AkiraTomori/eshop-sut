@@ -239,7 +239,7 @@ Orders have **5 statuses** and must follow the transition diagram below:
 
 ### FR-21: General Interface Standards
 
-- **Language consistency**: The entire interface uses English (except for standard technical terms).
+- **Language consistency**: The entire interface uses Vietnamese (except for standard technical terms).
 - **Color consistency**: Positive action buttons (Submit, Purchase) use blue. Dangerous/cancel buttons use red.
 - **Currency consistency**: Always use the `₫` symbol with thousands-separator formatting.
 - **Page title**: Each page has exactly 1 `<h1>` tag describing the page content.
