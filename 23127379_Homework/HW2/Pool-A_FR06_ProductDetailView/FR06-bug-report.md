@@ -459,5 +459,528 @@ The API returned a success response and added the non-existent product (id=99999
 
 ---
 
-*End of Bug Reports — FR-06 Product Detail View (BUG-FR06-001 to BUG-FR06-010)*
+---
+
+## Bug Report: BUG-FR06-011
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — API Cart Price Validation (Zero Price)
+**Problem Summary:** The `POST /api/cart` endpoint accepts a cart request body with `price=0`, storing the item at zero cost — effectively making products free (Expected: the API rejects any request where `price ≤ 0` with HTTP 400; zero price must not be persisted in the cart).
+**Severity:** Fatal
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop backend is running at `http://localhost:3000`
+- User is logged in — valid JWT token is available
+- Product id=1 exists in the database with an actual price > 0
+
+**Steps:**
+1. Obtain a valid JWT token by sending `POST /api/login` with valid credentials
+2. Using Postman or cURL, send the following request:
+   ```
+   POST http://localhost:3000/api/cart
+   Authorization: Bearer <valid_jwt_token>
+   Content-Type: application/json
+
+   {
+     "id": 1,
+     "name": "iPhone 15 Pro Max",
+     "price": 0,
+     "quantity": 1
+   }
+   ```
+3. Observe the HTTP response status and body
+4. Send `GET /api/cart` and verify whether an item with `price=0` exists
+
+**Expected Result:**
+Per FR-06 and financial integrity constraints: price must be > 0. The API must return HTTP 400 with an error such as `{"error": "Price must be greater than 0"}`. The product must NOT be added to the cart with price = 0. Accepting zero price allows checkout with a total of ₫0 — a critical financial defect.
+
+**Actual Result:**
+The API accepted the request and added the product to the cart with `price = 0`. No validation error was returned. The item can subsequently be purchased at zero cost.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Tool: Postman / cURL
+- Backend URL: http://localhost:3000/api/cart
+- Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 0, "quantity": 1}`
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**Linked Test Case:** TC-FR06-NEG-014
+**Attachments:** _(HITL attaches Postman screenshot showing 2xx response and GET /api/cart response confirming price=0)_
+
+---
+
+## Bug Report: BUG-FR06-012
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — API Cart Price Validation (Negative Price)
+**Problem Summary:** The `POST /api/cart` endpoint accepts a cart request body with a negative `price` (`-1000000`), which produces a negative cart total — a critical financial integrity defect (Expected: the API rejects any request where `price < 0` with HTTP 400).
+**Severity:** Fatal
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop backend is running at `http://localhost:3000`
+- User is logged in — valid JWT token is available
+- Product id=1 exists in the database
+
+**Steps:**
+1. Obtain a valid JWT token
+2. Using Postman or cURL, send the following request:
+   ```
+   POST http://localhost:3000/api/cart
+   Authorization: Bearer <valid_jwt_token>
+   Content-Type: application/json
+
+   {
+     "id": 1,
+     "name": "iPhone 15 Pro Max",
+     "price": -1000000,
+     "quantity": 1
+   }
+   ```
+3. Observe the HTTP response status and body
+4. Send `GET /api/cart` and verify whether the negative-price item exists
+5. If present, proceed to checkout and observe the total calculation
+
+**Expected Result:**
+The API must reject the request. A negative price is logically invalid for any product. The API must return HTTP 400 with an appropriate error message. The product must NOT be added to the cart with a negative price, as this would produce a negative cart total and allow financial exploitation.
+
+**Actual Result:**
+The API accepted the request and added the product to the cart with `price = -1000000`. No validation error was returned. A negative cart total is producible, representing a critical financial integrity failure.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Tool: Postman / cURL
+- Backend URL: http://localhost:3000/api/cart
+- Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": -1000000, "quantity": 1}`
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**Linked Test Case:** TC-FR06-NEG-015
+**Attachments:** _(HITL attaches Postman screenshot showing 2xx response and negative total in cart)_
+
+---
+
+## Bug Report: BUG-FR06-013
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — API Cart Quantity Validation (Zero Quantity)
+**Problem Summary:** The `POST /api/cart` endpoint accepts a cart request with `quantity=0` at the API level, bypassing the frontend's specification minimum of 1 (Expected: the API rejects quantity=0 with HTTP 400 as a server-side guard independent of UI validation).
+**Severity:** Serious
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop backend is running at `http://localhost:3000`
+- User is logged in — valid JWT token is available
+- Product id=1 exists in the database
+
+**Steps:**
+1. Obtain a valid JWT token
+2. Using Postman or cURL, send the following request:
+   ```
+   POST http://localhost:3000/api/cart
+   Authorization: Bearer <valid_jwt_token>
+   Content-Type: application/json
+
+   {
+     "id": 1,
+     "name": "iPhone 15 Pro Max",
+     "price": 30000000,
+     "quantity": 0
+   }
+   ```
+3. Observe the HTTP response status and body
+4. Send `GET /api/cart` and verify whether a zero-quantity entry exists
+
+**Expected Result:**
+Per FR-06: quantity minimum is 1. The API must enforce this server-side regardless of UI validation. The API must return HTTP 400 with an error such as `{"error": "Quantity must be at least 1"}`. The product must NOT be added to the cart with quantity = 0.
+
+**Actual Result:**
+The API accepted the request and added the product to the cart with `quantity = 0`. No validation error was returned. This confirms the backend has no server-side quantity validation for the minimum boundary.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Tool: Postman / cURL
+- Backend URL: http://localhost:3000/api/cart
+- Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 0}`
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**Linked Test Case:** TC-FR06-NEG-016
+**Attachments:** _(HITL attaches Postman screenshot showing 2xx response)_
+
+---
+
+## Bug Report: BUG-FR06-014
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — API Cart Quantity Validation (NaN / String Quantity)
+**Problem Summary:** The `POST /api/cart` endpoint accepts a string value (`"abc"`) in the `quantity` field and stores it in the cart as a NaN quantity, corrupting the cart data (Expected: the API rejects non-numeric quantity with HTTP 400 and enforces type validation server-side).
+**Severity:** Serious
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop backend is running at `http://localhost:3000`
+- User is logged in — valid JWT token is available
+- Product id=1 exists in the database
+
+**Steps:**
+1. Obtain a valid JWT token
+2. Using Postman or cURL, send the following request:
+   ```
+   POST http://localhost:3000/api/cart
+   Authorization: Bearer <valid_jwt_token>
+   Content-Type: application/json
+
+   {
+     "id": 1,
+     "name": "iPhone 15 Pro Max",
+     "price": 30000000,
+     "quantity": "abc"
+   }
+   ```
+3. Observe the HTTP response status and body
+4. Send `GET /api/cart` and inspect the `quantity` field of the stored cart entry
+
+**Expected Result:**
+The API must enforce type validation on the `quantity` field. A string value such as `"abc"` must be rejected with HTTP 400 and an error such as `{"error": "Quantity must be a positive integer"}`. NaN must never be stored in the cart, as it corrupts total calculations and downstream processing.
+
+**Actual Result:**
+The API accepted the request and added the product to the cart with `quantity = "abc"` (NaN). No type validation error was returned. NaN quantity is now persisted in the database, corrupting the cart data and making the cart total incalculable.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Tool: Postman / cURL
+- Backend URL: http://localhost:3000/api/cart
+- Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": "abc"}`
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**Linked Test Case:** TC-FR06-NEG-017
+**Attachments:** _(HITL attaches Postman screenshot showing 2xx response and GET /api/cart showing NaN quantity)_
+
+---
+
+## Bug Report: BUG-FR06-015
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — API Security: Price Tampering Attack
+**Problem Summary:** The `POST /api/cart` API blindly trusts the client-sent `price` field without cross-referencing the actual product price in the database. An attacker can set `price=1` for a product worth ₫30,000,000 and complete checkout at that fraudulent price — a critical security and financial integrity vulnerability (Expected: the API fetches the authoritative price from the database and ignores or overrides the client-sent value).
+**Severity:** Fatal
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop backend is running at `http://localhost:3000`
+- User is logged in — valid JWT token is available
+- Product id=1 exists in the database with a confirmed price of `30,000,000 ₫` (verified via `GET /api/products/1`)
+
+**Steps:**
+1. Send `GET http://localhost:3000/api/products/1` and confirm the actual price (e.g., `30000000`)
+2. Obtain a valid JWT token
+3. Using Postman or cURL, send the following tampered request:
+   ```
+   POST http://localhost:3000/api/cart
+   Authorization: Bearer <valid_jwt_token>
+   Content-Type: application/json
+
+   {
+     "id": 1,
+     "name": "iPhone 15 Pro Max",
+     "price": 1,
+     "quantity": 1
+   }
+   ```
+4. Observe the HTTP response status
+5. Send `GET /api/cart` — verify whether `price=1` was stored
+6. Proceed to checkout and observe the order total
+
+**Expected Result:**
+Per SEC-02 and financial integrity requirements: the API must NOT trust the client-supplied `price` field. The server must retrieve the authoritative price from the database and use that value. The API should either: (a) reject the request because the client price (1) does not match the DB price (30000000), or (b) silently override with the DB price. Under no circumstances should checkout complete at a tampered price.
+
+**Actual Result:**
+The API accepted `price=1` and stored it in the cart. The checkout flow processes the cart at ₫1 for a product actually worth ₫30,000,000. This is a working price-tampering exploit enabling users to purchase products at arbitrarily low prices.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Tool: Postman / cURL
+- Backend URL: http://localhost:3000/api/cart
+- Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}` (actual DB price = 30,000,000)
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**Linked Test Case:** TC-FR06-NEG-018
+**Attachments:** _(HITL attaches Postman screenshots: GET /api/products/1 showing real price, POST /api/cart with price=1 showing 2xx, GET /api/cart showing tampered price, checkout total showing ₫1)_
+
+---
+
+## Bug Report: BUG-FR06-016
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — Product Information Display (BVA: id=1 Lower Boundary)
+**Problem Summary:** The product detail page for the smallest valid product ID (`id=1`) does not display the category name field — one of the 5 mandatory fields per FR-06 (Expected: category name is displayed). **Note: this is a duplicate manifestation of BUG-FR06-001 at the lower ID boundary; root cause is the same absent category field.**
+**Severity:** Serious
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop frontend and backend are running
+- Product with id=1 exists in the database with an assigned category
+
+**Steps:**
+1. Open Microsoft Edge and navigate to `http://localhost:5173/product/1`
+2. Wait for the product detail page to fully load
+3. Inspect the page for the **category name** field (any label such as "Category:", "Danh mục:", or similar)
+4. Verify all 5 required fields: image, name, price, description, category
+
+**Expected Result:**
+Per FR-06: the product detail page for id=1 (specification lower boundary LB=1) must display all 5 required fields including the **category name**. This boundary test confirms the minimum valid product ID is handled completely.
+
+**Actual Result:**
+The category name field is absent from the product detail page for id=1. Only 4 of the 5 required fields are displayed (image, name, price, description). Category is missing.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Browser: Microsoft Edge (latest)
+- App URL: http://localhost:5173/product/1
+- Test Data: product_id=1 (specification LB)
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N] — may reference same issue as BUG-FR06-001)_
+**Linked Test Case:** TC-FR06-BV-001
+**Attachments:** _(HITL attaches screenshot)_
+
+---
+
+## Bug Report: BUG-FR06-017
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — Product Information Display (BVA: id=2, LB+1)
+**Problem Summary:** The product detail page for `id=2` (one above the lower boundary) also does not display the category name field — confirming the category omission defect is not isolated to id=1 and affects the product detail page globally (Expected: category name is displayed for all valid product IDs). **Note: duplicate manifestation of BUG-FR06-001; same root cause.**
+**Severity:** Serious
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop frontend and backend are running
+- Product with id=2 exists in the database with an assigned category
+
+**Steps:**
+1. Open Microsoft Edge and navigate to `http://localhost:5173/product/2`
+2. Wait for the product detail page to fully load
+3. Inspect the page for the **category name** field
+4. Verify all 5 required fields: image, name, price, description, category
+
+**Expected Result:**
+Per FR-06: the product detail page for id=2 (BVA point LB+1=2) must display all 5 required fields including **category name**. If the category field is missing for both id=1 and id=2, the defect is confirmed as a systematic omission across the entire product detail feature, not a data issue for a single product.
+
+**Actual Result:**
+The category name field is absent from the product detail page for id=2. Only 4 of the 5 required fields are displayed. This confirms BUG-FR06-001 / BUG-FR06-016 is a systematic defect affecting all products, not a data issue.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Browser: Microsoft Edge (latest)
+- App URL: http://localhost:5173/product/2
+- Test Data: product_id=2 (BVA LB+1)
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N] — may reference same issue as BUG-FR06-001)_
+**Linked Test Case:** TC-FR06-BV-002
+**Attachments:** _(HITL attaches screenshot)_
+
+---
+
+## Bug Report: BUG-FR06-018
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — API Cart Price Validation (BVA: Price LB = 1₫)
+**Problem Summary:** The `POST /api/cart` API accepts a client-supplied `price=1` (the price lower boundary) for a product whose actual database price is ₫30,000,000, confirming that the backend performs no server-side price validation against the database at any price value — including the boundary minimum (Expected: API fetches authoritative price from DB; price=1 sent by client is rejected or overridden when it doesn't match the DB price).
+**Severity:** Fatal
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop backend is running at `http://localhost:3000`
+- User is logged in — valid JWT token is available
+- Product id=1 exists with a confirmed database price significantly greater than 1 (e.g., 30,000,000 ₫)
+
+**Steps:**
+1. Confirm the product's real price: `GET http://localhost:3000/api/products/1` (note the price field)
+2. Obtain a valid JWT token
+3. Using Postman or cURL, send:
+   ```
+   POST http://localhost:3000/api/cart
+   Authorization: Bearer <valid_jwt_token>
+   Content-Type: application/json
+
+   {
+     "id": 1,
+     "name": "iPhone 15 Pro Max",
+     "price": 1,
+     "quantity": 1
+   }
+   ```
+4. Observe the HTTP response
+5. Send `GET /api/cart` and check the stored price value
+
+**Expected Result:**
+The API must validate the client-supplied price against the database. Since 1 ≠ DB price (30,000,000), the API must reject with HTTP 400 or silently override with the DB price. The boundary value test (price=1) confirms whether any server-side price guard exists at the theoretical minimum valid price.
+
+**Actual Result:**
+The API returned a success response and stored `price=1` in the cart. No price validation against the database was performed. This boundary test confirms that the price tampering vulnerability (BUG-FR06-015) is present at every price value — including the minimum boundary of 1₫.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Tool: Postman / cURL
+- Backend URL: http://localhost:3000/api/cart
+- Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": 1}` (actual DB price = 30,000,000)
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N] — may reference same issue as BUG-FR06-015)_
+**Linked Test Case:** TC-FR06-BV-006
+**Attachments:** _(HITL attaches Postman screenshots)_
+
+---
+
+## Bug Report: BUG-FR06-019
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — API Cart Quantity Validation (BVA: Quantity LB-1 = -1)
+**Problem Summary:** The `POST /api/cart` API accepts a `quantity=-1` (one below the specification lower boundary of 1) without rejection, confirming that the API has no server-side lower-boundary enforcement for the quantity field (Expected: API rejects quantity=-1 with HTTP 400).
+**Severity:** Serious
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop backend is running at `http://localhost:3000`
+- User is logged in — valid JWT token is available
+- Product id=1 exists in the database
+
+**Steps:**
+1. Obtain a valid JWT token
+2. Using Postman or cURL, send:
+   ```
+   POST http://localhost:3000/api/cart
+   Authorization: Bearer <valid_jwt_token>
+   Content-Type: application/json
+
+   {
+     "id": 1,
+     "name": "iPhone 15 Pro Max",
+     "price": 1,
+     "quantity": -1
+   }
+   ```
+3. Observe the HTTP response status and body
+4. Send `GET /api/cart` and verify whether a negative-quantity entry exists
+
+**Expected Result:**
+Per FR-06: quantity must be ≥ 1. The BVA LB-1 point (-1) is one step below the lower boundary. The API must return HTTP 400 with an error such as `{"error": "Quantity must be at least 1"}`. A negative quantity must NOT be stored in the cart as it corrupts totals and could theoretically reduce cart value when combined with valid items.
+
+**Actual Result:**
+The API accepted the request and stored `quantity = -1` in the cart. No boundary validation was performed. The backend has confirmed no server-side minimum quantity guard at the API layer.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Tool: Postman / cURL
+- Backend URL: http://localhost:3000/api/cart
+- Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 1, "quantity": -1}`
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**Linked Test Case:** TC-FR06-BV-007
+**Attachments:** _(HITL attaches Postman screenshot showing 2xx response and GET /api/cart confirming quantity=-1)_
+
+---
+
+## Bug Report: BUG-FR06-020
+
+**Date:** 2026-06-13
+**Function Name:** FR-06 Product Detail View — API Cart Quantity Validation (BVA: DB Stress — quantity=999999999)
+**Problem Summary:** The `POST /api/cart` API accepts an extremely large quantity (`999999999`) without rejection or upper-bound enforcement. While no server crash occurred, the API provides no way to retrieve the calculated cart total via `GET /api/cart`, preventing overflow verification — a system design gap (Expected: the API either rejects the extreme quantity or returns the total with overflow-safe calculation).
+**Severity:** Medium
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- EShop backend is running at `http://localhost:3000`
+- User is logged in — valid JWT token is available
+- Product id=1 exists in the database (price = 30,000,000)
+
+**Steps:**
+1. Obtain a valid JWT token
+2. Using Postman or cURL, send:
+   ```
+   POST http://localhost:3000/api/cart
+   Authorization: Bearer <valid_jwt_token>
+   Content-Type: application/json
+
+   {
+     "id": 1,
+     "name": "iPhone 15 Pro Max",
+     "price": 30000000,
+     "quantity": 999999999
+   }
+   ```
+3. Observe the HTTP response status and body
+4. Send `GET /api/cart` — record the raw response
+5. Attempt to view the cart page at `http://localhost:5173/cart` and inspect the displayed total
+6. Manually calculate expected total: 30,000,000 × 999,999,999 = 29,999,999,970,000,000 ₫ — check for overflow/truncation
+
+**Expected Result:**
+The API must either: (a) reject the quantity with an error indicating an upper limit (e.g., `{"error": "Quantity cannot exceed 9999"}`), or (b) if accepted, the cart total must be calculated correctly using overflow-safe arithmetic (result: approximately ₫29,999,999,970,000,000) with no integer overflow, truncation, or NaN. The `GET /api/cart` response must return the total in a verifiable format.
+
+**Actual Result:**
+The API accepted `quantity=999999999` without rejection. The `GET /api/cart` API response does not include a pre-calculated total field, making overflow verification impossible via API alone. Manual calculation using the cart page data was required. No upper-bound enforcement exists at the API layer. The lack of an API-level total field is also noted as a design gap that hinders testing.
+
+**Environment:**
+- OS: macOS Tahoe 26.1
+- Tool: Postman / cURL + Microsoft Edge (for cart page total)
+- Backend URL: http://localhost:3000/api/cart
+- Test Data: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 999999999}`
+- Expected total (manual): ₫29,999,999,970,000,000
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**Linked Test Case:** TC-FR06-BV-008
+**Attachments:** _(HITL attaches Postman screenshot showing 2xx response, GET /api/cart response, and cart page total screenshot)_
+
+---
+
+*End of Bug Reports — FR-06 Product Detail View (BUG-FR06-001 to BUG-FR06-020)*
 *Generated by Gemini QA Agent — 2026-06-13 | Reviewed by: Thái Minh Huy (HITL)*

@@ -134,3 +134,27 @@
   - Priority left blank for HITL/PM assignment per TR-BP-06
 - **Human Review Notes:** _(HITL must review severity assignments, file GitHub Issues for each bug, paste issue URLs into `FR06-bug-report.md`, and sign off below)_
 - **Verdict:** _(Accepted / Partially Accepted / Rejected — set by HITL after review)_
+
+---
+## Session: 2026-06-13 20:44 — Phase 5: Reporting (Bug Report — Remaining Test Cases)
+
+- **AI Tool:** Gemini QA Agent (Claude Sonnet 4.6 Thinking)
+- **Bloom-AI Level:** G9.3 (Analyse) — Analysed remaining 10 failed test cases and produced dedicated bug reports for each
+- **Prompt:**
+  > Write bug report for remaining testcases.
+- **AI Output Summary:** Appended **10 additional bug reports** (BUG-FR06-011 to BUG-FR06-020) to `FR06-bug-report.md`, covering all remaining failed test cases not addressed in the previous session:
+  - **BUG-FR06-011** (Fatal): API accepts price=0 — product purchasable at zero cost → TC-FR06-NEG-014
+  - **BUG-FR06-012** (Fatal): API accepts price=-1,000,000 — negative cart total possible → TC-FR06-NEG-015
+  - **BUG-FR06-013** (Serious): API accepts quantity=0 at server level — no server-side minimum quantity guard → TC-FR06-NEG-016
+  - **BUG-FR06-014** (Serious): API accepts quantity="abc" (NaN string) — NaN stored in DB corrupting cart → TC-FR06-NEG-017
+  - **BUG-FR06-015** (Fatal): Price tampering attack — API blindly trusts client price=1 for a ₫30M product → TC-FR06-NEG-018
+  - **BUG-FR06-016** (Serious): Category name missing at BVA LB (id=1) — duplicate manifestation of BUG-FR06-001 → TC-FR06-BV-001
+  - **BUG-FR06-017** (Serious): Category name missing at BVA LB+1 (id=2) — confirms systematic defect → TC-FR06-BV-002
+  - **BUG-FR06-018** (Fatal): Price boundary LB=1 accepted via API — price tampering confirmed at all price values → TC-FR06-BV-006
+  - **BUG-FR06-019** (Serious): API accepts quantity=-1 (BVA LB-1) — no server-side lower-boundary enforcement → TC-FR06-BV-007
+  - **BUG-FR06-020** (Medium): API accepts quantity=999999999 (DB stress) — no upper-bound enforcement; GET /api/cart lacks total field for verification → TC-FR06-BV-008
+  - Severity breakdown for all 20 bugs: 4 × Fatal, 12 × Serious, 3 × Medium, 0 × Cosmetic
+  - BUG-FR06-016 and BUG-FR06-017 are noted as duplicate manifestations of BUG-FR06-001 (same root cause — category field not rendered)
+  - BUG-FR06-018 is noted as a BVA-level confirmation of the price tampering vulnerability already identified in BUG-FR06-015
+- **Human Review Notes:** _(HITL must review severity assignments, merge duplicate issues where appropriate — especially BUG-FR06-001/016/017 and BUG-FR06-015/018 — file GitHub Issues for each unique defect, and sign off below)_
+- **Verdict:** _(Accepted / Partially Accepted / Rejected — set by HITL after review)_
