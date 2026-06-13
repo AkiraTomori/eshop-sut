@@ -108,3 +108,29 @@
   - Self-audit checklist passed (all 7 items)
 - **Human Review Notes:** Approved
 - **Verdict:** Accepted
+
+---
+## Session: 2026-06-13 20:34 — Phase 5: Reporting (Bug Report)
+
+- **AI Tool:** Gemini QA Agent (Claude Sonnet 4.6 Thinking)
+- **Bloom-AI Level:** G9.3 (Analyse) — Analysed executed test case results and produced one bug report per failed test case following theory-test-report.md §4 bug report format
+- **Prompt:**
+  > I have reviewed and approved Phase 1, Phase 2, Phase 3 and Phase 4 for FR06.
+  > Bug Report for 10 testcases
+  > I used: Macos (Tahoe 26.1) and Edge Browser
+- **AI Output Summary:** Produced `FR06-bug-report.md` containing **10 individual bug reports** (BUG-FR06-001 to BUG-FR06-010) corresponding to the first 10 failed test cases identified from the executed `FR06-test-cases.md`:
+  - **BUG-FR06-001** (Serious): Missing category name, missing breadcrumbs, green Add to Cart button → TC-FR06-EP-001
+  - **BUG-FR06-002** (Serious): Add to Cart creates duplicate cart rows instead of incrementing quantity → TC-FR06-EP-004
+  - **BUG-FR06-003** (Serious): Quantity=0 not rejected by UI — product added to cart with zero quantity → TC-FR06-NEG-006
+  - **BUG-FR06-004** (Serious): Negative quantity not rejected by UI — product added to cart with quantity=-1 → TC-FR06-NEG-007
+  - **BUG-FR06-005** (Medium): Decimal quantity (1.5) silently truncated to 1 without user notification → TC-FR06-NEG-008
+  - **BUG-FR06-006** (Serious): Non-numeric quantity (NaN) not rejected — NaN reaches backend via input type="number" → TC-FR06-NEG-009
+  - **BUG-FR06-007** (Serious): Empty quantity field not rejected — product added to cart with NaN quantity → TC-FR06-NEG-010
+  - **BUG-FR06-008** (Medium): Extremely large quantity (999999999) accepted without upper-limit enforcement → TC-FR06-NEG-011
+  - **BUG-FR06-009** (Serious): Unauthenticated user can add to cart — no login redirect or error shown → TC-FR06-NEG-012
+  - **BUG-FR06-010** (Serious): API accepts non-existent product ID in cart request — no product existence validation → TC-FR06-NEG-013
+  - Each report includes: Bug ID, Date, Problem Summary, Severity, Steps to Reproduce, Expected vs Actual Result, Environment (macOS Tahoe 26.1 / Edge), GitHub Issue placeholder, and Linked Test Case
+  - Severity assigned per theory-test-report.md §5 (Fatal/Serious/Medium/Cosmetic)
+  - Priority left blank for HITL/PM assignment per TR-BP-06
+- **Human Review Notes:** _(HITL must review severity assignments, file GitHub Issues for each bug, paste issue URLs into `FR06-bug-report.md`, and sign off below)_
+- **Verdict:** _(Accepted / Partially Accepted / Rejected — set by HITL after review)_
