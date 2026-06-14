@@ -38,7 +38,7 @@
   - Input: `shipping_address` = `"123 Nguyen Hue, District 1, Ho Chi Minh City"` (42 chars); User: `test@eshop.com`; Cart: ≥ 1 item.
   - Expected Output: Order created with status `pending`; cart cleared; HTTP 200 from `POST /api/checkout`.
 **Expected Result:** The order is placed successfully. The system displays a success notification. The cart is cleared (0 items). The order appears in the user's order history with status `pending`.
-**Observed Result:** The order is placed successfully. The system displays a success notification. The cart is cleared (0 items). The order appears in the user's order history with status `pending`. But there is no `<h1>` tag is present in cart page and checkout page and "Tiến thành thanh toán" button are green color, not blue color.
+**Observed Result:** The order is placed successfully. The system displays a success notification. The cart is cleared (0 items). The order appears in the user's order history with status `pending`. But there is no `<h1>` tag is present in cart page and checkout page and "Tiến thành thanh toán" button are green color, not blue color. The cart is not empty after checkout
 **Status:** Failed
 **EC Coverage:** EC-FR08-001, EC-FR08-004, EC-FR08-006, EC-FR08-009, EC-FR08-026, EC-FR08-027, EC-FR08-036, EC-FR08-037, EC-FR08-038, EC-FR08-040, EC-FR08-041
 **Req. Ref:** FR-08, FR-21, FR-22, FR-23, FR-10
@@ -173,8 +173,8 @@
   - Input: No `Authorization` header; `shipping_address` = `"123 Test St"`.
   - Expected Output: HTTP 401 Unauthorized or redirect to login page.
 **Expected Result:** The system rejects the checkout attempt. The user is either redirected to the login page (`http://localhost:5173/login`) or a clear error message is displayed indicating authentication is required. No order is created in the database.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system rejects the checkout attempt, a clear error message is displayed indicating authentication is required. No order is created in the database.
+**Status:** Passed
 **EC Coverage:** EC-FR08-002, EC-FR08-030
 **Req. Ref:** FR-08, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -189,14 +189,14 @@
   2. A malformed or previously-expired token is available (e.g., manually altered string).
 **Steps:**
   1. Send `POST /api/checkout` via Postman with `Authorization: Bearer INVALID_TAMPERED_TOKEN_XYZ`.
-  2. Include a valid-looking body: `{ "total_amount": 100000, "shipping_address": "123 Test St" }`.
+  2. Include a valid-looking body: `{ "total_amount": 30000000, "shipping_address": "123 Nguyen Hue, District 1, Ho Chi Minh City" }`.
   3. Observe the API response.
 **Test Data:**
-  - Input: `Authorization: Bearer INVALID_TAMPERED_TOKEN_XYZ`; `shipping_address` = `"123 Test St"`.
+  - Input: `Authorization: Bearer INVALID_TAMPERED_TOKEN_XYZ`; `shipping_address` = `"123 Nguyen Hue, District 1, Ho Chi Minh City"`.
   - Expected Output: HTTP 401 or HTTP 403 with a descriptive error message.
 **Expected Result:** The API returns HTTP 401 or HTTP 403. No order is created. The response body contains an error message indicating invalid/expired token. The system does not fall back to processing the request as unauthenticated.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API returns HTTP 403 Forbidden. No order is created.
+**Status:** Passed
 **EC Coverage:** EC-FR08-003, EC-FR08-030
 **Req. Ref:** SEC-02, FR-08
 **Bug ID:** _(fill if fails)_
@@ -218,8 +218,8 @@
   - Input: Authenticated user; cart item count = 0.
   - Expected Output: Checkout is blocked; user sees an appropriate error or is redirected to the cart page with an empty-state message.
 **Expected Result:** The system prevents the user from reaching or completing checkout with an empty cart. An appropriate error message or empty-state UI (with icon/illustration) is displayed. No order is created.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system prevents the user from reaching/completing checkout with an empty cart. UI said "Giỏ hàng của bạn đang trống, tiếp tục mua sắm"
+**Status:** Passed
 **EC Coverage:** EC-FR08-005, EC-FR08-031
 **Req. Ref:** FR-07, FR-08, FR-24
 **Bug ID:** _(fill if fails)_
@@ -242,8 +242,8 @@
   - Input: `shipping_address` = `""` (empty string).
   - Expected Output: Error message displayed above the submit button indicating shipping address is required.
 **Expected Result:** The system does not create an order. An error message (e.g., "Shipping address is required" or "Vui lòng nhập địa chỉ giao hàng") is displayed **above** the "Place Order" button. The user remains on the checkout page.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system still creates an order. No error message like "Shipping address is required" appears.
+**Status:** Failed
 **EC Coverage:** EC-FR08-007
 **Req. Ref:** FR-08, FR-22
 **Bug ID:** _(fill if fails)_
@@ -256,19 +256,19 @@
 **Pre-conditions:**
   1. Backend is running.
   2. A valid JWT token for `test@eshop.com` is available.
-  3. Cart contains items with a known total (e.g., 200,000 ₫ in DB).
+  3. Cart contains items with a known total (e.g., 30,000,000 ₫ in DB).
 **Steps:**
   1. Send `POST /api/checkout` via Postman with a valid `Authorization: Bearer <token>` header.
-  2. Set the request body to: `{ "total_amount": 1, "shipping_address": "123 Security Test St" }`.
+  2. Set the request body to: `{ "total_amount": 1, "shipping_address": "123 Nguyen Hue, District 1, Ho Chi Minh City" }`.
   3. Observe the HTTP response and the order record created in the database.
   4. Query `GET /api/orders/my-orders` to retrieve the created order.
   5. Verify the stored `total_amount` in the order record matches the actual cart total (not the client-sent `1`).
 **Test Data:**
-  - Input: `total_amount` = 1 (tampered); `shipping_address` = `"123 Security Test St"`; actual cart total = 200,000 ₫.
-  - Expected Output: Order created with `total_amount` = 200,000 ₫ (server-recalculated), NOT 1 ₫.
-**Expected Result:** The API returns HTTP 200 and creates an order. The order's `total_amount` in the database is 200,000 ₫ (the actual cart total), not 1 ₫. The backend has ignored the client-supplied value and performed its own calculation.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+  - Input: `total_amount` = 1 (tampered); `shipping_address` = `"123 Nguyen Hue, District 1, Ho Chi Minh City"`; actual cart total = 30,000,000 ₫.
+  - Expected Output: Order created with `total_amount` = 30,000,000 ₫ (server-recalculated), NOT 1 ₫.
+**Expected Result:** The API returns HTTP 200 and creates an order. The order's `total_amount` in the database is 30,000,000 ₫ (the actual cart total), not 1 ₫. The backend has ignored the client-supplied value and performed its own calculation.
+**Observed Result:** The API returns HTTP 200 and creates an order. The order's `total_amount` in the database is 1 ₫ (the client-sent value), not 30,000,000 ₫.
+**Status:** Failed
 **EC Coverage:** EC-FR08-010, EC-FR08-036
 **Req. Ref:** FR-08
 **Bug ID:** _(fill if fails)_
@@ -291,8 +291,8 @@
   - Input: `coupon_code` = `"FAKECODE99"`.
   - Expected Output: Error message displayed indicating the coupon code is invalid or does not exist.
 **Expected Result:** The system displays an error message (e.g., "Invalid coupon code" or "Mã giảm giá không hợp lệ") **above** the checkout button. No discount is applied. The checkout total remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system displays an error message (`Mã giảm giá không tồn tại hoặc đã bị vô hiệu hoá`) above the checkout button. No discount is applied. The checkout total remains unchanged.
+**Status:** Passed
 **EC Coverage:** EC-FR08-012, EC-FR08-032
 **Req. Ref:** FR-09 (C1), FR-22
 **Bug ID:** _(fill if fails)_
@@ -315,8 +315,8 @@
   - Input: `coupon_code` = inactive coupon code with `is_active = 0`.
   - Expected Output: Error message indicating the coupon is not available or has been disabled.
 **Expected Result:** The system rejects the inactive coupon and displays an error message (e.g., "This coupon is no longer active" or "Mã giảm giá không khả dụng"). No discount is applied.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system displays an error message (`Mã giảm giá không tồn tại hoặc đã bị vô hiệu hoá`) above the checkout button. No discount is applied. The checkout total remains unchanged.
+**Status:** Passed
 **EC Coverage:** EC-FR08-013, EC-FR08-032
 **Req. Ref:** FR-09 (C1)
 **Bug ID:** _(fill if fails)_
@@ -338,8 +338,8 @@
   - Input: `coupon_code` = `"EXPIRED"`; current date = 2026-06-14 (> expired_at = 2020-01-01).
   - Expected Output: Error message indicating the coupon has expired.
 **Expected Result:** The system rejects coupon `EXPIRED` and displays an error message (e.g., "This coupon has expired" or "Mã giảm giá đã hết hạn"). No discount is applied to the checkout total.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system displays an error message (`Mã giảm giá không tồn tại hoặc đã bị vô hiệu hoá`) above the checkout button. No discount is applied. The checkout total remains unchanged.
+**Status:** Passed
 **EC Coverage:** EC-FR08-017, EC-FR08-033
 **Req. Ref:** FR-09 (C2)
 **Bug ID:** _(fill if fails)_
@@ -363,8 +363,8 @@
   - Input: `coupon_code` = `"SAVE10"`; cart total = 200,000 ₫; min_order_amount = 300,000 ₫.
   - Expected Output: Error message indicating the order total does not meet the minimum requirement.
 **Expected Result:** The system rejects the coupon and displays an error message (e.g., "Minimum order amount is 300,000 ₫" or "Đơn hàng tối thiểu 300,000 ₫ để sử dụng mã này"). No discount is applied. The checkout total remains at 200,000 ₫.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-019, EC-FR08-034
 **Req. Ref:** FR-09 (C3)
 **Bug ID:** _(fill if fails)_
@@ -387,8 +387,8 @@
   - Input: `coupon_code` = `"SAVE10"`; user's prior usage count of SAVE10 = 1 (= max_uses_per_user); cart total ≥ 300,000 ₫.
   - Expected Output: Error message indicating the usage limit has been reached.
 **Expected Result:** The system rejects the coupon and displays an error message (e.g., "You have already used this coupon the maximum number of times" or "Mã giảm giá đã đạt giới hạn sử dụng"). No discount is applied.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-021, EC-FR08-035
 **Req. Ref:** FR-09 (C5)
 **Bug ID:** _(fill if fails)_
@@ -409,8 +409,8 @@
   - Input: `code` = `"SAVE10"`; `total_amount` = 350,000; `user_id` = test user's ID; usage_count = 2.
   - Expected Output: HTTP 4XX with error message indicating usage limit exceeded.
 **Expected Result:** The API returns an error response (HTTP 400 or similar) with a message indicating the coupon usage limit has been exceeded. No discount is calculated.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-022, EC-FR08-035
 **Req. Ref:** FR-09 (C5)
 **Bug ID:** _(fill if fails)_
@@ -431,8 +431,8 @@
   - Input: `code` = invalid-type coupon code; `total_amount` = 300,000; `user_id` = test user's ID.
   - Expected Output: HTTP 4XX with error message indicating unsupported or invalid coupon type.
 **Expected Result:** The API returns an error response. No discount is applied. The system does not crash or return an undefined value.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-025
 **Req. Ref:** FR-09, FR-17
 **Bug ID:** _(fill if fails)_
@@ -454,8 +454,8 @@
   - Input: `shipping_address` = `"     "` (whitespace only).
   - Expected Output: Error message indicating address is required or invalid.
 **Expected Result:** The system rejects the whitespace-only shipping address and displays an error message above the submit button. No order is created.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the whitespace-only shipping address and didn't display an error message above the submit button. Order is still created.
+**Status:** Failed
 **EC Coverage:** EC-FR08-007
 **Req. Ref:** FR-08, FR-22
 **Bug ID:** _(fill if fails)_
@@ -478,8 +478,8 @@
   - Input: Authenticated user; non-empty cart.
   - Expected Output: Exactly 1 `<h1>` element; submit button is blue; total shown as e.g. `100,000 ₫`.
 **Expected Result:** The checkout page contains exactly **one `<h1>` tag**. The "Place Order" button is styled in blue. The total amount is displayed with thousands separators and the `₫` symbol (e.g., `100,000 ₫`, not `100000`).
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** There is no `<h1>` element; there is `<h2>` element as heading. Submit button is not blue. The total is shown as e.g. `100,000 ₫`.
+**Status:** Failed
 **EC Coverage:** EC-FR08-038, EC-FR08-040, EC-FR08-041
 **Req. Ref:** FR-21
 **Bug ID:** _(fill if fails)_
@@ -508,8 +508,8 @@
   - Input: `shipping_address` = `"A"` (1 char = LB).
   - Expected Output: Order created successfully; HTTP 200; cart cleared.
 **Expected Result:** The system accepts a 1-character shipping address and places the order successfully. No validation error is displayed.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-006 (via BV-FR08-001)
 **Req. Ref:** FR-08
 **Bug ID:** _(fill if fails)_
@@ -530,8 +530,8 @@
   - Input: `shipping_address` = `"AB"` (2 chars = LB+1).
   - Expected Output: Order created successfully.
 **Expected Result:** The system accepts a 2-character shipping address and places the order successfully.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-006 (via BV-FR08-002)
 **Req. Ref:** FR-08
 **Bug ID:** _(fill if fails)_
@@ -552,8 +552,8 @@
   - Input: `shipping_address` = 254-character string (UB-1); example: `"AAAA…A"` (254 × "A").
   - Expected Output: Order created successfully.
 **Expected Result:** The system accepts a 254-character shipping address and places the order successfully. No truncation or error occurs.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-006 (via BV-FR08-003)
 **Req. Ref:** FR-08
 **Bug ID:** _(fill if fails)_
@@ -574,8 +574,8 @@
   - Input: `shipping_address` = 255-character string (UB = 255 × "B").
   - Expected Output: Order created successfully with the full 255-char address stored.
 **Expected Result:** The system accepts a 255-character shipping address and places the order successfully. The address is stored in full (255 characters) in the order record without truncation.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-006 (via BV-FR08-004)
 **Req. Ref:** FR-08
 **Bug ID:** _(fill if fails)_
@@ -596,8 +596,8 @@
   - Input: `shipping_address` = `""` (0 chars = LB-1).
   - Expected Output: Error message displayed above the submit button; no order created.
 **Expected Result:** The system rejects the empty address and displays an error message above the "Place Order" button. No order is created.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the empty address and not displays an error message above the "Place Order" button. Order is stll created.
+**Status:** Failed
 **EC Coverage:** EC-FR08-007 (via BV-FR08-005)
 **Req. Ref:** FR-08, FR-22
 **Bug ID:** _(fill if fails)_
@@ -619,8 +619,8 @@
   - Input: `shipping_address` = 256-character string (UB+1 = 256 × "C").
   - Expected Output: Error message OR order is created (revealing lack of enforcement — which is a defect finding).
 **Expected Result:** One of two outcomes (document which): (a) **Expected (pass):** System rejects the 256-char address with an error message. (b) **Defect finding:** System accepts the 256-char address without error, indicating no length enforcement layer — log as a bug.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** System didn't reject the 256-char address with an error message, it still accpets and creates an order.
+**Status:** Failed
 **EC Coverage:** EC-FR08-008 (via BV-FR08-006)
 **Req. Ref:** FR-08
 **Bug ID:** _(fill if fails)_
@@ -640,8 +640,8 @@
   - Input: `shipping_address` = 1000-character string (DB stress boundary test).
   - Expected Output: Error OR 200 with full/truncated address stored.
 **Expected Result:** Document actual behavior: (a) API returns error (good — enforcement exists), (b) API returns 200 but address is truncated in DB (defect — silent data loss), (c) API returns 200 and full address is stored (no limit enforced — document finding).
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** API returns 200 and full address is stored (no limit enforced).
+**Status:** Passed
 **EC Coverage:** EC-FR08-008 (via BV-FR08-008)
 **Req. Ref:** FR-08
 **Bug ID:** _(fill if fails)_
