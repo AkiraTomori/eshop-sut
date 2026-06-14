@@ -67,7 +67,7 @@
   - Input: `coupon_code` = `SAVE10`; cart total = 300,000 ₫; `shipping_address` = `"123 Nguyen Hue, District 1, Ho Chi Minh City"`.
   - Expected Output: `discount_amount` = 30,000 ₫; `final_amount` = 270,000 ₫; order created with status `pending`.
 **Expected Result:** The coupon `SAVE10` is applied successfully. The checkout page displays `discount_amount = 30,000 ₫` and `final_amount = 270,000 ₫`. The order is placed at the discounted amount.
-**Observed Result:** The coupon `SAVE10` is applied successfully. The checkout page displays as expected. But the total price is the same before applied to coupon. 
+**Observed Result:** The coupon `SAVE10` is applied successfully. The checkout page displays as expected. But the total price is not the same, it should be 10% * 300,000 = 30,000 ₫. but it's 10 * 300,000 = 3,000,000 ₫
 **Status:** Failed
 **EC Coverage:** EC-FR08-001, EC-FR08-004, EC-FR08-006, EC-FR08-011, EC-FR08-015, EC-FR08-018, EC-FR08-020, EC-FR08-023, EC-FR08-026, EC-FR08-027, EC-FR08-028
 **Req. Ref:** FR-09 (C1, C2, C3, C4, C5), FR-08, FR-21
@@ -656,20 +656,20 @@
 **Priority:** High
 **Pre-conditions:**
   1. Backend and Frontend are running.
-  2. User `test@eshop.com` is logged in; cart total ≥ 300,000 ₫.
-  3. System date is set to `2099-12-30` (one day before expiry of `SAVE10`).
+  2. User `test@eshop.com` is logged in; cart total ≥ 500,000 ₫.
+  3. System date is set to `2099-12-30` (one day before expiry of `BIGBUY`).
      _(Note: For demo environment, may require admin DB update or date mocking.)_
 **Steps:**
   1. Navigate to the checkout page.
-  2. Enter coupon code `SAVE10`.
+  2. Enter coupon code `BIGBUY`.
   3. Click "Apply Coupon".
   4. Verify the coupon is accepted and the discount is applied.
 **Test Data:**
-  - Input: `coupon_code` = `"SAVE10"`; system date = `2099-12-30` (UB-1 relative to `expired_at = 2099-12-31`).
-  - Expected Output: Coupon accepted; `discount_amount` = 10% of total; `final_amount` shown correctly.
-**Expected Result:** The coupon `SAVE10` is accepted on `2099-12-30` (one day before expiry). The discount is applied and `final_amount` is reduced by 10%.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+  - Input: `coupon_code` = `"BIGBUY"`; system date = `2099-12-30` (UB-1 relative to `expired_at = 2099-12-31`).
+  - Expected Output: Coupon accepted; `discount_amount` = 50.000 đ; `final_amount` shown correctly.
+**Expected Result:** The coupon `BIGBUY` is accepted on `2099-12-30` (one day before expiry). The discount is applied and `final_amount` is reduced by 10%.
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-015 (via BV-FR08-009)
 **Req. Ref:** FR-09 (C2)
 **Bug ID:** _(fill if fails)_
@@ -690,8 +690,8 @@
   - Input: `coupon_code` = `"EXPIRED"`; `expired_at` = `2020-01-01`; test date = `2020-01-01` (UB = exact expiry).
   - Expected Output: HTTP 4XX; error: coupon has expired.
 **Expected Result:** The API rejects the coupon on its exact expiry date (`current_date = expired_at`). An error response is returned indicating the coupon has expired. The `<` predicate means equality is NOT valid.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-016 (via BV-FR08-010)
 **Req. Ref:** FR-09 (C2)
 **Bug ID:** _(fill if fails)_
@@ -712,8 +712,8 @@
   - Input: `coupon_code` = `"EXPIRED"`; test date = `2020-01-02` (UB+1).
   - Expected Output: HTTP 4XX; error: coupon has expired.
 **Expected Result:** The API rejects the coupon one day past its expiry. Error response confirms expiry. The system correctly handles dates beyond expiry.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-017 (via BV-FR08-011)
 **Req. Ref:** FR-09 (C2)
 **Bug ID:** _(fill if fails)_
@@ -721,22 +721,22 @@
 ---
 **Test Case ID:** TC-FR08-BV-011
 **Title:** Verify that a non-expired coupon is accepted when the current date is well before the expiry date (interior valid)
-**Description:** Interior valid representative for expiry date. Tests BV-FR08-012 — normal operation using `SAVE10` (expires 2099-12-31) on today's date (2026-06-14). This is the standard runtime condition.
+**Description:** Interior valid representative for expiry date. Tests BV-FR08-012 — normal operation using `BIGBUY` (expires 2099-12-31) on today's date (2026-06-14). This is the standard runtime condition.
 **Priority:** High
 **Pre-conditions:**
   1. Backend and Frontend are running.
-  2. User `test@eshop.com` is logged in (first use of SAVE10); cart total ≥ 300,000 ₫.
+  2. User `test@eshop.com` is logged in (first use of BIGBUY); cart total ≥ 500,000 ₫.
 **Steps:**
   1. Navigate to the checkout page with today's actual date.
-  2. Enter coupon `SAVE10`.
+  2. Enter coupon `BIGBUY`.
   3. Click "Apply Coupon".
   4. Verify the coupon is accepted.
 **Test Data:**
-  - Input: `coupon_code` = `"SAVE10"`; current date = `2026-06-14`; `expired_at` = `2099-12-31`.
-  - Expected Output: Coupon accepted; 10% discount applied.
-**Expected Result:** Coupon `SAVE10` is accepted. The 10% discount is applied. This confirms the normal expiry check works for a coupon far from its expiry date.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+  - Input: `coupon_code` = `"BIGBUY"`; current date = `2026-06-14`; `expired_at` = `2099-12-31`.
+  - Expected Output: Coupon accepted; 50.000 đ discount applied.
+**Expected Result:** Coupon `BIGBUY` is accepted. The 50.000 đ discount is applied. This confirms the normal expiry check works for a coupon far from its expiry date.
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-015 (via BV-FR08-012)
 **Req. Ref:** FR-09 (C2)
 **Bug ID:** _(fill if fails)_
@@ -758,8 +758,8 @@
   - Input: `coupon_code` = `"EXPIRED"`; current date = `2026-06-14`; `expired_at` = `2020-01-01`.
   - Expected Output: Error message: coupon has expired.
 **Expected Result:** The system rejects the `EXPIRED` coupon with a clear expiry error message. No discount is applied.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-017 (via BV-FR08-013)
 **Req. Ref:** FR-09 (C2)
 **Bug ID:** _(fill if fails)_
@@ -782,8 +782,8 @@
   - Input: `code` = `"SAVE10"`; `total_amount` = 299,999 ₫ (LB-1); `min_order_amount` = 300,000 ₫.
   - Expected Output: HTTP 4XX; error: order total below minimum.
 **Expected Result:** The API rejects the coupon because 299,999 < 300,000. An error message is returned indicating the minimum order amount is not met. This boundary test detects off-by-one errors in the `>=` operator.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-019 (via BV-FR08-015)
 **Req. Ref:** FR-09 (C3)
 **Bug ID:** _(fill if fails)_
@@ -803,8 +803,8 @@
   - Input: `code` = `"SAVE10"`; `total_amount` = 300,000 ₫ (LB = exact min); `min_order_amount` = 300,000 ₫.
   - Expected Output: HTTP 200; `discount_amount` = 30,000 ₫; `final_amount` = 270,000 ₫.
 **Expected Result:** The API accepts the coupon at exactly the minimum order amount (300,000 ₫ = min_order_amount). Returns `discount_amount = 30,000` and `final_amount = 270,000`. A response of "minimum not met" at this exact value would indicate a `>` operator bug.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API didn't accept the coupon at exactly the minimum order amount (300,000 đ = min _order_amount).
+**Status:** Failed
 **EC Coverage:** EC-FR08-018 (via BV-FR08-016)
 **Req. Ref:** FR-09 (C3)
 **Bug ID:** _(fill if fails)_
@@ -824,8 +824,8 @@
   - Input: `code` = `"SAVE10"`; `total_amount` = 300,001 ₫ (LB+1).
   - Expected Output: HTTP 200; `discount_amount` = Math.round(300001 × 10 / 100) = 30,000 ₫; `final_amount` = 270,001 ₫.
 **Expected Result:** The coupon is accepted at 300,001 ₫. Discount = 30,000 ₫ (after Math.round). Final amount = 270,001 ₫.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The coupon is accepted at 300,001 đ. But the discount_amount is `-2700009` and final amount is `3000010`
+**Status:** Failed
 **EC Coverage:** EC-FR08-018 (via BV-FR08-017)
 **Req. Ref:** FR-09 (C3)
 **Bug ID:** _(fill if fails)_
@@ -844,8 +844,8 @@
   - Input: `code` = `"SAVE10"`; `total_amount` = 100,000 ₫ (far below min = 300,000 ₫).
   - Expected Output: HTTP 4XX; error: minimum order not met.
 **Expected Result:** The API rejects the coupon with a minimum order error. This confirms the validation works for values well below the threshold.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-019 (via BV-FR08-018)
 **Req. Ref:** FR-09 (C3)
 **Bug ID:** _(fill if fails)_
@@ -864,8 +864,8 @@
   - Input: `code` = `"BIGBUY"`; `total_amount` = 499,999 ₫ (LB-1 for BIGBUY's min = 500,000 ₫).
   - Expected Output: HTTP 4XX; error: minimum order not met.
 **Expected Result:** The API rejects the `BIGBUY` coupon because 499,999 < 500,000. An error indicating minimum order amount is not met is returned.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-019 (via BV-FR08-020)
 **Req. Ref:** FR-09 (C3)
 **Bug ID:** _(fill if fails)_
@@ -891,8 +891,8 @@
   - Input: `coupon_code` = `"SAVE10"`; user usage_count of SAVE10 = 0 (LB); max_uses = 1.
   - Expected Output: Coupon accepted; 10% discount applied.
 **Expected Result:** The coupon `SAVE10` is accepted on the first use (usage_count = 0 < max_uses = 1). Discount of 10% is applied.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-020 (via BV-FR08-021)
 **Req. Ref:** FR-09 (C5)
 **Bug ID:** _(fill if fails)_
@@ -913,8 +913,8 @@
   - Input: `code` = `"VIP100"`; usage_count = 1 (= UB-1 for max=2); `total_amount` = 400,000 ₫.
   - Expected Output: HTTP 200; `discount_amount` = 100,000 ₫; `final_amount` = 300,000 ₫.
 **Expected Result:** The coupon is accepted (1 < 2). Discount = 100,000 ₫ (fixed). Final amount = 300,000 ₫.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-020 (via BV-FR08-022, BV-FR08-026)
 **Req. Ref:** FR-09 (C5)
 **Bug ID:** _(fill if fails)_
@@ -937,8 +937,8 @@
   - Input: `coupon_code` = `"SAVE10"`; usage_count = 1; max_uses_per_user = 1 (UB — exactly at limit).
   - Expected Output: Error message: usage limit reached.
 **Expected Result:** The coupon is **rejected**. The system displays an error indicating the usage limit has been reached (e.g., "You have already used this coupon"). A response of `discount_amount` being applied would indicate a `<=` operator bug (allowing one extra use).
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-021 (via BV-FR08-023)
 **Req. Ref:** FR-09 (C5)
 **Bug ID:** _(fill if fails)_
@@ -959,8 +959,8 @@
   - Input: `code` = `"VIP100"`; usage_count = 2; max_uses_per_user = 2 (UB).
   - Expected Output: HTTP 4XX; error: usage limit reached.
 **Expected Result:** The coupon `VIP100` is rejected after 2 uses. Error message indicates maximum uses reached.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-021 (via BV-FR08-025)
 **Req. Ref:** FR-09 (C5)
 **Bug ID:** _(fill if fails)_
@@ -980,8 +980,8 @@
   - Input: `code` = `"SAVE10"`; usage_count = 2 (UB+1 = beyond max); max_uses = 1.
   - Expected Output: HTTP 4XX; error: usage limit exceeded.
 **Expected Result:** The API rejects the coupon. Error response confirms usage is exceeded. The system does not apply any discount.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR08-022 (via BV-FR08-024)
 **Req. Ref:** FR-09 (C5)
 **Bug ID:** _(fill if fails)_
