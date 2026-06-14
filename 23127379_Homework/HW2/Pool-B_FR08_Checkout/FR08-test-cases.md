@@ -42,7 +42,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-001, EC-FR08-004, EC-FR08-006, EC-FR08-009, EC-FR08-026, EC-FR08-027, EC-FR08-036, EC-FR08-037, EC-FR08-038, EC-FR08-040, EC-FR08-041
 **Req. Ref:** FR-08, FR-21, FR-22, FR-23, FR-10
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-001, BUG-FR08-002, BUG-FR08-003
 
 ---
 **Test Case ID:** TC-FR08-EP-002
@@ -71,7 +71,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-001, EC-FR08-004, EC-FR08-006, EC-FR08-011, EC-FR08-015, EC-FR08-018, EC-FR08-020, EC-FR08-023, EC-FR08-026, EC-FR08-027, EC-FR08-028
 **Req. Ref:** FR-09 (C1, C2, C3, C4, C5), FR-08, FR-21
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-004
 
 ---
 **Test Case ID:** TC-FR08-EP-003
@@ -99,7 +99,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-001, EC-FR08-004, EC-FR08-006, EC-FR08-011, EC-FR08-015, EC-FR08-018, EC-FR08-020, EC-FR08-024, EC-FR08-026, EC-FR08-027, EC-FR08-029
 **Req. Ref:** FR-09 (C1, C2, C3, C4, C5), FR-08
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-EP-004
@@ -124,7 +124,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-001, EC-FR08-004, EC-FR08-006, EC-FR08-014, EC-FR08-026, EC-FR08-027
 **Req. Ref:** FR-08, FR-09
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-EP-005
@@ -150,7 +150,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-001, EC-FR08-004, EC-FR08-011, EC-FR08-015, EC-FR08-018, EC-FR08-020, EC-FR08-024, EC-FR08-037, EC-FR08-038, EC-FR08-039
 **Req. Ref:** FR-22, FR-23, FR-21, FR-09 (C5)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-005, BUG-FR08-006
 
 ---
 
@@ -177,7 +177,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-002, EC-FR08-030
 **Req. Ref:** FR-08, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-002
@@ -199,7 +199,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-003, EC-FR08-030
 **Req. Ref:** SEC-02, FR-08
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-003
@@ -222,7 +222,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-005, EC-FR08-031
 **Req. Ref:** FR-07, FR-08, FR-24
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-004
@@ -246,7 +246,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-007
 **Req. Ref:** FR-08, FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-006, BUG-FR08-007
 
 ---
 **Test Case ID:** TC-FR08-NEG-005
@@ -271,7 +271,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-010, EC-FR08-036
 **Req. Ref:** FR-08
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-008
 
 ---
 **Test Case ID:** TC-FR08-NEG-006
@@ -295,7 +295,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-012, EC-FR08-032
 **Req. Ref:** FR-09 (C1), FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-007
@@ -319,7 +319,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-013, EC-FR08-032
 **Req. Ref:** FR-09 (C1)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-008
@@ -342,7 +342,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-017, EC-FR08-033
 **Req. Ref:** FR-09 (C2)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-009
@@ -367,7 +367,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-019, EC-FR08-034
 **Req. Ref:** FR-09 (C3)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-010
@@ -391,7 +391,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-021, EC-FR08-035
 **Req. Ref:** FR-09 (C5)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-011
@@ -413,7 +413,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-022, EC-FR08-035
 **Req. Ref:** FR-09 (C5)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-012
@@ -435,7 +435,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-025
 **Req. Ref:** FR-09, FR-17
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-NEG-013
@@ -458,7 +458,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-007
 **Req. Ref:** FR-08, FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-006, BUG-FR08-007
 
 ---
 **Test Case ID:** TC-FR08-NEG-014
@@ -482,7 +482,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-038, EC-FR08-040, EC-FR08-041
 **Req. Ref:** FR-21
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-001, BUG-FR08-002
 
 ---
 
@@ -512,7 +512,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-006 (via BV-FR08-001)
 **Req. Ref:** FR-08
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-002
@@ -534,7 +534,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-006 (via BV-FR08-002)
 **Req. Ref:** FR-08
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-003
@@ -556,7 +556,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-006 (via BV-FR08-003)
 **Req. Ref:** FR-08
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-004
@@ -578,7 +578,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-006 (via BV-FR08-004)
 **Req. Ref:** FR-08
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-005
@@ -600,7 +600,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-007 (via BV-FR08-005)
 **Req. Ref:** FR-08, FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-006, BUG-FR08-007
 
 ---
 **Test Case ID:** TC-FR08-BV-006
@@ -623,7 +623,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-008 (via BV-FR08-006)
 **Req. Ref:** FR-08
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-009
 
 ---
 **Test Case ID:** TC-FR08-BV-007
@@ -644,7 +644,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-008 (via BV-FR08-008)
 **Req. Ref:** FR-08
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-009
 
 ---
 ### Section BV-B: Coupon Expiry Date Boundaries (High Risk — 6-point)
@@ -672,7 +672,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-015 (via BV-FR08-009)
 **Req. Ref:** FR-09 (C2)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-009
@@ -694,7 +694,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-016 (via BV-FR08-010)
 **Req. Ref:** FR-09 (C2)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-010
@@ -716,7 +716,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-017 (via BV-FR08-011)
 **Req. Ref:** FR-09 (C2)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-011
@@ -739,7 +739,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-015 (via BV-FR08-012)
 **Req. Ref:** FR-09 (C2)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-012
@@ -762,7 +762,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-017 (via BV-FR08-013)
 **Req. Ref:** FR-09 (C2)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 ### Section BV-C: Order Total vs. `min_order_amount` Boundaries (High Risk — 6-point)
@@ -786,7 +786,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-019 (via BV-FR08-015)
 **Req. Ref:** FR-09 (C3)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-014
@@ -803,11 +803,11 @@
   - Input: `code` = `"SAVE10"`; `total_amount` = 300,000 ₫ (LB = exact min); `min_order_amount` = 300,000 ₫.
   - Expected Output: HTTP 200; `discount_amount` = 30,000 ₫; `final_amount` = 270,000 ₫.
 **Expected Result:** The API accepts the coupon at exactly the minimum order amount (300,000 ₫ = min_order_amount). Returns `discount_amount = 30,000` and `final_amount = 270,000`. A response of "minimum not met" at this exact value would indicate a `>` operator bug.
-**Observed Result:** The API didn't accept the coupon at exactly the minimum order amount (300,000 đ = min _order_amount).
+**Observed Result:** The API didn't accept the coupon at exactly the minimum order amount (300,000 đ = min_order_amount).
 **Status:** Failed
 **EC Coverage:** EC-FR08-018 (via BV-FR08-016)
 **Req. Ref:** FR-09 (C3)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-010
 
 ---
 **Test Case ID:** TC-FR08-BV-015
@@ -828,7 +828,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR08-018 (via BV-FR08-017)
 **Req. Ref:** FR-09 (C3)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR08-011
 
 ---
 **Test Case ID:** TC-FR08-BV-016
@@ -848,7 +848,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-019 (via BV-FR08-018)
 **Req. Ref:** FR-09 (C3)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-017
@@ -868,7 +868,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-019 (via BV-FR08-020)
 **Req. Ref:** FR-09 (C3)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 ### Section BV-D: Coupon Usage Count vs. `max_uses_per_user` Boundaries (High Risk — 6-point)
@@ -895,7 +895,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-020 (via BV-FR08-021)
 **Req. Ref:** FR-09 (C5)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-019
@@ -917,7 +917,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-020 (via BV-FR08-022, BV-FR08-026)
 **Req. Ref:** FR-09 (C5)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-020
@@ -941,7 +941,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-021 (via BV-FR08-023)
 **Req. Ref:** FR-09 (C5)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-021
@@ -963,7 +963,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-021 (via BV-FR08-025)
 **Req. Ref:** FR-09 (C5)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR08-BV-022
@@ -984,7 +984,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR08-022 (via BV-FR08-024)
 **Req. Ref:** FR-09 (C5)
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 

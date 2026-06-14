@@ -167,5 +167,5 @@
 - **Prompt:**
   > Write test report for testcase FR06.
 - **AI Output Summary:** Generated `FR06-test-summary.md` containing execution metrics (33.3% pass rate), a breakdown of 20 defects (4 Fatal, 13 Serious, 3 Medium), and a 'No-Go' release recommendation due to critical price tampering vulnerabilities and poor validation.
-- **Human Review Notes:** _(HITL must review pass rate, defect severity, and sign off below)_
-- **Verdict:** _(Accepted / Partially Accepted / Rejected — set by HITL after review)_
+- **Human Review Notes:** Approved
+- **Verdict:** Accepted
