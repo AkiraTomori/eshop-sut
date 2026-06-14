@@ -34,3 +34,25 @@
   3. Dual Phone Valid Lengths (EC-012 vs EC-013): Approved the split. Both exactly 10 digits and exactly 11 digits will be treated as distinct standalone valid classes, forcing individual 1-switch boundary validation sweeps during Phase 3.
   4. Email Immutability (EC-022): Confirmed a dual-layer enforcement expectation. The UI must render the email input node as strictly disabled/read-only, and the backend API must silently ignore any 'email' keys injected inside the PUT request payload, ensuring zero system state changes.
 - **Verdict:** Accepted
+
+---
+## Session: 2026-06-14 22:08 — Phase 3: Boundary Value Analysis (BVA)
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking via Google DeepMind IDE)
+- **Bloom-AI Level:** G9.3 (Analyse) — Systematic BVA depth selection and boundary point derivation across all eligible EC classes
+- **Prompt:**
+  > "I have reviewed Phase 2 for FR04. Proceed to phase 3 (Boundary Analysis) for Pool-D_FR04_ProfileManagement."
+- **AI Output Summary:** Screened all 32 ECs for BVA eligibility; identified 3 ordered/numeric fields requiring BVA (Full Name length, Phone length, Shipping Address length). Assigned Medium risk and 4-point BVA depth to all three. Key decisions:
+  - Full Name length: 4-point BVA on [1, 255] — LB=1, LB+1=2, UB-1=254, UB=255; LB-1=0 (empty, INVALID), UB+1=256 (INVALID)
+  - Phone length: Narrow-range [10, 11] — only 2 valid spec values; LB+1 collapses to UB; effective 4 points are LB-1=9 (INVALID), LB=10 (VALID), UB=11 (VALID), UB+1=12 (INVALID); documented collapse explicitly
+  - Shipping Address length: Optional field; LB-1=0 (empty = VALID for optional field); LB=1, UB-1=254, UB=255; UB+1=256 (INVALID)
+  - All 3 boundary types (Spec, UI/System, DB) documented per field
+  - 4 potential boundary mismatch risks flagged: missing spec max for name/address, UI keyboard not enforcing phone length, phone narrow-range dual-valid endpoints
+- **Human Review Notes:** Verified boundary point values against SRS and resolved all 4 boundary mismatch risks to lock down test coverage:
+  1. Name/Address Max-Length: The 255-character layout boundary is confirmed as the test target. Any longer input (1000+ chars) is confirmed as a Backend/DB stress-test case only.
+  2. Phone Keyboard: Verified the Android numeric keyboard allows entry of 10-11 digit strings, so no client-side keyboard-based blocking is implemented or expected.
+  3. Phone Dual-Valid Endpoints: Explicit confirmation that both EC-012 (10 digits) and EC-013 (11 digits) must be treated as distinct, individually testable equivalence classes during BVA execution.
+  4. Phone Numeric-Only Validation: Backend validation confirmed (via database schema and API behaviour) to strictly enforce numeric-only content, with no allowance for spaces, dashes, or other whitespace.
+- **Verdict:** Accepted
+
+---
