@@ -26,3 +26,14 @@
 - **AI Output Summary:** Produced a complete Equivalence Class table with **41 ECs** (EC-FR08-001 to EC-FR08-041) across 10 groups: Authentication/JWT (G3+G4, 3 ECs), Cart state (G3, 2 ECs), Shipping address (G1, 3 ECs), `total_amount` security (G3, 2 ECs), Coupon existence/C1 (G3+G4, 4 ECs), Coupon expiry/C2 (G1, 3 ECs), Coupon min-order/C3 (G1, 2 ECs), Coupon usage/C5 (G1, 3 ECs), Coupon type/G2 (3 ECs), and Output variables (G3+G2, 16 ECs). Incorporated all 5 HITL-resolved ambiguities from Phase 1. Flagged 3 open issues for Phase 3 review.
 - **Human Review Notes:** Verified the completeness and partitioning logic of all 41 equivalence classes. Approved the boundary interpretations for coupon expiration (strict equality meaning expired) and shipping_address (255-character baseline limit). Confirmed the security testing approach for EC-FR08-010; price tampering checks will be isolated as network-layer integration tests executed via Postman to assert that the backend recalculates the financial totals independently regardless of client-supplied payloads.
 - **Verdict:** Accepted
+
+---
+## Session: 2026-06-14 09:36 — Phase 3: Boundary Value Analysis
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking) via IDE
+- **Bloom-AI Level:** G9.3 (Analyse) — Applying BVA risk-level classification and deriving boundary points for all ordered/numeric EC classes
+- **Prompt:**
+  > I have reviewed phase 2 for FR08_checkout. Proceed to phase 3 (boundary analysis) for Pool_B-FR08-Checkout
+- **AI Output Summary:** Produced a complete BVA table with **26 boundary points** (BV-FR08-001 to BV-FR08-026) across 4 variables. Risk levels: `shipping_address` (Medium, 4-point, 8 BV points including UI/system and DB boundary rows), coupon `expired_at` (High, 6-point, 6 BV points), order total vs. `min_order_amount` (High, 6-point, 6 BV points with dual-coupon cross-testing for SAVE10 and BIGBUY), usage count vs. `max_uses_per_user` (High, 6-point, 6 BV points with dual-coupon cross-testing for SAVE10 and VIP100). Identified 4 potential high-value findings: shipping_address layer-enforcement mismatch, `>=` vs `>` operator ambiguity for C3, `<` vs `<=` operator ambiguity for C5, and expiry date exact-equality boundary. All three boundary types (Specification, UI/System, DB) documented in coverage summary.
+- **Human Review Notes:** Verified boundary point values (LB=1, UB=255 for address; exact dates for expiry/limits). Risk-level assignments align with HITL assessment (High for financial/expiry, Medium for structural/UI). Confirmed all 3 boundary types (Specification, UI/System, DB) are correctly documented for comprehensive coverage.
+- **Verdict:** Accepted
