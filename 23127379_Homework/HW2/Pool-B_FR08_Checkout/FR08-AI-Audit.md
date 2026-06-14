@@ -75,3 +75,14 @@
 - **AI Output Summary:** Scanned all 15 test cases in BV-B, BV-C, BV-D. Found **zero failures in BV-B (5 Passed)** and **zero failures in BV-D (5 Passed)**. Found **2 failures in BV-C**: (1) TC-FR08-BV-014 — coupon rejected at exact min_order_amount boundary → BUG-FR08-010 (Serious: strict `>` operator used instead of `>=`); (2) TC-FR08-BV-015 — discount_amount = −2,700,009 and final_amount = 3,000,010 for 300,001 ₫ input → BUG-FR08-011 (Fatal: formula computes `total × rate` instead of `total × rate / 100`). Root cause analysis for BUG-FR08-011 derived from observed values: final_amount = total × 10 = 3,000,010 confirms multiplication without division. Both bugs cross-referenced against BUG-FR08-004. Updated bug summary table to 11 total bugs (2 Fatal, 5 Serious, 3 Medium, 1 Cosmetic).
 - **Human Review Notes:** Reviewed each bug's severity, attached screenshots, filed GitHub Issues, then approved.
 - **Verdict:** Accepted
+
+---
+## Session: 2026-06-14 19:04 — Phase 5: Test Summary Report
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking) via IDE
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.2 (Apply) — Consolidating all 41 executed test case results into a structured Test Summary Report following theory-test-report.md §9–10
+- **Prompt:**
+  > Write Test Summary for FR08, I have reviewed test report for it.
+- **AI Output Summary:** Produced the complete `FR08-test-summary.md`. Counted all 41 statuses from `FR08-test-cases.md` (grep-verified): EP 2/5 Pass (40.0%), NEG 10/14 Pass (71.4%), BV 18/22 Pass (81.8%), **Grand Total 30/41 Pass (73.2%)**. Documented 11 bugs across 7 defect types and 4 feature areas. BV-B and BV-D sections are defect-free (100% pass rate); BV-A and BV-C have failures. Included defect statistics by severity (2 Fatal, 5 Serious, 3 Medium, 1 Cosmetic), by type, and by feature area. Documented 7 open points and risks. Issued **No-Go** release recommendation citing 2 open Fatal defects (price tampering + discount formula) and 5 open Serious defects in a financial transaction flow. Conditional Go conditions listed for PM consideration.
+- **Human Review Notes:** Verified all test case counts, and pass rates.
+- **Verdict:** Accepted
