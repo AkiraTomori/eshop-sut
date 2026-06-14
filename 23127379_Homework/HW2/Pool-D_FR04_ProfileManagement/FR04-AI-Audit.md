@@ -56,3 +56,20 @@
 - **Verdict:** Accepted
 
 ---
+
+## Session: 2026-06-14 22:15 — Phase 4: Test Case Design
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking via Google DeepMind IDE)
+- **Bloom-AI Level:** G9.3 (Analyse) — Systematic derivation of EP, NEG, and BVA test cases from approved EC and BVA tables
+- **Prompt:**
+  > "I have reviewed Phase 3 for FR04. Proceed to phase 4 (Write test case) for Pool-D_FR04_ProfileManagement."
+- **AI Output Summary:** Produced 31 test cases across three types: 4 EP (valid), 13 NEG (one per invalid EC), and 14 BV (boundary). Key design decisions:
+  - EP-001: Primary valid path combining 10 valid ECs (JWT, name, 10-digit phone with `0` prefix, numeric-only, address, email/role absent) — maximum valid class combination
+  - EP-002: Dedicated valid case for 11-digit phone (EC-FR04-013) — separate from EP-001 as HITL mandated both length classes as distinct test targets
+  - EP-003: Optional-field scenario — phone and address both empty, only name provided (EC-009, EC-018)
+  - EP-004: Profile screen load / UI structural constraints (read-only email, no role field, GET pre-population) — covers EC-029, 030, 031
+  - NEG-001 to NEG-013: One isolated test per invalid EC (13 TCs); critical security tests NEG-012 (email change attempt) and NEG-013 (role escalation) include verification GET step to confirm database state unchanged
+  - BV TCs: Full Name 5 BV points (BV-001 to BV-005); Phone 4 BV points (BV-006 to BV-009); Shipping Address 5 BV points (BV-010 to BV-014); total 14 BV TCs
+  - Coverage matrix confirms all 32 ECs covered; all BVA boundary points covered; all FR-04 and SEC-06 references present
+- **Human Review Notes:** Reviewed all 31 test cases for title quality, expected result precision, EC coverage completeness, and self-standing clarity.
+- **Verdict:** Accepted
