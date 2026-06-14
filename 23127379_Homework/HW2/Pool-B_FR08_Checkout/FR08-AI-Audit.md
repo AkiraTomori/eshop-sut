@@ -53,3 +53,14 @@
   - **Coverage:** The coverage matrix accurately links all 41 ECs and 26 BV points to the test cases. All test case titles follow the specified format.
   - **Precision:** Expected results are specific and pre-defined, allowing for objective pass/fail determination.
 - **Verdict:** Accepted
+
+---
+## Session: 2026-06-14 12:11 — Phase 5: Bug Report (EP + NEG + BV Section A)
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking) via IDE
+- **Bloom-AI Level:** G9.3 (Analyse) — Analysing HITL-recorded execution results to produce structured, actionable bug reports per theory-test-report.md standards
+- **Prompt:**
+  > Write Bug Report from beginning to Section BV-A for FR08
+- **AI Output Summary:** Produced **9 bug reports** (BUG-FR08-001 to BUG-FR08-009) covering all failed test cases from TC-FR08-EP-001 to TC-FR08-BV-007. Identified and de-duplicated bugs: BUG-FR08-001 (missing `<h1>` — Medium), BUG-FR08-002 (green button — Cosmetic), BUG-FR08-003 (cart not cleared — Serious), BUG-FR08-004 (percent discount not in total — Serious), BUG-FR08-005 (breadcrumb missing — Medium), BUG-FR08-006 (no UI error for empty address — Serious), BUG-FR08-007 (backend accepts empty/whitespace address — Serious), BUG-FR08-008 (price tampering — **Fatal**), BUG-FR08-009 (no length enforcement — Medium). TR-BP-09 security escalation flag applied to BUG-FR08-008.
+- **Human Review Notes:** _[HITL to fill in: review each bug's severity, file GitHub Issues, attach screenshots, then sign off]_
+- **Verdict:** Accepted
