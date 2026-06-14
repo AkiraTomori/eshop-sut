@@ -434,4 +434,145 @@ The system accepts the 256-character address without any error. An order is crea
 3. Prioritize **BUG-FR08-008** (Fatal — price tampering) for **immediate escalation** before any other fix.
 4. Update the `Bug ID:` field in [FR08-test-cases.md](FR08-test-cases.md) for each failed test case.
 
-**HITL Review:** ☐ Accepted / ☐ Partially Accepted / ☐ Rejected — _[HITL to fill in]_
+**HITL Review (BV-A scope):** Accepted
+
+---
+
+## Bug Report: BUG-FR08-010
+**Date:** 2026-06-14
+**Function Name:** FR-09 Coupon Code — `min_order_amount` Boundary Operator
+**Problem Summary:** The coupon validation rejects an order total that **exactly equals** `min_order_amount` (300,000 ₫ = 300,000 ₫) — indicating the backend uses a strict `>` operator instead of the required `>=` operator for the minimum order threshold.
+**Severity:** Serious
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- Backend (`http://localhost:3000`) is running.
+- A valid JWT token for `test@eshop.com` is available (first use of `SAVE10` — usage_count = 0).
+- Cart total is exactly **300,000 ₫** (= `SAVE10` min_order_amount).
+
+**Steps (API-level — Postman):**
+1. Send `POST http://localhost:3000/api/apply-coupon` with:
+   - Header: `Authorization: Bearer <valid_token>`
+   - Body: `{ "code": "SAVE10", "total_amount": 300000, "user_id": <user_id> }`
+2. Observe the HTTP response code and response body.
+
+**Expected Result:**
+Per FR-09 (C3): The condition is `total_amount >= min_order_amount`. When `total_amount = 300,000 ₫` and `min_order_amount = 300,000 ₫`, the condition `300,000 >= 300,000` evaluates to **TRUE**. The API must return HTTP 200 with:
+- `discount_amount` = `Math.round(300,000 × 10 / 100)` = **30,000 ₫**
+- `final_amount` = 300,000 − 30,000 = **270,000 ₫**
+
+**Actual Result:**
+The API **rejects** the coupon with an error indicating the minimum order amount is not met, despite the cart total being exactly equal to the minimum (300,000 ₫). This indicates the backend comparison operator is `total > min_order_amount` (strict greater-than) rather than `total >= min_order_amount` (greater-than-or-equal), causing a valid coupon application to be incorrectly blocked at the exact boundary.
+
+**Environment:**
+- OS: macOS
+- API Tool: Postman
+- API Base URL: `http://localhost:3000`
+- Test Data: `code` = `SAVE10`; `total_amount` = 300,000; `min_order_amount` = 300,000; usage_count = 0.
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**Linked Test Cases:** TC-FR08-BV-014
+**Attachments:** _(HITL attaches Postman screenshot showing: request body with total_amount=300000, error response rejecting the coupon)_
+
+> **Note:** TC-FR08-BV-013 (total = 299,999 ₫) correctly fails. Only the exact boundary (total = 300,000 ₫) is incorrectly rejected, confirming this is a strict `>` vs. `>=` off-by-one operator defect at the boundary — not a general minimum validation failure.
+
+---
+
+## Bug Report: BUG-FR08-011
+**Date:** 2026-06-14
+**Function Name:** FR-09 Coupon Code — Percent Discount Calculation Formula (API Level)
+**Problem Summary:** When a percent-type coupon (`SAVE10`, 10%) is applied via the API with `total_amount = 300,001 ₫`, the returned `discount_amount` is **−2,700,009** (a large negative value) and `final_amount` is **3,000,010** — indicating the backend discount formula multiplies the total by the percentage number (×10) instead of dividing (×10/100).
+**Severity:** Fatal
+**Priority:** _(set by HITL/PM)_
+**Status:** New
+**Reported By:** Gemini QA Agent + Thái Minh Huy
+**Assign To:** Development Team
+
+### Steps to Reproduce
+
+**Pre-conditions:**
+- Backend (`http://localhost:3000`) is running.
+- A valid JWT token for `test@eshop.com` is available (first use of `SAVE10` — usage_count = 0).
+- Cart total is set to 300,001 ₫ (one unit above `SAVE10` min_order_amount of 300,000 ₫).
+
+**Steps (API-level — Postman):**
+1. Send `POST http://localhost:3000/api/apply-coupon` with:
+   - Header: `Authorization: Bearer <valid_token>`
+   - Body: `{ "code": "SAVE10", "total_amount": 300001, "user_id": <user_id> }`
+2. Observe the HTTP response code.
+3. Note the values of `discount_amount` and `final_amount` in the response body.
+
+**Expected Result:**
+Per FR-09 (C4) and HITL-resolved rounding rule:
+- `discount_amount` = `Math.round(300,001 × 10 / 100)` = `Math.round(30,000.1)` = **30,000 ₫**
+- `final_amount` = 300,001 − 30,000 = **270,001 ₫**
+
+**Actual Result:**
+The API returns:
+- `discount_amount` = **−2,700,009** (negative value)
+- `final_amount` = **3,000,010**
+
+**Root Cause Analysis (from observed values):**
+- `final_amount = 300,001 × 10 = 3,000,010` → the formula computes `total × rate` (no division by 100)
+- `discount_amount = final_amount - total = 3,000,010 − 300,001 = 2,700,009`, stored as **negative** (sign inverted in subtraction direction: `total − final_amount = −2,700,009`)
+- The correct formula `discount = total × rate / 100` has either lost the `/ 100` divisor, or the `rate` variable holds `1000` instead of `10`.
+
+This defect causes the coupon to inflate the order total by 10× instead of reducing it by 10%, which means any order with a percent coupon applied is charged approximately 9× more than the correct amount.
+
+**Environment:**
+- OS: macOS
+- API Tool: Postman
+- API Base URL: `http://localhost:3000`
+- Test Data: `code` = `SAVE10`; `total_amount` = 300,001; usage_count = 0; `min_order_amount` = 300,000.
+
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**Linked Test Cases:** TC-FR08-BV-015
+**Attachments:** _(HITL attaches Postman screenshot showing: request body, HTTP 200 response with discount_amount = -2700009 and final_amount = 3000010)_
+
+> ⚠️ **Relationship to BUG-FR08-004:** BUG-FR08-004 reports that the percent discount is not reflected in the **UI** checkout total (frontend display issue). BUG-FR08-011 is a **separate, more severe defect** in the **backend API calculation formula** itself — the formula produces a catastrophically wrong value. These must be fixed independently:
+> - BUG-FR08-004 fix: update frontend to display the discount value returned by the API.
+> - BUG-FR08-011 fix: correct the backend formula from `total × rate` to `total × rate / 100`.
+
+> ⚠️ **Note on BUG-FR08-010 interaction:** TC-FR08-BV-014 (total = 300,000 ₫ exactly) was rejected by the API (BUG-FR08-010). TC-FR08-BV-015 (total = 300,001 ₫) was accepted, which exposed BUG-FR08-011. These are two independent defects in the same endpoint — one in the comparison operator for `min_order_amount`, one in the discount formula.
+
+---
+
+## Updated Bug Summary Table (Full Scope: EP + NEG + BV-A + BV-B + BV-C + BV-D)
+
+| Bug ID | TC(s) | Feature Area | Problem Summary | Severity | Status |
+|--------|-------|-------------|-----------------|:--------:|--------|
+| BUG-FR08-001 | EP-001, NEG-014 | GUI / Page Structure | No `<h1>` on checkout page — uses `<h2>` instead | Medium | New |
+| BUG-FR08-002 | EP-001, NEG-014 | GUI / Button Styling | Checkout button is green instead of blue | Cosmetic | New |
+| BUG-FR08-003 | EP-001 | Cart State Post-Checkout | Cart not cleared after successful order placement | Serious | New |
+| BUG-FR08-004 | EP-002 | Coupon / Discount UI Display | SAVE10 percent discount not reflected in checkout total (UI layer) | Serious | New |
+| BUG-FR08-005 | EP-005 | GUI / Breadcrumb Navigation | Breadcrumb navigation absent from checkout page | Medium | New |
+| BUG-FR08-006 | EP-005, NEG-004, NEG-013, BV-005 | Input Validation / UI Error Display | No UI error message when shipping address is empty/whitespace | Serious | New |
+| BUG-FR08-007 | NEG-004, NEG-013, BV-005 | Backend Input Validation | API accepts orders with empty/whitespace shipping_address | Serious | New |
+| BUG-FR08-008 | NEG-005 | Security / Price Tampering | Backend trusts client-supplied total_amount — price tampering succeeds | **Fatal** | New |
+| BUG-FR08-009 | BV-006, BV-007 | Input Validation / Length | No enforcement of 255-char max on shipping_address | Medium | New |
+| BUG-FR08-010 | BV-014 | Coupon / min_order_amount | Coupon rejected at exact minimum threshold — `>` used instead of `>=` | Serious | New |
+| BUG-FR08-011 | BV-015 | Coupon / Discount Calculation | Percent discount formula wrong — multiplies instead of divides — produces negative discount and 10× final_amount | **Fatal** | New |
+
+**Total bugs: 11**
+
+| Severity | Count |
+|----------|:-----:|
+| Fatal | **2** (BUG-FR08-008, BUG-FR08-011) |
+| Serious | **5** (BUG-FR08-003, 004, 006, 007, 010) |
+| Medium | **3** (BUG-FR08-001, 005, 009) |
+| Cosmetic | **1** (BUG-FR08-002) |
+
+---
+
+**HITL Action Required (BV-B → BV-D scope):**
+1. File **GitHub Issues** for BUG-FR08-010 and BUG-FR08-011 and paste URLs into the `GitHub Issue:` fields above.
+2. Attach Postman screenshots showing the exact request bodies and response values.
+3. **Escalate BUG-FR08-011 immediately** alongside BUG-FR08-008 — both are Fatal defects in the core financial calculation path.
+4. Update `Bug ID:` fields in [FR08-test-cases.md](FR08-test-cases.md) for TC-FR08-BV-014 and TC-FR08-BV-015.
+
+**HITL Review (BV-B → BV-D scope):** ☐ Accepted / ☐ Partially Accepted / ☐ Rejected — _[HITL to fill in]_

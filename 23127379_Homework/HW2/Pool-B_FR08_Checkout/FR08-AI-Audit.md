@@ -64,3 +64,14 @@
 - **AI Output Summary:** Produced **9 bug reports** (BUG-FR08-001 to BUG-FR08-009) covering all failed test cases from TC-FR08-EP-001 to TC-FR08-BV-007. Identified and de-duplicated bugs: BUG-FR08-001 (missing `<h1>` — Medium), BUG-FR08-002 (green button — Cosmetic), BUG-FR08-003 (cart not cleared — Serious), BUG-FR08-004 (percent discount not in total — Serious), BUG-FR08-005 (breadcrumb missing — Medium), BUG-FR08-006 (no UI error for empty address — Serious), BUG-FR08-007 (backend accepts empty/whitespace address — Serious), BUG-FR08-008 (price tampering — **Fatal**), BUG-FR08-009 (no length enforcement — Medium). TR-BP-09 security escalation flag applied to BUG-FR08-008.
 - **Human Review Notes:** _[HITL to fill in: review each bug's severity, file GitHub Issues, attach screenshots, then sign off]_
 - **Verdict:** Accepted
+
+---
+## Session: 2026-06-14 18:03 — Phase 5: Bug Report (BV-B + BV-C + BV-D)
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking) via IDE
+- **Bloom-AI Level:** G9.3 (Analyse) — Analysing HITL-recorded boundary test execution results to produce structured, actionable bug reports for Section BV-B (Expiry), BV-C (min_order_amount), and BV-D (usage_count)
+- **Prompt:**
+  > Write Bug Report from Section BV-B to Section BV-D for FR08
+- **AI Output Summary:** Scanned all 15 test cases in BV-B, BV-C, BV-D. Found **zero failures in BV-B (5 Passed)** and **zero failures in BV-D (5 Passed)**. Found **2 failures in BV-C**: (1) TC-FR08-BV-014 — coupon rejected at exact min_order_amount boundary → BUG-FR08-010 (Serious: strict `>` operator used instead of `>=`); (2) TC-FR08-BV-015 — discount_amount = −2,700,009 and final_amount = 3,000,010 for 300,001 ₫ input → BUG-FR08-011 (Fatal: formula computes `total × rate` instead of `total × rate / 100`). Root cause analysis for BUG-FR08-011 derived from observed values: final_amount = total × 10 = 3,000,010 confirms multiplication without division. Both bugs cross-referenced against BUG-FR08-004. Updated bug summary table to 11 total bugs (2 Fatal, 5 Serious, 3 Medium, 1 Cosmetic).
+- **Human Review Notes:** _[HITL to fill in: verify root cause analysis for BUG-FR08-011, confirm severity assignments, file GitHub Issues with Postman screenshots, then sign off]_
+- **Verdict:** ☐ Accepted / ☐ Partially Accepted / ☐ Rejected
