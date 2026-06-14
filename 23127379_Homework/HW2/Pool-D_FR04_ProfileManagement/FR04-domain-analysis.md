@@ -1,6 +1,6 @@
 ## Domain Analysis (Equivalence Partitioning) — FR-04: Personal Profile Management
 **Date:** 2026-06-14 21:57
-**Analyst:** Gemini QA Agent (reviewed by: [HITL — Huy])
+**Analyst:** Gemini QA Agent (reviewed by: Thái Minh Huy)
 **Based on:** FR04-requirement-analysis.md (approved 2026-06-14)
 **Sources:** SRS §2 (FR-04, FR-01), §9 (SEC-02, SEC-06) · API Spec §2.2 (PUT /api/users/me) · theory-domain-testing.md §5, §6
 
