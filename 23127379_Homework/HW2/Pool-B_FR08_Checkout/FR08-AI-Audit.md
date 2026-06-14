@@ -37,3 +37,19 @@
 - **AI Output Summary:** Produced a complete BVA table with **26 boundary points** (BV-FR08-001 to BV-FR08-026) across 4 variables. Risk levels: `shipping_address` (Medium, 4-point, 8 BV points including UI/system and DB boundary rows), coupon `expired_at` (High, 6-point, 6 BV points), order total vs. `min_order_amount` (High, 6-point, 6 BV points with dual-coupon cross-testing for SAVE10 and BIGBUY), usage count vs. `max_uses_per_user` (High, 6-point, 6 BV points with dual-coupon cross-testing for SAVE10 and VIP100). Identified 4 potential high-value findings: shipping_address layer-enforcement mismatch, `>=` vs `>` operator ambiguity for C3, `<` vs `<=` operator ambiguity for C5, and expiry date exact-equality boundary. All three boundary types (Specification, UI/System, DB) documented in coverage summary.
 - **Human Review Notes:** Verified boundary point values (LB=1, UB=255 for address; exact dates for expiry/limits). Risk-level assignments align with HITL assessment (High for financial/expiry, Medium for structural/UI). Confirmed all 3 boundary types (Specification, UI/System, DB) are correctly documented for comprehensive coverage.
 - **Verdict:** Accepted
+
+---
+## Session: 2026-06-14 10:01 — Phase 4: Test Case Design
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking) via IDE
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.2 (Apply) — Designing EP, NEG, and BV test cases from approved EC and BVA tables following the standard template
+- **Prompt:**
+  > I have reviewed phase 3 for FR08_checkout. Proceed to phase 4 (write test case) for Pool_B-FR08-Checkout
+- **AI Output Summary:** Produced a complete test case suite of **41 test cases** total: 5 EP (valid), 14 NEG (invalid — one per invalid EC), and 22 BV (boundary) test cases. EP TCs efficiently combine valid ECs (TC-FR08-EP-001 covers 11 valid ECs simultaneously). Each of the 14 invalid ECs has its own isolated NEG TC. BV TCs cover all 26 BVA boundary points from Phase 3 across 4 variables (shipping_address length, coupon expiry, min_order_amount, usage_count). All titles follow Action+Function+Condition pattern. All expected results are precise and pre-defined. Full coverage matrix included linking all 41 ECs and 26 BV points to specific test cases.
+- **Human Review Notes:** Reviewed and approved the test case suite in its entirety:
+  - **EP Test Cases:** All 5 EP tests are well-designed and cover valid scenarios. TC-FR08-EP-001 is particularly efficient by combining 11 valid ECs into a single test.
+  - **Negative Test Cases:** Each of the 14 invalid ECs has a corresponding negative test case. The expected results are precise and clearly articulated.
+  - **Boundary Test Cases:** All 26 BVA boundary points are covered across the 4 specified variables. The boundary point values (LB/UB) and risk levels are correctly assigned as per the BVA table.
+  - **Coverage:** The coverage matrix accurately links all 41 ECs and 26 BV points to the test cases. All test case titles follow the specified format.
+  - **Precision:** Expected results are specific and pre-defined, allowing for objective pass/fail determination.
+- **Verdict:** Accepted
