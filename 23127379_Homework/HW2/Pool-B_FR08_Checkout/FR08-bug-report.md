@@ -1,10 +1,11 @@
-# Bug Report — FR-08: Checkout (+ FR-09: Coupon Code)
+# Bug Report — FR-08: Checkout
 **Pool:** B
 **Test Cycle:** HW02 Domain Testing
 **Tester:** Thái Minh Huy + Gemini QA Agent
 **Execution Date:** 2026-06-14
+**Revised:** 2026-06-15 — FR-09 coupon bug reports removed (BUG-FR08-004, BUG-FR08-010, BUG-FR08-011)
 
-> **Scope:** This file contains bug reports filed from test execution results covering EP Test Cases (TC-FR08-EP-001 to TC-FR08-EP-005), NEG Test Cases (TC-FR08-NEG-001 to TC-FR08-NEG-014), and BV Test Cases Section BV-A: `shipping_address` Length Boundaries (TC-FR08-BV-001 to TC-FR08-BV-007).
+> **Scope:** This file contains bug reports from EP Test Cases (TC-FR08-EP-001 to TC-FR08-EP-003), NEG Test Cases (TC-FR08-NEG-001 to TC-FR08-NEG-007), and BV Test Cases Section BV-A: `shipping_address` Length Boundaries (TC-FR08-BV-001 to TC-FR08-BV-007).
 
 ---
 
@@ -13,7 +14,7 @@
 **Function Name:** FR-08 Checkout — GUI / Page Structure
 **Problem Summary:** The checkout page does not contain any `<h1>` heading element — it uses `<h2>` instead — violating the FR-21 requirement that every page must have exactly one `<h1>` tag.
 **Severity:** Medium
-**Priority:** Medium
+**Priority:** _(set by HITL/PM)_
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -43,9 +44,9 @@ There are **zero `<h1>` elements** on the checkout page. The page heading is imp
 - App URL: `http://localhost:5173/checkout`
 - Test Data: Authenticated user; non-empty cart.
 
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/21
-**Linked Test Cases:** TC-FR08-EP-001, TC-FR08-NEG-014
-**Attachments:** ![Screenshot](./Issues/1.png)
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**Linked Test Cases:** TC-FR08-EP-001, TC-FR08-NEG-007
+**Attachments:** _(HITL attaches screenshot showing DevTools Elements panel with no `<h1>` tag)_
 
 ---
 
@@ -54,7 +55,7 @@ There are **zero `<h1>` elements** on the checkout page. The page heading is imp
 **Function Name:** FR-08 Checkout — GUI / Button Styling
 **Problem Summary:** The checkout/proceed-to-checkout button ("Tiến hành thanh toán") is displayed in **green** instead of the required **blue** color, violating the FR-21 UI standard for primary action buttons.
 **Severity:** Cosmetic
-**Priority:** Low
+**Priority:** _(set by HITL/PM)_
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -84,9 +85,9 @@ The button is rendered in **green** (not blue). The observed color does not matc
 - App URL: `http://localhost:5173/cart` and `http://localhost:5173/checkout`
 - Test Data: Authenticated user; non-empty cart.
 
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/22
-**Linked Test Cases:** TC-FR08-EP-001, TC-FR08-NEG-014
-**Attachments:** ![Screenshot](./Issues/2.png)
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**Linked Test Cases:** TC-FR08-EP-001, TC-FR08-NEG-007
+**Attachments:** _(HITL attaches screenshot of the green button)_
 
 ---
 
@@ -95,7 +96,7 @@ The button is rendered in **green** (not blue). The observed color does not matc
 **Function Name:** FR-08 Checkout — Cart State After Order Placement
 **Problem Summary:** After a successful checkout, the user's cart is **not cleared** — cart items remain visible in the cart page instead of being reset to an empty state.
 **Severity:** Serious
-**Priority:** High
+**Priority:** _(set by HITL/PM)_
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -127,57 +128,9 @@ After a successful order placement, the cart **still shows the previously ordere
 - App URL: `http://localhost:5173/checkout` → `http://localhost:5173/cart`
 - Test Data: `shipping_address` = `"123 Nguyen Hue, District 1, Ho Chi Minh City"`; at least 1 product in cart.
 
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/23
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
 **Linked Test Cases:** TC-FR08-EP-001
-**Attachments:** ![Screenshot](./Issues/3.png)
-
----
-
-## Bug Report: BUG-FR08-004
-**Date:** 2026-06-14
-**Function Name:** FR-09 Coupon Code — Percent Discount Calculation / Checkout Total Display
-**Problem Summary:** When a valid percent-type coupon (`SAVE10`, 10% off) is applied at checkout, the displayed checkout total is **not reduced** — the total price shown remains unchanged as if no coupon was applied.
-**Severity:** Serious
-**Priority:** Immediate
-**Status:** New
-**Reported By:** Gemini QA Agent + Thái Minh Huy
-**Assign To:** Development Team
-
-### Steps to Reproduce
-
-**Pre-conditions:**
-- Backend and Frontend are running.
-- User `test@eshop.com` is logged in.
-- Cart total is at least 300,000 ₫ (SAVE10 minimum order amount).
-- User has not previously used coupon `SAVE10` (usage_count = 0).
-
-**Steps:**
-1. Navigate to `http://localhost:5173/checkout`.
-2. Verify the cart total displayed (e.g., 300,000 ₫).
-3. Enter coupon code `SAVE10` in the coupon input field.
-4. Click "Áp dụng mã" (Apply Coupon).
-5. Observe the coupon application response (system shows the coupon as accepted).
-6. Observe the **checkout total / final_amount** displayed on the page.
-
-**Expected Result:**
-After applying `SAVE10` (10% discount):
-- `discount_amount` = `Math.round(300,000 × 10 / 100)` = **30,000 ₫**
-- `final_amount` displayed = 300,000 − 30,000 = **270,000 ₫**
-
-The total displayed must be reduced to reflect the discount.
-
-**Actual Result:**
-The system accepts the coupon `SAVE10` and shows a success message, but the **checkout total remains at 300,000 ₫** — unchanged. The discount amount is not reflected in the displayed total. The order may be placed at the full amount without the discount being applied.
-
-**Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
-- App URL: `http://localhost:5173/checkout`
-- Test Data: `coupon_code` = `SAVE10`; cart total = 300,000 ₫; user first use of SAVE10.
-
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/24
-**Linked Test Cases:** TC-FR08-EP-002
-**Attachments:** ![Screenshot](./Issues/4.png)
+**Attachments:** _(HITL attaches screenshot of cart page showing items still present after order confirmation)_
 
 ---
 
@@ -186,7 +139,7 @@ The system accepts the coupon `SAVE10` and shows a success message, but the **ch
 **Function Name:** FR-08 Checkout — Breadcrumb Navigation
 **Problem Summary:** The breadcrumb navigation component is **absent** from the checkout page, violating the FR-22 requirement that the checkout page must display breadcrumb navigation showing the user's position in the site hierarchy.
 **Severity:** Medium
-**Priority:** Meidum
+**Priority:** _(set by HITL/PM)_
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -214,9 +167,9 @@ No breadcrumb navigation is visible anywhere on the checkout page. The page does
 - App URL: `http://localhost:5173/checkout`
 - Test Data: Authenticated user; non-empty cart.
 
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/25
-**Linked Test Cases:** TC-FR08-EP-005
-**Attachments:** ![Screenshot](./Issues/5.png)
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**Linked Test Cases:** TC-FR08-EP-003
+**Attachments:** _(HITL attaches screenshot of the checkout page with no breadcrumb visible)_
 
 ---
 
@@ -225,7 +178,7 @@ No breadcrumb navigation is visible anywhere on the checkout page. The page does
 **Function Name:** FR-08 Checkout — Input Validation Error Message Display
 **Problem Summary:** When the user attempts to place an order without entering a shipping address, **no validation error message is displayed** — the system fails silently or proceeds anyway, violating the FR-22 requirement for error message feedback above the submit button.
 **Severity:** Serious
-**Priority:** Serious
+**Priority:** _(set by HITL/PM)_
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -258,11 +211,11 @@ When the "Đặt hàng" button is clicked with an empty shipping address field:
 - App URL: `http://localhost:5173/checkout`
 - Test Data: `shipping_address` = `""` (empty string); authenticated user; non-empty cart.
 
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/26
-**Linked Test Cases:** TC-FR08-NEG-004, TC-FR08-NEG-013, TC-FR08-BV-005
-**Attachments:** ![Screenshot](./Issues/6.png)
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**Linked Test Cases:** TC-FR08-NEG-004, TC-FR08-NEG-006, TC-FR08-BV-005
+**Attachments:** _(HITL attaches screenshot showing order created with no error message shown)_
 
-> **Note:** This defect also reproduces with a whitespace-only address (`"     "`) — see TC-FR08-NEG-013. Both empty and whitespace-only inputs fail to trigger validation. The root cause is likely a single missing validation rule in the frontend and/or backend input processing.
+> **Note:** This defect also reproduces with a whitespace-only address (`"     "`) — see TC-FR08-NEG-006. Both empty and whitespace-only inputs fail to trigger validation. The root cause is likely a single missing validation rule in the frontend and/or backend input processing.
 
 ---
 
@@ -303,9 +256,9 @@ The API returns **HTTP 200 OK**. An order is created in the database with the sh
 - API Base URL: `http://localhost:3000`
 - Test Data: `shipping_address` = `"     "` (whitespace-only) and `""` (empty string); valid JWT.
 
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/27
-**Linked Test Cases:** TC-FR08-NEG-004, TC-FR08-NEG-013, TC-FR08-BV-005
-**Attachments:** ![Screenshot](./Issues/7.png)
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**Linked Test Cases:** TC-FR08-NEG-004, TC-FR08-NEG-006, TC-FR08-BV-005
+**Attachments:** _(HITL attaches Postman screenshot of request + response showing HTTP 200 and order created with whitespace address)_
 
 > **Note:** BUG-FR08-006 (no frontend error message) and BUG-FR08-007 (no backend validation) are separate defects. BUG-FR08-006 is a UI/frontend gap; BUG-FR08-007 is a backend/API gap. Both must be fixed independently.
 
@@ -316,7 +269,7 @@ The API returns **HTTP 200 OK**. An order is created in the database with the sh
 **Function Name:** FR-08 Checkout — Security: `total_amount` Recalculation
 **Problem Summary:** The backend **trusts the client-supplied `total_amount`** without recalculating from the actual cart items — a price tampering attack succeeds, allowing an order to be placed at 1 ₫ regardless of the actual cart total.
 **Severity:** Fatal
-**Priority:** Immediate
+**Priority:** _(set by HITL/PM)_
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -348,9 +301,9 @@ The API returns **HTTP 200 OK**. The order is created with `total_amount = 1 ₫
 - API Base URL: `http://localhost:3000`
 - Test Data: Tampered `total_amount` = 1; actual cart total = 30,000,000 ₫; valid JWT for `test@eshop.com`.
 
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/28
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
 **Linked Test Cases:** TC-FR08-NEG-005
-**Attachments:** ![Screenshot](./Issues/8.png)
+**Attachments:** _(HITL attaches Postman screenshot showing: request body with total_amount=1, HTTP 200 response, and GET order confirming total_amount=1 in DB)_
 
 > ⚠️ **Security Escalation Required (TR-BP-09):** This is a Fatal security defect — price tampering vulnerability. Per senior QA best practice, this defect must be **escalated immediately** to the team lead or security officer and must not be deferred. The checkout endpoint must be patched before any production deployment.
 
@@ -361,7 +314,7 @@ The API returns **HTTP 200 OK**. The order is created with `total_amount = 1 ₫
 **Function Name:** FR-08 Checkout — Shipping Address Length Enforcement
 **Problem Summary:** The system does **not enforce** the 255-character maximum length on the `shipping_address` field — a 256-character address is accepted and an order is created, indicating there is no length-enforcement layer (UI, API, or database).
 **Severity:** Medium
-**Priority:** Medium
+**Priority:** _(set by HITL/PM)_
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -404,175 +357,40 @@ The system accepts the 256-character address without any error. An order is crea
 - App URL: `http://localhost:5173/checkout` and `http://localhost:3000/api/checkout`
 - Test Data: `shipping_address` = 256-char string (`"C" × 256`) and 1000-char string.
 
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/29
+**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
 **Linked Test Cases:** TC-FR08-BV-006, TC-FR08-BV-007
-**Attachments:** ![Screenshot](./Issues/9.png)
+**Attachments:** _(HITL attaches screenshots showing UI acceptance of 256-char input and Postman confirming HTTP 200 with full address stored)_
 
 ---
 
-## Bug Summary Table (Scope: EP + NEG + BV Section A)
+## Bug Summary Table (Full Scope: EP + NEG + BV-A)
 
 | Bug ID | TC(s) | Feature Area | Problem Summary | Severity | Status |
 |--------|-------|-------------|-----------------|:--------:|--------|
-| BUG-FR08-001 | EP-001, NEG-014 | GUI / Page Structure | No `<h1>` on checkout page — uses `<h2>` instead | Medium | New |
-| BUG-FR08-002 | EP-001, NEG-014 | GUI / Button Styling | Checkout button is green instead of blue | Cosmetic | New |
+| BUG-FR08-001 | EP-001, NEG-007 | GUI / Page Structure | No `<h1>` on checkout page — uses `<h2>` instead | Medium | New |
+| BUG-FR08-002 | EP-001, NEG-007 | GUI / Button Styling | Checkout button is green instead of blue | Cosmetic | New |
 | BUG-FR08-003 | EP-001 | Cart State Post-Checkout | Cart not cleared after successful order placement | Serious | New |
-| BUG-FR08-004 | EP-002 | Coupon / Discount Calculation | SAVE10 percent discount not reflected in checkout total | Serious | New |
-| BUG-FR08-005 | EP-005 | GUI / Breadcrumb Navigation | Breadcrumb navigation absent from checkout page | Medium | New |
-| BUG-FR08-006 | EP-005, NEG-004, NEG-013, BV-005 | Input Validation / UI Error Display | No error message shown when shipping address is empty/whitespace | Serious | New |
-| BUG-FR08-007 | NEG-004, NEG-013, BV-005 | Backend Validation | API accepts orders with empty/whitespace shipping_address | Serious | New |
-| BUG-FR08-008 | NEG-005 | Security / Price Tampering | Backend trusts client-supplied total_amount — price tampering succeeds | **Fatal** | New |
-| BUG-FR08-009 | BV-006, BV-007 | Input Validation / Length Enforcement | No enforcement of 255-char limit on shipping_address (256+ chars accepted) | Medium | New |
-
-**Total bugs: 9** | Fatal: 1 | Serious: 3 | Medium: 3 | Cosmetic: 1
-
----
-
-**HITL Action Required:**
-1. File a **GitHub Issue** for each of the 9 bugs above and paste the issue URL into the corresponding `GitHub Issue:` field.
-2. Attach a **screenshot or screen recording** to each GitHub Issue.
-3. Prioritize **BUG-FR08-008** (Fatal — price tampering) for **immediate escalation** before any other fix.
-4. Update the `Bug ID:` field in [FR08-test-cases.md](FR08-test-cases.md) for each failed test case.
-
-**HITL Review (BV-A scope):** Accepted
-
----
-
-## Bug Report: BUG-FR08-010
-**Date:** 2026-06-14
-**Function Name:** FR-09 Coupon Code — `min_order_amount` Boundary Operator
-**Problem Summary:** The coupon validation rejects an order total that **exactly equals** `min_order_amount` (300,000 ₫ = 300,000 ₫) — indicating the backend uses a strict `>` operator instead of the required `>=` operator for the minimum order threshold.
-**Severity:** Serious
-**Priority:** Serious
-**Status:** New
-**Reported By:** Gemini QA Agent + Thái Minh Huy
-**Assign To:** Development Team
-
-### Steps to Reproduce
-
-**Pre-conditions:**
-- Backend (`http://localhost:3000`) is running.
-- A valid JWT token for `test@eshop.com` is available (first use of `SAVE10` — usage_count = 0).
-- Cart total is exactly **300,000 ₫** (= `SAVE10` min_order_amount).
-
-**Steps (API-level — Postman):**
-1. Send `POST http://localhost:3000/api/apply-coupon` with:
-   - Header: `Authorization: Bearer <valid_token>`
-   - Body: `{ "code": "SAVE10", "total_amount": 300000, "user_id": <user_id> }`
-2. Observe the HTTP response code and response body.
-
-**Expected Result:**
-Per FR-09 (C3): The condition is `total_amount >= min_order_amount`. When `total_amount = 300,000 ₫` and `min_order_amount = 300,000 ₫`, the condition `300,000 >= 300,000` evaluates to **TRUE**. The API must return HTTP 200 with:
-- `discount_amount` = `Math.round(300,000 × 10 / 100)` = **30,000 ₫**
-- `final_amount` = 300,000 − 30,000 = **270,000 ₫**
-
-**Actual Result:**
-The API **rejects** the coupon with an error indicating the minimum order amount is not met, despite the cart total being exactly equal to the minimum (300,000 ₫). This indicates the backend comparison operator is `total > min_order_amount` (strict greater-than) rather than `total >= min_order_amount` (greater-than-or-equal), causing a valid coupon application to be incorrectly blocked at the exact boundary.
-
-**Environment:**
-- OS: macOS
-- API Tool: Postman
-- API Base URL: `http://localhost:3000`
-- Test Data: `code` = `SAVE10`; `total_amount` = 300,000; `min_order_amount` = 300,000; usage_count = 0.
-
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/30
-**Linked Test Cases:** TC-FR08-BV-014
-**Attachments:** ![Screenshot](./Issues/10.png)
-
-> **Note:** TC-FR08-BV-013 (total = 299,999 ₫) correctly fails. Only the exact boundary (total = 300,000 ₫) is incorrectly rejected, confirming this is a strict `>` vs. `>=` off-by-one operator defect at the boundary — not a general minimum validation failure.
-
----
-
-## Bug Report: BUG-FR08-011
-**Date:** 2026-06-14
-**Function Name:** FR-09 Coupon Code — Percent Discount Calculation Formula (API Level)
-**Problem Summary:** When a percent-type coupon (`SAVE10`, 10%) is applied via the API with `total_amount = 300,001 ₫`, the returned `discount_amount` is **−2,700,009** (a large negative value) and `final_amount` is **3,000,010** — indicating the backend discount formula multiplies the total by the percentage number (×10) instead of dividing (×10/100).
-**Severity:** Fatal
-**Priority:** Immediate
-**Status:** New
-**Reported By:** Gemini QA Agent + Thái Minh Huy
-**Assign To:** Development Team
-
-### Steps to Reproduce
-
-**Pre-conditions:**
-- Backend (`http://localhost:3000`) is running.
-- A valid JWT token for `test@eshop.com` is available (first use of `SAVE10` — usage_count = 0).
-- Cart total is set to 300,001 ₫ (one unit above `SAVE10` min_order_amount of 300,000 ₫).
-
-**Steps (API-level — Postman):**
-1. Send `POST http://localhost:3000/api/apply-coupon` with:
-   - Header: `Authorization: Bearer <valid_token>`
-   - Body: `{ "code": "SAVE10", "total_amount": 300001, "user_id": <user_id> }`
-2. Observe the HTTP response code.
-3. Note the values of `discount_amount` and `final_amount` in the response body.
-
-**Expected Result:**
-Per FR-09 (C4) and HITL-resolved rounding rule:
-- `discount_amount` = `Math.round(300,001 × 10 / 100)` = `Math.round(30,000.1)` = **30,000 ₫**
-- `final_amount` = 300,001 − 30,000 = **270,001 ₫**
-
-**Actual Result:**
-The API returns:
-- `discount_amount` = **−2,700,009** (negative value)
-- `final_amount` = **3,000,010**
-
-**Root Cause Analysis (from observed values):**
-- `final_amount = 300,001 × 10 = 3,000,010` → the formula computes `total × rate` (no division by 100)
-- `discount_amount = final_amount - total = 3,000,010 − 300,001 = 2,700,009`, stored as **negative** (sign inverted in subtraction direction: `total − final_amount = −2,700,009`)
-- The correct formula `discount = total × rate / 100` has either lost the `/ 100` divisor, or the `rate` variable holds `1000` instead of `10`.
-
-This defect causes the coupon to inflate the order total by 10× instead of reducing it by 10%, which means any order with a percent coupon applied is charged approximately 9× more than the correct amount.
-
-**Environment:**
-- OS: macOS
-- API Tool: Postman
-- API Base URL: `http://localhost:3000`
-- Test Data: `code` = `SAVE10`; `total_amount` = 300,001; usage_count = 0; `min_order_amount` = 300,000.
-
-**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/31
-**Linked Test Cases:** TC-FR08-BV-015
-**Attachments:** ![Screenshot](./Issues/11.png)
-
-> ⚠️ **Relationship to BUG-FR08-004:** BUG-FR08-004 reports that the percent discount is not reflected in the **UI** checkout total (frontend display issue). BUG-FR08-011 is a **separate, more severe defect** in the **backend API calculation formula** itself — the formula produces a catastrophically wrong value. These must be fixed independently:
-> - BUG-FR08-004 fix: update frontend to display the discount value returned by the API.
-> - BUG-FR08-011 fix: correct the backend formula from `total × rate` to `total × rate / 100`.
-
-> ⚠️ **Note on BUG-FR08-010 interaction:** TC-FR08-BV-014 (total = 300,000 ₫ exactly) was rejected by the API (BUG-FR08-010). TC-FR08-BV-015 (total = 300,001 ₫) was accepted, which exposed BUG-FR08-011. These are two independent defects in the same endpoint — one in the comparison operator for `min_order_amount`, one in the discount formula.
-
----
-
-## Updated Bug Summary Table (Full Scope: EP + NEG + BV-A + BV-B + BV-C + BV-D)
-
-| Bug ID | TC(s) | Feature Area | Problem Summary | Severity | Status |
-|--------|-------|-------------|-----------------|:--------:|--------|
-| BUG-FR08-001 | EP-001, NEG-014 | GUI / Page Structure | No `<h1>` on checkout page — uses `<h2>` instead | Medium | New |
-| BUG-FR08-002 | EP-001, NEG-014 | GUI / Button Styling | Checkout button is green instead of blue | Cosmetic | New |
-| BUG-FR08-003 | EP-001 | Cart State Post-Checkout | Cart not cleared after successful order placement | Serious | New |
-| BUG-FR08-004 | EP-002 | Coupon / Discount UI Display | SAVE10 percent discount not reflected in checkout total (UI layer) | Serious | New |
-| BUG-FR08-005 | EP-005 | GUI / Breadcrumb Navigation | Breadcrumb navigation absent from checkout page | Medium | New |
-| BUG-FR08-006 | EP-005, NEG-004, NEG-013, BV-005 | Input Validation / UI Error Display | No UI error message when shipping address is empty/whitespace | Serious | New |
-| BUG-FR08-007 | NEG-004, NEG-013, BV-005 | Backend Input Validation | API accepts orders with empty/whitespace shipping_address | Serious | New |
+| BUG-FR08-005 | EP-003 | GUI / Breadcrumb Navigation | Breadcrumb navigation absent from checkout page | Medium | New |
+| BUG-FR08-006 | EP-003, NEG-004, NEG-006, BV-005 | Input Validation / UI Error Display | No UI error message when shipping address is empty/whitespace | Serious | New |
+| BUG-FR08-007 | NEG-004, NEG-006, BV-005 | Backend Input Validation | API accepts orders with empty/whitespace shipping_address | Serious | New |
 | BUG-FR08-008 | NEG-005 | Security / Price Tampering | Backend trusts client-supplied total_amount — price tampering succeeds | **Fatal** | New |
 | BUG-FR08-009 | BV-006, BV-007 | Input Validation / Length | No enforcement of 255-char max on shipping_address | Medium | New |
-| BUG-FR08-010 | BV-014 | Coupon / min_order_amount | Coupon rejected at exact minimum threshold — `>` used instead of `>=` | Serious | New |
-| BUG-FR08-011 | BV-015 | Coupon / Discount Calculation | Percent discount formula wrong — multiplies instead of divides — produces negative discount and 10× final_amount | **Fatal** | New |
 
-**Total bugs: 11**
+**Total bugs: 8**
 
 | Severity | Count |
 |----------|:-----:|
-| Fatal | **2** (BUG-FR08-008, BUG-FR08-011) |
-| Serious | **5** (BUG-FR08-003, 004, 006, 007, 010) |
+| Fatal | **1** (BUG-FR08-008) |
+| Serious | **3** (BUG-FR08-003, 006, 007) |
 | Medium | **3** (BUG-FR08-001, 005, 009) |
 | Cosmetic | **1** (BUG-FR08-002) |
 
 ---
 
-**HITL Action Required (BV-B → BV-D scope):**
-1. File **GitHub Issues** for BUG-FR08-010 and BUG-FR08-011 and paste URLs into the `GitHub Issue:` fields above.
-2. Attach Postman screenshots showing the exact request bodies and response values.
-3. **Escalate BUG-FR08-011 immediately** alongside BUG-FR08-008 — both are Fatal defects in the core financial calculation path.
-4. Update `Bug ID:` fields in [FR08-test-cases.md](FR08-test-cases.md) for TC-FR08-BV-014 and TC-FR08-BV-015.
+**HITL Action Required:**
+1. File a **GitHub Issue** for each of the 8 bugs and paste the issue URL into the corresponding `GitHub Issue:` field.
+2. Attach a **screenshot or screen recording** to each GitHub Issue.
+3. Prioritize **BUG-FR08-008** (Fatal — price tampering) for **immediate escalation** before any other fix.
+4. Update the `Bug ID:` field in [FR08-test-cases.md](FR08-test-cases.md) for each failed test case.
 
-**HITL Review (BV-B → BV-D scope):** Accepted
+**HITL Review:** ☐ Accepted / ☐ Partially Accepted / ☐ Rejected — _[HITL to fill in]_

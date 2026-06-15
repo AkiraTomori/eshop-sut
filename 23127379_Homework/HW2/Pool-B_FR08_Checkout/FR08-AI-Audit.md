@@ -86,3 +86,20 @@
 - **AI Output Summary:** Produced the complete `FR08-test-summary.md`. Counted all 41 statuses from `FR08-test-cases.md` (grep-verified): EP 2/5 Pass (40.0%), NEG 10/14 Pass (71.4%), BV 18/22 Pass (81.8%), **Grand Total 30/41 Pass (73.2%)**. Documented 11 bugs across 7 defect types and 4 feature areas. BV-B and BV-D sections are defect-free (100% pass rate); BV-A and BV-C have failures. Included defect statistics by severity (2 Fatal, 5 Serious, 3 Medium, 1 Cosmetic), by type, and by feature area. Documented 7 open points and risks. Issued **No-Go** release recommendation citing 2 open Fatal defects (price tampering + discount formula) and 5 open Serious defects in a financial transaction flow. Conditional Go conditions listed for PM consideration.
 - **Human Review Notes:** Verified all test case counts, and pass rates.
 - **Verdict:** Accepted
+
+---
+## Session: 2026-06-15 15:48 — Artefact Cleanup: Remove FR-09 Content from All FR-08 Files
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking) via IDE
+- **Bloom-AI Level:** G9.2 (Apply) — Executing a HITL-approved plan to strip all FR-09 (Coupon Code) content from the 6 FR-08 Pool-B artefact files, replacing it with FR-08-only scope
+- **Prompt:**
+  > In FR08, I have made a mistake, we should only care about FR08, we have something include in FR09 like coupon and expired_date, we don't need it. Please remove anything not relevant in FR08.
+- **AI Output Summary:** Created an implementation plan identifying all FR-09 content across 6 files. After HITL approval, rewrote all 6 artefacts with FR-09 content removed:
+  - `FR08-requirement-analysis.md`: Removed 6 input variables (coupon_code, expired_at, min_order_amount, usage_count, discount_value, coupon type) and 6 output variables (discount outputs + coupon rejection messages). Retained 4 inputs + 10 outputs. Removed 2 coupon-related ambiguities.
+  - `FR08-domain-analysis.md`: Removed Groups 5–9 (25 ECs) and 6 coupon output ECs. Renumbered outputs EC-FR08-011→020. EC count: **41 → 20**.
+  - `FR08-boundary-analysis.md`: Removed Sections B (expiry), C (min_order_amount), D (usage_count). Retained Section A only. BV count: **26 → 8**.
+  - `FR08-test-cases.md`: Removed TC-FR08-EP-002/003, TC-FR08-NEG-006→012, Sections BV-B/C/D. Retained NEG-013→NEG-006, NEG-014→NEG-007 (both are FR-08 shipping address / GUI tests). Renumbered all IDs. Updated EC references to new IDs. TC count: **41 → 17**.
+  - `FR08-bug-report.md`: Removed BUG-FR08-004 (percent discount UI), BUG-FR08-010 (min_order operator), BUG-FR08-011 (formula error). Updated TC references. Bug count: **11 → 8**.
+  - `FR08-test-summary.md`: Rewrote with corrected counts. New totals: 17 TCs, 9 Pass / 8 Fail (**52.9% pass rate**), 8 bugs (1 Fatal, 3 Serious, 3 Medium, 1 Cosmetic). Release recommendation remains **No-Go** (BUG-FR08-008 fatal security defect open).
+- **Human Review Notes:** _[HITL to fill in: verify all six revised files, confirm no FR-09 references remain, sign off before committing]_
+- **Verdict:** ☐ Accepted / ☐ Partially Accepted / ☐ Rejected
