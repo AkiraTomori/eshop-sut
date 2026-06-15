@@ -31,8 +31,8 @@
   - Input: `name = "Nguyen Van Test"`, `phone = "0912345678"`, `shipping_address = "123 Le Loi Street, District 1, Ho Chi Minh City"`, `Authorization: Bearer <valid_token>`
   - Expected Output: HTTP 200 OK; profile updated in database; UI shows success notification
 **Expected Result:** The system returns HTTP 200 OK. A success notification (toast or confirmation message) is displayed on the mobile screen. The Profile screen immediately shows `name = "Nguyen Van Test"`, `phone = "0912345678"`, and `shipping_address = "123 Le Loi Street, District 1, Ho Chi Minh City"`. The email field remains unchanged and read-only.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system fails to process the valid 10-digit phone number. A validation error message stating "Lỗi, Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số" is triggered on the mobile UI screen, blocking the profile update. The database state remains unchanged.
+**Status:** Failed
 **EC Coverage:** EC-FR04-001, EC-FR04-005, EC-FR04-010, EC-FR04-012, EC-FR04-016, EC-FR04-019, EC-FR04-021, EC-FR04-023, EC-FR04-025, EC-FR04-026
 **Req. Ref:** FR-04, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -56,8 +56,8 @@
   - Input: `phone = "01234567890"`, `Authorization: Bearer <valid_token>`
   - Expected Output: HTTP 200 OK; phone updated in database; UI shows success notification
 **Expected Result:** The system returns HTTP 200 OK. A success notification is displayed. The Profile screen shows `phone = "01234567890"`. No error message is displayed.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system fails to process the valid 11-digit phone number. A validation error message stating "Lỗi, Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số" is triggered on the mobile UI screen, blocking the profile update. The database state remains unchanged.
+**Status:** Failed
 **EC Coverage:** EC-FR04-001, EC-FR04-013, EC-FR04-016, EC-FR04-025
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -82,8 +82,8 @@
   - Input: `name = "Nguyen Van A"`, `phone = ""`, `shipping_address = ""`, `Authorization: Bearer <valid_token>`
   - Expected Output: HTTP 200 OK; name updated; phone and address cleared or unchanged in database
 **Expected Result:** The system returns HTTP 200 OK. A success notification is displayed. No validation error is shown for the empty phone or address fields. The Profile screen shows `name = "Nguyen Van A"` and the phone/address fields reflect the submitted empty state (or retain previous values depending on server implementation).
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system failed to process update profile, it's still said "Lỗi, Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số".
+**Status:** Failed
 **EC Coverage:** EC-FR04-001, EC-FR04-005, EC-FR04-009, EC-FR04-018, EC-FR04-021, EC-FR04-023, EC-FR04-025
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -111,8 +111,8 @@
   (c) The Phone field displays the stored phone number
   (d) The Shipping Address field displays the stored address
   (e) No `role` field, label, or editable control exists anywhere on the Profile screen
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-001, EC-FR04-029, EC-FR04-030, EC-FR04-031
 **Req. Ref:** FR-04, SEC-06
 **Bug ID:** _(fill if fails)_
@@ -139,8 +139,8 @@
   - Input: No `Authorization` header; body: `{"name": "Test", "phone": "0912345678", "shipping_address": "Test Address"}`
   - Expected Output: HTTP 401 Unauthorized
 **Expected Result:** The server returns HTTP 401 Unauthorized. The response body contains an error message indicating the request is unauthenticated (e.g., `{"message": "Unauthorized"}` or equivalent). The profile data in the database remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-002, EC-FR04-027
 **Req. Ref:** FR-04, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -163,8 +163,8 @@
   - Input: `Authorization: Bearer thisisnotavalidjwt`; body: `{"name": "Test", "phone": "0912345678", "shipping_address": "Test Address"}`
   - Expected Output: HTTP 401 Unauthorized
 **Expected Result:** The server returns HTTP 401 Unauthorized. The response body contains an error message indicating invalid or unparseable token. The profile data in the database remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The server returns HTTP 403 Forbidden. The profile data in the database remains unchanged.
+**Status:** Failed
 **EC Coverage:** EC-FR04-003, EC-FR04-027
 **Req. Ref:** FR-04, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -188,34 +188,41 @@
   - Input: `Authorization: Bearer <expired_jwt_token>`; body: `{"name": "Test", "phone": "0912345678", "shipping_address": "Test Address"}`
   - Expected Output: HTTP 401 Unauthorized
 **Expected Result:** The server returns HTTP 401 Unauthorized. The response body contains an error message indicating an expired or invalid token. The profile data in the database remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** Server returns HTTP 200 OK and the profile is successfully updated, instead of rejecting with HTTP 401. The expired token was incorrectly accepted.
+**Status:** Failed
 **EC Coverage:** EC-FR04-004, EC-FR04-027
 **Req. Ref:** FR-04, SEC-02
 **Bug ID:** _(fill if fails)_
 
 ---
-**Test Case ID:** TC-FR04-NEG-004
-**Title:** Verify that profile update is rejected when the Full Name field is submitted as an empty string
-**Description:** Covers EC-FR04-006: submitting an empty string `""` for the `name` field must be rejected by the system, as Full Name is a mandatory field.
+***Test Case ID:** TC-FR04-NEG-004
+**Title:** Verify that profile update API rejects request when the Full Name field is submitted as an empty string
+**Description:** Covers EC-FR04-006: sending a PUT request to /api/users/me with an empty string `""` for the mandatory `name` field must be strictly rejected at the API layer to safeguard data identity contracts.
 **Priority:** High
 **Pre-conditions:**
-  1. EShop backend is running at `http://localhost:3000`
-  2. Mobile app is running and connected to the backend, OR Postman is available for direct API testing
-  3. User is logged in; valid JWT token is available
+  1. EShop backend server is running at `http://localhost:3000`
+  2. Postman or equivalent API testing tool is active
+  3. Test user account `test@eshop.com` is authenticated; a valid JWT session token is available
 **Steps:**
-  1. Navigate to the Profile screen on the mobile app
-  2. Clear the Full Name field entirely so it is empty
-  3. Enter valid values in Phone (`"0912345678"`) and Address (`"Test Address"`)
-  4. Tap the Save / Update button
-  5. Observe the UI response (error message or success)
-  6. **(API-level)** Also send a PUT request via Postman with `{"name": "", "phone": "0912345678", "shipping_address": "Test Address"}` and observe the response
+  1. Open Postman and configure a `PUT` request targeting the route: `http://localhost:3000/api/users/me`
+  2. Add the authentication key to the headers container: `Authorization: Bearer <valid_token>`
+  3. Configure the raw JSON body payload, explicitly setting the name parameter to empty:
+     ```json
+     {
+       "name": "",
+       "phone": "0912345678",
+       "shipping_address": "Test Address"
+     }
+     ```
+  4. Click the "Send" button to transmit the payload network stream
+  5. Observe and audit the returned HTTP response status code and message body
+  6. Perform a verification check: send a `GET` request to `/api/users/me` to inspect if any database cell mutation occurred
 **Test Data:**
   - Input: `name = ""`, `phone = "0912345678"`, `shipping_address = "Test Address"`, `Authorization: Bearer <valid_token>`
-  - Expected Output: Validation error message; HTTP 400 or equivalent rejection
-**Expected Result:** The system rejects the update. Either: (a) the mobile UI displays a validation error message indicating Full Name is required, preventing form submission; or (b) the API returns HTTP 400 Bad Request with an error message specifying that the name field cannot be empty. The profile data in the database remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+  - Expected Output: HTTP 400 Bad Request or equivalent server-side validation rejection code
+**Expected Result:** The server backend must aggressively reject the update payload. The API returns an HTTP 400 Bad Request status code with a clear validation error string specifying that the name field cannot be empty. A subsequent validation GET request confirms the profile data row inside the SQLite database remains completely unchanged.
+**Observed Result:** The system did not reject the update via the API. The API failed to return an HTTP 400 Bad Request code, returning a false-positive HTTP 200 OK instead. The user profile row cell in the SQLite database was corrupted, successfully changing the name value to blank `""`.
+**Status:** Failed
 **EC Coverage:** EC-FR04-006
 **Req. Ref:** FR-04, FR-01
 **Bug ID:** _(fill if fails)_
@@ -241,8 +248,8 @@
   - Input: `name = "AAAA...A"` (256 characters), `phone = "0912345678"`, `shipping_address = "Test Address"`, `Authorization: Bearer <valid_token>`
   - Expected Output: HTTP 400 Bad Request or equivalent rejection; or observable DB truncation error
 **Expected Result:** The system rejects the update with HTTP 400 Bad Request and an error message indicating the name is too long. The profile data in the database remains unchanged. (If the system silently truncates to 255 chars and returns HTTP 200 without error, this is a defect and must be filed as a bug.)
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the update with HTTP 400 Bad Request and an error message indicating the name is too long. The profile data in the database changed. The system didn't silently truncate to 255 chars
+**Status:** Failed
 **EC Coverage:** EC-FR04-007
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -266,8 +273,8 @@
   - Input: `{"phone": "0912345678", "shipping_address": "Test Address"}` (no `name` key), `Authorization: Bearer <valid_token>`
   - Expected Output: HTTP 400 Bad Request or validation error indicating `name` is required
 **Expected Result:** The server returns HTTP 400 Bad Request with an error message indicating the `name` field is missing or required. The profile data in the database remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The server didn't return HTTP 400 Bad Request, return status HTTP 200. The profile data in the database changed.
+**Status:** Failed
 **EC Coverage:** EC-FR04-008
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -292,8 +299,8 @@
   - Input: `name = "Nguyen Van Test"`, `phone = "1912345678"`, `shipping_address = "Test Address"`, `Authorization: Bearer <valid_token>`
   - Expected Output: Validation error message indicating phone must start with `0`
 **Expected Result:** The system rejects the update. An error message is displayed on the mobile UI (or returned by the API) indicating the phone number must start with the digit `0`. The profile data in the database remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't reject the update. There is no error message is displayed indicating the phone number must start with the digit `0` on the mobile UI. The profile data in the database changed.
+**Status:** Failed
 **EC Coverage:** EC-FR04-011, EC-FR04-028
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -318,8 +325,8 @@
   - Input: `name = "Nguyen Van Test"`, `phone = "012345678"`, `shipping_address = "Test Address"`, `Authorization: Bearer <valid_token>`
   - Expected Output: Validation error message indicating phone must be 10–11 digits
 **Expected Result:** The system rejects the update. An error message is displayed indicating the phone number must be 10–11 digits long. The profile data in the database remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system rejects the update. An error message is displayed indicating the phone number must be 9-10 digits long. The profile data in the database remains unchanged.
+**Status:** Failed
 **EC Coverage:** EC-FR04-014, EC-FR04-028
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -344,36 +351,42 @@
   - Input: `name = "Nguyen Van Test"`, `phone = "012345678901"`, `shipping_address = "Test Address"`, `Authorization: Bearer <valid_token>`
   - Expected Output: Validation error message indicating phone must be 10–11 digits
 **Expected Result:** The system rejects the update. An error message is displayed indicating the phone number must be 10–11 digits long. The profile data in the database remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system rejects the update. But an error message is dislayed indicating the phone number must be 9-10 digits long. The profile data in the database remains unchanged.
+**Status:** Failed
 **EC Coverage:** EC-FR04-015, EC-FR04-028
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
 
 ---
 **Test Case ID:** TC-FR04-NEG-010
-**Title:** Verify that profile update rejects a phone number containing non-numeric characters
-**Description:** Covers EC-FR04-017: a phone value with correct length and `0` prefix but containing spaces, dashes, or letters must be rejected. HITL confirmed strict numeric-only enforcement at both frontend and backend layers.
+**Title:** Verify that profile update API rejects request when the phone number contains non-numeric characters
+**Description:** Covers EC-FR04-017: sending a PUT request body with a phone value containing spaces, dashes, or formatting characters must be blocked by the server validation layer to enforce strict numeric constraints.
 **Priority:** High
 **Pre-conditions:**
-  1. EShop backend is running at `http://localhost:3000`
-  2. Mobile app is running and connected to the backend, OR Postman is available
-  3. User is logged in; valid JWT token is available
+  1. EShop backend server is running at `http://localhost:3000`
+  2. Postman or equivalent API testing tool is active
+  3. Test user account `test@eshop.com` is authenticated; a valid JWT session token is available
 **Steps:**
-  1. Navigate to the Profile screen on the mobile app
-  2. Enter `"Nguyen Van Test"` in the Full Name field
-  3. Enter `"0912-345-678"` in the Phone Number field (contains dashes — non-numeric characters)
-  4. Enter `"Test Address"` in the Shipping Address field
-  5. Tap the Save / Update button
-  6. Observe the UI response
-  7. **(API-level)** Also send via Postman: `{"name": "Nguyen Van Test", "phone": "0912-345-678", "shipping_address": "Test Address"}`
+  1. Open Postman and configure a `PUT` request targeting the route: `http://localhost:3000/api/users/me`
+  2. Add the authentication key to the headers container: `Authorization: Bearer <valid_token>`
+  3. Configure the raw JSON body payload, injecting invalid dash markers inside the phone parameter cell:
+     ```json
+     {
+       "name": "Nguyen Van Test",
+       "phone": "0912-345-678",
+       "shipping_address": "Test Address"
+     }
+     ```
+  4. Click the "Send" button to transmit the payload network stream
+  5. Observe and audit the returned HTTP response status code and message body
+  6. Perform a verification check: send a `GET` request to `/api/users/me` to inspect if the formatting characters bypassed storage filters
 **Test Data:**
   - Input: `name = "Nguyen Van Test"`, `phone = "0912-345-678"`, `shipping_address = "Test Address"`, `Authorization: Bearer <valid_token>`
-  - Expected Output: Validation error message indicating phone must contain only numeric digits
-**Expected Result:** The system rejects the update. An error message is displayed indicating the phone number must contain only numeric digits (0–9). The profile data in the database remains unchanged.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
-**EC Coverage:** EC-FR04-017, EC-FR04-028
+  - Expected Output: HTTP 400 Bad Request or equivalent server-side format validation rejection code
+**Expected Result:** The server backend must reject the formatted string entry. The API returns an HTTP 400 Bad Request status code with a validation error response indicating that the phone number must exclusively contain numeric digits (0-9). The stored phone number row cell in the database remains unchanged.
+**Observed Result:** The backend API failed to evaluate or reject the non-numeric input parameters, returning an HTTP 200 OK response code instead. The formatted character string `"0912-345-678"` bypassed server checks and successfully committed into the database record cell.
+**Status:** Failed
+**EC Coverage:** EC-FR04-017
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
 
@@ -397,8 +410,8 @@
   - Input: `name = "Nguyen Van Test"`, `phone = "0912345678"`, `shipping_address = "AAAA...A"` (256 characters), `Authorization: Bearer <valid_token>`
   - Expected Output: HTTP 400 Bad Request or equivalent; profile not updated in database
 **Expected Result:** The system returns HTTP 400 Bad Request with an error message indicating the shipping address is too long. The profile data in the database remains unchanged. (If the system silently truncates and returns HTTP 200, this is a defect to be filed as a bug.)
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't return HTTP 400 Bad Request with an message indicating the shipping address is too long. The profile data in the database changed.
+**Status:** Failed
 **EC Coverage:** EC-FR04-020
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -425,8 +438,8 @@
   - Input: `{"name": "Nguyen Van Test", "phone": "0912345678", "shipping_address": "Test Address", "email": "attacker@evil.com"}`, `Authorization: Bearer <valid_token>`
   - Expected Output: HTTP 200 OK (or any non-error response); email in database remains `test@eshop.com`
 **Expected Result:** The API processes the request and returns HTTP 200 OK (updating only name, phone, and address). The `email` field in the request body is silently ignored. A subsequent GET /api/users/me confirms the user's email is still `test@eshop.com` — unchanged. If the email is changed to `attacker@evil.com`, this is a critical security defect.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The API processes the request and returns HTTP 200 OK (updating only name, phone, and address). The `email` field in the request body is silently ignored. A subsequent GET /api/users/me confirms the user's email is still `test@eshop.com` — unchanged.
+**Status:** Passed
 **EC Coverage:** EC-FR04-022
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -454,8 +467,8 @@
   - Input: `{"name": "Nguyen Van Test", "phone": "0912345678", "shipping_address": "Test Address", "role": "admin"}`, `Authorization: Bearer <valid_token>`
   - Expected Output: HTTP 200 OK (only valid fields updated); role in database remains `user`; admin endpoint returns HTTP 403
 **Expected Result:** The API processes the request and returns HTTP 200 OK (updating only name, phone, and address). The `role` field is silently ignored. A subsequent GET /api/users/me confirms `role = "user"`. An attempt to call an admin-only endpoint with the same token returns HTTP 403 Forbidden. If the role is changed to `admin`, this is a **critical security vulnerability** and must be filed immediately.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The `role` field is not ignored. A subsequent GET /api/users/me confirms `role = "admin"`.
+**Status:** Failed
 **EC Coverage:** EC-FR04-024, EC-FR04-032
 **Req. Ref:** FR-04, SEC-06
 **Bug ID:** _(fill if fails)_
@@ -481,8 +494,8 @@
   - Input: `name = "A"` (1 character = LB), `phone = "0912345678"`, `shipping_address = "Test Address"`
   - Expected Output: HTTP 200 OK
 **Expected Result:** The system returns HTTP 200 OK. The profile is updated with `name = "A"`. No error is displayed. The 1-character name is accepted as valid.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-005
 **Req. Ref:** FR-04, FR-01
 **Bug ID:** _(fill if fails)_
@@ -504,8 +517,8 @@
   - Input: `name = "AB"` (2 characters = LB+1), `phone = "0912345678"`, `shipping_address = "Test Address"`
   - Expected Output: HTTP 200 OK
 **Expected Result:** The system returns HTTP 200 OK. The profile is updated with `name = "AB"`. No error is displayed.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-005
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -528,8 +541,8 @@
   - Input: `name = "NNN...N"` (254 characters = UB-1), `phone = "0912345678"`, `shipping_address = "Test"`
   - Expected Output: HTTP 200 OK
 **Expected Result:** The system returns HTTP 200 OK. The profile is updated with the 254-character name stored correctly in the database. No truncation occurs.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-005
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -553,8 +566,8 @@
   - Input: `name = "NNN...N"` (255 characters = UB), `phone = "0912345678"`, `shipping_address = "Test"`
   - Expected Output: HTTP 200 OK; database stores all 255 characters without truncation
 **Expected Result:** The system returns HTTP 200 OK. A subsequent GET /api/users/me confirms the stored name is exactly 255 characters — not truncated. No error is displayed.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-005
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -577,8 +590,8 @@
   - Input: `name = "NNN...N"` (256 characters = UB+1), `phone = "0912345678"`, `shipping_address = "Test"`
   - Expected Output: HTTP 400 Bad Request; name not stored or truncated
 **Expected Result:** The system returns HTTP 400 Bad Request with an error message indicating the name exceeds the maximum allowed length. The database is not updated. (If HTTP 200 is returned with silent truncation to 255 chars, this is a defect — the spec boundary is violated without user feedback.)
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't return HTTP 400 Bad Request with an error messgae indicating the name exceeds the maximum allowed length. The database is still updated and the API Response is 200 OK with no truncation to 255 chars.
+**Status:** Failed
 **EC Coverage:** EC-FR04-007
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -603,8 +616,8 @@
   - Input: `phone = "012345678"` (9 digits = LB-1), all other fields valid
   - Expected Output: Validation error message; phone not updated
 **Expected Result:** The system rejects the update. An error message is displayed indicating the phone number must be 10–11 digits. The database is not updated.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system rejects the update. An error message is displayed indicating the phone number must be 9–10 digits. The database is not updated.
+**Status:** Failed
 **EC Coverage:** EC-FR04-014, EC-FR04-028
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -626,8 +639,8 @@
   - Input: `phone = "0123456789"` (10 digits = LB)
   - Expected Output: HTTP 200 OK; phone updated
 **Expected Result:** The system returns HTTP 200 OK. The phone number `"0123456789"` is stored. No error is displayed.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-012
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -649,33 +662,41 @@
   - Input: `phone = "01234567890"` (11 digits = UB)
   - Expected Output: HTTP 200 OK; phone updated
 **Expected Result:** The system returns HTTP 200 OK. The phone number `"01234567890"` is stored. No error is displayed.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-013
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
 
 ---
 **Test Case ID:** TC-FR04-BV-009
-**Title:** Verify that profile update is rejected when the phone number has exactly 12 digits (UB+1)
-**Description:** BVA on Phone length — UB+1 point. A 12-digit phone number starting with `0` is one step above the 11-digit maximum; must be rejected. HITL confirmed UI keyboard does not enforce this — API must be the enforcement layer.
+**Title:** Verify that profile update API rejects request when the phone number has exactly 12 digits (UB+1)
+**Description:** Covers EC-FR04-015 (via BV-FR04-009): sending a PUT request body with a 12-digit phone number (one unit above the 11-digit maximum constraint) must be rejected by the backend validation filters to maintain data integrity.
 **Priority:** High
 **Pre-conditions:**
-  1. EShop backend is running at `http://localhost:3000`
-  2. Mobile app is running and connected to the backend, OR Postman available
-  3. User is logged in; valid JWT token is available
+  1. EShop backend server is running at `http://localhost:3000`
+  2. Postman or equivalent API testing tool is active
+  3. Test user account `test@eshop.com` is authenticated; a valid JWT session token is available
 **Steps:**
-  1. Navigate to the Profile screen on the mobile app
-  2. Enter `"012345678901"` in the Phone field (12 digits, starts with `0`)
-  3. Enter valid values for Name and Address
-  4. Tap Save / Update and observe the response
-  5. Also test directly via Postman: `{"name": "Nguyen Van Test", "phone": "012345678901", "shipping_address": "Test Address"}`
+  1. Open Postman and configure a `PUT` request targeting the route: `http://localhost:3000/api/users/me`
+  2. Add the authentication key to the headers container: `Authorization: Bearer <valid_token>`
+  3. Configure the raw JSON body payload, injecting an over-length 12-digit phone number string:
+     ```json
+     {
+       "name": "Nguyen Van Test",
+       "phone": "012345678901",
+       "shipping_address": "Test Address"
+     }
+     ```
+  4. Click the "Send" button to transmit the payload network stream
+  5. Observe and audit the returned HTTP response status code and message body
+  6. Perform a verification check: send a `GET` request to `/api/users/me` to inspect if the over-length string was written to the DB row
 **Test Data:**
-  - Input: `phone = "012345678901"` (12 digits = UB+1), all other fields valid
-  - Expected Output: Validation error message; phone not updated
-**Expected Result:** The system rejects the update. An error message is displayed indicating the phone number must be 10–11 digits. The database is not updated. If the system accepts a 12-digit phone number, this is a defect to be filed as a bug.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+  - Input: `name = "Nguyen Van Test"`, `phone = "012345678901"` (12 digits = UB+1), `shipping_address = "Test Address"`, `Authorization: Bearer <valid_token>`
+  - Expected Output: HTTP 400 Bad Request or equivalent server-side length validation rejection code
+**Expected Result:** The server backend must aggressively reject the update request due to the upper-bound violation. The API returns an HTTP 400 Bad Request status code with a clear validation error string specifying that the phone number must be 10–11 digits. The stored phone number row cell in the SQLite database remains completely unchanged.
+**Observed Result:** The backend API failed to evaluate or reject the upper-bound violation, returning a false-positive HTTP 200 OK response code instead. The over-length 12-digit phone string `"012345678901"` bypassed server checks and was committed directly into the database record cell without truncation.
+**Status:** Failed
 **EC Coverage:** EC-FR04-015, EC-FR04-028
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -697,7 +718,7 @@
   - Input: `shipping_address = "A"` (1 character = LB)
   - Expected Output: HTTP 200 OK
 **Expected Result:** The system returns HTTP 200 OK. The address `"A"` is stored. No error is displayed.
-**Observed Result:** _(fill during execution)_
+**Observed Result:** As Expected Result
 **Status:** Not Run
 **EC Coverage:** EC-FR04-019
 **Req. Ref:** FR-04
@@ -720,8 +741,8 @@
   - Input: `shipping_address = "AB"` (2 characters = LB+1)
   - Expected Output: HTTP 200 OK
 **Expected Result:** The system returns HTTP 200 OK. The address `"AB"` is stored. No error is displayed.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-019
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -744,8 +765,8 @@
   - Input: `shipping_address = "AAA...A"` (254 characters = UB-1)
   - Expected Output: HTTP 200 OK; full 254-char address stored without truncation
 **Expected Result:** The system returns HTTP 200 OK. A subsequent GET confirms the full 254-character address is stored. No truncation or error occurs.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-019
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -769,8 +790,8 @@
   - Input: `shipping_address = "AAA...A"` (255 characters = UB)
   - Expected Output: HTTP 200 OK; full 255-char address stored
 **Expected Result:** The system returns HTTP 200 OK. A subsequent GET /api/users/me confirms the address is stored as exactly 255 characters — not truncated. No error is displayed.
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR04-019
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
@@ -793,8 +814,8 @@
   - Input: `shipping_address = "AAA...A"` (256 characters = UB+1)
   - Expected Output: HTTP 400 Bad Request; address not stored or truncated
 **Expected Result:** The system returns HTTP 400 Bad Request with an error message indicating the address exceeds the maximum allowed length. The database is not updated. (If HTTP 200 is returned with silent truncation, this is a defect.)
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** The system didn't return HTTP 400 Bad Request with an error message indicating the address exceeds the maximum allowed length. The database is updated and the API Response is 200 OK with no truncation.
+**Status:** Failed
 **EC Coverage:** EC-FR04-020
 **Req. Ref:** FR-04
 **Bug ID:** _(fill if fails)_
