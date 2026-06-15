@@ -59,3 +59,20 @@
   - **Boundary Type Coverage Summary** produced with mismatch analysis for all 4 variables.
 - **Human Review Notes:** Formally reviewed and signed off on the 28 boundary point matrices for Phase 3. Confirmed that the financial risk depth for the `price` lower boundary (6-point arrangement including float probes at 0.5 and 1.0) is mathematically sound. Approved the exploitation vectors for HVF-01 through HVF-04 to catch application-layer length and type validation mismatches during the upcoming test case execution phase.
 - **Verdict:** [X] Accepted / [ ] Partially Accepted / [ ] Rejected
+
+---
+## Session: 2026-06-15 19:56 — Phase 4: Test Case Design (EP + NEG)
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse) — Applying TC design rules to produce precise, traceable test cases from the approved EC table
+- **Prompt:**
+  > I have reviewed Phase 3 (Boundary Analysis) for Pool-C_FR15_ProductManagement (Approved). Proceed to phase 4 (Write Test Case) for Pool-C_FR15_ProductManagement. Because this feature may have a lot of testcase, so you generate testcase for EP first.
+- **AI Output Summary:**
+  The AI produced **39 EP-phase test cases** for FR-15 in `FR15-test-cases.md`, covering all 67 ECs from the approved domain analysis:
+  - **10 EP (valid) test cases** (TC-FR15-EP-001 to TC-FR15-EP-010): Happy path for Create (all fields, minimal fields), Edit with isolation guarantee, Delete with confirm, Delete with cancel, View product list (no search, match, no-match), View product detail, and GUI compliance check (*, button colours, error position, tab order, h1 count).
+  - **29 NEG (invalid) test cases** (TC-FR15-NEG-001 to TC-FR15-NEG-029): One isolated TC per invalid EC — 4 auth/access TCs (no token, malformed, expired, non-admin), 5 name validation TCs (empty, 256-char, 500-char, XSS), 5 price validation TCs (zero, negative, float, non-numeric, missing), 2 description TCs (>1000 chars, XSS), 2 imageUrl TCs (http://, malformed), 3 category TCs (missing, non-existent, non-integer), 2 product ID TCs (non-existent, non-integer), 1 search XSS TC, and 6 GUI compliance TCs (*, error position, button colours, h1, tab order, delete dialog).
+  - **Full Coverage Matrix** produced mapping all 67 ECs to their covering TC IDs.
+  - **P-01 compliance confirmed:** No two invalid conditions are combined in any single TC.
+  - **BVA test cases (TC-FR15-BV-###)** deferred to next session per HITL instruction.
+- **Human Review Notes:** [To be filled by HITL — review all 39 TC titles for Action+Function+Condition pattern; verify all expected results are precise and measurable; confirm coverage matrix is complete before approving]
+- **Verdict:** [ ] Accepted / [ ] Partially Accepted / [ ] Rejected
