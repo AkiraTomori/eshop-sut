@@ -40,3 +40,22 @@
   3. Locked down `http://` as an explicit validation failure to mandate secure `https://` endpoints.
   4. Confirmed the application layer must clamp descriptions at 1000 characters to block layout corruption.
 - **Verdict:** [X] Accepted / [ ] Parially Accepted / [ ] Rejected
+
+---
+## Session: 2026-06-15 19:19 — Phase 3: Boundary Value Analysis (BVA)
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking)
+- **Bloom-AI Level:** G9.3 (Analyse) — Selecting BVA depth per risk level and deriving boundary points for all qualifying EC classes
+- **Prompt:**
+  > I have reviewed Phase 2 (Domain Analysis) for Pool-C_FR15_ProductManagement (Approved). Proceed to phase 3 (Boundary Analysis) for Pool-C_FR15_ProductManagement.
+- **AI Output Summary:**
+  The AI produced a complete Phase 3 BVA artefact for FR-15 covering **28 boundary test points** across 4 qualifying variables:
+  - **Product Name (Medium risk, 4-point + UI/DB probes):** BV-01 to BV-09 — LB-1 (0 chars=empty), LB (1 char), LB+1 (2 chars), UB-1 (254 chars), UB (255 chars), UB+1 (256 chars), plus UI maxlength bypass and DB column boundary probes.
+  - **Price (High risk, 6-point full BVA):** BV-10 to BV-18 — LB-1 (price=-1), forbidden boundary (price=0, its own INVALID EC per AMB-07), LB (price=1), LB+1 (price=2), practical UB-1/UB/UB+1 at 10-digit threshold, plus float-at-boundary probes (0.5 and 1.0 as INVALID per AMB-03/RESOLVED-02).
+  - **Description (Medium risk, 4-point + DB bypass probe):** BV-19 to BV-24 — LB (0 chars=empty), LB+1 (1 char), UB-1 (999 chars), UB (1000 chars), UB+1 (1001 chars=INVALID per RESOLVED-04), plus direct API bypass probe for backend enforcement verification.
+  - **Product ID path param (Medium risk, representative):** BV-25 to BV-28 — existing valid ID, non-existent ID (max+1), non-integer path, ID=0 (below auto-increment floor).
+  - **3 boundary boundary types documented:** Specification, UI/System, and Database for all qualifying variables.
+  - **4 High-Value Findings (HVF)** flagged: name 256-char API bypass (HVF-01), price=0 API bypass (HVF-02), description 1001-char DB bypass (HVF-03), whitespace-only name (HVF-04).
+  - **Boundary Type Coverage Summary** produced with mismatch analysis for all 4 variables.
+- **Human Review Notes:** Formally reviewed and signed off on the 28 boundary point matrices for Phase 3. Confirmed that the financial risk depth for the `price` lower boundary (6-point arrangement including float probes at 0.5 and 1.0) is mathematically sound. Approved the exploitation vectors for HVF-01 through HVF-04 to catch application-layer length and type validation mismatches during the upcoming test case execution phase.
+- **Verdict:** [X] Accepted / [ ] Partially Accepted / [ ] Rejected
