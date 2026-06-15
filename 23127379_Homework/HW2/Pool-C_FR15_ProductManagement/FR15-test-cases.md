@@ -45,8 +45,13 @@
   - The newly created product "Laptop Gaming ABC" with price 15,000,000 ₫ appears in the product list
   - The product list is not disrupted (all previously existing products remain unchanged)
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API `POST /api/products` returns HTTP 200 Created
+  - There is no success notification displayed in the UI
+  - The newly created product "Laptop Gaming ABC" with price 15,000,000 ₫ appears in the product list, but the price is not display as `15,000,000 đ` is 15000000 đ
+  - The product list is not disrupted (all previously existing products remain unchanged)
+  
+**Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-007, EC-FR15-012, EC-FR15-019, EC-FR15-023, EC-FR15-026, EC-FR15-050
 **Req. Ref:** FR-15, FR-12, SEC-02, SEC-03
 **Bug ID:** _(fill if fails)_
@@ -85,8 +90,11 @@
   - A success notification is displayed in the UI
   - The product "Basic Product X" with price 50,000 ₫ appears in the product list without a broken image or description error
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API `POST /api/products` returns HTTP 200 OK with the created product data in the body
+  - There is no success notification displayed in the UI
+  - The product "Basic Product X" with price 50,000 ₫ appears without a broken image or description error, but the price is not display as `50,000 đ` is 50000 đ
+**Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-007, EC-FR15-012, EC-FR15-018, EC-FR15-022, EC-FR15-026, EC-FR15-050
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -130,8 +138,12 @@
   - The edited product now displays "Updated Product Name", price 200,000 ₫, with updated description and image
   - All other products in the list retain their original names and prices (isolation guaranteed)
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API `PUT /api/products/:id` returns HTTP 200 OK with the updated product data in the body
+  - A Success notification is displayed in the UI
+  - The edited product now displays "Updated Product Name", price 200,000 đ but displayed as 200000 đ
+  - All other products in the list changed their name based on updated product
+**Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-007, EC-FR15-012, EC-FR15-019, EC-FR15-023, EC-FR15-026, EC-FR15-030, EC-FR15-051, EC-FR15-066
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -169,8 +181,14 @@
   - "Delete Target Product" is no longer present in the product list
   - All other products remain unchanged in the list
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - A delete confirmation didn't appear before any delete occurs.
+  - After clicking delete button, the product is deleted immediately.
+  - The API DELETE /api/products/:id returns HTTP 200 OK
+  - A success notification is not displayed
+  - "Delete Target Product" is no longer present in the product list
+  - All other products remian unchanged in the list 
+**Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-030, EC-FR15-048, EC-FR15-052, EC-FR15-066
 **Req. Ref:** FR-15, FR-21
 **Bug ID:** _(fill if fails)_
@@ -208,8 +226,13 @@
   - "Cancel Target Product" remains visible in the product list with all its original data intact
   - No error or success notification is shown (no operation occurred)
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The delete confirmation dialog does not appear.
+  - No Cancel button appear, `DELETE /api/products/:id` is immediately called
+  - No dialog closes since there is no dialog
+  - "Cancel Target Product" is no longer present in the product list
+  - All other products remain unchanged in the list
+**Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-030, EC-FR15-048, EC-FR15-067
 **Req. Ref:** FR-15, FR-21
 **Bug ID:** _(fill if fails)_
@@ -244,15 +267,23 @@
   - A loading indicator (spinner or skeleton) is visible while the `GET /api/products` request is in flight
   - The page contains exactly one `<h1>` tag describing the page content (e.g., "Product Management" or equivalent Vietnamese text)
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - All products in the database are displayed in the product list
+  - Each product row shows:
+    - Name: [Name]
+    - Price: [Price] but not in thousands separator
+    - Image: [Image]
+    - Category: [Category]
+    - Actions: [Edit, Delete]
+  - A loading indicator (spinner or skeleton) is visible while the `GET /api/products` request is in flight
+  - The page contains exactly one `<h2>` tag describing the page content (e.g., "Product Management" or equivalent Vietnamese text)
+**Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-033, EC-FR15-044, EC-FR15-053
 **Req. Ref:** FR-15, FR-05, FR-21
 **Bug ID:** _(fill if fails)_
 
 ---
 
-### TC-FR15-EP-007
 
 **Test Case ID:** TC-FR15-EP-007
 **Title:** Verify that the product list correctly filters and displays products when a matching search keyword is entered
@@ -280,7 +311,7 @@
   - The search keyword "Wireless" is displayed safely in the UI as plain text (no HTML execution)
 
 **Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Status:** Not Run because there is no search keyword in Product Management in Admin
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-034, EC-FR15-053
 **Req. Ref:** FR-15, FR-05
 **Bug ID:** _(fill if fails)_
@@ -314,7 +345,7 @@
   - The page does not show an error, blank area, or broken layout
 
 **Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Status:** Not Run because there is no search keyword in Product Management in Admin
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-035, EC-FR15-053
 **Req. Ref:** FR-15, FR-05
 **Bug ID:** _(fill if fails)_
@@ -330,11 +361,11 @@
 **Pre-conditions:**
   1. Web Admin is running at `http://localhost:5174`
   2. Admin is logged in with valid JWT (`role = 'admin'`)
-  3. A product with known data exists (e.g., name = "Detail View Product", price = 300000, description = "Test description", imageUrl = "https://example.com/img.jpg", category = "Electronics")
+  3. A product with known data exists (e.g., name = "iPhone 15 Pro Max", price = 30000000, description = "Điện thoại cao cấp của Apple", imageUrl = "https://placehold.co/300x300/png?text=iPhone+15", category = "Điện thoại")
 
 **Steps:**
   1. Navigate to the product management list page
-  2. Locate "Detail View Product" and click to view its detail
+  2. Locate "iPhone 15 Pro Max" and click to view its detail
   3. Inspect all displayed fields
 
 **Test Data:**
@@ -343,15 +374,15 @@
 
 **Expected Result:**
   - The product detail page displays:
-    - Name: "Detail View Product"
-    - Price: "300,000 ₫" (formatted with ₫ symbol and thousands separator)
-    - Description: "Test description" (rendered as plain text)
-    - Image: the image from "https://example.com/img.jpg" (or alt text if image fails to load)
-    - Category: "Electronics"
+    - Name: "iPhone 15 Pro Max"
+    - Price: "30,000,000 ₫" (formatted with ₫ symbol and thousands separator)
+    - Description: "Điện thoại cao cấp của Apple" (rendered as plain text)
+    - Image: the image from "https://placehold.co/300x300/png?text=iPhone+15"
+    - Category: "Điện thoại"
   - No fields are missing, broken, or displayed incorrectly
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** Price is not displayed as thousands separator.
+**Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-030, EC-FR15-054
 **Req. Ref:** FR-15, FR-06
 **Bug ID:** _(fill if fails)_
@@ -388,8 +419,13 @@
   - After submitting an empty form, validation error messages appear **above** the submit button, not below it (per FR-22)
   - Tab key focus moves from top-to-bottom, left-to-right through the form fields (per FR-21)
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - Name is required, Price is not required, Category default is "Điện Thoại"
+  - The Submit/Save button uses green color
+  - The Delete / Cancle Dangerous Button uses red as expected
+  - After submitting an empty form, validation error messages don't appear above the submit button nor below
+  - Tab key focues move from top-to-botton, left-to-right through the form fields as expected
+**Status:** Failed
 **EC Coverage:** EC-FR15-037, EC-FR15-039, EC-FR15-041, EC-FR15-042, EC-FR15-044, EC-FR15-046
 **Req. Ref:** FR-21, FR-22
 **Bug ID:** _(fill if fails)_
@@ -424,8 +460,11 @@
   - The product is NOT created in the database
   - The response body contains an appropriate error message (e.g., "Unauthorized" or "No token provided")
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API returns HTTP 200 OK
+  - The product is created in the database
+  - The response body didn't contain an appropriate error message as expected.
+**Status:** Failed
 **EC Coverage:** EC-FR15-002, EC-FR15-063
 **Req. Ref:** FR-12, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -455,8 +494,11 @@
   - The product is NOT created
   - Access to the admin endpoint is denied
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API returns HTTP 200 OK
+  - The product is created in the database
+  - The response body didn't contain an appropriate error message as expected.
+**Status:** Failed
 **EC Coverage:** EC-FR15-003, EC-FR15-063
 **Req. Ref:** FR-12, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -487,8 +529,11 @@
   - The product is NOT created
   - The response indicates the token has expired (without revealing specific internal details)
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API returns HTTP 200 OK
+  - The product is created
+  - There is no response indicate the token has expired
+**Status:** Failed
 **EC Coverage:** EC-FR15-004, EC-FR15-063
 **Req. Ref:** FR-12, SEC-02
 **Bug ID:** _(fill if fails)_
@@ -520,8 +565,11 @@
   - The product is NOT created in the database
   - The response body contains an appropriate "Forbidden" or "Insufficient privileges" message
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API didn't return HTTP 403 Forbidden. It's still 200 OK
+  - The product is created in the database
+  - The response body didn't contain an appropriate error message as expected.
+**Status:** Failed
 **EC Coverage:** EC-FR15-006, EC-FR15-064
 **Req. Ref:** FR-12, SEC-03
 **Bug ID:** _(fill if fails)_
@@ -556,8 +604,11 @@
   - An error message indicating the product name is required appears **above** the Submit button
   - No product is created in the database
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The form subbmission is rejected as expected, "required" attributes in DOM rejected it
+  - No product is created in the database
+  - Validation error messages didn't appear as expected
+**Status:** Failed
 **EC Coverage:** EC-FR15-008, EC-FR15-055
 **Req. Ref:** FR-15, FR-22
 **Bug ID:** _(fill if fails)_
@@ -591,8 +642,11 @@
   - An error message indicating the name exceeds the 255-character limit appears **above** the Submit button
   - No product is created in the database
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The form submission is not rejected
+  - No error message is dislayed as expected
+  - Product is created in the database
+**Status:** Failed
 **EC Coverage:** EC-FR15-009, EC-FR15-056
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -625,8 +679,11 @@
   - An error message indicating the name exceeds the maximum allowed length appears **above** the Submit button
   - No product is created
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The form submission is not rejected
+  - No error message is dislayed as expected
+  - Product is created in the database
+**Status:** Failed
 **EC Coverage:** EC-FR15-010, EC-FR15-056
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -662,11 +719,14 @@
   - The browser console shows no unexpected script execution
   - The product list page does not execute the injected script when rendering the product name
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API POST /api/products returns HTTP 201/200 OK and creates the product.  
+  - The product list page renders the name literally as `<script>alert(1)</script>` as plain text.  
+  - No JavaScript alert dialog appears, and no code execution is observed in the console.  
+**Status:** Passed
 **EC Coverage:** EC-FR15-011, EC-FR15-065
 **Req. Ref:** SEC-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 **Cleanup:** Delete the created test product (with XSS name) after execution if creation succeeded.
 
@@ -699,8 +759,11 @@
   - An error message indicating price must be greater than zero (a positive number) appears **above** the Submit button
   - No product is created in the database
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The form submission is not rejected
+  - No error message dislayed as expected
+  - Product is created in the database
+**Status:** Failed
 **EC Coverage:** EC-FR15-013, EC-FR15-058
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -720,22 +783,25 @@
 **Steps:**
   1. Navigate to the product creation form
   2. Enter `name = "Negative Price Product"` in the Name field
-  3. Attempt to enter `-1` in the Price field (may need to bypass HTML min="1" via direct API if the UI blocks negative input)
+  3. Attempt to enter `-1` in the Price field
   4. Select a valid category
   5. Click Submit / Save or send directly via API
   6. Observe the validation response
 
 **Test Data:**
-  - Input (UI): `name = "Negative Price Product"`, `price = -1`; Input (API direct): `POST /api/products` with `{ "name": "Negative Price Product", "price": -1, "category_id": 1 }`
+  - Input (UI): `name = "Negative Price Product"`, `price = -1`
   - Expected Output: HTTP 400 Bad Request; error message indicating price must be a positive number
 
 **Expected Result:**
-  - Both the UI and the API reject price = -1 with HTTP 400 Bad Request
+  - The UI reject price = -1 with HTTP 400 Bad Request
   - An error message indicating price must be greater than zero appears **above** the Submit button (UI) or in the API response body (API)
   - No product is created
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The UI didn't reject price = -1 with HTTP 400 Bad Request
+  - No error message dislayed as expected
+  - Product is created in the database
+**Status:** Failed
 **EC Coverage:** EC-FR15-014, EC-FR15-058
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -769,8 +835,11 @@
   - An appropriate error message is returned (e.g., "Price must be a positive integer")
   - No product is created with a float price
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API didn't reject price = 99.5 with HTTP 400 Bad Request
+  - No error message dislayed as expected
+  - Product is created in the database
+**Status:** Failed
 **EC Coverage:** EC-FR15-015, EC-FR15-058
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -801,8 +870,11 @@
   - The response body contains an error message indicating price must be a numeric value
   - No product is created
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API didn't return HTTP 400 Bad Request
+  - The response body didn't contain an error message indicating price must be a numeric value
+  - Product is still created
+**Status:** Failed
 **EC Coverage:** EC-FR15-016, EC-FR15-059
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -833,8 +905,11 @@
   - The response contains an error indicating price is a required field
   - No product is created
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API didn't return HTTP 400 Bad Request
+  - The response didn't contain an error as expected
+  - Product is still created
+**Status:** Failed
 **EC Coverage:** EC-FR15-017, EC-FR15-057
 **Req. Ref:** FR-15, FR-22
 **Bug ID:** _(fill if fails)_
@@ -866,8 +941,11 @@
   - The response contains an error indicating the description exceeds the maximum allowed length (1000 characters)
   - No product is created with the oversized description
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API didn't return HTTP 400 Bad Request
+  - The response didn't contain an error as expected
+  - Product is created with the oversized description
+**Status:** Failed
 **EC Coverage:** EC-FR15-020
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -903,8 +981,11 @@
   - No browser alert dialog appears
   - No unexpected scripts are executed (verified via browser console)
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The description stored and rendered as the escaped string in the UI
+  - No browser alert dialog appears
+  - No unexpected scripts are executed
+**Status:** Passed
 **EC Coverage:** EC-FR15-021, EC-FR15-065
 **Req. Ref:** SEC-04
 **Bug ID:** _(fill if fails)_
@@ -937,8 +1018,11 @@
   - The response contains an error indicating the image URL must begin with `https://`
   - No product is created with an insecure image URL
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API returns HTTP 200 OK
+  - The response didn't contain an error indicating the image url must begin with `https://`
+  - Product is created with the insecure image url
+**Status:** Failed
 **EC Coverage:** EC-FR15-024
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -969,8 +1053,11 @@
   - The response indicates imageUrl must be a valid URL (starting with `https://`)
   - No product is created
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:**
+  - The API returns HTTP 200 OK
+  - The response didn't contain an error as expected
+  - Product is created with the malformed image url
+**Status:** Failed
 **EC Coverage:** EC-FR15-025
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -1004,8 +1091,10 @@
   - An error message indicating category is required appears **above** the Submit button (per FR-22)
   - No product is created without a category
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - Category dropdown is default as "Điện Thoại"
+  - It's impossible to submit the form with no category selected
+**Status:** Passed
 **EC Coverage:** EC-FR15-027, EC-FR15-060
 **Req. Ref:** FR-15, FR-22
 **Bug ID:** _(fill if fails)_
@@ -1037,8 +1126,11 @@
   - The response contains an error message indicating the selected category does not exist
   - No product is created with an orphaned category reference
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API didn't return HTTP 400 Bad Request. It was 200 OK
+  - The response didn't contain an error as expected
+  - Product is created with the orphaned category reference
+**Status:** Failed
 **EC Coverage:** EC-FR15-028, EC-FR15-061
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -1069,8 +1161,11 @@
   - The response contains an error indicating the category_id must be an integer
   - No product is created
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API didn't return HTTP 400 Bad Request
+  - The response didn't contain an error as expected
+  - Product is created with the wrong category type
+**Status:** Failed
 **EC Coverage:** EC-FR15-029
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -1102,8 +1197,11 @@
   - An appropriate error message is returned (e.g., "Product not found")
   - No existing product is modified
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API didn't return HTTP 404 Not Found, it's 200 OK
+  - The response didn't contain an error as expected
+  - No existing product is modified
+**Status:** Failed
 **EC Coverage:** EC-FR15-031, EC-FR15-062
 **Req. Ref:** FR-15
 **Bug ID:** _(fill if fails)_
@@ -1133,8 +1231,11 @@
   - The response indicates the product ID in the path is invalid (not an integer)
   - No product is deleted
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The API didn't return HTTP 400 Bad Request, it's 200 OK
+  - The response didn't contain an error as expected
+  - No product is deleted
+**Status:** Failed
 **EC Coverage:** EC-FR15-032
 **Req. Ref:** FR-15, API §3.3
 **Bug ID:** _(fill if fails)_
@@ -1168,7 +1269,7 @@
   - No unexpected script execution occurs (verified via browser console)
 
 **Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Status:** Not Run because search is not displayed in Admin Management
 **EC Coverage:** EC-FR15-036, EC-FR15-065
 **Req. Ref:** SEC-04, FR-05
 **Bug ID:** _(fill if fails)_
@@ -1201,8 +1302,9 @@
   - The Category label displays `*`
   - No mandatory field label is missing the `*` indicator
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The Product Name label didn't display `*`, neither do Price, Category
+**Status:** Failed
 **EC Coverage:** EC-FR15-038 (verifies absence of the defect described in this EC)
 **Req. Ref:** FR-22
 **Bug ID:** _(fill if fails)_
@@ -1233,8 +1335,11 @@
   - All validation error messages appear in the UI area **above** the Submit button, not below it or floating elsewhere
   - The Submit button is still visible below the error messages
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - One validation error message is displayed below `Name` label
+  - There are no validation error messages appered as expected
+  - Submit button is still visible but no error messages above it as expected
+**Status:** Failed
 **EC Coverage:** EC-FR15-040 (verifies that this defect condition does NOT occur)
 **Req. Ref:** FR-22
 **Bug ID:** _(fill if fails)_
@@ -1267,8 +1372,10 @@
   - No blue button is used for a dangerous/destructive action
   - No red button is used for a non-dangerous positive action
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The Submit button is styled with a green background colour
+  - No red button is used for a non-dangerous positive action as expected
+**Status:** Failed
 **EC Coverage:** EC-FR15-041, EC-FR15-042, EC-FR15-043
 **Req. Ref:** FR-21
 **Bug ID:** _(fill if fails)_
