@@ -1407,8 +1407,10 @@
   - The single `<h1>` tag contains a meaningful, descriptive page title
   - Neither zero `<h1>` tags nor more than one `<h1>` tag exists on the page
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - The DOM query returns `0`
+  - No `<h1>` tag exists on the page
+**Status:** Failed
 **EC Coverage:** EC-FR15-044, EC-FR15-045
 **Req. Ref:** FR-21
 **Bug ID:** _(fill if fails)_
@@ -1440,8 +1442,8 @@
   - No field is skipped during Tab navigation
   - Focus does not jump to a footer, navigation bar, or other out-of-sequence element before completing the form
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** As Expected Result
+**Status:** Passed
 **EC Coverage:** EC-FR15-046, EC-FR15-047
 **Req. Ref:** FR-21
 **Bug ID:** _(fill if fails)_
@@ -1474,8 +1476,10 @@
   - The product is still present in the list while the dialog is displayed (no immediate deletion)
   - The dialog offers both a Confirm/Yes and a Cancel/No option
 
-**Observed Result:** _(fill during execution)_
-**Status:** Not Run
+**Observed Result:** 
+  - After Clicking delete, there is no confirmation dialog appears asking the admin to confirm the deletion as expected
+  - The product after that will disappear
+**Status:** Failed
 **EC Coverage:** EC-FR15-048, EC-FR15-049
 **Req. Ref:** FR-21
 **Bug ID:** _(fill if fails)_
