@@ -14,7 +14,7 @@
 **Function Name:** FR-08 Checkout — GUI / Page Structure
 **Problem Summary:** The checkout page does not contain any `<h1>` heading element — it uses `<h2>` instead — violating the FR-21 requirement that every page must have exactly one `<h1>` tag.
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -44,9 +44,9 @@ There are **zero `<h1>` elements** on the checkout page. The page heading is imp
 - App URL: `http://localhost:5173/checkout`
 - Test Data: Authenticated user; non-empty cart.
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/21
 **Linked Test Cases:** TC-FR08-EP-001, TC-FR08-NEG-007
-**Attachments:** _(HITL attaches screenshot showing DevTools Elements panel with no `<h1>` tag)_
+**Attachments:** ![Screenshot](./Issues/1.png)
 
 ---
 
@@ -55,7 +55,7 @@ There are **zero `<h1>` elements** on the checkout page. The page heading is imp
 **Function Name:** FR-08 Checkout — GUI / Button Styling
 **Problem Summary:** The checkout/proceed-to-checkout button ("Tiến hành thanh toán") is displayed in **green** instead of the required **blue** color, violating the FR-21 UI standard for primary action buttons.
 **Severity:** Cosmetic
-**Priority:** _(set by HITL/PM)_
+**Priority:** Low
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -85,9 +85,9 @@ The button is rendered in **green** (not blue). The observed color does not matc
 - App URL: `http://localhost:5173/cart` and `http://localhost:5173/checkout`
 - Test Data: Authenticated user; non-empty cart.
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/22
 **Linked Test Cases:** TC-FR08-EP-001, TC-FR08-NEG-007
-**Attachments:** _(HITL attaches screenshot of the green button)_
+**Attachments:** ![Screenshot](./Issues/2.png)
 
 ---
 
@@ -96,7 +96,7 @@ The button is rendered in **green** (not blue). The observed color does not matc
 **Function Name:** FR-08 Checkout — Cart State After Order Placement
 **Problem Summary:** After a successful checkout, the user's cart is **not cleared** — cart items remain visible in the cart page instead of being reset to an empty state.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -128,9 +128,9 @@ After a successful order placement, the cart **still shows the previously ordere
 - App URL: `http://localhost:5173/checkout` → `http://localhost:5173/cart`
 - Test Data: `shipping_address` = `"123 Nguyen Hue, District 1, Ho Chi Minh City"`; at least 1 product in cart.
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/23
 **Linked Test Cases:** TC-FR08-EP-001
-**Attachments:** _(HITL attaches screenshot of cart page showing items still present after order confirmation)_
+**Attachments:** ![Screenshot](./Issues/3.png)
 
 ---
 
@@ -139,7 +139,7 @@ After a successful order placement, the cart **still shows the previously ordere
 **Function Name:** FR-08 Checkout — Breadcrumb Navigation
 **Problem Summary:** The breadcrumb navigation component is **absent** from the checkout page, violating the FR-22 requirement that the checkout page must display breadcrumb navigation showing the user's position in the site hierarchy.
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -167,9 +167,9 @@ No breadcrumb navigation is visible anywhere on the checkout page. The page does
 - App URL: `http://localhost:5173/checkout`
 - Test Data: Authenticated user; non-empty cart.
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/25
 **Linked Test Cases:** TC-FR08-EP-003
-**Attachments:** _(HITL attaches screenshot of the checkout page with no breadcrumb visible)_
+**Attachments:** ![Screenshot](./Issues/5.png)
 
 ---
 
@@ -178,7 +178,7 @@ No breadcrumb navigation is visible anywhere on the checkout page. The page does
 **Function Name:** FR-08 Checkout — Input Validation Error Message Display
 **Problem Summary:** When the user attempts to place an order without entering a shipping address, **no validation error message is displayed** — the system fails silently or proceeds anyway, violating the FR-22 requirement for error message feedback above the submit button.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -211,9 +211,9 @@ When the "Đặt hàng" button is clicked with an empty shipping address field:
 - App URL: `http://localhost:5173/checkout`
 - Test Data: `shipping_address` = `""` (empty string); authenticated user; non-empty cart.
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/26
 **Linked Test Cases:** TC-FR08-NEG-004, TC-FR08-NEG-006, TC-FR08-BV-005
-**Attachments:** _(HITL attaches screenshot showing order created with no error message shown)_
+**Attachments:** ![Screenshot](./Issues/6.png)
 
 > **Note:** This defect also reproduces with a whitespace-only address (`"     "`) — see TC-FR08-NEG-006. Both empty and whitespace-only inputs fail to trigger validation. The root cause is likely a single missing validation rule in the frontend and/or backend input processing.
 
@@ -224,7 +224,7 @@ When the "Đặt hàng" button is clicked with an empty shipping address field:
 **Function Name:** FR-08 Checkout — Shipping Address Validation (Empty / Whitespace)
 **Problem Summary:** The system accepts an order with an empty string or whitespace-only `shipping_address` — no server-side validation rejects the blank address, resulting in orders being stored with meaningless shipping destinations.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -256,9 +256,9 @@ The API returns **HTTP 200 OK**. An order is created in the database with the sh
 - API Base URL: `http://localhost:3000`
 - Test Data: `shipping_address` = `"     "` (whitespace-only) and `""` (empty string); valid JWT.
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/27
 **Linked Test Cases:** TC-FR08-NEG-004, TC-FR08-NEG-006, TC-FR08-BV-005
-**Attachments:** _(HITL attaches Postman screenshot of request + response showing HTTP 200 and order created with whitespace address)_
+**Attachments:** ![Screenshot](./Issues/7.png)
 
 > **Note:** BUG-FR08-006 (no frontend error message) and BUG-FR08-007 (no backend validation) are separate defects. BUG-FR08-006 is a UI/frontend gap; BUG-FR08-007 is a backend/API gap. Both must be fixed independently.
 
@@ -269,7 +269,7 @@ The API returns **HTTP 200 OK**. An order is created in the database with the sh
 **Function Name:** FR-08 Checkout — Security: `total_amount` Recalculation
 **Problem Summary:** The backend **trusts the client-supplied `total_amount`** without recalculating from the actual cart items — a price tampering attack succeeds, allowing an order to be placed at 1 ₫ regardless of the actual cart total.
 **Severity:** Fatal
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -301,9 +301,9 @@ The API returns **HTTP 200 OK**. The order is created with `total_amount = 1 ₫
 - API Base URL: `http://localhost:3000`
 - Test Data: Tampered `total_amount` = 1; actual cart total = 30,000,000 ₫; valid JWT for `test@eshop.com`.
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/28
 **Linked Test Cases:** TC-FR08-NEG-005
-**Attachments:** _(HITL attaches Postman screenshot showing: request body with total_amount=1, HTTP 200 response, and GET order confirming total_amount=1 in DB)_
+**Attachments:** ![Screenshot](./Issues/8.png)
 
 > ⚠️ **Security Escalation Required (TR-BP-09):** This is a Fatal security defect — price tampering vulnerability. Per senior QA best practice, this defect must be **escalated immediately** to the team lead or security officer and must not be deferred. The checkout endpoint must be patched before any production deployment.
 
@@ -314,7 +314,7 @@ The API returns **HTTP 200 OK**. The order is created with `total_amount = 1 ₫
 **Function Name:** FR-08 Checkout — Shipping Address Length Enforcement
 **Problem Summary:** The system does **not enforce** the 255-character maximum length on the `shipping_address` field — a 256-character address is accepted and an order is created, indicating there is no length-enforcement layer (UI, API, or database).
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
 **Reported By:** Gemini QA Agent + Thái Minh Huy
 **Assign To:** Development Team
@@ -357,9 +357,9 @@ The system accepts the 256-character address without any error. An order is crea
 - App URL: `http://localhost:5173/checkout` and `http://localhost:3000/api/checkout`
 - Test Data: `shipping_address` = 256-char string (`"C" × 256`) and 1000-char string.
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/AkiraTomori/eshop-sut/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/29
 **Linked Test Cases:** TC-FR08-BV-006, TC-FR08-BV-007
-**Attachments:** _(HITL attaches screenshots showing UI acceptance of 256-char input and Postman confirming HTTP 200 with full address stored)_
+**Attachments:** ![Screenshot](./Issues/9.png)
 
 ---
 
@@ -393,4 +393,4 @@ The system accepts the 256-character address without any error. An order is crea
 3. Prioritize **BUG-FR08-008** (Fatal — price tampering) for **immediate escalation** before any other fix.
 4. Update the `Bug ID:` field in [FR08-test-cases.md](FR08-test-cases.md) for each failed test case.
 
-**HITL Review:** ☐ Accepted / ☐ Partially Accepted / ☐ Rejected — _[HITL to fill in]_
+**HITL Review:** Accepted
