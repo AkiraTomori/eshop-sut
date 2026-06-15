@@ -35,7 +35,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-001, EC-FR04-005, EC-FR04-010, EC-FR04-012, EC-FR04-016, EC-FR04-019, EC-FR04-021, EC-FR04-023, EC-FR04-025, EC-FR04-026
 **Req. Ref:** FR-04, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-001
 
 ---
 **Test Case ID:** TC-FR04-EP-002
@@ -60,7 +60,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-001, EC-FR04-013, EC-FR04-016, EC-FR04-025
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-001
 
 ---
 **Test Case ID:** TC-FR04-EP-003
@@ -86,7 +86,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-001, EC-FR04-005, EC-FR04-009, EC-FR04-018, EC-FR04-021, EC-FR04-023, EC-FR04-025
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-001
 
 ---
 **Test Case ID:** TC-FR04-EP-004
@@ -115,7 +115,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-001, EC-FR04-029, EC-FR04-030, EC-FR04-031
 **Req. Ref:** FR-04, SEC-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -143,7 +143,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-002, EC-FR04-027
 **Req. Ref:** FR-04, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-NEG-002
@@ -167,7 +167,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-003, EC-FR04-027
 **Req. Ref:** FR-04, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-002
 
 ---
 **Test Case ID:** TC-FR04-NEG-003
@@ -192,10 +192,10 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-004, EC-FR04-027
 **Req. Ref:** FR-04, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-003
 
 ---
-***Test Case ID:** TC-FR04-NEG-004
+**Test Case ID:** TC-FR04-NEG-004
 **Title:** Verify that profile update API rejects request when the Full Name field is submitted as an empty string
 **Description:** Covers EC-FR04-006: sending a PUT request to /api/users/me with an empty string `""` for the mandatory `name` field must be strictly rejected at the API layer to safeguard data identity contracts.
 **Priority:** High
@@ -225,7 +225,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-006
 **Req. Ref:** FR-04, FR-01
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-004
 
 ---
 **Test Case ID:** TC-FR04-NEG-005
@@ -252,7 +252,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-007
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-005
 
 ---
 **Test Case ID:** TC-FR04-NEG-006
@@ -277,7 +277,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-008
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-006
 
 ---
 **Test Case ID:** TC-FR04-NEG-007
@@ -303,7 +303,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-011, EC-FR04-028
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-007
 
 ---
 **Test Case ID:** TC-FR04-NEG-008
@@ -329,7 +329,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-014, EC-FR04-028
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-001
 
 ---
 **Test Case ID:** TC-FR04-NEG-009
@@ -355,7 +355,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-015, EC-FR04-028
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-001
 
 ---
 **Test Case ID:** TC-FR04-NEG-010
@@ -386,9 +386,9 @@
 **Expected Result:** The server backend must reject the formatted string entry. The API returns an HTTP 400 Bad Request status code with a validation error response indicating that the phone number must exclusively contain numeric digits (0-9). The stored phone number row cell in the database remains unchanged.
 **Observed Result:** The backend API failed to evaluate or reject the non-numeric input parameters, returning an HTTP 200 OK response code instead. The formatted character string `"0912-345-678"` bypassed server checks and successfully committed into the database record cell.
 **Status:** Failed
-**EC Coverage:** EC-FR04-017
+**EC Coverage:** EC-FR04-017, EC-FR04-028
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-008
 
 ---
 **Test Case ID:** TC-FR04-NEG-011
@@ -414,7 +414,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-020
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-010
 
 ---
 **Test Case ID:** TC-FR04-NEG-012
@@ -442,7 +442,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-022
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-NEG-013
@@ -471,7 +471,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-024, EC-FR04-032
 **Req. Ref:** FR-04, SEC-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-009
 
 ---
 
@@ -498,7 +498,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-005
 **Req. Ref:** FR-04, FR-01
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-002
@@ -521,7 +521,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-005
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-003
@@ -545,7 +545,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-005
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-004
@@ -570,7 +570,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-005
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-005
@@ -594,7 +594,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-007
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-005
 
 ---
 **Test Case ID:** TC-FR04-BV-006
@@ -620,7 +620,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-014, EC-FR04-028
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-001
 
 ---
 **Test Case ID:** TC-FR04-BV-007
@@ -643,7 +643,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-012
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-008
@@ -666,7 +666,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-013
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-009
@@ -699,7 +699,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-015, EC-FR04-028
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-008
 
 ---
 **Test Case ID:** TC-FR04-BV-010
@@ -719,10 +719,10 @@
   - Expected Output: HTTP 200 OK
 **Expected Result:** The system returns HTTP 200 OK. The address `"A"` is stored. No error is displayed.
 **Observed Result:** As Expected Result
-**Status:** Not Run
+**Status:** Passed
 **EC Coverage:** EC-FR04-019
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-011
@@ -745,7 +745,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-019
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-012
@@ -769,7 +769,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-019
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-013
@@ -794,7 +794,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR04-019
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 **Test Case ID:** TC-FR04-BV-014
@@ -818,7 +818,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR04-020
 **Req. Ref:** FR-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR04-010
 
 ---
 

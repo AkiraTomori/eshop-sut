@@ -73,3 +73,24 @@
   - Coverage matrix confirms all 32 ECs covered; all BVA boundary points covered; all FR-04 and SEC-06 references present
 - **Human Review Notes:** Reviewed all 31 test cases for title quality, expected result precision, EC coverage completeness, and self-standing clarity.
 - **Verdict:** Accepted
+
+---
+## Session: 2026-06-15 11:10 — Phase 5: Bug Report
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking via Google DeepMind IDE)
+- **Bloom-AI Level:** G9.3 (Analyse) — Analysed 31 executed test cases; identified 17 failures across 10 distinct root causes; produced 10 individual bug reports
+- **Prompt:**
+  > "Write bug report for Pool-D_FR04_ProfileManagement."
+- **AI Output Summary:** Scanned all 31 executed test cases; identified 17 Status: Fail results. Deduplicated by root cause to produce 10 individual bug reports (BUG-FR04-001 to BUG-FR04-010). Key findings:
+  - **BUG-FR04-001 (Serious):** Wrong phone validation regex in mobile UI — enforces 9–10 digits instead of SRS-specified 10–11 digits; blocks all valid phone inputs (EP-001, EP-002, EP-003, NEG-008, NEG-009, BV-006)
+  - **BUG-FR04-002 (Medium):** Malformed JWT returns HTTP 403 instead of HTTP 401 — incorrect authentication error semantics
+  - **BUG-FR04-003 (Fatal):** Expired JWT token accepted by API — token expiry check not implemented; profile updated with expired credentials
+  - **BUG-FR04-004 (Serious):** Empty string `""` accepted as valid name — mandatory field constraint not enforced at API layer
+  - **BUG-FR04-005 (Serious):** Name > 255 characters accepted and stored without truncation — no upper length bound enforced
+  - **BUG-FR04-006 (Serious):** Missing `name` key in PUT body accepted — API does not enforce mandatory field presence
+  - **BUG-FR04-007 (Serious):** Phone prefix `0` constraint not enforced at UI or API layer — any first digit accepted
+  - **BUG-FR04-008 (Serious):** Non-numeric phone (e.g., `"0912-345-678"`) and 12-digit phone accepted by API — no server-side phone format validation
+  - **BUG-FR04-009 (Fatal):** Role privilege escalation via PUT payload — `role = "admin"` written to DB when injected in request body; violates SEC-06; critical security vulnerability
+  - **BUG-FR04-010 (Serious):** Address > 255 characters accepted and stored — no upper length bound enforced on shipping_address field
+- **Human Review Notes:** Verified severity assignments, reviewed each report for completeness, created GitHub Issues for all 10 bugs, pasted Issue URLs into bug report file
+- **Verdict:** Accepted
