@@ -24,3 +24,19 @@
   6. AMBIGUITY-06 (Delete Dialog): Confirmed that a browser-native or component-level UI Delete Confirmation Dialog is mandatory per FR-21 design criteria. A cancellation choice on the dialog must gracefully abort the transaction, preserving database isolation.
   7. AMBIGUITY-07 (Price Zero vs Negative): Approved the partition bifurcation. Price = 0 (violates positive constraint) and Price < 0 (extreme negative injection) must be modeled as two distinct invalid equivalence classes to force independent BVA sweeps.
 - **Verdict:** [X] Accepted / [ ] Partially Accepted / [ ] Rejected
+
+---
+## Session: 2026-06-15 18:04 — Phase 2: Domain Analysis (Equivalence Partitioning)
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking)
+- **Bloom-AI Level:** G9.3 (Analyse) — Applying all 4 EP Guidelines to produce a complete, labelled Equivalence Class table
+- **Prompt:**
+  > I have reviewed Phase 1 (Analyse Requirements) for Pool-C_FR15_ProductManagement (Approved). Proceed to phase 2 (Domain Analysis) for Pool-C_FR15_ProductManagement.
+- **AI Output Summary:**
+  The AI produced a complete Phase 2 Domain Analysis artefact for FR-15 covering 67 Equivalence Classes (EC-FR15-001 through EC-FR15-067) organised into 11 groups. Applied G1, G2, G3, and G4 split protocols. Flagged 4 open issues for human review alignment.
+- **Human Review Notes:** Formally reviewed and closed all 4 open domain issues under strict integration test guidelines:
+  1. Enforced standard G4 safety split for Name XSS blocks due to unique HTML-escaping output criteria.
+  2. Declared decimal prices (e.g., `100.0`) as strictly invalid to safeguard integer ₫ processing.
+  3. Locked down `http://` as an explicit validation failure to mandate secure `https://` endpoints.
+  4. Confirmed the application layer must clamp descriptions at 1000 characters to block layout corruption.
+- **Verdict:** [X] Accepted / [ ] Parially Accepted / [ ] Rejected
