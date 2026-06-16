@@ -91,7 +91,7 @@
   - **Description (6 BVA points → 4 TCs):** BV-016 (LB=0 + LB+1=1, VALID paired), BV-017 (UB-1=999 + UB=1000, VALID paired), BV-018 (UB+1=1001 UI, INVALID), BV-019 (1001-char API direct bypass, DB probe, INVALID — HVF-03).
   - **Product ID (4 representative points → 2 TCs):** BV-020 (valid ID + max+1=404), BV-021 (non-integer path=400 + ID=0=404).
   - **Full BVA coverage matrix** appended showing all 28 BVA points mapped to their TC IDs.
-  - **Final total:** 10 EP + 29 NEG + 21 BV = **60 test cases** for FR-15.
+  - **Final total:** 10 EP + 29 NEG + 15 BV = **54 test cases** for FR-15.
   - **Self-audit checklist** completed: all three boundary types (Spec, UI/System, DB) covered; all INVALID points isolated; HVF-01/02/03 all explicitly probed.
 - **Human Review Notes:** Reviewed all 21 BVA TCs — expected results match approved boundary points; HVF probes are executable in Postman + DB inspection; approved for bug reporting phase
-- **Verdict:** [X] Accepted / [ ] Partially Accepted / [ ] Rejected
+- **Verdict:** [] Accepted / [X] Partially Accepted / [ ] Rejected (Some testcase should be merged and HITL have merged it in the next step)
