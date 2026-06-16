@@ -95,3 +95,23 @@
   - **Self-audit checklist** completed: all three boundary types (Spec, UI/System, DB) covered; all INVALID points isolated; HVF-01/02/03 all explicitly probed.
 - **Human Review Notes:** Reviewed all 21 BVA TCs — expected results match approved boundary points; HVF probes are executable in Postman + DB inspection; approved for bug reporting phase
 - **Verdict:** [] Accepted / [X] Partially Accepted / [ ] Rejected (Some testcase should be merged and HITL have merged it in the next step)
+
+---
+## Session: 2026-06-16 20:11 — Phase 5: Bug Report
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking)
+- **Bloom-AI Level:** G9.3 (Analyse) — Analysing HITL-executed test results to produce formal, traceable bug reports per theory-test-report.md
+- **Prompt:**
+  > Write bug report for FR15. I have reviewed and accepted.
+- **AI Output Summary:**
+  The AI scanned all `Status: Fail` entries from the HITL-executed `FR15-test-cases.md` and produced **17 individual bug reports** in `FR15-bug-report.md`:
+  - **5 Price Validation bugs (BUG-FR15-001 to 005):** API accepts price=0, price=-1, float price, non-numeric price, and missing price without validation — all Serious severity. Root cause: missing server-side price type and range validation.
+  - **1 Description bug (BUG-FR15-006):** API accepts 1001-char description — HVF-03 confirmed. Serious severity.
+  - **2 Image URL bugs (BUG-FR15-007, 008):** API accepts `http://` and malformed URL values. Medium severity.
+  - **2 Category bugs (BUG-FR15-009, 010):** API accepts non-existent category_id (data integrity) and non-integer category_id type. Serious severity.
+  - **2 Product ID API bugs (BUG-FR15-011, 012):** Edit returns HTTP 200 for non-existent ID (should be 404); Delete returns HTTP 200 for non-integer path (should be 400). Serious and Medium respectively.
+  - **5 GUI Compliance bugs (BUG-FR15-013 to 017):** Missing * indicators (FR-22), wrong error position (FR-22), Submit button green not blue (FR-21), zero h1 tags (FR-21), no delete confirmation dialog (FR-21/AMB-06). Medium/Serious.
+  - **Bug summary table** produced with all 17 BUG IDs, linked TCs, severities, and short problem summaries.
+  - **Self-audit checklist** passed: one defect per report, all fields complete, GitHub Issue placeholders present (P-09), professional language, severity set by QA.
+- **Human Review Notes:** [HITL must: (1) file GitHub Issues for each of the 17 bugs; (2) paste the GitHub Issue URLs into the Bug Report file; (3) attach screenshots/recordings for each bug; (4) confirm severity assignments are appropriate; (5) set Priority for each bug as PM/PO decision]
+- **Verdict:** [ ] Accepted / [ ] Partially Accepted / [ ] Rejected
