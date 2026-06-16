@@ -2,7 +2,7 @@
 **Pool:** C — FR-15 Product Management
 **Test Cycle:** HW02 Domain Testing
 **Date:** 2026-06-16
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Total Bugs Filed:** 17
 
 > **Note (P-09 compliance):** GitHub Issue links must be filled in by HITL after filing issues in the project repository. Every `GitHub Issue` field below is a placeholder that must be completed before this report is considered finalized.
@@ -15,9 +15,9 @@
 **Function Name:** FR-15 Product Management — Create Product (Price Validation)
 **Problem Summary:** The Create Product API accepts `price = 0` and creates a product successfully (HTTP 200 OK), violating the specification requirement that price must be a positive integer greater than zero.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -45,9 +45,8 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Zero Price Product"`, `price = 0`, `category_id = 1`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/42
 **Linked Test Case:** TC-FR15-NEG-009
-**Attachments:** _(HITL attaches screenshot of Postman response showing HTTP 200 with price = 0)_
 
 ---
 
@@ -57,9 +56,9 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 **Function Name:** FR-15 Product Management — Create Product (Price Validation)
 **Problem Summary:** The Create Product API accepts a negative price (`price = -1`) and creates a product successfully, violating the specification that price must be a positive integer (greater than zero).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -87,9 +86,8 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Negative Price Product"`, `price = -1`, `category_id = 1`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/43
 **Linked Test Case:** TC-FR15-NEG-010
-**Attachments:** _(HITL attaches screenshot of Postman response and product appearing in list with negative price)_
 
 ---
 
@@ -99,9 +97,9 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 **Function Name:** FR-15 Product Management — Create Product (Price Validation)
 **Problem Summary:** The Create Product API accepts a floating-point price value (`price = 99.5`) and creates a product successfully, violating the integer-only constraint for Vietnamese ₫ currency (AMB-03, RESOLVED-02).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -129,9 +127,8 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Float Price Product"`, `price = 99.5`, `category_id = 1`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/44
 **Linked Test Case:** TC-FR15-NEG-011
-**Attachments:** _(HITL attaches screenshot of Postman response showing HTTP 200 with float price stored)_
 
 ---
 
@@ -141,9 +138,9 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 **Function Name:** FR-15 Product Management — Create Product (Price Validation)
 **Problem Summary:** The Create Product API accepts a non-numeric string as the price field (`price = "abc"`) and creates a product, violating the type constraint that price must be a valid numeric integer.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -171,9 +168,8 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Test Product"`, `price = "abc"` (string), `category_id = 1`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/45
 **Linked Test Case:** TC-FR15-NEG-012
-**Attachments:** _(HITL attaches screenshot of Postman request/response)_
 
 ---
 
@@ -183,9 +179,9 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 **Function Name:** FR-15 Product Management — Create Product (Price Validation)
 **Problem Summary:** The Create Product API accepts a request body with the `price` field completely omitted and creates a product, violating the specification that price is a mandatory field.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Immediate
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -213,9 +209,8 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 - App URL: `http://localhost:3000`
 - Test Data: `name = "No Price Product"`, price field: **absent**, `category_id = 1`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/46
 **Linked Test Case:** TC-FR15-NEG-013
-**Attachments:** _(HITL attaches Postman request/response screenshot)_
 
 ---
 
@@ -225,9 +220,9 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 **Function Name:** FR-15 Product Management — Create Product (Description Validation)
 **Problem Summary:** The Create Product API accepts a description of 1001 characters and creates a product, violating the application-layer 1000-character safety limit (AMB-01, RESOLVED-04). The oversized description is stored in the SQLite database without rejection.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -255,9 +250,8 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Long Desc Product"`, `price = 100000`, `description = "C" × 1001`, `category_id = 1`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/47
 **Linked Test Case:** TC-FR15-NEG-014
-**Attachments:** _(HITL attaches Postman response + SQLite DB query showing description length > 1000)_
 
 ---
 
@@ -267,9 +261,9 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 **Function Name:** FR-15 Product Management — Create Product (Image URL Validation)
 **Problem Summary:** The Create Product API accepts an image URL using the insecure `http://` protocol and creates a product, violating the specification requirement that imageUrl must begin with `https://` (AMB-02, RESOLVED-03).
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -297,9 +291,8 @@ The API returns HTTP 200 OK. No error message is returned. A product is created 
 - App URL: `http://localhost:3000`
 - Test Data: `name = "HTTP URL Product"`, `price = 100000`, `imageUrl = "http://example.com/img.jpg"`, `category_id = 1`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/48
 **Linked Test Case:** TC-FR15-NEG-016
-**Attachments:** _(HITL attaches Postman response screenshot)_
 
 ---
 
@@ -309,9 +302,9 @@ The API returns HTTP 200 OK. No error message is returned. A product is created 
 **Function Name:** FR-15 Product Management — Create Product (Image URL Validation)
 **Problem Summary:** The Create Product API accepts a completely malformed non-URL string as the `imageUrl` value (`"notavalidurl"`) and creates a product, violating the requirement that imageUrl must be a valid URL beginning with `https://`.
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -339,9 +332,8 @@ The API returns HTTP 200 OK. No error message is returned. A product is created 
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Malformed URL Product"`, `price = 100000`, `imageUrl = "notavalidurl"`, `category_id = 1`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/49
 **Linked Test Case:** TC-FR15-NEG-017
-**Attachments:** _(HITL attaches Postman response screenshot)_
 
 ---
 
@@ -351,9 +343,9 @@ The API returns HTTP 200 OK. No error message is returned. A product is created 
 **Function Name:** FR-15 Product Management — Create Product (Category Validation)
 **Problem Summary:** The Create Product API accepts a `category_id` that references a non-existent category (`category_id = 99999`) and creates a product with an orphaned category reference, violating the requirement that category_id must reference an existing database record.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -382,9 +374,8 @@ The API returns HTTP 200 OK. No error message is returned. A product is created 
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Orphan Category Product"`, `price = 100000`, `category_id = 99999` (non-existent)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/50
 **Linked Test Case:** TC-FR15-NEG-019
-**Attachments:** _(HITL attaches Postman response + DB query confirming orphaned record)_
 
 ---
 
@@ -394,9 +385,9 @@ The API returns HTTP 200 OK. No error message is returned. A product is created 
 **Function Name:** FR-15 Product Management — Create Product (Category Validation)
 **Problem Summary:** The Create Product API accepts a non-integer string as `category_id` (e.g., `"electronics"`) and creates a product, violating the type constraint that category_id must be a valid integer (AMB-04).
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -424,9 +415,8 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Wrong Category Type Product"`, `price = 100000`, `category_id = "electronics"` (string)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/51
 **Linked Test Case:** TC-FR15-NEG-020
-**Attachments:** _(HITL attaches Postman request/response screenshot)_
 
 ---
 
@@ -436,9 +426,9 @@ The API returns HTTP 200 OK (or 201 Created). No error message is returned. A pr
 **Function Name:** FR-15 Product Management — Edit Product (Product ID Validation)
 **Problem Summary:** The Edit Product API (`PUT /api/products/99999`) returns HTTP 200 OK when the product ID in the path does not exist, instead of returning HTTP 404 Not Found. No data is modified but the response code is incorrect, masking the error condition.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -466,9 +456,8 @@ The API returns HTTP 200 OK. No error message is returned. No existing product i
 - App URL: `http://localhost:3000`
 - Test Data: Path: `/api/products/99999` (non-existent product ID), body: `{ "name": "Ghost Product", "price": 100000, "category_id": 1 }`
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/52
 **Linked Test Case:** TC-FR15-NEG-021
-**Attachments:** _(HITL attaches Postman screenshot showing HTTP 200 response for non-existent product ID)_
 
 ---
 
@@ -478,9 +467,9 @@ The API returns HTTP 200 OK. No error message is returned. No existing product i
 **Function Name:** FR-15 Product Management — Delete Product (Product ID Type Validation)
 **Problem Summary:** The Delete Product API (`DELETE /api/products/abc`) returns HTTP 200 OK when the product ID path parameter is a non-integer string (`"abc"`), instead of returning HTTP 400 Bad Request for an invalid path parameter type.
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -506,9 +495,8 @@ The API returns HTTP 200 OK. No error message is returned indicating the invalid
 - App URL: `http://localhost:3000`
 - Test Data: Path: `/api/products/abc` (non-integer string as product ID)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/53
 **Linked Test Case:** TC-FR15-NEG-022
-**Attachments:** _(HITL attaches Postman screenshot showing HTTP 200 response for non-integer path parameter)_
 
 ---
 
@@ -518,9 +506,9 @@ The API returns HTTP 200 OK. No error message is returned indicating the invalid
 **Function Name:** FR-15 Product Management — Product Form GUI Compliance (FR-22)
 **Problem Summary:** The product creation form does not display a required field indicator (`*`) adjacent to any mandatory field label (Product Name, Price, Category), violating the FR-22 requirement that all mandatory fields must be visually marked with an asterisk.
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -547,9 +535,8 @@ None of the mandatory field labels (Product Name, Price, Category) display the r
 - App URL: `http://localhost:5174`
 - Test Data: Visual + DOM inspection only
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/54
 **Linked Test Case:** TC-FR15-NEG-024
-**Attachments:** _(HITL attaches screenshot of form labels showing absence of * indicators + browser devtools DOM view)_
 
 ---
 
@@ -559,9 +546,9 @@ None of the mandatory field labels (Product Name, Price, Category) display the r
 **Function Name:** FR-15 Product Management — Product Form GUI Compliance (FR-22)
 **Problem Summary:** Validation error messages on the product creation form appear below the individual field labels (e.g., below the Name field) rather than above the Submit button, violating the FR-22 requirement that all validation errors must appear above the Submit button.
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -589,9 +576,8 @@ A validation error message appears below the Name field label, not above the Sub
 - App URL: `http://localhost:5174`
 - Test Data: Empty form submission (all fields blank)
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/55
 **Linked Test Case:** TC-FR15-NEG-025
-**Attachments:** _(HITL attaches screenshot showing error message below Name field label, not above Submit button)_
 
 ---
 
@@ -601,9 +587,9 @@ A validation error message appears below the Name field label, not above the Sub
 **Function Name:** FR-15 Product Management — Product Form GUI Compliance (FR-21)
 **Problem Summary:** The Submit / Save button on the product creation form uses a green background colour instead of the blue colour required by FR-21, which specifies that submission/positive-action buttons must be blue.
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -630,9 +616,8 @@ The Submit / Save button uses a green background colour. The button does not con
 - App URL: `http://localhost:5174`
 - Test Data: Visual inspection of product creation form
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/56
 **Linked Test Case:** TC-FR15-NEG-026
-**Attachments:** _(HITL attaches screenshot of the green Submit button with browser devtools showing computed color value)_
 
 ---
 
@@ -642,9 +627,9 @@ The Submit / Save button uses a green background colour. The button does not con
 **Function Name:** FR-15 Product Management — Product Management Page GUI Compliance (FR-21)
 **Problem Summary:** The product management page contains zero `<h1>` elements in the DOM, violating the FR-21 requirement that each page must have exactly one `<h1>` heading tag.
 **Severity:** Medium
-**Priority:** _(set by HITL/PM)_
+**Priority:** Medium
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -671,9 +656,8 @@ The Submit / Save button uses a green background colour. The button does not con
 - App URL: `http://localhost:5174`
 - Test Data: DOM inspection via browser console
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/57
 **Linked Test Case:** TC-FR15-NEG-027
-**Attachments:** _(HITL attaches screenshot of browser console showing `document.querySelectorAll('h1').length` = 0)_
 
 ---
 
@@ -683,9 +667,9 @@ The Submit / Save button uses a green background colour. The button does not con
 **Function Name:** FR-15 Product Management — Delete Product (Confirmation Dialog)
 **Problem Summary:** Clicking the Delete button on the product management list immediately deletes the product without displaying a confirmation dialog, violating the FR-21 / AMB-06 requirement that a confirmation dialog must appear before any deletion is executed.
 **Severity:** Serious
-**Priority:** _(set by HITL/PM)_
+**Priority:** Serious
 **Status:** New
-**Reported By:** Gemini QA Agent + HITL (23127379)
+**Reported By:** Gemini QA Agent + HITL (Thái Minh Huy)
 **Assign To:** Development Team
 
 ### Steps to Reproduce
@@ -713,9 +697,8 @@ After clicking the Delete button, no confirmation dialog appears. The product is
 - App URL: `http://localhost:5174`
 - Test Data: Any existing product in the product management list
 
-**GitHub Issue:** _(HITL must file and link: https://github.com/[repo]/issues/[N])_
+**GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/58
 **Linked Test Case:** TC-FR15-NEG-029
-**Attachments:** _(HITL attaches screen recording showing Delete button click causing immediate deletion with no dialog)_
 
 ---
 

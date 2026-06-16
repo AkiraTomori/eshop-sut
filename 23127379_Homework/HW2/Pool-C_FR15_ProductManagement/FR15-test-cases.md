@@ -54,7 +54,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-007, EC-FR15-012, EC-FR15-019, EC-FR15-023, EC-FR15-026, EC-FR15-050
 **Req. Ref:** FR-15, FR-12, SEC-02, SEC-03
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-001, BUG-FR15-003
 
 **Cleanup:** Delete the created test product "Laptop Gaming ABC" after execution to restore clean state.
 
@@ -97,7 +97,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-007, EC-FR15-012, EC-FR15-018, EC-FR15-022, EC-FR15-026, EC-FR15-050
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-001, BUG-FR15-003
 
 **Cleanup:** Delete the created test product "Basic Product X" after execution.
 
@@ -146,7 +146,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-007, EC-FR15-012, EC-FR15-019, EC-FR15-023, EC-FR15-026, EC-FR15-030, EC-FR15-051, EC-FR15-066
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-003
 
 **Cleanup:** Restore the original values of "Edit Target Product" or delete the product after execution.
 
@@ -187,11 +187,11 @@
   - The API DELETE /api/products/:id returns HTTP 200 OK
   - A success notification is not displayed
   - "Delete Target Product" is no longer present in the product list
-  - All other products remian unchanged in the list 
+  - All other products remain unchanged in the list 
 **Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-030, EC-FR15-048, EC-FR15-052, EC-FR15-066
 **Req. Ref:** FR-15, FR-21
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-017
 
 **Cleanup:** No cleanup needed (product was intentionally deleted as the test action).
 
@@ -235,7 +235,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-030, EC-FR15-048, EC-FR15-067
 **Req. Ref:** FR-15, FR-21
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-017
 
 ---
 
@@ -280,10 +280,11 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-033, EC-FR15-044, EC-FR15-053
 **Req. Ref:** FR-15, FR-05, FR-21
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-003, BUG-FR15-016
 
 ---
 
+### TC-FR15-EP-007
 
 **Test Case ID:** TC-FR15-EP-007
 **Title:** Verify that the product list correctly filters and displays products when a matching search keyword is entered
@@ -314,7 +315,7 @@
 **Status:** Not Run because there is no search keyword in Product Management in Admin
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-034, EC-FR15-053
 **Req. Ref:** FR-15, FR-05
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -348,7 +349,7 @@
 **Status:** Not Run because there is no search keyword in Product Management in Admin
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-035, EC-FR15-053
 **Req. Ref:** FR-15, FR-05
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -385,7 +386,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-001, EC-FR15-005, EC-FR15-030, EC-FR15-054
 **Req. Ref:** FR-15, FR-06
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-003
 
 ---
 
@@ -422,13 +423,13 @@
 **Observed Result:** 
   - Name is required, Price is not required, Category default is "Điện Thoại"
   - The Submit/Save button uses green color
-  - The Delete / Cancle Dangerous Button uses red as expected
+  - The Delete / Cancel Dangerous Button uses red as expected
   - After submitting an empty form, validation error messages don't appear above the submit button nor below
-  - Tab key focues move from top-to-botton, left-to-right through the form fields as expected
+  - Tab key focuses move from top-to-bottom, left-to-right through the form fields as expected
 **Status:** Failed
 **EC Coverage:** EC-FR15-037, EC-FR15-039, EC-FR15-041, EC-FR15-042, EC-FR15-044, EC-FR15-046
 **Req. Ref:** FR-21, FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-015
 
 ---
 
@@ -467,7 +468,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-002, EC-FR15-063
 **Req. Ref:** FR-12, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-005
 
 ---
 
@@ -501,7 +502,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-003, EC-FR15-063
 **Req. Ref:** FR-12, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-005
 
 ---
 
@@ -536,7 +537,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-004, EC-FR15-063
 **Req. Ref:** FR-12, SEC-02
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-005
 
 ---
 
@@ -572,7 +573,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-006, EC-FR15-064
 **Req. Ref:** FR-12, SEC-03
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-005
 
 ---
 
@@ -611,7 +612,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-008, EC-FR15-055
 **Req. Ref:** FR-15, FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-014
 
 ---
 
@@ -649,7 +650,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-009, EC-FR15-056
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** _fill_if_fails_ (Note: Handled by API boundary suite mapping)
 
 ---
 
@@ -686,7 +687,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-010, EC-FR15-056
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** _fill_if_fails_
 
 ---
 
@@ -766,7 +767,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-013, EC-FR15-058
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-001, BUG-FR15-009
 
 ---
 
@@ -804,7 +805,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-014, EC-FR15-058
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-002, BUG-FR15-009
 
 ---
 
@@ -842,7 +843,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-015, EC-FR15-058
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-003, BUG-FR15-009
 
 ---
 
@@ -877,7 +878,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-016, EC-FR15-059
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-004, BUG-FR15-009
 
 ---
 
@@ -912,7 +913,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-017, EC-FR15-057
 **Req. Ref:** FR-15, FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-005, BUG-FR15-009
 
 ---
 
@@ -948,7 +949,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-020
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-006
 
 ---
 
@@ -988,7 +989,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR15-021, EC-FR15-065
 **Req. Ref:** SEC-04
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 **Cleanup:** Delete the test product if it was successfully created.
 
@@ -1025,7 +1026,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-024
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-007
 
 ---
 
@@ -1060,7 +1061,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-025
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-008
 
 ---
 
@@ -1097,7 +1098,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR15-027, EC-FR15-060
 **Req. Ref:** FR-15, FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -1133,7 +1134,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-028, EC-FR15-061
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-009
 
 ---
 
@@ -1168,7 +1169,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-029
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-010
 
 ---
 
@@ -1204,7 +1205,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-031, EC-FR15-062
 **Req. Ref:** FR-15
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-011
 
 ---
 
@@ -1238,7 +1239,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-032
 **Req. Ref:** FR-15, API §3.3
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-012
 
 ---
 
@@ -1272,7 +1273,7 @@
 **Status:** Not Run because search is not displayed in Admin Management
 **EC Coverage:** EC-FR15-036, EC-FR15-065
 **Req. Ref:** SEC-04, FR-05
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -1305,9 +1306,9 @@
 **Observed Result:** 
   - The Product Name label didn't display `*`, neither do Price, Category
 **Status:** Failed
-**EC Coverage:** EC-FR15-038 (verifies absence of the defect described in this EC)
+**EC Coverage:** EC-FR15-038
 **Req. Ref:** FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-013
 
 ---
 
@@ -1340,9 +1341,9 @@
   - There are no validation error messages appered as expected
   - Submit button is still visible but no error messages above it as expected
 **Status:** Failed
-**EC Coverage:** EC-FR15-040 (verifies that this defect condition does NOT occur)
+**EC Coverage:** EC-FR15-040
 **Req. Ref:** FR-22
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-014
 
 ---
 
@@ -1376,9 +1377,9 @@
   - The Submit button is styled with a green background colour
   - No red button is used for a non-dangerous positive action as expected
 **Status:** Failed
-**EC Coverage:** EC-FR15-041, EC-FR15-042, EC-FR15-043
+**EC Coverage:** EC-FR15-043
 **Req. Ref:** FR-21
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-015
 
 ---
 
@@ -1411,9 +1412,9 @@
   - The DOM query returns `0`
   - No `<h1>` tag exists on the page
 **Status:** Failed
-**EC Coverage:** EC-FR15-044, EC-FR15-045
+**EC Coverage:** EC-FR15-045
 **Req. Ref:** FR-21
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-016
 
 ---
 
@@ -1446,7 +1447,7 @@
 **Status:** Passed
 **EC Coverage:** EC-FR15-046, EC-FR15-047
 **Req. Ref:** FR-21
-**Bug ID:** _(fill if fails)_
+**Bug ID:** None
 
 ---
 
@@ -1480,9 +1481,9 @@
   - After Clicking delete, there is no confirmation dialog appears asking the admin to confirm the deletion as expected
   - The product after that will disappear
 **Status:** Failed
-**EC Coverage:** EC-FR15-048, EC-FR15-049
+**EC Coverage:** EC-FR15-049
 **Req. Ref:** FR-21
-**Bug ID:** _(fill if fails)_
+**Bug ID:** BUG-FR15-017
 
 ---
 
@@ -1618,11 +1619,9 @@
 **EC Coverage:** EC-FR15-007
 **BVA Points:** BV-02 (VALID), BV-03 (VALID)
 **Req. Ref:** FR-15
-**Bug ID:** _fill_if_fail_
+**Bug ID:** BUG-FR15-001
 **Cleanup:** Delete test products "A" and "AB" after execution.
-
---- 
-
+---
 #### TC-FR15-BV-002
 **Test Case ID:** TC-FR15-BV-002
 **Title:** Verify that product creation succeeds with a product name of exactly 254 characters (UB-1) and exactly 255 characters (UB)
@@ -1637,11 +1636,9 @@
 **EC Coverage:** EC-FR15-007
 **BVA Points:** BV-04 (VALID), BV-05 (VALID)
 **Req. Ref:** FR-15
-**Bug ID:** _fill_if_fail_
+**Bug ID:** BUG-FR15-001
 **Cleanup:** Delete both generated text items.
-
---- 
-
+---
 #### TC-FR15-BV-003
 **Test Case ID:** TC-FR15-BV-003
 **Title:** Verify that product creation fails when the product name is exactly 256 characters (UB+1 — Integrated API & Database Truncation Check — HVF-01 Core Probe)
@@ -1662,7 +1659,7 @@
 **EC Coverage:** EC-FR15-009, EC-FR15-010
 **BVA Points:** BV-06 (INVALID), BV-08 (INVALID), BV-09 (INVALID)
 **Req. Ref:** FR-15
-**Bug ID:** _fill_if_fail_
+**Bug ID:** BUG-FR15-008
 
 ---
 ### SECTION B — Price Boundary Tests
@@ -1679,10 +1676,8 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-014
 **BVA Point:** BV-10 (INVALID)
-**Bug ID:** _fill_if_fail_
-
----
-
+**Bug ID:** BUG-FR15-002, BUG-FR15-009
+--- 
 #### TC-FR15-BV-005
 **Test Case ID:** TC-FR15-BV-005
 **Title:** Verify that the Create Product API rejects the request when price is exactly 0 (Forbidden Boundary Value)
@@ -1695,10 +1690,8 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-013
 **BVA Point:** BV-11 (INVALID)
-**Bug ID:** _fill_if_fail_
-
----
-
+**Bug ID:** BUG-FR15-001, BUG-FR15-009
+--- 
 #### TC-FR15-BV-006
 **Test Case ID:** TC-FR15-BV-006
 **Title:** Verify that product creation succeeds when price is exactly 1 (LB) and exactly 2 (LB+1)
@@ -1712,10 +1705,8 @@
 **Status:** Failed (due to response code)
 **EC Coverage:** EC-FR15-012
 **BVA Points:** BV-12 (VALID), BV-13 (VALID)
-**Bug ID:** _fill_if_fail_
-
----
-
+**Bug ID:** BUG-FR15-001
+--- 
 #### TC-FR15-BV-007
 **Test Case ID:** TC-FR15-BV-007
 **Title:** Verify that product creation succeeds with large price values at the 9-digit practical UI upper boundary (UB-1 and UB)
@@ -1729,10 +1720,8 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-012
 **BVA Points:** BV-14 (VALID), BV-15 (VALID)
-**Bug ID:** _fill_if_fail_
-
---- 
-
+**Bug ID:** BUG-FR15-003
+---
 #### TC-FR15-BV-008
 **Test Case ID:** TC-FR15-BV-008
 **Title:** Verify that product creation succeeds with price at 1,000,000,000 ₫ (10-digit threshold practical probe)
@@ -1745,10 +1734,8 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-012
 **BVA Point:** BV-16 (VALID)
-**Bug ID:** _fill_if_fail_
-
----
-
+**Bug ID:** BUG-FR15-003
+--- 
 #### TC-FR15-BV-009
 **Test Case ID:** TC-FR15-BV-009
 **Title:** Verify that product creation fails when price is 0.5 (Float below LB)
@@ -1761,7 +1748,9 @@
 **Status:** Failed (due to empty validation message)
 **EC Coverage:** EC-FR15-015
 **BVA Point:** BV-17 (INVALID)
-**Bug ID:** _fill_if_fail_
+**Bug ID:** BUG-FR15-002
+
+---
 
 #### TC-FR15-BV-010
 **Test Case ID:** TC-FR15-BV-010
@@ -1775,7 +1764,7 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-015
 **BVA Point:** BV-18 (INVALID)
-**Bug ID:** _fill_if_fail_
+**Bug ID:** BUG-FR15-003, BUG-FR15-009
 
 ---
 ### SECTION C — Description Boundary Tests
@@ -1793,10 +1782,8 @@
 **Status:** Failed (due to response code)
 **EC Coverage:** EC-FR15-018, EC-FR15-019
 **BVA Points:** BV-19 (VALID), BV-20 (VALID)
-**Bug ID:** _fill_if_fail_
-
----
-
+**Bug ID:** BUG-FR15-001
+--- 
 #### TC-FR15-BV-012
 **Test Case ID:** TC-FR15-BV-012
 **Title:** Verify that product creation succeeds with a description of exactly 999 characters (UB-1) and exactly 1000 characters (UB)
@@ -1810,12 +1797,11 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-019
 **BVA Points:** BV-21 (VALID), BV-22 (VALID)
-**Bug ID:** _fill_if_fail_
-
----
+**Bug ID:** BUG-FR15-001
+--- 
 
 #### TC-FR15-BV-013
-**Test Case ID:** TC-FR15-BV-014
+**Test Case ID:** TC-FR15-BV-013
 **Title:** Verify that the API independently rejects a 1001-character description sent directly without UI interception (DB Boundary Bypass — HVF-03 Core Probe)
 **Description:** BVA database boundary probe testing application layer clamping. Bypasses UI textareas using Postman to verify that the Express server enforces the 1000-char safety boundary before sending text data to the unbounded SQLite TEXT column. Maps to BV-23 and BV-24.
 **Priority:** Medium
@@ -1833,7 +1819,7 @@
 **EC Coverage:** EC-FR15-020
 **BVA Points:** BV-23 (INVALID), BV-24 (INVALID)
 **Req. Ref:** FR-15
-**Bug ID:** _fill_if_fail_
+**Bug ID:** BUG-FR15-006
 
 ---
 ### SECTION D — Product ID Path Parameter Boundary Tests
@@ -1851,9 +1837,8 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-030, EC-FR15-031
 **BVA Points:** BV-25 (VALID), BV-26 (INVALID)
-**Bug ID:** _fill_if_fail_
-
----
+**Bug ID:** BUG-FR15-011
+--- 
 
 #### TC-FR15-BV-015
 **Test Case ID:** TC-FR15-BV-015
@@ -1868,8 +1853,8 @@
 **Status:** Failed
 **EC Coverage:** EC-FR15-031, EC-FR15-032
 **BVA Points:** BV-27 (INVALID), BV-28 (INVALID)
-**Bug ID:** _fill_if_fail_
----
+**Bug ID:** BUG-FR15-012
+--- 
 
 ## Updated Coverage Matrix (Full — EP + NEG + BV)
 

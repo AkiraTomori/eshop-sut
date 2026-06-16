@@ -113,5 +113,5 @@
   - **5 GUI Compliance bugs (BUG-FR15-013 to 017):** Missing * indicators (FR-22), wrong error position (FR-22), Submit button green not blue (FR-21), zero h1 tags (FR-21), no delete confirmation dialog (FR-21/AMB-06). Medium/Serious.
   - **Bug summary table** produced with all 17 BUG IDs, linked TCs, severities, and short problem summaries.
   - **Self-audit checklist** passed: one defect per report, all fields complete, GitHub Issue placeholders present (P-09), professional language, severity set by QA.
-- **Human Review Notes:** [HITL must: (1) file GitHub Issues for each of the 17 bugs; (2) paste the GitHub Issue URLs into the Bug Report file; (3) attach screenshots/recordings for each bug; (4) confirm severity assignments are appropriate; (5) set Priority for each bug as PM/PO decision]
-- **Verdict:** [ ] Accepted / [ ] Partially Accepted / [ ] Rejected
+- **Human Review Notes:** Verified all 17 Bugs-id, Issues, link bug-id for failed testcase
+- **Verdict:** [X] Accepted / [ ] Partially Accepted / [ ] Rejected
