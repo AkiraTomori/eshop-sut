@@ -1913,8 +1913,8 @@
 |------|-------|----------|
 | EP (valid equivalence partitions) | 10 | TC-FR15-EP-001 to EP-010 |
 | NEG (invalid equivalence partitions) | 29 | TC-FR15-NEG-001 to NEG-029 |
-| BV (boundary value analysis) | 21 | TC-FR15-BV-001 to BV-021 |
-| **TOTAL** | **60** | |
+| BV (boundary value analysis) | 15 | TC-FR15-BV-001 to BV-015 |
+| **TOTAL** | **54** | |
 
 ---
 
