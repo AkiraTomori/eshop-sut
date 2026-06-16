@@ -53,7 +53,6 @@ Per FR-06: The product detail page must display all 5 required fields — image,
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/1
 **Linked Test Case:** TC-FR06-EP-001, TC-FR06-BV-001, TC-FR06-BV-002
-**Attachments:** ![Screenshot](./Issues/1.png)
 
 ---
 
@@ -99,7 +98,6 @@ The cart displays product id=1 as **two separate rows**: one with quantity = 2 (
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/2
 **Linked Test Case:** TC-FR06-EP-004
-**Attachments:** ![Screenshot](./Issues/2.png)
 
 ---
 
@@ -184,7 +182,6 @@ The system did not reject quantity = `-1`. The product was added to the cart wit
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/4
 **Linked Test Case:** TC-FR06-NEG-007
-**Attachments:** ![Screenshot](./Issues/4.png)
 
 ---
 
@@ -227,7 +224,6 @@ The system accepted `1.5` without displaying any error. The decimal value was si
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/5
 **Linked Test Case:** TC-FR06-NEG-008
-**Attachments:** ![Screenshot](./Issues/5.png)
 
 ---
 
@@ -270,7 +266,6 @@ The system did not reject the non-numeric input. Despite `input type="number"` o
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/6
 **Linked Test Case:** TC-FR06-NEG-009
-**Attachments:** ![Screenshot](./Issues/6.png)
 
 ---
 
@@ -314,7 +309,6 @@ The system did not reject the empty quantity field. The product was added to the
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/7
 **Linked Test Case:** TC-FR06-NEG-010
-**Attachments:** ![Screenshot](./Issues/7.png)
 
 ---
 
@@ -357,7 +351,6 @@ The system accepted quantity = `999999999` without any error or rejection. The p
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/8
 **Linked Test Case:** TC-FR06-NEG-011
-**Attachments:** ![Screenshot](./Issues/8.png)
 
 ---
 
@@ -401,7 +394,6 @@ The system did not block the add-to-cart action. Despite the user being unauthen
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/9
 **Linked Test Case:** TC-FR06-NEG-012
-**Attachments:** ![Screenshot](./Issues/9.png)
 
 ---
 
@@ -455,7 +447,6 @@ The API returned a success response and added the non-existent product (id=99999
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/10
 **Linked Test Case:** TC-FR06-NEG-013
-**Attachments:** ![Screenshot](./Issues/10.png)
 
 ---
 
@@ -511,7 +502,6 @@ The API accepted the request and added the product to the cart with `price = 0`.
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/11
 **Linked Test Case:** TC-FR06-NEG-014
-**Attachments:** ![Screenshot](./Issues/11.png)
 
 ---
 
@@ -566,7 +556,6 @@ The API accepted the request and added the product to the cart with `price = -10
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/12
 **Linked Test Case:** TC-FR06-NEG-015
-**Attachments:** ![Screenshot](./Issues/12.png)
 
 ---
 
@@ -620,7 +609,6 @@ The API accepted the request and added the product to the cart with `quantity = 
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/13
 **Linked Test Case:** TC-FR06-NEG-016
-**Attachments:** ![Screenshot](./Issues/13.png)
 
 ---
 
@@ -674,7 +662,6 @@ The API accepted the request and added the product to the cart with `quantity = 
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/14
 **Linked Test Case:** TC-FR06-NEG-017
-**Attachments:** ![Screenshot](./Issues/14.png)
 
 ---
 
@@ -730,7 +717,6 @@ The API accepted `price=1` and stored it in the cart. The checkout flow processe
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/15
 **Linked Test Case:** TC-FR06-NEG-018
-**Attachments:** ![Screenshot](./Issues/15.png)
 
 ---
 
@@ -771,7 +757,6 @@ The category name field is absent from the product detail page for id=1. Only 4 
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/16
 **Linked Test Case:** TC-FR06-BV-001
-**Attachments:** ![Screenshot](./Issues/16.png)
 
 ---
 
@@ -812,7 +797,6 @@ The category name field is absent from the product detail page for id=2. Only 4 
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/17
 **Linked Test Case:** TC-FR06-BV-002
-**Attachments:** ![Screenshot](./Issues/17.png)
 
 ---
 
@@ -867,7 +851,6 @@ The API returned a success response and stored `price=1` in the cart. No price v
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/18
 **Linked Test Case:** TC-FR06-BV-006
-**Attachments:** ![Screenshot](./Issues/18.png)
 
 ---
 
@@ -921,7 +904,6 @@ The API accepted the request and stored `quantity = -1` in the cart. No boundary
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/19
 **Linked Test Case:** TC-FR06-BV-007
-**Attachments:** ![Screenshot](./Issues/19.png)
 
 ---
 
@@ -978,7 +960,6 @@ The API accepted `quantity=999999999` without rejection. The `GET /api/cart` API
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/20
 **Linked Test Case:** TC-FR06-BV-008
-**Attachments:** ![Screenshot](./Issues/20.png)
 
 ---
 

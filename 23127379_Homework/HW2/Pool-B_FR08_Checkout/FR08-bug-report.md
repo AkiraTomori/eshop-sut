@@ -46,7 +46,6 @@ There are **zero `<h1>` elements** on the checkout page. The page heading is imp
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/21
 **Linked Test Cases:** TC-FR08-EP-001, TC-FR08-NEG-007
-**Attachments:** ![Screenshot](./Issues/1.png)
 
 ---
 
@@ -87,7 +86,6 @@ The button is rendered in **green** (not blue). The observed color does not matc
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/22
 **Linked Test Cases:** TC-FR08-EP-001, TC-FR08-NEG-007
-**Attachments:** ![Screenshot](./Issues/2.png)
 
 ---
 
@@ -130,7 +128,6 @@ After a successful order placement, the cart **still shows the previously ordere
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/23
 **Linked Test Cases:** TC-FR08-EP-001
-**Attachments:** ![Screenshot](./Issues/3.png)
 
 ---
 
@@ -169,7 +166,6 @@ No breadcrumb navigation is visible anywhere on the checkout page. The page does
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/25
 **Linked Test Cases:** TC-FR08-EP-003
-**Attachments:** ![Screenshot](./Issues/5.png)
 
 ---
 
@@ -213,7 +209,6 @@ When the "Đặt hàng" button is clicked with an empty shipping address field:
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/26
 **Linked Test Cases:** TC-FR08-NEG-004, TC-FR08-NEG-006, TC-FR08-BV-005
-**Attachments:** ![Screenshot](./Issues/6.png)
 
 > **Note:** This defect also reproduces with a whitespace-only address (`"     "`) — see TC-FR08-NEG-006. Both empty and whitespace-only inputs fail to trigger validation. The root cause is likely a single missing validation rule in the frontend and/or backend input processing.
 
@@ -258,7 +253,6 @@ The API returns **HTTP 200 OK**. An order is created in the database with the sh
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/27
 **Linked Test Cases:** TC-FR08-NEG-004, TC-FR08-NEG-006, TC-FR08-BV-005
-**Attachments:** ![Screenshot](./Issues/7.png)
 
 > **Note:** BUG-FR08-006 (no frontend error message) and BUG-FR08-007 (no backend validation) are separate defects. BUG-FR08-006 is a UI/frontend gap; BUG-FR08-007 is a backend/API gap. Both must be fixed independently.
 
@@ -303,7 +297,6 @@ The API returns **HTTP 200 OK**. The order is created with `total_amount = 1 ₫
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/28
 **Linked Test Cases:** TC-FR08-NEG-005
-**Attachments:** ![Screenshot](./Issues/8.png)
 
 > ⚠️ **Security Escalation Required (TR-BP-09):** This is a Fatal security defect — price tampering vulnerability. Per senior QA best practice, this defect must be **escalated immediately** to the team lead or security officer and must not be deferred. The checkout endpoint must be patched before any production deployment.
 
@@ -359,7 +352,6 @@ The system accepts the 256-character address without any error. An order is crea
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/29
 **Linked Test Cases:** TC-FR08-BV-006, TC-FR08-BV-007
-**Attachments:** ![Screenshot](./Issues/9.png)
 
 ---
 

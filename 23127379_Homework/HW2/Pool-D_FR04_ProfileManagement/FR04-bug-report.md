@@ -95,7 +95,6 @@ The server returns **HTTP 403 Forbidden** instead of HTTP 401 Unauthorized. The 
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/33
 **Linked Test Case:** TC-FR04-NEG-002
-**Attachments:** ![Screenshot](./Issues/2.png)
 
 ---
 ## Bug Report: BUG-FR04-003
@@ -141,7 +140,6 @@ The server returns **HTTP 200 OK** and successfully updates the user profile in 
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/34
 **Linked Test Case:** TC-FR04-NEG-003
-**Attachments:** ![Screenshot](./Issues/3.png)
 
 ---
 ## Bug Report: BUG-FR04-004
@@ -185,7 +183,6 @@ The server returns **HTTP 200 OK**. A subsequent `GET /api/users/me` confirms th
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/35
 **Linked Test Case:** TC-FR04-NEG-004
-**Attachments:** ![Screenshot](./Issues/4.png)
 
 ---
 ## Bug Report: BUG-FR04-005
@@ -230,7 +227,6 @@ The server returns **HTTP 200 OK**. A subsequent `GET /api/users/me` confirms th
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/36
 **Linked Test Cases:** TC-FR04-NEG-005, TC-FR04-BV-005
-**Attachments:** ![Screenshot](./Issues/5.png)
 
 ---
 ## Bug Report: BUG-FR04-006
@@ -274,7 +270,6 @@ The server returns **HTTP 200 OK**. The database state is changed (phone and add
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/37
 **Linked Test Case:** TC-FR04-NEG-006
-**Attachments:** ![Screenshot](./Issues/6.png)
 
 ---
 ## Bug Report: BUG-FR04-007
@@ -320,7 +315,6 @@ Neither the mobile UI nor the API rejects the phone number. No error message is 
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/38
 **Linked Test Case:** TC-FR04-NEG-007
-**Attachments:** ![Screenshot](./Issues/7.png)
 
 ---
 ## Bug Report: BUG-FR04-008
@@ -377,7 +371,6 @@ Both scenarios reproduced consistently across 2 attempts from a clean state.
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/39
 **Linked Test Cases:** TC-FR04-NEG-010, TC-FR04-BV-009
-**Attachments:** ![Screenshot](./Issues/8.png)
 
 ---
 ## Bug Report: BUG-FR04-009
@@ -430,7 +423,6 @@ The API returns **HTTP 200 OK**. A subsequent `GET /api/users/me` confirms `role
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/40
 **Linked Test Case:** TC-FR04-NEG-013
-**Attachments:** ![Screenshot](./Issues/9.png)
 
 ---
 ## Bug Report: BUG-FR04-010
@@ -475,7 +467,6 @@ The server returns **HTTP 200 OK**. A subsequent `GET /api/users/me` confirms th
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/41
 **Linked Test Cases:** TC-FR04-NEG-011, TC-FR04-BV-014
-**Attachments:** ![Screenshot](./Issues/10.png)
 
 ---
 
