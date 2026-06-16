@@ -51,7 +51,6 @@ The mobile UI displays a validation error message: **"Lỗi, Số điện thoạ
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/32
 **Linked Test Cases:** TC-FR04-EP-001, TC-FR04-EP-002, TC-FR04-EP-003, TC-FR04-NEG-008, TC-FR04-NEG-009, TC-FR04-BV-006
-**Attachments:** ![Screenshot](./Issues/1.png)
 
 ---
 ## Bug Report: BUG-FR04-002
