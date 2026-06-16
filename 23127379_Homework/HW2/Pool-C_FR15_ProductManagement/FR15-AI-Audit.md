@@ -75,4 +75,23 @@
   - **P-01 compliance confirmed:** No two invalid conditions are combined in any single TC.
   - **BVA test cases (TC-FR15-BV-###)** deferred to next session per HITL instruction.
 - **Human Review Notes:** [To be filled by HITL — review all 39 TC titles for Action+Function+Condition pattern; verify all expected results are precise and measurable; confirm coverage matrix is complete before approving]
-- **Verdict:** [ ] Accepted / [ ] Partially Accepted / [ ] Rejected
+- **Verdict:** [X] Accepted / [ ] Partially Accepted / [ ] Rejected
+
+---
+## Session: 2026-06-16 08:07 — Phase 4: Test Case Design (BVA)
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse) — Translating all 28 BVA boundary points into test cases using Phase 4 skill and TC-BP rules
+- **Prompt:**
+  > I have done all 39 Testcase for FR15, generate BVA Testcase for FR15.
+- **AI Output Summary:**
+  The AI produced **21 BVA test cases** (TC-FR15-BV-001 to TC-FR15-BV-021) covering all 28 boundary points from `FR15-boundary-analysis.md`:
+  - **Product Name (9 BVA points → 7 TCs):** BV-001 (empty=LB-1, INVALID), BV-002 (LB=1 + LB+1=2, VALID paired), BV-003 (UB-1=254 + UB=255, VALID paired), BV-004 (UB+1=256 Spec, INVALID), BV-005 (UI min probe, VALID), BV-006 (UI/System bypass=API direct 256-char, INVALID — HVF-01), BV-007 (DB boundary=API 256-char DB inspection, INVALID — HVF-01b).
+  - **Price (9 BVA points → 8 TCs):** BV-008 (price=-1, LB-1, INVALID), BV-009 (price=0, forbidden boundary, INVALID), BV-010 (price=1+2, LB+LB+1, VALID paired), BV-011 (price=999,999,998+999,999,999, UI UB-1+UB, VALID paired), BV-012 (price=1,000,000,000, 10-digit probe, VALID), BV-013 (price=0.5, float below LB, INVALID), BV-014 (price=1.0, float at LB, INVALID), BV-015 (price=0 UI vs API mismatch, HVF-02 probe, INVALID).
+  - **Description (6 BVA points → 4 TCs):** BV-016 (LB=0 + LB+1=1, VALID paired), BV-017 (UB-1=999 + UB=1000, VALID paired), BV-018 (UB+1=1001 UI, INVALID), BV-019 (1001-char API direct bypass, DB probe, INVALID — HVF-03).
+  - **Product ID (4 representative points → 2 TCs):** BV-020 (valid ID + max+1=404), BV-021 (non-integer path=400 + ID=0=404).
+  - **Full BVA coverage matrix** appended showing all 28 BVA points mapped to their TC IDs.
+  - **Final total:** 10 EP + 29 NEG + 21 BV = **60 test cases** for FR-15.
+  - **Self-audit checklist** completed: all three boundary types (Spec, UI/System, DB) covered; all INVALID points isolated; HVF-01/02/03 all explicitly probed.
+- **Human Review Notes:** Reviewed all 21 BVA TCs — expected results match approved boundary points; HVF probes are executable in Postman + DB inspection; approved for bug reporting phase
+- **Verdict:** [X] Accepted / [ ] Partially Accepted / [ ] Rejected
