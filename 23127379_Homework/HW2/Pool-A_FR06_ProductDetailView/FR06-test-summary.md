@@ -8,9 +8,9 @@
 | Type | Total | Passed | Failed | Blocked | Skipped | Not Run | Pass Rate |
 |------|-------|--------|--------|---------|---------|---------|-----------|
 | EP (Equivalence) | 4 | 2 | 2 | 0 | 0 | 0 | 50.0% |
-| BV (Boundary) | 8 | 3 | 5 | 0 | 0 | 0 | 37.5% |
+| BV (Boundary) | 9 | 3 | 6 | 0 | 0 | 0 | 33.3% |
 | NEG (Invalid) | 18 | 5 | 13 | 0 | 0 | 0 | 27.8% |
-| **TOTAL** | 30 | 10 | 20 | 0 | 0 | 0 | 33.3% |
+| **TOTAL** | 31 | 10 | 21 | 0 | 0 | 0 | 32.3% |
 
 ## Defect Summary
 

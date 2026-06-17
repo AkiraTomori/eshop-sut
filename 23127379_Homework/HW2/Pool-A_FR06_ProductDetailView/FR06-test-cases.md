@@ -813,31 +813,60 @@
 ### TC-FR06-BV-008
 
 **Test Case ID:** TC-FR06-BV-008
-**Title:** Verify that API handles extremely large quantity (999999999) as stress test via direct API call
-**Description:** Tests the database practical limit for quantity. BVA point: DB boundary. HITL classified this as an API negative stress test.
+**Title:** Verify that quantity field handles an extremely large integer value on the UI input form (UI Upper Boundary Probe)
+**Description:** BVA UI/System boundary probe. Tests the frontend browser input behavior when an extreme value (999,999,999) is typed inside the input box element to verify client-side validation containment. Maps to UI practical limit.
 **Priority:** Low
 **Pre-conditions:**
-  - EShop backend is running
-  - User is logged in (valid JWT token)
-  - Product id=1 exists (price = 30000000)
+  1. EShop frontend is active at `http://localhost:5173`.
+  2. A valid product row exists inside database context (product id=1).
 **Steps:**
-  1. Obtain a valid JWT token
-  2. Send `POST /api/cart` with body: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 999999999}`
-  3. Include `Authorization: Bearer <token>` header
-  4. Observe the API response
-  5. If accepted, check cart total (30000000 × 999999999 = ~3 × 10^16 — potential overflow)
-**Test Data:**
-  - Input: `{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 999999999}`
-  - Expected Output: Rejection, or if accepted, correct total without overflow
-**Expected Result:** The API either: (a) rejects the extremely large quantity with an error, or (b) if accepted, the cart total (approximately 99,999,999,900,000 ₫) calculates without integer overflow or NaN. No 500 server error.
-**Observed Result:** The API didn't reject the extremely large quantiy with an error, it still accepted but the tester doesn't have a way to check to sum in API, the closest API required tester to calculate by hand with calculator
+  1. Navigate to the product detail page at `http://localhost:5173/product/1`.
+  2. Locate the quantity text input field.
+  3. Clear the box area field and type exactly `999999999`.
+  4. Click the visual "Add to Cart" control button.
+  5. Inspect if the browser UI or frontend code introduces any blocking error warning nodes.
+**Test Data:** `product_id = 1`, `quantity = 999999999`
+**Expected Result:** The system frontend should intercept the action, displaying a clear validation error warning explaining that the quantity exceeds a practical purchase limit, preventing submission.
+**Observed Result:** Broken frontend guardrail. The UI input element accepts the value `999999999` without displaying any error, restriction, or upper-bound validation warning layout message.
 **Status:** Failed
-**EC Coverage:** EC-FR06-013, EC-FR06-021
-**Req. Ref:** FR-06, API §4.2
-**Bug ID:** BUG-FR06-020
-**Cleanup:** Remove item from cart after test.
+**EC Coverage:** EC-FR06-013
+**BVA Point:** Quantity UI/System Practical Limit (INVALID per boundary policy)
+**Req. Ref:** FR-06, FR-24
+**Bug ID:** BUG-FR06-008
 
 ---
+
+### TC-FR06-BV-009
+**Test Case ID:** TC-FR06-BV-009
+**Title:** Verify that API handles cart requests with an extremely large quantity parameter as a server-side stress test (DB Boundary Bypass — HVF-03 / BUG-FR06-020 Core Probe)
+**Description:** BVA database stress probe evaluating integer handling inside backend containers. Bypasses the browser UI via direct Postman execution to monitor server-side calculation filters and check for potential data overflow bugs.
+**Priority:** Low
+**Pre-conditions:**
+  1. EShop backend server container is running at `http://localhost:3000`.
+  2. User session is authenticated with a valid JWT token active.
+**Steps:**
+  1. Open Postman and configure a network path routing packet directed at `POST /api/cart`.
+  2. Provide a valid Authorization bearer token parameter inside header nodes.
+  3. Configure request body payload injecting an extreme 9-digit numerical string integer:
+```json
+     {
+       "id": 1,
+       "name": "iPhone 15 Pro Max",
+       "price": 30000000,
+       "quantity": 999999999
+     }
+```
+  4. Send packet array stream and evaluate the HTTP response status container.
+  5. Fire a follow-up query packet calling `GET /api/cart` to evaluate if calculations caused an overflow defect.
+
+**Test Data:** `product_id = 1`, `price = 30000000`, `quantity = 999999999`
+**Expected Result:** The server independent middleware should reject the raw entry payload with an HTTP 400 Bad Request to protect arithmetic calculations, or ensure the total amount calculates safely with no overflow leaks.
+**Observed Result:** The API didn't reject the extreme request payload with an error code, returning an HTTP 200 OK. The row was accepted, but the backend lacks a pre-calculated total sum variable, forcing the tester to calculate numbers by hand.
+**Status:** Failed
+**EC Coverage:** EC-FR06-021
+**BVA Point:** Quantity Database Extreme Practical Boundary (INVALID per missing system requirement verification)
+**Req. Ref:** FR-06, API §4.2
+**Bug ID:** BUG-FR06-020
 
 ## Coverage Matrix
 
@@ -888,7 +917,7 @@
 [x] Every FR-XX requirement referenced → FR-06, FR-07, FR-15, FR-21, FR-23, FR-24, SEC-02, SEC-04
 ```
 
-**Total:** 4 EP test cases + 18 NEG test cases + 8 BV test cases = **30 test cases**
+**Total:** 4 EP test cases + 18 NEG test cases + 9 BV test cases = **31 test cases**
 
 ---
 
@@ -906,4 +935,4 @@
 
 ---
 
-**HITL Review:** Accepted
+**HITL Review:** Accepted (Second Reviewed: 17-06-2025: Separate TC-FR06-BV008 to two separate testcase)
