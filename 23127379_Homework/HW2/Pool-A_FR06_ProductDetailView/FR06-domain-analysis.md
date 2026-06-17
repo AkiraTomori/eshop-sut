@@ -78,7 +78,7 @@
 |-------|----------|-------------------------------|------|-------------|----------------|
 | EC-FR06-028 | Breadcrumbs | Breadcrumb navigation is displayed on the Product Detail sub-page | VALID OUTPUT | G3 (must-be: breadcrumbs required on sub-pages) | FR-23 |
 | EC-FR06-029 | Page `<h1>` | Exactly **one `<h1>` tag** present on the page, describing page content | VALID OUTPUT | G3 (must-be: exactly 1 `<h1>`) | FR-21 |
-| EC-FR06-030 | Language | Entire interface displayed in English (except standard technical terms) | VALID OUTPUT | G3 (must-be: English) | FR-21 |
+| EC-FR06-030 | Language | Entire interface displayed in Vietnamese (except standard technical terms) | VALID OUTPUT | G3 (must-be: Vietnamese) | FR-21 |
 | EC-FR06-031 | Button Color | Add to Cart button uses **blue** colour (positive action) | VALID OUTPUT | G3 (must-be: blue for positive actions) | FR-21 |
 | EC-FR06-032 | Tab Order | Focus order via Tab key follows top-to-bottom, left-to-right sequence | VALID OUTPUT | G3 (must-be: correct tab order) | FR-21 |
 | EC-FR06-033 | Image `alt` | Product image has a **non-empty `alt` attribute** describing the image content | VALID OUTPUT | G3 (must-be: non-empty alt) | FR-24 |
