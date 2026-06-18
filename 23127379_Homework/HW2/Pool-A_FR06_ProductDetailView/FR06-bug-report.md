@@ -140,7 +140,6 @@ The system did not reject quantity = `0`. The product was added to the cart with
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/3
 **Linked Test Case:** TC-FR06-NEG-006
-**Attachments:** ![Screenshot](./Issues/3.png)
 
 ---
 
