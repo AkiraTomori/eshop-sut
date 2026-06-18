@@ -44,7 +44,7 @@ The mobile UI displays a validation error message: **"Lỗi, Số điện thoạ
 **Root Cause (Suspected):** The client-side validation regex in the mobile app enforces `length >= 9 && length <= 10` instead of `length >= 10 && length <= 11`. The off-by-one error in the allowed range means all SRS-valid phones are rejected and 9-digit phones (which should be invalid) are incorrectly accepted by the UI validation rule (though subsequently the error message is still shown, which is also wrong).
 
 **Environment:**
-- OS: Android (mobile device / emulator)
+- OS: iOS (mobile device / emulator)
 - App: EShop Mobile App (React Native + Expo)
 - Backend: Node.js + Express at `http://localhost:3000`
 - Test Data: `phone = "0912345678"` (10 digits), `phone = "01234567890"` (11 digits), `phone = ""`
@@ -88,7 +88,7 @@ The server returns **HTTP 403 Forbidden** instead of HTTP 401 Unauthorized. The 
 **Root Cause (Suspected):** The authentication middleware uses HTTP 403 for all token-related rejections without distinguishing between "not authenticated" (401) and "authenticated but not authorized" (403). RFC 7235 defines 401 for authentication failure and 403 for authorization failure — these are different semantics.
 
 **Environment:**
-- OS: macOS (Postman desktop client)
+- OS: macOS Tahoe 26.1 (Postman desktop client)
 - API Endpoint: `PUT http://localhost:3000/api/users/me`
 - Test Data: `Authorization: Bearer thisisnotavalidjwt`
 
@@ -133,7 +133,7 @@ The server returns **HTTP 200 OK** and successfully updates the user profile in 
 **Security Impact:** This is a **Fatal** defect. An attacker in possession of a stolen or leaked JWT token can continue to access and modify user profile data indefinitely, even after the token has expired — effectively making the token non-revocable by expiry. This defeats the purpose of JWT token expiration as a security control.
 
 **Environment:**
-- OS: macOS (Postman desktop client)
+- OS: macOS Tahoe 26.1 (Postman desktop client)
 - API Endpoint: `PUT http://localhost:3000/api/users/me`
 - Test Data: `Authorization: Bearer <expired_jwt_token>` (token with past `exp` claim)
 
@@ -176,7 +176,7 @@ Per FR-04 and FR-01, the `name` field is mandatory. The server must reject a req
 The server returns **HTTP 200 OK**. A subsequent `GET /api/users/me` confirms the stored name has been updated to an empty string `""`. The database record is corrupted — the user account now has a blank display name. Reproduced consistently across 2 attempts from a clean state.
 
 **Environment:**
-- OS: macOS (Postman desktop client)
+- OS: macOS Tahoe 26.1 (Postman desktop client)
 - API Endpoint: `PUT http://localhost:3000/api/users/me`
 - Test Data: `{"name": "", "phone": "0912345678", "shipping_address": "Test Address"}`
 
@@ -220,7 +220,7 @@ The server must reject the request with **HTTP 400 Bad Request** and an error me
 The server returns **HTTP 200 OK**. A subsequent `GET /api/users/me` confirms the full 256-character string is stored in the database without truncation. No error or warning is returned. The same behaviour was observed with names significantly longer than 255 characters (TC-FR04-BV-005). Reproduced consistently across 2 attempts.
 
 **Environment:**
-- OS: macOS (Postman desktop client)
+- OS: macOS Tahoe 26.1 (Postman desktop client)
 - API Endpoint: `PUT http://localhost:3000/api/users/me`
 - Test Data: `{"name": "A" × 256, "phone": "0912345678", "shipping_address": "Test Address"}`
 
@@ -263,7 +263,7 @@ Per FR-04, `name` is a mandatory field. The server must reject a request where t
 The server returns **HTTP 200 OK**. The database state is changed (phone and address are updated). The missing mandatory `name` field is not enforced at the API validation layer. Reproduced consistently across 2 attempts.
 
 **Environment:**
-- OS: macOS (Postman desktop client)
+- OS: macOS Tahoe 26.1 (Postman desktop client)
 - API Endpoint: `PUT http://localhost:3000/api/users/me`
 - Test Data: `{"phone": "0912345678", "shipping_address": "Test Address"}` (no `name` key)
 
@@ -306,7 +306,7 @@ Per SRS FR-04, a valid phone number must start with digit `0`. A phone number st
 Neither the mobile UI nor the API rejects the phone number. No error message is displayed on the mobile app screen. The API returns **HTTP 200 OK** and the phone number `"1912345678"` is stored in the database. The `0` prefix constraint is not enforced at either the frontend or backend validation layer. Reproduced consistently across 2 attempts.
 
 **Environment:**
-- OS: Android (mobile device / emulator)
+- OS: iOS (mobile device / emulator)
 - App: EShop Mobile App (React Native + Expo)
 - Backend: Node.js + Express at `http://localhost:3000`
 - API Endpoint: `PUT http://localhost:3000/api/users/me`
@@ -363,7 +363,7 @@ Neither the mobile UI nor the API rejects the phone number. No error message is 
 Both scenarios reproduced consistently across 2 attempts from a clean state.
 
 **Environment:**
-- OS: macOS (Postman desktop client)
+- OS: macOS Tahoe 26.1 (Postman desktop client)
 - API Endpoint: `PUT http://localhost:3000/api/users/me`
 - Test Data Scenario A: `phone = "0912-345-678"` (contains dashes)
 - Test Data Scenario B: `phone = "012345678901"` (12 digits)
@@ -460,7 +460,7 @@ The server must reject the request with **HTTP 400 Bad Request** and an error me
 The server returns **HTTP 200 OK**. A subsequent `GET /api/users/me` confirms the full 256-character address string is stored in the database without truncation. No error or warning is returned (TC-FR04-NEG-011, TC-FR04-BV-014). Reproduced consistently across 2 attempts.
 
 **Environment:**
-- OS: macOS (Postman desktop client)
+- OS: macOS Tahoe 26.1 (Postman desktop client)
 - API Endpoint: `PUT http://localhost:3000/api/users/me`
 - Test Data: `{"shipping_address": "A" × 256, "name": "Nguyen Van Test", "phone": "0912345678"}`
 

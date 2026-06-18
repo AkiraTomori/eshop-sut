@@ -39,8 +39,8 @@ Per FR-21, the checkout page must contain exactly **one `<h1>` element** serving
 There are **zero `<h1>` elements** on the checkout page. The page heading is implemented using `<h2>`, which violates the FR-21 heading structure requirement.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5173/checkout`
 - Test Data: Authenticated user; non-empty cart.
 
@@ -79,8 +79,8 @@ Per FR-21, the primary checkout/submit button must be styled in **blue**. Hex va
 The button is rendered in **green** (not blue). The observed color does not match the FR-21 blue button specification.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5173/cart` and `http://localhost:5173/checkout`
 - Test Data: Authenticated user; non-empty cart.
 
@@ -121,8 +121,8 @@ After a successful order placement, the cart must be **cleared** (0 items). The 
 After a successful order placement, the cart **still shows the previously ordered items**. The cart is not emptied. This can lead to users accidentally re-ordering or to a misrepresentation of cart state.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5173/checkout` → `http://localhost:5173/cart`
 - Test Data: `shipping_address` = `"123 Nguyen Hue, District 1, Ho Chi Minh City"`; at least 1 product in cart.
 
@@ -159,8 +159,8 @@ Per FR-22, the checkout page must display a **breadcrumb navigation bar** at the
 No breadcrumb navigation is visible anywhere on the checkout page. The page does not indicate the user's position in the site navigation hierarchy.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5173/checkout`
 - Test Data: Authenticated user; non-empty cart.
 
@@ -202,8 +202,8 @@ When the "Đặt hàng" button is clicked with an empty shipping address field:
 - The user is not notified of the validation failure.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5173/checkout`
 - Test Data: `shipping_address` = `""` (empty string); authenticated user; non-empty cart.
 
@@ -246,7 +246,7 @@ The API must return **HTTP 400 Bad Request** with an error message indicating th
 The API returns **HTTP 200 OK**. An order is created in the database with the shipping address stored as `"     "` (five whitespace characters). No validation error is returned. The same behaviour is reproduced with `""` (empty string).
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - API Tool: Postman
 - API Base URL: `http://localhost:3000`
 - Test Data: `shipping_address` = `"     "` (whitespace-only) and `""` (empty string); valid JWT.
@@ -290,7 +290,7 @@ The backend must **ignore** the client-supplied `total_amount` field. Instead, i
 The API returns **HTTP 200 OK**. The order is created with `total_amount = 1 ₫` — the exact value sent by the client. The backend does **not** recalculate the total from the cart. This constitutes a **critical price tampering vulnerability**: any authenticated user can place any order for 1 ₫.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - API Tool: Postman
 - API Base URL: `http://localhost:3000`
 - Test Data: Tampered `total_amount` = 1; actual cart total = 30,000,000 ₫; valid JWT for `test@eshop.com`.
@@ -345,8 +345,8 @@ The system accepts the 256-character address without any error. An order is crea
 > Additionally, a 1000-character address was also accepted without error (TC-FR08-BV-007), confirming there is no length limit enforcement at any layer.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest) + Postman
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest) + Postman
 - App URL: `http://localhost:5173/profile` and `http://localhost:3000/api/checkout`
 - Test Data: `shipping_address` = 256-char string (`"C" × 256`) and 1000-char string.
 

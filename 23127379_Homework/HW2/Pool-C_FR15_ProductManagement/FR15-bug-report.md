@@ -40,7 +40,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that price
 The API returns HTTP 200 OK (or 201 Created). No error message is returned. A product with `price = 0` is created and appears in the product list.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Zero Price Product"`, `price = 0`, `category_id = 1`
@@ -81,7 +81,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that price
 The API returns HTTP 200 OK (or 201 Created). No error message is returned. A product with `price = -1` is created and stored in the database. No error message is displayed in the UI.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman) / Web Admin at `http://localhost:5174`
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Negative Price Product"`, `price = -1`, `category_id = 1`
@@ -122,7 +122,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that price
 The API returns HTTP 200 OK (or 201 Created). No error message is returned. A product with `price = 99.5` is created in the database. The float price is persisted.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Float Price Product"`, `price = 99.5`, `category_id = 1`
@@ -163,7 +163,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that price
 The API returns HTTP 200 OK (or 201 Created). No error message is returned. A product with a non-numeric string price is still created in the database.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Test Product"`, `price = "abc"` (string), `category_id = 1`
@@ -204,7 +204,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that price
 The API returns HTTP 200 OK (or 201 Created). No error message is returned. A product is created in the database despite the missing mandatory price field.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: `name = "No Price Product"`, price field: **absent**, `category_id = 1`
@@ -245,7 +245,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that the d
 The API returns HTTP 200 OK (or 201 Created). No error message is returned. A product is created with the 1001-character description stored intact in the database.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Long Desc Product"`, `price = 100000`, `description = "C" × 1001`, `category_id = 1`
@@ -286,7 +286,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that the i
 The API returns HTTP 200 OK. No error message is returned. A product is created with `imageUrl = "http://example.com/img.jpg"` stored in the database.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: `name = "HTTP URL Product"`, `price = 100000`, `imageUrl = "http://example.com/img.jpg"`, `category_id = 1`
@@ -327,7 +327,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that image
 The API returns HTTP 200 OK. No error message is returned. A product is created with `imageUrl = "notavalidurl"` stored in the database.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Malformed URL Product"`, `price = 100000`, `imageUrl = "notavalidurl"`, `category_id = 1`
@@ -369,7 +369,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that the s
 The API returns HTTP 200 OK. No error message is returned. A product is created in the database with `category_id = 99999`, which does not reference any existing category record. This constitutes a data integrity violation (orphaned foreign key reference).
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Orphan Category Product"`, `price = 100000`, `category_id = 99999` (non-existent)
@@ -410,7 +410,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that categ
 The API returns HTTP 200 OK (or 201 Created). No error message is returned. A product is created in the database with a non-integer category_id value.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: `name = "Wrong Category Type Product"`, `price = 100000`, `category_id = "electronics"` (string)
@@ -451,7 +451,7 @@ The API returns HTTP 404 Not Found with an error message such as "Product not fo
 The API returns HTTP 200 OK. No error message is returned. No existing product is modified, but the incorrect 200 status code makes it appear the operation succeeded on a valid resource.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: Path: `/api/products/99999` (non-existent product ID), body: `{ "name": "Ghost Product", "price": 100000, "category_id": 1 }`
@@ -490,7 +490,7 @@ The API returns HTTP 400 Bad Request with an error message indicating that the p
 The API returns HTTP 200 OK. No error message is returned indicating the invalid path parameter type. No product is deleted, but the incorrect 200 status code does not communicate the error condition to the caller.
 
 **Environment:**
-- OS: macOS
+- OS: macOS Tahoe 26.1
 - Browser: N/A (API-level test via Postman)
 - App URL: `http://localhost:3000`
 - Test Data: Path: `/api/products/abc` (non-integer string as product ID)
@@ -530,8 +530,8 @@ Each mandatory field label (Product Name, Price, Category) displays a `*` symbol
 None of the mandatory field labels (Product Name, Price, Category) display the required `*` symbol. The form does not provide any visual indication of which fields are mandatory, violating FR-22.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5174`
 - Test Data: Visual + DOM inspection only
 
@@ -571,8 +571,8 @@ All validation error messages appear in the UI area **above** the Submit button,
 A validation error message appears below the Name field label, not above the Submit button. Other mandatory fields (Price, Category) do not display error messages at all. The error placement does not conform to the FR-22 specification.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5174`
 - Test Data: Empty form submission (all fields blank)
 
@@ -611,8 +611,8 @@ The Submit / Save button uses a blue background colour, consistent with FR-21 co
 The Submit / Save button uses a green background colour. The button does not conform to the FR-21 specification requiring blue for submission actions.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5174`
 - Test Data: Visual inspection of product creation form
 
@@ -651,8 +651,8 @@ The Submit / Save button uses a green background colour. The button does not con
 `document.querySelectorAll('h1').length` returns `0`. No `<h1>` element exists on the product management page. This violates FR-21 and also impacts accessibility and SEO.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5174`
 - Test Data: DOM inspection via browser console
 
@@ -692,8 +692,8 @@ Immediately after clicking the Delete button, a confirmation dialog appears aski
 After clicking the Delete button, no confirmation dialog appears. The product is immediately deleted from the list without any confirmation step. This creates a risk of accidental, irreversible data deletion by admin users.
 
 **Environment:**
-- OS: macOS
-- Browser: Chrome (latest)
+- OS: macOS Tahoe 26.1
+- Browser: Edge (latest)
 - App URL: `http://localhost:5174`
 - Test Data: Any existing product in the product management list
 
