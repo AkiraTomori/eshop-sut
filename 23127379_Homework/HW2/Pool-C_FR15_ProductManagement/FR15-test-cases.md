@@ -1,6 +1,6 @@
 ## Test Cases (EP Phase) — FR-15: Product Management (Product CRUD)
 **Date:** 2026-06-15 19:56
-**Designer:** Gemini QA Agent (reviewed by: [HITL name])
+**Designer:** Gemini QA Agent (reviewed by: Thái Minh Huy)
 **Based on:** FR15-domain-analysis.md + FR15-boundary-analysis.md (HITL-Accepted 2026-06-15)
 **SRS Version:** 2.0 (2026-05-14)
 **Scope of this file:** EP valid test cases (TC-FR15-EP-###) + NEG invalid test cases (TC-FR15-NEG-###)
