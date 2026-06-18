@@ -883,7 +883,7 @@ The API returned a success response and stored `price=1` in the cart. No price v
    {
      "id": 1,
      "name": "iPhone 15 Pro Max",
-     "price": 1,
+     "price": 30000000,
      "quantity": -1
    }
    ```

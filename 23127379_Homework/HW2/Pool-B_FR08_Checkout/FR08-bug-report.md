@@ -347,7 +347,7 @@ The system accepts the 256-character address without any error. An order is crea
 **Environment:**
 - OS: macOS
 - Browser: Chrome (latest) + Postman
-- App URL: `http://localhost:5173/checkout` and `http://localhost:3000/api/checkout`
+- App URL: `http://localhost:5173/profile` and `http://localhost:3000/api/checkout`
 - Test Data: `shipping_address` = 256-char string (`"C" × 256`) and 1000-char string.
 
 **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/29
