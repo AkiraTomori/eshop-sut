@@ -1179,7 +1179,7 @@ The API accepted `quantity=999999999` without rejection. The `GET /api/cart` API
 
 ---
 
-## 🟢 POOL C — FR-15: Product Management (Product CRUD Web Admin)
+## POOL C — FR-15: Product Management (Product CRUD Web Admin)
 **Total Bugs Filed in Pool C:** 17 Defects (0 Fatal, 12 Serious, 5 Medium)
 
 ---
@@ -1621,7 +1621,7 @@ The API accepted `quantity=999999999` without rejection. The `GET /api/cart` API
 
 ---
 
-## 🟢 POOL D — FR-04: Personal Profile Management (Mobile App)
+## POOL D — FR-04: Personal Profile Management (Mobile App)
 **Total Bugs Filed in Pool D:** 10 Defects (2 Fatal, 7 Serious, 1 Medium)
 
 ---
