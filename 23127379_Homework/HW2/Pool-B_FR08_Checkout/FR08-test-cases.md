@@ -4,7 +4,7 @@
 **Based on:** FR08-domain-analysis.md + FR08-boundary-analysis.md (revised 2026-06-15)
 **Test Environment:**
 - OS: macOS / Windows 11
-- Browser: Chrome (latest)
+- Browser: Edge (latest)
 - Frontend URL: http://localhost:5173
 - Backend URL: http://localhost:3000
 - API Tool: Postman (for API-level tests)
