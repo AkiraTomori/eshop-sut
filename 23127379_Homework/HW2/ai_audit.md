@@ -157,6 +157,25 @@
 - **Human Review Notes:** Verified all 17 Bug IDs, cross-referenced traceability links, and approved.
 - **Verdict:** [X] Accepted
 
+### Session: 2026-06-19 11:49 — Phase 5: Test Summary Report
+
+- **AI Tool:** Antigravity (Claude Sonnet 4.6 Thinking)
+- **Bloom-AI Level:** G9.3 (Analyse) — Aggregating all execution data from FR15-test-cases.md and FR15-bug-report.md into a structured Test Summary Report per theory-test-report.md §9
+- **Prompt:**
+  > I have reviewed and approve bug report for FR15, write test summary for FR15.
+- **AI Output Summary:**
+  The AI compiled all 54 HITL-executed test results from `FR15-test-cases.md` and produced `FR15-test-summary.md` with the following key findings:
+  - **Execution totals:** 54 TCs total — 4 Passed (7.4%), 47 Failed (87.0%), 3 Not Run (5.6%) — search feature absent in Web Admin.
+  - **Pass details:** 4 TCs passed — NEG-008 (XSS name safe), NEG-015 (XSS description safe), NEG-018 (category default UI prevents empty submit), NEG-028 (tab order correct).
+  - **By suite:** EP: 0/10 passed; NEG: 4/29 passed; BV (15 TCs as merged by HITL): 0/15 passed.
+  - **17 defects confirmed** (from approved bug report) — 10 Serious, 7 Medium. Primary root cause: complete absence of server-side validation on all API endpoints, and complete absence of JWT authentication enforcement.
+  - **Additional risk identified:** Price formatting defect (raw numbers displayed without ₫ thousands separator) spans all creation operations — not yet assigned a Bug ID.
+  - **Defect density:** 31.5% (17 bugs / 54 TCs) — very high, indicating feature requires significant backend rework.
+  - **Release recommendation:** NO-GO — 4 critical blocking defects (auth absence, price validation, category validation, no delete confirmation dialog) must be resolved before release.
+  - Open Points section documents 7 risks requiring HITL decision or immediate escalation.
+- **Human Review Notes:** Reviewed the release recommendation and confirm or override the No-Go decision; file GitHub Issue for price formatting defect; confirm test execution date range accuracy; sign off on the overall FR-15 test cycle closure
+- **Verdict:** [X] Accepted / [ ] Partially Accepted / [ ] Rejected
+
 ---
 
 ## POOL D — FR-04: Personal Profile Management (Mobile App)
