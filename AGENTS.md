@@ -61,15 +61,14 @@ All output files for a pool are written **only** into that pool's directory. Cro
 Agents MUST read these documents before performing any work. Ground all automation in these files.
 
 | Priority | Source File | Purpose |
-|----------|------------|---------| 
+|----------|------------|---------|  
 | 1 (Primary) | `23127379_Homework/HW2/Pool-A_FR06_ProductDetailView/FR06-test-cases.md` | TC list for FR-06 automation |
 | 1 (Primary) | `23127379_Homework/HW2/Pool-B_FR08_Checkout/FR08-test-cases.md` | TC list for FR-08 automation |
 | 1 (Primary) | `23127379_Homework/HW2/Pool-C_FR15_ProductManagement/FR15-test-cases.md` | TC list for FR-15 automation |
 | 2 (Context) | `23127379_Homework/HW2/agents/context/eshop-srs.md` | SUT requirements for selector/assertion grounding |
-| 3 (Context) | `23127379_Homework/HW2/agents/context/eshop-api-spec.md` | API endpoints for test setup/teardown via API |
-| 4 (Context) | `23127379_Homework/HW2/Pool-A_FR06_ProductDetailView/FR06-bug-report.md` | Known bugs — inform expected assertion outcomes |
-| 4 (Context) | `23127379_Homework/HW2/Pool-B_FR08_Checkout/FR08-bug-report.md` | Known bugs for FR-08 |
-| 4 (Context) | `23127379_Homework/HW2/Pool-C_FR15_ProductManagement/FR15-bug-report.md` | Known bugs for FR-15 |
+| 3 (Context) | `23127379_Homework/HW2/Pool-A_FR06_ProductDetailView/FR06-bug-report.md` | Known bugs — inform expected assertion outcomes |
+| 3 (Context) | `23127379_Homework/HW2/Pool-B_FR08_Checkout/FR08-bug-report.md` | Known bugs for FR-08 |
+| 3 (Context) | `23127379_Homework/HW2/Pool-C_FR15_ProductManagement/FR15-bug-report.md` | Known bugs for FR-15 |
 
 ---
 
@@ -94,7 +93,6 @@ Every spec file MUST use at least 3 of these assertion patterns:
 | A4 | `await expect(locator).toHaveValue(...)` | Form field value check |
 | A5 | `await expect(locator).toHaveCount(...)` | Element count (e.g., h1 count) |
 | A6 | `await expect(page).toHaveTitle(...)` | Page title check |
-| A7 | `await expect(response).toBeOK()` | API response status |
 | A8 | `await expect(locator).not.toBeVisible()` | Negative visibility |
 | A9 | `await expect(locator).toContainText(...)` | Partial text match |
 
@@ -113,8 +111,7 @@ Every spec file MUST use at least 3 of these assertion patterns:
 ### 5.5 Test Isolation
 
 - Each `test()` block must be self-contained and self-cleaning.
-- Use `beforeEach` / `afterEach` for setup and cleanup.
-- Use API calls (via `request` fixture or `fetch`) for state setup, not UI navigation, whenever possible.
+- Use `beforeEach` / `afterEach` for setup and cleanup via **UI actions** (navigate, fill, click).
 - Tests must not depend on execution order.
 
 ---

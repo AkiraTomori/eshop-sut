@@ -158,14 +158,14 @@ Append the session block to the correct file:
 
 ### AI Output Summary
 Generated `fr06.spec.ts` with 14 test cases covering EP-001 to EP-004 and NEG-001 to NEG-010. 
-Created `fr06-test-data.json` with 14 entries. Used beforeEach for navigation and afterEach API cleanup.
+Created `fr06-test-data.json` with 14 entries. Used `beforeEach` for page navigation and `afterEach` UI-based cleanup.
 Assertion patterns included: toHaveURL, toBeVisible, toHaveText, toHaveValue, toHaveCount.
 
 ### Human Review Notes
 - **Issue 1 — Fragile Selector:** Line 45: `page.locator('div.product-container > img')` → replaced with `page.locator('img[alt]')` because the AI assumed CSS class name not present in SUT.
 - **Issue 2 — Missing Assertion:** TC-FR06-EP-003 (Add to Cart): AI only checked toast visibility, missing cart badge count assertion → added `expect(cartBadge).toContainText('1')`.
 - **Issue 3 — Weak Assertion:** TC-FR06-EP-001: AI used `toContainText('₫')` for price check; replaced with `toContainText(/\d{1,3}(,\d{3})* ₫/)` (regex for thousands format).
-- **Issue 4 — Missing Cleanup:** TC-FR06-EP-003/004: No afterEach to clear cart → added `await request.delete('/api/cart')` in afterEach.
+- **Issue 4 — Missing Cleanup:** TC-FR06-EP-003/004: No afterEach to clear cart → added UI-based cleanup: navigate to cart page and click remove buttons for added items.
 - **Issue 5 — Known Bug Handling:** TC-FR06-EP-001 asserted category display but AI did NOT annotate the known bug (BUG-FR06-001) → added inline comment.
 
 ### What AI Got Wrong

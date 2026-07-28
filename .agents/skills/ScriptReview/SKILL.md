@@ -110,18 +110,18 @@ grep -n "waitForTimeout\|sleep\|setTimeout" Pool-[X]_FR##/fr##.spec.ts
 For each `test()` block, verify:
 
 ```
-□ beforeEach/beforeAll sets up required state
-□ afterEach/afterAll cleans up created data
+□ beforeEach/beforeAll sets up required state via UI navigation
+□ afterEach/afterAll cleans up created data via UI (navigate and undo)
 □ Test does not rely on state from a previous test
 □ Tests can run in random order without failures
-□ API calls (not UI navigation) are used for setup/teardown where possible
+□ No API calls used — all setup and teardown performed through the browser UI
 ```
 
 **Document isolation issues:**
 ```markdown
 ### [ISSUE] Test Order Dependency — Test: TC-FR15-EP-003
 - **Problem:** TC-EP-003 (Edit product) assumes the product created in TC-EP-001 still exists
-- **Fix:** Add beforeEach that creates a fresh product via API: POST /api/products
+- **Fix:** Add `beforeEach` that creates a test product via the **Admin UI** (navigate to admin, fill form, submit) instead of assuming a pre-existing product.
 - **Why AI failed:** AI wrote tests assuming sequential execution; did not consider parallel runners
 ```
 

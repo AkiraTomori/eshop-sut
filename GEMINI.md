@@ -27,11 +27,10 @@ Before executing any request, Gemini MUST perform the following steps **in order
 [STARTUP]
 1. Load AGENTS.md          → at workspace root (eshop-sut/AGENTS.md)
 2. Load eshop-srs.md       → 23127379_Homework/HW2/agents/context/eshop-srs.md
-3. Load eshop-api-spec.md  → 23127379_Homework/HW2/agents/context/eshop-api-spec.md
-4. Load FR##-test-cases.md → 23127379_Homework/HW2/Pool-[X]_FR##_*/FR##-test-cases.md
-5. Load FR##-bug-report.md → 23127379_Homework/HW2/Pool-[X]_FR##_*/FR##-bug-report.md
-6. Identify the FR pool    → determine which pool directory to write to
-7. Confirm with HITL       → state the FR, pool, skill, and phase before proceeding
+3. Load FR##-test-cases.md → 23127379_Homework/HW2/Pool-[X]_FR##_*/FR##-test-cases.md
+4. Load FR##-bug-report.md → 23127379_Homework/HW2/Pool-[X]_FR##_*/FR##-bug-report.md
+5. Identify the FR pool    → determine which pool directory to write to
+6. Confirm with HITL       → state the FR, pool, skill, and phase before proceeding
 ```
 
 If the human does not specify the FR or skill, Gemini MUST ask before proceeding.

@@ -11,7 +11,6 @@ description: Converts HW2 test cases into data-driven Playwright automation scri
 >   - `23127379_Homework/HW2/Pool-[X]_FR##_*/FR##-test-cases.md` — TC IDs and steps to automate
 >   - `23127379_Homework/HW2/Pool-[X]_FR##_*/FR##-bug-report.md` — known bugs affecting assertion expectations
 >   - `23127379_Homework/HW2/agents/context/eshop-srs.md` — expected behaviour for assertions
->   - `23127379_Homework/HW2/agents/context/eshop-api-spec.md` — API endpoints for setup/teardown
 > **Output files:**
 >   - `23127379_Homework/HW4/Pool-[X]_FR##/fr##.spec.ts` — Playwright test spec
 >   - `23127379_Homework/HW4/Pool-[X]_FR##/fr##-test-data.json` — External test data file
@@ -114,9 +113,11 @@ Every spec file follows this structure:
  * - A3: expect(locator).toHaveText(...)
  * - A4: expect(locator).toHaveValue(...)
  * - A5: expect(locator).toHaveCount(...)
+ * - A8: expect(locator).not.toBeVisible()
+ * - A9: expect(locator).toContainText(...)
  */
 
-import { test, expect, Page, APIRequestContext } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 import testData from './fr##-test-data.json';
 
 // ============================================================
@@ -125,19 +126,18 @@ import testData from './fr##-test-data.json';
 const { sut, accounts } = testData.meta;
 const FRONTEND_URL = sut.frontendUrl;
 const ADMIN_URL = sut.adminUrl;
-const API_URL = sut.apiUrl;
 
 // ============================================================
-// HELPER FUNCTIONS
+// HELPER FUNCTIONS (UI-only — no API calls)
 // ============================================================
 
-/** Login via UI and return authenticated page */
+/** Login as regular user via UI */
 async function loginAsUser(page: Page): Promise<void> {
   await page.goto(`${FRONTEND_URL}/login`);
   await page.fill('input[type="email"]', accounts.user.email);
   await page.fill('input[type="password"]', accounts.user.password);
   await page.click('button[type="submit"]');
-  await expect(page).toHaveURL(`${FRONTEND_URL}/`, { timeout: 15_000 });
+  await expect(page).toHaveURL(`${FRONTEND_URL}/`, { timeout: 15_000 }); // A1
 }
 
 /** Login as admin via UI */
@@ -146,17 +146,7 @@ async function loginAsAdmin(page: Page): Promise<void> {
   await page.fill('input[type="email"]', accounts.admin.email);
   await page.fill('input[type="password"]', accounts.admin.password);
   await page.click('button[type="submit"]');
-  await expect(page).toHaveURL(`${ADMIN_URL}/`, { timeout: 15_000 });
-}
-
-/** Get auth token via API (for API-level test setup) */
-async function getToken(request: APIRequestContext, role: 'user' | 'admin'): Promise<string> {
-  const creds = role === 'admin' ? accounts.admin : accounts.user;
-  const response = await request.post(`${API_URL}/api/login`, {
-    data: { email: creds.email, password: creds.password }
-  });
-  const body = await response.json();
-  return body.token;
+  await expect(page).toHaveURL(`${ADMIN_URL}/`, { timeout: 15_000 }); // A1
 }
 
 // ============================================================
@@ -165,22 +155,17 @@ async function getToken(request: APIRequestContext, role: 'user' | 'admin'): Pro
 
 test.describe('FR-##: [Feature Name] @FR##', () => {
 
-  // Setup shared state
-  let authToken: string;
-  
-  test.beforeAll(async ({ request }) => {
-    authToken = await getToken(request, 'user');
-  });
-
   test.beforeEach(async ({ page }) => {
-    // Navigate to SUT; verify it's running
-    await page.goto(`${FRONTEND_URL}`);
+    // Navigate to SUT home; verify it is running
+    await page.goto(FRONTEND_URL);
     await expect(page).not.toHaveURL(/.*error.*/);
   });
 
-  test.afterEach(async ({ request }) => {
-    // Cleanup: reset state via API if needed
-    // Example: clear cart, delete created products
+  test.afterEach(async ({ page }) => {
+    // UI-based cleanup if needed
+    // Example: navigate to cart and clear items via UI
+    // await page.goto(`${FRONTEND_URL}/cart`);
+    // await page.getByRole('button', { name: /xóa|remove|clear/i }).click();
   });
 
   // ----------------------------------------------------------
@@ -193,16 +178,22 @@ test.describe('FR-##: [Feature Name] @FR##', () => {
       // Source TC: TC-FR##-EP-001 from FR##-test-cases.md
       const tc = testData.testCases.find(t => t.id === 'TC-FR##-EP-001')!;
       
-      // [Steps from HW2 TC]
+      // Login via UI if required
+      if (tc.inputs.authRequired) {
+        await loginAsUser(page);
+      }
+      
+      // Navigate to feature under test
+      await page.goto(tc.inputs.url as string);
       
       // Assertions (A1): URL check
-      await expect(page).toHaveURL(tc.expected.url);
+      await expect(page).toHaveURL(tc.inputs.url as string); // A1
       
       // Assertions (A2): Visibility
-      await expect(page.locator('[role="main"]')).toBeVisible();
+      await expect(page.locator('[role="main"]')).toBeVisible(); // A2
       
       // Assertions (A3): Text content
-      await expect(page.locator('h1')).toHaveText(tc.expected.messageContains!);
+      await expect(page.locator('h1')).toHaveText(tc.expected.title as string); // A3
     });
     
   });
@@ -222,15 +213,13 @@ test.describe('FR-##: [Feature Name] @FR##', () => {
         console.log(`⚠️ Known bug: ${tc.knownBug} — this test is expected to fail until fixed`);
       }
       
-      // [Steps]
-      
       // Assertions (A8): Negative visibility
-      await expect(page.locator('[data-testid="success-message"]')).not.toBeVisible();
+      const successMsg = page.locator('[data-testid="success-message"]');
+      await expect(successMsg).not.toBeVisible(); // A8
       
       // Assertions (A9): Error text contains
-      await expect(page.locator('[data-testid="error-message"]')).toContainText(
-        tc.expected.errorMessageContains!
-      );
+      const errorMsg = page.locator('[data-testid="error-message"]');
+      await expect(errorMsg).toContainText(tc.expected.errorMessageContains as string); // A9
     });
     
   });
@@ -314,7 +303,7 @@ Generate `23127379_Homework/HW4/Pool-B_FR08/fr08.spec.ts` based on these TCs:
 - `TC-FR08-BV-003`: 254-char address (UB-1) → automate
 - `TC-FR08-BV-004`: 255-char address (UB) → automate
 
-**Note:** `TC-FR08-NEG-002` (malformed JWT via API) and `TC-FR08-NEG-005` (tampered total_amount via API) can be automated using `request` fixture — include them as bonus.
+⚠️ **CANNOT AUTOMATE:** `TC-FR08-NEG-002` (malformed JWT) and `TC-FR08-NEG-005` (tampered total_amount) require direct HTTP manipulation — skip and document in `fr08-automation-review.md`.
 
 **Key selectors for FR-08:**
 ```typescript
@@ -382,7 +371,7 @@ Every spec file must document its assertion patterns as a header comment:
 □ No hardcoded strings in test() bodies (except comments)
 □ At least 3 distinct assertion patterns documented in header
 □ beforeEach navigates to SUT and checks it's running
-□ afterEach / afterAll cleans up created data via API
+□ afterEach / afterAll cleans up created data via UI navigation (not API calls)
 □ Each test() is labeled with its TC ID in the title
 □ Known bugs are annotated with inline comments
 □ ⚠️ CANNOT AUTOMATE items are listed and explained
