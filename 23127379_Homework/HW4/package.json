@@ -1,0 +1,24 @@
+{
+  "name": "eshop-hw04-automation",
+  "version": "1.0.0",
+  "description": "HW04 Automation Testing — EShop — Student 23127379",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:chromium": "npx playwright test --project=chromium",
+    "test:firefox": "npx playwright test --project=firefox",
+    "test:webkit": "npx playwright test --project=webkit",
+    "test:fr06": "npx playwright test --grep @FR06",
+    "test:fr08": "npx playwright test --grep @FR08",
+    "test:fr15": "npx playwright test --grep @FR15",
+    "test:all-browsers": "npx playwright test --project=chromium --project=firefox --project=webkit",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "csv-parse": "^5.5.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": ["playwright", "automation", "eshop", "hw04"],
+  "author": "23127379"
+}
