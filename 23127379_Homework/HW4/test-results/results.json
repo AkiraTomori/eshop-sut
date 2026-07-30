@@ -1,0 +1,114 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.0.0/bin/node",
+      "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4/node_modules/.bin/playwright",
+      "test",
+      "--list"
+    ],
+    "configFile": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4/playwright.config.ts",
+    "rootDir": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4/global-setup.ts",
+    "globalTeardown": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4/global-teardown.ts",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW4",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report",
+          "open": "never",
+          "title": "EShop HW04 Automation — Run by: 23127379"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [],
+  "errors": [
+    {
+      "message": "Error: No tests found",
+      "stack": "Error: No tests found"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-07-30T16:07:13.620Z",
+    "duration": 9.088999999999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
