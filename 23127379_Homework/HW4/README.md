@@ -15,6 +15,9 @@ HW4/
 ├── tsconfig.json               # TypeScript config
 ├── global-setup.ts             # Auth state caching (user + admin login)
 ├── global-teardown.ts          # Auth state cleanup
+├── test-environment.json       # Shared URLs, accounts, auth-state paths
+├── scripts/run-feature.mjs     # 3 isolated browser reports per FR
+├── Infrastructure-AI-Audit.md  # Setup/workflow AI audit
 │
 ├── Pool-A_FR06/                # FR-06: Product Detail View
 │   ├── fr06.spec.ts
@@ -50,7 +53,7 @@ HW4/
 ## Quick Start
 
 ### Prerequisites
-- Node.js ≥ 18 (currently using v26)
+- Node.js ≥ 22 (currently using v26)
 - EShop SUT running:
   - Frontend: http://localhost:5173
   - Web Admin: http://localhost:5174
@@ -67,15 +70,8 @@ npx playwright install
 ### Run Tests
 
 ```bash
-# All tests, all browsers
-npm run test:all-browsers
-
-# Per-browser
-npm run test:chromium
-npm run test:firefox
-npm run test:webkit
-
-# Per-feature
+# Complete one feature on Chromium, Firefox and WebKit.
+# Each browser writes to its own report directory.
 npm run test:fr06
 npm run test:fr08
 npm run test:fr15

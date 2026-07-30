@@ -1,20 +1,18 @@
-import { chromium, FullConfig } from '@playwright/test';
+import { chromium } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
+import environment from './test-environment.json';
 
 /**
  * Global Setup — HW04 EShop Automation
  *
  * Logs in as regular user and admin once, saves auth state to file.
- * Tests reuse these auth states via storageState in playwright.config.ts.
- * This avoids repeated login UI interactions across test runs.
+ * Authenticated describe blocks load the appropriate storageState explicitly.
  */
-async function globalSetup(config: FullConfig) {
-  const { baseURL } = config.projects[0].use;
-  const adminURL = 'http://localhost:5174';
-
-  // Ensure auth directory exists
-  const authDir = path.join(__dirname, '.auth');
+async function globalSetup() {
+  const userStatePath = path.resolve(__dirname, environment.auth.userState);
+  const adminStatePath = path.resolve(__dirname, environment.auth.adminState);
+  const authDir = path.dirname(userStatePath);
   if (!fs.existsSync(authDir)) {
     fs.mkdirSync(authDir, { recursive: true });
   }
@@ -25,24 +23,33 @@ async function globalSetup(config: FullConfig) {
   const userContext = await browser.newContext();
   const userPage = await userContext.newPage();
 
-  await userPage.goto(`${baseURL}/login`);
-  await userPage.fill('input[type="email"]', 'test@eshop.com');
-  await userPage.fill('input[type="password"]', 'Test1234!');
-  await userPage.click('button[type="submit"]');
-  await userPage.waitForURL(`${baseURL}/`, { timeout: 15_000 });
-  await userContext.storageState({ path: path.join(authDir, 'user.json') });
+  await userPage.goto(`${environment.urls.frontend}/login`);
+  const userInputs = userPage.locator('form input');
+  await userInputs.first().fill(environment.accounts.user.email);
+  await userInputs.last().fill(environment.accounts.user.password);
+  await userPage.getByRole('button', { name: 'Sign In' }).click();
+  await userPage.waitForURL(`${environment.urls.frontend}/`, {
+    timeout: 15_000,
+  });
+  await userContext.storageState({ path: userStatePath });
   await userContext.close();
 
   // --- Admin Auth ---
   const adminContext = await browser.newContext();
   const adminPage = await adminContext.newPage();
 
-  await adminPage.goto(`${adminURL}/login`);
-  await adminPage.fill('input[type="email"]', 'admin@eshop.com');
-  await adminPage.fill('input[type="password"]', 'Admin123!');
-  await adminPage.click('button[type="submit"]');
-  await adminPage.waitForURL(`${adminURL}/`, { timeout: 15_000 });
-  await adminContext.storageState({ path: path.join(authDir, 'admin.json') });
+  await adminPage.goto(environment.urls.admin);
+  await adminPage
+    .getByPlaceholder('Email')
+    .fill(environment.accounts.admin.email);
+  await adminPage
+    .getByPlaceholder('Password')
+    .fill(environment.accounts.admin.password);
+  await adminPage.getByRole('button', { name: 'Login' }).click();
+  await adminPage.getByText('Dashboard', { exact: true }).waitFor({
+    state: 'visible',
+  });
+  await adminContext.storageState({ path: adminStatePath });
   await adminContext.close();
 
   await browser.close();

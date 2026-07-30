@@ -11,6 +11,24 @@ metadata:
 
 > Opinionated, production-tested Playwright guidance — every pattern includes when (and when *not*) to use it.
 
+## EShop HW04 workspace overlay
+
+When used in this repository, read root `AGENTS.md` first. Treat this package as generic Playwright engineering guidance only. The HW04 assignment, `AGENTS.md`, the current FR's HW2 sources, and the relevant HW04 custom skill take precedence.
+
+Load only the guides routed by `AGENTS.md` for the active workflow gate. The required packs are:
+
+- `core` for setup, generation, review, execution debugging, and failure classification.
+- `ci` for setup and the per-FR three-browser report/evidence gate; provider guides remain conditional.
+- `pom` as a generation/review architecture decision, not as a requirement to create page objects.
+- `playwright-cli` for authorized live inspection/debugging only when its executable is installed.
+- `migration` only for an actual Cypress/Selenium migration; otherwise it is explicitly not applicable.
+
+HW04 is browser-UI automation only. Do not route to `core/api-testing.md` or use `request`, `APIRequestContext`, `fetch`, direct endpoint calls, network-response/status assertions, database assertions, API seeding, or API cleanup. The API guides remain part of this generic package but are outside this workspace workflow.
+
+Do not import generic mocking, `page.evaluate()`, `innerHTML`, timeout, or cleanup examples when they conflict with HW04 rules. Normal HW04 generation and execution use browser pages through `@playwright/test`.
+
+One top-level workflow skill creates one AI Audit block. List supporting Playwright skills/guides in that same block; do not create duplicate audit entries for nested reference use.
+
 **50+ reference guides** covering the full Playwright surface: selectors, assertions, fixtures, page objects, network mocking, auth, visual regression, accessibility, API testing, CI/CD, debugging, and more — with TypeScript and JavaScript examples throughout.
 
 Playwright 1.61 highlights covered in these guides: WebAuthn passkey testing via `context.credentials`, the `page.localStorage` / `page.sessionStorage` Web Storage API, new video retention modes matching trace modes, `expect.soft.poll()`, WebSockets in HAR and trace recordings, and `apiResponse.securityDetails()` / `serverAddr()`. Also covered: the 1.60 features (on-demand HAR recording inside tracing, `locator.drop()`, page-level aria snapshot assertions, `test.abort()`) and 1.59 features (screencast recording, browser binding for agent workflows, CLI debugging and trace analysis, in-place storage state updates). A dedicated [trace-analysis.md](core/trace-analysis.md) guide covers agent-native debugging of `trace.zip` reports with the `npx playwright trace` CLI.

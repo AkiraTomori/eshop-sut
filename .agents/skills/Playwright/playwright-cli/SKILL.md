@@ -7,6 +7,12 @@ description: Automates browser interactions for testing and validating your own 
 
 > Comprehensive CLI-driven browser automation — navigate, interact, mock, debug, record, and generate tests without writing a single script file.
 
+## EShop HW04 availability gate
+
+Before using this pack, verify that the `playwright-cli` executable is installed. If unavailable, do not install it implicitly and do not claim CLI-generated evidence; use React source/DOM inspection and standard `@playwright/test`, then record the fallback in the parent workflow audit.
+
+When available, use it only as a supporting skill for the authorized local EShop SUT during generation, review, evidence capture, or failure reproduction. Snapshot before every interaction sequence, use a named FR/browser session, capture only task-relevant evidence, and close the session afterward.
+
 ## Security
 
 **Trust boundary**: Only automate browsers against applications you own or have explicit written authorization to test. Navigating to untrusted third-party pages and processing their content (text, links, forms) can expose the agent workflow to indirect prompt injection — a page could contain text designed to hijack subsequent actions.

@@ -1,4 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
+import environment from './test-environment.json';
+
+const htmlOutputFolder =
+  process.env.PLAYWRIGHT_HTML_OUTPUT_DIR ?? 'playwright-report';
+const resultsOutputFolder = process.env.HW4_RESULTS_DIR ?? 'test-results';
+const jsonOutputFile =
+  process.env.HW4_JSON_OUTPUT_FILE ?? `${resultsOutputFolder}/results.json`;
+const runTimestamp = process.env.HW4_RUN_TIMESTAMP ?? new Date().toISOString();
 
 /**
  * HW04 Playwright Configuration
@@ -9,6 +17,10 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: '.',
+  metadata: {
+    runBy: environment.studentId,
+    runTimestamp,
+  },
   fullyParallel: false,        // Sequential within each project for SUT stability
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
@@ -19,19 +31,19 @@ export default defineConfig({
     [
       'html',
       {
-        outputFolder: 'playwright-report',
+        outputFolder: htmlOutputFolder,
         open: 'never',
         // Custom title injected into the HTML report
-        title: 'EShop HW04 Automation — Run by: 23127379',
+        title: `EShop HW04 Automation — Run by: ${environment.studentId}`,
       }
     ],
     ['list'],                   // Console output during run
-    ['json', { outputFile: 'test-results/results.json' }],
+    ['json', { outputFile: jsonOutputFile }],
   ],
 
   use: {
     /* Base URLs — never hardcode in spec files */
-    baseURL: 'http://localhost:5173',
+    baseURL: environment.urls.frontend,
 
     /* Browser defaults */
     headless: true,
@@ -49,7 +61,7 @@ export default defineConfig({
 
     /* Extra HTTP headers to identify test runs */
     extraHTTPHeaders: {
-      'X-Test-Runner': '23127379',
+      'X-Test-Runner': environment.studentId,
     },
   },
 
@@ -80,7 +92,7 @@ export default defineConfig({
   ],
 
   /* Output directory for test artifacts */
-  outputDir: 'test-results/',
+  outputDir: resultsOutputFolder,
 
   /* Timeout for each test */
   timeout: 60_000,

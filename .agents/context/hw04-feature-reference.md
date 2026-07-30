@@ -1,172 +1,147 @@
-# HW04 Context — Feature and TC Reference
+# HW04 Verified Feature Reference
 
-## Purpose
-This file is a quick reference for the automation agent. It maps each FR to:
-- The HW2 test case source
-- The key SUT URLs
-- The most important locator hints
-- The known bugs that will cause automation failures
+This file is a navigation aid for HW04. HW2 remains authoritative. Re-read the current FR's complete test-case and bug-report files before generating or reviewing automation.
 
----
+## Source map
 
-## FR-06: Product Detail View
+| Order | FR | HW2 test cases | HW2 known bugs | HW4 pool |
+|---:|---|---|---|---|
+| 1 | FR-06 | `23127379_Homework/HW2/Pool-A_FR06_ProductDetailView/FR06-test-cases.md` | `23127379_Homework/HW2/Pool-A_FR06_ProductDetailView/FR06-bug-report.md` | `23127379_Homework/HW4/Pool-A_FR06/` |
+| 2 | FR-08 | `23127379_Homework/HW2/Pool-B_FR08_Checkout/FR08-test-cases.md` | `23127379_Homework/HW2/Pool-B_FR08_Checkout/FR08-bug-report.md` | `23127379_Homework/HW4/Pool-B_FR08/` |
+| 3 | FR-15 | `23127379_Homework/HW2/Pool-C_FR15_ProductManagement/FR15-test-cases.md` | `23127379_Homework/HW2/Pool-C_FR15_ProductManagement/FR15-bug-report.md` | `23127379_Homework/HW4/Pool-C_FR15/` |
 
-**SUT URL:** `http://localhost:5173/product/:id`
-**API Endpoint:** `GET /api/products/:id`
-**HW2 TC Source:** `../../../HW2/Pool-A_FR06_ProductDetailView/FR06-test-cases.md`
+Shared SRS: `23127379_Homework/HW2/agents/context/eshop-srs.md`.
 
-### TC Selection (14 TCs)
+## HW04 scope filter
 
-| TC ID | Type | Automate? | Known Bug |
-|-------|------|-----------|-----------|
-| TC-FR06-EP-001 | EP | Yes | BUG-FR06-001 (category, breadcrumb, button color) |
-| TC-FR06-EP-002 | EP | Yes | None |
-| TC-FR06-EP-003 | EP | Yes | None |
-| TC-FR06-EP-004 | EP | Yes | BUG-FR06-002 (cart row creation) |
-| TC-FR06-NEG-001 | NEG | Yes | None |
-| TC-FR06-NEG-002 | NEG | Yes | None |
-| TC-FR06-NEG-003 | NEG | Yes | None |
-| TC-FR06-NEG-004 | NEG | Yes | None |
-| TC-FR06-NEG-005 | NEG | Yes | None |
-| TC-FR06-NEG-006 | NEG | Yes | BUG-FR06-003 (qty=0 accepted) |
-| TC-FR06-NEG-007 | NEG | Yes | BUG-FR06-004 (neg qty accepted) |
-| TC-FR06-NEG-009 | NEG | Yes | BUG-FR06-006 (NaN qty accepted) |
-| TC-FR06-BV-001 | BV | Yes | None |
-| TC-FR06-BV-003 | BV | Yes | None |
+Automate browser UI only. HW2 API-only TCs requiring direct HTTP requests, API response/status assertions, or database inspection remain valid HW2 evidence but are excluded from HW4 as `Out of HW4 scope — API testing`. A hybrid TC with an explicit UI path may cover only its UI-observable clauses; list its API/database clauses as not covered. Replace each excluded API-only TC with another eligible UI TC and never use Playwright's request fixture for HW4.
 
-### Cannot Automate
-- TC-FR06-EP-001 step: "Verify the Add to Cart button is blue" — use CSS class assertion instead
-- TC-FR06-EP-001 step: "Verify tab order" — keyboard tab navigation is automatable but complex
+## Recommended TC manifests
 
-### Key Locator Hints (verify against live SUT)
-```
-Product image: img[alt]
-Product name: h1 (or first heading)
-Product price: element containing '₫'
-Quantity input: input[type="number"]
-Add to Cart button: button containing 'Thêm vào giỏ' or 'Add to Cart'
-Cart badge: element in navbar with cart item count
-Toast notification: .toast or [role="alert"]
-Error message: text containing 'không tìm thấy' or 'not found'
+These are reviewed starting manifests, not replacements for HW2. Verify every title, step, expected result, status, and Bug ID against the source before use.
+
+### FR-06 — Product Detail
+
+Target: `http://localhost:5173/product/:id`
+
+Recommended 14:
+
+```text
+EP-001, EP-002, EP-003, EP-004,
+NEG-001, NEG-002, NEG-003, NEG-004, NEG-005,
+NEG-006, NEG-007, NEG-009,
+BV-001, BV-003
 ```
 
----
+Important corrections:
 
-## FR-08: Checkout
+- `BV-001` is the minimum existing product ID (`id=1`), not a quantity boundary.
+- `BV-003` is the valid quantity lower boundary (`quantity=1`).
+- The UI quantity upper probe `quantity=999` is `BV-005`.
+- Known defect mappings in this manifest include:
+  - `EP-001 → BUG-FR06-001`
+  - `EP-004 → BUG-FR06-002`
+  - `NEG-006 → BUG-FR06-003`
+  - `NEG-007 → BUG-FR06-004`
+  - `NEG-009 → BUG-FR06-006`
+  - `BV-001 → BUG-FR06-016` in the detailed HW2 report
 
-**SUT URL:** `http://localhost:5173/checkout`
-**API Endpoint:** `POST /api/checkout`
-**HW2 TC Source:** `../../../HW2/Pool-B_FR08_Checkout/FR08-test-cases.md`
+Verified source locators:
 
-### TC Selection (12 TCs)
-
-| TC ID | Type | Automate? | Known Bug |
-|-------|------|-----------|-----------|
-| TC-FR08-EP-001 | EP | Yes | BUG-FR08-001 (no h1), BUG-FR08-002 (button color) |
-| TC-FR08-EP-002 | EP | Yes | None |
-| TC-FR08-EP-003 | EP | Yes | BUG-FR08-005 (no breadcrumb) |
-| TC-FR08-NEG-001 | NEG | Yes | None |
-| TC-FR08-NEG-003 | NEG | Yes | None |
-| TC-FR08-NEG-004 | NEG | Yes | BUG-FR08-006 (empty address accepted) |
-| TC-FR08-NEG-006 | NEG | Yes | BUG-FR08-007 (whitespace accepted) |
-| TC-FR08-NEG-007 | NEG | Yes | BUG-FR08-001 (no h1) |
-| TC-FR08-BV-001 | BV | Yes | None |
-| TC-FR08-BV-002 | BV | Yes | None |
-| TC-FR08-BV-003 | BV | Yes | None |
-| TC-FR08-BV-004 | BV | Yes | None |
-
-### Bonus TCs (API-level, using request fixture)
-- TC-FR08-NEG-002: Malformed JWT → `request.post('/api/checkout', { headers: { Authorization: 'Bearer INVALID' } })`
-- TC-FR08-NEG-005: Tampered total_amount → `request.post('/api/checkout', { data: { total_amount: 1 } })`
-
-### Key Locator Hints
-```
-Shipping address: input[name="shipping_address"] or textarea
-Place Order button: button containing 'Đặt hàng' or 'Place Order'
-Cart items list: table or list of checkout items
-Order total: element containing '₫' near 'Total' text
-Breadcrumb: nav or ol with breadcrumb links
-Success message: text containing 'đặt hàng thành công'
-Empty cart message: text containing 'Giỏ hàng trống' or 'empty'
+```text
+Name: role=heading level 1
+Image: img with non-empty alt
+Quantity: input[type="number"]
+Add: role=button, name matching "Thêm vào giỏ hàng"
 ```
 
----
+The page currently has no category or breadcrumb and has no toast/alert element. Assert spec-correct behaviour and classify failures as known defects.
 
-## FR-15: Product Management (CRUD)
+### FR-08 — Checkout
 
-**SUT URL:** `http://localhost:5174` (Web Admin)
-**API Endpoints:** `POST/PUT/DELETE /api/products`
-**HW2 TC Source:** `../../../HW2/Pool-C_FR15_ProductManagement/FR15-test-cases.md`
+Target: `http://localhost:5173/checkout`
 
-### TC Selection (12 TCs)
+Recommended 12 UI TCs:
 
-| TC ID | Type | Automate? | Known Bug |
-|-------|------|-----------|-----------|
-| TC-FR15-EP-001 | EP | Yes | BUG-FR15-001 (no toast), BUG-FR15-003 (price format) |
-| TC-FR15-EP-002 | EP | Yes | BUG-FR15-001, BUG-FR15-003 |
-| TC-FR15-EP-003 | EP | Yes | None |
-| TC-FR15-EP-004 | EP | Yes | None (if exists) |
-| TC-FR15-NEG-001 | NEG | Yes | None (name empty → reject) |
-| TC-FR15-NEG-002 | NEG | Yes | None (price=0 → reject) |
-| TC-FR15-NEG-003 | NEG | Yes | None (price<0 → reject) |
-| TC-FR15-NEG-004 | NEG | Yes | None (no auth → redirect) |
-| TC-FR15-NEG-005 | NEG | Yes | None (name>255 chars → reject) |
-| TC-FR15-BV-001 | BV | Yes | None (name=1 char) |
-| TC-FR15-BV-002 | BV | Yes | None (name=255 chars) |
-| TC-FR15-BV-003 | BV | Yes | None (name=256 chars → reject) |
-
-### Key Locator Hints (Web Admin at localhost:5174)
-```
-Add Product button: button containing 'Thêm' or 'Add Product'
-Name field: input[name="name"] or first text input in form
-Price field: input[name="price"] or input[type="number"]
-Description: textarea[name="description"]
-Image URL: input[name="imageUrl"]
-Category dropdown: select[name="category_id"]
-Save/Submit button: button[type="submit"] or button containing 'Lưu'
-Product table rows: table tbody tr
-Success toast: .toast-success or [role="alert"] with success style
-Error message: .error or [role="alert"] with error style
-Delete button: button containing 'Xóa' or 'Delete'
-Edit button: button containing 'Sửa' or 'Edit'
-Confirm dialog OK: button in modal containing 'Xác nhận' or 'OK'
+```text
+EP-001, EP-002, EP-003,
+NEG-001, NEG-003, NEG-004, NEG-006, NEG-007,
+BV-001, BV-004, BV-005, BV-006
 ```
 
----
+Known defect mappings:
 
-## SUT Default Accounts
-
-```
-Regular User: test@eshop.com / Test1234!
-Admin: admin@eshop.com / Admin123!
-```
-
-## SUT URLs
-
-```
-Frontend:  http://localhost:5173
-Web Admin: http://localhost:5174
-Backend:   http://localhost:3000
+```text
+EP-001  → BUG-FR08-001, BUG-FR08-002, BUG-FR08-003
+EP-003  → BUG-FR08-005
+NEG-004 → BUG-FR08-006, BUG-FR08-007
+NEG-006 → BUG-FR08-006, BUG-FR08-007
+NEG-007 → BUG-FR08-001, BUG-FR08-002
+BV-005  → BUG-FR08-006, BUG-FR08-007
+BV-006  → BUG-FR08-009
 ```
 
-## Common API Setup Calls
+Implementation warning:
 
-```typescript
-// Get user auth token
-POST http://localhost:3000/api/login
-{ "email": "test@eshop.com", "password": "Test1234!" }
-→ response.token
+- The current `Checkout.jsx` has no `shipping_address` input and does not include `shipping_address` in its checkout request.
+- Inspect the live flow and the profile page before selecting a UI locator. Treat absence of the required field as SUT evidence, not permission to invent a selector.
+- `NEG-002` and `NEG-005` require direct API testing and are excluded from HW4. They do not count toward the 12 UI TCs.
 
-// Add product to cart (for checkout tests)
-POST http://localhost:3000/api/cart
-Authorization: Bearer <token>
-{ "id": 1, "name": "Product A", "price": 100000, "quantity": 1 }
+Verified current UI locators:
 
-// Clear cart (afterEach cleanup)
-// No DELETE /api/cart endpoint — clear by removing each item
-// Or: place a checkout to clear the cart
-
-// Get category list (for FR-15 tests)
-GET http://localhost:3000/api/categories
-→ response[0].id (use first category_id)
+```text
+Heading: current page uses role=heading level 2 (spec expects one h1)
+Total input: input[type="number"]
+Coupon: placeholder "Nhập mã giảm giá..."
+Checkout: role=button, name "Xác Nhận Thanh Toán"
 ```
+
+### FR-15 — Product Management
+
+Target: `http://localhost:5174`
+
+Recommended 14:
+
+```text
+EP-001 through EP-010,
+NEG-005, NEG-009, NEG-010,
+BV-003
+```
+
+Important corrections:
+
+```text
+NEG-001 = missing Authorization header
+NEG-002 = malformed JWT
+NEG-003 = expired JWT
+NEG-004 = authenticated non-admin
+NEG-005 = empty product name
+NEG-009 = price 0       → BUG-FR15-001
+NEG-010 = negative price → BUG-FR15-002
+```
+
+Do not reuse the old shifted NEG mapping.
+
+`NEG-001` through `NEG-004` are direct API authorization tests and are excluded from HW4. The recommended manifest starts at `NEG-005`, whose empty-name validation is UI-observable.
+
+Verified current UI facts:
+
+- Admin navigation uses clickable list items, not an “Add Product” button.
+- Product inputs currently lack `name` attributes; prefer verified placeholders/labels or add stable `data-testid` values to the SUT through a separately reviewed change.
+- Product success uses browser `alert`, not `.toast-success` or `[role="alert"]`.
+- Delete currently has no confirmation dialog; this is `BUG-FR15-017` linked to `NEG-029`.
+
+## Browser UI-native checks
+
+Do not classify these as manual-only by default:
+
+```text
+Colour        → expect(locator).toHaveCSS(...)
+Tab order     → keyboard.press('Tab') + expect(locator).toBeFocused()
+```
+
+Malformed JWT, tampered body, HTTP status, and database-only checks are `Out of HW4 scope — API testing`.
+
+## Source discrepancy rule
+
+Some older HW2 TC blocks and bug summaries contain inconsistent Bug IDs. Preserve the TC identity and expected result from `FR##-test-cases.md`, use the detailed bug report/summary for the canonical defect description, and document the discrepancy in `fr##-automation-review.md`. Never silently renumber a defect.

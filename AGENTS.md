@@ -1,6 +1,6 @@
 # AGENTS.md — Cross-tool Rules for EShop Automation Testing (HW04)
 
-> **Scope:** This file defines the shared governance rules, constraints, methodology, knowledge sources, output contracts, and Human-in-the-Loop (HITL) responsibilities that apply to **all AI agents** operating in the HW04 Automation Testing workspace. Each agent-specific file MUST inherit and apply every rule stated here; it may only extend, never override or relax, these rules.
+> **Scope:** This file is the single cross-tool workflow and governance source for **all AI agents** operating in the HW04 Automation Testing workspace. Do not require a separate `GEMINI.md`, `CLAUDE.md`, or tool-specific workflow file. Tool-specific files may only point back to this file; they must not duplicate or override it.
 >
 > **Inherits context from:** `23127379_Homework/HW2/AGENTS.md` (domain analysis governance). All domain knowledge, TC IDs, EC tables, and bug reports produced in HW2 serve as the **canonical input** for this automation workflow.
 
@@ -22,9 +22,9 @@ You do **not** act as a black-box script generator. Every automation script you 
 
 | Pool | FR ID | Feature Name | HW2 TC Source | Target URL |
 |------|-------|-------------|---------------|------------|
-| **A** | FR-06 | Product Detail View | `HW2/Pool-A_FR06_ProductDetailView/FR06-test-cases.md` | `http://localhost:5173/product/:id` |
-| **B** | FR-08 | Checkout | `HW2/Pool-B_FR08_Checkout/FR08-test-cases.md` | `http://localhost:5173/checkout` |
-| **C** | FR-15 | Product Management (CRUD) | `HW2/Pool-C_FR15_ProductManagement/FR15-test-cases.md` | `http://localhost:5174` (Web Admin) |
+| **A** | FR-06 | Product Detail View | `23127379_Homework/HW2/Pool-A_FR06_ProductDetailView/FR06-test-cases.md` | `http://localhost:5173/product/:id` |
+| **B** | FR-08 | Checkout | `23127379_Homework/HW2/Pool-B_FR08_Checkout/FR08-test-cases.md` | `http://localhost:5173/checkout` |
+| **C** | FR-15 | Product Management (CRUD) | `23127379_Homework/HW2/Pool-C_FR15_ProductManagement/FR15-test-cases.md` | `http://localhost:5174` (Web Admin) |
 
 Each pool maps to a dedicated workspace directory:
 
@@ -36,6 +36,17 @@ Each pool maps to a dedicated workspace directory:
 ```
 
 All output files for a pool are written **only** into that pool's directory. Cross-pool contamination is a **hard error**.
+
+### 2.1 HW04 automation scope: browser UI only
+
+HW2 remains authoritative for feature behaviour, but its API-level test cases are outside the HW04 automation scope.
+
+- Select only TCs whose actions and required assertions can be completed through the Web or Web Admin UI.
+- Do not use Playwright `request`, `APIRequestContext`, `fetch`, direct endpoint calls, database queries, network-response interception/assertions, or API response/status assertions.
+- Setup and cleanup must also use the UI. API seeding and API cleanup are prohibited.
+- A hybrid HW2 TC is eligible when it has an explicit UI execution path and a primary UI-observable outcome. Automate all UI-observable clauses, list its API/database clauses as not covered by HW4, and never claim those clauses passed.
+- List every excluded API-dependent TC in `fr##-automation-review.md` as `Out of HW4 scope — API testing`, then choose another eligible UI TC. Do not count it as automated or “manual-only”.
+- The minimum remains 12 UI automation TCs per FR.
 
 ---
 
@@ -58,7 +69,7 @@ All output files for a pool are written **only** into that pool's directory. Cro
 
 ## 4. Canonical Knowledge Sources
 
-Agents MUST read these documents before performing any work. Ground all automation in these files.
+HW2 is the source of truth for test identity, inputs, expected results, and known defects. Before working on one FR, read only that FR's complete HW2 source set plus the shared SRS. Do not copy TC mappings into a skill.
 
 | Priority | Source File | Purpose |
 |----------|------------|---------|  
@@ -70,18 +81,141 @@ Agents MUST read these documents before performing any work. Ground all automati
 | 3 (Context) | `23127379_Homework/HW2/Pool-B_FR08_Checkout/FR08-bug-report.md` | Known bugs for FR-08 |
 | 3 (Context) | `23127379_Homework/HW2/Pool-C_FR15_ProductManagement/FR15-bug-report.md` | Known bugs for FR-15 |
 
+### 4.1 Source precedence
+
+When sources conflict, apply this order:
+
+1. The HW04 assignment file defines submission requirements.
+2. This `AGENTS.md` defines the execution workflow and quality gates.
+3. The FR's HW2 `FR##-test-cases.md` defines TC ID, title, steps, data, and spec-correct expected result.
+4. `eshop-srs.md` defines required behaviour when a TC is ambiguous.
+5. The FR's HW2 bug report defines known defect descriptions and canonical Bug IDs.
+6. Live DOM/source inspection defines locators only; buggy SUT behaviour never replaces the spec-correct expectation.
+7. `.agents/context/hw04-feature-reference.md` is a verified navigation aid, not an independent source of truth.
+
+If HW2 files disagree with each other, record a source discrepancy in the automation review and ask HITL to resolve it. Never silently invent or shift a TC/Bug mapping.
+
+### 4.2 Playwright skill policy
+
+Use `.agents/skills/playwright/SKILL.md` and its relevant core/CI/POM guides for Playwright engineering patterns. Load only the guides needed for the current task. Apply this precedence:
+
+```text
+HW04 assignment → AGENTS.md → current FR's HW2 sources
+→ HW04 custom skill → generic Playwright skill
+```
+
+Generic examples that conflict with P-01 through P-14 are not allowed. In particular, do not copy generic `page.evaluate()`, `innerHTML`, API testing/seeding, mock, timeout, or cleanup patterns without checking them against this file.
+
+### 4.3 Mandatory Playwright routing by workflow gate
+
+The `playwright/` folder is an active technical layer of this workflow, not a passive reference library. A top-level workflow skill MUST load the supporting Playwright skill and listed guides for its current gate.
+
+| Workflow gate | Top-level skill | Required supporting Playwright skills/guides | Conditional routing |
+|---|---|---|---|
+| Infrastructure | `playwright-setup` | `playwright-core`: `configuration.md`, `authentication.md`; `playwright-ci`: `projects-and-dependencies.md`, `reporting-and-artifacts.md`, `global-setup-teardown.md` | Load a CI-provider guide only when a provider pipeline is requested |
+| FR generation | `automation-script-gen` | `playwright-core`: `test-architecture.md`, `test-data-management.md`, `locators.md`, `assertions-and-waiting.md`, `fixtures-and-hooks.md`, `react.md`; `playwright-pom`: `pom-vs-fixtures-vs-helpers.md` | Add `forms-and-validation.md`, `crud-testing.md`, or `error-and-edge-cases.md` when selected UI TCs require them; use `playwright-cli` for live inspection only when available |
+| FR review | `script-review` | `playwright-core`: `locator-strategy.md`, `assertions-and-waiting.md`, `flaky-tests.md`, `common-pitfalls.md`, `test-organization.md`; `playwright-pom`: re-check the architecture decision | Use `playwright-cli` to verify live locators or reproduce a UI flow only when available |
+| Browser evidence | `playwright-ci` | `projects-and-dependencies.md`, `reporting-and-artifacts.md`; `playwright-core`: `debugging.md`, `trace-analysis.md`, `error-index.md` | `playwright-cli` may capture a focused trace/screenshot when installed; provider/sharding/container guides are not loaded for a normal local HW04 run |
+| Failure classification | `bug-report-automation` | `playwright-core`: `debugging.md`, `trace-analysis.md`, `error-index.md`; `playwright-ci`: `reporting-and-artifacts.md` | Use `playwright-cli` only for an authorized reproducible browser UI flow |
+| Framework migration | `playwright-migration` | `from-cypress.md` or `from-selenium.md` | Not applicable to the normal HW04 flow; activate only when the repository actually contains a migration request/source suite |
+
+Rules:
+
+- “Used” means the relevant `SKILL.md` and routed guide were read and materially applied at the current gate. Merely listing a skill does not count.
+- `playwright-pom` always performs a design decision during generation/review; it does not force Page Object Model files when fixtures or helpers are the simpler fit.
+- Before invoking `playwright-cli`, verify that its executable is installed. If unavailable, record the fallback to React source/DOM inspection and standard `@playwright/test`; never claim CLI evidence and never install it implicitly.
+- A top-level workflow invocation produces one audit block. Supporting Playwright skills/guides used inside that invocation are recorded in the same block and do not create duplicate audits.
+- `playwright-migration` must be recorded as not applicable, not invoked artificially, when no Cypress/Selenium migration exists.
+
 ---
 
-## 5. Mandatory Automation Standards
+## 5. Mandatory Sequential Workflow
 
-### 5.1 Data-Driven Testing
+The workflow is a state machine. Do not start the next FR until the current FR passes its completion gate.
+
+```text
+G0 — Read HW04 + AGENTS.md + current HW2 sources
+  ↓
+G1 — playwright-setup + playwright-core + playwright-ci → ai-audit-logger
+     validate config, browsers, auth and report paths
+  ↓
+FR-06:
+  automation-script-gen + playwright-core + playwright-pom
+    (+ playwright-cli inspection when available) → ai-audit-logger
+  → script-review/HITL corrections + playwright-core + playwright-pom
+    (+ playwright-cli verification when available) → ai-audit-logger
+  → playwright-ci: 3 browser runs + report/trace evidence
+    (+ playwright-core debugging; playwright-cli when available) → ai-audit-logger
+  → bug-report-automation + playwright-core + playwright-ci
+    once for all genuine failures → ai-audit-logger
+  → FR-06 completion gate
+  ↓
+FR-08: same cycle → FR-08 completion gate
+  ↓
+FR-15: same cycle → FR-15 completion gate
+  ↓
+Final reports, critique, video and submission package
+```
+
+Rules:
+
+- Invoke `playwright-setup` exactly once unless infrastructure changes.
+- Process FRs in the order FR-06 → FR-08 → FR-15.
+- Invoke `playwright-ci` once per reviewed FR for the local three-browser evidence gate; do not interpret this as authorization to create or change a remote CI pipeline.
+- Invoke `bug-report-automation` once per FR run and batch all classified failures from that run.
+- Invoke `ai-audit-logger` once after each completed top-level workflow-skill invocation. Record nested Playwright supporting skills in that same block. The logger action does not audit itself.
+- Do not mark an FR complete until its spec, external data, review, three reports, bug classification, and signed audit blocks exist.
+
+### 5.1 User-facing slash commands
+
+These are chat-command aliases interpreted by any AI agent that reads this `AGENTS.md`; they are not shell commands and do not require an IDE plugin. The user sends exactly one command per message. Supporting Playwright skills are loaded automatically.
+
+| Stage | Slash command | Top-level action | Required state and stop point |
+|---|---|---|---|
+| Help | `/hw4-help` | List the commands and current valid FR values | Read-only; never advances the workflow |
+| G0 — Inspect/resume | `/hw4-status` | Inspect existing artefacts and report the current gate and next valid command | Read-only; may be called at any time |
+| G1 — Infrastructure setup | `/hw4-setup` | Run `playwright-setup`, validate three browsers, auth state, and report paths, then audit | Run once before FR-06 or after an infrastructure change; stop before F1 |
+| F1 — Generate one FR | `/hw4-generate FR-06` | Run `automation-script-gen` for the current FR under browser-UI-only scope, then audit | G1 must pass; stop at the review gate |
+| F2 — Review one FR | `/hw4-review FR-06` | Run `script-review`, correct spec/data, update automation review, then audit | F1 artefacts must exist; stop before browser runs |
+| F3 — Run browser evidence | `/hw4-run FR-06` | Run the local `playwright-ci` evidence gate for Chromium, Firefox, and WebKit, then audit | F2 must pass; stop after reports/traces are captured |
+| F4 — Classify failures | `/hw4-bugs FR-06` | Run `bug-report-automation` for all three browser results, then audit | F3 results must exist; stop at the FR completion gate |
+| F5 — HITL sign-off | `/hw4-signoff FR-06` followed by the review block below | Update one specified pending audit block and re-check the completion gate | Repeat for each pending audit session; only complete accepted blocks unlock the next FR |
+| G2 — Final deliverables | `/hw4-final` | Complete final reports and submission checklist without fabricating issues or video links | All three FR completion gates must pass |
+
+For F1–F5, replace `FR-06` only with the current permitted FR in the sequence `FR-06 → FR-08 → FR-15`.
+
+Use this payload immediately after `/hw4-signoff FR-##`:
+
+```text
+Session: YYYY-MM-DD HH:MM — exact session title
+Human Review Notes: ...
+What AI Got Wrong: ...
+Verdict: Accepted | Partially Accepted | Rejected
+```
+
+Command rules:
+
+- Command names are lowercase and must start the message. Supported FR arguments are exactly `FR-06`, `FR-08`, and `FR-15`.
+- If a command is unknown, lacks a required FR/session/review field, or targets an out-of-order FR, make no changes and respond with `/hw4-help`, the current gate, and the missing prerequisite.
+- Do not chain commands in one message. A command such as `/hw4-generate FR-06 && /hw4-review FR-06` is invalid.
+- Extra prose may narrow the current command but cannot expand it past the stage stop point.
+- A broad request such as `/hw4-all` or `làm toàn bộ HW4` is unsupported because it would bypass HITL gates.
+- `ai-audit-logger` runs automatically after `/hw4-setup`, `/hw4-generate`, `/hw4-review`, `/hw4-run`, and `/hw4-bugs`; there is no separate audit command.
+- `/hw4-status`, `/hw4-help`, and an incomplete `/hw4-signoff` are read-only and do not create audit blocks.
+- To resume in a new conversation, call `/hw4-status`, then use the exact next command returned by the agent.
+
+---
+
+## 6. Mandatory Automation Standards
+
+### 6.1 Data-Driven Testing
 
 - **RULE:** All test data (URLs, input values, expected messages, boundary values) MUST be stored in a dedicated `.json` or `.csv` file in the pool directory.
 - **RULE:** The spec file must import/read from the data file — no hardcoded values in the `test()` body.
 - **Allowed:** `const testData = require('./fr06-test-data.json')` or reading CSV with a parser.
 - **Prohibited:** `const name = "Laptop Gaming ABC"` directly inside the spec.
 
-### 5.2 Assertion Patterns (Minimum 3 per feature)
+### 6.2 Assertion Patterns (Minimum 3 per feature)
 
 Every spec file MUST use at least 3 of these assertion patterns:
 
@@ -96,27 +230,28 @@ Every spec file MUST use at least 3 of these assertion patterns:
 | A8 | `await expect(locator).not.toBeVisible()` | Negative visibility |
 | A9 | `await expect(locator).toContainText(...)` | Partial text match |
 
-### 5.3 Multi-Browser Execution
+### 6.3 Multi-Browser Execution
 
 - Scripts MUST run on: **Chromium**, **Firefox**, **WebKit**.
 - Each feature must produce HTML reports for all 3 browsers (9 browser runs total).
 - Reports MUST display **"Run by: 23127379"** in title, header, or metadata.
 
-### 5.4 No Sleep / Flaky Waits
+### 6.4 No Sleep / Flaky Waits
 
 - **Prohibited:** `await page.waitForTimeout(5000)` or any `sleep()` equivalent.
 - **Required:** `await expect(locator).toBeVisible({ timeout: 10000 })` or `await page.waitForSelector(...)`.
 - Exception: `page.waitForTimeout` with ≤500ms for animation completion is tolerated if documented.
 
-### 5.5 Test Isolation
+### 6.5 Test Isolation
 
 - Each `test()` block must be self-contained and self-cleaning.
 - Use `beforeEach` / `afterEach` for setup and cleanup via **UI actions** (navigate, fill, click).
+- Never use direct API actions for setup, test steps, assertions, or cleanup.
 - Tests must not depend on execution order.
 
 ---
 
-## 6. Output Contract — Artefacts Per Pool
+## 7. Output Contract — Artefacts Per Pool
 
 | Artefact | File | Location |
 |----------|------|----------|
@@ -130,10 +265,11 @@ Every spec file MUST use at least 3 of these assertion patterns:
 | Bug report | `bug_report.md` | `HW4/` root |
 | Main report | `main_report.md` | `HW4/` root |
 | AI Critique | `ai_critique.md` | `HW4/` root |
+| Infrastructure AI Audit | `Infrastructure-AI-Audit.md` | `HW4/` root |
 
 ### AI-Audit Session Block Format
 
-Each session block in `FR##-AI-Audit.md` MUST contain:
+Each top-level workflow-skill invocation produces exactly one session block. Infrastructure skills append to `Infrastructure-AI-Audit.md`; FR skills append to the current `FR##-AI-Audit.md`. Supporting Playwright skills used inside that invocation stay in the same block.
 
 ```markdown
 ---
@@ -144,15 +280,16 @@ Each session block in `FR##-AI-Audit.md` MUST contain:
 - **Task:** [What was asked of the AI]
 - **Prompt:**
   > [Exact prompt text submitted]
+- **Supporting Playwright Skills:** [Skill names and guides materially used, or None]
 - **AI Output Summary:** [Concise description of what the AI produced]
-- **Human Review Notes:** [Corrections made: selectors fixed, assertions added/changed, data extracted, etc.]
-- **What AI Got Wrong:** [Specific issues found during human review]
-- **Verdict:** Accepted / Partially Accepted / Rejected
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review / Accepted / Partially Accepted / Rejected
 ```
 
 ---
 
-## 7. TC Selection Rules (which TCs to automate)
+## 8. TC Selection Rules (which TCs to automate)
 
 From each FR's HW2 test cases, select **at least 12** per FR (36 total) following these priorities:
 
@@ -161,13 +298,16 @@ From each FR's HW2 test cases, select **at least 12** per FR (36 total) followin
 | 1st | All **EP valid** TCs (TC-FR##-EP-###) | Core happy-path coverage |
 | 2nd | All **NEG** TCs with direct UI assertions | Validation/error state coverage |
 | 3rd | **BV** TCs at boundaries (LB, UB, LB-1, UB+1) | Edge case coverage |
-| Skip | TCs requiring manual observation only (e.g., "visual colour check" impossible to automate) | Document in `fr##-automation-review.md` |
+| Exclude | TCs requiring direct HTTP calls, API response/status assertions, or database inspection | Out of HW4 scope — replace with another UI TC |
+| Last | Manual-only TCs after attempting Playwright-native automation | Document the concrete blocker in `fr##-automation-review.md` |
 
 For TCs with known bugs (from HW2 bug reports), automate them and **assert the expected (spec-correct) result**, then document the failure as a confirmed bug in the automation run.
 
+Colour and focus order remain UI-automatable with `toHaveCSS` and `toBeFocused`. Malformed-token, tampered-payload, HTTP-status, and database-only TCs are excluded as API testing, not reimplemented with Playwright's request fixture.
+
 ---
 
-## 8. Quality Gates — Before Committing Any Artefact
+## 9. Quality Gates — Before Committing Any Artefact
 
 The agent MUST self-audit against this checklist before presenting output:
 
@@ -176,6 +316,7 @@ AUTOMATION SCRIPTS:
 □ All test data in external .json/.csv file (no hardcoded values in spec)
 □ At least 3 distinct assertion patterns used per spec file
 □ No sleep() / waitForTimeout() > 500ms
+□ No Playwright request fixture, APIRequestContext, fetch, direct endpoint call, network-response assertion, database assertion, API setup, or API cleanup
 □ beforeEach/afterEach present for setup and cleanup
 □ Each test is independent (can run in any order)
 □ Playwright config declares chromium, firefox, webkit projects
@@ -185,7 +326,8 @@ REVIEW & REPORTING:
 □ fr##-automation-review.md lists every AI-generated issue found
 □ Known bugs (from HW2) documented in automation run output
 □ Bug report linked to GitHub Issues (HITL action)
-□ AI Audit session block present for every AI interaction
+□ One AI Audit block present for every completed skill invocation
+□ Human Review Notes and Verdict are signed by HITL, not fabricated by AI
 
 GIT:
 □ At least 8 commits touching .spec.ts files
@@ -195,7 +337,7 @@ GIT:
 
 ---
 
-## 9. Git Commit Convention
+## 10. Git Commit Convention
 
 One commit per meaningful change to spec files, following Conventional Commits:
 
@@ -218,26 +360,26 @@ fix(FR06): fix fragile XPath selectors → use data-testid/aria-label
 test(FR06): run multi-browser suite, attach HTML reports
 bug(FR06): file BUG-FR06-AUTO-001 - category not displayed on product detail
 feat(FR08): add checkout automation spec with data-driven inputs
-feat(FR15): add admin product CRUD spec with API-based setup
+feat(FR15): add admin product CRUD spec with UI-based setup
 ```
 
 ---
 
-## 10. HITL Responsibilities
+## 11. HITL Responsibilities
 
 | HITL Duty | Timing | Action Required |
 |-----------|--------|-----------------|
 | **Script review** | After AI generates spec | Read every `test()` block; fix selectors, assertions, data files |
 | **Execution** | After script is fixed | Run `npx playwright test` for all 3 browsers; save HTML reports |
 | **Bug filing** | When assertion fails on known bug | Create GitHub Issue with screenshot; link to bug_report.md |
-| **Gap analysis** | After each AI session | Complete `fr##-automation-review.md` with what AI got wrong |
-| **AI Audit sign-off** | After each session | Fill Human Review Notes and Verdict in AI-Audit session block |
+| **Gap analysis** | After script-review for each FR | Complete `fr##-automation-review.md` with what AI got wrong |
+| **AI Audit sign-off** | After each skill invocation | Replace pending Human Review Notes and Verdict |
 | **Video recording** | During one full browser run | Record 5+ min unlisted YouTube demo video with narration |
 | **Git commits** | After each phase | Commit spec changes only; at least 8 commits over 4 days |
 
 ---
 
-## 11. Prohibited Actions
+## 12. Prohibited Actions
 
 | # | Prohibited Action |
 |---|------------------|
@@ -251,10 +393,14 @@ feat(FR15): add admin product CRUD spec with API-based setup
 | P-08 | Using brittle `nth-child()` selectors when stable alternatives exist (`role`, `label`, `text`) |
 | P-09 | Using `page.evaluate()` for assertions that could use Playwright's built-in `expect` |
 | P-10 | Creating commits that only touch README/PDF — these do not count toward the 8-commit minimum |
+| P-11 | Starting work on FR-08 or FR-15 before the preceding FR completion gate passes |
+| P-12 | Duplicating authoritative TC/Bug mappings inside a skill instead of reading HW2 |
+| P-13 | Having the audit logger create an audit of its own logging action |
+| P-14 | Using API testing, request fixtures, direct endpoint calls, network-response assertions, database assertions, API setup, or API cleanup in HW04 automation |
 
 ---
 
-## 12. Submission Checklist
+## 13. Submission Checklist
 
 ```
 □ Pool A (FR-06): fr06.spec.ts, fr06-test-data.json, fr06-automation-review.md, HTML reports (3 browsers), FR06-AI-Audit.md
@@ -272,4 +418,4 @@ feat(FR15): add admin product CRUD spec with API-based setup
 
 ---
 
-*This file is the authoritative governance document for all AI agents in the HW04 workspace. Agent-specific files (GEMINI.md) derive their task definitions from this file and must not contradict it.*
+*This file is the authoritative workflow for all AI agents in the HW04 workspace. A separate agent-specific workflow file is neither required nor authoritative.*
