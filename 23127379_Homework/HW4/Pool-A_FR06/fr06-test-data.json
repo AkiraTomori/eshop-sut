@@ -1,0 +1,223 @@
+{
+  "metadata": {
+    "feature": "FR-06",
+    "tag": "@FR06",
+    "frontendUrl": "http://localhost:5173",
+    "productRoutePrefix": "/product/"
+  },
+  "routes": {
+    "home": "/",
+    "cart": "/cart",
+    "login": "/login"
+  },
+  "navigationLabels": {
+    "home": "EShop",
+    "cart": "Giỏ hàng",
+    "login": "Đăng nhập",
+    "register": "Đăng ký"
+  },
+  "ui": {
+    "addToCart": "Thêm vào giỏ hàng",
+    "addedFeedback": "Đã thêm",
+    "removeButton": "Xóa",
+    "breadcrumbName": "Điều hướng đường dẫn",
+    "productNotFound": "Sản phẩm không tồn tại (Lỗi trắng trang do data rỗng)",
+    "documentLanguage": "vi",
+    "positiveActionColour": "rgb(37, 99, 235)",
+    "focusOrder": [
+      "home",
+      "cart",
+      "login",
+      "register",
+      "quantity",
+      "addToCart"
+    ]
+  },
+  "products": {
+    "primary": {
+      "id": "1",
+      "name": "iPhone 15 Pro Max",
+      "price": "30,000,000 ₫",
+      "numericPrice": 30000000,
+      "description": "Điện thoại cao cấp của Apple",
+      "category": "Điện thoại"
+    },
+    "secondary": {
+      "id": "2",
+      "name": "Samsung Galaxy S24 Ultra",
+      "price": "28,000,000 ₫",
+      "numericPrice": 28000000,
+      "description": "Màn hình hiển thị xuất sắc, camera siêu zoom",
+      "category": "Điện thoại"
+    }
+  },
+  "displayCase": {
+    "id": "TC-FR06-EP-001",
+    "title": "Verify that product detail page displays all required fields correctly with a valid product ID",
+    "bugId": "BUG-FR06-001"
+  },
+  "quantityEntryCase": {
+    "id": "TC-FR06-EP-002",
+    "title": "Verify that quantity input field defaults to 1 and accepts valid positive integers",
+    "defaultQuantity": "1",
+    "enteredQuantity": "5",
+    "bugId": null
+  },
+  "authenticatedAddCase": {
+    "id": "TC-FR06-EP-003",
+    "title": "Verify that Add to Cart succeeds with valid quantity for an authenticated user",
+    "quantity": "3",
+    "bugId": null
+  },
+  "duplicateCartCase": {
+    "id": "TC-FR06-EP-004",
+    "title": "Verify that adding the same product to cart increments quantity instead of creating a new row",
+    "existingQuantity": "2",
+    "addedQuantity": "1",
+    "expectedQuantity": "3",
+    "expectedRows": 1,
+    "bugId": "BUG-FR06-002"
+  },
+  "invalidProductCases": [
+    {
+      "id": "TC-FR06-NEG-001",
+      "title": "Verify that product detail page shows error when navigating with a non-existent product ID",
+      "productId": "99999",
+      "bugId": null
+    },
+    {
+      "id": "TC-FR06-NEG-002",
+      "title": "Verify that product detail page shows error when product ID is zero",
+      "productId": "0",
+      "bugId": null
+    },
+    {
+      "id": "TC-FR06-NEG-003",
+      "title": "Verify that product detail page shows error when product ID is a negative integer",
+      "productId": "-1",
+      "bugId": null
+    },
+    {
+      "id": "TC-FR06-NEG-004",
+      "title": "Verify that product detail page shows error when product ID is a non-numeric string",
+      "productId": "abc",
+      "bugId": null
+    },
+    {
+      "id": "TC-FR06-NEG-005",
+      "title": "Verify that product detail page handles an extremely large product ID gracefully",
+      "productId": "9999999999999",
+      "bugId": null
+    }
+  ],
+  "invalidQuantityCases": [
+    {
+      "id": "TC-FR06-NEG-006",
+      "title": "Verify that quantity field rejects zero value on the product detail page",
+      "quantity": "0",
+      "constraint": {
+        "name": "min",
+        "value": "1"
+      },
+      "bugId": "BUG-FR06-003"
+    },
+    {
+      "id": "TC-FR06-NEG-007",
+      "title": "Verify that quantity field rejects negative integer on the product detail page",
+      "quantity": "-1",
+      "constraint": {
+        "name": "min",
+        "value": "1"
+      },
+      "bugId": "BUG-FR06-004"
+    },
+    {
+      "id": "TC-FR06-NEG-010",
+      "title": "Verify that quantity field rejects empty value on the product detail page",
+      "quantity": "",
+      "constraint": {
+        "name": "required",
+        "value": ""
+      },
+      "bugId": "BUG-FR06-007"
+    },
+    {
+      "id": "TC-FR06-BV-008",
+      "title": "Verify that quantity field handles an extremely large integer value on the UI input form (UI Upper Boundary Probe)",
+      "quantity": "999999999",
+      "constraint": {
+        "name": "max",
+        "value": "999"
+      },
+      "bugId": "BUG-FR06-008"
+    }
+  ],
+  "decimalQuantityCase": {
+    "id": "TC-FR06-NEG-008",
+    "title": "Verify that quantity field rejects decimal value on the product detail page",
+    "quantity": "1.5",
+    "safeIntegerQuantity": "1",
+    "integerConstraint": {
+      "name": "step",
+      "value": "1"
+    },
+    "bugId": "BUG-FR06-005"
+  },
+  "nonNumericQuantityCase": {
+    "id": "TC-FR06-NEG-009",
+    "title": "Verify that quantity field rejects non-numeric string input on the product detail page",
+    "quantity": "abc",
+    "browserPreventedValue": "",
+    "bugId": "BUG-FR06-006"
+  },
+  "largeQuantityCase": {
+    "id": "TC-FR06-NEG-011",
+    "title": "Verify that system handles extremely large quantity value on the product detail page",
+    "quantity": "999999999",
+    "expectedTotal": "29,999,999,970,000,000 ₫",
+    "bugId": "BUG-FR06-008"
+  },
+  "unauthenticatedCase": {
+    "id": "TC-FR06-NEG-012",
+    "title": "Verify that Add to Cart is blocked for an unauthenticated user on the product detail page",
+    "quantity": "1",
+    "bugId": "BUG-FR06-009"
+  },
+  "boundaryProductCases": [
+    {
+      "id": "TC-FR06-BV-001",
+      "title": "Verify that product detail page loads correctly with the smallest valid product ID (id=1)",
+      "productKey": "primary",
+      "bugId": "BUG-FR06-016"
+    },
+    {
+      "id": "TC-FR06-BV-002",
+      "title": "Verify that product detail page loads correctly with the second smallest product ID (id=2)",
+      "productKey": "secondary",
+      "bugId": "BUG-FR06-017"
+    }
+  ],
+  "validBoundaryQuantityCases": [
+    {
+      "id": "TC-FR06-BV-003",
+      "title": "Verify that quantity field accepts the minimum valid value of 1 and Add to Cart succeeds",
+      "quantity": "1",
+      "expectedTotal": "30,000,000 ₫",
+      "bugId": null
+    },
+    {
+      "id": "TC-FR06-BV-004",
+      "title": "Verify that quantity field accepts the value 2 (one above minimum boundary)",
+      "quantity": "2",
+      "expectedTotal": "60,000,000 ₫",
+      "bugId": null
+    }
+  ],
+  "baselineUpperBoundaryCase": {
+    "id": "TC-FR06-BV-005",
+    "title": "Verify that quantity field accepts the system UI baseline upper boundary of 999",
+    "quantity": "999",
+    "expectedTotal": "29,970,000,000 ₫",
+    "bugId": null
+  }
+}
