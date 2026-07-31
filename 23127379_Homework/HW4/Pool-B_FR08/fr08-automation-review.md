@@ -1,6 +1,6 @@
 # FR-08 Automation Review
 
-**Stage:** Run #3 cart-lifecycle correction review complete — accepted by HITL
+**Stage:** Run #4 three-browser evidence complete — accepted by HITL; failure classification pending
 **Automation scope:** Browser UI only
 **Selected:** 14 UI test cases
 **Excluded:** 3 API-dependent test cases
@@ -126,6 +126,6 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - `TEST-FR08-002` is corrected by ordering the reload before cart creation. No test data, expected result, locator, timeout, retry, storage state, shared fixture, or page object was weakened or expanded.
 - FR-08 requires a fresh three-browser evidence run, updated failure classification, and HITL sign-off before its completion gate can pass.
 
-**Human Review:** Cart-lifecycle correction accepted by HITL
+**Human Review:** Cart-lifecycle correction and Run #4 evidence accepted by HITL
 
-**Next gate:** `/hw4-run FR-08`
+**Next gate:** `/hw4-bugs FR-08`
