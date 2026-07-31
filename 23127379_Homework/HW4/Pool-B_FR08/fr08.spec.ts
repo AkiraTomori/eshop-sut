@@ -41,7 +41,11 @@ async function openCheckoutWithProfileAddress(
       testData.ui.shippingAddressPlaceholder,
     ),
   ).toHaveValue(address);
-  await checkoutPage.openCart(testData.labels);
+  await checkoutPage.prepareCart(
+    testData.routes,
+    testData.labels,
+    testData.ui.productName,
+  );
   await expect(
     checkoutPage.cartRows(testData.ui.productName),
   ).toHaveCount(testData.ui.expectedCartRows);
@@ -118,14 +122,7 @@ async function expectAddressRejected(
 
 test.describe('FR-08 authenticated checkout with a non-empty cart', () => {
   test.beforeEach(async ({ userCheckoutPage }) => {
-    await userCheckoutPage.prepareCart(
-      testData.routes,
-      testData.labels,
-      testData.ui.productName,
-    );
-    await expect(
-      userCheckoutPage.cartRows(testData.ui.productName),
-    ).toHaveCount(testData.ui.expectedCartRows);
+    await userCheckoutPage.openRoute(testData.routes.home);
   });
 
   test.afterEach(async ({ userCheckoutPage }) => {

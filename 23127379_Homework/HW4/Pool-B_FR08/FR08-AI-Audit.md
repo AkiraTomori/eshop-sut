@@ -88,3 +88,16 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Human and A.i agreed on the classification of the Run #3 failures, and the script is ready for further review and potential correction, nothing wrong
 - **Verdict:** Accepted
+---
+## Session: 2026-07-31 16:23 — script-review: Correct FR-08 cart lifecycle after Run #3
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.4 (Collaborate)
+- **Task:** Re-review and correct the FR-08 browser UI suite after Run #3 proved that the Profile reload cleared the test's in-memory cart precondition; preserve Profile persistence verification, UI-only setup/cleanup, canonical expectations, external data, isolation, and the BasePage-derived POM architecture; stop before browser execution.
+- **Prompt:**
+  > /hw4-review FR-08
+- **Supporting Playwright Skills:** `playwright-core` (`locator-strategy.md`, `assertions-and-waiting.md`, `fixtures-and-hooks.md`, `flaky-tests.md`, `common-pitfalls.md`, `test-organization.md`); `playwright-pom` (`pom-vs-fixtures-vs-helpers.md`)
+- **AI Output Summary:** Corrected `TEST-FR08-002` by reordering only the FR-local browser workflow: each address-bearing test now updates Profile, reloads and verifies the persisted external address, then adds `iPhone 15 Pro Max` through the UI before asserting the cart row/total and entering Checkout. Run #3 traces and `CartContext.jsx` prove that the former `beforeEach` product setup succeeded and was later erased when `page.reload()` remounted the in-memory `CartProvider`; the database reset does not explain that within-test state transition. Preserved all cart and Checkout assertions, external JSON, corrected Profile locators, UI-only cleanup, shared fixtures, and the BasePage-derived page object; no timeout, retry, skip, storage manipulation, API action, or weakened expectation was introduced. Updated `fr08.spec.ts`, `fr08-automation-review.md`, and the consolidated FR-08 status in `bug_report.md`; no page object, fixture, or test-data change was needed. `playwright-cli` was unavailable, so retained Playwright evidence and React source were used. JSON and boundary validation, exact comparison of 14 selected HW2 ID/title pairs, TypeScript checking, prohibited-pattern scanning, whitespace checking, nine assertion-pattern checks, and Playwright discovery of 42 project-test combinations passed. No browser suite was executed at F2.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Human and A.I agreed on the correction of the cart lifecycle issue, and the script is ready for re-execution after third time
+- **Verdict:** Accpted
