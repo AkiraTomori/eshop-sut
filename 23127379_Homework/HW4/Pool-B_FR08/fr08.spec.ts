@@ -141,7 +141,7 @@ test.describe('FR-08 authenticated checkout with a non-empty cart', () => {
     );
     await expect(
       userCheckoutPage.checkoutItem(testData.ui.checkoutItemText),
-    ).toBeVisible();
+    ).toHaveText(testData.ui.checkoutItemText);
     await expect
       .soft(userCheckoutPage.allPrimaryHeadings)
       .toHaveCount(testData.ui.expectedPrimaryHeadings);

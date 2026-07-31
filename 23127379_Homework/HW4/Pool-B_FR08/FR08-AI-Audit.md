@@ -127,3 +127,16 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Nothing wrong
 - **Verdict:** Accepted
+---
+## Session: 2026-07-31 21:20 — script-review: Correct FR-08 list-item locator after Run #4
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.4 (Collaborate)
+- **Task:** Re-review and correct the FR-08 browser UI suite after Run #4 isolated an invalid accessible-name assumption in the EP-001 Checkout item locator; preserve external test data, the exact item-content expectation, all later known-defect assertions, UI-only isolation, and the existing fixture/POM architecture; stop before browser execution.
+- **Prompt:**
+  > /hw4-review FR-08
+- **Supporting Playwright Skills:** `playwright-core` (`locator-strategy.md`, `assertions-and-waiting.md`, `fixtures-and-hooks.md`, `flaky-tests.md`, `common-pitfalls.md`, `test-organization.md`); `playwright-pom` (`page-object-model.md`, `pom-vs-fixtures-vs-helpers.md`)
+- **AI Output Summary:** Corrected `TEST-FR08-003` without weakening the product-content check: retained Run #4 evidence and `Checkout.jsx` confirm the exact item content is rendered inside a native `li`, but `listitem` does not receive an accessible name from descendant text. The BasePage-derived Checkout page object now filters semantic list items with the externally supplied descendant text, and EP-001 asserts the complete normalized external value using `toHaveText` instead of visibility alone. Preserved all heading, action-colour, total, success, cart-clear, known-bug, data-driven, UI-only setup/cleanup, fixture, and isolation behavior; no test data or shared infrastructure changed. Updated `fr08.spec.ts`, `pages/checkout.page.ts`, `fr08-automation-review.md`, the Run #4 report status, and the consolidated workflow status. `playwright-cli` was unavailable, so retained Playwright evidence and React source were used. JSON parsing, 14 unique TC and boundary-length checks, exact HW2 ID/title comparison, TypeScript checking, prohibited-pattern scanning, eight assertion-pattern checks, whitespace validation, and Playwright discovery of 42 project-test combinations passed. No browser suite was executed at F2.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Nothing Wrong
+- **Verdict:** Accepted

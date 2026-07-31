@@ -138,7 +138,7 @@ export class CheckoutPage extends BasePage {
   }
 
   checkoutItem(text: string): Locator {
-    return this.page.getByRole('listitem', { name: text, exact: true });
+    return this.page.getByRole('listitem').filter({ hasText: text });
   }
 
   checkoutButton(labels: CheckoutLabels): Locator {

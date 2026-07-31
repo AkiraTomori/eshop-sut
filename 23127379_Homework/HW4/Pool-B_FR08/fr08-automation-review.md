@@ -1,6 +1,6 @@
 # FR-08 Automation Review
 
-**Stage:** Run #4 failure classification accepted — test-locator correction required
+**Stage:** Run #4 locator correction reviewed and accepted — ready for browser evidence
 **Automation scope:** Browser UI only
 **Selected:** 14 UI test cases
 **Excluded:** 3 API-dependent test cases
@@ -37,6 +37,7 @@
 
 | Issue | Severity | Original pattern | Correction | Root cause |
 |---|---|---|---|---|
+| TEST-FR08-003 blocked EP-001 before its product-defect assertions in every browser | High | `getByRole('listitem', { name: exactText, exact: true })` followed by visibility only | Filter semantic list items with the external descendant text and assert the complete normalized text using `toHaveText(exactText)` | Native `listitem` does not derive an accessible name from descendant text; Run #4 screenshots, traces, and `Checkout.jsx` show the rendered item content itself is correct |
 | TEST-FR08-002 blocked all 12 address-bearing TCs in every browser | High | `beforeEach` added the product before the Profile update helper called `page.reload()` | Reordered the browser UI flow: update/reload/verify Profile first, then call `prepareCart()`, assert its row and total, and proceed to Checkout | `CartProvider` owns cart only in React memory, so the explicit reload remounted it with `[]`; the test invalidated its own precondition |
 | TEST-FR08-001 blocked all 12 address-bearing TCs in every browser | High | `getByLabel("Số điện thoại")` and `getByLabel("Địa chỉ giao hàng")` assumed associated labels | Replaced both with exact, externally supplied `getByPlaceholder()` locators verified against the Run #2 trace snapshot and `Profile.jsx` | The visible labels are not programmatically associated with their adjacent input/textarea, so label locators correctly resolved zero controls |
 | Shipping address was located on Checkout although current UI maintains it on Profile | High | `getByLabel("Địa chỉ giao hàng")` on `/checkout` | Added UI-only Profile update, dialog handling, reload, and persisted-value assertion before checkout | Generation followed the canonical checkout wording but lacked the later HITL workflow clarification |
@@ -81,14 +82,14 @@ These cases are not automated and are not counted toward the 14 selected UI case
 
 None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; heading structure uses accessible role plus level; and error placement uses polled element geometry. Run #4 confirms the reordered Profile/cart lifecycle reaches the intended Checkout assertions. API/database clauses remain out of scope rather than being simulated.
 
-## Run #4 classification
+## Run #4 classification and locator correction
 
 - **Genuine product defects:** 36 failed TC/browser results reproduce product defects. Thirty primary rows reproduce known HW2 defects `BUG-FR08-001`, `BUG-FR08-003`, `BUG-FR08-005`, `BUG-FR08-006`, and `BUG-FR08-009`; the EP-001 screenshots also reproduce known colour defect `BUG-FR08-002` as a secondary observation. Six rows reproduce two new cross-browser defects: missing empty-cart illustration `BUG-FR08-AUTO-001` and directly editable Checkout total `BUG-FR08-AUTO-002`.
-- **Test issue:** Three TC-FR08-EP-001 rows are `TEST-FR08-003`. The exact item text is visibly correct, but a native `listitem` does not derive its accessible name from descendant text, so `getByRole('listitem', { name: exactText })` resolves zero elements. The correction must preserve the external expected text and use `getByRole('listitem').filter({ hasText: exactText })`.
+- **Test issue corrected:** Three TC-FR08-EP-001 rows were `TEST-FR08-003`. The exact item text is visibly correct, but a native `listitem` does not derive its accessible name from descendant text. The page object now uses `getByRole('listitem').filter({ hasText: exactText })`, and the spec asserts the full external value with `toHaveText(exactText)` rather than weakening the check to visibility.
 - **Previous corrections verified:** `TEST-FR08-001` and `TEST-FR08-002` appear zero times in Run #4. All address-bearing tests pass Profile persistence, product addition, cart row/total, and Checkout navigation.
 - **API-only defects:** `BUG-FR08-007` and `BUG-FR08-008` remain outside the HW4 browser-UI scope and are not claimed as reproduced.
 - **Passed protection:** TC-FR08-NEG-001 passed in Chromium, Firefox, and WebKit.
-- **Correction gate:** Run #4 classification is complete. After HITL accepts its audit session, FR-08 returns to `/hw4-review FR-08` to correct only `TEST-FR08-003`; no product expectation may be weakened.
+- **Correction gate:** Static F2 review and validation are complete. Cross-browser confirmation belongs to the next `/hw4-run FR-08` evidence cycle after HITL accepts this review session.
 
 Full classification and per-browser evidence are recorded in [fr08-bug-report.md](fr08-bug-report.md).
 
@@ -120,9 +121,10 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - All UI-observable expected clauses are asserted or explicitly disclosed as a source discrepancy/out-of-scope hybrid clause.
 - Tests use the shared fixture, external JSON, fresh contexts, UI-only setup/cleanup, and spec-correct known-defect assertions.
 - Run #4 produced 3 passed and 39 failed results across 42 browser executions.
-- Of the 39 failures, 36 are genuine product-defect results and three are `TEST-FR08-003`; the prior Profile locator and cart lifecycle issues are resolved.
-- FR-08 requires correction of the EP-001 list-item locator, a fresh three-browser evidence run, renewed failure classification, and HITL sign-off before its completion gate can pass.
+- Of the 39 Run #4 failures, 36 are genuine product-defect results and three were `TEST-FR08-003`; all three identified test issues now have focused corrections.
+- `TEST-FR08-003` is corrected without changing external data or weakening any later heading, colour, total, success, or cart-clear expectation.
+- FR-08 requires HITL acceptance of this review, a fresh three-browser evidence run, renewed failure classification, and sign-off before its completion gate can pass.
 
-**Human Review:** Run #4 failure classification accepted by HITL
+**Human Review:** `TEST-FR08-003` correction accepted by HITL
 
-**Next gate:** `/hw4-review FR-08`
+**Next gate:** `/hw4-run FR-08`

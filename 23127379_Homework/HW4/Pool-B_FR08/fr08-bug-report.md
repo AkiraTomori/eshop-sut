@@ -4,7 +4,7 @@
 >
 > **Evidence source:** [FR-08 Run Summary](fr08-run-summary.md), tracked Run #4 across Chromium, Firefox, and WebKit
 >
-> **Classification status:** Complete — accepted by HITL; one test-locator correction required
+> **Classification status:** Complete — accepted by HITL; test-locator correction applied, rerun pending
 >
 > **Aggregate report:** [HW04 Bug Report](../bug_report.md)
 
@@ -153,7 +153,7 @@ All defects below affect Chromium, Firefox, and WebKit. The matrix above contain
 - **Source:** TC-FR08-EP-001; **Affected browsers:** Chromium, Firefox, WebKit; **Failed results:** 3
 - **Observed:** `getByRole('listitem', { name: 'iPhone 15 Pro Max x 1 — 30,000,000 ₫', exact: true })` resolves zero elements, while every screenshot and trace shows that exact item text in a native `<li>`.
 - **Root cause:** The locator assumes the native `listitem` receives an accessible name from its contents. The rendered content is correct; this is not a product failure.
-- **Correction direction:** Return to `/hw4-review FR-08` and use `getByRole('listitem').filter({ hasText: externalText })` (or an equivalent source-verified text assertion). Preserve the external item text and all later heading, colour, total, success, and cart-clear assertions.
+- **Correction status:** Applied at the next F2 review: the page object filters semantic list items by the external descendant text, and the spec asserts the complete value with `toHaveText(externalText)`. Cross-browser confirmation remains pending; all later heading, colour, total, success, and cart-clear assertions are preserved.
 
 `TEST-FR08-001` and `TEST-FR08-002` do not recur in Run #4. All address-bearing cases pass Profile update/persistence, product addition, cart row/total, and Checkout navigation.
 
