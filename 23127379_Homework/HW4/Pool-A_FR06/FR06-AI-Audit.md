@@ -34,6 +34,19 @@
   > /hw4-run FR-06
 - **Supporting Playwright Skills:** `playwright-ci` (`projects-and-dependencies.md`, `reporting-and-artifacts.md`); `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`)
 - **AI Output Summary:** Started the required local EShop services, executed all 22 reviewed FR-06 UI tests sequentially in each configured browser, and generated three isolated HTML reports plus three JSON result files. Chromium, Firefox, and WebKit each recorded 7 passed, 15 failed, 0 skipped, and 0 flaky tests (66 executions total). Failure identities matched across all browsers. Evidence validation confirmed 45 traces, 45 screenshots, 45 error-context files, 12 retained videos, and rendered report titles showing `EShop HW04 Automation — Run by: 23127379`. The aggregate runner exited nonzero because genuine assertions failed; all three runs and their reports completed. `playwright-cli` was unavailable, so standard `@playwright/test` execution and retained artifacts were used. Failure-to-bug classification was intentionally deferred to `/hw4-bugs FR-06`.
-- **Human Review Notes:** Pending HITL review
-- **What AI Got Wrong:** Pending HITL review
-- **Verdict:** Pending HITL review
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Test suite execution and evidence capture were successful; no significant issues were found. The evidence is ready for classification and further analysis.
+- **Verdict:** Passed with approval for classification and further analysis. The FR-06 evidence is now ready for the next step in the bug-reporting process.
+---
+## Session: 2026-07-31 11:31 — bug-report-automation: Classify FR-06 browser failures
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.2 (Apply)
+- **Task:** Classify every failed FR-06 TC/browser result against retained evidence and canonical HW2/SRS sources, write the detailed per-FR report, update the consolidated bug summary and automation review, and draft new GitHub Issue content without creating an external issue.
+- **Prompt:**
+  > /hw4-bugs FR-06
+- **Supporting Playwright Skills:** `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`); `playwright-ci` (`reporting-and-artifacts.md`)
+- **AI Output Summary:** Classified all 45 failed TC/browser results from Run #1. Confirmed eight distinct product defects: seven canonical HW2 defects reproduced by 21 results and new `BUG-FR06-AUTO-001` reproduced by 24 results across Chromium, Firefox, and WebKit. Recorded one secondary WebKit focus-portability test issue and zero out-of-scope failure results. Avoided falsely confirming BUG-FR06-002, BUG-FR06-005, and BUG-FR06-009 because their tests stopped earlier at the new first-click defect; BUG-FR06-006's UI test passed. Replaced the FR detail placeholder with a 45-row matrix, complete defect evidence, and a ready-to-paste issue draft; updated root `bug_report.md` and the automation review. Standard Playwright trace CLI, JSON, error contexts, screenshots, reports, source, HW2, and SRS were used; standalone `playwright-cli` was unavailable. Local-link, row-count, stale-placeholder, and whitespace validation passed. No GitHub issue was created.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Test suite execution and evidence capture were successful; no significant issues were found. The evidence is ready for classification and further analysis.
+- **Verdict:** Passed with approval for classification and further analysis. The FR-06 evidence is now ready for the next step in the bug-reporting process.

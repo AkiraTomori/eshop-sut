@@ -1,6 +1,6 @@
 # FR-06 Automation Review
 
-**Stage:** Reviewed — pending `/hw4-run FR-06`
+**Stage:** Browser evidence classified — pending HITL audit sign-off
 **Automation scope:** Browser UI only  
 **Selected:** 22 UI test cases  
 **Excluded:** 9 API-dependent test cases
@@ -89,14 +89,20 @@ These cases are not automated and are not counted toward the 22 selected UI case
 
 None of the selected UI steps is inherently manual. Colour uses `toHaveCSS`, focus order uses keyboard plus `toBeFocused`, and non-numeric input uses normal `pressSequentially` keyboard events. Programmatic injection of `abc` into `type=number` would bypass the browser UI and is deliberately not used.
 
-## Known failures expected during browser execution
+## Known-failure classification from Run #1
 
-- Current React source suppresses the first Add to Cart click via `clickCount`; this behavior is absent from HW2. The reviewed suite does not compensate for it, so EP-003, EP-004 setup, valid boundaries, and invalid-submission flows may expose a new automation-discovered defect at F3.
-- BUG-FR06-001/016/017: current source omits category and breadcrumb and uses a green positive-action button.
-- BUG-FR06-002: `CartContext` appends duplicate rows rather than incrementing an existing row, if the test reaches the second add.
-- BUG-FR06-003 through 009: current source has no quantity/authentication validation in `handleAddToCart`; normal browser prevention may mean BUG-FR06-006 is not reproduced.
-- Current navbar source has no quantity badge, so EP-003 is expected to fail that clause even if success feedback appears.
-- Product-not-found rendering remains grounded in the verified current React message and should pass when the backend returns an empty object.
+The detailed evidence and 45-row TC/browser matrix are in [fr06-bug-report.md](fr06-bug-report.md).
+
+| Classification | Result |
+|---|---|
+| Confirmed genuine defects | 8 distinct: 7 known HW2 defects and 1 new automation-discovered defect |
+| Known defects reproduced | BUG-FR06-001, BUG-FR06-003, BUG-FR06-004, BUG-FR06-007, BUG-FR06-008, BUG-FR06-016, BUG-FR06-017 |
+| New defect | BUG-FR06-AUTO-001 — first Add to Cart click is silently ignored in Chromium, Firefox, and WebKit |
+| Known mappings not confirmed | BUG-FR06-002, BUG-FR06-005, and BUG-FR06-009 were not reached because their tests stopped at BUG-FR06-AUTO-001; BUG-FR06-006's UI test passed |
+| Test issue | TEST-FR06-001 — WebKit first-Tab focus assertion depends on host/browser full-keyboard-access behavior and must return to script review |
+| Out-of-scope failures | 0; all nine API-only exclusions remain excluded and unclaimed |
+
+The new first-click defect accounts for 24 failed TC/browser results across EP-003, EP-004, NEG-008, NEG-011, NEG-012, BV-003, BV-004, and BV-005. The 21 remaining failed results reproduce the seven known UI defects above. Product-not-found cases and normal non-numeric keyboard prevention passed in all engines.
 
 ## Assertion-pattern inventory
 
@@ -123,8 +129,10 @@ None of the selected UI steps is inherently manual. Colour uses `toHaveCSS`, foc
 - All UI-observable canonical expected-result clauses are asserted or a source discrepancy is documented.
 - Tests are fresh-context, order-independent, data-driven, and use UI-only setup/cleanup with `beforeEach`/`afterEach`.
 - Known bugs are annotated but not skipped, inverted, or weakened.
-- Full browser evidence has intentionally not been run during F2.
+- Run #1 completed all 66 browser executions and produced isolated Chromium, Firefox, and WebKit reports, JSON, screenshots, traces, error contexts, and a cumulative run summary.
+- Failure classification is complete in `fr06-bug-report.md` and the consolidated root `bug_report.md`.
+- FR-06 remains blocked only on HITL sign-off of pending audit sessions; external creation of BUG-FR06-AUTO-001 remains a HITL action.
 
-**Human Review:** Pending HITL sign-off
+**Human Review:** Pending HITL sign-off for browser-evidence and bug-classification audit sessions
 
-**Next gate:** `/hw4-run FR-06`
+**Next gate:** `/hw4-signoff FR-06`

@@ -4,7 +4,7 @@
 >
 > **Scope:** Summary only. Detailed evidence and reproduction steps live in each FR pool.
 >
-> **GitHub Issues:** <https://github.com/ttbhanh/eshop-sut/issues>
+> **GitHub Issues:** <https://github.com/AkiraTomori/eshop-sut/issues>
 
 ---
 
@@ -12,32 +12,43 @@
 
 | FR | Feature | Detailed report | Latest automation evidence | Classification status | Confirmed bugs |
 |---|---|---|---|---|---:|
-| FR-06 | Product Detail View | [fr06-bug-report.md](Pool-A_FR06/fr06-bug-report.md) | Run #1 — 3 browsers | Pending `/hw4-bugs FR-06` | Pending |
+| FR-06 | Product Detail View | [fr06-bug-report.md](Pool-A_FR06/fr06-bug-report.md) | Run #1 — 3 browsers | Complete — pending HITL sign-off | 8 |
 | FR-08 | Checkout | `Pool-B_FR08/fr08-bug-report.md` | Not run | Not started | 0 |
 | FR-15 | Product Management | `Pool-C_FR15/fr15-bug-report.md` | Not run | Not started | 0 |
 
 ## Consolidated bug index
 
-This table is populated only from bugs already classified as genuine product defects in a signed per-FR report. Do not copy unclassified assertion failures or HW2 candidates into this index.
+This index contains only defects classified as genuine in the detailed FR reports. Full reproduction steps, assertions, and artifact paths remain in those reports.
 
 | Bug ID | FR | Title | Severity | Affected browsers | Known/New | GitHub Issue | Detail |
 |---|---|---|---|---|---|---|---|
-| _Pending FR-06 classification_ | FR-06 | — | — | — | — | — | [Open detail](Pool-A_FR06/fr06-bug-report.md) |
+| BUG-FR06-001 | FR-06 | Missing required product details/breadcrumb; wrong action colour | Serious | Chromium, Firefox, WebKit | Known | [Issue 1](https://github.com/AkiraTomori/eshop-sut/issues/1) | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-001--required-product-information-breadcrumb-and-positive-action-colour-are-incorrect) |
+| BUG-FR06-003 | FR-06 | Zero quantity lacks UI validation | Serious | Chromium, Firefox, WebKit | Known | [Issue 3](https://github.com/AkiraTomori/eshop-sut/issues/3) | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-003--zero-quantity-lacks-ui-validation) |
+| BUG-FR06-004 | FR-06 | Negative quantity lacks UI validation | Serious | Chromium, Firefox, WebKit | Known | [Issue 4](https://github.com/AkiraTomori/eshop-sut/issues/4) | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-004--negative-quantity-lacks-ui-validation) |
+| BUG-FR06-007 | FR-06 | Empty quantity lacks required validation | Serious | Chromium, Firefox, WebKit | Known | [Issue 7](https://github.com/AkiraTomori/eshop-sut/issues/7) | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-007--empty-quantity-lacks-required-validation) |
+| BUG-FR06-008 | FR-06 | Practical quantity upper bound is not enforced | Medium | Chromium, Firefox, WebKit | Known | [Issue 8](https://github.com/AkiraTomori/eshop-sut/issues/8) | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-008--practical-quantity-upper-bound-is-not-enforced) |
+| BUG-FR06-016 | FR-06 | Category missing at product-ID lower boundary | Serious | Chromium, Firefox, WebKit | Known | [Issue 16](https://github.com/AkiraTomori/eshop-sut/issues/16) | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-016--category-missing-at-product-id-lower-boundary) |
+| BUG-FR06-017 | FR-06 | Category missing at product-ID LB+1 boundary | Serious | Chromium, Firefox, WebKit | Known | [Issue 17](https://github.com/AkiraTomori/eshop-sut/issues/17) | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-017--category-missing-at-product-id-lb1-boundary) |
+| BUG-FR06-AUTO-001 | FR-06 | First Add to Cart click is silently ignored | Serious | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-auto-001--first-add-to-cart-click-is-silently-ignored) |
 
 ## Totals
 
+Counts represent distinct classified defects/issues, not repeated browser failures.
+
 | Metric | FR-06 | FR-08 | FR-15 | Total |
 |---|---:|---:|---:|---:|
-| Confirmed genuine product defects | Pending | 0 | 0 | Pending |
-| Known HW2 defects reproduced | Pending | 0 | 0 | Pending |
-| New automation-discovered defects | Pending | 0 | 0 | Pending |
-| Test/infrastructure failures | Pending | 0 | 0 | Pending |
-| Out-of-scope failures | Pending | 0 | 0 | Pending |
+| Confirmed genuine product defects | 8 | 0 | 0 | 8 |
+| Known HW2 defects reproduced | 7 | 0 | 0 | 7 |
+| New automation-discovered defects | 1 | 0 | 0 | 1 |
+| Test/infrastructure issues | 1 | 0 | 0 | 1 |
+| Out-of-scope failures | 0 | 0 | 0 | 0 |
+
+FR-06 has 45 failed TC/browser results: 21 reproduce known defects and 24 reproduce the new first-click defect. One WebKit focus-portability observation is secondary to an EP-001 product-defect result and does not increase the 45-result total.
 
 ## Aggregation rules
 
 - `/hw4-bugs FR-##` writes full details to the current pool's `fr##-bug-report.md`.
-- Root `bug_report.md` contains only totals, a concise bug index, GitHub Issue links, and links to the detailed FR reports.
-- The root summary must be updated in the same `/hw4-bugs` invocation; it must never contain more confirmed bugs than the detailed FR reports.
-- A failed assertion is not automatically a product bug. It must first be classified against HW2, SRS, test code, environment, and retained browser evidence.
-- API-only HW2 defects remain outside HW4 automation scope and must not be presented as browser-automation confirmations.
+- Root `bug_report.md` contains only totals, a concise bug index, GitHub Issue links, and links to detailed FR reports.
+- Root counts are derived from, and never exceed, the detailed per-FR reports.
+- A failed assertion is not automatically a product bug; classification requires HW2/SRS, test, environment, and retained evidence.
+- API-only HW2 defects remain outside HW4 automation scope and are never presented as browser-automation confirmations.
