@@ -13,7 +13,7 @@
 | FR | Feature | Detailed report | Latest automation evidence | Classification status | Confirmed bugs |
 |---|---|---|---|---|---:|
 | FR-06 | Product Detail View | [fr06-bug-report.md](Pool-A_FR06/fr06-bug-report.md) | Run #1 — 3 browsers | Complete — pending HITL sign-off | 8 |
-| FR-08 | Checkout | [fr08-bug-report.md](Pool-B_FR08/fr08-bug-report.md) | Run #3 — 3 browsers | Complete — correction and HITL sign-off required | 1 |
+| FR-08 | Checkout | [fr08-bug-report.md](Pool-B_FR08/fr08-bug-report.md) | Run #3 — 3 browsers | Complete — correction required | 1 |
 | FR-15 | Product Management | `Pool-C_FR15/fr15-bug-report.md` | Not run | Not started | 0 |
 
 ## Consolidated bug index

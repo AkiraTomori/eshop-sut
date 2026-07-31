@@ -4,7 +4,7 @@
 >
 > **Evidence source:** [FR-08 Run Summary](fr08-run-summary.md), Chromium, Firefox, and WebKit reports
 >
-> **Classification status:** Complete — pending HITL sign-off
+> **Classification status:** Complete — accepted by HITL; test correction required
 >
 > **Aggregate report:** [HW04 Bug Report](../bug_report.md)
 

@@ -124,6 +124,6 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - `TEST-FR08-001` is cross-browser verified as resolved, but the explicit Profile reload now exposes a separate test-ordering/isolation defect because the SUT cart is held only in React memory.
 - FR-08 requires correction at the review gate, a fresh three-browser evidence run, updated failure classification, and HITL sign-off before its completion gate can pass.
 
-**Human Review:** Pending HITL sign-off for Run #3 classification
+**Human Review:** Run #3 classification accepted by HITL
 
-**Next gate:** `/hw4-signoff FR-08` for the `2026-07-31 16:13 — bug-report-automation: Classify FR-08 Run #3 browser failures` session; after acceptance, `/hw4-review FR-08`
+**Next gate:** `/hw4-review FR-08`
