@@ -1,6 +1,6 @@
 # FR-08 Automation Review
 
-**Stage:** Script review complete — pending HITL sign-off
+**Stage:** Failure classification complete — pending HITL sign-off
 **Automation scope:** Browser UI only
 **Selected:** 14 UI test cases
 **Excluded:** 3 API-dependent test cases
@@ -78,17 +78,17 @@ These cases are not automated and are not counted toward the 14 selected UI case
 
 None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; heading structure uses accessible role plus level; error placement uses polled element geometry; address persistence is verified by a normal Profile reload. API/database clauses remain out of scope rather than being simulated.
 
-## Expected known failures before F3
+## Run #2 known-failure classification
 
-These are source-grounded expectations, not browser results or classifications:
+- **Genuine product defect:** TC-FR08-NEG-003 failed in Chromium, Firefox, and WebKit because the empty-cart state has no required image/illustration. This is new `BUG-FR08-AUTO-001` (Cosmetic).
+- **Test issue:** The other 36 failed TC/browser results are `TEST-FR08-001`. All 12 address-bearing TCs stop on Profile setup because `getByLabel('Số điện thoại')` cannot resolve a control: the current `<label>` has no `htmlFor`, and the input has no `id` or accessible name.
+- **Known defects reproduced:** None. The Profile setup failure occurs before Checkout assertions, so BUG-FR08-001, 002, 003, 005, 006, and 009 are not confirmed by this run.
+- **API-only defects:** BUG-FR08-007 and BUG-FR08-008 remain outside the HW4 browser-UI scope.
+- **Passed protection:** TC-FR08-NEG-001 passed in all three browsers.
+- **Unreached clauses:** NEG-003 stopped at the missing illustration before its direct-Checkout assertion. EP-002 never reached the editable-total assertion.
+- **Required correction:** Return `TEST-FR08-001` to `/hw4-review FR-08`, replace both Profile `getByLabel()` control locators with source-verified stable locators, then rerun browser evidence. Do not weaken FR-08 assertions.
 
-- EP-001/NEG-007: Checkout uses `<h2>` and a green submit action (BUG-FR08-001/002).
-- EP-001/EP-002 and valid boundaries: `Checkout.jsx` sets success but does not call `clearCart()` (BUG-FR08-003).
-- EP-003: Breadcrumb and address-validation feedback are absent (BUG-FR08-005/006).
-- NEG-003: Cart's empty state has no illustration, and direct Checkout still exposes submission.
-- NEG-004/NEG-006/BV-005: No UI required/whitespace validation exists (BUG-FR08-006). Browser evidence cannot confirm backend-only BUG-FR08-007.
-- BV-006: Profile and Checkout expose no 255-character enforcement or over-limit UI error (UI-observable portion of BUG-FR08-009).
-- EP-002: The checkout total is a directly editable number input, contrary to SRS FR-08; F3 may reveal a new UI defect because HW2 has no mapped Bug ID for this clause.
+Full classification and per-browser evidence are recorded in [fr08-bug-report.md](fr08-bug-report.md).
 
 ## Assertion-pattern inventory
 
@@ -116,9 +116,10 @@ These are source-grounded expectations, not browser results or classifications:
 - Every address-bearing case now includes the HITL-requested Profile update and persisted browser-control verification.
 - All UI-observable expected clauses are asserted or explicitly disclosed as a source discrepancy/out-of-scope hybrid clause.
 - Tests use the shared fixture, external JSON, fresh contexts, UI-only setup/cleanup, and spec-correct known-defect assertions.
-- Browser execution was intentionally not run at F2. Static validation and three-project discovery passed before handoff.
-- FR-08 is ready for HITL review of this correction set, then the next workflow command is `/hw4-run FR-08`.
+- Run #2 produced 42 browser executions: 3 passed and 39 failed. All failed results retained screenshots, traces, and error contexts.
+- The run confirms one new product defect and one test issue; it does not confirm any mapped HW2 checkout defect because the affected tests never reached Checkout.
+- FR-08 cannot pass its completion gate until `TEST-FR08-001` is corrected through script review, the three-browser evidence is rerun, failures are reclassified, and all pending audit sessions receive HITL sign-off.
 
 **Human Review:** Pending HITL sign-off
 
-**Next gate:** `/hw4-run FR-08`
+**Next gate:** `/hw4-signoff FR-08` for the 2026-07-31 15:17 classification session; after sign-off, return to `/hw4-review FR-08` to correct `TEST-FR08-001`

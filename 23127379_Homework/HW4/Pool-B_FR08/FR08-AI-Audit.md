@@ -36,3 +36,16 @@
 - **Human Review Notes:** Approved test suite script
 - **What AI Got Wrong:** But 12 testcases failed due to the locator issue, i guess it's not our fault for it, maybe because SUT's responsibility about the locator. But I think the another problem about changing profile in 12 testcases they all fill in phone number, but why the best pratice locator failed, need to review
 - **Verdict:** Partially Accepted. The test suite script is approved, but the failures due to locator issues need further investigation and potential collaboration with the SUT team to resolve.
+---
+## Session: 2026-07-31 15:17 — bug-report-automation: Classify FR-08 browser failures
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.4 (Collaborate)
+- **Task:** Classify every failed FR-08 Run #2 TC/browser result against retained Playwright evidence and canonical HW2/SRS sources, create the detailed FR report and GitHub Issue draft, update the consolidated summary and automation review, and re-check the FR completion gate.
+- **Prompt:**
+  > /hw4-bugs FR-08
+- **Supporting Playwright Skills:** `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`); `playwright-ci` (`reporting-and-artifacts.md`)
+- **AI Output Summary:** Classified all 39 failed Run #2 results with one matrix row per TC/browser and verified every local evidence link. Three TC-FR08-NEG-003 results confirm new Cosmetic defect `BUG-FR08-AUTO-001`, the missing required empty-cart illustration, and include a ready-to-paste GitHub Issue draft. The other 36 results are `TEST-FR08-001`: 12 address-bearing TCs in all browsers stop during Profile setup because `getByLabel('Số điện thoại')` cannot resolve the unassociated label/input markup, so no mapped HW2 Checkout defect is falsely claimed as reproduced. Updated `fr08-bug-report.md`, `fr08-automation-review.md`, and root `bug_report.md`; retained all screenshots, traces, error contexts, JSON, and HTML reports. `playwright-cli` was unavailable, so standard Playwright terminal trace analysis, DOM snapshots, JSON, screenshots, and React source were used. FR-08 remains incomplete; after this classification session receives HITL sign-off, it returns to `/hw4-review FR-08` for locator correction and a fresh evidence cycle.
+- **Human Review Notes:** Approved this session
+- **What AI Got Wrong:** Human and A.I have reviewed the evidence about the locator issue
+- **Verdict:** Accepted

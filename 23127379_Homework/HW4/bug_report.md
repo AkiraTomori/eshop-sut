@@ -13,7 +13,7 @@
 | FR | Feature | Detailed report | Latest automation evidence | Classification status | Confirmed bugs |
 |---|---|---|---|---|---:|
 | FR-06 | Product Detail View | [fr06-bug-report.md](Pool-A_FR06/fr06-bug-report.md) | Run #1 — 3 browsers | Complete — pending HITL sign-off | 8 |
-| FR-08 | Checkout | `Pool-B_FR08/fr08-bug-report.md` | Not run | Not started | 0 |
+| FR-08 | Checkout | [fr08-bug-report.md](Pool-B_FR08/fr08-bug-report.md) | Run #2 — 3 browsers | Complete — correction and HITL sign-off required | 1 |
 | FR-15 | Product Management | `Pool-C_FR15/fr15-bug-report.md` | Not run | Not started | 0 |
 
 ## Consolidated bug index
@@ -30,6 +30,7 @@ This index contains only defects classified as genuine in the detailed FR report
 | BUG-FR06-016 | FR-06 | Category missing at product-ID lower boundary | Serious | Chromium, Firefox, WebKit | Known | [Issue 16](https://github.com/AkiraTomori/eshop-sut/issues/16) | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-016--category-missing-at-product-id-lower-boundary) |
 | BUG-FR06-017 | FR-06 | Category missing at product-ID LB+1 boundary | Serious | Chromium, Firefox, WebKit | Known | [Issue 17](https://github.com/AkiraTomori/eshop-sut/issues/17) | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-017--category-missing-at-product-id-lb1-boundary) |
 | BUG-FR06-AUTO-001 | FR-06 | First Add to Cart click is silently ignored | Serious | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-A_FR06/fr06-bug-report.md#bug-fr06-auto-001--first-add-to-cart-click-is-silently-ignored) |
+| BUG-FR08-AUTO-001 | FR-08 | Empty cart state is missing the required illustration | Cosmetic | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-B_FR08/fr08-bug-report.md#bug-fr08-auto-001--empty-cart-state-is-missing-the-required-illustration) |
 
 ## Totals
 
@@ -37,13 +38,15 @@ Counts represent distinct classified defects/issues, not repeated browser failur
 
 | Metric | FR-06 | FR-08 | FR-15 | Total |
 |---|---:|---:|---:|---:|
-| Confirmed genuine product defects | 8 | 0 | 0 | 8 |
+| Confirmed genuine product defects | 8 | 1 | 0 | 9 |
 | Known HW2 defects reproduced | 7 | 0 | 0 | 7 |
-| New automation-discovered defects | 1 | 0 | 0 | 1 |
-| Test/infrastructure issues | 1 | 0 | 0 | 1 |
+| New automation-discovered defects | 1 | 1 | 0 | 2 |
+| Test/infrastructure issues | 1 | 1 | 0 | 2 |
 | Out-of-scope failures | 0 | 0 | 0 | 0 |
 
 FR-06 has 45 failed TC/browser results: 21 reproduce known defects and 24 reproduce the new first-click defect. One WebKit focus-portability observation is secondary to an EP-001 product-defect result and does not increase the 45-result total.
+
+FR-08 Run #2 has 39 failed TC/browser results: 3 reproduce the new missing-illustration defect and 36 are caused by one Profile control-locator test issue. No HW2 checkout defect is claimed as reproduced because those 36 tests stopped before reaching Checkout.
 
 ## Aggregation rules
 
