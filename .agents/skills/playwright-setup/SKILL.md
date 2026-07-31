@@ -58,9 +58,18 @@ Maintain these shared files:
 Pool-[X]_FR##/playwright-report/chromium/index.html
 Pool-[X]_FR##/playwright-report/firefox/index.html
 Pool-[X]_FR##/playwright-report/webkit/index.html
+Pool-[X]_FR##/playwright-report/index.html
 ```
 
 Keep each run's JSON/test artefacts in a browser-specific path so runs cannot overwrite one another.
+
+After all three attempts, the runner must create or update:
+
+```text
+Pool-[X]_FR##/fr##-run-summary.md
+```
+
+Each runner invocation adds exactly one cumulative session with timestamp, per-browser process status, JSON-derived passed/failed/flaky/skipped/total counts, duration, and report/result links. Record missing JSON as `N/A` rather than reusing stale results. Generate the root `playwright-report/index.html` overview with latest-run statistics and links to all three isolated reports. Include the full-FR `npx playwright show-report <pool>/playwright-report` command and browser-specific variants in the summary. Setup, `--list`, and opening a report do not increment the count.
 
 ## Setup gate
 

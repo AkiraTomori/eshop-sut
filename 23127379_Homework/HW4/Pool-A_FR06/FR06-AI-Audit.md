@@ -24,3 +24,16 @@
 - **Human Review Notes:** Approved the AI corrections and improvements. The suite is now ready for execution and further review.
 - **What AI Got Wrong:** No significant issues were found in the AI review; all corrections were appropriate and improved the suite.
 - **Verdict:** Passed with approval for execution and further review. The FR-06 suite is now considered robust and ready for browser testing.
+---
+## Session: 2026-07-31 10:01 — playwright-ci: Capture FR-06 three-browser evidence
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Execute the reviewed FR-06 browser UI suite locally in Chromium, Firefox, and WebKit; preserve separate HTML, JSON, trace, screenshot, video, and error-context evidence; and validate the evidence gate without classifying failures.
+- **Prompt:**
+  > /hw4-run FR-06
+- **Supporting Playwright Skills:** `playwright-ci` (`projects-and-dependencies.md`, `reporting-and-artifacts.md`); `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`)
+- **AI Output Summary:** Started the required local EShop services, executed all 22 reviewed FR-06 UI tests sequentially in each configured browser, and generated three isolated HTML reports plus three JSON result files. Chromium, Firefox, and WebKit each recorded 7 passed, 15 failed, 0 skipped, and 0 flaky tests (66 executions total). Failure identities matched across all browsers. Evidence validation confirmed 45 traces, 45 screenshots, 45 error-context files, 12 retained videos, and rendered report titles showing `EShop HW04 Automation — Run by: 23127379`. The aggregate runner exited nonzero because genuine assertions failed; all three runs and their reports completed. `playwright-cli` was unavailable, so standard `@playwright/test` execution and retained artifacts were used. Failure-to-bug classification was intentionally deferred to `/hw4-bugs FR-06`.
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review

@@ -11,6 +11,8 @@ description: Production-ready CI/CD configurations for Playwright — GitHub Act
 
 In this repository, this skill is also the top-level skill for the reviewed FR's local three-browser evidence gate. Read root `AGENTS.md`, then `projects-and-dependencies.md` and `reporting-and-artifacts.md`; use `23127379_Homework/HW4/scripts/run-feature.mjs FR##` and preserve separate Chromium, Firefox, and WebKit reports/results.
 
+The runner must append one cumulative session to the current pool's `fr##-run-summary.md` after all three browser attempts, including failed attempts. Populate passed/failed/flaky/skipped/total counts and duration from each browser's Playwright JSON report; record missing data as `N/A`, never from memory or terminal-log guesses. Generate `playwright-report/index.html` as a full-FR overview linking to all three isolated reports. The summary must include `npx playwright show-report Pool-[X]_FR##/playwright-report` for the full FR plus the three browser-specific variants. Merely opening a report does not increment the run count.
+
 Use `playwright-core` debugging, trace analysis, and error-index guides as supporting guidance for failed runs. Use `playwright-cli` only when installed and only for focused authorized inspection. After the three run attempts and evidence capture complete, invoke `ai-audit-logger` once for this top-level gate.
 
 Do not create or alter a remote CI pipeline unless the user explicitly requests it. Provider, Docker, coverage, and sharding guides are conditional and are not part of a normal local HW04 run.

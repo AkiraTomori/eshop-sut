@@ -16,7 +16,7 @@ HW4/
 ├── global-setup.ts             # Auth state caching (user + admin login)
 ├── global-teardown.ts          # Auth state cleanup
 ├── test-environment.json       # Shared URLs, accounts, auth-state paths
-├── scripts/run-feature.mjs     # 3 isolated browser reports per FR
+├── scripts/run-feature.mjs     # 3 browser runs + cumulative Markdown summary
 ├── Infrastructure-AI-Audit.md  # Setup/workflow AI audit
 │
 ├── fixtures/
@@ -31,6 +31,7 @@ HW4/
 │   ├── fr06.spec.ts
 │   ├── fr06-test-data.json
 │   ├── fr06-automation-review.md
+│   ├── fr06-run-summary.md     # Run count, results, report commands
 │   ├── FR06-AI-Audit.md
 │   └── playwright-report/
 │       ├── chromium/
@@ -41,6 +42,7 @@ HW4/
 │   ├── fr08.spec.ts
 │   ├── fr08-test-data.json
 │   ├── fr08-automation-review.md
+│   ├── fr08-run-summary.md
 │   ├── FR08-AI-Audit.md
 │   └── playwright-report/
 │
@@ -48,6 +50,7 @@ HW4/
 │   ├── fr15.spec.ts
 │   ├── fr15-test-data.json
 │   ├── fr15-automation-review.md
+│   ├── fr15-run-summary.md
 │   ├── FR15-AI-Audit.md
 │   └── playwright-report/
 │
@@ -84,9 +87,39 @@ npm run test:fr06
 npm run test:fr08
 npm run test:fr15
 
-# View HTML report
-npm run report
+# Each command above adds exactly one session to the FR's
+# fr##-run-summary.md after all three browser attempts finish.
 ```
+
+### Open an FR report
+
+Use `playwright show-report <report-directory>` from `23127379_Homework/HW4`. Open one report server at a time and stop it with `Ctrl+C`.
+
+```bash
+# Full FR overview (Chromium + Firefox + WebKit)
+npm run report:fr06:all
+npm run report:fr08:all
+npm run report:fr15:all
+
+# FR-06
+npx playwright show-report Pool-A_FR06/playwright-report/chromium
+npx playwright show-report Pool-A_FR06/playwright-report/firefox
+npx playwright show-report Pool-A_FR06/playwright-report/webkit
+
+# FR-08
+npx playwright show-report Pool-B_FR08/playwright-report/chromium
+npx playwright show-report Pool-B_FR08/playwright-report/firefox
+npx playwright show-report Pool-B_FR08/playwright-report/webkit
+
+# FR-15
+npx playwright show-report Pool-C_FR15/playwright-report/chromium
+npx playwright show-report Pool-C_FR15/playwright-report/firefox
+npx playwright show-report Pool-C_FR15/playwright-report/webkit
+```
+
+The full-report command opens a generated overview page with latest-run statistics and links to all three detailed browser reports. Its direct Playwright form is `npx playwright show-report Pool-A_FR06/playwright-report`, replacing the pool for FR-08 or FR-15.
+
+The single-browser npm shortcuts follow the pattern `npm run report:fr06:chromium`, replacing the FR and browser as needed. If the default port is busy, append `-- --port <number>` to an npm command, or `--port <number>` to the direct Playwright command.
 
 ---
 

@@ -13,6 +13,7 @@ Read:
 
 - current FR spec and data
 - current FR automation review
+- current FR `fr##-run-summary.md` and its latest session
 - Chromium, Firefox, and WebKit reports/results
 - failure screenshots and traces
 - current FR HW2 test cases and bug report
@@ -57,4 +58,4 @@ Update the current `fr##-automation-review.md` Known Failures section with the s
 
 Prepare ready-to-paste GitHub Issue content for new bugs, but do not create external issues without explicit user authorization. Never fabricate screenshots, report results, issue numbers, or links.
 
-After the batch is complete, invoke `ai-audit-logger` once. The FR completion gate still requires HITL sign-off and all three report paths.
+After the batch is complete, invoke `ai-audit-logger` once. The FR completion gate still requires HITL sign-off, the cumulative run summary, and all three report paths.

@@ -12,7 +12,18 @@
     "test:fr06": "node scripts/run-feature.mjs FR06",
     "test:fr08": "node scripts/run-feature.mjs FR08",
     "test:fr15": "node scripts/run-feature.mjs FR15",
-    "report": "playwright show-report"
+    "report:fr06:all": "playwright show-report Pool-A_FR06/playwright-report",
+    "report:fr06:chromium": "playwright show-report Pool-A_FR06/playwright-report/chromium",
+    "report:fr06:firefox": "playwright show-report Pool-A_FR06/playwright-report/firefox",
+    "report:fr06:webkit": "playwright show-report Pool-A_FR06/playwright-report/webkit",
+    "report:fr08:all": "playwright show-report Pool-B_FR08/playwright-report",
+    "report:fr08:chromium": "playwright show-report Pool-B_FR08/playwright-report/chromium",
+    "report:fr08:firefox": "playwright show-report Pool-B_FR08/playwright-report/firefox",
+    "report:fr08:webkit": "playwright show-report Pool-B_FR08/playwright-report/webkit",
+    "report:fr15:all": "playwright show-report Pool-C_FR15/playwright-report",
+    "report:fr15:chromium": "playwright show-report Pool-C_FR15/playwright-report/chromium",
+    "report:fr15:firefox": "playwright show-report Pool-C_FR15/playwright-report/firefox",
+    "report:fr15:webkit": "playwright show-report Pool-C_FR15/playwright-report/webkit"
   },
   "devDependencies": {
     "@playwright/test": "1.62.0",

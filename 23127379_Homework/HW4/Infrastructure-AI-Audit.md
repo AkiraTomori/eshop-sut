@@ -226,3 +226,45 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** No wrong outputs detected
 - **Verdict:** Accepted. All changes have been successfully integrated into the `AGENTS.md` file, and the workflow is now consolidated and ready for use. Further review may be needed to ensure that all Playwright skills are correctly referenced and functional within the new structure.
+
+---
+## Session: 2026-07-31 10:10 — skill-creator: Add cumulative FR run-summary governance
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.4 (Collaborate)
+- **Task:** Extend the HW04 workflow, output contract, quality gates, and relevant skills with a cumulative per-FR automation run summary and report-opening guidance.
+- **Prompt:**
+  > Bạn bổ sung thêm cho mình là mỗi khi chạy script automation cho FR, hãy có 1 một file markdown tổng hợp số lần chạy, đồng thời là hướng dẫn cho họ sử dụng câu lệnh show-report để mà mở báo cáo FR đó lên
+- **Supporting Playwright Skills:** `playwright-ci` (`reporting-and-artifacts.md`)
+- **AI Output Summary:** Updated `AGENTS.md`, `playwright-ci`, `playwright-setup`, and `bug-report-automation` so every FR runner invocation creates one cumulative `fr##-run-summary.md` session with JSON-derived browser results and explicit browser-specific `show-report` commands. Added the run summary to FR completion gates, quality checks, output contracts, and submission requirements.
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review
+
+---
+## Session: 2026-07-31 10:10 — playwright-setup: Implement cumulative FR run summaries
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Update and validate the shared FR runner, report commands, documentation, and initial evidence-backed FR-06 run summary.
+- **Prompt:**
+  > Bạn bổ sung thêm cho mình là mỗi khi chạy script automation cho FR, hãy có 1 một file markdown tổng hợp số lần chạy, đồng thời là hướng dẫn cho họ sử dụng câu lệnh show-report để mà mở báo cáo FR đó lên
+- **Supporting Playwright Skills:** `playwright-ci` (`reporting-and-artifacts.md`)
+- **AI Output Summary:** Enhanced `scripts/run-feature.mjs` to append one per-invocation Markdown session after all Chromium, Firefox, and WebKit attempts, using fresh browser JSON results for counts and recording collection errors as `N/A`. Added nine npm report shortcuts and direct `playwright show-report` guidance to README. Created `fr06-run-summary.md` and backfilled Run #1 from the existing three JSON reports and prior audited FR-06 evidence without rerunning tests. JavaScript syntax, package JSON, TypeScript, and whitespace validation passed.
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review
+
+---
+## Session: 2026-07-31 10:14 — playwright-setup: Add full-FR report overview command
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Add one command that opens the complete current FR report across Chromium, Firefox, and WebKit while retaining isolated browser reports.
+- **Prompt:**
+  > Khi mà chạy Report ấy, hãy có câu lệnh cho phép mở full toàn bộ của FR đó
+- **Supporting Playwright Skills:** `playwright-ci` (`reporting-and-artifacts.md`)
+- **AI Output Summary:** Updated the shared runner to generate `playwright-report/index.html` as a latest-run FR overview with browser statistics and links to all three detailed reports. Added `report:fr06:all`, `report:fr08:all`, and `report:fr15:all` npm commands; updated AGENTS.md, README, the FR run summary, and relevant Playwright skills; and generated the current FR-06 overview from existing Run #1 evidence without rerunning tests. Verified the aggregate `show-report` server and all three linked browser reports returned HTTP 200, then passed JavaScript syntax, package JSON, and TypeScript checks.
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review
