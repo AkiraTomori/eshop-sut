@@ -282,3 +282,17 @@
 - **Human Review Notes:** Pending HITL review
 - **What AI Got Wrong:** Pending HITL review
 - **Verdict:** Pending HITL review
+
+---
+## Session: 2026-07-31 11:21 — bug-report-automation: Split detailed FR reports and consolidated summary
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.4 (Collaborate)
+- **Task:** Establish a two-tier bug-reporting contract with one detailed report per FR and one root cross-FR summary.
+- **Prompt:**
+  > Bổ sung thêm này cho mình, đó là mỗi FR sẽ có bug chi tiết, rồi bug-report.md là tổng hợp
+- **Supporting Playwright Skills:** None
+- **AI Output Summary:** Updated AGENTS.md, README, main report references, and `bug-report-automation` so `/hw4-bugs FR-##` writes full evidence and classifications to `fr##-bug-report.md` and derives only totals, concise indexes, links, and GitHub Issue status into root `bug_report.md`. Created the FR-06 detailed report scaffold and replaced premature FR-08/FR-15 automation-confirmation claims in the root report with truthful not-started states. FR-06 remains explicitly pending F4 classification; no product bug was classified or fabricated in this workflow update. Markdown and whitespace validation passed.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Help human for enhance Skills, nothing wrong
+- **Verdict:** Accepted. All changes have been successfully integrated into the `AGENTS.md` file, and the workflow is now consolidated and ready for use. Further review may be needed to ensure that all Playwright skills are correctly referenced and functional within the new structure.

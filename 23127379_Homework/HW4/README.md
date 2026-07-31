@@ -32,6 +32,7 @@ HW4/
 │   ├── fr06-test-data.json
 │   ├── fr06-automation-review.md
 │   ├── fr06-run-summary.md     # Run count, results, report commands
+│   ├── fr06-bug-report.md      # Detailed FR failure/bug evidence
 │   ├── FR06-AI-Audit.md
 │   └── playwright-report/
 │       ├── chromium/
@@ -43,6 +44,7 @@ HW4/
 │   ├── fr08-test-data.json
 │   ├── fr08-automation-review.md
 │   ├── fr08-run-summary.md
+│   ├── fr08-bug-report.md
 │   ├── FR08-AI-Audit.md
 │   └── playwright-report/
 │
@@ -51,11 +53,12 @@ HW4/
 │   ├── fr15-test-data.json
 │   ├── fr15-automation-review.md
 │   ├── fr15-run-summary.md
+│   ├── fr15-bug-report.md
 │   ├── FR15-AI-Audit.md
 │   └── playwright-report/
 │
 ├── main_report.md              # Final summary report
-├── bug_report.md               # All automation-discovered bugs
+├── bug_report.md               # Consolidated cross-FR bug summary
 └── ai_critique.md              # AI tool critique (200–300 words)
 ```
 

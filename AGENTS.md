@@ -38,11 +38,14 @@ Each pool maps to a dedicated workspace directory:
 │   ├── checkout.page.ts
 │   └── product-management.page.ts
 ├── Pool-A_FR06/
-│   └── fr06-run-summary.md
+│   ├── fr06-run-summary.md
+│   └── fr06-bug-report.md
 ├── Pool-B_FR08/
-│   └── fr08-run-summary.md
+│   ├── fr08-run-summary.md
+│   └── fr08-bug-report.md
 └── Pool-C_FR15/
-    └── fr15-run-summary.md
+    ├── fr15-run-summary.md
+    └── fr15-bug-report.md
 ```
 
 Pool-specific specs, data, reviews, reports, and audits are written **only** into that pool's directory. Shared fixture/page infrastructure stays in `HW4/fixtures/` and `HW4/pages/`. Writing one FR's pool artefacts into another pool is a **hard error**.
@@ -174,10 +177,10 @@ Rules:
 - Invoke `playwright-setup` exactly once unless infrastructure changes.
 - Process FRs in the order FR-06 → FR-08 → FR-15.
 - Invoke `playwright-ci` once per reviewed FR for the local three-browser evidence gate; do not interpret this as authorization to create or change a remote CI pipeline.
-- Invoke `bug-report-automation` once per FR run and batch all classified failures from that run.
+- Invoke `bug-report-automation` once per FR run and batch all classified failures from that run into the current `fr##-bug-report.md`; update the root `bug_report.md` summary in the same invocation.
 - Invoke `ai-audit-logger` once after each completed top-level workflow-skill invocation. Record nested Playwright supporting skills in that same block. The logger action does not audit itself.
 - Each invocation of the FR runner appends exactly one session to that FR's `fr##-run-summary.md`, even when one or more browser attempts fail. Do not count setup, listing, review, or `show-report` as a run.
-- Do not mark an FR complete until its spec, external data, review, cumulative run summary, three reports, bug classification, and signed audit blocks exist.
+- Do not mark an FR complete until its spec, external data, review, cumulative run summary, three reports, detailed FR bug report, updated consolidated bug summary, bug classification, and signed audit blocks exist.
 
 ### 5.1 User-facing slash commands
 
@@ -191,7 +194,7 @@ These are chat-command aliases interpreted by any AI agent that reads this `AGEN
 | F1 — Generate one FR | `/hw4-generate FR-06` | Run `automation-script-gen` for the current FR under browser-UI-only scope, then audit | G1 must pass; stop at the review gate |
 | F2 — Review one FR | `/hw4-review FR-06` | Run `script-review`, correct spec/data, update automation review, then audit | F1 artefacts must exist; stop before browser runs |
 | F3 — Run browser evidence | `/hw4-run FR-06` | Run the local `playwright-ci` evidence gate for Chromium, Firefox, and WebKit; update the FR run summary; then audit | F2 must pass; stop after reports/traces and one new run-summary session are captured |
-| F4 — Classify failures | `/hw4-bugs FR-06` | Run `bug-report-automation` for all three browser results, then audit | F3 results must exist; stop at the FR completion gate |
+| F4 — Classify failures | `/hw4-bugs FR-06` | Classify all browser results into the detailed `fr06-bug-report.md`, update consolidated `bug_report.md`, then audit | F3 results must exist; stop at the FR completion gate |
 | F5 — HITL sign-off | `/hw4-signoff FR-06` followed by the review block below | Update one specified pending audit block and re-check the completion gate | Repeat for each pending audit session; only complete accepted blocks unlock the next FR |
 | G2 — Final deliverables | `/hw4-final` | Complete final reports and submission checklist without fabricating issues or video links | All three FR completion gates must pass |
 
@@ -295,12 +298,13 @@ To open only one browser, append `chromium`, `firefox`, or `webkit` to the repor
 | FR page objects | `product-detail.page.ts`, `checkout.page.ts`, `product-management.page.ts` | `HW4/pages/` |
 | Automation review | `fr##-automation-review.md` | `Pool-[X]_FR##/` |
 | Cumulative run summary | `fr##-run-summary.md` | `Pool-[X]_FR##/` |
+| Detailed FR bug report | `fr##-bug-report.md` | `Pool-[X]_FR##/` |
 | Full FR report overview | `playwright-report/index.html` | `Pool-[X]_FR##/` |
 | HTML report (Chromium) | `playwright-report/chromium/index.html` | `Pool-[X]_FR##/` |
 | HTML report (Firefox) | `playwright-report/firefox/index.html` | `Pool-[X]_FR##/` |
 | HTML report (WebKit) | `playwright-report/webkit/index.html` | `Pool-[X]_FR##/` |
 | AI Audit | `FR##-AI-Audit.md` | `Pool-[X]_FR##/` |
-| Bug report | `bug_report.md` | `HW4/` root |
+| Consolidated bug summary | `bug_report.md` | `HW4/` root |
 | Main report | `main_report.md` | `HW4/` root |
 | AI Critique | `ai_critique.md` | `HW4/` root |
 | Infrastructure AI Audit | `Infrastructure-AI-Audit.md` | `HW4/` root |
@@ -372,7 +376,9 @@ REVIEW & REPORTING:
 □ Run summary documents full-FR and browser-specific `npx playwright show-report <path>` commands
 □ Full FR report overview links to all three isolated browser reports
 □ Known bugs (from HW2) documented in automation run output
-□ Bug report linked to GitHub Issues (HITL action)
+□ fr##-bug-report.md classifies every failed TC/browser and contains full evidence
+□ Root bug_report.md contains only derived totals/index/links, not duplicate details
+□ Detailed bug reports and aggregate are linked to GitHub Issues (HITL action)
 □ One AI Audit block present for every completed skill invocation
 □ Human Review Notes and Verdict are signed by HITL, not fabricated by AI
 
@@ -450,9 +456,9 @@ feat(FR15): add admin product CRUD spec with UI-based setup
 ## 13. Submission Checklist
 
 ```
-□ Pool A (FR-06): fr06.spec.ts, fr06-test-data.json, fr06-automation-review.md, fr06-run-summary.md, HTML reports (3 browsers), FR06-AI-Audit.md
-□ Pool B (FR-08): fr08.spec.ts, fr08-test-data.json, fr08-automation-review.md, fr08-run-summary.md, HTML reports (3 browsers), FR08-AI-Audit.md
-□ Pool C (FR-15): fr15.spec.ts, fr15-test-data.json, fr15-automation-review.md, fr15-run-summary.md, HTML reports (3 browsers), FR15-AI-Audit.md
+□ Pool A (FR-06): fr06.spec.ts, fr06-test-data.json, fr06-automation-review.md, fr06-run-summary.md, fr06-bug-report.md, HTML reports (3 browsers), FR06-AI-Audit.md
+□ Pool B (FR-08): fr08.spec.ts, fr08-test-data.json, fr08-automation-review.md, fr08-run-summary.md, fr08-bug-report.md, HTML reports (3 browsers), FR08-AI-Audit.md
+□ Pool C (FR-15): fr15.spec.ts, fr15-test-data.json, fr15-automation-review.md, fr15-run-summary.md, fr15-bug-report.md, HTML reports (3 browsers), FR15-AI-Audit.md
 □ playwright.config.ts with 3 browser projects
 □ main_report.md (Markdown + PDF)
 □ ai_critique.md (200–300 words)

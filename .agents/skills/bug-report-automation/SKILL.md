@@ -1,6 +1,6 @@
 ---
 name: bug-report-automation
-description: "Classify all failing results from one current HW04 FR browser run, link known HW2 defects, and draft new automation-discovered bug entries and GitHub Issue content. Use once per FR after its three browser reports exist."
+description: "Classify all failing results from one current HW04 FR browser run into a detailed per-FR bug report, update the consolidated root bug summary, link known HW2 defects, and draft new GitHub Issue content. Use once per FR after its three browser reports exist."
 ---
 
 # Classify one FR run
@@ -17,6 +17,7 @@ Read:
 - Chromium, Firefox, and WebKit reports/results
 - failure screenshots and traces
 - current FR HW2 test cases and bug report
+- current pool's `fr##-bug-report.md`, if it already exists
 - `23127379_Homework/HW4/bug_report.md`
 
 Invoke `playwright-core` and `playwright-ci` as supporting skills. Read:
@@ -40,9 +41,9 @@ For each failure:
 
 Preserve the severity vocabulary used by the HW2 bug report (`Fatal`, `Serious`, `Medium`, `Cosmetic`) unless HITL requests another scheme.
 
-## Update artefacts
+## Update detailed FR artefact
 
-Update `23127379_Homework/HW4/bug_report.md` with:
+Create or update the current pool's `fr##-bug-report.md` with:
 
 - Bug ID and source TC
 - affected browsers
@@ -54,8 +55,26 @@ Update `23127379_Homework/HW4/bug_report.md` with:
 - known/new classification
 - GitHub Issue URL for known bugs or `Pending HITL creation` for new bugs
 
+The detailed FR report must also include:
+
+- a classification row for every failed TC/browser result
+- totals for genuine defects, known defects reproduced, new defects, test/infrastructure issues, and out-of-scope failures
+- separate sections for product defects, test/infrastructure issues, and out-of-scope observations
+- ready-to-paste GitHub Issue content for genuine new defects
+
+## Update consolidated artefact
+
+Update `23127379_Homework/HW4/bug_report.md` in the same invocation with summary data only:
+
+- one row and link for each FR detailed report
+- a concise index of confirmed product defects
+- aggregate counts by FR and classification
+- GitHub Issue links or `Pending HITL creation`
+
+Do not duplicate full reproduction steps, assertions, screenshots, or trace inventories in the root file. The root counts and bug index must be derived from, and never exceed, the detailed per-FR reports.
+
 Update the current `fr##-automation-review.md` Known Failures section with the same classification.
 
 Prepare ready-to-paste GitHub Issue content for new bugs, but do not create external issues without explicit user authorization. Never fabricate screenshots, report results, issue numbers, or links.
 
-After the batch is complete, invoke `ai-audit-logger` once. The FR completion gate still requires HITL sign-off, the cumulative run summary, and all three report paths.
+After the batch is complete, invoke `ai-audit-logger` once. The FR completion gate still requires HITL sign-off, the detailed FR bug report, the updated consolidated bug report, the cumulative run summary, and all three report paths.

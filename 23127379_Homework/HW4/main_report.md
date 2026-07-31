@@ -133,7 +133,7 @@ HTML reports: `playwright-report/` (each report shows "Run by: 23127379")
 
 ## 6. Bug Summary
 
-*(See `bug_report.md` for full details)*
+*(See `bug_report.md` for the consolidated index and each pool's `fr##-bug-report.md` for full evidence.)*
 
 | Bug ID | Feature | Severity | Type |
 |--------|---------|----------|------|
