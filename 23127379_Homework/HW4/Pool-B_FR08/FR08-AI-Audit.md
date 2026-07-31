@@ -62,3 +62,16 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Human and A.I agreed on the correction of the Profile locators, and the script is ready for re-execution.
 - **Verdict:** Accepted
+---
+## Session: 2026-07-31 15:50 — playwright-ci: Run FR-08 three-browser evidence cycle #3
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Execute the corrected FR-08 browser UI suite through the local evidence runner for Chromium, Firefox, and WebKit; retain isolated reports, JSON results, screenshots, traces, error contexts, and the cumulative run summary; stop before failure classification.
+- **Prompt:**
+  > /hw4-run FR-08
+- **Supporting Playwright Skills:** `playwright-ci` (`projects-and-dependencies.md`, `reporting-and-artifacts.md`); `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`)
+- **AI Output Summary:** Completed tracked Run #3 through the dedicated FR-08 runner. Chromium, Firefox, and WebKit each reported 1 passed and 13 failed out of 14, for 3 passed and 39 failed across 42 browser executions; counts and durations were verified directly from the three Playwright JSON reports. All 39 failures retained a trace, screenshot, and error context. Run-level evidence confirms the corrected Profile phone locator no longer fails: 36 results now reach the checkout precondition and fail because the expected `iPhone 15 Pro Max` cart row count is 0 rather than 1, while three results retain the missing empty-cart illustration failure; unauthenticated checkout protection passes in every browser. The runner appended Run #3 to `fr08-run-summary.md` and regenerated the full overview plus isolated Chromium, Firefox, and WebKit HTML reports with student ID 23127379 in report metadata/title. `playwright-cli` was unavailable, so standard Playwright JSON, HTML, trace, screenshot, and error-context artifacts were used. No spec correction or failure classification was performed at F3.
+- **Human Review Notes:** Testcases fail because there is a gap, Agent thought the product is in the cart, but the product is not in the cart, so the testcases fail. Need to review the SUT and testcases.
+- **What AI Got Wrong:** The AI correctly executed the test suite, but the failures are due to a gap between the expected cart state and the actual SUT behavior. The AI did not account for the possibility that the product may not be present in the cart, leading to failed assertions. Further investigation into the SUT and test cases is required to resolve this discrepancy. Hint for Agent: When play script, did you see why the database.sqlite always in stage area, because when you run the script again, the backend will reset to its inital state, so the product is not in the cart which leads to the testcases fail. So we need to review the SUT and testcases to ensure that the expected cart state aligns with the actual behavior of the application.
+- **Verdict:** Partially Accepted. The test suite execution is valid, but the failures indicate a need for review of the SUT and test cases to ensure that the expected cart state aligns with the actual behavior of the application.
