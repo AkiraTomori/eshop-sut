@@ -1,6 +1,7 @@
 {
   "studentId": "23127379",
   "urls": {
+    "backend": "http://localhost:3000",
     "frontend": "http://localhost:5173",
     "admin": "http://localhost:5174"
   },

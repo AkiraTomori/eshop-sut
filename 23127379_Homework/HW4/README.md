@@ -83,6 +83,7 @@ npx playwright install
 ```bash
 # Complete one feature on Chromium, Firefox and WebKit.
 # Each browser writes to its own report directory.
+# Playwright automatically starts Backend, Web and Web Admin when absent.
 npm run test:fr06
 npm run test:fr08
 npm run test:fr15
@@ -90,6 +91,18 @@ npm run test:fr15
 # Each command above adds exactly one session to the FR's
 # fr##-run-summary.md after all three browser attempts finish.
 ```
+
+### Automatic SUT servers
+
+`playwright.config.ts` manages all three local services before test execution:
+
+| Service | URL | Command directory |
+|---|---|---|
+| Backend | `http://localhost:3000` | `backend/` |
+| Web | `http://localhost:5173` | `frontend-web/` |
+| Web Admin | `http://localhost:5174` | `frontend-admin/` |
+
+Locally, Playwright reuses a service that is already listening. Otherwise it starts the service, waits until it is ready, runs the tests, and stops only the process it created. The Backend is started solely as SUT infrastructure; HW4 test actions and assertions remain browser-UI-only.
 
 ### Open an FR report
 

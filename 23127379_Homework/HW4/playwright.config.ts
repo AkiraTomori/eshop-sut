@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'node:path';
 import environment from './test-environment.json';
 
 const htmlOutputFolder =
@@ -7,6 +8,12 @@ const resultsOutputFolder = process.env.HW4_RESULTS_DIR ?? 'test-results';
 const jsonOutputFile =
   process.env.HW4_JSON_OUTPUT_FILE ?? `${resultsOutputFolder}/results.json`;
 const runTimestamp = process.env.HW4_RUN_TIMESTAMP ?? new Date().toISOString();
+const repositoryRoot = path.resolve(__dirname, '../..');
+const backendUrl = new URL(environment.urls.backend);
+const frontendUrl = new URL(environment.urls.frontend);
+const adminUrl = new URL(environment.urls.admin);
+const reuseExistingServer = !process.env.CI;
+const serverTimeout = 120_000;
 
 export default defineConfig({
   testDir: '.',
@@ -55,6 +62,50 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
+    },
+  ],
+  webServer: [
+    {
+      name: 'EShop Backend',
+      command: 'node server.js',
+      cwd: path.join(repositoryRoot, 'backend'),
+      port: Number(backendUrl.port),
+      reuseExistingServer,
+      timeout: serverTimeout,
+      stdout: 'pipe',
+      stderr: 'pipe',
+      gracefulShutdown: {
+        signal: 'SIGTERM',
+        timeout: 5_000,
+      },
+    },
+    {
+      name: 'EShop Web',
+      command: `npm run dev -- --host ${frontendUrl.hostname} --port ${frontendUrl.port} --strictPort`,
+      cwd: path.join(repositoryRoot, 'frontend-web'),
+      url: environment.urls.frontend,
+      reuseExistingServer,
+      timeout: serverTimeout,
+      stdout: 'pipe',
+      stderr: 'pipe',
+      gracefulShutdown: {
+        signal: 'SIGTERM',
+        timeout: 5_000,
+      },
+    },
+    {
+      name: 'EShop Web Admin',
+      command: `npm run dev -- --host ${adminUrl.hostname} --port ${adminUrl.port} --strictPort`,
+      cwd: path.join(repositoryRoot, 'frontend-admin'),
+      url: environment.urls.admin,
+      reuseExistingServer,
+      timeout: serverTimeout,
+      stdout: 'pipe',
+      stderr: 'pipe',
+      gracefulShutdown: {
+        signal: 'SIGTERM',
+        timeout: 5_000,
+      },
     },
   ],
   outputDir: resultsOutputFolder,

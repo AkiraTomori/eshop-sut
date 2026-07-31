@@ -39,6 +39,8 @@ Maintain these shared files:
 - Use the installed Playwright version consistently; do not claim `latest` while pinning an unrelated old version.
 - Support Node versions required by that installed Playwright release.
 - Declare Chromium, Firefox, and WebKit projects.
+- Configure a three-entry Playwright `webServer` array for Backend, Frontend Web, and Web Admin. Load readiness URLs/ports from `test-environment.json`, use explicit service working directories, reuse already-running services locally, wait for all services before setup/tests, and shut down only processes Playwright created.
+- Treat the Backend web server as SUT infrastructure only; it does not authorize API testing, endpoint assertions, or API-based setup/cleanup.
 - Set HTML report title to `EShop HW04 Automation — Run by: 23127379`.
 - Keep retries CI-only, use web-first timeouts, and retain failure screenshot/trace/video.
 - Load URLs, accounts, and auth-state paths from `test-environment.json`; do not hardcode them in setup code.

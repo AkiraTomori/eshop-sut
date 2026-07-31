@@ -68,6 +68,8 @@ HW2 remains authoritative for feature behaviour, but its API-level test cases ar
 | Frontend Web | React + Vite + Tailwind CSS | `http://localhost:5173` |
 | Web Admin    | React + Vite + Tailwind CSS | `http://localhost:5174` |
 
+`playwright.config.ts` manages Backend, Frontend Web, and Web Admin through a three-entry `webServer` array. Each Playwright invocation reuses healthy local services when available or starts and waits for missing services before global setup/tests. Starting the Backend as SUT infrastructure does not authorize API test actions, API assertions, or API-based setup/cleanup.
+
 **Test Accounts:**
 
 | Account Type | Email | Password |
@@ -360,6 +362,7 @@ AUTOMATION SCRIPTS:
 □ Every FR page object extends pages/base.page.ts
 □ No credentials, input values, expected results, or hardcoded SUT URLs in page objects
 □ Playwright config declares chromium, firefox, webkit projects
+□ Playwright config starts or reuses Backend, Web, and Web Admin before tests
 □ "Run by: 23127379" appears in report metadata or title
 
 REVIEW & REPORTING:

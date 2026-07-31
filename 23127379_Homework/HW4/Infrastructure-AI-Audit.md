@@ -237,9 +237,9 @@
   > Bạn bổ sung thêm cho mình là mỗi khi chạy script automation cho FR, hãy có 1 một file markdown tổng hợp số lần chạy, đồng thời là hướng dẫn cho họ sử dụng câu lệnh show-report để mà mở báo cáo FR đó lên
 - **Supporting Playwright Skills:** `playwright-ci` (`reporting-and-artifacts.md`)
 - **AI Output Summary:** Updated `AGENTS.md`, `playwright-ci`, `playwright-setup`, and `bug-report-automation` so every FR runner invocation creates one cumulative `fr##-run-summary.md` session with JSON-derived browser results and explicit browser-specific `show-report` commands. Added the run summary to FR completion gates, quality checks, output contracts, and submission requirements.
-- **Human Review Notes:** Pending HITL review
-- **What AI Got Wrong:** Pending HITL review
-- **Verdict:** Pending HITL review
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Help Human for enhance Skills
+- **Verdict:** Accepted
 
 ---
 ## Session: 2026-07-31 10:10 — playwright-setup: Implement cumulative FR run summaries
@@ -251,9 +251,9 @@
   > Bạn bổ sung thêm cho mình là mỗi khi chạy script automation cho FR, hãy có 1 một file markdown tổng hợp số lần chạy, đồng thời là hướng dẫn cho họ sử dụng câu lệnh show-report để mà mở báo cáo FR đó lên
 - **Supporting Playwright Skills:** `playwright-ci` (`reporting-and-artifacts.md`)
 - **AI Output Summary:** Enhanced `scripts/run-feature.mjs` to append one per-invocation Markdown session after all Chromium, Firefox, and WebKit attempts, using fresh browser JSON results for counts and recording collection errors as `N/A`. Added nine npm report shortcuts and direct `playwright show-report` guidance to README. Created `fr06-run-summary.md` and backfilled Run #1 from the existing three JSON reports and prior audited FR-06 evidence without rerunning tests. JavaScript syntax, package JSON, TypeScript, and whitespace validation passed.
-- **Human Review Notes:** Pending HITL review
-- **What AI Got Wrong:** Pending HITL review
-- **Verdict:** Pending HITL review
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Help human for enhance Skills, nothing wrong
+- **Verdict:** Accepted
 
 ---
 ## Session: 2026-07-31 10:14 — playwright-setup: Add full-FR report overview command
@@ -265,6 +265,20 @@
   > Khi mà chạy Report ấy, hãy có câu lệnh cho phép mở full toàn bộ của FR đó
 - **Supporting Playwright Skills:** `playwright-ci` (`reporting-and-artifacts.md`)
 - **AI Output Summary:** Updated the shared runner to generate `playwright-report/index.html` as a latest-run FR overview with browser statistics and links to all three detailed reports. Added `report:fr06:all`, `report:fr08:all`, and `report:fr15:all` npm commands; updated AGENTS.md, README, the FR run summary, and relevant Playwright skills; and generated the current FR-06 overview from existing Run #1 evidence without rerunning tests. Verified the aggregate `show-report` server and all three linked browser reports returned HTTP 200, then passed JavaScript syntax, package JSON, and TypeScript checks.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Help human for enhance Skills, nothing wrong
+- **Verdict:** Accepted
+
+---
+## Session: 2026-07-31 10:33 — playwright-setup: Auto-start all local SUT services
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Configure Playwright to start or reuse Backend, Frontend Web, and Web Admin automatically before every test invocation.
+- **Prompt:**
+  > Bạn chỉnh sửa Playwright-config.ts một cái cho mình là chỉnh sửa để mà Playwright có thể tự mở web, admin, backend luôn được không, cứ mỗi lần chạy script thì nó có sẵn
+- **Supporting Playwright Skills:** `playwright-core` (`configuration.md`)
+- **AI Output Summary:** Added the Backend URL to external environment data and configured a three-entry `webServer` array with explicit service working directories, readiness checks, local reuse, startup timeouts, piped diagnostics, and graceful shutdown. Updated AGENTS.md, README, and `playwright-setup` to preserve the browser-UI-only boundary. Verified the exact Backend, Web, and Web Admin commands listened on ports 3000, 5173, and 5174; TypeScript passed; Playwright still discovered 66 tests; and all verification servers were stopped afterward. No FR automation test was executed and no run-summary count was changed.
 - **Human Review Notes:** Pending HITL review
 - **What AI Got Wrong:** Pending HITL review
 - **Verdict:** Pending HITL review
