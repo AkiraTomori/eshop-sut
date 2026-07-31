@@ -23,3 +23,16 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Script is corrected, ready to run script test
 - **Verdict:** Accepted
+---
+## Session: 2026-07-31 14:55 — playwright-ci: Run FR-08 three-browser evidence gate
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Execute the reviewed FR-08 browser UI suite through the local evidence runner for Chromium, Firefox, and WebKit; retain isolated reports, JSON results, screenshots, traces, error contexts, and the cumulative run summary; stop before failure classification.
+- **Prompt:**
+  > /hw4-run FR-08
+- **Supporting Playwright Skills:** `playwright-ci` (`projects-and-dependencies.md`, `reporting-and-artifacts.md`); `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`)
+- **AI Output Summary:** The initial sandboxed runner invocation was prevented from starting the configured local web servers and was transparently preserved as Run #1 with zero executed tests. The approved rerun completed as Run #2: Chromium, Firefox, and WebKit each reported 1 passed and 13 failed out of 14, for 3 passed and 39 failed across 42 browser executions. All 39 failures retained a trace, screenshot, and error context. Evidence inspection found 36 failures at the reviewed Profile phone-field locator and three failures for the missing empty-cart illustration; the unauthenticated-protection case passed in every browser. The runner updated `fr08-run-summary.md` and generated the full overview plus three isolated HTML reports displaying student ID 23127379. `playwright-cli` was unavailable, so standard Playwright JSON, HTML, trace, screenshot, and error-context artifacts were used. No spec correction or bug classification was performed at F3.
+- **Human Review Notes:** Approved test suite script
+- **What AI Got Wrong:** But 12 testcases failed due to the locator issue, i guess it's not our fault for it, maybe because SUT's responsibility about the locator. But I think the another problem about changing profile in 12 testcases they all fill in phone number, but why the best pratice locator failed, need to review
+- **Verdict:** Partially Accepted. The test suite script is approved, but the failures due to locator issues need further investigation and potential collaboration with the SUT team to resolve.
