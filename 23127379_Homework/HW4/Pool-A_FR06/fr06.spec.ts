@@ -5,6 +5,9 @@ import testData from './fr06-test-data.json';
 
 type ProductKey = keyof typeof testData.products;
 type FocusTarget = Parameters<ProductDetailPage['focusTarget']>[0];
+type QuantityConstraint = Parameters<
+  ProductDetailPage['quantityInputWithConstraint']
+>[0];
 
 function testTitle(testCase: { id: string; title: string }): string {
   return `${testCase.id} — ${testCase.title} ${testData.metadata.tag}`;
@@ -18,18 +21,13 @@ function authenticatedProductPage(page: Page): ProductDetailPage {
   );
 }
 
-async function addCartPrecondition(
-  productPage: ProductDetailPage,
-  quantity: string,
-): Promise<void> {
-  await productPage.setQuantity(quantity);
-  await productPage.addToCart();
-
-  if (!(await productPage.feedback(testData.ui.addedFeedback).isVisible())) {
-    await productPage.addToCart();
+function annotateKnownBug(bugId: string | null): void {
+  if (bugId) {
+    test.info().annotations.push({
+      type: 'known-bug',
+      description: bugId,
+    });
   }
-
-  await expect(productPage.feedback(testData.ui.addedFeedback)).toBeVisible();
 }
 
 test.describe('FR-06 public product-detail UI', () => {
@@ -45,33 +43,36 @@ test.describe('FR-06 public product-detail UI', () => {
   });
 
   test(testTitle(testData.displayCase), async ({ page, productDetailPage }) => {
+    annotateKnownBug(testData.displayCase.bugId);
     const product = testData.products.primary;
+    const productImage = productDetailPage.productImage(product.name);
     const expectedUrl = new URL(
       `${testData.metadata.productRoutePrefix}${product.id}`,
       testData.metadata.frontendUrl,
     ).toString();
 
     await expect(page).toHaveURL(expectedUrl);
-    await expect(productDetailPage.productImage).toBeVisible();
-    await expect(productDetailPage.productImage).toHaveAttribute(
-      'alt',
-      product.name,
-    );
+    await expect(productImage).toBeVisible();
+    await expect(productImage).toHaveAttribute('alt', product.name);
     await expect(productDetailPage.productName).toHaveText(product.name);
-    await expect(productDetailPage.productPrice).toHaveText(product.price);
-    await expect(productDetailPage.productDescription).toHaveText(
-      product.description,
-    );
-    await expect(productDetailPage.categoryText(product.category)).toBeVisible();
+    await expect(productDetailPage.productText(product.price)).toBeVisible();
     await expect(
+      productDetailPage.productText(product.description),
+    ).toBeVisible();
+    await expect
+      .soft(productDetailPage.categoryText(product.category))
+      .toBeVisible();
+    await expect.soft(
       productDetailPage.breadcrumb(testData.ui.breadcrumbName),
     ).toBeVisible();
     await expect(productDetailPage.pageHeadings).toHaveCount(1);
-    await expect(productDetailPage.documentRoot).toHaveAttribute(
-      'lang',
-      testData.ui.documentLanguage,
+    await expect(
+      productDetailPage.quantityLabel(testData.ui.quantityLabel),
+    ).toBeVisible();
+    await expect(productDetailPage.addToCartButton).toHaveText(
+      testData.ui.addToCart,
     );
-    await expect(productDetailPage.addToCartButton).toHaveCSS(
+    await expect.soft(productDetailPage.addToCartButton).toHaveCSS(
       'background-color',
       testData.ui.positiveActionColour,
     );
@@ -90,6 +91,7 @@ test.describe('FR-06 public product-detail UI', () => {
   test(
     testTitle(testData.quantityEntryCase),
     async ({ productDetailPage }) => {
+      annotateKnownBug(testData.quantityEntryCase.bugId);
       await expect(productDetailPage.quantityInput).toHaveValue(
         testData.quantityEntryCase.defaultQuantity,
       );
@@ -104,6 +106,7 @@ test.describe('FR-06 public product-detail UI', () => {
 
   for (const testCase of testData.invalidProductCases) {
     test(testTitle(testCase), async ({ page, productDetailPage }) => {
+      annotateKnownBug(testCase.bugId);
       await productDetailPage.open(testCase.productId);
 
       await expect(page).toHaveURL(
@@ -123,25 +126,18 @@ test.describe('FR-06 public product-detail UI', () => {
 
   test(
     testTitle(testData.unauthenticatedCase),
-    async ({ page, productDetailPage }) => {
+    async ({ productDetailPage }) => {
+      annotateKnownBug(testData.unauthenticatedCase.bugId);
       await productDetailPage.setQuantity(
         testData.unauthenticatedCase.quantity,
       );
       await productDetailPage.addToCart();
 
-      const loginUrl = new URL(
-        testData.routes.login,
-        testData.metadata.frontendUrl,
-      ).toString();
-      await expect
-        .soft
-        .poll(async () => {
-          return (
-            page.url() === loginUrl ||
-            (await productDetailPage.validationAlert.isVisible())
-          );
-        })
-        .toBe(true);
+      await expect(
+        productDetailPage.validationAlert.or(
+          productDetailPage.loginButton(testData.ui.loginButton),
+        ),
+      ).toBeVisible();
 
       await productDetailPage.openCart(testData.navigationLabels);
       await expect(
@@ -152,7 +148,9 @@ test.describe('FR-06 public product-detail UI', () => {
 
   for (const testCase of testData.boundaryProductCases) {
     test(testTitle(testCase), async ({ page, productDetailPage }) => {
+      annotateKnownBug(testCase.bugId);
       const product = testData.products[testCase.productKey as ProductKey];
+      const productImage = productDetailPage.productImage(product.name);
       await productDetailPage.open(product.id);
 
       await expect(page).toHaveURL(
@@ -161,13 +159,16 @@ test.describe('FR-06 public product-detail UI', () => {
           testData.metadata.frontendUrl,
         ).toString(),
       );
-      await expect(productDetailPage.productImage).toBeVisible();
+      await expect(productImage).toBeVisible();
+      await expect(productImage).toHaveAttribute('alt', product.name);
       await expect(productDetailPage.productName).toHaveText(product.name);
-      await expect(productDetailPage.productPrice).toHaveText(product.price);
-      await expect(productDetailPage.productDescription).toHaveText(
-        product.description,
-      );
-      await expect(productDetailPage.categoryText(product.category)).toBeVisible();
+      await expect(productDetailPage.productText(product.price)).toBeVisible();
+      await expect(
+        productDetailPage.productText(product.description),
+      ).toBeVisible();
+      await expect(
+        productDetailPage.categoryText(product.category),
+      ).toBeVisible();
     });
   }
 });
@@ -187,6 +188,7 @@ test.describe('FR-06 authenticated product-detail UI', () => {
   });
 
   test(testTitle(testData.authenticatedAddCase), async ({ userPage }) => {
+    annotateKnownBug(testData.authenticatedAddCase.bugId);
     const productPage = authenticatedProductPage(userPage);
     await productPage.setQuantity(testData.authenticatedAddCase.quantity);
     await productPage.addToCart();
@@ -203,10 +205,15 @@ test.describe('FR-06 authenticated product-detail UI', () => {
   });
 
   test(testTitle(testData.duplicateCartCase), async ({ userPage }) => {
+    annotateKnownBug(testData.duplicateCartCase.bugId);
     const productPage = authenticatedProductPage(userPage);
     const testCase = testData.duplicateCartCase;
 
-    await addCartPrecondition(productPage, testCase.existingQuantity);
+    await productPage.setQuantity(testCase.existingQuantity);
+    await productPage.addToCart();
+    await expect(
+      productPage.feedback(testData.ui.addedFeedback),
+    ).toBeVisible();
     await productPage.openCart(testData.navigationLabels);
     await expect(
       productPage.cartQuantity(
@@ -229,20 +236,28 @@ test.describe('FR-06 authenticated product-detail UI', () => {
         testCase.expectedQuantity,
       ),
     ).toBeVisible();
+    await expect(
+      productPage.cartSummary(
+        testData.ui.cartTotalLabel,
+        testCase.expectedTotal,
+      ),
+    ).toBeVisible();
   });
 
   for (const testCase of testData.invalidQuantityCases) {
     test(testTitle(testCase), async ({ userPage }) => {
+      annotateKnownBug(testCase.bugId);
       const productPage = authenticatedProductPage(userPage);
       await productPage.setQuantity(testCase.quantity);
       await productPage.addToCart();
 
-      const hasNativeGuard =
-        (await productPage.quantityInput.getAttribute(
-          testCase.constraint.name,
-        )) === testCase.constraint.value;
-      const hasVisibleValidation = await productPage.validationAlert.isVisible();
-      expect.soft(hasNativeGuard || hasVisibleValidation).toBe(true);
+      await expect(
+        productPage
+          .quantityInputWithConstraint(
+            testCase.constraint as QuantityConstraint,
+          )
+          .or(productPage.validationAlert),
+      ).toBeVisible();
 
       await productPage.openCart(testData.navigationLabels);
       await expect(
@@ -252,29 +267,31 @@ test.describe('FR-06 authenticated product-detail UI', () => {
   }
 
   test(testTitle(testData.decimalQuantityCase), async ({ userPage }) => {
+    annotateKnownBug(testData.decimalQuantityCase.bugId);
     const productPage = authenticatedProductPage(userPage);
     const testCase = testData.decimalQuantityCase;
     await productPage.setQuantity(testCase.quantity);
     await productPage.addToCart();
 
-    const hasVisibleValidation = await productPage.validationAlert.isVisible();
+    await expect(
+      productPage.validationAlert.or(
+        productPage.feedback(testData.ui.addedFeedback),
+      ),
+    ).toBeVisible();
     await productPage.openCart(testData.navigationLabels);
-    const cartRows = productPage.cartRows(testData.products.primary.name);
-
-    if ((await cartRows.count()) > 0) {
-      await expect(cartRows).toHaveCount(1);
-      await expect(
-        productPage.cartQuantity(
+    await expect(
+      productPage
+        .cartRowWithQuantityAndSubtotal(
           testData.products.primary.name,
           testCase.safeIntegerQuantity,
-        ),
-      ).toBeVisible();
-    } else {
-      expect(hasVisibleValidation).toBe(true);
-    }
+          testData.products.primary.price,
+        )
+        .or(productPage.emptyCartMessage(testData.ui.emptyCart)),
+    ).toBeVisible();
   });
 
   test(testTitle(testData.nonNumericQuantityCase), async ({ userPage }) => {
+    annotateKnownBug(testData.nonNumericQuantityCase.bugId);
     const productPage = authenticatedProductPage(userPage);
     const testCase = testData.nonNumericQuantityCase;
     await productPage.typeQuantity(testCase.quantity);
@@ -290,30 +307,32 @@ test.describe('FR-06 authenticated product-detail UI', () => {
   });
 
   test(testTitle(testData.largeQuantityCase), async ({ userPage }) => {
+    annotateKnownBug(testData.largeQuantityCase.bugId);
     const productPage = authenticatedProductPage(userPage);
     const testCase = testData.largeQuantityCase;
     await productPage.setQuantity(testCase.quantity);
     await productPage.addToCart();
 
-    const hasVisibleValidation = await productPage.validationAlert.isVisible();
+    await expect(
+      productPage.validationAlert.or(
+        productPage.feedback(testData.ui.addedFeedback),
+      ),
+    ).toBeVisible();
     await productPage.openCart(testData.navigationLabels);
-    const cartRows = productPage.cartRows(testData.products.primary.name);
-
-    if ((await cartRows.count()) > 0) {
-      await expect(
-        productPage.cartQuantity(
+    await expect(
+      productPage
+        .cartRowWithQuantityAndSubtotal(
           testData.products.primary.name,
           testCase.quantity,
-        ),
-      ).toBeVisible();
-      await expect(productPage.cartAmount(testCase.expectedTotal)).toBeVisible();
-    } else {
-      expect(hasVisibleValidation).toBe(true);
-    }
+          testCase.expectedTotal,
+        )
+        .or(productPage.emptyCartMessage(testData.ui.emptyCart)),
+    ).toBeVisible();
   });
 
   for (const testCase of testData.validBoundaryQuantityCases) {
     test(testTitle(testCase), async ({ userPage }) => {
+      annotateKnownBug(testCase.bugId);
       const productPage = authenticatedProductPage(userPage);
       await productPage.setQuantity(testCase.quantity);
       await productPage.addToCart();
@@ -328,36 +347,39 @@ test.describe('FR-06 authenticated product-detail UI', () => {
           testCase.quantity,
         ),
       ).toBeVisible();
-      await expect(productPage.cartAmount(testCase.expectedTotal)).toBeVisible();
+      await expect(
+        productPage.cartSummary(
+          testData.ui.cartTotalLabel,
+          testCase.expectedTotal,
+        ),
+      ).toBeVisible();
     });
   }
 
   test(
     testTitle(testData.baselineUpperBoundaryCase),
     async ({ userPage }) => {
+      annotateKnownBug(testData.baselineUpperBoundaryCase.bugId);
       const productPage = authenticatedProductPage(userPage);
       const testCase = testData.baselineUpperBoundaryCase;
       await productPage.setQuantity(testCase.quantity);
       await productPage.addToCart();
 
-      const hasVisibleValidation =
-        await productPage.validationAlert.isVisible();
+      await expect(
+        productPage.validationAlert.or(
+          productPage.feedback(testData.ui.addedFeedback),
+        ),
+      ).toBeVisible();
       await productPage.openCart(testData.navigationLabels);
-      const cartRows = productPage.cartRows(testData.products.primary.name);
-
-      if ((await cartRows.count()) > 0) {
-        await expect(
-          productPage.cartQuantity(
+      await expect(
+        productPage
+          .cartRowWithQuantityAndSubtotal(
             testData.products.primary.name,
             testCase.quantity,
-          ),
-        ).toBeVisible();
-        await expect(
-          productPage.cartAmount(testCase.expectedTotal),
-        ).toBeVisible();
-      } else {
-        expect(hasVisibleValidation).toBe(true);
-      }
+            testCase.expectedTotal,
+          )
+          .or(productPage.emptyCartMessage(testData.ui.emptyCart)),
+      ).toBeVisible();
     },
   );
 });

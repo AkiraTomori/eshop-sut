@@ -22,7 +22,10 @@
     "removeButton": "Xóa",
     "breadcrumbName": "Điều hướng đường dẫn",
     "productNotFound": "Sản phẩm không tồn tại (Lỗi trắng trang do data rỗng)",
-    "documentLanguage": "vi",
+    "quantityLabel": "Số lượng:",
+    "loginButton": "Sign In",
+    "emptyCart": "Giỏ hàng của bạn đang trống",
+    "cartTotalLabel": "Tổng tạm tính:",
     "positiveActionColour": "rgb(37, 99, 235)",
     "focusOrder": [
       "home",
@@ -75,6 +78,7 @@
     "existingQuantity": "2",
     "addedQuantity": "1",
     "expectedQuantity": "3",
+    "expectedTotal": "90,000,000 ₫",
     "expectedRows": 1,
     "bugId": "BUG-FR06-002"
   },
@@ -157,10 +161,6 @@
     "title": "Verify that quantity field rejects decimal value on the product detail page",
     "quantity": "1.5",
     "safeIntegerQuantity": "1",
-    "integerConstraint": {
-      "name": "step",
-      "value": "1"
-    },
     "bugId": "BUG-FR06-005"
   },
   "nonNumericQuantityCase": {

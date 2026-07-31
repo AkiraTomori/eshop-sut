@@ -16,15 +16,16 @@ type NavigationLabels = {
   register: string;
 };
 
+type QuantityConstraint = {
+  name: 'min' | 'max' | 'step' | 'required';
+  value: string;
+};
+
 export class ProductDetailPage extends BasePage {
   readonly productName: Locator;
-  readonly productImage: Locator;
-  readonly productPrice: Locator;
-  readonly productDescription: Locator;
   readonly quantityInput: Locator;
   readonly addToCartButton: Locator;
   readonly pageHeadings: Locator;
-  readonly documentRoot: Locator;
   readonly validationAlert: Locator;
 
   constructor(
@@ -34,15 +35,11 @@ export class ProductDetailPage extends BasePage {
   ) {
     super(page, baseUrl);
     this.productName = page.getByRole('heading', { level: 1 });
-    this.productImage = page.locator('img[alt]:not([alt=""])').first();
-    this.productPrice = page.locator('main p.text-2xl');
-    this.productDescription = page.locator('main p.text-gray-700');
-    this.quantityInput = page.locator('input[type="number"]');
+    this.quantityInput = page.getByRole('spinbutton');
     this.addToCartButton = page.getByRole('button', {
       name: /Thêm vào giỏ hàng|Đã thêm/,
     });
     this.pageHeadings = page.getByRole('heading', { level: 1 });
-    this.documentRoot = page.locator('html');
     this.validationAlert = page.getByRole('alert');
   }
 
@@ -77,8 +74,27 @@ export class ProductDetailPage extends BasePage {
     return this.page.getByText(text, { exact: true });
   }
 
+  productImage(name: string): Locator {
+    return this.page.getByRole('img', { name, exact: true });
+  }
+
   categoryText(categoryName: string): Locator {
     return this.page.getByText(categoryName, { exact: true });
+  }
+
+  quantityLabel(label: string): Locator {
+    return this.page.getByText(label, { exact: true });
+  }
+
+  quantityInputWithConstraint(constraint: QuantityConstraint): Locator {
+    if (constraint.name === 'required') {
+      return this.quantityInput.and(this.page.locator('[required]'));
+    }
+
+    const escapedValue = constraint.value.replace(/["\\]/g, '\\$&');
+    return this.quantityInput.and(
+      this.page.locator(`[${constraint.name}="${escapedValue}"]`),
+    );
   }
 
   breadcrumb(name: string): Locator {
@@ -104,8 +120,36 @@ export class ProductDetailPage extends BasePage {
     });
   }
 
-  cartAmount(amount: string): Locator {
-    return this.page.getByText(amount, { exact: true });
+  cartRowWithQuantityAndSubtotal(
+    productName: string,
+    quantity: string | number,
+    subtotal: string,
+  ): Locator {
+    return this.cartRows(productName)
+      .filter({
+        has: this.page.getByRole('cell', {
+          name: String(quantity),
+          exact: true,
+        }),
+      })
+      .filter({
+        has: this.page.getByRole('cell', {
+          name: subtotal,
+          exact: true,
+        }),
+      });
+  }
+
+  cartSummary(totalLabel: string, amount: string): Locator {
+    return this.page.getByText(totalLabel).filter({ hasText: amount });
+  }
+
+  emptyCartMessage(message: string): Locator {
+    return this.page.getByText(message, { exact: true });
+  }
+
+  loginButton(name: string): Locator {
+    return this.page.getByRole('button', { name, exact: true });
   }
 
   cartBadge(labels: NavigationLabels, quantity: string | number): Locator {
@@ -130,7 +174,10 @@ export class ProductDetailPage extends BasePage {
     return targets[target];
   }
 
-  async cleanupCart(labels: NavigationLabels, removeButton: string): Promise<void> {
+  async cleanupCart(
+    labels: NavigationLabels,
+    removeButton: string,
+  ): Promise<void> {
     await this.openCart(labels);
     const removeButtons = this.page.getByRole('button', {
       name: removeButton,

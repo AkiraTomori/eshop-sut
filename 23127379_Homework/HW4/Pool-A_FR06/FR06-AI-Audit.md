@@ -1,4 +1,3 @@
----
 ## Session: 2026-07-31 09:04 — automation-script-gen: Generate FR-06 browser UI suite
 
 - **AI Tool:** OpenAI Codex (GPT-5)
@@ -12,3 +11,16 @@
 - **What AI Got Wrong:** 
   - Some locators are weak and may break if the product-detail page is redesigned (For example: this.productPrice = page.locator('main p.text-2xl'); this.productDescription = page.locator('main p.text-gray-700');))
 - **Verdict:** Passed with that review note about weak locators. The generated suite is ready for execution and further review.
+---
+## Session: 2026-07-31 09:36 — script-review: Review and correct FR-06 suite
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.2 (Apply)
+- **Task:** Review and correct the generated FR-06 spec, external data, page object, traceability, isolation, assertions, and browser-UI-only scope before browser execution.
+- **Prompt:**
+  > /hw4-review FR-06
+- **Supporting Playwright Skills:** `playwright-core` (`locator-strategy.md`, `assertions-and-waiting.md`, `fixtures-and-hooks.md`, `flaky-tests.md`, `common-pitfalls.md`, `test-organization.md`); `playwright-pom` (`page-object-model.md`, `pom-vs-fixtures-vs-helpers.md`)
+- **AI Output Summary:** Verified 22 exact HW2 UI TC IDs/titles and 12 selected known-bug mappings, retained nine explicit API-only exclusions, and corrected eight review findings. Replaced one-time conditional checks with web-first alternative locators, removed a buggy first-click workaround, replaced product CSS locators with semantic locators, corrected the Vietnamese-language assertion, scoped cart totals, added known-bug annotations, and completed EP-004 total coverage. Updated the automation review with findings, UI replacement IDs, expected failures, assertion inventory, architecture assessment, and pending HITL sign-off. `playwright-cli` was unavailable, so permitted React-source inspection was used. JSON, TypeScript, 66-test discovery, prohibited-pattern, mapping, and whitespace checks passed; no browser suite was executed.
+- **Human Review Notes:** Approved the AI corrections and improvements. The suite is now ready for execution and further review.
+- **What AI Got Wrong:** No significant issues were found in the AI review; all corrections were appropriate and improved the suite.
+- **Verdict:** Passed with approval for execution and further review. The FR-06 suite is now considered robust and ready for browser testing.

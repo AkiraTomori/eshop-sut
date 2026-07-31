@@ -1,6 +1,6 @@
 # FR-06 Automation Review
 
-**Stage:** Generated — pending `/hw4-review FR-06`  
+**Stage:** Reviewed — pending `/hw4-run FR-06`
 **Automation scope:** Browser UI only  
 **Selected:** 22 UI test cases  
 **Excluded:** 9 API-dependent test cases
@@ -9,7 +9,7 @@
 
 - **Page object:** Retained and expanded `pages/product-detail.page.ts` because the selected cases reuse product display, quantity, navigation, feedback, cart verification, focus, and UI cleanup interactions. It remains BasePage-derived and contains no assertions or test data.
 - **Fixtures:** The shared fixture remains the lifecycle owner. Public tests use `productDetailPage`; authenticated tests use the fresh `userPage` fixture and bind the same FR-06 page class locally because infrastructure does not expose an authenticated FR-06 page-object fixture and F1 is prohibited from editing `eshop.fixture.ts`.
-- **Helper:** One local, stateless factory binds `userPage` to `ProductDetailPage`; one setup helper establishes EP-004's cart precondition through the UI. No additional shared helper or component was justified.
+- **Helper:** One local, stateless factory binds `userPage` to `ProductDetailPage`. The generated adaptive setup helper was removed because it compensated for defective first-click behavior. No additional shared helper or component is justified.
 - **Locator evidence:** `playwright-cli` was not installed. Locators were grounded in the current React sources `ProductDetail.jsx`, `Cart.jsx`, `App.jsx`, and `CartContext.jsx`.
 
 ## Selected UI traceability manifest
@@ -18,10 +18,10 @@ All assertions below preserve the HW2 spec-correct result. Known defective behav
 
 | TC ID and exact HW2 title | Type | UI data and actions | Complete UI-observable expected result | Known Bug | UI cleanup |
 |---|---|---|---|---|---|
-| **TC-FR06-EP-001** — Verify that product detail page displays all required fields correctly with a valid product ID | EP | Open product 1; inspect image, name, price, description, category, breadcrumb, h1, language, button colour, and keyboard focus | URL is product 1; all five fields render; image alt is descriptive; price is formatted with `₫`; breadcrumb is visible; exactly one h1 exists; document is Vietnamese; positive action is blue; focus follows visual order | BUG-FR06-001 | Open cart, remove UI rows, return home |
+| **TC-FR06-EP-001** — Verify that product detail page displays all required fields correctly with a valid product ID | EP | Open product 1; inspect image, name, price, description, category, breadcrumb, h1, visible language, button colour, and keyboard focus | URL is product 1; all five fields render; image alt is descriptive; price is formatted with `₫`; breadcrumb is visible; exactly one h1 exists; visible interface labels are Vietnamese; positive action is blue; focus follows visual order | BUG-FR06-001 | Open cart, remove UI rows, return home |
 | **TC-FR06-EP-002** — Verify that quantity input field defaults to 1 and accepts valid positive integers | EP | Product 1; default `1`, then enter `5` | Quantity has value `1`, accepts `5`, and displays `5` | None | Open cart, remove UI rows, return home |
 | **TC-FR06-EP-003** — Verify that Add to Cart succeeds with valid quantity for an authenticated user | EP | Authenticated user; product 1; quantity `3`; click once | Visible success feedback appears and the navbar cart badge displays `3` | None | Open cart, remove UI rows, return home |
-| **TC-FR06-EP-004** — Verify that adding the same product to cart increments quantity instead of creating a new row | EP | Establish quantity `2` through UI; add `1`; inspect cart | Exactly one product row exists with quantity `3`; no duplicate row | BUG-FR06-002 | Remove all cart rows through UI, return home |
+| **TC-FR06-EP-004** — Verify that adding the same product to cart increments quantity instead of creating a new row | EP | Establish quantity `2` through UI; add `1`; inspect cart | Exactly one product row exists with quantity `3`; no duplicate row; total is `90,000,000 ₫` | BUG-FR06-002 | Remove all cart rows through UI, return home |
 | **TC-FR06-NEG-001** — Verify that product detail page shows error when navigating with a non-existent product ID | NEG | Open product `99999` | A visible product-not-found message appears; no product h1 or blank/crashed page | None | Open cart, remove UI rows, return home |
 | **TC-FR06-NEG-002** — Verify that product detail page shows error when product ID is zero | NEG | Open product `0` | A visible product-not-found message appears; no product h1 or blank/crashed page | None | Open cart, remove UI rows, return home |
 | **TC-FR06-NEG-003** — Verify that product detail page shows error when product ID is a negative integer | NEG | Open product `-1` | A visible product-not-found message appears; no product h1 or blank/crashed page | None | Open cart, remove UI rows, return home |
@@ -41,21 +41,34 @@ All assertions below preserve the HW2 spec-correct result. Known defective behav
 | **TC-FR06-BV-005** — Verify that quantity field accepts the system UI baseline upper boundary of 999 | BV | Authenticated; quantity `999`; click once; inspect validation or cart | Graceful validation is accepted; otherwise cart shows quantity `999` and correct non-overflowing total | None | Remove all cart rows through UI, return home |
 | **TC-FR06-BV-008** — Verify that quantity field handles an extremely large integer value on the UI input form (UI Upper Boundary Probe) | BV | Authenticated; quantity `999999999`; click once; inspect native/UI validation and cart | Native or visible UI validation enforces practical maximum `999`; no cart row is submitted | BUG-FR06-008 | Remove all cart rows through UI, return home |
 
+## Script-review findings and corrections
+
+| Issue | Severity | Original pattern | Correction | Root cause |
+|---|---|---|---|---|
+| Alternative validation/cart outcomes used `isVisible()`, `getAttribute()`, and `count()` branches | High | One-time resolved booleans selected which assertions ran | Replaced with web-first `Locator.or()` assertions and scoped acceptable-outcome locators | Generated logic attempted to encode canonical “reject or handle safely” alternatives imperatively |
+| EP-004 setup retried Add to Cart when feedback was absent | High | Adaptive second click compensated for `clickCount` | Removed retry; setup now performs the exact one-click UI action and asserts feedback | Generation optimized around buggy React behavior, which could mask a new first-click defect |
+| Product price, description, image, and quantity used CSS selectors | Medium | Tailwind class and element-attribute selectors | Replaced primary locators with `getByRole()` and exact visible-text locators | Source inspection was used, but locator resilience hierarchy was not applied strictly enough |
+| Vietnamese-language check required `html[lang=vi]` | Medium | `toHaveAttribute('lang', 'vi')` | Replaced with assertions on visible Vietnamese quantity/action/navigation labels | SRS requires visible language consistency, not a particular document metadata implementation |
+| Cart total assertion used an unscoped exact amount | High | `getByText(amount)` could match unit price, subtotal, and summary | Added cart-row quantity/subtotal filtering and a label-scoped cart-summary locator | Repeated currency values make global text locators strict-mode ambiguous |
+| Known Bug IDs existed only in JSON/review | Medium | Test reports did not expose mappings | Added `known-bug` annotations from external data without skipping or inverting tests | Traceability data was not connected to Playwright report metadata |
+| EP-004 omitted the expected cart-total clause | High | Row count and quantity only | Added external expected total and a scoped total assertion | Generation implemented only the primary duplicate-row outcome |
+| EP-001 stopped at the first independent display defect | Low | All checklist assertions were hard | Made independent known-defect display checks soft while retaining hard navigation/core-content assertions | A checklist-style TC benefits from collecting category, breadcrumb, and colour failures together |
+
 ## API-dependent exclusions
 
 These cases are not automated and are not counted toward the 22 selected UI cases.
 
-| TC ID and exact HW2 title | Classification |
-|---|---|
-| **TC-FR06-NEG-013** — Verify that API rejects Add to Cart request with a non-existent product ID via direct API call | Out of HW4 scope — API testing |
-| **TC-FR06-NEG-014** — Verify that API rejects Add to Cart request with a tampered zero price via direct API call | Out of HW4 scope — API testing |
-| **TC-FR06-NEG-015** — Verify that API rejects Add to Cart request with a negative price via direct API call | Out of HW4 scope — API testing |
-| **TC-FR06-NEG-016** — Verify that API rejects Add to Cart request with zero quantity via direct API call | Out of HW4 scope — API testing |
-| **TC-FR06-NEG-017** — Verify that API rejects Add to Cart request with NaN quantity via direct API call | Out of HW4 scope — API testing |
-| **TC-FR06-NEG-018** — Verify that API rejects Add to Cart request with tampered low price via direct API call | Out of HW4 scope — API testing |
-| **TC-FR06-BV-006** — Verify that API handles cart request with the minimum valid price of 1₫ via direct API call | Out of HW4 scope — API testing |
-| **TC-FR06-BV-007** — Verify that API rejects cart request with negative quantity of -1 via direct API call | Out of HW4 scope — API testing |
-| **TC-FR06-BV-009** — Verify that API handles cart requests with an extremely large quantity parameter as a server-side stress test (DB Boundary Bypass — HVF-03 / BUG-FR06-020 Core Probe) | Out of HW4 scope — API testing |
+| TC ID and exact HW2 title | Classification | UI replacement selected for HW4 |
+|---|---|---|
+| **TC-FR06-NEG-013** — Verify that API rejects Add to Cart request with a non-existent product ID via direct API call | Out of HW4 scope — API testing | NEG-001 covers the non-existent product through the UI; it does not replace server validation |
+| **TC-FR06-NEG-014** — Verify that API rejects Add to Cart request with a tampered zero price via direct API call | Out of HW4 scope — API testing | BV-001 preserves required product/price display coverage; price tampering remains uncovered |
+| **TC-FR06-NEG-015** — Verify that API rejects Add to Cart request with a negative price via direct API call | Out of HW4 scope — API testing | BV-002 adds a second valid UI product boundary; negative-price server validation remains uncovered |
+| **TC-FR06-NEG-016** — Verify that API rejects Add to Cart request with zero quantity via direct API call | Out of HW4 scope — API testing | NEG-006 covers zero quantity through the UI |
+| **TC-FR06-NEG-017** — Verify that API rejects Add to Cart request with NaN quantity via direct API call | Out of HW4 scope — API testing | NEG-009 and NEG-010 cover non-numeric/empty quantity through normal UI input |
+| **TC-FR06-NEG-018** — Verify that API rejects Add to Cart request with tampered low price via direct API call | Out of HW4 scope — API testing | EP-001 verifies authoritative displayed price only; tamper resistance remains uncovered |
+| **TC-FR06-BV-006** — Verify that API handles cart request with the minimum valid price of 1₫ via direct API call | Out of HW4 scope — API testing | BV-003 supplies an eligible UI lower-boundary quantity case; price API boundary remains uncovered |
+| **TC-FR06-BV-007** — Verify that API rejects cart request with negative quantity of -1 via direct API call | Out of HW4 scope — API testing | NEG-007 covers negative quantity through the UI |
+| **TC-FR06-BV-009** — Verify that API handles cart requests with an extremely large quantity parameter as a server-side stress test (DB Boundary Bypass — HVF-03 / BUG-FR06-020 Core Probe) | Out of HW4 scope — API testing | NEG-011 and BV-008 cover the extreme value through the UI; database/server stress remains uncovered |
 
 ## Hybrid clauses not covered by HW4
 
@@ -66,21 +79,52 @@ These cases are not automated and are not counted toward the 22 selected UI case
 
 ## Source discrepancies requiring HITL resolution
 
-1. EP-001's description says “English language,” while its steps, Expected Result, SRS FR-21, and observed comparison require Vietnamese. The generated assertion follows the higher-confidence Expected Result plus SRS and expects `lang=vi`.
+1. EP-001's description says “English language,” while its steps, Expected Result, SRS FR-21, and observed comparison require Vietnamese. The reviewed assertion follows the higher-confidence Expected Result plus SRS and verifies visible Vietnamese labels without imposing `lang=vi`.
 2. NEG-008's Expected Result permits safe truncation/rounding, but its title says “rejects,” its Failed status treats truncation as defective, and BUG-FR06-005 requires prevention or user notification. The generated test preserves the canonical TC Expected Result by accepting visible rejection or safe integer `1`; HITL should decide whether notification is mandatory.
 3. NEG-011 permits acceptance when the total is correct and no overflow occurs, while its Failed status and BUG-FR06-008 frame lack of an upper bound as the defect. The generated NEG-011 follows the TC Expected Result; BV-008 separately asserts the practical maximum.
 4. The detailed BUG-FR06-020 report links `TC-FR06-BV-008`, but the canonical test-case file maps BUG-FR06-020 to API-only `TC-FR06-BV-009`. No remapping was guessed; BV-009 remains excluded pending HITL correction.
 5. The HW2 narrative for NEG-009 says a `type=number` input accepted `abc`. Current React source still declares `type=number`; the generated browser test uses normal keyboard events and prohibits programmatic value injection. HITL should compare the three-browser evidence at F3 before retaining or revising BUG-FR06-006.
 
-## Generation-time risks for script review
+## Genuinely non-automatable steps
 
-- Current React source suppresses the first Add to Cart click via `clickCount`; this behavior is absent from the HW2 mappings. Tests preserve the HW2 one-click steps. EP-004 uses a UI-visible adaptive retry only to establish its precondition, not for the action under test.
-- The current navbar source has no cart quantity badge, category field, or breadcrumb. Assertions remain spec-correct and are expected to expose those known defects.
-- Product-not-found rendering is grounded in the current React message. F2 should verify it against a running SUT and adjust only if the user-visible DOM differs.
+None of the selected UI steps is inherently manual. Colour uses `toHaveCSS`, focus order uses keyboard plus `toBeFocused`, and non-numeric input uses normal `pressSequentially` keyboard events. Programmatic injection of `abc` into `type=number` would bypass the browser UI and is deliberately not used.
 
-## F1 quality snapshot
+## Known failures expected during browser execution
 
-- External JSON contains URLs, inputs, boundaries, labels, and expected values.
-- Spec imports the shared custom `test`/`expect`, uses fresh public/authenticated pages, and has `beforeEach`/`afterEach`.
-- Assertions include URL, visibility, text, value, attribute, count, CSS, focus, and negative cart-state patterns.
-- Full browser evidence has intentionally not been run. The next gate is `/hw4-review FR-06`.
+- Current React source suppresses the first Add to Cart click via `clickCount`; this behavior is absent from HW2. The reviewed suite does not compensate for it, so EP-003, EP-004 setup, valid boundaries, and invalid-submission flows may expose a new automation-discovered defect at F3.
+- BUG-FR06-001/016/017: current source omits category and breadcrumb and uses a green positive-action button.
+- BUG-FR06-002: `CartContext` appends duplicate rows rather than incrementing an existing row, if the test reaches the second add.
+- BUG-FR06-003 through 009: current source has no quantity/authentication validation in `handleAddToCart`; normal browser prevention may mean BUG-FR06-006 is not reproduced.
+- Current navbar source has no quantity badge, so EP-003 is expected to fail that clause even if success feedback appears.
+- Product-not-found rendering remains grounded in the verified current React message and should pass when the backend returns an empty object.
+
+## Assertion-pattern inventory
+
+- A1: `toHaveURL`
+- A2: `toBeVisible`, including `Locator.or()` for canonical alternative outcomes
+- A3: `toHaveText`
+- A4: `toHaveValue`
+- A5: `toHaveCount`
+- A7: `toHaveAttribute` for image alt text
+- A10: `toHaveCSS`
+- Focus: `toBeFocused`
+
+## Fixture/POM architecture findings
+
+- The BasePage-derived FR-06 class remains justified because 22 tests reuse more than five product/cart interactions.
+- Public tests consume the typed `productDetailPage` fixture. Authenticated tests consume the fresh test-scoped `userPage`; a local stateless factory binds it to the same page class because adding `userProductDetailPage` would be an infrastructure change outside F2.
+- No mutable test data is stored in the page object. All URLs, labels, values, boundaries, messages, expected totals, and Bug IDs remain external.
+- No new component/helper abstraction was added: cart interactions are used only by the current FR suite, and splitting them now would add indirection without cross-feature reuse.
+- The only remaining raw selectors are narrowly scoped HTML validation-attribute selectors used to represent invisible native constraints in an alternative locator; all user-facing elements use roles or visible text.
+
+## Final quality assessment
+
+- 22 exact HW2 UI TC IDs/titles are discovered under `@FR06`; all nine API-dependent TCs are explicitly excluded and replaced for UI-count/priority purposes without claiming equivalent server coverage.
+- All UI-observable canonical expected-result clauses are asserted or a source discrepancy is documented.
+- Tests are fresh-context, order-independent, data-driven, and use UI-only setup/cleanup with `beforeEach`/`afterEach`.
+- Known bugs are annotated but not skipped, inverted, or weakened.
+- Full browser evidence has intentionally not been run during F2.
+
+**Human Review:** Pending HITL sign-off
+
+**Next gate:** `/hw4-run FR-06`
