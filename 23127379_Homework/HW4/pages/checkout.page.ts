@@ -4,7 +4,7 @@ import { BasePage } from './base.page';
 type CheckoutRoutes = {
   home: string;
   cart: string;
-  login: string;
+  profile: string;
 };
 
 type CheckoutLabels = {
@@ -14,6 +14,7 @@ type CheckoutLabels = {
   remove: string;
   proceedToCheckout: string;
   checkoutButton: string;
+  updateProfile: string;
 };
 
 export class CheckoutPage extends BasePage {
@@ -30,7 +31,7 @@ export class CheckoutPage extends BasePage {
   ) {
     super(page, baseUrl);
     this.primaryHeading = page.getByRole('heading', { level: 1 });
-    this.allPrimaryHeadings = page.locator('h1');
+    this.allPrimaryHeadings = page.getByRole('heading', { level: 1 });
     this.checkoutItems = page.getByRole('listitem');
     this.totalInput = page.getByRole('spinbutton');
     this.couponInput = page.getByPlaceholder('Nhập mã giảm giá...');
@@ -75,8 +76,27 @@ export class CheckoutPage extends BasePage {
     await this.checkoutButton(labels).click();
   }
 
-  async fillShippingAddress(label: string, address: string): Promise<void> {
-    await this.shippingAddressInput(label).fill(address);
+  async updateProfileShippingAddress(
+    routes: CheckoutRoutes,
+    labels: CheckoutLabels,
+    phoneLabel: string,
+    phone: string,
+    addressLabel: string,
+    address: string,
+  ): Promise<string> {
+    await this.openRoute(routes.profile);
+    await this.profilePhoneInput(phoneLabel).fill(phone);
+    await this.profileShippingAddressInput(addressLabel).fill(address);
+
+    const dialogPromise = this.page.waitForEvent('dialog');
+    const updatePromise = this.page
+      .getByRole('button', { name: labels.updateProfile, exact: true })
+      .click();
+    const dialog = await dialogPromise;
+    const message = dialog.message();
+    await dialog.dismiss();
+    await updatePromise;
+    return message;
   }
 
   async cleanupCart(labels: CheckoutLabels): Promise<void> {
@@ -111,6 +131,16 @@ export class CheckoutPage extends BasePage {
     return this.page.getByRole('row').filter({ hasText: productName });
   }
 
+  cartSummary(label: string, total: string): Locator {
+    return this.page
+      .getByText(label, { exact: false })
+      .filter({ hasText: total });
+  }
+
+  checkoutItem(text: string): Locator {
+    return this.page.getByRole('listitem', { name: text, exact: true });
+  }
+
   checkoutButton(labels: CheckoutLabels): Locator {
     return this.page.getByRole('button', {
       name: labels.checkoutButton,
@@ -118,7 +148,11 @@ export class CheckoutPage extends BasePage {
     });
   }
 
-  shippingAddressInput(label: string): Locator {
+  profilePhoneInput(label: string): Locator {
+    return this.page.getByLabel(label, { exact: true });
+  }
+
+  profileShippingAddressInput(label: string): Locator {
     return this.page.getByLabel(label, { exact: true });
   }
 
@@ -138,24 +172,24 @@ export class CheckoutPage extends BasePage {
     return this.page.getByText(text, { exact: true });
   }
 
-  emptyCartIllustration(message: string): Locator {
-    return this.emptyCartMessage(message).locator('..').getByRole('img');
-  }
-
-  authenticationError(text: string): Locator {
-    return this.page.getByText(text);
+  emptyCartIllustration(): Locator {
+    return this.page.getByRole('img');
   }
 
   validationError(text: string): Locator {
     return this.page.getByText(text, { exact: true });
   }
 
-  validationErrorBeforeButton(
+  async isValidationErrorAboveButton(
     errorText: string,
     labels: CheckoutLabels,
-  ): Locator {
-    return this.validationError(errorText)
-      .locator('~ button')
-      .filter({ hasText: labels.checkoutButton });
+  ): Promise<boolean> {
+    const errorBox = await this.validationError(errorText).boundingBox();
+    const buttonBox = await this.checkoutButton(labels).boundingBox();
+    return Boolean(
+      errorBox &&
+        buttonBox &&
+        errorBox.y + errorBox.height <= buttonBox.y,
+    );
   }
 }

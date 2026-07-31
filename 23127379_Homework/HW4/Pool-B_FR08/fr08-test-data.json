@@ -3,12 +3,21 @@
     "feature": "FR-08",
     "tag": "@FR08",
     "frontendUrl": "http://localhost:5173",
-    "checkoutRoute": "/checkout"
+    "checkoutRoute": "/checkout",
+    "uiObservableBugIds": [
+      "BUG-FR08-001",
+      "BUG-FR08-002",
+      "BUG-FR08-003",
+      "BUG-FR08-005",
+      "BUG-FR08-006",
+      "BUG-FR08-009"
+    ]
   },
   "routes": {
     "home": "/",
     "cart": "/cart",
-    "login": "/login"
+    "login": "/login",
+    "profile": "/profile"
   },
   "labels": {
     "home": "EShop",
@@ -16,11 +25,22 @@
     "addToCart": "Thêm vào giỏ",
     "remove": "Xóa",
     "proceedToCheckout": "Tiến hành thanh toán",
-    "checkoutButton": "Xác Nhận Thanh Toán"
+    "checkoutButton": "Xác Nhận Thanh Toán",
+    "updateProfile": "Cập nhật"
   },
   "ui": {
     "productName": "iPhone 15 Pro Max",
+    "checkoutItemText": "iPhone 15 Pro Max x 1 — 30,000,000 ₫",
+    "cartTotalLabel": "Tổng tạm tính:",
+    "expectedCartTotal": "30,000,000 ₫",
+    "expectedTotalInput": "30000000",
+    "expectedFormattedTotal": "Tổng thanh toán: 30,000,000 ₫",
     "shippingAddressLabel": "Địa chỉ giao hàng",
+    "profilePhoneLabel": "Số điện thoại",
+    "profilePhone": "912345678",
+    "profileUpdateSuccess": "Cập nhật thành công!",
+    "profileCleanupAddress": "",
+    "profileBaselineAddress": "123 Nguyen Hue, District 1, Ho Chi Minh City",
     "checkoutHeading": "Xác Nhận Đơn Hàng",
     "successMessage": "Thanh toán thành công!",
     "emptyCartMessage": "Giỏ hàng của bạn đang trống",
@@ -29,11 +49,9 @@
     "addressTooLongError": "Địa chỉ giao hàng không được vượt quá 255 ký tự",
     "authenticationError": "Bạn cần đăng nhập để thanh toán",
     "positiveActionColour": "rgb(37, 99, 235)",
-    "formattedTotalPattern": "^Tổng thanh toán: \\d{1,3}(,\\d{3})* ₫$",
     "expectedCartRows": 1,
     "expectedPrimaryHeadings": 1,
-    "expectedEmptyCartRows": 0,
-    "expectedErrorButtonCount": 1
+    "expectedEmptyCartRows": 0
   },
   "validCheckoutCase": {
     "id": "TC-FR08-EP-001",

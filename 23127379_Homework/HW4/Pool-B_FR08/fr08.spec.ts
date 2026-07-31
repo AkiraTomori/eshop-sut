@@ -1,4 +1,3 @@
-import { type Page } from '@playwright/test';
 import { test, expect } from '../fixtures/eshop.fixture';
 import { CheckoutPage } from '../pages/checkout.page';
 import testData from './fr08-test-data.json';
@@ -14,7 +13,8 @@ function testTitle(testCase: TestCase): string {
 }
 
 function annotateKnownBugs(bugIds: string[]): void {
-  for (const bugId of bugIds) {
+  const uiObservableBugIds = new Set(testData.metadata.uiObservableBugIds);
+  for (const bugId of bugIds.filter((id) => uiObservableBugIds.has(id))) {
     test.info().annotations.push({
       type: 'known-bug',
       description: bugId,
@@ -22,28 +22,62 @@ function annotateKnownBugs(bugIds: string[]): void {
   }
 }
 
-function anonymousCheckoutPage(page: Page): CheckoutPage {
-  return new CheckoutPage(
-    page,
-    testData.metadata.frontendUrl,
-    testData.metadata.checkoutRoute,
+async function openCheckoutWithProfileAddress(
+  checkoutPage: CheckoutPage,
+  address: string,
+): Promise<void> {
+  const updateMessage = await checkoutPage.updateProfileShippingAddress(
+    testData.routes,
+    testData.labels,
+    testData.ui.profilePhoneLabel,
+    testData.ui.profilePhone,
+    testData.ui.shippingAddressLabel,
+    address,
   );
+  expect(updateMessage).toContain(testData.ui.profileUpdateSuccess);
+  await checkoutPage.page.reload();
+  await expect(
+    checkoutPage.profileShippingAddressInput(
+      testData.ui.shippingAddressLabel,
+    ),
+  ).toHaveValue(address);
+  await checkoutPage.openCart(testData.labels);
+  await expect(
+    checkoutPage.cartRows(testData.ui.productName),
+  ).toHaveCount(testData.ui.expectedCartRows);
+  await expect(
+    checkoutPage.cartSummary(
+      testData.ui.cartTotalLabel,
+      testData.ui.expectedCartTotal,
+    ),
+  ).toBeVisible();
+  await checkoutPage.proceedFromCart(testData.labels);
+  await expect(checkoutPage.page).toHaveURL(
+    new URL(
+      testData.metadata.checkoutRoute,
+      testData.metadata.frontendUrl,
+    ).toString(),
+  );
+}
+
+async function resetProfileAndCart(
+  checkoutPage: CheckoutPage,
+): Promise<void> {
+  const updateMessage = await checkoutPage.updateProfileShippingAddress(
+    testData.routes,
+    testData.labels,
+    testData.ui.profilePhoneLabel,
+    testData.ui.profilePhone,
+    testData.ui.shippingAddressLabel,
+    testData.ui.profileCleanupAddress,
+  );
+  expect(updateMessage).toContain(testData.ui.profileUpdateSuccess);
+  await checkoutPage.cleanupCart(testData.labels);
 }
 
 async function expectSuccessfulCheckout(
   checkoutPage: CheckoutPage,
-  address: string,
 ): Promise<void> {
-  await expect(
-    checkoutPage.shippingAddressInput(testData.ui.shippingAddressLabel),
-  ).toBeVisible();
-  await checkoutPage.fillShippingAddress(
-    testData.ui.shippingAddressLabel,
-    address,
-  );
-  await expect(
-    checkoutPage.shippingAddressInput(testData.ui.shippingAddressLabel),
-  ).toHaveValue(address);
   await checkoutPage.submitCheckout(testData.labels);
   await expect(
     checkoutPage.successMessage(testData.ui.successMessage),
@@ -59,21 +93,18 @@ async function expectSuccessfulCheckout(
 
 async function expectAddressRejected(
   checkoutPage: CheckoutPage,
-  address: string,
   errorMessage: string,
 ): Promise<void> {
-  await expect(
-    checkoutPage.shippingAddressInput(testData.ui.shippingAddressLabel),
-  ).toBeVisible();
-  await checkoutPage.fillShippingAddress(
-    testData.ui.shippingAddressLabel,
-    address,
-  );
   await checkoutPage.submitCheckout(testData.labels);
   await expect(checkoutPage.validationError(errorMessage)).toBeVisible();
-  await expect(
-    checkoutPage.validationErrorBeforeButton(errorMessage, testData.labels),
-  ).toHaveCount(testData.ui.expectedErrorButtonCount);
+  await expect
+    .poll(() =>
+      checkoutPage.isValidationErrorAboveButton(
+        errorMessage,
+        testData.labels,
+      ),
+    )
+    .toBe(true);
   await expect(checkoutPage.page).toHaveURL(
     new URL(
       testData.metadata.checkoutRoute,
@@ -95,82 +126,89 @@ test.describe('FR-08 authenticated checkout with a non-empty cart', () => {
     await expect(
       userCheckoutPage.cartRows(testData.ui.productName),
     ).toHaveCount(testData.ui.expectedCartRows);
-    await userCheckoutPage.proceedFromCart(testData.labels);
   });
 
   test.afterEach(async ({ userCheckoutPage }) => {
-    await userCheckoutPage.cleanupCart(testData.labels);
+    await resetProfileAndCart(userCheckoutPage);
   });
 
   test(testTitle(testData.validCheckoutCase), async ({ userCheckoutPage }) => {
     annotateKnownBugs(testData.validCheckoutCase.bugIds);
-    const expectedUrl = new URL(
-      testData.metadata.checkoutRoute,
-      testData.metadata.frontendUrl,
-    ).toString();
-    const formattedTotal = new RegExp(testData.ui.formattedTotalPattern);
-
-    await expect(userCheckoutPage.page).toHaveURL(expectedUrl);
-    await expect(userCheckoutPage.checkoutItems).toHaveCount(
-      testData.ui.expectedCartRows,
-    );
-    await expect
-      .soft(userCheckoutPage.allPrimaryHeadings)
-      .toHaveCount(testData.ui.expectedPrimaryHeadings);
-    await expect(userCheckoutPage.totalText(formattedTotal)).toBeVisible();
-    await expect
-      .soft(userCheckoutPage.checkoutButton(testData.labels))
-      .toHaveCSS('background-color', testData.ui.positiveActionColour);
-    await expectSuccessfulCheckout(
+    await openCheckoutWithProfileAddress(
       userCheckoutPage,
       testData.validCheckoutCase.address,
     );
+
+    await expect(userCheckoutPage.checkoutItems).toHaveCount(
+      testData.ui.expectedCartRows,
+    );
+    await expect(
+      userCheckoutPage.checkoutItem(testData.ui.checkoutItemText),
+    ).toBeVisible();
+    await expect
+      .soft(userCheckoutPage.allPrimaryHeadings)
+      .toHaveCount(testData.ui.expectedPrimaryHeadings);
+    await expect(
+      userCheckoutPage.totalText(testData.ui.expectedFormattedTotal),
+    ).toBeVisible();
+    await expect
+      .soft(userCheckoutPage.checkoutButton(testData.labels))
+      .toHaveCSS('background-color', testData.ui.positiveActionColour);
+    await expectSuccessfulCheckout(userCheckoutPage);
   });
 
   test(testTitle(testData.blankCouponCase), async ({ userCheckoutPage }) => {
     annotateKnownBugs(testData.blankCouponCase.bugIds);
-    const totalBeforeCheckout = await userCheckoutPage.totalInput.inputValue();
+    await openCheckoutWithProfileAddress(
+      userCheckoutPage,
+      testData.blankCouponCase.address,
+    );
 
     await expect(userCheckoutPage.couponInput).toHaveValue(
       testData.blankCouponCase.couponValue,
     );
-    await expect(userCheckoutPage.totalInput).toHaveValue(totalBeforeCheckout);
-    await expectSuccessfulCheckout(
-      userCheckoutPage,
-      testData.blankCouponCase.address,
+    await expect(userCheckoutPage.totalInput).toHaveValue(
+      testData.ui.expectedTotalInput,
     );
+    await expect(userCheckoutPage.totalInput).not.toBeEditable();
+    await expect(
+      userCheckoutPage.totalText(testData.ui.expectedFormattedTotal),
+    ).toBeVisible();
+    await expectSuccessfulCheckout(userCheckoutPage);
   });
 
   test(testTitle(testData.breadcrumbCase), async ({ userCheckoutPage }) => {
     annotateKnownBugs(testData.breadcrumbCase.bugIds);
+    await openCheckoutWithProfileAddress(
+      userCheckoutPage,
+      testData.ui.profileCleanupAddress,
+    );
 
     await expect
       .soft(userCheckoutPage.breadcrumb(testData.ui.breadcrumb))
-      .toBeVisible();
-    await expect
-      .soft(
-        userCheckoutPage.shippingAddressInput(
-          testData.ui.shippingAddressLabel,
-        ),
-      )
       .toBeVisible();
     await userCheckoutPage.submitCheckout(testData.labels);
     await expect(
       userCheckoutPage.validationError(testData.ui.requiredAddressError),
     ).toBeVisible();
-    await expect(
-      userCheckoutPage.validationErrorBeforeButton(
-        testData.ui.requiredAddressError,
-        testData.labels,
-      ),
-    ).toHaveCount(testData.ui.expectedErrorButtonCount);
+    await expect
+      .poll(() =>
+        userCheckoutPage.isValidationErrorAboveButton(
+          testData.ui.requiredAddressError,
+          testData.labels,
+        ),
+      )
+      .toBe(true);
   });
 
   test(testTitle(testData.emptyAddressCase), async ({ userCheckoutPage }) => {
     annotateKnownBugs(testData.emptyAddressCase.bugIds);
-    await expectAddressRejected(
+    await openCheckoutWithProfileAddress(
       userCheckoutPage,
       testData.emptyAddressCase.address,
+    );
+    await expectAddressRejected(
+      userCheckoutPage,
       testData.ui.requiredAddressError,
     );
   });
@@ -179,9 +217,12 @@ test.describe('FR-08 authenticated checkout with a non-empty cart', () => {
     testTitle(testData.whitespaceAddressCase),
     async ({ userCheckoutPage }) => {
       annotateKnownBugs(testData.whitespaceAddressCase.bugIds);
-      await expectAddressRejected(
+      await openCheckoutWithProfileAddress(
         userCheckoutPage,
         testData.whitespaceAddressCase.address,
+      );
+      await expectAddressRejected(
+        userCheckoutPage,
         testData.ui.requiredAddressError,
       );
     },
@@ -189,7 +230,10 @@ test.describe('FR-08 authenticated checkout with a non-empty cart', () => {
 
   test(testTitle(testData.headingCase), async ({ userCheckoutPage }) => {
     annotateKnownBugs(testData.headingCase.bugIds);
-    const formattedTotal = new RegExp(testData.ui.formattedTotalPattern);
+    await openCheckoutWithProfileAddress(
+      userCheckoutPage,
+      testData.ui.profileBaselineAddress,
+    );
 
     await expect(userCheckoutPage.allPrimaryHeadings).toHaveCount(
       testData.ui.expectedPrimaryHeadings,
@@ -201,14 +245,20 @@ test.describe('FR-08 authenticated checkout with a non-empty cart', () => {
       'background-color',
       testData.ui.positiveActionColour,
     );
-    await expect(userCheckoutPage.totalText(formattedTotal)).toBeVisible();
+    await expect(
+      userCheckoutPage.totalText(testData.ui.expectedFormattedTotal),
+    ).toBeVisible();
   });
 
   for (const testCase of testData.validBoundaryCases) {
     test(testTitle(testCase), async ({ userCheckoutPage }) => {
       annotateKnownBugs(testCase.bugIds);
       expect(testCase.address).toHaveLength(testCase.expectedLength);
-      await expectSuccessfulCheckout(userCheckoutPage, testCase.address);
+      await openCheckoutWithProfileAddress(
+        userCheckoutPage,
+        testCase.address,
+      );
+      await expectSuccessfulCheckout(userCheckoutPage);
     });
   }
 
@@ -219,9 +269,12 @@ test.describe('FR-08 authenticated checkout with a non-empty cart', () => {
       expect(testData.zeroLengthBoundaryCase.address).toHaveLength(
         testData.zeroLengthBoundaryCase.expectedLength,
       );
-      await expectAddressRejected(
+      await openCheckoutWithProfileAddress(
         userCheckoutPage,
         testData.zeroLengthBoundaryCase.address,
+      );
+      await expectAddressRejected(
+        userCheckoutPage,
         testData.ui.requiredAddressError,
       );
     },
@@ -234,9 +287,12 @@ test.describe('FR-08 authenticated checkout with a non-empty cart', () => {
       expect(testData.overLengthBoundaryCase.address).toHaveLength(
         testData.overLengthBoundaryCase.expectedLength,
       );
-      await expectAddressRejected(
+      await openCheckoutWithProfileAddress(
         userCheckoutPage,
         testData.overLengthBoundaryCase.address,
+      );
+      await expectAddressRejected(
+        userCheckoutPage,
         testData.ui.addressTooLongError,
       );
     },
@@ -259,7 +315,7 @@ test.describe('FR-08 authenticated empty-cart protection', () => {
       userCheckoutPage.emptyCartMessage(testData.ui.emptyCartMessage),
     ).toBeVisible();
     await expect(
-      userCheckoutPage.emptyCartIllustration(testData.ui.emptyCartMessage),
+      userCheckoutPage.emptyCartIllustration(),
     ).toBeVisible();
     await userCheckoutPage.open();
     await expect(
@@ -278,27 +334,29 @@ test.describe('FR-08 unauthenticated checkout protection', () => {
       testData.labels,
       testData.ui.productName,
     );
-    await checkoutPage.open();
   });
 
   test.afterEach(async ({ checkoutPage }) => {
     await checkoutPage.cleanupCart(testData.labels);
   });
 
-  test(testTitle(testData.unauthenticatedCase), async ({ page }) => {
-    annotateKnownBugs(testData.unauthenticatedCase.bugIds);
-    const checkoutPage = anonymousCheckoutPage(page);
-    const dialogPromise = page.waitForEvent('dialog');
+  test(
+    testTitle(testData.unauthenticatedCase),
+    async ({ page, checkoutPage }) => {
+      annotateKnownBugs(testData.unauthenticatedCase.bugIds);
+      const dialogPromise = page.waitForEvent('dialog');
 
-    await checkoutPage.submitCheckout(testData.labels);
-    const dialog = await dialogPromise;
-    expect(dialog.message()).toContain(testData.ui.authenticationError);
-    await dialog.dismiss();
-    await expect(page).toHaveURL(
-      new URL(
-        testData.metadata.checkoutRoute,
-        testData.metadata.frontendUrl,
-      ).toString(),
-    );
-  });
+      const checkoutPromise = checkoutPage.proceedFromCart(testData.labels);
+      const dialog = await dialogPromise;
+      expect(dialog.message()).toContain(testData.ui.authenticationError);
+      await dialog.dismiss();
+      await checkoutPromise;
+      await expect(page).toHaveURL(
+        new URL(
+          testData.routes.login,
+          testData.metadata.frontendUrl,
+        ).toString(),
+      );
+    },
+  );
 });
