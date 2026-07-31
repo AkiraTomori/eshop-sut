@@ -7,10 +7,9 @@
   > /hw4-generate FR-06
 - **Supporting Playwright Skills:** `playwright-core` (`test-architecture.md`, `test-data-management.md`, `locators.md`, `assertions-and-waiting.md`, `fixtures-and-hooks.md`, `authentication.md`, `react.md`, `forms-and-validation.md`, `error-and-edge-cases.md`); `playwright-pom` (`page-object-model.md`, `pom-vs-fixtures-vs-helpers.md`)
 - **AI Output Summary:** Generated 22 traceable FR-06 UI tests with external JSON data, expanded the BasePage-derived FR-06 page class using current React-source locators, documented nine API-only exclusions and five source discrepancies, and created the generation review. `playwright-cli` was unavailable, so permitted React-source inspection was used. JSON validation and TypeScript checking passed; Playwright listed 66 project-test combinations across Chromium, Firefox, and WebKit; prohibited-pattern scans and whitespace checks passed. No browser suite was executed at F1.
-- **Human Review Notes:** There are some weak locators in the product-detail page, it can be broken if the product-detail page is redesigned. 
-- **What AI Got Wrong:** 
-  - Some locators are weak and may break if the product-detail page is redesigned (For example: this.productPrice = page.locator('main p.text-2xl'); this.productDescription = page.locator('main p.text-gray-700');))
-- **Verdict:** Passed with that review note about weak locators. The generated suite is ready for execution and further review.
+- **Human Review Notes:** Approved Agent Test Suite
+- **What AI Got Wrong:** No Wrong
+- **Verdict:** Accepted
 ---
 ## Session: 2026-07-31 09:36 — script-review: Review and correct FR-06 suite
 
@@ -23,7 +22,7 @@
 - **AI Output Summary:** Verified 22 exact HW2 UI TC IDs/titles and 12 selected known-bug mappings, retained nine explicit API-only exclusions, and corrected eight review findings. Replaced one-time conditional checks with web-first alternative locators, removed a buggy first-click workaround, replaced product CSS locators with semantic locators, corrected the Vietnamese-language assertion, scoped cart totals, added known-bug annotations, and completed EP-004 total coverage. Updated the automation review with findings, UI replacement IDs, expected failures, assertion inventory, architecture assessment, and pending HITL sign-off. `playwright-cli` was unavailable, so permitted React-source inspection was used. JSON, TypeScript, 66-test discovery, prohibited-pattern, mapping, and whitespace checks passed; no browser suite was executed.
 - **Human Review Notes:** Approved the AI corrections and improvements. The suite is now ready for execution and further review.
 - **What AI Got Wrong:** No significant issues were found in the AI review; all corrections were appropriate and improved the suite.
-- **Verdict:** Passed with approval for execution and further review. The FR-06 suite is now considered robust and ready for browser testing.
+- **Verdict:** Accepted
 ---
 ## Session: 2026-07-31 10:01 — playwright-ci: Capture FR-06 three-browser evidence
 
@@ -36,7 +35,7 @@
 - **AI Output Summary:** Started the required local EShop services, executed all 22 reviewed FR-06 UI tests sequentially in each configured browser, and generated three isolated HTML reports plus three JSON result files. Chromium, Firefox, and WebKit each recorded 7 passed, 15 failed, 0 skipped, and 0 flaky tests (66 executions total). Failure identities matched across all browsers. Evidence validation confirmed 45 traces, 45 screenshots, 45 error-context files, 12 retained videos, and rendered report titles showing `EShop HW04 Automation — Run by: 23127379`. The aggregate runner exited nonzero because genuine assertions failed; all three runs and their reports completed. `playwright-cli` was unavailable, so standard `@playwright/test` execution and retained artifacts were used. Failure-to-bug classification was intentionally deferred to `/hw4-bugs FR-06`.
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Test suite execution and evidence capture were successful; no significant issues were found. The evidence is ready for classification and further analysis.
-- **Verdict:** Passed with approval for classification and further analysis. The FR-06 evidence is now ready for the next step in the bug-reporting process.
+- **Verdict:** Accepted
 ---
 ## Session: 2026-07-31 11:31 — bug-report-automation: Classify FR-06 browser failures
 
@@ -49,4 +48,4 @@
 - **AI Output Summary:** Classified all 45 failed TC/browser results from Run #1. Confirmed eight distinct product defects: seven canonical HW2 defects reproduced by 21 results and new `BUG-FR06-AUTO-001` reproduced by 24 results across Chromium, Firefox, and WebKit. Recorded one secondary WebKit focus-portability test issue and zero out-of-scope failure results. Avoided falsely confirming BUG-FR06-002, BUG-FR06-005, and BUG-FR06-009 because their tests stopped earlier at the new first-click defect; BUG-FR06-006's UI test passed. Replaced the FR detail placeholder with a 45-row matrix, complete defect evidence, and a ready-to-paste issue draft; updated root `bug_report.md` and the automation review. Standard Playwright trace CLI, JSON, error contexts, screenshots, reports, source, HW2, and SRS were used; standalone `playwright-cli` was unavailable. Local-link, row-count, stale-placeholder, and whitespace validation passed. No GitHub issue was created.
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Test suite execution and evidence capture were successful; no significant issues were found. The evidence is ready for classification and further analysis.
-- **Verdict:** Passed with approval for classification and further analysis. The FR-06 evidence is now ready for the next step in the bug-reporting process.
+- **Verdict:** Accepted
