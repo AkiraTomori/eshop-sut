@@ -1,6 +1,6 @@
 # FR-08 Automation Review
 
-**Stage:** Run #4 three-browser evidence complete — accepted by HITL; failure classification pending
+**Stage:** Run #4 failure classification accepted — test-locator correction required
 **Automation scope:** Browser UI only
 **Selected:** 14 UI test cases
 **Excluded:** 3 API-dependent test cases
@@ -79,19 +79,16 @@ These cases are not automated and are not counted toward the 14 selected UI case
 
 ## Genuinely non-automatable steps
 
-None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; heading structure uses accessible role plus level; and error placement uses polled element geometry. Run #3 shows that Profile persistence verification must be reordered so its full reload does not destroy the already-created in-memory cart precondition. API/database clauses remain out of scope rather than being simulated.
+None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; heading structure uses accessible role plus level; and error placement uses polled element geometry. Run #4 confirms the reordered Profile/cart lifecycle reaches the intended Checkout assertions. API/database clauses remain out of scope rather than being simulated.
 
-## Run #3 classification and review correction
+## Run #4 classification
 
-- **Genuine product defect:** TC-FR08-NEG-003 failed in Chromium, Firefox, and WebKit because the empty-cart state has no required image/illustration. This is new `BUG-FR08-AUTO-001` (Cosmetic).
-- **Test issue:** The other 36 failed TC/browser results are `TEST-FR08-002`. Every address-bearing case adds the product successfully, updates Profile through the corrected locators, then calls `page.reload()`. Because `CartContext` keeps cart state only in React memory, that reload remounts the provider with an empty cart, and the later cart-row precondition receives 0 instead of 1.
-- **Previous correction verified:** `TEST-FR08-001` is resolved; the former Profile phone-label failure appears zero times in Run #3.
-- **Known defects reproduced:** None. The post-reload cart precondition fails before Checkout assertions, so BUG-FR08-001, 002, 003, 005, 006, and 009 are not confirmed by this run.
-- **API-only defects:** BUG-FR08-007 and BUG-FR08-008 remain outside the HW4 browser-UI scope.
-- **Passed protection:** TC-FR08-NEG-001 passed in all three browsers.
-- **Unreached clauses:** NEG-003 stopped at the missing illustration before its direct-Checkout assertion. EP-002 never reached the editable-total assertion.
-- **Applied correction:** Profile update, browser reload, and persisted-value verification now occur before `prepareCart()`. The product is added only after the reload, and the original cart row, total, navigation, and Checkout assertions remain unchanged.
-- **Verification status:** Static F2 validation is required in this review. Cross-browser confirmation belongs to the next `/hw4-run FR-08` evidence cycle.
+- **Genuine product defects:** 36 failed TC/browser results reproduce product defects. Thirty primary rows reproduce known HW2 defects `BUG-FR08-001`, `BUG-FR08-003`, `BUG-FR08-005`, `BUG-FR08-006`, and `BUG-FR08-009`; the EP-001 screenshots also reproduce known colour defect `BUG-FR08-002` as a secondary observation. Six rows reproduce two new cross-browser defects: missing empty-cart illustration `BUG-FR08-AUTO-001` and directly editable Checkout total `BUG-FR08-AUTO-002`.
+- **Test issue:** Three TC-FR08-EP-001 rows are `TEST-FR08-003`. The exact item text is visibly correct, but a native `listitem` does not derive its accessible name from descendant text, so `getByRole('listitem', { name: exactText })` resolves zero elements. The correction must preserve the external expected text and use `getByRole('listitem').filter({ hasText: exactText })`.
+- **Previous corrections verified:** `TEST-FR08-001` and `TEST-FR08-002` appear zero times in Run #4. All address-bearing tests pass Profile persistence, product addition, cart row/total, and Checkout navigation.
+- **API-only defects:** `BUG-FR08-007` and `BUG-FR08-008` remain outside the HW4 browser-UI scope and are not claimed as reproduced.
+- **Passed protection:** TC-FR08-NEG-001 passed in Chromium, Firefox, and WebKit.
+- **Correction gate:** Run #4 classification is complete. After HITL accepts its audit session, FR-08 returns to `/hw4-review FR-08` to correct only `TEST-FR08-003`; no product expectation may be weakened.
 
 Full classification and per-browser evidence are recorded in [fr08-bug-report.md](fr08-bug-report.md).
 
@@ -122,10 +119,10 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - Every address-bearing case now includes the HITL-requested Profile update and persisted browser-control verification.
 - All UI-observable expected clauses are asserted or explicitly disclosed as a source discrepancy/out-of-scope hybrid clause.
 - Tests use the shared fixture, external JSON, fresh contexts, UI-only setup/cleanup, and spec-correct known-defect assertions.
-- Run #3 remains historical evidence: 3 passed and 39 failed results across 42 browser executions, including 36 `TEST-FR08-002` results.
-- `TEST-FR08-002` is corrected by ordering the reload before cart creation. No test data, expected result, locator, timeout, retry, storage state, shared fixture, or page object was weakened or expanded.
-- FR-08 requires a fresh three-browser evidence run, updated failure classification, and HITL sign-off before its completion gate can pass.
+- Run #4 produced 3 passed and 39 failed results across 42 browser executions.
+- Of the 39 failures, 36 are genuine product-defect results and three are `TEST-FR08-003`; the prior Profile locator and cart lifecycle issues are resolved.
+- FR-08 requires correction of the EP-001 list-item locator, a fresh three-browser evidence run, renewed failure classification, and HITL sign-off before its completion gate can pass.
 
-**Human Review:** Cart-lifecycle correction and Run #4 evidence accepted by HITL
+**Human Review:** Run #4 failure classification accepted by HITL
 
-**Next gate:** `/hw4-bugs FR-08`
+**Next gate:** `/hw4-review FR-08`

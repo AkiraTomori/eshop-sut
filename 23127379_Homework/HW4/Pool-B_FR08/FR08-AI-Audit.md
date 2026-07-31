@@ -114,3 +114,16 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Nothing Wrong after third correction according our analysis why test suites have the same issues
 - **Verdict:** Accepted
+---
+## Session: 2026-07-31 21:12 — bug-report-automation: Classify FR-08 Run #4 browser failures
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.4 (Collaborate)
+- **Task:** Classify every failed FR-08 Run #4 TC/browser result against retained Playwright evidence and canonical HW2/SRS sources, update the detailed FR report and GitHub Issue drafts, update the consolidated summary and automation review, and re-check the FR completion gate.
+- **Prompt:**
+  > /hw4-bugs FR-08
+- **Supporting Playwright Skills:** `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`); `playwright-ci` (`reporting-and-artifacts.md`)
+- **AI Output Summary:** Classified all 39 failed Run #4 results with one matrix row per TC/browser and verified every local evidence link. Thirty-six rows are genuine product-defect results: 30 primary rows reproduce known HW2 defects and six reproduce two new cross-browser defects, `BUG-FR08-AUTO-001` (missing empty-cart illustration) and `BUG-FR08-AUTO-002` (directly editable Checkout total); known action-colour defect `BUG-FR08-002` is additionally visible as a secondary EP-001 observation without increasing the failed-result count. The remaining three EP-001 rows are `TEST-FR08-003`: the exact item text is visibly correct, but the test incorrectly requires a native `listitem` to derive an accessible name from descendant text. Confirmed that prior `TEST-FR08-001` and `TEST-FR08-002` are resolved and that no failure is API-only or out of scope. Updated `fr08-bug-report.md`, `fr08-automation-review.md`, and root `bug_report.md`; retained ready-to-paste drafts for both new defects without creating external issues. `playwright-cli` was unavailable, so retained Playwright JSON, screenshots, traces, error contexts, and React source were used. FR-08 remains incomplete; after this session receives HITL sign-off, it returns to `/hw4-review FR-08` for the focused locator correction.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Nothing wrong
+- **Verdict:** Accepted
