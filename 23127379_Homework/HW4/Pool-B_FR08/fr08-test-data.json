@@ -1,0 +1,148 @@
+{
+  "metadata": {
+    "feature": "FR-08",
+    "tag": "@FR08",
+    "frontendUrl": "http://localhost:5173",
+    "checkoutRoute": "/checkout"
+  },
+  "routes": {
+    "home": "/",
+    "cart": "/cart",
+    "login": "/login"
+  },
+  "labels": {
+    "home": "EShop",
+    "cart": "Giỏ hàng",
+    "addToCart": "Thêm vào giỏ",
+    "remove": "Xóa",
+    "proceedToCheckout": "Tiến hành thanh toán",
+    "checkoutButton": "Xác Nhận Thanh Toán"
+  },
+  "ui": {
+    "productName": "iPhone 15 Pro Max",
+    "shippingAddressLabel": "Địa chỉ giao hàng",
+    "checkoutHeading": "Xác Nhận Đơn Hàng",
+    "successMessage": "Thanh toán thành công!",
+    "emptyCartMessage": "Giỏ hàng của bạn đang trống",
+    "breadcrumb": "Trang chủ > Giỏ hàng > Thanh toán",
+    "requiredAddressError": "Vui lòng nhập địa chỉ giao hàng",
+    "addressTooLongError": "Địa chỉ giao hàng không được vượt quá 255 ký tự",
+    "authenticationError": "Bạn cần đăng nhập để thanh toán",
+    "positiveActionColour": "rgb(37, 99, 235)",
+    "formattedTotalPattern": "^Tổng thanh toán: \\d{1,3}(,\\d{3})* ₫$",
+    "expectedCartRows": 1,
+    "expectedPrimaryHeadings": 1,
+    "expectedEmptyCartRows": 0,
+    "expectedErrorButtonCount": 1
+  },
+  "validCheckoutCase": {
+    "id": "TC-FR08-EP-001",
+    "title": "Verify that checkout succeeds with a valid cart, authenticated user, and a valid shipping address",
+    "address": "123 Nguyen Hue, District 1, Ho Chi Minh City",
+    "bugIds": [
+      "BUG-FR08-001",
+      "BUG-FR08-002",
+      "BUG-FR08-003"
+    ]
+  },
+  "blankCouponCase": {
+    "id": "TC-FR08-EP-002",
+    "title": "Verify that checkout proceeds without a coupon when the coupon field is left blank",
+    "address": "123 Nguyen Hue, District 1, Ho Chi Minh City",
+    "couponValue": "",
+    "bugIds": []
+  },
+  "breadcrumbCase": {
+    "id": "TC-FR08-EP-003",
+    "title": "Verify that breadcrumb navigation and error message position are correct on the checkout page",
+    "bugIds": [
+      "BUG-FR08-005",
+      "BUG-FR08-006"
+    ]
+  },
+  "unauthenticatedCase": {
+    "id": "TC-FR08-NEG-001",
+    "title": "Verify that checkout is blocked when the user is not logged in (no JWT token)",
+    "bugIds": []
+  },
+  "emptyCartCase": {
+    "id": "TC-FR08-NEG-003",
+    "title": "Verify that checkout is blocked when the user's cart is empty",
+    "bugIds": []
+  },
+  "emptyAddressCase": {
+    "id": "TC-FR08-NEG-004",
+    "title": "Verify that checkout is rejected when the shipping address field is empty",
+    "address": "",
+    "bugIds": [
+      "BUG-FR08-006",
+      "BUG-FR08-007"
+    ]
+  },
+  "whitespaceAddressCase": {
+    "id": "TC-FR08-NEG-006",
+    "title": "Verify that a shipping address consisting of only whitespace characters is rejected at checkout",
+    "address": "     ",
+    "bugIds": [
+      "BUG-FR08-006",
+      "BUG-FR08-007"
+    ]
+  },
+  "headingCase": {
+    "id": "TC-FR08-NEG-007",
+    "title": "Verify that the checkout page displays exactly one `<h1>` tag and no duplicate heading elements",
+    "bugIds": [
+      "BUG-FR08-001",
+      "BUG-FR08-002"
+    ]
+  },
+  "validBoundaryCases": [
+    {
+      "id": "TC-FR08-BV-001",
+      "title": "Verify that a 1-character shipping address (minimum length) is accepted at checkout",
+      "address": "A",
+      "expectedLength": 1,
+      "bugIds": []
+    },
+    {
+      "id": "TC-FR08-BV-002",
+      "title": "Verify that a 2-character shipping address (LB+1) is accepted at checkout",
+      "address": "AB",
+      "expectedLength": 2,
+      "bugIds": []
+    },
+    {
+      "id": "TC-FR08-BV-003",
+      "title": "Verify that a 254-character shipping address (UB-1) is accepted at checkout",
+      "address": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedLength": 254,
+      "bugIds": []
+    },
+    {
+      "id": "TC-FR08-BV-004",
+      "title": "Verify that a 255-character shipping address (UB — maximum safe length) is accepted at checkout",
+      "address": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\u0042\u0042\u0042\u0042\u0042\u0042\u0042\u0042",
+      "expectedLength": 255,
+      "bugIds": []
+    }
+  ],
+  "zeroLengthBoundaryCase": {
+    "id": "TC-FR08-BV-005",
+    "title": "Verify that an empty shipping address (LB-1 = 0 chars) is rejected at checkout",
+    "address": "",
+    "expectedLength": 0,
+    "bugIds": [
+      "BUG-FR08-006",
+      "BUG-FR08-007"
+    ]
+  },
+  "overLengthBoundaryCase": {
+    "id": "TC-FR08-BV-006",
+    "title": "Verify system behavior when a 256-character shipping address (UB+1) is submitted at checkout",
+    "address": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+    "expectedLength": 256,
+    "bugIds": [
+      "BUG-FR08-009"
+    ]
+  }
+}
