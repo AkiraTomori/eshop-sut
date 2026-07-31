@@ -1,6 +1,6 @@
 # FR-08 Automation Review
 
-**Stage:** Failure classification accepted — correction required
+**Stage:** Locator correction review complete — Accepted for a fresh three-browser evidence cycle
 **Automation scope:** Browser UI only
 **Selected:** 14 UI test cases
 **Excluded:** 3 API-dependent test cases
@@ -11,7 +11,7 @@
 - **Fixture:** The reviewed suite continues to use `userCheckoutPage` and `checkoutPage` from the shared test-scoped fixture. Neither `fixtures/eshop.fixture.ts` nor `pages/base.page.ts` changed.
 - **Helper:** FR-local orchestration remains in the spec. Profile and cart interaction mechanics stay in the page object; expected values and assertions stay in the spec/data.
 - **HITL correction:** The accepted generation audit notes that shipping address is maintained through Profile. Every address-bearing case now opens `/profile`, updates the exact external address through the UI, confirms the browser dialog, reloads Profile, verifies the persisted control value, returns to Cart, and proceeds to Checkout.
-- **Locator evidence:** `playwright-cli` is unavailable. Locators were re-verified against `Home.jsx`, `Cart.jsx`, `Checkout.jsx`, `Profile.jsx`, `Login.jsx`, `App.jsx`, `AuthContext.jsx`, and `CartContext.jsx`.
+- **Locator evidence:** `playwright-cli` is unavailable. Run #2 traces prove the Profile phone control has no accessible name, and `Profile.jsx` confirms both visible labels lack `htmlFor` while the controls lack `id`. The corrected page object uses the unique source-verified placeholders `VD: 0912345678` and `Nhập địa chỉ của bạn`, supplied from external JSON.
 
 ## Selected UI traceability manifest
 
@@ -36,6 +36,7 @@
 
 | Issue | Severity | Original pattern | Correction | Root cause |
 |---|---|---|---|---|
+| TEST-FR08-001 blocked all 12 address-bearing TCs in every browser | High | `getByLabel("Số điện thoại")` and `getByLabel("Địa chỉ giao hàng")` assumed associated labels | Replaced both with exact, externally supplied `getByPlaceholder()` locators verified against the Run #2 trace snapshot and `Profile.jsx` | The visible labels are not programmatically associated with their adjacent input/textarea, so label locators correctly resolved zero controls |
 | Shipping address was located on Checkout although current UI maintains it on Profile | High | `getByLabel("Địa chỉ giao hàng")` on `/checkout` | Added UI-only Profile update, dialog handling, reload, and persisted-value assertion before checkout | Generation followed the canonical checkout wording but lacked the later HITL workflow clarification |
 | EP-002 compared the total input with its own one-time `inputValue()` snapshot | High | A mutable control was used as both actual and expected value | Added external cart total/input/formatted expectations and `not.toBeEditable()` | The original assertion could pass after client-side tampering and bypassed web-first checking |
 | EP-001 checked only checkout item count | High | `checkoutItems.toHaveCount(1)` | Added an exact external item summary assertion covering product, quantity, and price | Count alone did not prove the full cart item list was displayed |
@@ -78,7 +79,7 @@ These cases are not automated and are not counted toward the 14 selected UI case
 
 None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; heading structure uses accessible role plus level; error placement uses polled element geometry; address persistence is verified by a normal Profile reload. API/database clauses remain out of scope rather than being simulated.
 
-## Run #2 known-failure classification
+## Run #2 classification and review correction
 
 - **Genuine product defect:** TC-FR08-NEG-003 failed in Chromium, Firefox, and WebKit because the empty-cart state has no required image/illustration. This is new `BUG-FR08-AUTO-001` (Cosmetic).
 - **Test issue:** The other 36 failed TC/browser results are `TEST-FR08-001`. All 12 address-bearing TCs stop on Profile setup because `getByLabel('Số điện thoại')` cannot resolve a control: the current `<label>` has no `htmlFor`, and the input has no `id` or accessible name.
@@ -86,7 +87,8 @@ None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; h
 - **API-only defects:** BUG-FR08-007 and BUG-FR08-008 remain outside the HW4 browser-UI scope.
 - **Passed protection:** TC-FR08-NEG-001 passed in all three browsers.
 - **Unreached clauses:** NEG-003 stopped at the missing illustration before its direct-Checkout assertion. EP-002 never reached the editable-total assertion.
-- **Required correction:** Return `TEST-FR08-001` to `/hw4-review FR-08`, replace both Profile `getByLabel()` control locators with source-verified stable locators, then rerun browser evidence. Do not weaken FR-08 assertions.
+- **Applied correction:** Both Profile control locators now use exact source-verified placeholders from external JSON. No timeout, skip, retry, or weakened checkout assertion was introduced.
+- **Verification status:** Static review validation is required at F2; cross-browser confirmation belongs to the next `/hw4-run FR-08` evidence cycle.
 
 Full classification and per-browser evidence are recorded in [fr08-bug-report.md](fr08-bug-report.md).
 
@@ -106,6 +108,7 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - The BasePage-derived FR-08 class remains warranted for the repeated Profile/Cart/Checkout workflow.
 - Fresh `userCheckoutPage` and `checkoutPage` contexts preserve browser isolation. `beforeEach` performs only UI setup; `afterEach` resets Profile address and removes cart rows through the UI.
 - The test account phone is set to one fixed external UI-valid setup value on every address-bearing test because the current Profile form refuses an empty phone. No test depends on its previous phone value.
+- The Profile labels remain an SUT accessibility concern, but the test interaction uses unique placeholders because the current controls have no accessible names. Placeholder strings remain external test data rather than page-object constants.
 - Orders cannot be deleted through the user UI, so successful-test order records cannot be removed within HW4's UI-only boundary. The selected assertions do not depend on order count or order execution order.
 - `productCard(...).locator('..')` remains the sole narrow structural locator because the current Home product card has no semantic container/test ID; it is source-verified and scoped by an exact product heading.
 - Page objects retain interaction mechanics only. URLs, labels, phone/address values, totals, messages, colours, counts, Bug IDs, and exact test identity remain external.
@@ -116,10 +119,10 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - Every address-bearing case now includes the HITL-requested Profile update and persisted browser-control verification.
 - All UI-observable expected clauses are asserted or explicitly disclosed as a source discrepancy/out-of-scope hybrid clause.
 - Tests use the shared fixture, external JSON, fresh contexts, UI-only setup/cleanup, and spec-correct known-defect assertions.
-- Run #2 produced 42 browser executions: 3 passed and 39 failed. All failed results retained screenshots, traces, and error contexts.
-- The run confirms one new product defect and one test issue; it does not confirm any mapped HW2 checkout defect because the affected tests never reached Checkout.
-- FR-08 cannot pass its completion gate until `TEST-FR08-001` is corrected through script review, the three-browser evidence is rerun, failures are reclassified, and all pending audit sessions receive HITL sign-off.
+- Run #2 remains historical evidence: 3 passed and 39 failed across 42 browser executions, including 36 failures caused by `TEST-FR08-001`.
+- `TEST-FR08-001` is corrected without changing TC selection, expected outcomes, fixture lifecycle, or browser-UI-only scope.
+- FR-08 still requires a fresh three-browser evidence run, updated failure classification, and HITL sign-off before its completion gate can pass.
 
-**Human Review:** Classification session accepted; Run #2 remains partially accepted pending locator correction
+**Human Review:** Pending HITL sign-off for this correction review
 
-**Next gate:** `/hw4-review FR-08` to correct `TEST-FR08-001`
+**Next gate:** `/hw4-run FR-08`

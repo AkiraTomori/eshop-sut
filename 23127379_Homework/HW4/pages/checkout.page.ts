@@ -79,14 +79,14 @@ export class CheckoutPage extends BasePage {
   async updateProfileShippingAddress(
     routes: CheckoutRoutes,
     labels: CheckoutLabels,
-    phoneLabel: string,
+    phonePlaceholder: string,
     phone: string,
-    addressLabel: string,
+    addressPlaceholder: string,
     address: string,
   ): Promise<string> {
     await this.openRoute(routes.profile);
-    await this.profilePhoneInput(phoneLabel).fill(phone);
-    await this.profileShippingAddressInput(addressLabel).fill(address);
+    await this.profilePhoneInput(phonePlaceholder).fill(phone);
+    await this.profileShippingAddressInput(addressPlaceholder).fill(address);
 
     const dialogPromise = this.page.waitForEvent('dialog');
     const updatePromise = this.page
@@ -148,12 +148,12 @@ export class CheckoutPage extends BasePage {
     });
   }
 
-  profilePhoneInput(label: string): Locator {
-    return this.page.getByLabel(label, { exact: true });
+  profilePhoneInput(placeholder: string): Locator {
+    return this.page.getByPlaceholder(placeholder, { exact: true });
   }
 
-  profileShippingAddressInput(label: string): Locator {
-    return this.page.getByLabel(label, { exact: true });
+  profileShippingAddressInput(placeholder: string): Locator {
+    return this.page.getByPlaceholder(placeholder, { exact: true });
   }
 
   breadcrumb(text: string): Locator {

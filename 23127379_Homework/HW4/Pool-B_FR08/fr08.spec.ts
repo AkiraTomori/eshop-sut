@@ -29,16 +29,16 @@ async function openCheckoutWithProfileAddress(
   const updateMessage = await checkoutPage.updateProfileShippingAddress(
     testData.routes,
     testData.labels,
-    testData.ui.profilePhoneLabel,
+    testData.ui.profilePhonePlaceholder,
     testData.ui.profilePhone,
-    testData.ui.shippingAddressLabel,
+    testData.ui.shippingAddressPlaceholder,
     address,
   );
   expect(updateMessage).toContain(testData.ui.profileUpdateSuccess);
   await checkoutPage.page.reload();
   await expect(
     checkoutPage.profileShippingAddressInput(
-      testData.ui.shippingAddressLabel,
+      testData.ui.shippingAddressPlaceholder,
     ),
   ).toHaveValue(address);
   await checkoutPage.openCart(testData.labels);
@@ -66,9 +66,9 @@ async function resetProfileAndCart(
   const updateMessage = await checkoutPage.updateProfileShippingAddress(
     testData.routes,
     testData.labels,
-    testData.ui.profilePhoneLabel,
+    testData.ui.profilePhonePlaceholder,
     testData.ui.profilePhone,
-    testData.ui.shippingAddressLabel,
+    testData.ui.shippingAddressPlaceholder,
     testData.ui.profileCleanupAddress,
   );
   expect(updateMessage).toContain(testData.ui.profileUpdateSuccess);

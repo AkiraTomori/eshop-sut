@@ -49,3 +49,16 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Nothing wrong
 - **Verdict:** Accepted
+---
+## Session: 2026-07-31 15:37 — script-review: Correct FR-08 Profile locators after Run #2
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.4 (Collaborate)
+- **Task:** Re-review and correct the FR-08 Playwright suite after Run #2 isolated the shared Profile setup locator failure; preserve canonical expectations, browser-UI-only scope, data-driven inputs, isolation, and the BasePage-derived POM architecture; stop before browser execution.
+- **Prompt:**
+  > /hw4-review FR-08
+- **Supporting Playwright Skills:** `playwright-core` (`locator-strategy.md`, `assertions-and-waiting.md`, `fixtures-and-hooks.md`, `flaky-tests.md`, `common-pitfalls.md`, `test-organization.md`); `playwright-pom` (`page-object-model.md`, `pom-vs-fixtures-vs-helpers.md`)
+- **AI Output Summary:** Corrected `TEST-FR08-001` without weakening assertions, adding waits, or skipping tests: Run #2 trace DOM and React source confirmed that the Profile labels have no `htmlFor` association and their controls have no matching accessible name, so the FR-08 page object now resolves the phone input and shipping-address textarea through their exact, unique placeholders supplied by the external JSON data. Updated the spec, test data, page object, and automation review while leaving shared infrastructure unchanged. `playwright-cli` was unavailable, so retained Playwright trace evidence and React source were used. JSON parsing, source-placeholder uniqueness, exact comparison of 14 HW2 ID/title pairs, boundary-length validation, TypeScript checking, prohibited-pattern scanning, whitespace checking, six assertion-pattern verification, and Playwright discovery of 42 project-test combinations passed. No browser suite was executed at F2.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Human and A.I agreed on the correction of the Profile locators, and the script is ready for re-execution.
+- **Verdict:** Accepted
