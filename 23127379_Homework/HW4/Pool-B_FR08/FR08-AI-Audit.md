@@ -46,6 +46,6 @@
   > /hw4-bugs FR-08
 - **Supporting Playwright Skills:** `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`); `playwright-ci` (`reporting-and-artifacts.md`)
 - **AI Output Summary:** Classified all 39 failed Run #2 results with one matrix row per TC/browser and verified every local evidence link. Three TC-FR08-NEG-003 results confirm new Cosmetic defect `BUG-FR08-AUTO-001`, the missing required empty-cart illustration, and include a ready-to-paste GitHub Issue draft. The other 36 results are `TEST-FR08-001`: 12 address-bearing TCs in all browsers stop during Profile setup because `getByLabel('Số điện thoại')` cannot resolve the unassociated label/input markup, so no mapped HW2 Checkout defect is falsely claimed as reproduced. Updated `fr08-bug-report.md`, `fr08-automation-review.md`, and root `bug_report.md`; retained all screenshots, traces, error contexts, JSON, and HTML reports. `playwright-cli` was unavailable, so standard Playwright terminal trace analysis, DOM snapshots, JSON, screenshots, and React source were used. FR-08 remains incomplete; after this classification session receives HITL sign-off, it returns to `/hw4-review FR-08` for locator correction and a fresh evidence cycle.
-- **Human Review Notes:** Approved this session
-- **What AI Got Wrong:** Human and A.I have reviewed the evidence about the locator issue
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Nothing wrong
 - **Verdict:** Accepted

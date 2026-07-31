@@ -1,6 +1,6 @@
 # FR-08 Automation Review
 
-**Stage:** Failure classification complete — pending HITL sign-off
+**Stage:** Failure classification accepted — correction required
 **Automation scope:** Browser UI only
 **Selected:** 14 UI test cases
 **Excluded:** 3 API-dependent test cases
@@ -120,6 +120,6 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - The run confirms one new product defect and one test issue; it does not confirm any mapped HW2 checkout defect because the affected tests never reached Checkout.
 - FR-08 cannot pass its completion gate until `TEST-FR08-001` is corrected through script review, the three-browser evidence is rerun, failures are reclassified, and all pending audit sessions receive HITL sign-off.
 
-**Human Review:** Pending HITL sign-off
+**Human Review:** Classification session accepted; Run #2 remains partially accepted pending locator correction
 
-**Next gate:** `/hw4-signoff FR-08` for the 2026-07-31 15:17 classification session; after sign-off, return to `/hw4-review FR-08` to correct `TEST-FR08-001`
+**Next gate:** `/hw4-review FR-08` to correct `TEST-FR08-001`
