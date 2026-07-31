@@ -19,6 +19,14 @@ HW4/
 ├── scripts/run-feature.mjs     # 3 isolated browser reports per FR
 ├── Infrastructure-AI-Audit.md  # Setup/workflow AI audit
 │
+├── fixtures/
+│   └── eshop.fixture.ts        # Test-scoped auth pages + typed page objects
+├── pages/
+│   ├── base.page.ts            # Shared navigation/base Page contract
+│   ├── product-detail.page.ts  # FR-06 UI actions and locators
+│   ├── checkout.page.ts        # FR-08 UI actions and locators
+│   └── product-management.page.ts # FR-15 UI actions and locators
+│
 ├── Pool-A_FR06/                # FR-06: Product Detail View
 │   ├── fr06.spec.ts
 │   ├── fr06-test-data.json
@@ -53,7 +61,7 @@ HW4/
 ## Quick Start
 
 ### Prerequisites
-- Node.js ≥ 22 (currently using v26)
+- Node.js ≥ 20 (currently using v26)
 - EShop SUT running:
   - Frontend: http://localhost:5173
   - Web Admin: http://localhost:5174

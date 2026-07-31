@@ -1,5 +1,9 @@
 # Fixtures and Hooks
 
+## EShop HW04 workspace constraint
+
+HW04 uses browser UI only. Its shared `fixtures/eshop.fixture.ts` provides fresh test-scoped `userPage` and `adminPage` contexts plus typed page objects. Do not copy API-client, database, or direct-seeding fixture examples from this generic guide into HW04. Any future resource fixture must create and clean up the resource through verified UI actions.
+
 > **When to use**: Whenever tests need shared setup, teardown, reusable resources, or configurable context. Fixtures are Playwright's killer feature — prefer them over hooks in every situation where both could work.
 
 ## Quick Reference

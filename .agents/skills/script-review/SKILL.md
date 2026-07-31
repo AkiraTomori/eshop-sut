@@ -1,13 +1,13 @@
 ---
 name: script-review
-description: "Review and correct one current HW04 FR's AI-generated Playwright spec and external test data against its complete HW2 sources, live SUT locators, isolation rules, and Playwright quality patterns. Use after automation-script-gen and before multi-browser execution."
+description: "Review and correct one current HW04 FR's AI-generated Playwright spec, external test data, shared fixture usage, and BasePage-derived page object against its complete HW2 sources, live SUT locators, isolation rules, and Playwright quality patterns. Use after automation-script-gen and before multi-browser execution."
 ---
 
 # Review and correct one FR
 
 Obey `AGENTS.md`; remain in the current FR.
 
-Read the current spec, data file, full HW2 test-case file, HW2 bug report, and SRS. Invoke `playwright-core` and `playwright-pom` as supporting skills and read:
+Read the current spec, data file, current FR page class, `pages/base.page.ts`, `fixtures/eshop.fixture.ts`, full HW2 test-case file, HW2 bug report, and SRS. Invoke `playwright-core` and `playwright-pom` as supporting skills and read:
 
 - `../playwright/core/locator-strategy.md`
 - `../playwright/core/assertions-and-waiting.md`
@@ -30,6 +30,7 @@ Re-check whether the generated structure should remain fixtures/helpers or use P
 7. **Reliability:** remove sleeps, missing `await`, broad catches, forced actions, and unnecessary `page.evaluate()`.
 8. **Known bugs:** assert the spec-correct result and annotate the existing defect without skipping or weakening the test.
 9. **No API testing:** reject `request`, `APIRequestContext`, `fetch`, direct endpoint calls, `waitForResponse`/response-status assertions, database assertions, API seeding, and API cleanup.
+10. **Shared architecture:** spec imports shared `test`/`expect`; the FR page class extends `BasePage`; page objects contain verified UI intent but no test data; authenticated page fixtures are fresh and test-scoped.
 
 Colour checks may use `toHaveCSS`; tab-order checks may use keyboard focus assertions. Do not call these inherently manual.
 
@@ -50,6 +51,7 @@ Include:
 - any genuinely non-automatable step and concrete reason
 - known failures expected during execution
 - assertion-pattern inventory
+- fixture/POM architecture findings
 - final quality assessment
 - `Human Review: Pending HITL sign-off`
 

@@ -2,6 +2,11 @@
 
 # dependencies
 node_modules/
+23127379_Homework/HW4/.auth/
+23127379_Homework/HW4/playwright-report/
+23127379_Homework/HW4/test-results/
+23127379_Homework/HW4/Pool-*/playwright-report/
+23127379_Homework/HW4/Pool-*/test-results/
 
 # Expo
 .expo/

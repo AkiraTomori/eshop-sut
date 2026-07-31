@@ -30,12 +30,19 @@ Each pool maps to a dedicated workspace directory:
 
 ```
 23127379_Homework/HW4/
+├── fixtures/
+│   └── eshop.fixture.ts
+├── pages/
+│   ├── base.page.ts
+│   ├── product-detail.page.ts
+│   ├── checkout.page.ts
+│   └── product-management.page.ts
 ├── Pool-A_FR06/
 ├── Pool-B_FR08/
 └── Pool-C_FR15/
 ```
 
-All output files for a pool are written **only** into that pool's directory. Cross-pool contamination is a **hard error**.
+Pool-specific specs, data, reviews, reports, and audits are written **only** into that pool's directory. Shared fixture/page infrastructure stays in `HW4/fixtures/` and `HW4/pages/`. Writing one FR's pool artefacts into another pool is a **hard error**.
 
 ### 2.1 HW04 automation scope: browser UI only
 
@@ -122,7 +129,7 @@ The `playwright/` folder is an active technical layer of this workflow, not a pa
 Rules:
 
 - “Used” means the relevant `SKILL.md` and routed guide were read and materially applied at the current gate. Merely listing a skill does not count.
-- `playwright-pom` always performs a design decision during generation/review; it does not force Page Object Model files when fixtures or helpers are the simpler fit.
+- This workspace requires a small shared POM layer: every FR page class extends `pages/base.page.ts`. `playwright-pom` still decides whether additional components belong in page objects, fixtures, or helpers; do not turn page objects into test-data or assertion dumps.
 - Before invoking `playwright-cli`, verify that its executable is installed. If unavailable, record the fallback to React source/DOM inspection and standard `@playwright/test`; never claim CLI evidence and never install it implicitly.
 - A top-level workflow invocation produces one audit block. Supporting Playwright skills/guides used inside that invocation are recorded in the same block and do not create duplicate audits.
 - `playwright-migration` must be recorded as not applicable, not invoked artificially, when no Cypress/Selenium migration exists.
@@ -249,6 +256,16 @@ Every spec file MUST use at least 3 of these assertion patterns:
 - Never use direct API actions for setup, test steps, assertions, or cleanup.
 - Tests must not depend on execution order.
 
+### 6.6 Shared fixtures and Page Object Model
+
+- `fixtures/eshop.fixture.ts` is the only shared custom-test entry point. Specs import `test` and `expect` from it, not directly from `@playwright/test`.
+- `userPage` and `adminPage` create a fresh browser context and page per test using the corresponding saved storage state, then close that context after `await use(...)`.
+- API fixtures such as `userApiRequest` and `adminApiRequest` are prohibited. Resource fixtures such as `seededProduct` or `seededOrder` may be added only when both setup and teardown are implemented through verified UI flows.
+- `pages/base.page.ts` owns only shared browser-page behaviour such as resolving an externally supplied URL and navigation. It must not contain feature-specific locators, credentials, test data, or hardcoded SUT URLs.
+- `product-detail.page.ts`, `checkout.page.ts`, and `product-management.page.ts` extend `BasePage`. Their locators must be verified against the React source/live DOM, and their methods express user intent.
+- Page objects never store mutable test data between tests. Input values and expected results remain in each pool's external JSON/CSV.
+- `automation-script-gen` may update only the current FR's page class. Changes to `base.page.ts` or `eshop.fixture.ts` are infrastructure changes and require `playwright-setup` plus a new infrastructure audit.
+
 ---
 
 ## 7. Output Contract — Artefacts Per Pool
@@ -257,6 +274,9 @@ Every spec file MUST use at least 3 of these assertion patterns:
 |----------|------|----------|
 | Playwright spec | `fr##.spec.ts` | `Pool-[X]_FR##/` |
 | Test data file | `fr##-test-data.json` (or `.csv`) | `Pool-[X]_FR##/` |
+| Shared fixtures | `eshop.fixture.ts` | `HW4/fixtures/` |
+| Base page object | `base.page.ts` | `HW4/pages/` |
+| FR page objects | `product-detail.page.ts`, `checkout.page.ts`, `product-management.page.ts` | `HW4/pages/` |
 | Automation review | `fr##-automation-review.md` | `Pool-[X]_FR##/` |
 | HTML report (Chromium) | `playwright-report/chromium/index.html` | `Pool-[X]_FR##/` |
 | HTML report (Firefox) | `playwright-report/firefox/index.html` | `Pool-[X]_FR##/` |
@@ -319,6 +339,10 @@ AUTOMATION SCRIPTS:
 □ No Playwright request fixture, APIRequestContext, fetch, direct endpoint call, network-response assertion, database assertion, API setup, or API cleanup
 □ beforeEach/afterEach present for setup and cleanup
 □ Each test is independent (can run in any order)
+□ Specs import test/expect from fixtures/eshop.fixture.ts
+□ userPage/adminPage use fresh test-scoped contexts and close them after use
+□ Every FR page object extends pages/base.page.ts
+□ No credentials, input values, expected results, or hardcoded SUT URLs in page objects
 □ Playwright config declares chromium, firefox, webkit projects
 □ "Run by: 23127379" appears in report metadata or title
 

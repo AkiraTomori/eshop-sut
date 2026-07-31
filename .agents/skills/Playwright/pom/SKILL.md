@@ -9,7 +9,9 @@ description: Page Object Model patterns for Playwright — when to use POM, how 
 
 ## EShop HW04 decision gate
 
-For every FR generation and review, read `pom-vs-fixtures-vs-helpers.md` and record the architecture decision. Use `page-object-model.md` only when repeated selectors and page behaviour justify a page object. A fixtures/helpers decision is a valid outcome and does not mean this skill was skipped.
+This workspace requires `pages/base.page.ts` plus one page class for each automated FR. Every FR page class extends `BasePage`; it owns verified locators and user-intent actions, while data stays external.
+
+For every FR generation and review, read both guides and record decisions for any additional abstraction. Use fixtures for lifecycle/auth contexts and helpers for stateless utilities. Do not add API clients, database resources, credentials, test inputs, or expected results to page objects.
 
 **2 guides** covering Page Object Model implementation and the decision framework for choosing between POM, fixtures, and helpers.
 

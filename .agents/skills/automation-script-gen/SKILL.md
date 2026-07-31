@@ -1,6 +1,6 @@
 ---
 name: automation-script-gen
-description: "Generate one HW04 FR's data-driven Playwright spec and external JSON/CSV from its complete HW2 test-case and bug sources. Use only after Playwright setup passes and only for the current sequential FR: FR-06, then FR-08, then FR-15."
+description: "Generate one HW04 FR's data-driven Playwright spec, external JSON/CSV, and current BasePage-derived page-object updates from its complete HW2 test-case and bug sources. Use only after Playwright setup passes and only for the current sequential FR: FR-06, then FR-08, then FR-15."
 ---
 
 # Generate one FR automation suite
@@ -24,6 +24,14 @@ Read the current FR's full test-case file, bug report, and the shared SRS. Invok
 - For FR-15 CRUD: `../playwright/core/crud-testing.md`
 
 Make an explicit POM-versus-fixture-versus-helper decision before generating code. Do not create POM files merely to satisfy the routing step.
+
+Use the required shared architecture:
+
+- Import `test` and `expect` from `../fixtures/eshop.fixture`.
+- Reuse `userPage`, `adminPage`, and the relevant typed page-object fixture.
+- Update only the current FR page class in `../pages/`; every FR page class must extend `BasePage`.
+- Keep test inputs and expected results in the pool data file, never in fixtures or page objects.
+- Never add API/request fixtures. Add a resource fixture only when its complete lifecycle is implemented through the UI.
 
 If `playwright-cli` is installed, it may be invoked as a supporting skill to inspect the authorized local SUT: snapshot before interaction and use named sessions. If it is unavailable, inspect React source/DOM through the available standard tooling and record that fallback. Never install it implicitly.
 
@@ -56,6 +64,8 @@ fr##.spec.ts
 fr##-test-data.json (or CSV)
 ```
 
+The only allowed shared edit is the current FR's existing page class under `HW4/pages/`. Do not edit another FR's page class, `base.page.ts`, or `fixtures/eshop.fixture.ts` during generation.
+
 Requirements:
 
 - Put URLs, credentials, inputs, expected messages, and boundaries in external data.
@@ -66,7 +76,7 @@ Requirements:
 - Use UI actions for setup, test steps, assertions, and cleanup.
 - Do not use `request`, `APIRequestContext`, `fetch`, direct endpoint calls, `waitForResponse`/response-status assertions, database queries/assertions, API seeding, or API cleanup.
 - Do not use `waitForTimeout()` above 500 ms, brittle XPath/`nth-child`, unnecessary `page.evaluate()`, or `innerHTML` assignments.
-- Separate authenticated and unauthenticated describes with explicit `storageState`.
+- Authenticated tests request `userPage`, `adminPage`, or the corresponding typed page-object fixture; unauthenticated tests use the default isolated `page`/page-object fixture.
 - Add `@FR06`, `@FR08`, or `@FR15`.
 
 ## Gate and hand off

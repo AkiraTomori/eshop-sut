@@ -1,6 +1,6 @@
 ---
 name: playwright-setup
-description: "Initialize or repair the shared HW04 Playwright infrastructure, including three browser projects, reusable auth state, data-driven environment configuration, and separate per-FR/per-browser HTML reports showing the student ID. Use once before FR automation or when infrastructure changes."
+description: "Initialize or repair the shared HW04 Playwright infrastructure, including three browser projects, reusable auth state, test-scoped fixtures, BasePage-derived page objects, data-driven environment configuration, and separate per-FR/per-browser HTML reports showing the student ID. Use once before FR automation or when infrastructure changes."
 ---
 
 # Set up HW04 Playwright once
@@ -27,6 +27,11 @@ Maintain these shared files:
 23127379_Homework/HW4/test-environment.json
 23127379_Homework/HW4/scripts/run-feature.mjs
 23127379_Homework/HW4/tsconfig.json
+23127379_Homework/HW4/fixtures/eshop.fixture.ts
+23127379_Homework/HW4/pages/base.page.ts
+23127379_Homework/HW4/pages/product-detail.page.ts
+23127379_Homework/HW4/pages/checkout.page.ts
+23127379_Homework/HW4/pages/product-management.page.ts
 ```
 
 ## Configuration requirements
@@ -38,8 +43,12 @@ Maintain these shared files:
 - Keep retries CI-only, use web-first timeouts, and retain failure screenshot/trace/video.
 - Load URLs, accounts, and auth-state paths from `test-environment.json`; do not hardcode them in setup code.
 - Save user/admin storage states in global setup.
-- Require authenticated describe blocks to load the correct state explicitly; unauthenticated blocks must use empty state.
+- Require authenticated tests to request `userPage`, `adminPage`, or the corresponding typed page-object fixture; unauthenticated tests use the default isolated `page`.
 - Never state that storage state is reused unless the generated specs/config actually load it.
+- Export the shared `test` and `expect` from `fixtures/eshop.fixture.ts`.
+- Keep `userPage` and `adminPage` test-scoped: create a fresh context from saved storage state, call `await use(page)`, and close the context in `finally`.
+- Do not create request/API fixtures or API-backed seeded-resource fixtures.
+- Require all FR page objects to extend `pages/base.page.ts`; keep URLs/routes in `test-environment.json`.
 
 ## Report runner
 
