@@ -1,8 +1,8 @@
-<!-- HW4_RUN_COUNT: 3 -->
+<!-- HW4_RUN_COUNT: 4 -->
 # FR-08 Automation Run Summary
 
-- **Tracked FR run sessions:** 3
-- **Last updated:** 2026-07-31, 15:50:05 (Asia/Ho_Chi_Minh)
+- **Tracked FR run sessions:** 4
+- **Last updated:** 2026-07-31, 20:49:01 (Asia/Ho_Chi_Minh)
 - **Runner:** 23127379
 - **Scope:** One session represents one invocation of `npm run test:fr08`, including Chromium, Firefox, and WebKit attempts.
 
@@ -55,5 +55,15 @@ Only one report server should use the default port at a time. If needed, add `--
 | chromium | Failed (exit 1) | 1 | 13 | 0 | 0 | 14 | 154.1s | [Open](playwright-report/chromium/index.html) | [JSON](test-results/chromium/results.json) |
 | firefox | Failed (exit 1) | 1 | 13 | 0 | 0 | 14 | 181.5s | [Open](playwright-report/firefox/index.html) | [JSON](test-results/firefox/results.json) |
 | webkit | Failed (exit 1) | 1 | 13 | 0 | 0 | 14 | 167.0s | [Open](playwright-report/webkit/index.html) | [JSON](test-results/webkit/results.json) |
+
+---
+
+## Run #4 — 2026-07-31, 20:39:59
+
+| Browser | Process | Passed | Failed | Flaky | Skipped | Total | Duration | HTML report | JSON result |
+|---|---|---:|---:|---:|---:|---:|---:|---|---|
+| chromium | Failed (exit 1) | 1 | 13 | 0 | 0 | 14 | 167.6s | [Open](playwright-report/chromium/index.html) | [JSON](test-results/chromium/results.json) |
+| firefox | Failed (exit 1) | 1 | 13 | 0 | 0 | 14 | 194.4s | [Open](playwright-report/firefox/index.html) | [JSON](test-results/firefox/results.json) |
+| webkit | Failed (exit 1) | 1 | 13 | 0 | 0 | 14 | 177.9s | [Open](playwright-report/webkit/index.html) | [JSON](test-results/webkit/results.json) |
 
 

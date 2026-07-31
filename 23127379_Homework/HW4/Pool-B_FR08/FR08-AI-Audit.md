@@ -101,3 +101,16 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Human and A.I agreed on the correction of the cart lifecycle issue, and the script is ready for re-execution after third time
 - **Verdict:** Accepted
+---
+## Session: 2026-07-31 20:50 — playwright-ci: Run FR-08 three-browser evidence cycle #4
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Execute the HITL-accepted FR-08 cart-lifecycle correction through the dedicated local evidence runner for Chromium, Firefox, and WebKit; retain isolated JSON/HTML reports, screenshots, traces, error contexts, and one new cumulative run-summary session; stop before failure classification.
+- **Prompt:**
+  > /hw4-run FR-08
+- **Supporting Playwright Skills:** `playwright-ci` (`projects-and-dependencies.md`, `reporting-and-artifacts.md`); `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`)
+- **AI Output Summary:** Completed tracked Run #4 through the dedicated FR-08 runner. Chromium, Firefox, and WebKit each reported 1 passed and 13 failed out of 14, for 3 passed and 39 failed across 42 browser executions; counts and durations (167.6s, 194.4s, and 177.9s) were verified directly from the three current Playwright JSON reports. All 39 failures retained a trace, screenshot, and error context. Evidence confirms that the Run #3 cart-precondition failure is no longer present: all address-bearing cases now pass Profile persistence, product addition, cart-row/total checks, and Checkout navigation before reaching distinct spec-correct feature assertions. The runner appended Run #4 to `fr08-run-summary.md` and regenerated the full overview plus isolated Chromium, Firefox, and WebKit HTML reports with student ID 23127379 configured in report metadata/title. `playwright-cli` was unavailable, so standard Playwright JSON, HTML, trace, screenshot, and error-context artifacts were used. No spec correction or failure classification was performed at F3.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Nothing Wrong after third correction according our analysis why test suites have the same issues
+- **Verdict:** Accepted
