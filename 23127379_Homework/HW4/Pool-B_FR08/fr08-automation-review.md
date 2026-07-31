@@ -1,6 +1,6 @@
 # FR-08 Automation Review
 
-**Stage:** Locator correction review complete — Accepted for a fresh three-browser evidence cycle
+**Stage:** Run #3 failure classification complete — Approved by HITL sign-off
 **Automation scope:** Browser UI only
 **Selected:** 14 UI test cases
 **Excluded:** 3 API-dependent test cases
@@ -11,7 +11,7 @@
 - **Fixture:** The reviewed suite continues to use `userCheckoutPage` and `checkoutPage` from the shared test-scoped fixture. Neither `fixtures/eshop.fixture.ts` nor `pages/base.page.ts` changed.
 - **Helper:** FR-local orchestration remains in the spec. Profile and cart interaction mechanics stay in the page object; expected values and assertions stay in the spec/data.
 - **HITL correction:** The accepted generation audit notes that shipping address is maintained through Profile. Every address-bearing case now opens `/profile`, updates the exact external address through the UI, confirms the browser dialog, reloads Profile, verifies the persisted control value, returns to Cart, and proceeds to Checkout.
-- **Locator evidence:** `playwright-cli` is unavailable. Run #2 traces prove the Profile phone control has no accessible name, and `Profile.jsx` confirms both visible labels lack `htmlFor` while the controls lack `id`. The corrected page object uses the unique source-verified placeholders `VD: 0912345678` and `Nhập địa chỉ của bạn`, supplied from external JSON.
+- **Locator evidence:** `playwright-cli` is unavailable. Run #2 traces and `Profile.jsx` established the unique Profile placeholders used by the correction. Run #3 confirms that correction: all 12 address-bearing cases pass the Profile locators and address-value assertion in all three browsers.
 
 ## Selected UI traceability manifest
 
@@ -77,18 +77,19 @@ These cases are not automated and are not counted toward the 14 selected UI case
 
 ## Genuinely non-automatable steps
 
-None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; heading structure uses accessible role plus level; error placement uses polled element geometry; address persistence is verified by a normal Profile reload. API/database clauses remain out of scope rather than being simulated.
+None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; heading structure uses accessible role plus level; and error placement uses polled element geometry. Run #3 shows that Profile persistence verification must be reordered so its full reload does not destroy the already-created in-memory cart precondition. API/database clauses remain out of scope rather than being simulated.
 
-## Run #2 classification and review correction
+## Run #3 classification
 
 - **Genuine product defect:** TC-FR08-NEG-003 failed in Chromium, Firefox, and WebKit because the empty-cart state has no required image/illustration. This is new `BUG-FR08-AUTO-001` (Cosmetic).
-- **Test issue:** The other 36 failed TC/browser results are `TEST-FR08-001`. All 12 address-bearing TCs stop on Profile setup because `getByLabel('Số điện thoại')` cannot resolve a control: the current `<label>` has no `htmlFor`, and the input has no `id` or accessible name.
-- **Known defects reproduced:** None. The Profile setup failure occurs before Checkout assertions, so BUG-FR08-001, 002, 003, 005, 006, and 009 are not confirmed by this run.
+- **Test issue:** The other 36 failed TC/browser results are `TEST-FR08-002`. Every address-bearing case adds the product successfully, updates Profile through the corrected locators, then calls `page.reload()`. Because `CartContext` keeps cart state only in React memory, that reload remounts the provider with an empty cart, and the later cart-row precondition receives 0 instead of 1.
+- **Previous correction verified:** `TEST-FR08-001` is resolved; the former Profile phone-label failure appears zero times in Run #3.
+- **Known defects reproduced:** None. The post-reload cart precondition fails before Checkout assertions, so BUG-FR08-001, 002, 003, 005, 006, and 009 are not confirmed by this run.
 - **API-only defects:** BUG-FR08-007 and BUG-FR08-008 remain outside the HW4 browser-UI scope.
 - **Passed protection:** TC-FR08-NEG-001 passed in all three browsers.
 - **Unreached clauses:** NEG-003 stopped at the missing illustration before its direct-Checkout assertion. EP-002 never reached the editable-total assertion.
-- **Applied correction:** Both Profile control locators now use exact source-verified placeholders from external JSON. No timeout, skip, retry, or weakened checkout assertion was introduced.
-- **Verification status:** Static review validation is required at F2; cross-browser confirmation belongs to the next `/hw4-run FR-08` evidence cycle.
+- **Correction required:** Return to F2 and remove the hard reload from the cart-bearing flow, or complete Profile persistence verification before adding the product. Keep setup UI-only and preserve the cart-row and Checkout assertions; do not manipulate browser storage or weaken the precondition.
+- **Verification status:** Run #3 classification is complete. Its new audit block requires HITL sign-off; after acceptance, return to `/hw4-review FR-08`.
 
 Full classification and per-browser evidence are recorded in [fr08-bug-report.md](fr08-bug-report.md).
 
@@ -119,10 +120,10 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - Every address-bearing case now includes the HITL-requested Profile update and persisted browser-control verification.
 - All UI-observable expected clauses are asserted or explicitly disclosed as a source discrepancy/out-of-scope hybrid clause.
 - Tests use the shared fixture, external JSON, fresh contexts, UI-only setup/cleanup, and spec-correct known-defect assertions.
-- Run #2 remains historical evidence: 3 passed and 39 failed across 42 browser executions, including 36 failures caused by `TEST-FR08-001`.
-- `TEST-FR08-001` is corrected without changing TC selection, expected outcomes, fixture lifecycle, or browser-UI-only scope.
-- FR-08 still requires a fresh three-browser evidence run, updated failure classification, and HITL sign-off before its completion gate can pass.
+- Run #3 produced 3 passed and 39 failed results across 42 browser executions: 3 genuine product-defect results and 36 `TEST-FR08-002` results.
+- `TEST-FR08-001` is cross-browser verified as resolved, but the explicit Profile reload now exposes a separate test-ordering/isolation defect because the SUT cart is held only in React memory.
+- FR-08 requires correction at the review gate, a fresh three-browser evidence run, updated failure classification, and HITL sign-off before its completion gate can pass.
 
-**Human Review:** Pending HITL sign-off for this correction review
+**Human Review:** Pending HITL sign-off for Run #3 classification
 
-**Next gate:** `/hw4-run FR-08`
+**Next gate:** `/hw4-signoff FR-08` for the `2026-07-31 16:13 — bug-report-automation: Classify FR-08 Run #3 browser failures` session; after acceptance, `/hw4-review FR-08`

@@ -75,3 +75,16 @@
 - **Human Review Notes:** Testcases fail because there is a gap, Agent thought the product is in the cart, but the product is not in the cart, so the testcases fail. Need to review the SUT and testcases.
 - **What AI Got Wrong:** The AI correctly executed the test suite, but the failures are due to a gap between the expected cart state and the actual SUT behavior. The AI did not account for the possibility that the product may not be present in the cart, leading to failed assertions. Further investigation into the SUT and test cases is required to resolve this discrepancy. Hint for Agent: When play script, did you see why the database.sqlite always in stage area, because when you run the script again, the backend will reset to its inital state, so the product is not in the cart which leads to the testcases fail. So we need to review the SUT and testcases to ensure that the expected cart state aligns with the actual behavior of the application.
 - **Verdict:** Partially Accepted. The test suite execution is valid, but the failures indicate a need for review of the SUT and test cases to ensure that the expected cart state aligns with the actual behavior of the application.
+---
+## Session: 2026-07-31 16:13 — bug-report-automation: Classify FR-08 Run #3 browser failures
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.4 (Collaborate)
+- **Task:** Classify every failed FR-08 Run #3 TC/browser result against retained Playwright evidence and canonical HW2/SRS sources, update the detailed FR report and GitHub Issue draft, update the consolidated summary and automation review, and re-check the FR completion gate.
+- **Prompt:**
+  > /hw4-bugs FR-08
+- **Supporting Playwright Skills:** `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`); `playwright-ci` (`reporting-and-artifacts.md`)
+- **AI Output Summary:** Classified all 39 failed Run #3 results with one matrix row per TC/browser and verified all 139 local report links. Three TC-FR08-NEG-003 results reconfirm new Cosmetic defect `BUG-FR08-AUTO-001`, the missing required empty-cart illustration. The other 36 results are new test setup/isolation issue `TEST-FR08-002`: retained traces prove that each test successfully adds the product and updates Profile through the corrected locators, but the spec then calls `page.reload()`, which remounts the SUT's in-memory `CartProvider` and clears the cart before the Checkout precondition. The former `TEST-FR08-001` locator failure appears zero times in Run #3 and is resolved. No mapped HW2 Checkout defect or out-of-scope API failure is claimed. Updated `fr08-bug-report.md`, `fr08-automation-review.md`, and root `bug_report.md`; retained the ready-to-paste GitHub Issue draft without creating an external issue. `playwright-cli` was unavailable, so direct Playwright trace-archive, error-context, screenshot, JSON/HTML, and React-source evidence was used. FR-08 remains incomplete; this classification requires HITL sign-off before returning to `/hw4-review FR-08`.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Human and A.i agreed on the classification of the Run #3 failures, and the script is ready for further review and potential correction.
+- **Verdict:** Accepted

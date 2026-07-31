@@ -13,7 +13,7 @@
 | FR | Feature | Detailed report | Latest automation evidence | Classification status | Confirmed bugs |
 |---|---|---|---|---|---:|
 | FR-06 | Product Detail View | [fr06-bug-report.md](Pool-A_FR06/fr06-bug-report.md) | Run #1 — 3 browsers | Complete — pending HITL sign-off | 8 |
-| FR-08 | Checkout | [fr08-bug-report.md](Pool-B_FR08/fr08-bug-report.md) | Run #2 — 3 browsers | Complete — correction and HITL sign-off required | 1 |
+| FR-08 | Checkout | [fr08-bug-report.md](Pool-B_FR08/fr08-bug-report.md) | Run #3 — 3 browsers | Complete — correction and HITL sign-off required | 1 |
 | FR-15 | Product Management | `Pool-C_FR15/fr15-bug-report.md` | Not run | Not started | 0 |
 
 ## Consolidated bug index
@@ -46,7 +46,7 @@ Counts represent distinct classified defects/issues, not repeated browser failur
 
 FR-06 has 45 failed TC/browser results: 21 reproduce known defects and 24 reproduce the new first-click defect. One WebKit focus-portability observation is secondary to an EP-001 product-defect result and does not increase the 45-result total.
 
-FR-08 Run #2 has 39 failed TC/browser results: 3 reproduce the new missing-illustration defect and 36 are caused by one Profile control-locator test issue. No HW2 checkout defect is claimed as reproduced because those 36 tests stopped before reaching Checkout.
+FR-08 Run #3 has 39 failed TC/browser results: 3 reproduce the new missing-illustration defect and 36 are caused by `TEST-FR08-002`, where the spec's Profile reload clears the SUT's in-memory cart precondition. The previous Profile locator issue is resolved. No HW2 checkout defect is claimed as reproduced because those 36 tests stopped before reaching Checkout.
 
 ## Aggregation rules
 
