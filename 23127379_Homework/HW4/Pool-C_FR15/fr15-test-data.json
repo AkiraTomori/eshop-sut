@@ -25,7 +25,6 @@
     "selectedUiCases": [
       "TC-FR15-EP-001",
       "TC-FR15-EP-002",
-      "TC-FR15-EP-003",
       "TC-FR15-EP-004",
       "TC-FR15-EP-005",
       "TC-FR15-EP-006",
@@ -41,7 +40,14 @@
       "TC-FR15-NEG-026",
       "TC-FR15-NEG-027",
       "TC-FR15-NEG-028",
-      "TC-FR15-NEG-029"
+      "TC-FR15-NEG-029",
+      "TC-FR15-BV-001",
+      "TC-FR15-BV-002",
+      "TC-FR15-BV-006",
+      "TC-FR15-BV-007",
+      "TC-FR15-BV-008",
+      "TC-FR15-BV-011",
+      "TC-FR15-BV-012"
     ],
     "excludedApiTesting": [
       "TC-FR15-NEG-001",
@@ -74,14 +80,13 @@
       "TC-FR15-NEG-011",
       "TC-FR15-NEG-015",
       "TC-FR15-NEG-018",
-      "TC-FR15-NEG-023",
-      "TC-FR15-BV-001",
-      "TC-FR15-BV-002",
-      "TC-FR15-BV-006",
-      "TC-FR15-BV-007",
-      "TC-FR15-BV-008",
-      "TC-FR15-BV-011",
-      "TC-FR15-BV-012"
+      "TC-FR15-NEG-023"
+    ],
+    "manualOnly": [
+      {
+        "id": "TC-FR15-EP-003",
+        "reason": "Playwright-native UI automation was drafted, but the known mass-update behaviour renames every existing product. Because HW04 prohibits API/database restoration and the UI cannot uniquely identify and restore all affected pre-existing rows afterward, executing this case would violate mandatory self-cleaning isolation. Retain for HITL/manual execution in a disposable database only; do not count it as automated."
+      }
     ],
     "hybridClausesNotCovered": [
       "HTTP 200/201/400 response codes are not asserted for selected create, edit, delete, or validation cases.",
@@ -93,7 +98,13 @@
       "FR15-test-cases.md assigns BUG-FR15-001/003 to EP-001 and EP-002 and BUG-FR15-003 to EP-003, while FR15-bug-report.md defines those IDs as zero-price, float-price, and float-price defects rather than create-notification/format/isolation defects.",
       "FR15-test-cases.md assigns BUG-FR15-005 to authentication NEG-001 through NEG-004 and to missing-price NEG-013, while FR15-bug-report.md defines BUG-FR15-005 only as the missing-price defect.",
       "The appended BVA coverage matrix references TC-FR15-BV-001 through TC-FR15-BV-021, but the actual BVA case headings and final total define only TC-FR15-BV-001 through TC-FR15-BV-015.",
-      "TC-FR15-NEG-006 and TC-FR15-NEG-007 contain unresolved Bug ID placeholders, so no Bug ID is inferred for those cases."
+      "TC-FR15-NEG-006 and TC-FR15-NEG-007 contain unresolved Bug ID placeholders, so no Bug ID is inferred for those cases.",
+      "TC-FR15-NEG-024 is titled as verifying that asterisks are missing, but its expected result requires all mandatory labels to display asterisks; the automation follows the spec-correct expected result.",
+      "TC-FR15-NEG-027 is titled as checking that there is not more than one h1, which would allow zero, but its expected result requires exactly one meaningful h1; the automation enforces the expected result.",
+      "TC-FR15-NEG-028 specifies Name → Price → Description → Image URL → Category → Submit, while its recorded Passed result conflicts with the current React DOM order Name → Price → Image URL → Description → Category → Submit; the automation follows the specified expected order.",
+      "FR15-bug-report.md reports zero h1 elements, while the current React source contains a global EShop Admin h1 and a Product Management h2; the expected meaningful Product Management h1 still is not present.",
+      "TC-FR15-EP-006 records category and loading-state UI as observed, while the current React product table renders neither a category column nor a product-loading indicator.",
+      "The valid BVA cases assign BUG-FR15-001 or BUG-FR15-003 to HTTP-status and price-format observations, but the detailed bug report defines those IDs only for zero-price and float-price acceptance; the automated BVA cases therefore carry no canonical known Bug ID."
     ]
   },
   "ui": {
@@ -123,6 +134,7 @@
       "full": "15,000,000 ₫",
       "mandatoryOnly": "50,000 ₫",
       "updated": "200,000 ₫",
+      "cancelledDelete": "130,000 ₫",
       "list": "345,000 ₫",
       "detail": "30,000,000 ₫"
     },
@@ -140,8 +152,8 @@
     "tabOrder": [
       "name",
       "price",
-      "imageUrl",
       "description",
+      "imageUrl",
       "category",
       "save"
     ]
@@ -166,7 +178,7 @@
         "categoryLabel": "Điện thoại"
       },
       "cleanupNames": ["Laptop Gaming ABC"],
-      "bugIds": ["BUG-FR15-001", "BUG-FR15-003"]
+      "bugIds": []
     },
     "ep002": {
       "id": "TC-FR15-EP-002",
@@ -180,7 +192,7 @@
         "categoryLabel": "Điện thoại"
       },
       "cleanupNames": ["Basic Product X"],
-      "bugIds": ["BUG-FR15-001", "BUG-FR15-003"]
+      "bugIds": []
     },
     "ep003": {
       "id": "TC-FR15-EP-003",
@@ -212,7 +224,7 @@
         "Updated Product Name",
         "Isolation Comparison Product"
       ],
-      "bugIds": ["BUG-FR15-003"]
+      "bugIds": []
     },
     "ep004": {
       "id": "TC-FR15-EP-004",
@@ -254,7 +266,7 @@
         "categoryLabel": "Điện thoại"
       },
       "cleanupNames": ["List Display Product"],
-      "bugIds": ["BUG-FR15-003", "BUG-FR15-016"]
+      "bugIds": ["BUG-FR15-016"]
     },
     "ep007": {
       "id": "TC-FR15-EP-007",
@@ -298,7 +310,7 @@
         "categoryLabel": "Điện thoại"
       },
       "cleanupNames": ["FR15 Detail Product"],
-      "bugIds": ["BUG-FR15-003"]
+      "bugIds": []
     },
     "ep010": {
       "id": "TC-FR15-EP-010",
@@ -333,7 +345,7 @@
         "categoryLabel": "Điện thoại"
       },
       "cleanupNames": ["Zero Price Product"],
-      "bugIds": ["BUG-FR15-001", "BUG-FR15-009"]
+      "bugIds": ["BUG-FR15-001"]
     },
     "neg010": {
       "id": "TC-FR15-NEG-010",
@@ -347,7 +359,7 @@
         "categoryLabel": "Điện thoại"
       },
       "cleanupNames": ["Negative Price Product"],
-      "bugIds": ["BUG-FR15-002", "BUG-FR15-009"]
+      "bugIds": ["BUG-FR15-002"]
     },
     "neg024": {
       "id": "TC-FR15-NEG-024",
@@ -397,6 +409,88 @@
       },
       "cleanupNames": ["Delete Dialog Probe Product"],
       "bugIds": ["BUG-FR15-017"]
+    },
+    "bv001": {
+      "id": "TC-FR15-BV-001",
+      "title": "Verify that product creation succeeds with a product name of exactly 1 character (LB) and exactly 2 characters (LB+1)",
+      "type": "BV valid UI",
+      "inputs": [
+        { "name": "A", "price": "100000", "description": "BV-02", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "100,000 ₫" },
+        { "name": "AB", "price": "100000", "description": "BV-03", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "100,000 ₫" }
+      ],
+      "cleanupNames": ["A", "AB"],
+      "bugIds": []
+    },
+    "bv002": {
+      "id": "TC-FR15-BV-002",
+      "title": "Verify that product creation succeeds with a product name of exactly 254 characters (UB-1) and exactly 255 characters (UB)",
+      "type": "BV valid UI",
+      "inputs": [
+        { "nameCharacter": "A", "nameLength": 254, "price": "100000", "description": "BV-04", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "100,000 ₫" },
+        { "nameCharacter": "B", "nameLength": 255, "price": "100000", "description": "BV-05", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "100,000 ₫" }
+      ],
+      "cleanupNames": [],
+      "cleanupInputNames": [
+        { "character": "A", "length": 254 },
+        { "character": "B", "length": 255 }
+      ],
+      "bugIds": []
+    },
+    "bv006": {
+      "id": "TC-FR15-BV-006",
+      "title": "Verify that product creation succeeds when price is exactly 1 (LB) and exactly 2 (LB+1)",
+      "type": "BV valid UI",
+      "inputs": [
+        { "name": "BV Price One", "price": "1", "description": "BV-12", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "1 ₫" },
+        { "name": "BV Price Two", "price": "2", "description": "BV-13", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "2 ₫" }
+      ],
+      "cleanupNames": ["BV Price One", "BV Price Two"],
+      "bugIds": []
+    },
+    "bv007": {
+      "id": "TC-FR15-BV-007",
+      "title": "Verify that product creation succeeds with large price values at the 9-digit practical UI upper boundary (UB-1 and UB)",
+      "type": "BV valid UI",
+      "inputs": [
+        { "name": "BV Price UB Minus One", "price": "999999998", "description": "BV-14", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "999,999,998 ₫" },
+        { "name": "BV Price UB", "price": "999999999", "description": "BV-15", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "999,999,999 ₫" }
+      ],
+      "cleanupNames": ["BV Price UB Minus One", "BV Price UB"],
+      "bugIds": []
+    },
+    "bv008": {
+      "id": "TC-FR15-BV-008",
+      "title": "Verify that product creation succeeds with price at 1,000,000,000 ₫ (10-digit threshold practical probe)",
+      "type": "BV valid UI",
+      "inputs": [
+        { "name": "BV Price Ten Digit", "price": "1000000000", "description": "BV-16", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "1,000,000,000 ₫" }
+      ],
+      "cleanupNames": ["BV Price Ten Digit"],
+      "bugIds": []
+    },
+    "bv011": {
+      "id": "TC-FR15-BV-011",
+      "title": "Verify that product creation succeeds when description is empty (LB = 0 chars) and with exactly 1 character (LB+1)",
+      "type": "BV valid UI",
+      "verifyDescription": true,
+      "inputs": [
+        { "name": "BV Description Empty", "price": "100000", "description": "", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "100,000 ₫" },
+        { "name": "BV Description One", "price": "100000", "description": "A", "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "100,000 ₫" }
+      ],
+      "cleanupNames": ["BV Description Empty", "BV Description One"],
+      "bugIds": []
+    },
+    "bv012": {
+      "id": "TC-FR15-BV-012",
+      "title": "Verify that product creation succeeds with a description of exactly 999 characters (UB-1) and exactly 1000 characters (UB)",
+      "type": "BV valid UI",
+      "verifyDescription": true,
+      "inputs": [
+        { "name": "BV Description 999", "price": "100000", "descriptionCharacter": "C", "descriptionLength": 999, "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "100,000 ₫" },
+        { "name": "BV Description 1000", "price": "100000", "descriptionCharacter": "D", "descriptionLength": 1000, "imageUrl": "", "categoryLabel": "Điện thoại", "expectedPrice": "100,000 ₫" }
+      ],
+      "cleanupNames": ["BV Description 999", "BV Description 1000"],
+      "bugIds": []
     }
   }
 }

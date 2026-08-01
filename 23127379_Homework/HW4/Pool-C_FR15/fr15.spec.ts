@@ -9,11 +9,25 @@ type ProductInput = ProductFormData & {
   categoryLabel: string;
 };
 
+type BoundaryInput = {
+  name?: string;
+  nameCharacter?: string;
+  nameLength?: number;
+  price: string;
+  description?: string;
+  descriptionCharacter?: string;
+  descriptionLength?: number;
+  imageUrl: string;
+  categoryLabel: string;
+  expectedPrice: string;
+};
+
 type FR15Case = {
   id: string;
   title: string;
   type: string;
   cleanupNames: string[];
+  cleanupInputNames?: Array<{ character: string; length: number }>;
   bugIds: string[];
 };
 
@@ -66,12 +80,26 @@ async function fillProductThroughUi(
   await productPage.selectCategoryByLabel(input.categoryLabel);
 }
 
-async function expectDialogFeedback(
+async function expectDialogMessage(
   messages: string[],
   expectedMessage: string,
 ): Promise<void> {
-  await expect.soft(messages).toHaveLength(testData.ui.expectedDialogCount);
-  expect.soft(messages.join('')).toContain(expectedMessage);
+  expect.soft(messages).toContain(expectedMessage);
+}
+
+async function expectSuccessFeedback(
+  productPage: ProductManagementPage,
+  messages: string[],
+  expectedMessage: string,
+): Promise<void> {
+  if (messages.includes(expectedMessage)) {
+    expect(messages).toContain(expectedMessage);
+    return;
+  }
+
+  await expect(
+    productPage.page.getByText(expectedMessage, { exact: true }),
+  ).toBeVisible({ timeout: testData.ui.absentFeatureTimeout });
 }
 
 async function expectErrorAboveSaveButton(
@@ -94,8 +122,56 @@ async function cleanCurrentCase(
   productPage: ProductManagementPage,
   title: string,
 ): Promise<void> {
-  for (const name of currentCase(title).cleanupNames) {
+  const testCase = currentCase(title);
+  const generatedNames = (testCase.cleanupInputNames ?? []).map(
+    ({ character, length }) => character.repeat(length),
+  );
+
+  for (const name of [...testCase.cleanupNames, ...generatedNames]) {
     await productPage.deleteAllProductsNamed(name);
+  }
+}
+
+function resolveBoundaryInput(input: BoundaryInput): ProductInput {
+  const name = input.name ?? input.nameCharacter?.repeat(input.nameLength ?? 0);
+  if (name === undefined) {
+    throw new Error('Boundary input must supply a name or name repetition data');
+  }
+
+  return {
+    name,
+    price: input.price,
+    description:
+      input.description ??
+      input.descriptionCharacter?.repeat(input.descriptionLength ?? 0) ??
+      '',
+    imageUrl: input.imageUrl,
+    categoryLabel: input.categoryLabel,
+  };
+}
+
+async function expectConfiguredTabOrder(
+  productPage: ProductManagementPage,
+): Promise<void> {
+  const focusTargets = {
+    name: productPage.nameInput,
+    price: productPage.priceInput,
+    description: productPage.descriptionInput,
+    imageUrl: productPage.imageUrlInput,
+    category: productPage.categorySelect,
+    save: productPage.saveButton,
+  };
+
+  await focusTargets[testData.ui.tabOrder[0] as keyof typeof focusTargets].focus();
+  await expect(
+    focusTargets[testData.ui.tabOrder[0] as keyof typeof focusTargets],
+  ).toBeFocused();
+
+  for (const targetName of testData.ui.tabOrder.slice(1)) {
+    await productPage.page.keyboard.press(testData.ui.keyboardNextKey);
+    await expect(
+      focusTargets[targetName as keyof typeof focusTargets],
+    ).toBeFocused();
   }
 }
 
@@ -130,7 +206,12 @@ test.describe('FR-15 Product Management browser UI automation', () => {
     await expect(row).toBeVisible();
     await expect(row).toContainText(testData.ui.expectedFormattedPrices.full);
     await expect(productManagementPage.productImage(testCase.input.name)).toBeVisible();
-    await expectDialogFeedback(messages, testData.ui.successCreateMessage);
+    await expect(productManagementPage.productRow(testData.baselineProduct.name)).toBeVisible();
+    await expectSuccessFeedback(
+      productManagementPage,
+      messages,
+      testData.ui.successCreateMessage,
+    );
     await productManagementPage.editProduct(testCase.input.name);
     await expect(productManagementPage.nameInput).toHaveValue(testCase.input.name);
     await expect(productManagementPage.priceInput).toHaveValue(testCase.input.price);
@@ -154,7 +235,13 @@ test.describe('FR-15 Product Management browser UI automation', () => {
     await expect(productManagementPage.productRow(testCase.input.name)).toContainText(
       testData.ui.expectedFormattedPrices.mandatoryOnly,
     );
-    await expectDialogFeedback(messages, testData.ui.successCreateMessage);
+    await expect(productManagementPage.productImage(testCase.input.name)).toBeVisible();
+    await expect(productManagementPage.productRow(testData.baselineProduct.name)).toBeVisible();
+    await expectSuccessFeedback(
+      productManagementPage,
+      messages,
+      testData.ui.successCreateMessage,
+    );
     await productManagementPage.editProduct(testCase.input.name);
     await expect(productManagementPage.descriptionInput).toHaveValue(
       testCase.input.description,
@@ -162,33 +249,6 @@ test.describe('FR-15 Product Management browser UI automation', () => {
     await expect(productManagementPage.imageUrlInput).toHaveValue(
       testCase.input.imageUrl,
     );
-  });
-
-  test(testTitle(testData.cases.ep003), async ({ productManagementPage }) => {
-    const testCase = testData.cases.ep003;
-    annotateKnownBugs(testCase.bugIds);
-    await createProductThroughUi(productManagementPage, testCase.original);
-    await createProductThroughUi(productManagementPage, testCase.comparison);
-
-    await productManagementPage.editProduct(testCase.original.name);
-    await expect(productManagementPage.formHeading).toHaveText(
-      testData.ui.formHeadingEdit,
-    );
-    await fillProductThroughUi(productManagementPage, testCase.updated);
-    const messages = await productManagementPage.captureDialogsDuring(() =>
-      productManagementPage.saveProduct(),
-    );
-
-    await expect.soft(productManagementPage.productRow(testCase.updated.name)).toHaveCount(
-      testData.ui.expectedSingleRow,
-    );
-    await expect.soft(productManagementPage.productRow(testCase.updated.name)).toContainText(
-      testData.ui.expectedFormattedPrices.updated,
-    );
-    await expect.soft(productManagementPage.productRow(testCase.comparison.name)).toHaveCount(
-      testData.ui.expectedSingleRow,
-    );
-    await expectDialogFeedback(messages, testData.ui.successUpdateMessage);
   });
 
   test(testTitle(testData.cases.ep004), async ({ productManagementPage }) => {
@@ -201,7 +261,12 @@ test.describe('FR-15 Product Management browser UI automation', () => {
       'accept',
     );
 
-    await expectDialogFeedback(messages, testData.ui.deleteConfirmationText);
+    await expectDialogMessage(messages, testData.ui.deleteConfirmationText);
+    await expectSuccessFeedback(
+      productManagementPage,
+      messages,
+      testData.ui.successDeleteMessage,
+    );
     await expect(productManagementPage.productRow(testCase.input.name)).toHaveCount(
       testData.ui.expectedNoRows,
     );
@@ -218,10 +283,20 @@ test.describe('FR-15 Product Management browser UI automation', () => {
       'dismiss',
     );
 
-    await expectDialogFeedback(messages, testData.ui.deleteConfirmationText);
+    await expectDialogMessage(messages, testData.ui.deleteConfirmationText);
+    await expect.soft(messages).toHaveLength(testData.ui.expectedDialogCount);
     await expect(productManagementPage.productRow(testCase.input.name)).toHaveCount(
       testData.ui.expectedSingleRow,
     );
+    await expect(productManagementPage.productRow(testCase.input.name)).toContainText(
+      testData.ui.expectedFormattedPrices.cancelledDelete,
+    );
+    await expect(productManagementPage.productImage(testCase.input.name)).toBeVisible();
+    await expect(
+      productManagementPage.page.getByText(testData.ui.successDeleteMessage, {
+        exact: true,
+      }),
+    ).not.toBeVisible();
   });
 
   test(testTitle(testData.cases.ep006), async ({ productManagementPage }) => {
@@ -238,6 +313,7 @@ test.describe('FR-15 Product Management browser UI automation', () => {
     await expect(row).toContainText(testData.ui.expectedFormattedPrices.list);
     await expect.soft(row).toContainText(testCase.input.categoryLabel);
     await expect(productManagementPage.productImage(testCase.input.name)).toBeVisible();
+    await expect(productManagementPage.productRow(testData.baselineProduct.name)).toBeVisible();
     await expect(productManagementPage.primaryHeadings).toHaveCount(
       testData.ui.expectedPrimaryHeadingCount,
     );
@@ -327,6 +403,7 @@ test.describe('FR-15 Product Management browser UI automation', () => {
       productManagementPage,
       testData.ui.requiredNameError,
     );
+    await expectConfiguredTabOrder(productManagementPage);
   });
 
   test(testTitle(testData.cases.neg005), async ({ productManagementPage }) => {
@@ -425,26 +502,7 @@ test.describe('FR-15 Product Management browser UI automation', () => {
   test(testTitle(testData.cases.neg028), async ({ productManagementPage }) => {
     const testCase = testData.cases.neg028;
     annotateKnownBugs(testCase.bugIds);
-    const focusTargets = {
-      name: productManagementPage.nameInput,
-      price: productManagementPage.priceInput,
-      imageUrl: productManagementPage.imageUrlInput,
-      description: productManagementPage.descriptionInput,
-      category: productManagementPage.categorySelect,
-      save: productManagementPage.saveButton,
-    };
-
-    await focusTargets[testData.ui.tabOrder[0] as keyof typeof focusTargets].focus();
-    await expect(
-      focusTargets[testData.ui.tabOrder[0] as keyof typeof focusTargets],
-    ).toBeFocused();
-
-    for (const targetName of testData.ui.tabOrder.slice(1)) {
-      await productManagementPage.page.keyboard.press(testData.ui.keyboardNextKey);
-      await expect(
-        focusTargets[targetName as keyof typeof focusTargets],
-      ).toBeFocused();
-    }
+    await expectConfiguredTabOrder(productManagementPage);
   });
 
   test(testTitle(testData.cases.neg029), async ({ productManagementPage }) => {
@@ -457,9 +515,42 @@ test.describe('FR-15 Product Management browser UI automation', () => {
       'dismiss',
     );
 
-    await expectDialogFeedback(messages, testData.ui.deleteConfirmationText);
+    await expectDialogMessage(messages, testData.ui.deleteConfirmationText);
     await expect(productManagementPage.productRow(testCase.input.name)).toHaveCount(
       testData.ui.expectedSingleRow,
     );
   });
+
+  for (const boundaryCase of [
+    testData.cases.bv001,
+    testData.cases.bv002,
+    testData.cases.bv006,
+    testData.cases.bv007,
+    testData.cases.bv008,
+    testData.cases.bv011,
+    testData.cases.bv012,
+  ]) {
+    test(testTitle(boundaryCase), async ({ productManagementPage }) => {
+      annotateKnownBugs(boundaryCase.bugIds);
+
+      for (const rawInput of boundaryCase.inputs) {
+        const input = resolveBoundaryInput(rawInput);
+        await createProductThroughUi(productManagementPage, input);
+        await expect(productManagementPage.productRow(input.name)).toContainText(
+          rawInput.expectedPrice,
+        );
+
+        if ('verifyDescription' in boundaryCase && boundaryCase.verifyDescription) {
+          await productManagementPage.editProduct(input.name);
+          await expect(productManagementPage.descriptionInput).toHaveValue(
+            input.description ?? '',
+          );
+          await productManagementPage.cancelEdit();
+          await expect(productManagementPage.formHeading).toHaveText(
+            testData.ui.formHeadingCreate,
+          );
+        }
+      }
+    });
+  }
 });

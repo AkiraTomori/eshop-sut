@@ -10,3 +10,19 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Nothing wrong
 - **Verdict:** Accepted
+
+---
+## Session: 2026-08-01 17:10 — script-review: Review and correct FR-15 automation
+
+- **AI Tool:** Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) / G9.3 (Analyse) / G9.4 (Collaborate)
+- **Task:** Review and correct the FR-15 browser-UI-only Playwright spec, external data, shared fixture usage, and ProductManagementPage against the complete HW2 sources and verified React source; create the automation review and validate without browser execution.
+- **Prompt:**
+  > ```
+  > /hw4-review FR-15
+  > ```
+- **Supporting Playwright Skills:** `playwright-core` — `locator-strategy.md`, `assertions-and-waiting.md`, `fixtures-and-hooks.md`, `flaky-tests.md`, `common-pitfalls.md`, `test-organization.md`; `playwright-pom` — `pom-vs-fixtures-vs-helpers.md`. `playwright-cli` was unavailable, so `frontend-admin/src/App.jsx` and standard Playwright discovery were used as the verification fallback.
+- **AI Output Summary:** Corrected canonical Bug ID mappings, moved unsafe EP-003 to a documented manual-only blocker, added seven eligible BVA cases, corrected tab-order and omitted UI assertions, tightened semantic locators/POM methods, and created `fr15-automation-review.md`. JSON/manifest validation, TypeScript compilation, prohibited-pattern scans, and Playwright discovery passed with 25 tests per browser and 75 project/test instances. No browser evidence run was performed.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Nothing Wrong
+- **Verdict:** Accepted

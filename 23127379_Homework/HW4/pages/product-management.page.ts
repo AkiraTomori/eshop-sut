@@ -21,11 +21,9 @@ export class ProductManagementPage extends BasePage {
   readonly descriptionInput: Locator;
   readonly categorySelect: Locator;
   readonly saveButton: Locator;
-  readonly cancelEditButton: Locator;
   readonly productTable: Locator;
   readonly searchInput: Locator;
   readonly loadingIndicator: Locator;
-  readonly validationErrors: Locator;
 
   constructor(
     page: Page,
@@ -35,7 +33,7 @@ export class ProductManagementPage extends BasePage {
     super(page, baseUrl);
     this.productsNavigation = page.getByText('Sản phẩm', { exact: true });
     this.heading = page.getByRole('heading', { name: 'Quản lý Sản phẩm' });
-    this.primaryHeadings = page.locator('h1');
+    this.primaryHeadings = page.getByRole('heading', { level: 1 });
     this.productForm = page.locator('form').filter({
       has: page.getByRole('heading', { name: /Thêm sản phẩm mới|Sửa sản phẩm/ }),
     });
@@ -50,15 +48,11 @@ export class ProductManagementPage extends BasePage {
     this.saveButton = this.productForm.getByRole('button', {
       name: 'Lưu sản phẩm',
     });
-    this.cancelEditButton = this.productForm.getByRole('button', {
-      name: 'Hủy sửa',
-    });
-    this.productTable = page.locator('table').filter({
+    this.productTable = page.getByRole('table').filter({
       has: page.getByRole('columnheader', { name: 'Tên SP' }),
     });
     this.searchInput = page.getByRole('searchbox', { name: /sản phẩm/i });
     this.loadingIndicator = page.getByRole('progressbar');
-    this.validationErrors = this.productForm.getByRole('alert');
   }
 
   async open(): Promise<void> {
@@ -102,10 +96,6 @@ export class ProductManagementPage extends BasePage {
     });
   }
 
-  productNameCell(name: string): Locator {
-    return this.productRow(name).getByRole('cell', { name, exact: true });
-  }
-
   productImage(name: string): Locator {
     return this.productRow(name).getByRole('img', { name });
   }
@@ -137,6 +127,10 @@ export class ProductManagementPage extends BasePage {
 
   async editProduct(name: string): Promise<void> {
     await this.productRow(name).getByRole('button', { name: 'Sửa' }).click();
+  }
+
+  async cancelEdit(): Promise<void> {
+    await this.productForm.getByRole('button', { name: 'Hủy sửa' }).click();
   }
 
   async deleteProduct(name: string): Promise<void> {
