@@ -310,3 +310,18 @@
 - **Human Review Notes:** Pending HITL review
 - **What AI Got Wrong:** Pending HITL review
 - **Verdict:** Pending HITL review
+
+---
+## Session: 2026-08-01 20:31 — playwright-ci: Gate browser tests behind infrastructure build
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Restructure the GitHub Actions workflow into a Build-to-Test pipeline that validates the complete application and HW4 test infrastructure before running the three FR suites.
+- **Prompt:**
+  > Bạn có thể làm cách nào mà khi mà CI pipeline nó chạy ớ, mọi hạ tầng từ backend, 2 frontend, monorepo của testing sẽ được khởi tạo trước rồi sẽ bắt đầu test được không
+  > Kiểu theo Pipeline là: Build -> Test (3 FR)
+- **Supporting Playwright Skills:** `playwright-ci` (`ci-github-actions.md`, `projects-and-dependencies.md`, `reporting-and-artifacts.md`)
+- **AI Output Summary:** Added a `Build infrastructure` job that installs all four npm workspaces, validates the Backend entry point, builds the customer and admin Vite frontends, type-checks HW4, validates Playwright discovery, and prepares the browser cache. Made the FR06/FR08/FR15 by Chromium/Firefox/WebKit test matrix depend on that job with `needs: build`; each isolated test runner then restores dependencies and lets the existing Playwright `webServer` configuration start Backend, Web, and Admin before testing. YAML and dependency-edge validation passed, both frontend production builds passed, Backend syntax passed, HW4 TypeScript passed, and Playwright discovered 183 project-expanded tests. No browser evidence run was executed and no FR run summary was changed.
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review
