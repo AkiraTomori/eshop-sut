@@ -296,3 +296,17 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Help human for enhance Skills, nothing wrong
 - **Verdict:** Accepted. All changes have been successfully integrated into the `AGENTS.md` file, and the workflow is now consolidated and ready for use. Further review may be needed to ensure that all Playwright skills are correctly referenced and functional within the new structure.
+
+---
+## Session: 2026-08-01 20:19 — playwright-ci: Add automated GitHub Actions test workflow
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Design and implement a GitHub Actions CI workflow that automatically runs all three HW04 features across Chromium, Firefox, and WebKit.
+- **Prompt:**
+  > Mình đang làm bài tập HW4 Automation Testing, bây giờ bạn hãy thiết kế cho mình Workflow CI để mà cho nó tự test. Có thể tham khảo SKILL để thực hiện
+- **Supporting Playwright Skills:** `playwright-ci` (`ci-github-actions.md`, `projects-and-dependencies.md`, `reporting-and-artifacts.md`)
+- **AI Output Summary:** Added `.github/workflows/hw4-playwright.yml` with push, pull-request, and manual triggers; a fail-fast-disabled FR06/FR08/FR15 by Chromium/Firefox/WebKit matrix; deterministic npm installs for all three SUT services and HW4; cached Playwright browsers; CI-safe automatic SUT startup through the existing Playwright config; unique HTML/JSON/failure-evidence artifacts retained for 14 days; read-only permissions; concurrency cancellation; and immutable SHA-pinned GitHub Actions. YAML parsing, file-path validation, whitespace checks, and Playwright discovery for all nine matrix combinations passed. No browser evidence run was executed and no FR run summary was changed.
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review
