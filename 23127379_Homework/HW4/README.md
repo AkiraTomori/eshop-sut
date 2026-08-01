@@ -58,8 +58,10 @@ HW4/
 │   └── playwright-report/
 │
 ├── main_report.md              # Final summary report
+├── AI-Audit-Report.md          # Consolidated verbatim audit appendix
 ├── bug_report.md               # Consolidated cross-FR bug summary
-└── ai_critique.md              # AI tool critique (200–300 words)
+├── ai_critique.md              # AI tool critique (200–300 words)
+└── git-commit-log.txt           # Qualifying spec-file commit evidence
 ```
 
 ---
@@ -141,30 +143,40 @@ The single-browser npm shortcuts follow the pattern `npm run report:fr06:chromiu
 
 ## Test Summary
 
-| Pool | FR | Tests | Chromium | Firefox | WebKit |
-|------|----|-------|----------|---------|--------|
-| A | FR-06 Product Detail | TBD | ⬜ | ⬜ | ⬜ |
-| B | FR-08 Checkout | TBD | ⬜ | ⬜ | ⬜ |
-| C | FR-15 Product Mgmt | TBD | ⬜ | ⬜ | ⬜ |
+The figures below come from the latest retained JSON-backed evidence run for each FR. A failed assertion is preserved evidence and has been classified in the detailed pool bug report.
+
+| Pool | FR | UI tests | Chromium | Firefox | WebKit | Aggregate |
+|---|---|---:|---|---|---|---|
+| A | FR-06 Product Detail | 22 | 7 passed / 15 failed | 7 / 15 | 7 / 15 | 21 / 45 |
+| B | FR-08 Checkout | 14 | 1 passed / 13 failed | 1 / 13 | 1 / 13 | 3 / 39 |
+| C | FR-15 Product Management | 25 | 1 passed / 24 failed | 1 / 24 | 1 / 24 | 3 / 72 |
+| **Total** | **3 features** | **61** | **9 / 52** | **9 / 52** | **9 / 52** | **27 passed / 156 failed** |
+
+- Browser evidence runs: 9 (three browsers for each of three features)
+- Browser-test executions: 183
+- Genuine distinct defects: 28 (19 known, 9 automation-discovered)
+- Latest-run failures classified: 156
 
 ---
 
 ## Self-Assessment
 
-| Criterion | Score |
-|-----------|-------|
-| Data-driven testing (no hardcoded values) | 10/10 |
-| ≥3 assertion patterns per spec | 10/10 |
-| Multi-browser (Chromium/Firefox/WebKit) | 10/10 |
-| Test isolation (beforeEach/afterEach) | 10/10 |
-| No flaky waits (no sleep > 500ms) | 10/10 |
-| AI Audit logs complete | 10/10 |
-| Git commits ≥8 over ≥4 days | 10/10 |
+| Assignment criterion | Maximum | Provisional score |
+|---|---:|---:|
+| Task 1 — Feature A (FR-06) | 25 | 23 |
+| Task 1 — Feature B (FR-08) | 25 | 23 |
+| Task 1 — Feature C (FR-15) | 25 | 21 |
+| Task 2 — Demo video | 15 | 9 |
+| Agent Skills | 10 | 9 |
+| **Total** | **100** | **85** |
+
+The provisional filename grade is `085`; the student must confirm it before packaging. The repository has nine qualifying spec-file commits but they span only two calendar days, so the four-day history requirement is not met and is not claimed as complete.
 
 ---
 
 ## Demo Video
-> YouTube (unlisted):
+
+> YouTube playlist declared by the student:
 
 This playlist will demonstrate about agent skills:
 [Playlist](https://www.youtube.com/playlist?list=PLFKmUDyIY8sc)
@@ -176,6 +188,21 @@ Alternatively, you can watch the individual videos for workflow:
 - [Part 4](https://www.youtube.com/watch?v=qthcfm5Ihh4&list=PLFKmUDyIY8sc&index=4)
 - [Part 5](https://www.youtube.com/watch?v=2IxUkkGh148&list=PLFKmUDyIY8sc&index=5)
 - [Part 6](https://www.youtube.com/watch?v=RTrrBKdYq5A&list=PLFKmUDyIY8sc&index=6)
+
+Before submission, confirm that the video evidence totals at least five minutes, is narrated in Vietnamese, shows a multi-browser run and HTML report, explains at least one AI-script correction, and displays face-cam or terminal `whoami` and `hostname`.
+
+## Submission Status
+
+- [x] Three specs and external data files
+- [x] Chromium, Firefox, and WebKit HTML reports for each feature
+- [x] Reviews, run summaries, detailed bug reports, consolidated bug summary, and signed audits
+- [x] Final Markdown report, 240-word AI critique, consolidated AI Audit, spec commit log, and their PDFs
+- [x] Link all nine automation-discovered defects to verified GitHub Issues 59–67 with screenshots
+- [ ] Confirm the demo-video content and authorship evidence
+- [ ] Confirm provisional self-assessed grade `085`
+- [x] Generate the consolidated AI Audit PDF from all four source audit logs
+- [ ] Inspect all generated PDFs
+- [ ] Create `23127379_HW04_AI_Automation_085.zip` only after the pending HITL items are resolved
 ---
 
 *Run by: 23127379*

@@ -4,7 +4,7 @@
 **Stage:** F2 — reviewed; browser evidence not yet executed  
 **Scope:** Web Admin browser UI only  
 **Reviewed sources:** FR15 test cases, FR15 detailed bug report, shared EShop SRS, `frontend-admin/src/App.jsx`, shared fixture/BasePage, generated spec/data/POM  
-**Human Review:** Pending HITL sign-off
+**Human Review:** Script review, browser evidence, and failure classification accepted by HITL
 
 ## Final assessment
 
@@ -139,4 +139,4 @@ All browser-facing assertions are awaited. There are no sleeps, forced actions, 
 - The selected/excluded/eligible/manual manifest partitions all 54 authoritative FR-15 TCs without duplication.
 - `playwright-cli` is unavailable; locator verification used `frontend-admin/src/App.jsx` plus standard Playwright discovery. No CLI evidence is claimed.
 - Browser evidence Run #2 completed for Chromium, Firefox, and WebKit with 1 passed and 24 failed tests per browser; isolated reports, screenshots, traces, and error contexts are retained.
-- All 72 failures are classified in `fr15-bug-report.md`; GitHub Issue drafts for six new defects remain pending HITL creation.
+- All 72 failures are classified in `fr15-bug-report.md`; the six new defects are linked to verified GitHub Issues 62–67.

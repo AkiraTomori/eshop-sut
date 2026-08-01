@@ -4,7 +4,7 @@
 >
 > **Evidence source:** [FR-06 Run Summary](fr06-run-summary.md), Chromium, Firefox, and WebKit reports
 >
-> **Classification status:** Complete — pending HITL sign-off
+> **Classification status:** Complete — HITL accepted
 >
 > **Aggregate report:** [HW04 Bug Report](../bug_report.md)
 
@@ -384,7 +384,7 @@ Every add-to-cart attempt appears broken on first use, causing confusion, repeat
 
 No browser-run failure used direct API/database actions, and no failed result came from an API-dependent HW2 TC. The nine API-only cases already excluded in `fr06-automation-review.md` remain outside HW4 scope and are not counted as confirmations.
 
-## GitHub Issue draft
+## GitHub Issue
 
 ### BUG-FR06-AUTO-001 — First Add to Cart click is silently ignored
 

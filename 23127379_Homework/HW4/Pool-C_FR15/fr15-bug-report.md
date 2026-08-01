@@ -225,9 +225,9 @@ Tracked Run #1 is an infrastructure attempt with zero test executions and is not
 
 No Run #2 failure came from API/database activity. The 21 API-dependent HW2 cases listed in [the automation review](fr15-automation-review.md#api-dependent-cases-excluded-from-hw4) remain excluded and are not presented as browser confirmations. The category-column clause in EP-006 was not reached after a hard assertion and is not claimed as passed or failed.
 
-## GitHub Issue drafts
+## GitHub Issues
 
-All new issue URLs remain **Pending HITL creation**. The sections below are drafts only; no external issue was created.
+All six automation-discovered defects are filed as verified GitHub Issues 62–67. The sections below retain the submitted issue content and evidence links.
 
 ### BUG-FR15-AUTO-001 — Product-list prices lack thousands separators
 

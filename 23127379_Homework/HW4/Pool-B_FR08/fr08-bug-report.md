@@ -154,7 +154,7 @@ Run #6 contains no test or infrastructure failure. `TEST-FR08-001`, `TEST-FR08-0
 
 No Run #6 failure came from a direct API/database action or API-dependent HW2 TC. NEG-002, NEG-005, and BV-007 remain excluded as `Out of HW4 scope — API testing`. Backend defects `BUG-FR08-007` and `BUG-FR08-008` are not presented as browser confirmations.
 
-## GitHub Issue drafts
+## GitHub Issues
 
 ### BUG-FR08-AUTO-001 — Empty cart state is missing the required illustration
 

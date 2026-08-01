@@ -1,0 +1,24 @@
+HW04 qualifying test-script commit log
+Student: 23127379 - Thai Minh Huy
+Generated from Git history on 2026-08-01 (Asia/Ho_Chi_Minh)
+Scope: commits touching 23127379_Homework/HW4/**/*.spec.ts
+
+2026-08-01T17:19:56+07:00  5d2abe72ef325782279088bcc4941240be31110a  feat: Enhance FR-15 automation with new boundary test cases and UI improvements
+2026-08-01T16:57:29+07:00  3d619bedde9fc3b432c4ad53da34d405e58930e2  feat: Add FR-15 UI test suite and associated test data
+2026-07-31T21:23:46+07:00  9bbab26b721b9f55136d392f2e0b7daf1450ad7b  refactor(FR-08): Correct locator for checkout items and update related documentation after Run #4
+2026-07-31T20:27:02+07:00  d105ed2ce13194e47d313ca55f865e864cd726a1  refactor(fr-08): Update cart lifecycle handling and review process after Run #3
+2026-07-31T15:40:03+07:00  d4f4fb04f3357b701a412c308081f37786ee3065  refactor(FR-08): Update Profile locators to use placeholders and enhance checkout page interactions
+2026-07-31T14:37:24+07:00  293392ea74edb2b941ba4804272d88413a178dc4  Refactor FR-08 automation suite: integrate Profile address updates, enhance assertions, and improve locator strategies
+2026-07-31T14:11:47+07:00  dbcd1cb2639467f5d62cad22aafde0fed8b107f2  feat(FR08): Add FR-08 automation suite with comprehensive test cases and data management
+2026-07-31T09:45:49+07:00  05e2e904895c05daa50b7e68d47560c32721f648  feat(FR06): Enhance FR-06 automation suite with review findings and additional test data
+2026-07-31T09:28:16+07:00  94b96ae1ad6222bf065412be459d516fc1c241f0  feat(FR06): Add FR-06 automation test suite and supporting data for product detail page
+
+Summary
+Qualifying commits: 9 (minimum required: 8) - PASS
+Distinct calendar days: 2 (minimum required: 4) - FAIL
+Dates represented: 2026-07-31, 2026-08-01
+
+Integrity note
+The existing history does not satisfy the four-day requirement. This log reports the
+repository state as-is. Commit dates were not rewritten and no artificial commits were
+created to fabricate compliance.

@@ -89,7 +89,7 @@ None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; h
 - **All test corrections verified:** `TEST-FR08-001`, `TEST-FR08-002`, and `TEST-FR08-003` each appear zero times. All address-bearing tests pass Profile persistence, product addition, cart row/total, and Checkout navigation.
 - **API-only defects:** `BUG-FR08-007` and `BUG-FR08-008` remain outside the HW4 browser-UI scope and are not claimed as reproduced.
 - **Passed protection:** TC-FR08-NEG-001 passed in Chromium, Firefox, and WebKit.
-- **Classification gate:** Detailed and consolidated reports are updated from Run #6. No suite correction is indicated; this classification requires HITL sign-off before the FR-08 completion gate is re-checked.
+- **Classification gate:** Detailed and consolidated reports are updated from Run #6. HITL accepted the classification; no further suite correction is indicated.
 
 Full classification and per-browser evidence are recorded in [fr08-bug-report.md](fr08-bug-report.md).
 
@@ -125,7 +125,7 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - Run #5 is retained as an infrastructure-only attempt: macOS sandbox permission blocked Chromium in global setup before discovery, so all browser JSON reporters recorded 0 executions. The required retry was not hidden or merged into another session.
 - Run #6 executed all 42 browser-test combinations: Chromium, Firefox, and WebKit each reported 1 passed and 13 failed. All 39 failures are genuine product-defect results: 33 known-defect reproductions and six new-defect reproductions, representing eight distinct product defects.
 - The former named-`listitem` failure appears zero times; EP-001 reaches the downstream heading, colour, and cart-clear assertions in every browser. No Run #6 failure is a test/infrastructure issue or out-of-scope API failure.
-- FR-08 requires HITL sign-off of this Run #6 failure classification before its completion gate can pass.
+- HITL accepted the Run #6 failure classification, and the FR-08 completion gate passed.
 
 **Human Review:** Run #6 evidence and failure classification accepted by HITL
 

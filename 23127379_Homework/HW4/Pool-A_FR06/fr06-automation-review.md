@@ -1,6 +1,6 @@
 # FR-06 Automation Review
 
-**Stage:** Browser evidence classified — pending HITL audit sign-off
+**Stage:** FR-06 completion gate passed — browser evidence and classification accepted
 **Automation scope:** Browser UI only  
 **Selected:** 22 UI test cases  
 **Excluded:** 9 API-dependent test cases
@@ -133,6 +133,6 @@ The new first-click defect accounts for 24 failed TC/browser results across EP-0
 - Failure classification is complete in `fr06-bug-report.md` and the consolidated root `bug_report.md`.
 - FR-06 remains blocked only on HITL sign-off of pending audit sessions; external creation of BUG-FR06-AUTO-001 remains a HITL action.
 
-**Human Review:** Pending HITL sign-off for browser-evidence and bug-classification audit sessions
+**Human Review:** Browser-evidence and bug-classification audit sessions accepted by HITL
 
 **Next gate:** `/hw4-signoff FR-06`
