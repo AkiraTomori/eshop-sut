@@ -1,6 +1,6 @@
 # FR-08 Automation Review
 
-**Stage:** Run #4 locator correction reviewed and accepted — ready for browser evidence
+**Stage:** Run #6 three-browser evidence accepted — failure classification pending
 **Automation scope:** Browser UI only
 **Selected:** 14 UI test cases
 **Excluded:** 3 API-dependent test cases
@@ -123,8 +123,10 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - Run #4 produced 3 passed and 39 failed results across 42 browser executions.
 - Of the 39 Run #4 failures, 36 are genuine product-defect results and three were `TEST-FR08-003`; all three identified test issues now have focused corrections.
 - `TEST-FR08-003` is corrected without changing external data or weakening any later heading, colour, total, success, or cart-clear expectation.
-- FR-08 requires HITL acceptance of this review, a fresh three-browser evidence run, renewed failure classification, and sign-off before its completion gate can pass.
+- Run #5 is retained as an infrastructure-only attempt: macOS sandbox permission blocked Chromium in global setup before discovery, so all browser JSON reporters recorded 0 executions. The required retry was not hidden or merged into another session.
+- Run #6 executed all 42 browser-test combinations: Chromium, Firefox, and WebKit each reported 1 passed and 13 failed. The former named-`listitem` failure appears zero times; EP-001 reaches the downstream heading, colour, and cart-clear assertions in every browser.
+- FR-08 requires HITL acceptance of the Run #6 evidence, renewed failure classification, and sign-off before its completion gate can pass.
 
-**Human Review:** `TEST-FR08-003` correction accepted by HITL
+**Human Review:** Run #6 three-browser evidence accepted by HITL
 
-**Next gate:** `/hw4-run FR-08`
+**Next gate:** `/hw4-bugs FR-08`

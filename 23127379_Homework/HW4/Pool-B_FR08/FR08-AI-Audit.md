@@ -140,3 +140,16 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Nothing Wrong
 - **Verdict:** Accepted
+---
+## Session: 2026-08-01 11:16 — playwright-ci: Run FR-08 three-browser evidence cycle #6
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Execute the HITL-accepted FR-08 item-locator correction through the dedicated local evidence runner for Chromium, Firefox, and WebKit; retain isolated JSON/HTML reports, screenshots, traces, error contexts, and every cumulative run-summary attempt; stop before failure classification.
+- **Prompt:**
+  > /hw4-run FR-08
+- **Supporting Playwright Skills:** `playwright-ci` (`projects-and-dependencies.md`, `reporting-and-artifacts.md`); `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`)
+- **AI Output Summary:** The sandboxed runner attempt was blocked during Chromium launch in global setup by macOS Mach-port permission and correctly appended infrastructure-only tracked Run #5 with 0 executions for each browser. Retried the same required command with browser-launch permission, preserving rather than hiding Run #5, and completed tracked Run #6. Chromium, Firefox, and WebKit each reported 1 passed and 13 failed out of 14, for 3 passed and 39 failed across 42 executions; JSON-reporter durations were 185.8s, 213.4s, and 199.2s. All 39 failures retained browser-isolated screenshots, traces, and error contexts; all three isolated HTML reports and the full Run #6 overview exist with student ID 23127379. The former named-`listitem` locator failure appears zero times: EP-001 reaches its downstream spec-correct heading, action-colour, and cart-clear assertions in every browser. The runner appended both attempts to `fr08-run-summary.md`; updated the automation-review, detailed-report status, and consolidated workflow status. `playwright-cli` was unavailable, so standard Playwright JSON, HTML, screenshot, trace, and error-context evidence was used. No spec correction, failure classification, or remote CI change was performed at F3.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Nothing Wrong
+- **Verdict:** Accepted

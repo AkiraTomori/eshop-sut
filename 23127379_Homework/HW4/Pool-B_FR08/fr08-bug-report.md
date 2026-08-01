@@ -4,7 +4,7 @@
 >
 > **Evidence source:** [FR-08 Run Summary](fr08-run-summary.md), tracked Run #4 across Chromium, Firefox, and WebKit
 >
-> **Classification status:** Complete — accepted by HITL; test-locator correction applied, rerun pending
+> **Classification status:** Run #4 accepted; Run #6 evidence captured and pending reclassification
 >
 > **Aggregate report:** [HW04 Bug Report](../bug_report.md)
 
