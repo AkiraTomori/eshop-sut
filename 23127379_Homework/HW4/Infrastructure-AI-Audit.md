@@ -307,9 +307,9 @@
   > Mình đang làm bài tập HW4 Automation Testing, bây giờ bạn hãy thiết kế cho mình Workflow CI để mà cho nó tự test. Có thể tham khảo SKILL để thực hiện
 - **Supporting Playwright Skills:** `playwright-ci` (`ci-github-actions.md`, `projects-and-dependencies.md`, `reporting-and-artifacts.md`)
 - **AI Output Summary:** Added `.github/workflows/hw4-playwright.yml` with push, pull-request, and manual triggers; a fail-fast-disabled FR06/FR08/FR15 by Chromium/Firefox/WebKit matrix; deterministic npm installs for all three SUT services and HW4; cached Playwright browsers; CI-safe automatic SUT startup through the existing Playwright config; unique HTML/JSON/failure-evidence artifacts retained for 14 days; read-only permissions; concurrency cancellation; and immutable SHA-pinned GitHub Actions. YAML parsing, file-path validation, whitespace checks, and Playwright discovery for all nine matrix combinations passed. No browser evidence run was executed and no FR run summary was changed.
-- **Human Review Notes:** Pending HITL review
-- **What AI Got Wrong:** Pending HITL review
-- **Verdict:** Pending HITL review
+- **Human Review Notes:** Approved workflow design, but the workflow needs to be restructured into a Build-to-Test pipeline that validates the complete application and HW4 test infrastructure before running the three FR suites.
+- **What AI Got Wrong:** Build and test phase are in one place
+- **Verdict:** Rejected. The workflow needs to be restructured into a Build-to-Test pipeline that validates the complete application and HW4 test infrastructure before running the three FR suites.
 
 ---
 ## Session: 2026-08-01 20:31 — playwright-ci: Gate browser tests behind infrastructure build
@@ -322,9 +322,9 @@
   > Kiểu theo Pipeline là: Build -> Test (3 FR)
 - **Supporting Playwright Skills:** `playwright-ci` (`ci-github-actions.md`, `projects-and-dependencies.md`, `reporting-and-artifacts.md`)
 - **AI Output Summary:** Added a `Build infrastructure` job that installs all four npm workspaces, validates the Backend entry point, builds the customer and admin Vite frontends, type-checks HW4, validates Playwright discovery, and prepares the browser cache. Made the FR06/FR08/FR15 by Chromium/Firefox/WebKit test matrix depend on that job with `needs: build`; each isolated test runner then restores dependencies and lets the existing Playwright `webServer` configuration start Backend, Web, and Admin before testing. YAML and dependency-edge validation passed, both frontend production builds passed, Backend syntax passed, HW4 TypeScript passed, and Playwright discovered 183 project-expanded tests. No browser evidence run was executed and no FR run summary was changed.
-- **Human Review Notes:** Pending HITL review
-- **What AI Got Wrong:** Pending HITL review
-- **Verdict:** Pending HITL review
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Change from Build and Test in tight coupling to a Build-to-Test pipeline with explicit dependency edges
+- **Verdict:** Accepted
 
 ---
 ## Session: 2026-08-01 21:19 — playwright-ci: Add Docker and GHCR deploy phase
@@ -337,9 +337,9 @@
   > Bạn có thể sử dụng kiểu là một file deploy riêng, và nó sẽ được kích hoạt khi CI thành công hoặc workflow_dispatch
 - **Supporting Playwright Skills:** `playwright-ci` (`ci-github-actions.md`, `docker-and-containers.md`)
 - **AI Output Summary:** Added `.github/workflows/deploy.yml` with a secure successful-CI/default-branch `workflow_run` gate plus `workflow_dispatch`, least-privilege GHCR permissions, SHA-pinned Docker actions, and a three-component image matrix publishing `latest` and tested-commit tags. Added Backend, customer Web, and Admin Dockerfiles, Nginx SPA configurations, service `.dockerignore` files, and `compose.yaml` with dependency health checks and GHCR image defaults. Replaced the root scripts with portable `docker compose up --detach --build --wait` and `docker compose down --remove-orphans` commands. All three images built successfully; the Compose stack became healthy and returned HTTP 200 on ports 3000, 5173, and 5174; the stop script removed all test containers and network. Shell, YAML, Compose resolution, and whitespace validation passed. No image was pushed to GHCR locally; publishing begins after the workflow is committed and triggered.
-- **Human Review Notes:** Pending HITL review
-- **What AI Got Wrong:** Pending HITL review
-- **Verdict:** Pending HITL review
+- **Human Review Notes:** Approved the CD Pipeline design but 3 dockerfiles need to be refactored into production-oriented multi-stage builds, and the GHCR publishing logic should be updated to run after either a successful or failed CI conclusion.
+- **What AI Got Wrong:** Dockerfiles don't use multi-stage builds, and the GHCR publishing logic only runs after successful CI conclusion.
+- **Verdict:** Rejected. The Dockerfiles need to be refactored into production-oriented multi-stage builds, and the GHCR publishing logic should be updated to run after either a successful or failed CI conclusion.
 
 ---
 ## Session: 2026-08-01 21:25 — playwright-ci: Refactor all service Dockerfiles to multi-stage builds
@@ -351,9 +351,9 @@
   > Ba file Dockerfile của từ backend, 2 frontend, best practice với Multi-stage build đi
 - **Supporting Playwright Skills:** `playwright-ci` (`docker-and-containers.md`)
 - **AI Output Summary:** Refactored the Backend into reusable base, production-dependency, and non-root runtime stages, and refactored both Vite frontends into dependency, build, and minimal Nginx runtime stages. Pinned all Node and Nginx base images by digest, preserved lockfile-first dependency caching, copied only production dependencies or compiled static assets into final images, set runtime ownership explicitly, and added graceful stop signals. All three images rebuilt successfully; Backend ran as uid 1000 (`node`), neither frontend runtime contained Node.js, the Backend API and both frontends returned HTTP 200, all Compose health checks passed, and the smoke-test stack was removed afterward.
-- **Human Review Notes:** Pending HITL review
-- **What AI Got Wrong:** Pending HITL review
-- **Verdict:** Pending HITL review
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Best Practice for Dockerfiles
+- **Verdict:** Accepted
 
 ---
 ## Session: 2026-08-01 22:25 — playwright-ci: Publish after passed or failed CI tests
@@ -365,6 +365,6 @@
   > File deploy.yml, mình muốn test nó hoạt động ra sao sau khi xong step test, cho nên mình muốn logic là deploy sẽ chạy sau khi thành công CI (Kể cả pass và fail)
 - **Supporting Playwright Skills:** `playwright-ci` (`ci-github-actions.md`)
 - **AI Output Summary:** Updated `.github/workflows/deploy.yml` so its `workflow_run` job accepts both `success` and `failure` conclusions from the HW4 Playwright CI workflow on the repository default branch, while excluding pull requests, forks, cancelled, skipped, and timed-out runs. Removed the failed-test dry-run gate, made all three matrix builds push to GHCR, surfaced the upstream CI conclusion in logs and job summaries, and retained manual dispatch. YAML parsing and whitespace validation passed. No remote workflow was triggered and no image was pushed during local validation.
-- **Human Review Notes:** Pending HITL review
-- **What AI Got Wrong:** Pending HITL review
-- **Verdict:** Pending HITL review
+- **Human Review Notes:** Approved. This is human's purpose to demonstrate why testing is important, especially for CI/CD pipelines. The workflow has been updated to run the deploy phase after both successful and failed CI runs, ensuring that the deployment process is tested under all conditions.
+- **What AI Got Wrong:** Nothing wrong
+- **Verdict:** Accepted. The workflow has been successfully updated to run the deploy phase after both successful and failed CI runs, ensuring that the deployment process is tested under all conditions. Further review may be needed to ensure that all Playwright skills are correctly referenced and functional within the new structure.
