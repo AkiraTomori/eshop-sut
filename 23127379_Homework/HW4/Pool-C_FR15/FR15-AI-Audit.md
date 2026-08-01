@@ -11,7 +11,6 @@
 - **What AI Got Wrong:** Nothing wrong
 - **Verdict:** Accepted
 
----
 ## Session: 2026-08-01 17:10 — script-review: Review and correct FR-15 automation
 
 - **AI Tool:** Codex (GPT-5)
@@ -23,6 +22,20 @@
   > ```
 - **Supporting Playwright Skills:** `playwright-core` — `locator-strategy.md`, `assertions-and-waiting.md`, `fixtures-and-hooks.md`, `flaky-tests.md`, `common-pitfalls.md`, `test-organization.md`; `playwright-pom` — `pom-vs-fixtures-vs-helpers.md`. `playwright-cli` was unavailable, so `frontend-admin/src/App.jsx` and standard Playwright discovery were used as the verification fallback.
 - **AI Output Summary:** Corrected canonical Bug ID mappings, moved unsafe EP-003 to a documented manual-only blocker, added seven eligible BVA cases, corrected tab-order and omitted UI assertions, tightened semantic locators/POM methods, and created `fr15-automation-review.md`. JSON/manifest validation, TypeScript compilation, prohibited-pattern scans, and Playwright discovery passed with 25 tests per browser and 75 project/test instances. No browser evidence run was performed.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Nothing Wrong
+- **Verdict:** Accepted
+
+---
+## Session: 2026-08-01 17:38 — playwright-ci: Run FR-15 three-browser evidence gate
+
+- **AI Tool:** Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) / G9.3 (Analyse) / G9.4 (Collaborate)
+- **Task:** Execute the reviewed FR-15 suite through the repository runner for Chromium, Firefox, and WebKit; preserve JSON-derived counts, isolated reports, failure artifacts, the full-FR overview, and cumulative run history without classifying bugs.
+- **Prompt:**
+  > /hw4-run FR-15
+- **Supporting Playwright Skills:** `playwright-ci` — `projects-and-dependencies.md`, `reporting-and-artifacts.md`; `playwright-core` — `debugging.md`, `trace-analysis.md`, `error-index.md`. `playwright-cli` was unavailable, so standard Playwright reports, JSON reporters, and retained traces were used.
+- **AI Output Summary:** Recorded Run #1 with three zero-test infrastructure failures caused by sandbox port-binding denial, then completed approved Run #2 outside that restriction. Run #2 produced identical JSON counts for Chromium, Firefox, and WebKit: 1 passed, 24 failed, 0 flaky, 0 skipped, 25 total per browser. Generated three isolated HTML reports, the linked FR overview, 72 screenshots, 72 valid trace archives, 72 error-context files, and updated `fr15-run-summary.md` with both tracked sessions. No failure classification or bug report changes were made.
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Nothing Wrong
 - **Verdict:** Accepted
