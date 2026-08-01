@@ -13,7 +13,7 @@
 | FR | Feature | Detailed report | Latest automation evidence | Classification status | Confirmed bugs |
 |---|---|---|---|---|---:|
 | FR-06 | Product Detail View | [fr06-bug-report.md](Pool-A_FR06/fr06-bug-report.md) | Run #1 — 3 browsers | Complete — pending HITL sign-off | 8 |
-| FR-08 | Checkout | [fr08-bug-report.md](Pool-B_FR08/fr08-bug-report.md) | Run #6 — 3 browsers | Evidence accepted — failure classification pending | 8 |
+| FR-08 | Checkout | [fr08-bug-report.md](Pool-B_FR08/fr08-bug-report.md) | Run #6 — 3 browsers | Complete — HITL accepted | 8 |
 | FR-15 | Product Management | `Pool-C_FR15/fr15-bug-report.md` | Not run | Not started | 0 |
 
 ## Consolidated bug index
@@ -48,12 +48,12 @@ Counts represent distinct classified defects/issues, not repeated browser failur
 | Confirmed genuine product defects | 8 | 8 | 0 | 16 |
 | Known HW2 defects reproduced | 7 | 6 | 0 | 13 |
 | New automation-discovered defects | 1 | 2 | 0 | 3 |
-| Test/infrastructure issues | 1 | 1 | 0 | 2 |
+| Test/infrastructure issues | 1 | 0 | 0 | 1 |
 | Out-of-scope failures | 0 | 0 | 0 | 0 |
 
 FR-06 has 45 failed TC/browser results: 21 reproduce known defects and 24 reproduce the new first-click defect. One WebKit focus-portability observation is secondary to an EP-001 product-defect result and does not increase the 45-result total.
 
-FR-08 Run #4 has 39 failed TC/browser results: 30 primary rows reproduce known HW2 defects, 6 reproduce two new defects, and 3 are `TEST-FR08-003`, an invalid accessible-name assumption in the EP-001 list-item locator. `BUG-FR08-002` is also visible as a secondary observation in the EP-001 evidence and therefore does not add a failed-result row. The prior `TEST-FR08-001` Profile-locator and `TEST-FR08-002` cart-lifecycle issues are resolved.
+FR-08 Run #6 has 39 failed TC/browser results, all classified as genuine product defects: 33 reproduce six known HW2 defects and 6 reproduce two new defects. The corrected EP-001 exact-item check passes before directly recording `BUG-FR08-001`, `BUG-FR08-002`, and `BUG-FR08-003`; `TEST-FR08-001`, `TEST-FR08-002`, and `TEST-FR08-003` each recur zero times. No Run #6 failure is a test/infrastructure issue or an out-of-scope API failure.
 
 ## Aggregation rules
 

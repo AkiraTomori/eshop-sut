@@ -2,9 +2,9 @@
 
 > **Student:** 23127379 — Thái Minh Huy
 >
-> **Evidence source:** [FR-08 Run Summary](fr08-run-summary.md), tracked Run #4 across Chromium, Firefox, and WebKit
+> **Evidence source:** [FR-08 Run Summary](fr08-run-summary.md), tracked Run #6 across Chromium, Firefox, and WebKit
 >
-> **Classification status:** Run #4 accepted; Run #6 evidence captured and pending reclassification
+> **Classification status:** Run #6 classification accepted — FR-08 completion gate passed
 >
 > **Aggregate report:** [HW04 Bug Report](../bug_report.md)
 
@@ -12,17 +12,17 @@
 
 ## Classification summary
 
-Run #4 executed 14 tests in each browser. All 39 failed TC/browser results were classified from the current JSON reports, screenshots, traces, error contexts, reviewed spec/data, React source, HW2 test cases/bug report, and SRS.
+Run #6 executed 14 tests in each browser. All 39 failed TC/browser results were classified from the current JSON reports, screenshots, traces, error contexts, reviewed spec/data, React source, HW2 test cases/bug report, and SRS.
 
 | Classification | Distinct count | Failed TC/browser results |
 |---|---:|---:|
-| Genuine product defects | 8 | 36 |
-| Known HW2 defects reproduced | 6 | 30 |
+| Genuine product defects | 8 | 39 |
+| Known HW2 defects reproduced | 6 | 33 |
 | New automation-discovered defects | 2 | 6 |
-| Test or infrastructure issues | 1 | 3 |
+| Test or infrastructure issues | 0 | 0 |
 | Out of HW4 scope failures | 0 | 0 |
 
-The 36 product-defect rows reproduce known `BUG-FR08-001`, `002`, `003`, `005`, `006`, and `009`, plus new `BUG-FR08-AUTO-001` and `BUG-FR08-AUTO-002`. `BUG-FR08-002` is a secondary cross-browser observation in the EP-001 screenshots/source and does not add another failed-result row. The remaining three rows are `TEST-FR08-003`: the product item is visibly correct, but the locator incorrectly requests an accessible name from a native `listitem` role.
+All 39 rows are genuine product-defect results: 33 reproduce known `BUG-FR08-001`, `002`, `003`, `005`, `006`, and `009`, while six reproduce new `BUG-FR08-AUTO-001` and `BUG-FR08-AUTO-002`. In EP-001, the corrected exact-item assertion passes and Playwright records three soft failures for the missing `<h1>`, incorrect green action colour, and retained cart before the result fails. The former `TEST-FR08-003` named-`listitem` locator failure appears zero times.
 
 ## Failure classification matrix
 
@@ -30,9 +30,9 @@ Each failed TC/browser result has one row and exact retained evidence. Isolated 
 
 | Source TC | Browser | Exact assertion/evidence | Classification | Bug/Issue ID | Evidence |
 |---|---|---|---|---|---|
-| TC-FR08-EP-001 | Chromium | Correct item is visible, but named `listitem` locator resolves 0 | Test issue | TEST-FR08-003 | [shot](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-chromium/test-failed-1.png) · [trace](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-chromium/trace.zip) · [context](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-chromium/error-context.md) |
-| TC-FR08-EP-001 | Firefox | Same invalid named-`listitem` locator | Test issue | TEST-FR08-003 | [shot](test-results/firefox/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-firefox/test-failed-1.png) · [trace](test-results/firefox/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-firefox/trace.zip) · [context](test-results/firefox/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-firefox/error-context.md) |
-| TC-FR08-EP-001 | WebKit | Same invalid named-`listitem` locator | Test issue | TEST-FR08-003 | [shot](test-results/webkit/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-webkit/test-failed-1.png) · [trace](test-results/webkit/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-webkit/trace.zip) · [context](test-results/webkit/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-webkit/error-context.md) |
+| TC-FR08-EP-001 | Chromium | Exact item passes; missing `<h1>`, green action, and retained cart fail | Genuine — known | BUG-FR08-001, BUG-FR08-002, BUG-FR08-003 | [shot](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-chromium/test-failed-1.png) · [trace](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-chromium/trace.zip) · [context](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-chromium/error-context.md) |
+| TC-FR08-EP-001 | Firefox | Same three spec-correct product failures after exact item passes | Genuine — known | BUG-FR08-001, BUG-FR08-002, BUG-FR08-003 | [shot](test-results/firefox/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-firefox/test-failed-1.png) · [trace](test-results/firefox/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-firefox/trace.zip) · [context](test-results/firefox/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-firefox/error-context.md) |
+| TC-FR08-EP-001 | WebKit | Same three spec-correct product failures after exact item passes | Genuine — known | BUG-FR08-001, BUG-FR08-002, BUG-FR08-003 | [shot](test-results/webkit/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-webkit/test-failed-1.png) · [trace](test-results/webkit/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-webkit/trace.zip) · [context](test-results/webkit/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-webkit/error-context.md) |
 | TC-FR08-EP-002 | Chromium | Total spinbutton is editable | Genuine — new | BUG-FR08-AUTO-002 | [shot](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-chromium/test-failed-1.png) · [trace](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-chromium/trace.zip) · [context](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-chromium/error-context.md) |
 | TC-FR08-EP-002 | Firefox | Same editable-total failure | Genuine — new | BUG-FR08-AUTO-002 | [shot](test-results/firefox/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-firefox/test-failed-1.png) · [trace](test-results/firefox/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-firefox/trace.zip) · [context](test-results/firefox/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-firefox/error-context.md) |
 | TC-FR08-EP-002 | WebKit | Same editable-total failure | Genuine — new | BUG-FR08-AUTO-002 | [shot](test-results/webkit/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-webkit/test-failed-1.png) · [trace](test-results/webkit/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-webkit/trace.zip) · [context](test-results/webkit/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-webkit/error-context.md) |
@@ -76,7 +76,7 @@ All defects below affect Chromium, Firefox, and WebKit. The matrix above contain
 
 ### BUG-FR08-001 — Checkout page has no required `<h1>`
 
-- **Known/New:** Known HW2 defect; **Severity:** Medium; **Source:** TC-FR08-NEG-007 (secondary EP-001 evidence)
+- **Known/New:** Known HW2 defect; **Severity:** Medium; **Source:** TC-FR08-EP-001 and NEG-007
 - **SRS/HW2:** FR-21; [GitHub Issue 21](https://github.com/AkiraTomori/eshop-sut/issues/21)
 - **Expected:** Exactly one `<h1>` describes Checkout.
 - **Actual/assertion:** `getByRole('heading', { level: 1 })` has count 0; `Checkout.jsx` renders `Xác Nhận Đơn Hàng` as `<h2>`.
@@ -85,10 +85,10 @@ All defects below affect Chromium, Firefox, and WebKit. The matrix above contain
 
 ### BUG-FR08-002 — Positive checkout action is green instead of blue
 
-- **Known/New:** Known HW2 defect; **Severity:** Cosmetic; **Source:** TC-FR08-EP-001/NEG-007 secondary evidence
+- **Known/New:** Known HW2 defect; **Severity:** Cosmetic; **Source:** TC-FR08-EP-001
 - **SRS/HW2:** FR-21; [GitHub Issue 22](https://github.com/AkiraTomori/eshop-sut/issues/22)
 - **Expected:** The positive checkout action is blue (`rgb(37, 99, 235)`).
-- **Actual:** EP-001 screenshots in all browsers show the green `Xác Nhận Thanh Toán` action; `Checkout.jsx` uses `bg-green-600`. The earlier hard item-locator failure prevented the later CSS assertion, so this observation does not add a failed-result row.
+- **Actual/assertion:** EP-001 reaches `toHaveCSS` in every browser and receives `rgb(22, 163, 74)` instead of `rgb(37, 99, 235)`; `Checkout.jsx` uses `bg-green-600`.
 - **Evidence:** [Chromium screenshot](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-cd971-valid-shipping-address-FR08-chromium/trace.zip), [Chromium report](playwright-report/chromium/index.html), [Firefox report](playwright-report/firefox/index.html), [WebKit report](playwright-report/webkit/index.html).
 - **Impact:** Positive-action colour is inconsistent with the required interface language.
 
@@ -148,18 +148,11 @@ All defects below affect Chromium, Firefox, and WebKit. The matrix above contain
 
 ## Test and infrastructure issues
 
-### TEST-FR08-003 — Checkout item locator incorrectly requires a `listitem` accessible name
-
-- **Source:** TC-FR08-EP-001; **Affected browsers:** Chromium, Firefox, WebKit; **Failed results:** 3
-- **Observed:** `getByRole('listitem', { name: 'iPhone 15 Pro Max x 1 — 30,000,000 ₫', exact: true })` resolves zero elements, while every screenshot and trace shows that exact item text in a native `<li>`.
-- **Root cause:** The locator assumes the native `listitem` receives an accessible name from its contents. The rendered content is correct; this is not a product failure.
-- **Correction status:** Applied at the next F2 review: the page object filters semantic list items by the external descendant text, and the spec asserts the complete value with `toHaveText(externalText)`. Cross-browser confirmation remains pending; all later heading, colour, total, success, and cart-clear assertions are preserved.
-
-`TEST-FR08-001` and `TEST-FR08-002` do not recur in Run #4. All address-bearing cases pass Profile update/persistence, product addition, cart row/total, and Checkout navigation.
+Run #6 contains no test or infrastructure failure. `TEST-FR08-001`, `TEST-FR08-002`, and `TEST-FR08-003` each appear zero times. The EP-001 exact item text passes in all browsers, and all address-bearing cases pass Profile persistence, product addition, cart row/total, and Checkout navigation before reaching their spec-correct product assertions. Tracked Run #5 remains documented separately as a browser-launch permission attempt with zero executions and is not counted in Run #6 classification.
 
 ## Out-of-scope observations
 
-No Run #4 failure came from a direct API/database action or API-dependent HW2 TC. NEG-002, NEG-005, and BV-007 remain excluded as `Out of HW4 scope — API testing`. Backend defects `BUG-FR08-007` and `BUG-FR08-008` are not presented as browser confirmations.
+No Run #6 failure came from a direct API/database action or API-dependent HW2 TC. NEG-002, NEG-005, and BV-007 remain excluded as `Out of HW4 scope — API testing`. Backend defects `BUG-FR08-007` and `BUG-FR08-008` are not presented as browser confirmations.
 
 ## GitHub Issue drafts
 

@@ -153,3 +153,16 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Nothing Wrong
 - **Verdict:** Accepted
+---
+## Session: 2026-08-01 11:30 — bug-report-automation: Classify FR-08 Run #6 browser failures
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) + G9.4 (Collaborate)
+- **Task:** Classify every failed FR-08 Run #6 TC/browser result against retained Playwright evidence and canonical HW2/SRS sources, update the detailed FR report and GitHub Issue drafts, update the consolidated summary and automation review, and re-check the FR completion gate.
+- **Prompt:**
+  > /hw4-bugs FR-08
+- **Supporting Playwright Skills:** `playwright-core` (`debugging.md`, `trace-analysis.md`, `error-index.md`); `playwright-ci` (`reporting-and-artifacts.md`)
+- **AI Output Summary:** Classified all 39 failed Run #6 results with one matrix row per TC/browser. All 39 are genuine product-defect results: 33 reproduce six known HW2 defects (`BUG-FR08-001`, `002`, `003`, `005`, `006`, and `009`) and six reproduce two new cross-browser defects (`BUG-FR08-AUTO-001` and `AUTO-002`). The corrected EP-001 exact-item assertion passes before each browser records the missing heading, incorrect action colour, and retained cart, so former `TEST-FR08-003` appears zero times; `TEST-FR08-001` and `TEST-FR08-002` also remain resolved. Verified that no Run #6 failure is a test/infrastructure issue or out-of-scope API failure. Updated `fr08-bug-report.md`, `fr08-automation-review.md`, and root `bug_report.md`; retained ready-to-paste GitHub Issue drafts without creating external issues. `playwright-cli` remained unavailable, so current Playwright JSON, screenshots, traces, error contexts, HTML reports, and React source were used. FR-08 awaits HITL sign-off of this classification before its completion gate is re-checked.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Nothing wrong
+- **Verdict:** Accepted

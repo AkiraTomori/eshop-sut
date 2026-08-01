@@ -1,6 +1,6 @@
 # FR-08 Automation Review
 
-**Stage:** Run #6 three-browser evidence accepted — failure classification pending
+**Stage:** FR-08 completion gate passed — Run #6 classification accepted
 **Automation scope:** Browser UI only
 **Selected:** 14 UI test cases
 **Excluded:** 3 API-dependent test cases
@@ -80,16 +80,16 @@ These cases are not automated and are not counted toward the 14 selected UI case
 
 ## Genuinely non-automatable steps
 
-None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; heading structure uses accessible role plus level; and error placement uses polled element geometry. Run #4 confirms the reordered Profile/cart lifecycle reaches the intended Checkout assertions. API/database clauses remain out of scope rather than being simulated.
+None of the selected UI clauses is inherently manual. Colour uses `toHaveCSS`; heading structure uses accessible role plus level; and error placement uses polled element geometry. Run #6 confirms the reordered Profile/cart lifecycle and corrected exact-item locator reach the intended Checkout assertions. API/database clauses remain out of scope rather than being simulated.
 
-## Run #4 classification and locator correction
+## Run #6 classification
 
-- **Genuine product defects:** 36 failed TC/browser results reproduce product defects. Thirty primary rows reproduce known HW2 defects `BUG-FR08-001`, `BUG-FR08-003`, `BUG-FR08-005`, `BUG-FR08-006`, and `BUG-FR08-009`; the EP-001 screenshots also reproduce known colour defect `BUG-FR08-002` as a secondary observation. Six rows reproduce two new cross-browser defects: missing empty-cart illustration `BUG-FR08-AUTO-001` and directly editable Checkout total `BUG-FR08-AUTO-002`.
-- **Test issue corrected:** Three TC-FR08-EP-001 rows were `TEST-FR08-003`. The exact item text is visibly correct, but a native `listitem` does not derive its accessible name from descendant text. The page object now uses `getByRole('listitem').filter({ hasText: exactText })`, and the spec asserts the full external value with `toHaveText(exactText)` rather than weakening the check to visibility.
-- **Previous corrections verified:** `TEST-FR08-001` and `TEST-FR08-002` appear zero times in Run #4. All address-bearing tests pass Profile persistence, product addition, cart row/total, and Checkout navigation.
+- **Genuine product defects:** All 39 failed TC/browser results reproduce product defects. Thirty-three rows reproduce known HW2 defects `BUG-FR08-001`, `BUG-FR08-002`, `BUG-FR08-003`, `BUG-FR08-005`, `BUG-FR08-006`, and `BUG-FR08-009`; six rows reproduce new cross-browser defects `BUG-FR08-AUTO-001` (missing empty-cart illustration) and `BUG-FR08-AUTO-002` (directly editable Checkout total).
+- **EP-001 evidence:** The corrected external exact-item text assertion passes. Each browser then records the missing `<h1>` and incorrect green action as soft failures and the retained cart as the hard failure, directly reproducing `BUG-FR08-001`, `BUG-FR08-002`, and `BUG-FR08-003` in one failed result.
+- **All test corrections verified:** `TEST-FR08-001`, `TEST-FR08-002`, and `TEST-FR08-003` each appear zero times. All address-bearing tests pass Profile persistence, product addition, cart row/total, and Checkout navigation.
 - **API-only defects:** `BUG-FR08-007` and `BUG-FR08-008` remain outside the HW4 browser-UI scope and are not claimed as reproduced.
 - **Passed protection:** TC-FR08-NEG-001 passed in Chromium, Firefox, and WebKit.
-- **Correction gate:** Static F2 review and validation are complete. Cross-browser confirmation belongs to the next `/hw4-run FR-08` evidence cycle after HITL accepts this review session.
+- **Classification gate:** Detailed and consolidated reports are updated from Run #6. No suite correction is indicated; this classification requires HITL sign-off before the FR-08 completion gate is re-checked.
 
 Full classification and per-browser evidence are recorded in [fr08-bug-report.md](fr08-bug-report.md).
 
@@ -120,13 +120,13 @@ Full classification and per-browser evidence are recorded in [fr08-bug-report.md
 - Every address-bearing case now includes the HITL-requested Profile update and persisted browser-control verification.
 - All UI-observable expected clauses are asserted or explicitly disclosed as a source discrepancy/out-of-scope hybrid clause.
 - Tests use the shared fixture, external JSON, fresh contexts, UI-only setup/cleanup, and spec-correct known-defect assertions.
-- Run #4 produced 3 passed and 39 failed results across 42 browser executions.
-- Of the 39 Run #4 failures, 36 are genuine product-defect results and three were `TEST-FR08-003`; all three identified test issues now have focused corrections.
-- `TEST-FR08-003` is corrected without changing external data or weakening any later heading, colour, total, success, or cart-clear expectation.
+- Run #4 produced 3 passed and 39 failed results across 42 browser executions; its three `TEST-FR08-003` results led to the focused locator correction.
+- `TEST-FR08-003` was corrected without changing external data or weakening any later heading, colour, total, success, or cart-clear expectation.
 - Run #5 is retained as an infrastructure-only attempt: macOS sandbox permission blocked Chromium in global setup before discovery, so all browser JSON reporters recorded 0 executions. The required retry was not hidden or merged into another session.
-- Run #6 executed all 42 browser-test combinations: Chromium, Firefox, and WebKit each reported 1 passed and 13 failed. The former named-`listitem` failure appears zero times; EP-001 reaches the downstream heading, colour, and cart-clear assertions in every browser.
-- FR-08 requires HITL acceptance of the Run #6 evidence, renewed failure classification, and sign-off before its completion gate can pass.
+- Run #6 executed all 42 browser-test combinations: Chromium, Firefox, and WebKit each reported 1 passed and 13 failed. All 39 failures are genuine product-defect results: 33 known-defect reproductions and six new-defect reproductions, representing eight distinct product defects.
+- The former named-`listitem` failure appears zero times; EP-001 reaches the downstream heading, colour, and cart-clear assertions in every browser. No Run #6 failure is a test/infrastructure issue or out-of-scope API failure.
+- FR-08 requires HITL sign-off of this Run #6 failure classification before its completion gate can pass.
 
-**Human Review:** Run #6 three-browser evidence accepted by HITL
+**Human Review:** Run #6 evidence and failure classification accepted by HITL
 
-**Next gate:** `/hw4-bugs FR-08`
+**Next gate:** `/hw4-generate FR-15`
