@@ -1,0 +1,402 @@
+{
+  "metadata": {
+    "feature": "FR-15",
+    "tag": "@FR15",
+    "adminUrl": "http://localhost:5174",
+    "adminRoute": "/",
+    "uiObservableBugIds": [
+      "BUG-FR15-001",
+      "BUG-FR15-002",
+      "BUG-FR15-003",
+      "BUG-FR15-013",
+      "BUG-FR15-014",
+      "BUG-FR15-015",
+      "BUG-FR15-016",
+      "BUG-FR15-017"
+    ]
+  },
+  "architectureDecision": {
+    "pageObject": "Reuse and extend pages/product-management.page.ts for verified product-form, table, dialog, search, and heading locators plus user-intent CRUD actions.",
+    "fixture": "Reuse the existing test-scoped productManagementPage fixture backed by a fresh adminPage context; do not add a resource or API fixture.",
+    "helper": "Keep only stateless title, annotation, UI setup, UI cleanup, dialog, and DOM-order helpers in the spec; all inputs and expectations stay in this JSON file.",
+    "inspectionFallback": "playwright-cli is not installed; locators were verified against frontend-admin/src/App.jsx and will be rechecked during script-review with standard Playwright/browser evidence."
+  },
+  "scopeManifest": {
+    "selectedUiCases": [
+      "TC-FR15-EP-001",
+      "TC-FR15-EP-002",
+      "TC-FR15-EP-003",
+      "TC-FR15-EP-004",
+      "TC-FR15-EP-005",
+      "TC-FR15-EP-006",
+      "TC-FR15-EP-007",
+      "TC-FR15-EP-008",
+      "TC-FR15-EP-009",
+      "TC-FR15-EP-010",
+      "TC-FR15-NEG-005",
+      "TC-FR15-NEG-009",
+      "TC-FR15-NEG-010",
+      "TC-FR15-NEG-024",
+      "TC-FR15-NEG-025",
+      "TC-FR15-NEG-026",
+      "TC-FR15-NEG-027",
+      "TC-FR15-NEG-028",
+      "TC-FR15-NEG-029"
+    ],
+    "excludedApiTesting": [
+      "TC-FR15-NEG-001",
+      "TC-FR15-NEG-002",
+      "TC-FR15-NEG-003",
+      "TC-FR15-NEG-004",
+      "TC-FR15-NEG-012",
+      "TC-FR15-NEG-013",
+      "TC-FR15-NEG-014",
+      "TC-FR15-NEG-016",
+      "TC-FR15-NEG-017",
+      "TC-FR15-NEG-019",
+      "TC-FR15-NEG-020",
+      "TC-FR15-NEG-021",
+      "TC-FR15-NEG-022",
+      "TC-FR15-BV-003",
+      "TC-FR15-BV-004",
+      "TC-FR15-BV-005",
+      "TC-FR15-BV-009",
+      "TC-FR15-BV-010",
+      "TC-FR15-BV-013",
+      "TC-FR15-BV-014",
+      "TC-FR15-BV-015"
+    ],
+    "excludedReason": "Out of HW4 scope — API testing: the authoritative steps require Postman/cURL, direct HTTP status or response assertions, malformed/expired/tampered tokens, non-UI payload types, or database inspection.",
+    "eligibleNotSelected": [
+      "TC-FR15-NEG-006",
+      "TC-FR15-NEG-007",
+      "TC-FR15-NEG-008",
+      "TC-FR15-NEG-011",
+      "TC-FR15-NEG-015",
+      "TC-FR15-NEG-018",
+      "TC-FR15-NEG-023",
+      "TC-FR15-BV-001",
+      "TC-FR15-BV-002",
+      "TC-FR15-BV-006",
+      "TC-FR15-BV-007",
+      "TC-FR15-BV-008",
+      "TC-FR15-BV-011",
+      "TC-FR15-BV-012"
+    ],
+    "hybridClausesNotCovered": [
+      "HTTP 200/201/400 response codes are not asserted for selected create, edit, delete, or validation cases.",
+      "Database persistence, database row counts, and database isolation are not asserted; only UI-rendered state is covered.",
+      "Network request presence or absence is not intercepted or asserted.",
+      "The transient loading indicator clause in TC-FR15-EP-006 is asserted only as a UI locator and is not made deterministic through prohibited network interception."
+    ],
+    "sourceDiscrepancies": [
+      "FR15-test-cases.md assigns BUG-FR15-001/003 to EP-001 and EP-002 and BUG-FR15-003 to EP-003, while FR15-bug-report.md defines those IDs as zero-price, float-price, and float-price defects rather than create-notification/format/isolation defects.",
+      "FR15-test-cases.md assigns BUG-FR15-005 to authentication NEG-001 through NEG-004 and to missing-price NEG-013, while FR15-bug-report.md defines BUG-FR15-005 only as the missing-price defect.",
+      "The appended BVA coverage matrix references TC-FR15-BV-001 through TC-FR15-BV-021, but the actual BVA case headings and final total define only TC-FR15-BV-001 through TC-FR15-BV-015.",
+      "TC-FR15-NEG-006 and TC-FR15-NEG-007 contain unresolved Bug ID placeholders, so no Bug ID is inferred for those cases."
+    ]
+  },
+  "ui": {
+    "categoryLabel": "Điện thoại",
+    "formHeadingCreate": "Thêm sản phẩm mới",
+    "formHeadingEdit": "Sửa sản phẩm",
+    "pageHeading": "Quản lý Sản phẩm",
+    "meaningfulPrimaryHeading": "Quản lý Sản phẩm",
+    "saveButton": "Lưu sản phẩm",
+    "deleteButton": "Xóa",
+    "viewAction": "Xem chi tiết",
+    "successCreateMessage": "Tạo sản phẩm thành công!",
+    "successUpdateMessage": "Cập nhật thành công!",
+    "successDeleteMessage": "Xóa sản phẩm thành công!",
+    "deleteConfirmationText": "Bạn có chắc chắn muốn xóa sản phẩm này?",
+    "requiredNameError": "Tên sản phẩm là bắt buộc",
+    "positivePriceError": "Giá phải là số dương lớn hơn 0",
+    "requiredCategoryError": "Danh mục là bắt buộc",
+    "emptySearchMessage": "Không tìm thấy sản phẩm",
+    "searchPlaceholder": "Tìm kiếm sản phẩm",
+    "requiredLabels": [
+      "Tên sản phẩm *",
+      "Giá tiền *",
+      "Danh mục *"
+    ],
+    "expectedFormattedPrices": {
+      "full": "15,000,000 ₫",
+      "mandatoryOnly": "50,000 ₫",
+      "updated": "200,000 ₫",
+      "list": "345,000 ₫",
+      "detail": "30,000,000 ₫"
+    },
+    "positiveActionColour": "rgb(37, 99, 235)",
+    "dangerousActionColour": "rgb(239, 68, 68)",
+    "expectedPrimaryHeadingCount": 1,
+    "expectedSingleRow": 1,
+    "expectedNoRows": 0,
+    "expectedDialogCount": 1,
+    "absentFeatureTimeout": 1500,
+    "expectedInitialCategoryValue": "1",
+    "requiredAttribute": "required",
+    "backgroundColourProperty": "background-color",
+    "keyboardNextKey": "Tab",
+    "tabOrder": [
+      "name",
+      "price",
+      "imageUrl",
+      "description",
+      "category",
+      "save"
+    ]
+  },
+  "baselineProduct": {
+    "name": "iPhone 15 Pro Max",
+    "price": "30000000",
+    "description": "Điện thoại cao cấp của Apple",
+    "imageUrl": "https://placehold.co/300x300/png?text=iPhone+15",
+    "categoryLabel": "Điện thoại"
+  },
+  "cases": {
+    "ep001": {
+      "id": "TC-FR15-EP-001",
+      "title": "Verify that a new product is created successfully when all mandatory and optional fields contain valid data",
+      "type": "EP valid",
+      "input": {
+        "name": "Laptop Gaming ABC",
+        "price": "15000000",
+        "description": "High performance gaming laptop with RTX 4060",
+        "imageUrl": "https://example.com/laptop.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": ["Laptop Gaming ABC"],
+      "bugIds": ["BUG-FR15-001", "BUG-FR15-003"]
+    },
+    "ep002": {
+      "id": "TC-FR15-EP-002",
+      "title": "Verify that a product is created successfully when optional fields (description and imageUrl) are omitted",
+      "type": "EP valid",
+      "input": {
+        "name": "Basic Product X",
+        "price": "50000",
+        "description": "",
+        "imageUrl": "",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": ["Basic Product X"],
+      "bugIds": ["BUG-FR15-001", "BUG-FR15-003"]
+    },
+    "ep003": {
+      "id": "TC-FR15-EP-003",
+      "title": "Verify that an existing product is updated successfully with valid field values and only that product is modified",
+      "type": "EP valid",
+      "original": {
+        "name": "Edit Target Product",
+        "price": "100000",
+        "description": "Original description text",
+        "imageUrl": "https://example.com/original.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "updated": {
+        "name": "Updated Product Name",
+        "price": "200000",
+        "description": "Updated description text",
+        "imageUrl": "https://example.com/updated.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "comparison": {
+        "name": "Isolation Comparison Product",
+        "price": "310000",
+        "description": "Comparison product must remain unchanged",
+        "imageUrl": "https://example.com/comparison.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": [
+        "Edit Target Product",
+        "Updated Product Name",
+        "Isolation Comparison Product"
+      ],
+      "bugIds": ["BUG-FR15-003"]
+    },
+    "ep004": {
+      "id": "TC-FR15-EP-004",
+      "title": "Verify that a product is deleted successfully after the admin confirms the delete confirmation dialog",
+      "type": "EP valid",
+      "input": {
+        "name": "Delete Target Product",
+        "price": "120000",
+        "description": "Disposable delete-confirm target",
+        "imageUrl": "https://example.com/delete-target.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": ["Delete Target Product"],
+      "bugIds": ["BUG-FR15-017"]
+    },
+    "ep005": {
+      "id": "TC-FR15-EP-005",
+      "title": "Verify that product deletion is aborted and the product remains when the admin clicks Cancel on the delete confirmation dialog",
+      "type": "EP valid",
+      "input": {
+        "name": "Cancel Target Product",
+        "price": "130000",
+        "description": "Disposable delete-cancel target",
+        "imageUrl": "https://example.com/cancel-target.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": ["Cancel Target Product"],
+      "bugIds": ["BUG-FR15-017"]
+    },
+    "ep006": {
+      "id": "TC-FR15-EP-006",
+      "title": "Verify that the product list page displays all products with correct format when accessed without a search keyword",
+      "type": "EP valid",
+      "input": {
+        "name": "List Display Product",
+        "price": "345000",
+        "description": "List display verification product",
+        "imageUrl": "https://example.com/list-display.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": ["List Display Product"],
+      "bugIds": ["BUG-FR15-003", "BUG-FR15-016"]
+    },
+    "ep007": {
+      "id": "TC-FR15-EP-007",
+      "title": "Verify that the product list correctly filters and displays products when a matching search keyword is entered",
+      "type": "EP valid",
+      "matching": {
+        "name": "Wireless Keyboard Pro",
+        "price": "990000",
+        "description": "Matching search product",
+        "imageUrl": "https://example.com/wireless-keyboard.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "nonMatching": {
+        "name": "Wired Mouse Standard",
+        "price": "450000",
+        "description": "Non-matching search product",
+        "imageUrl": "https://example.com/wired-mouse.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "keyword": "Wireless",
+      "cleanupNames": ["Wireless Keyboard Pro", "Wired Mouse Standard"],
+      "bugIds": []
+    },
+    "ep008": {
+      "id": "TC-FR15-EP-008",
+      "title": "Verify that an empty state with a friendly message is displayed when a search keyword returns no product matches",
+      "type": "EP valid",
+      "keyword": "zzznoproductmatch",
+      "cleanupNames": [],
+      "bugIds": []
+    },
+    "ep009": {
+      "id": "TC-FR15-EP-009",
+      "title": "Verify that the product detail view displays all product fields correctly when accessed by a valid admin",
+      "type": "EP valid",
+      "input": {
+        "name": "FR15 Detail Product",
+        "price": "30000000",
+        "description": "Điện thoại cao cấp của Apple",
+        "imageUrl": "https://placehold.co/300x300/png?text=iPhone+15",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": ["FR15 Detail Product"],
+      "bugIds": ["BUG-FR15-003"]
+    },
+    "ep010": {
+      "id": "TC-FR15-EP-010",
+      "title": "Verify that the product creation form displays required field indicators, correct button colours, and positions errors above the submit button",
+      "type": "EP valid GUI",
+      "cleanupNames": [],
+      "bugIds": ["BUG-FR15-015"]
+    },
+    "neg005": {
+      "id": "TC-FR15-NEG-005",
+      "title": "Verify that product creation fails with a validation error when the product name field is submitted empty",
+      "type": "NEG UI",
+      "input": {
+        "name": "",
+        "price": "100000",
+        "description": "Empty name validation product",
+        "imageUrl": "https://example.com/empty-name.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": [],
+      "bugIds": ["BUG-FR15-014"]
+    },
+    "neg009": {
+      "id": "TC-FR15-NEG-009",
+      "title": "Verify that product creation fails with a validation error when the price is exactly zero",
+      "type": "NEG UI",
+      "input": {
+        "name": "Zero Price Product",
+        "price": "0",
+        "description": "Zero-price validation product",
+        "imageUrl": "https://example.com/zero-price.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": ["Zero Price Product"],
+      "bugIds": ["BUG-FR15-001", "BUG-FR15-009"]
+    },
+    "neg010": {
+      "id": "TC-FR15-NEG-010",
+      "title": "Verify that product creation fails with a validation error when the price is a negative integer value",
+      "type": "NEG UI",
+      "input": {
+        "name": "Negative Price Product",
+        "price": "-1",
+        "description": "Negative-price validation product",
+        "imageUrl": "https://example.com/negative-price.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": ["Negative Price Product"],
+      "bugIds": ["BUG-FR15-002", "BUG-FR15-009"]
+    },
+    "neg024": {
+      "id": "TC-FR15-NEG-024",
+      "title": "Verify that the product creation form is missing the required asterisk (*) indicator on mandatory field labels",
+      "type": "NEG UI GUI",
+      "cleanupNames": [],
+      "bugIds": ["BUG-FR15-013"]
+    },
+    "neg025": {
+      "id": "TC-FR15-NEG-025",
+      "title": "Verify that validation error messages appear above the submit button and not below it or elsewhere on the product form",
+      "type": "NEG UI GUI",
+      "cleanupNames": [],
+      "bugIds": ["BUG-FR15-014"]
+    },
+    "neg026": {
+      "id": "TC-FR15-NEG-026",
+      "title": "Verify that action buttons use the correct colour coding — Submit is blue and Delete is red on the product management page",
+      "type": "NEG UI GUI",
+      "cleanupNames": [],
+      "bugIds": ["BUG-FR15-015"]
+    },
+    "neg027": {
+      "id": "TC-FR15-NEG-027",
+      "title": "Verify that the product management page does not contain more than one h1 tag",
+      "type": "NEG UI GUI",
+      "cleanupNames": [],
+      "bugIds": ["BUG-FR15-016"]
+    },
+    "neg028": {
+      "id": "TC-FR15-NEG-028",
+      "title": "Verify that the Tab key navigates form fields in the correct top-to-bottom, left-to-right order on the product creation form",
+      "type": "NEG UI GUI",
+      "cleanupNames": [],
+      "bugIds": []
+    },
+    "neg029": {
+      "id": "TC-FR15-NEG-029",
+      "title": "Verify that the delete action does not execute immediately without displaying a confirmation dialog",
+      "type": "NEG UI",
+      "input": {
+        "name": "Delete Dialog Probe Product",
+        "price": "140000",
+        "description": "Disposable delete-dialog probe",
+        "imageUrl": "https://example.com/delete-dialog-probe.jpg",
+        "categoryLabel": "Điện thoại"
+      },
+      "cleanupNames": ["Delete Dialog Probe Product"],
+      "bugIds": ["BUG-FR15-017"]
+    }
+  }
+}
