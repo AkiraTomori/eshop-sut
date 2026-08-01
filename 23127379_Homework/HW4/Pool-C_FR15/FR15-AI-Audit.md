@@ -39,3 +39,19 @@
 - **Human Review Notes:** Approved
 - **What AI Got Wrong:** Nothing Wrong
 - **Verdict:** Accepted
+
+---
+## Session: 2026-08-01 18:05 — bug-report-automation: Classify FR-15 browser failures
+
+- **AI Tool:** Codex (GPT-5)
+- **Bloom-AI Level:** G9.3 (Analyse) / G9.4 (Collaborate)
+- **Task:** Classify every FR-15 Run #2 browser failure, create the detailed per-FR bug report and new-issue drafts, update the automation review and consolidated bug summary, and re-check the FR completion gate without creating external issues.
+- **Prompt:**
+  > ```
+  > /hw4-bugs FR-15
+  > ```
+- **Supporting Playwright Skills:** `playwright-core` — `debugging.md`, `trace-analysis.md`, `error-index.md`; `playwright-ci` — `reporting-and-artifacts.md`.
+- **AI Output Summary:** Classified all 72 failed TC/browser results from tracked Run #2: 57 genuine product failures covering 12 distinct defects (six known and six new), and 15 failures exclusively caused by two test/source issues. Created `fr15-bug-report.md` with exact per-result evidence, detailed defect records, and six GitHub Issue drafts marked pending HITL creation; updated `fr15-automation-review.md` and root `bug_report.md`. Validated 72 matrix rows, 228 local artifact/report links, and JSON counts of 1 passed/24 failed in each browser. No external issue was created and no browser suite was rerun.
+- **Human Review Notes:** Approved
+- **What AI Got Wrong:** Nothing Wrong
+- **Verdict:** Accepted

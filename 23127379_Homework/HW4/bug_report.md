@@ -12,9 +12,9 @@
 
 | FR | Feature | Detailed report | Latest automation evidence | Classification status | Confirmed bugs |
 |---|---|---|---|---|---:|
-| FR-06 | Product Detail View | [fr06-bug-report.md](Pool-A_FR06/fr06-bug-report.md) | Run #1 — 3 browsers | Complete — pending HITL sign-off | 8 |
+| FR-06 | Product Detail View | [fr06-bug-report.md](Pool-A_FR06/fr06-bug-report.md) | Run #1 — 3 browsers | Complete — HITL accepted | 8 |
 | FR-08 | Checkout | [fr08-bug-report.md](Pool-B_FR08/fr08-bug-report.md) | Run #6 — 3 browsers | Complete — HITL accepted | 8 |
-| FR-15 | Product Management | `Pool-C_FR15/fr15-bug-report.md` | Not run | Not started | 0 |
+| FR-15 | Product Management | [fr15-bug-report.md](Pool-C_FR15/fr15-bug-report.md) | Run #2 — 3 browsers | Complete — HITL accepted | 12 |
 
 ## Consolidated bug index
 
@@ -38,6 +38,18 @@ This index contains only defects classified as genuine in the detailed FR report
 | BUG-FR08-009 | FR-08 | 256-character shipping address is not rejected | Medium | Chromium, Firefox, WebKit | Known | [Issue 29](https://github.com/AkiraTomori/eshop-sut/issues/29) | [Detail](Pool-B_FR08/fr08-bug-report.md#bug-fr08-009--256-character-shipping-address-is-not-rejected) |
 | BUG-FR08-AUTO-001 | FR-08 | Empty cart state is missing the required illustration | Cosmetic | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-B_FR08/fr08-bug-report.md#bug-fr08-auto-001--empty-cart-state-is-missing-the-required-illustration) |
 | BUG-FR08-AUTO-002 | FR-08 | Checkout total is directly editable | Serious | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-B_FR08/fr08-bug-report.md#bug-fr08-auto-002--checkout-total-is-directly-editable) |
+| BUG-FR15-001 | FR-15 | Zero price is accepted | Serious | Chromium, Firefox, WebKit | Known | [Issue 42](https://github.com/AkiraTomori/eshop-sut/issues/42) | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-001--zero-price-is-accepted) |
+| BUG-FR15-002 | FR-15 | Negative price is accepted | Serious | Chromium, Firefox, WebKit | Known | [Issue 43](https://github.com/AkiraTomori/eshop-sut/issues/43) | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-002--negative-price-is-accepted) |
+| BUG-FR15-013 | FR-15 | Mandatory field indicators are missing | Medium | Chromium, Firefox, WebKit | Known | [Issue 54](https://github.com/AkiraTomori/eshop-sut/issues/54) | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-013--mandatory-field-indicators-are-missing) |
+| BUG-FR15-014 | FR-15 | Required validation errors are absent | Medium | Chromium, Firefox, WebKit | Known | [Issue 55](https://github.com/AkiraTomori/eshop-sut/issues/55) | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-014--required-validation-errors-are-absent) |
+| BUG-FR15-015 | FR-15 | Save button is green instead of blue | Medium | Chromium, Firefox, WebKit | Known | [Issue 56](https://github.com/AkiraTomori/eshop-sut/issues/56) | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-015--save-button-is-green-instead-of-blue) |
+| BUG-FR15-017 | FR-15 | Delete confirmation is absent | Serious | Chromium, Firefox, WebKit | Known | [Issue 58](https://github.com/AkiraTomori/eshop-sut/issues/58) | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-017--delete-confirmation-is-absent) |
+| BUG-FR15-AUTO-001 | FR-15 | Product-list prices lack thousands separators | Medium | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-auto-001--product-list-prices-lack-thousands-separators) |
+| BUG-FR15-AUTO-002 | FR-15 | Successful deletion has no success notification | Medium | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-auto-002--successful-deletion-has-no-success-notification) |
+| BUG-FR15-AUTO-003 | FR-15 | Product search and empty-result state are absent | Serious | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-auto-003--product-search-and-empty-result-state-are-absent) |
+| BUG-FR15-AUTO-004 | FR-15 | Product detail action/view is absent in Web Admin | Serious | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-auto-004--product-detail-actionview-is-absent-in-web-admin) |
+| BUG-FR15-AUTO-005 | FR-15 | Product-list loading indicator is absent | Medium | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-auto-005--product-list-loading-indicator-is-absent) |
+| BUG-FR15-AUTO-006 | FR-15 | Product Management lacks a meaningful feature-level h1 | Medium | Chromium, Firefox, WebKit | New | Pending HITL creation | [Detail](Pool-C_FR15/fr15-bug-report.md#bug-fr15-auto-006--product-management-lacks-a-meaningful-feature-level-h1) |
 
 ## Totals
 
@@ -45,15 +57,17 @@ Counts represent distinct classified defects/issues, not repeated browser failur
 
 | Metric | FR-06 | FR-08 | FR-15 | Total |
 |---|---:|---:|---:|---:|
-| Confirmed genuine product defects | 8 | 8 | 0 | 16 |
-| Known HW2 defects reproduced | 7 | 6 | 0 | 13 |
-| New automation-discovered defects | 1 | 2 | 0 | 3 |
-| Test/infrastructure issues | 1 | 0 | 0 | 1 |
+| Confirmed genuine product defects | 8 | 8 | 12 | 28 |
+| Known HW2 defects reproduced | 7 | 6 | 6 | 19 |
+| New automation-discovered defects | 1 | 2 | 6 | 9 |
+| Test/infrastructure issues | 1 | 0 | 2 | 3 |
 | Out-of-scope failures | 0 | 0 | 0 | 0 |
 
 FR-06 has 45 failed TC/browser results: 21 reproduce known defects and 24 reproduce the new first-click defect. One WebKit focus-portability observation is secondary to an EP-001 product-defect result and does not increase the 45-result total.
 
 FR-08 Run #6 has 39 failed TC/browser results, all classified as genuine product defects: 33 reproduce six known HW2 defects and 6 reproduce two new defects. The corrected EP-001 exact-item check passes before directly recording `BUG-FR08-001`, `BUG-FR08-002`, and `BUG-FR08-003`; `TEST-FR08-001`, `TEST-FR08-002`, and `TEST-FR08-003` each recur zero times. No Run #6 failure is a test/infrastructure issue or an out-of-scope API failure.
+
+FR-15 Run #2 has 72 failed TC/browser results: 57 genuine product-failure results reproduce six known and six new defects, while 15 results are exclusively two test/source issues. `TEST-FR15-001` accounts for 12 unrelated price-format failures in Name/Description boundary cases; `TEST-FR15-002` accounts for three exclusive tab-order failures and is also secondary to three EP-010 results already counted as genuine. No Run #2 result is an out-of-scope API failure.
 
 ## Aggregation rules
 

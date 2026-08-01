@@ -108,11 +108,11 @@ NEG-006, NEG-007, NEG-008, NEG-011, NEG-015, NEG-018, and NEG-023 remain eligibl
 
 For NEG-025/EP-010, Category cannot be made empty through the current UI because the select has no blank option and defaults to category 1. The suite asserts all required markers and the UI-triggerable empty-name error placement; it does not fabricate an empty category payload.
 
-## Expected execution failures
+## Classified browser failures
 
-Based on canonical expectations and current React source/HW2 defects, likely failures include missing create/delete feedback; raw price formatting; absent delete confirmation; missing search and detail UI; absent category/loading UI; missing mandatory asterisks and validation messages; green Save button; non-meaningful Product Management h1; zero/negative price acceptance; and the DOM tab order placing Image URL before Description. These remain strict spec-correct assertions and are not skipped or weakened.
+Tracked Run #2 produced 72 failed TC/browser results and three passes. The completed [detailed bug report](fr15-bug-report.md) classifies 57 results as genuine product failures and 15 exclusively as test/source issues. Six known defects were reproduced (`BUG-FR15-001`, `002`, `013`, `014`, `015`, and `017`) and six new cross-browser defects were assigned `BUG-FR15-AUTO-001` through `BUG-FR15-AUTO-006`.
 
-Canonical known defects attached to selected tests are BUG-FR15-001, BUG-FR15-002, BUG-FR15-013, BUG-FR15-014, BUG-FR15-015, BUG-FR15-016, and BUG-FR15-017. Other observed failures must be classified after browser evidence; no new Bug ID is invented here.
+`BUG-FR15-016` was not marked reproduced: its canonical observation is zero h1 elements, whereas current evidence has one global `EShop Admin` h1 and a Product Management h2. That distinct current defect is `BUG-FR15-AUTO-006`. Four boundary TCs (`BV-001`, `BV-002`, `BV-011`, `BV-012`) fail only because their helper adds price formatting beyond the authoritative boundary expectations (`TEST-FR15-001`). NEG-028's specified order conflicts with the SRS visual-order requirement and its own recorded HW2 result (`TEST-FR15-002`); the same mismatch is secondary in EP-010, which independently reproduces genuine UI defects.
 
 ## Assertion-pattern inventory
 
@@ -138,4 +138,5 @@ All browser-facing assertions are awaited. There are no sleeps, forced actions, 
 - Playwright discovery lists 25 tests per browser project, 75 total.
 - The selected/excluded/eligible/manual manifest partitions all 54 authoritative FR-15 TCs without duplication.
 - `playwright-cli` is unavailable; locator verification used `frontend-admin/src/App.jsx` plus standard Playwright discovery. No CLI evidence is claimed.
-- Browser execution, reports, traces, run-summary updates, and failure classification remain pending for `/hw4-run FR-15` after HITL review/sign-off.
+- Browser evidence Run #2 completed for Chromium, Firefox, and WebKit with 1 passed and 24 failed tests per browser; isolated reports, screenshots, traces, and error contexts are retained.
+- All 72 failures are classified in `fr15-bug-report.md`; GitHub Issue drafts for six new defects remain pending HITL creation.
