@@ -325,3 +325,32 @@
 - **Human Review Notes:** Pending HITL review
 - **What AI Got Wrong:** Pending HITL review
 - **Verdict:** Pending HITL review
+
+---
+## Session: 2026-08-01 21:19 — playwright-ci: Add Docker and GHCR deploy phase
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Add a simple Docker deployment phase that publishes the three EShop service images to GitHub Container Registry after successful CI or manual dispatch, and replace the root server scripts with Docker Compose start/stop commands.
+- **Prompt:**
+  > Hãy thiết kế cho mình phase Deploy, nhưng chỉ cần đơn giản thôi, hoàn thiện CI thì sẽ tới deploy, nhưng chỉ cần dùng ở Docker. Build and push lên docker registry (chúng ta không dùng Dockerhub, dùng registry có sẵn của github) để build. Bạn thấy ở root có hai file .sh phải không, thay thế nó là câu lệnh dùng để start và stop của docker-compose
+  > Bạn có thể sử dụng kiểu là một file deploy riêng, và nó sẽ được kích hoạt khi CI thành công hoặc workflow_dispatch
+- **Supporting Playwright Skills:** `playwright-ci` (`ci-github-actions.md`, `docker-and-containers.md`)
+- **AI Output Summary:** Added `.github/workflows/deploy.yml` with a secure successful-CI/default-branch `workflow_run` gate plus `workflow_dispatch`, least-privilege GHCR permissions, SHA-pinned Docker actions, and a three-component image matrix publishing `latest` and tested-commit tags. Added Backend, customer Web, and Admin Dockerfiles, Nginx SPA configurations, service `.dockerignore` files, and `compose.yaml` with dependency health checks and GHCR image defaults. Replaced the root scripts with portable `docker compose up --detach --build --wait` and `docker compose down --remove-orphans` commands. All three images built successfully; the Compose stack became healthy and returned HTTP 200 on ports 3000, 5173, and 5174; the stop script removed all test containers and network. Shell, YAML, Compose resolution, and whitespace validation passed. No image was pushed to GHCR locally; publishing begins after the workflow is committed and triggered.
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review
+
+---
+## Session: 2026-08-01 21:25 — playwright-ci: Refactor all service Dockerfiles to multi-stage builds
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Refactor the Backend, customer Web, and Admin Dockerfiles into production-oriented multi-stage builds.
+- **Prompt:**
+  > Ba file Dockerfile của từ backend, 2 frontend, best practice với Multi-stage build đi
+- **Supporting Playwright Skills:** `playwright-ci` (`docker-and-containers.md`)
+- **AI Output Summary:** Refactored the Backend into reusable base, production-dependency, and non-root runtime stages, and refactored both Vite frontends into dependency, build, and minimal Nginx runtime stages. Pinned all Node and Nginx base images by digest, preserved lockfile-first dependency caching, copied only production dependencies or compiled static assets into final images, set runtime ownership explicitly, and added graceful stop signals. All three images rebuilt successfully; Backend ran as uid 1000 (`node`), neither frontend runtime contained Node.js, the Backend API and both frontends returned HTTP 200, all Compose health checks passed, and the smoke-test stack was removed afterward.
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review

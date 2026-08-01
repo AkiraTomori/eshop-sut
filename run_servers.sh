@@ -1,5 +1,8 @@
-#!/bin/bash
-killall node
-cd /Users/thaiminhhuy/docs/Github/eshop-sut/backend && node server.js &
-cd /Users/thaiminhhuy/docs/Github/eshop-sut/frontend-web && npm run dev &
-cd /Users/thaiminhhuy/docs/Github/eshop-sut/frontend-admin && npm run dev &
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$script_dir"
+
+docker compose up --detach --build --wait
+docker compose ps

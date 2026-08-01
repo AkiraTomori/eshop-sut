@@ -1,0 +1,54 @@
+name: eshop-sut
+
+services:
+  backend:
+    image: ${BACKEND_IMAGE:-ghcr.io/akiratomori/eshop-sut-backend:latest}
+    build:
+      context: ./backend
+    ports:
+      - '3000:3000'
+    init: true
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000/api/products').then((response) => { if (!response.ok) process.exit(1); }).catch(() => process.exit(1));"
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  frontend-web:
+    image: ${WEB_IMAGE:-ghcr.io/akiratomori/eshop-sut-frontend-web:latest}
+    build:
+      context: ./frontend-web
+    ports:
+      - '5173:80'
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'wget --quiet --output-document=- http://127.0.0.1/ >/dev/null || exit 1']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  frontend-admin:
+    image: ${ADMIN_IMAGE:-ghcr.io/akiratomori/eshop-sut-frontend-admin:latest}
+    build:
+      context: ./frontend-admin
+    ports:
+      - '5174:80'
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'wget --quiet --output-document=- http://127.0.0.1/ >/dev/null || exit 1']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
