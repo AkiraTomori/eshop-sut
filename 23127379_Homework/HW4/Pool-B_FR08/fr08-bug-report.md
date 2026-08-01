@@ -130,7 +130,7 @@ All defects below affect Chromium, Firefox, and WebKit. The matrix above contain
 
 ### BUG-FR08-AUTO-001 — Empty cart state is missing the required illustration
 
-- **Known/New:** Automation-discovered; **Severity:** Cosmetic; **Source:** TC-FR08-NEG-003; **GitHub Issue:** Pending HITL creation
+- **Known/New:** Automation-discovered; **Severity:** Cosmetic; **Source:** TC-FR08-NEG-003; **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/60
 - **SRS/HW2:** FR-07, FR-24.
 - **Expected:** Empty Cart contains a friendly message and icon/illustration.
 - **Actual/assertion:** The friendly message and continue-shopping link render, but `getByRole('img')` finds no image; `Cart.jsx` contains no illustration.
@@ -139,7 +139,7 @@ All defects below affect Chromium, Firefox, and WebKit. The matrix above contain
 
 ### BUG-FR08-AUTO-002 — Checkout total is directly editable
 
-- **Known/New:** Automation-discovered; **Severity:** Serious; **Source:** TC-FR08-EP-002; **GitHub Issue:** Pending HITL creation
+- **Known/New:** Automation-discovered; **Severity:** Serious; **Source:** TC-FR08-EP-002; **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/61
 - **SRS/HW2:** FR-08 requires an automatically calculated total that cannot be directly edited.
 - **Expected:** The displayed total retains `30000000` and is not editable.
 - **Actual/assertion:** `expect(getByRole('spinbutton')).not.toBeEditable()` receives `editable`; `Checkout.jsx` binds the number input to mutable `editableTotal`.
@@ -172,7 +172,7 @@ No Run #6 failure came from a direct API/database action or API-dependent HW2 TC
 
 **Evidence:** [Full report](playwright-report/index.html), [screenshot](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-c94a4-e-user-s-cart-is-empty-FR08-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-c94a4-e-user-s-cart-is-empty-FR08-chromium/trace.zip).
 
-**GitHub Issue URL:** Pending HITL creation
+**GitHub Issue URL:** https://github.com/AkiraTomori/eshop-sut/issues/60
 
 ### BUG-FR08-AUTO-002 — Checkout total is directly editable
 
@@ -190,4 +190,4 @@ No Run #6 failure came from a direct API/database action or API-dependent HW2 TC
 
 **Evidence:** [Full report](playwright-report/index.html), [screenshot](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-B_FR08-fr08-FR-08-aut-7801f-on-field-is-left-blank-FR08-chromium/trace.zip).
 
-**GitHub Issue URL:** Pending HITL creation
+**GitHub Issue URL:** https://github.com/AkiraTomori/eshop-sut/issues/61

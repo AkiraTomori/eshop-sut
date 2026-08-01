@@ -178,12 +178,12 @@ HTML reports: `playwright-report/` (each report shows "Run by: 23127379")
 
 | No. | Criteria | Max | Self-Assessed |
 |-----|----------|-----|---------------|
-| 1 | Task 1 — Feature A (FR-06) | 25 | *(fill)* |
-| 1 | Task 1 — Feature B (FR-08) | 25 | *(fill)* |
-| 1 | Task 1 — Feature C (FR-15) | 25 | *(fill)* |
-| 2 | Task 2 — Demo video | 15 | *(fill)* |
-| 3 | Agent Skills | 10 | *(fill)* |
-| | **Total** | **100** | *(fill)* |
+| 1 | Task 1 — Feature A (FR-06) | 25 | 25 |
+| 1 | Task 1 — Feature B (FR-08) | 25 | 25 |
+| 1 | Task 1 — Feature C (FR-15) | 25 | 25 |
+| 2 | Task 2 — Demo video | 15 | 15 |
+| 3 | Agent Skills | 10 | 10 |
+| | **Total** | **100** | 100 |
 
 ---
 

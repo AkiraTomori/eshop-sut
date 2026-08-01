@@ -324,7 +324,7 @@ The UI provides no practical purchase limit and exposes downstream totals to unr
 - **Status:** Open
 - **Affected browsers:** Chromium, Firefox, WebKit
 - **SRS/HW2 reference:** FR-06, FR-24
-- **GitHub Issue:** Pending HITL creation
+- **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/59
 
 #### Preconditions
 
@@ -420,4 +420,4 @@ The first click is silently ignored in all three browsers. Trace actionability c
 - [Firefox representative trace](test-results/firefox/Pool-A_FR06-fr06-FR-06-aut-0989a--an-authenticated-user-FR06-firefox/trace.zip)
 - [WebKit representative trace](test-results/webkit/Pool-A_FR06-fr06-FR-06-aut-0989a--an-authenticated-user-FR06-webkit/trace.zip)
 
-**GitHub Issue URL:** Pending HITL creation
+**GitHub Issue URL:** https://github.com/AkiraTomori/eshop-sut/issues/59

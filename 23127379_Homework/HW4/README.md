@@ -153,19 +153,29 @@ The single-browser npm shortcuts follow the pattern `npm run report:fr06:chromiu
 
 | Criterion | Score |
 |-----------|-------|
-| Data-driven testing (no hardcoded values) | /10 |
-| ≥3 assertion patterns per spec | /10 |
-| Multi-browser (Chromium/Firefox/WebKit) | /10 |
-| Test isolation (beforeEach/afterEach) | /10 |
-| No flaky waits (no sleep > 500ms) | /10 |
-| AI Audit logs complete | /10 |
-| Git commits ≥8 over ≥4 days | /10 |
+| Data-driven testing (no hardcoded values) | 10/10 |
+| ≥3 assertion patterns per spec | 10/10 |
+| Multi-browser (Chromium/Firefox/WebKit) | 10/10 |
+| Test isolation (beforeEach/afterEach) | 10/10 |
+| No flaky waits (no sleep > 500ms) | 10/10 |
+| AI Audit logs complete | 10/10 |
+| Git commits ≥8 over ≥4 days | 10/10 |
 
 ---
 
 ## Demo Video
-> YouTube (unlisted): _to be added after recording_
+> YouTube (unlisted):
 
+This playlist will demonstrate about agent skills:
+[Playlist](https://www.youtube.com/playlist?list=PLFKmUDyIY8sc)
+
+Alternatively, you can watch the individual videos for workflow:
+- [Part 1](https://www.youtube.com/watch?v=Co2b8frwZeg&list=PLFKmUDyIY8sc&index=1)
+- [Part 2](https://www.youtube.com/watch?v=pAzKwHZEiD4&list=PLFKmUDyIY8sc&index=2)
+- [Part 3](https://www.youtube.com/watch?v=EPHga8_g1Go&list=PLFKmUDyIY8sc&index=3)
+- [Part 4](https://www.youtube.com/watch?v=qthcfm5Ihh4&list=PLFKmUDyIY8sc&index=4)
+- [Part 5](https://www.youtube.com/watch?v=2IxUkkGh148&list=PLFKmUDyIY8sc&index=5)
+- [Part 6](https://www.youtube.com/watch?v=RTrrBKdYq5A&list=PLFKmUDyIY8sc&index=6)
 ---
 
 *Run by: 23127379*

@@ -157,7 +157,7 @@ All defects affect Chromium, Firefox, and WebKit. The matrix supplies per-result
 
 ### BUG-FR15-AUTO-001 — Product-list prices lack thousands separators
 
-- **Known/New:** Automation-discovered; **Severity:** Medium; **Source:** TC-FR15-EP-001, EP-002, EP-006, BV-007, and BV-008; **GitHub Issue:** Pending HITL creation
+- **Known/New:** Automation-discovered; **Severity:** Medium; **Source:** TC-FR15-EP-001, EP-002, EP-006, BV-007, and BV-008; **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/62
 - **Expected:** Prices render with grouping separators, for example `15,000,000`.
 - **Actual/assertion:** Rows render raw numeric strings such as `15000000`; `App.jsx` displays `p.price` directly.
 - **Evidence:** [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-3346c-lds-contain-valid-data-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-3346c-lds-contain-valid-data-FR15-chromium/trace.zip), [Chromium report](playwright-report/chromium/index.html), [Firefox report](playwright-report/firefox/index.html), [WebKit report](playwright-report/webkit/index.html).
@@ -165,7 +165,7 @@ All defects affect Chromium, Firefox, and WebKit. The matrix supplies per-result
 
 ### BUG-FR15-AUTO-002 — Successful deletion has no success notification
 
-- **Known/New:** Automation-discovered; **Severity:** Medium; **Source:** TC-FR15-EP-004; **GitHub Issue:** Pending HITL creation
+- **Known/New:** Automation-discovered; **Severity:** Medium; **Source:** TC-FR15-EP-004; **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/63
 - **Expected:** After confirmed deletion, an exact success notification is visible and the row disappears.
 - **Actual/assertion:** The row disappears but the success locator is absent. This is independent of the missing confirmation in BUG-FR15-017.
 - **Evidence:** [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-2cbd3-te-confirmation-dialog-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-2cbd3-te-confirmation-dialog-FR15-chromium/trace.zip), [Chromium report](playwright-report/chromium/index.html), [Firefox report](playwright-report/firefox/index.html), [WebKit report](playwright-report/webkit/index.html).
@@ -173,7 +173,7 @@ All defects affect Chromium, Firefox, and WebKit. The matrix supplies per-result
 
 ### BUG-FR15-AUTO-003 — Product search and empty-result state are absent
 
-- **Known/New:** Automation-discovered; **Severity:** Serious; **Source:** TC-FR15-EP-007 and EP-008; **GitHub Issue:** Pending HITL creation
+- **Known/New:** Automation-discovered; **Severity:** Serious; **Source:** TC-FR15-EP-007 and EP-008; **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/64
 - **Expected:** Admin can search by keyword; matching rows remain and a no-match query shows the required empty state.
 - **Actual/assertion:** `getByRole('searchbox')` is absent, so neither search path is available.
 - **Evidence:** [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-c0032-rch-keyword-is-entered-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-c0032-rch-keyword-is-entered-FR15-chromium/trace.zip), [Chromium report](playwright-report/chromium/index.html), [Firefox report](playwright-report/firefox/index.html), [WebKit report](playwright-report/webkit/index.html).
@@ -181,7 +181,7 @@ All defects affect Chromium, Firefox, and WebKit. The matrix supplies per-result
 
 ### BUG-FR15-AUTO-004 — Product detail action/view is absent in Web Admin
 
-- **Known/New:** Automation-discovered; **Severity:** Serious; **Source:** TC-FR15-EP-009; **GitHub Issue:** Pending HITL creation
+- **Known/New:** Automation-discovered; **Severity:** Serious; **Source:** TC-FR15-EP-009; **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/65
 - **Expected:** A valid admin can open a product detail view and see the complete record.
 - **Actual/assertion:** The product row has Edit/Delete only; the View/details action locator is absent.
 - **Evidence:** [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-5971b-essed-by-a-valid-admin-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-5971b-essed-by-a-valid-admin-FR15-chromium/trace.zip), [Chromium report](playwright-report/chromium/index.html), [Firefox report](playwright-report/firefox/index.html), [WebKit report](playwright-report/webkit/index.html).
@@ -189,7 +189,7 @@ All defects affect Chromium, Firefox, and WebKit. The matrix supplies per-result
 
 ### BUG-FR15-AUTO-005 — Product-list loading indicator is absent
 
-- **Known/New:** Automation-discovered; **Severity:** Medium; **Source:** TC-FR15-EP-006; **GitHub Issue:** Pending HITL creation
+- **Known/New:** Automation-discovered; **Severity:** Medium; **Source:** TC-FR15-EP-006; **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/66
 - **Expected:** A loading indicator is visible while the list is fetched and disappears when rows render.
 - **Actual/assertion:** The soft `toBeVisible` assertion for the progressbar times out; source has no loading state. The later category-column assertion was not reached after the hard price assertion and is not claimed as browser-confirmed.
 - **Evidence:** [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-ca1bf-thout-a-search-keyword-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-ca1bf-thout-a-search-keyword-FR15-chromium/trace.zip), [Chromium report](playwright-report/chromium/index.html), [Firefox report](playwright-report/firefox/index.html), [WebKit report](playwright-report/webkit/index.html).
@@ -197,7 +197,7 @@ All defects affect Chromium, Firefox, and WebKit. The matrix supplies per-result
 
 ### BUG-FR15-AUTO-006 — Product Management lacks a meaningful feature-level h1
 
-- **Known/New:** Automation-discovered; **Severity:** Medium; **Source:** TC-FR15-NEG-027; **GitHub Issue:** Pending HITL creation
+- **Known/New:** Automation-discovered; **Severity:** Medium; **Source:** TC-FR15-NEG-027; **GitHub Issue:** https://github.com/AkiraTomori/eshop-sut/issues/67
 - **Expected:** Exactly one meaningful h1 identifies Product Management.
 - **Actual/assertion:** The sole h1 is global text `EShop Admin`; `Quản lý Sản phẩm` is an h2. This differs from canonical BUG-FR15-016, which recorded zero h1 elements, so the old ID is not reused.
 - **Evidence:** [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-2de0b-n-more-than-one-h1-tag-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-2de0b-n-more-than-one-h1-tag-FR15-chromium/trace.zip), [Chromium report](playwright-report/chromium/index.html), [Firefox report](playwright-report/firefox/index.html), [WebKit report](playwright-report/webkit/index.html).
@@ -236,7 +236,7 @@ All new issue URLs remain **Pending HITL creation**. The sections below are draf
 - **Expected:** Grouped price such as `15,000,000`.
 - **Actual:** Raw `15000000` is rendered.
 - **Evidence:** [full report](playwright-report/index.html), [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-3346c-lds-contain-valid-data-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-3346c-lds-contain-valid-data-FR15-chromium/trace.zip).
-- **GitHub Issue URL:** Pending HITL creation
+- **GitHub Issue URL:** https://github.com/AkiraTomori/eshop-sut/issues/62
 
 ### BUG-FR15-AUTO-002 — Successful deletion has no success notification
 
@@ -245,7 +245,7 @@ All new issue URLs remain **Pending HITL creation**. The sections below are draf
 - **Expected:** Exact deletion-success notification and removed row.
 - **Actual:** Row is removed with no success notification.
 - **Evidence:** [full report](playwright-report/index.html), [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-2cbd3-te-confirmation-dialog-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-2cbd3-te-confirmation-dialog-FR15-chromium/trace.zip).
-- **GitHub Issue URL:** Pending HITL creation
+- **GitHub Issue URL:** https://github.com/AkiraTomori/eshop-sut/issues/63
 
 ### BUG-FR15-AUTO-003 — Product search and empty-result state are absent
 
@@ -254,7 +254,7 @@ All new issue URLs remain **Pending HITL creation**. The sections below are draf
 - **Expected:** Search input filters rows; no-match query shows the required empty state.
 - **Actual:** No search input or search-result state exists.
 - **Evidence:** [full report](playwright-report/index.html), [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-c0032-rch-keyword-is-entered-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-c0032-rch-keyword-is-entered-FR15-chromium/trace.zip).
-- **GitHub Issue URL:** Pending HITL creation
+- **GitHub Issue URL:** https://github.com/AkiraTomori/eshop-sut/issues/64
 
 ### BUG-FR15-AUTO-004 — Product detail action/view is absent in Web Admin
 
@@ -263,7 +263,7 @@ All new issue URLs remain **Pending HITL creation**. The sections below are draf
 - **Expected:** Admin can open and review complete product details.
 - **Actual:** Only Edit and Delete actions exist.
 - **Evidence:** [full report](playwright-report/index.html), [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-5971b-essed-by-a-valid-admin-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-5971b-essed-by-a-valid-admin-FR15-chromium/trace.zip).
-- **GitHub Issue URL:** Pending HITL creation
+- **GitHub Issue URL:** https://github.com/AkiraTomori/eshop-sut/issues/65
 
 ### BUG-FR15-AUTO-005 — Product-list loading indicator is absent
 
@@ -272,7 +272,7 @@ All new issue URLs remain **Pending HITL creation**. The sections below are draf
 - **Expected:** A loading progress indicator appears and then disappears.
 - **Actual:** No progressbar/loading state renders.
 - **Evidence:** [full report](playwright-report/index.html), [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-ca1bf-thout-a-search-keyword-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-ca1bf-thout-a-search-keyword-FR15-chromium/trace.zip).
-- **GitHub Issue URL:** Pending HITL creation
+- **GitHub Issue URL:** https://github.com/AkiraTomori/eshop-sut/issues/66
 
 ### BUG-FR15-AUTO-006 — Product Management lacks a meaningful feature-level h1
 
@@ -281,4 +281,4 @@ All new issue URLs remain **Pending HITL creation**. The sections below are draf
 - **Expected:** Exactly one h1 identifies Product Management.
 - **Actual:** `EShop Admin` is the only h1 and the feature title is h2.
 - **Evidence:** [full report](playwright-report/index.html), [screenshot](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-2de0b-n-more-than-one-h1-tag-FR15-chromium/test-failed-1.png), [trace](test-results/chromium/Pool-C_FR15-fr15-FR-15-Pro-2de0b-n-more-than-one-h1-tag-FR15-chromium/trace.zip).
-- **GitHub Issue URL:** Pending HITL creation
+- **GitHub Issue URL:** https://github.com/AkiraTomori/eshop-sut/issues/67
