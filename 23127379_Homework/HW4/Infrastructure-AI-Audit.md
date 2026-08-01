@@ -354,3 +354,17 @@
 - **Human Review Notes:** Pending HITL review
 - **What AI Got Wrong:** Pending HITL review
 - **Verdict:** Pending HITL review
+
+---
+## Session: 2026-08-01 22:25 — playwright-ci: Publish after passed or failed CI tests
+
+- **AI Tool:** OpenAI Codex (GPT-5)
+- **Bloom-AI Level:** G9.2 (Apply) + G9.3 (Analyse)
+- **Task:** Change the GHCR Deploy workflow to publish the three service images after the CI workflow completes with either a successful or failed test result.
+- **Prompt:**
+  > File deploy.yml, mình muốn test nó hoạt động ra sao sau khi xong step test, cho nên mình muốn logic là deploy sẽ chạy sau khi thành công CI (Kể cả pass và fail)
+- **Supporting Playwright Skills:** `playwright-ci` (`ci-github-actions.md`)
+- **AI Output Summary:** Updated `.github/workflows/deploy.yml` so its `workflow_run` job accepts both `success` and `failure` conclusions from the HW4 Playwright CI workflow on the repository default branch, while excluding pull requests, forks, cancelled, skipped, and timed-out runs. Removed the failed-test dry-run gate, made all three matrix builds push to GHCR, surfaced the upstream CI conclusion in logs and job summaries, and retained manual dispatch. YAML parsing and whitespace validation passed. No remote workflow was triggered and no image was pushed during local validation.
+- **Human Review Notes:** Pending HITL review
+- **What AI Got Wrong:** Pending HITL review
+- **Verdict:** Pending HITL review

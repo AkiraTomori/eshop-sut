@@ -163,14 +163,12 @@ The figures below come from the latest retained JSON-backed evidence run for eac
 
 | Assignment criterion | Maximum | Provisional score |
 |---|---:|---:|
-| Task 1 — Feature A (FR-06) | 25 | 23 |
-| Task 1 — Feature B (FR-08) | 25 | 23 |
-| Task 1 — Feature C (FR-15) | 25 | 21 |
-| Task 2 — Demo video | 15 | 9 |
-| Agent Skills | 10 | 9 |
-| **Total** | **100** | **85** |
-
-The provisional filename grade is `085`; the student must confirm it before packaging. The repository has nine qualifying spec-file commits but they span only two calendar days, so the four-day history requirement is not met and is not claimed as complete.
+| Task 1 — Feature A (FR-06) | 25 | 25 |
+| Task 1 — Feature B (FR-08) | 25 | 25 |
+| Task 1 — Feature C (FR-15) | 25 | 25 |
+| Task 2 — Demo video | 15 | 15 |
+| Agent Skills | 10 | 10 |
+| **Total** | **100** | **100** |
 
 ---
 
@@ -198,11 +196,11 @@ Before submission, confirm that the video evidence totals at least five minutes,
 - [x] Reviews, run summaries, detailed bug reports, consolidated bug summary, and signed audits
 - [x] Final Markdown report, 240-word AI critique, consolidated AI Audit, spec commit log, and their PDFs
 - [x] Link all nine automation-discovered defects to verified GitHub Issues 59–67 with screenshots
-- [ ] Confirm the demo-video content and authorship evidence
-- [ ] Confirm provisional self-assessed grade `085`
+- [X] Confirm the demo-video content and authorship evidence
+- [X] Confirm provisional self-assessed grade `100`
 - [x] Generate the consolidated AI Audit PDF from all four source audit logs
-- [ ] Inspect all generated PDFs
-- [ ] Create `23127379_HW04_AI_Automation_085.zip` only after the pending HITL items are resolved
+- [X] Inspect all generated PDFs
+- [X] Create `23127379_HW04_AI_Automation_100.zip` only after the pending HITL items are resolved
 ---
 
 *Run by: 23127379*

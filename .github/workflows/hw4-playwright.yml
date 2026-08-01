@@ -5,6 +5,8 @@ on:
     branches: [main, master]
     paths:
       - '.github/workflows/hw4-playwright.yml'
+      # Let a deploy-workflow-only commit exercise the complete Test -> Deploy chain.
+      - '.github/workflows/deploy.yml'
       - 'backend/**'
       - 'frontend-web/**'
       - 'frontend-admin/**'
@@ -13,6 +15,7 @@ on:
     branches: [main, master]
     paths:
       - '.github/workflows/hw4-playwright.yml'
+      - '.github/workflows/deploy.yml'
       - 'backend/**'
       - 'frontend-web/**'
       - 'frontend-admin/**'
