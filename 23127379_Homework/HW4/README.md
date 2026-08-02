@@ -187,6 +187,9 @@ Alternatively, you can watch the individual videos for workflow:
 - [Part 5](https://www.youtube.com/watch?v=2IxUkkGh148&list=PLFKmUDyIY8sc&index=5)
 - [Part 6](https://www.youtube.com/watch?v=RTrrBKdYq5A&list=PLFKmUDyIY8sc&index=6)
 
+DevOps Video to explain why Testing Process is now shift-left and how to run test with CI/CD pipeline:
+- [DevOps Video](https://www.youtube.com/watch?v=6ccDGcsMSgc&list=PLFKmUDyIY8sc&index=7)
+
 Before submission, confirm that the video evidence totals at least five minutes, is narrated in Vietnamese, shows a multi-browser run and HTML report, explains at least one AI-script correction, and displays face-cam or terminal `whoami` and `hostname`.
 
 ## Submission Status
