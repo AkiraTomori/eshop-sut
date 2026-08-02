@@ -21,7 +21,7 @@ on:
       - 'frontend-admin/**'
       - '23127379_Homework/HW4/**'
   schedule:
-    - cron: "0 2 * * 1-5"
+    - cron: "0 2 * * *" # 02:00 UTC every day
   workflow_dispatch:
 
 permissions:
