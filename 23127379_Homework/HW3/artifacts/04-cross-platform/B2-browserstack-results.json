@@ -1,0 +1,1216 @@
+[
+  {
+    "cell": "C01",
+    "target_os": "Windows 11",
+    "browser": "Chrome",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "4266360c3855ada2898d9fc909f6f32877295a33",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/events/2",
+      "title": "Chi tiết sự kiện | HCMUS EMS",
+      "viewport": {
+        "width": 1904,
+        "height": 929,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1889,
+        "scrollWidth": 1889,
+        "scrollHeight": 3022
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "tại đây",
+          "width": 49,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "tlsv@fit.hcmus.edu.vn",
+          "width": 159,
+          "height": 21
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên tham dự",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên đặt câu hỏi trực tiếp",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Tình nguyện viên hỗ trợ",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 157,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 172,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 223,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 66,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 166,
+          "height": 21
+        }
+      ],
+      "truncatedText": [],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/events/2",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C01.png"
+  },
+  {
+    "cell": "C02",
+    "target_os": "Windows 11",
+    "browser": "Firefox",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "6d2d7a3f5435b7677b03dfa4efc8da74cd57526a",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/events/2",
+      "title": "Chi tiết sự kiện | HCMUS EMS",
+      "viewport": {
+        "width": 1904,
+        "height": 986,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1904,
+        "scrollWidth": 1904,
+        "scrollHeight": 3022
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "tại đây",
+          "width": 47,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "tlsv@fit.hcmus.edu.vn",
+          "width": 153,
+          "height": 21
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên tham dự",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên đặt câu hỏi trực tiếp",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Tình nguyện viên hỗ trợ",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 157,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 172,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 223,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 66,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 166,
+          "height": 21
+        }
+      ],
+      "truncatedText": [],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/events/2",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C02.png"
+  },
+  {
+    "cell": "C03",
+    "target_os": "Windows 11",
+    "browser": "Edge",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "d5a25ab0724f8d3db6a71da1f4a94851a3214494",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/events/2",
+      "title": "Chi tiết sự kiện | HCMUS EMS",
+      "viewport": {
+        "width": 1416,
+        "height": 733,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1401,
+        "scrollWidth": 1401,
+        "scrollHeight": 3022
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "tại đây",
+          "width": 49,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "tlsv@fit.hcmus.edu.vn",
+          "width": 159,
+          "height": 21
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên tham dự",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên đặt câu hỏi trực tiếp",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Tình nguyện viên hỗ trợ",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 157,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 172,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 223,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 66,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 166,
+          "height": 21
+        }
+      ],
+      "truncatedText": [],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/events/2",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C03.png"
+  },
+  {
+    "cell": "C04",
+    "target_os": "macOS Sequoia",
+    "browser": "Safari",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "392a356922413baa5eb08178997e336708e7ab56",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/events/2",
+      "title": "Chi tiết sự kiện | HCMUS EMS",
+      "viewport": {
+        "width": 1920,
+        "height": 1028,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1920,
+        "scrollWidth": 1920,
+        "scrollHeight": 3022
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "tại đây",
+          "width": 50,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "tlsv@fit.hcmus.edu.vn",
+          "width": 164,
+          "height": 18
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên tham dự",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên đặt câu hỏi trực tiếp",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Tình nguyện viên hỗ trợ",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 161,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 177,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 232,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 68,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 174,
+          "height": 18
+        }
+      ],
+      "truncatedText": [],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/events/2",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C04.png"
+  },
+  {
+    "cell": "C05",
+    "target_os": "macOS Mojave (Sequoia unavailable)",
+    "browser": "Opera 12.15",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "status": "error",
+    "stage": "login-and-navigation",
+    "session_id": "e94c0f7ec1b0a34f8e3738370be7ed0609373b53",
+    "error_type": "TimeoutException",
+    "error": "Message: \n",
+    "current_url": "https://prod-dev.ems-fitus.cloud/login",
+    "page_title": "Error",
+    "body_excerpt": "Unable to complete secure transaction\nYou tried to access the address https://prod-dev.ems-fitus.cloud/login, which is currently unavailable. Please make sure that the web address (URL) is correctly spelled and punctuated, then try reloading the page.\nSecure connection: fatal error (40) from server.\nhttps://prod-dev.ems-fitus.cloud/login\nFailed to connect to server. The reason may be that the encryption methods supported by the server are not enabled in the security preferences.\nPlease note that some encryption methods are no longer supported, and that access will not be possible until the website has been upgraded to use strong encryption.\nMake sure your internet connection is active and check whether other applications that rely on the same connection are working.\nCheck that the setup of any internet security software is correct and does not interfere with ordinary web browsing.\nIf you are behind a firewall on a Local Area Network and think this may be causing problems, talk to your systems administrator.\nTry pressing the F12 key on your keyboard and disabling proxy servers, unless you know that you are required to use a proxy to connect to the internet. Reload the page.\nNeed help?\nOpen the Opera Help.\nGo to Opera's online support desk.",
+    "error_screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C05_error.png"
+  },
+  {
+    "cell": "C06",
+    "target_os": "macOS Sequoia",
+    "browser": "Chrome",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "0f249158e18cfd6505741d932ba0a1b021717671",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/events/2",
+      "title": "Chi tiết sự kiện | HCMUS EMS",
+      "viewport": {
+        "width": 1440,
+        "height": 757,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "scrollHeight": 3022
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "tại đây",
+          "width": 50,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "tlsv@fit.hcmus.edu.vn",
+          "width": 164,
+          "height": 18
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên tham dự",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên đặt câu hỏi trực tiếp",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Tình nguyện viên hỗ trợ",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 161,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 177,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 232,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 68,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 174,
+          "height": 18
+        }
+      ],
+      "truncatedText": [],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/events/2",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C06.png"
+  },
+  {
+    "cell": "C07",
+    "target_os": "Android 14",
+    "browser": "Chrome",
+    "device_class": "Phone",
+    "requested_viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "66fdfa220f1f8b96cd3c58d15d815b0b1d4a4995",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/events/2",
+      "title": "Chi tiết sự kiện | HCMUS EMS",
+      "viewport": {
+        "width": 360,
+        "height": 647,
+        "dpr": 3
+      },
+      "document": {
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "scrollHeight": 4174
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "tại đây",
+          "width": 48,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "tlsv@fit.hcmus.edu.vn",
+          "width": 160,
+          "height": 19
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên tham dự",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên đặt câu hỏi trực tiếp",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Tình nguyện viên hỗ trợ",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 140,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 152,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 198,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 58,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 147,
+          "height": 16
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "P",
+          "text": "Registered",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            48,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Confirmed",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            47,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Waitlisted",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            44,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Registered",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            48,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Confirmed",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            47,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Waitlisted",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            44,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Registered",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            48,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Confirmed",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            47,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Waitlisted",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            44,
+            16
+          ]
+        }
+      ],
+      "lang": "en",
+      "mainText": "Back to events\nEnded\nChương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT\nSave event\n\nNhằm gặp gỡ, nắm bắt tâm tư, nguyện vọng của sinh viên, Khoa CNTT tổ chức chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT\n\nConferences & Seminars\nStandard/2025-2026/S2\nSpecial/2025-2026/S2\n\nEvent date\n\nFrom:\n28/06/2026 01:30\nTo:\n28/06/2026 04:00\nEvent has ended\n\nRegistration period\n\nFrom:\n15/06/2026 15:00\nTo:\n24/06/2026 17:00\n\nCheck-in period\n\nFrom:\n15/06/2026 15:00\nTo:\n28/06/2026 02:00\n\nLocation\n\nHội trường B\n\nSlot available\n\nStudent: 97\n\nDetailed content\nShare event\n\nKhoa CNTT với thông tin như sau:\n\nĐối tượng: sinh viên đang học tập tại cơ sở Thủ Đức\n\nThời gian: 8g30 - 11g00 thứ sáu ngày 16/06/2023\n\nĐịa điểm: Hội trường B, Trường ĐH KHTN, ĐHQG-HCM (Thủ Đức)\n\nLink đăng ký: tại đây\n\nThời hạn đăng ký: đến ngày 12/06/2023\n\nMọi thắc mắc liên quan vui lòng liên hệ tlsv@fit.hcmus.edu.vn\n\nRegistration roles\nSelected 0/1 student roles\nStudent roles\nSinh viên tham dự\n\nTheo dõi chương trình và tham gia trao đổi\n\nRegistered\n\n1/80\n\nPending\n\n0\n\nConfirmed\n\n1\n\nWaitlisted\n\n0\n\nSinh viên đặt câu hỏi trực tiếp\n\nChuẩn bị câu hỏi và trao đổi với Ban chủ nhiệm\n\nRegistered\n\n2/15\n\nPending\n\n0\n\nConfirmed\n\n2\n\nWaitlisted\n\n0\n\nTình nguyện viên hỗ trợ\n\nCheck-in, thu thập câu hỏi và hỗ trợ hội trường\n\nRegistered\n\n0/5\n\nPending\n\n0\n\nConfirmed\n\n0\n\nWaitlisted\n\n0\n\nEvent registration period has ended\nRating summary\n\n4.3\n\n(3)\n\n5\n2\n(67%)\n4\n0\n(0%)\n3\n1\n(33%)\n2\n0\n(0%)\n1\n0\n(0%)",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/events/2",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C07.png"
+  },
+  {
+    "cell": "C08",
+    "target_os": "Android 14",
+    "browser": "Samsung Internet",
+    "device_class": "Phone",
+    "requested_viewport": {
+      "width": 360,
+      "height": 800
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "93d50e7d83856d6e75356a24efd48f5f1bf3ed9c",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/events/2",
+      "title": "Chi tiết sự kiện | HCMUS EMS",
+      "viewport": {
+        "width": 360,
+        "height": 607,
+        "dpr": 3
+      },
+      "document": {
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "scrollHeight": 4174
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "tại đây",
+          "width": 48,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "tlsv@fit.hcmus.edu.vn",
+          "width": 160,
+          "height": 19
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên tham dự",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên đặt câu hỏi trực tiếp",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Tình nguyện viên hỗ trợ",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 140,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 152,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 198,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 58,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 147,
+          "height": 16
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "P",
+          "text": "Registered",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            48,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Confirmed",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            47,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Waitlisted",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            44,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Registered",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            48,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Confirmed",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            47,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Waitlisted",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            44,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Registered",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            48,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Confirmed",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            47,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Waitlisted",
+          "client": [
+            39,
+            16
+          ],
+          "scroll": [
+            44,
+            16
+          ]
+        }
+      ],
+      "lang": "en",
+      "mainText": "Back to events\nEnded\nChương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT\nSave event\n\nNhằm gặp gỡ, nắm bắt tâm tư, nguyện vọng của sinh viên, Khoa CNTT tổ chức chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT\n\nConferences & Seminars\nStandard/2025-2026/S2\nSpecial/2025-2026/S2\n\nEvent date\n\nFrom:\n28/06/2026 01:30\nTo:\n28/06/2026 04:00\nEvent has ended\n\nRegistration period\n\nFrom:\n15/06/2026 15:00\nTo:\n24/06/2026 17:00\n\nCheck-in period\n\nFrom:\n15/06/2026 15:00\nTo:\n28/06/2026 02:00\n\nLocation\n\nHội trường B\n\nSlot available\n\nStudent: 97\n\nDetailed content\nShare event\n\nKhoa CNTT với thông tin như sau:\n\nĐối tượng: sinh viên đang học tập tại cơ sở Thủ Đức\n\nThời gian: 8g30 - 11g00 thứ sáu ngày 16/06/2023\n\nĐịa điểm: Hội trường B, Trường ĐH KHTN, ĐHQG-HCM (Thủ Đức)\n\nLink đăng ký: tại đây\n\nThời hạn đăng ký: đến ngày 12/06/2023\n\nMọi thắc mắc liên quan vui lòng liên hệ tlsv@fit.hcmus.edu.vn\n\nRegistration roles\nSelected 0/1 student roles\nStudent roles\nSinh viên tham dự\n\nTheo dõi chương trình và tham gia trao đổi\n\nRegistered\n\n1/80\n\nPending\n\n0\n\nConfirmed\n\n1\n\nWaitlisted\n\n0\n\nSinh viên đặt câu hỏi trực tiếp\n\nChuẩn bị câu hỏi và trao đổi với Ban chủ nhiệm\n\nRegistered\n\n2/15\n\nPending\n\n0\n\nConfirmed\n\n2\n\nWaitlisted\n\n0\n\nTình nguyện viên hỗ trợ\n\nCheck-in, thu thập câu hỏi và hỗ trợ hội trường\n\nRegistered\n\n0/5\n\nPending\n\n0\n\nConfirmed\n\n0\n\nWaitlisted\n\n0\n\nEvent registration period has ended\nRating summary\n\n4.3\n\n(3)\n\n5\n2\n(67%)\n4\n0\n(0%)\n3\n1\n(33%)\n2\n0\n(0%)\n1\n0\n(0%)",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/events/2",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C08.png"
+  },
+  {
+    "cell": "C09",
+    "target_os": "Android 14",
+    "browser": "Chrome",
+    "device_class": "Tablet",
+    "requested_viewport": {
+      "width": 820,
+      "height": 1180
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "a05c9be77eaec47c40e60fd7deb60a8604c01f4d",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/events/2",
+      "title": "Chi tiết sự kiện | HCMUS EMS",
+      "viewport": {
+        "width": 800,
+        "height": 1112,
+        "dpr": 1.5
+      },
+      "document": {
+        "clientWidth": 800,
+        "scrollWidth": 800,
+        "scrollHeight": 3493
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "tại đây",
+          "width": 48,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "tlsv@fit.hcmus.edu.vn",
+          "width": 160,
+          "height": 19
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên tham dự",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên đặt câu hỏi trực tiếp",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Tình nguyện viên hỗ trợ",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 160,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 174,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 227,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 67,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 168,
+          "height": 19
+        }
+      ],
+      "truncatedText": [],
+      "lang": "en",
+      "mainText": "Back to events\nEnded\nChương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT\nSave event\n\nNhằm gặp gỡ, nắm bắt tâm tư, nguyện vọng của sinh viên, Khoa CNTT tổ chức chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT\n\nConferences & Seminars\nStandard/2025-2026/S2\nSpecial/2025-2026/S2\n\nEvent date\n\nFrom:\n28/06/2026 01:30\nTo:\n28/06/2026 04:00\nEvent has ended\n\nRegistration period\n\nFrom:\n15/06/2026 15:00\nTo:\n24/06/2026 17:00\n\nCheck-in period\n\nFrom:\n15/06/2026 15:00\nTo:\n28/06/2026 02:00\n\nLocation\n\nHội trường B\n\nSlot available\n\nStudent: 97\n\nDetailed content\nShare event\n\nKhoa CNTT với thông tin như sau:\n\nĐối tượng: sinh viên đang học tập tại cơ sở Thủ Đức\n\nThời gian: 8g30 - 11g00 thứ sáu ngày 16/06/2023\n\nĐịa điểm: Hội trường B, Trường ĐH KHTN, ĐHQG-HCM (Thủ Đức)\n\nLink đăng ký: tại đây\n\nThời hạn đăng ký: đến ngày 12/06/2023\n\nMọi thắc mắc liên quan vui lòng liên hệ tlsv@fit.hcmus.edu.vn\n\nRegistration roles\nSelected 0/1 student roles\nStudent roles\nSinh viên tham dự\n\nTheo dõi chương trình và tham gia trao đổi\n\nRegistered\n\n1/80\n\nPending\n\n0\n\nConfirmed\n\n1\n\nWaitlisted\n\n0\n\nSinh viên đặt câu hỏi trực tiếp\n\nChuẩn bị câu hỏi và trao đổi với Ban chủ nhiệm\n\nRegistered\n\n2/15\n\nPending\n\n0\n\nConfirmed\n\n2\n\nWaitlisted\n\n0\n\nTình nguyện viên hỗ trợ\n\nCheck-in, thu thập câu hỏi và hỗ trợ hội trường\n\nRegistered\n\n0/5\n\nPending\n\n0\n\nConfirmed\n\n0\n\nWaitlisted\n\n0\n\nEvent registration period has ended\nRating summary\n\n4.3\n\n(3)\n\n5\n2\n(67%)\n4\n0\n(0%)\n3\n1\n(33%)\n2\n0\n(0%)\n1\n0\n(0%)",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/events/2",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C09.png"
+  },
+  {
+    "cell": "C10",
+    "target_os": "iOS 17",
+    "browser": "Safari",
+    "device_class": "Phone",
+    "requested_viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "ac370e0f34a4d115dd4b4aa742dc3c79816b4dec",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/events/2",
+      "title": "Chi tiết sự kiện | HCMUS EMS",
+      "viewport": {
+        "width": 393,
+        "height": 659,
+        "dpr": 3
+      },
+      "document": {
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "scrollHeight": 4087
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "tại đây",
+          "width": 50,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "tlsv@fit.hcmus.edu.vn",
+          "width": 164,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên tham dự",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Sinh viên đặt câu hỏi trực tiếp",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "INPUT",
+          "text": "Select Tình nguyện viên hỗ trợ",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 143,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 157,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 207,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 61,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 155,
+          "height": 18
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "P",
+          "text": "Registered",
+          "client": [
+            47,
+            16
+          ],
+          "scroll": [
+            53,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Confirmed",
+          "client": [
+            47,
+            16
+          ],
+          "scroll": [
+            52,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Waitlisted",
+          "client": [
+            47,
+            16
+          ],
+          "scroll": [
+            49,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Registered",
+          "client": [
+            47,
+            16
+          ],
+          "scroll": [
+            53,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Confirmed",
+          "client": [
+            47,
+            16
+          ],
+          "scroll": [
+            52,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Waitlisted",
+          "client": [
+            47,
+            16
+          ],
+          "scroll": [
+            49,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Registered",
+          "client": [
+            47,
+            16
+          ],
+          "scroll": [
+            53,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Confirmed",
+          "client": [
+            47,
+            16
+          ],
+          "scroll": [
+            52,
+            16
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Waitlisted",
+          "client": [
+            47,
+            16
+          ],
+          "scroll": [
+            49,
+            16
+          ]
+        }
+      ],
+      "lang": "en",
+      "mainText": "Back to events\n\nEnded\nChương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT\nSave event\nNhằm gặp gỡ, nắm bắt tâm tư, nguyện vọng của sinh viên, Khoa CNTT tổ chức chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT\nConferences & Seminars\nStandard/2025-2026/S2\nSpecial/2025-2026/S2\nEvent date\nFrom:\n28/06/2026 01:30\nTo:\n28/06/2026 04:00\nEvent has ended\nRegistration period\nFrom:\n15/06/2026 15:00\nTo:\n24/06/2026 17:00\nCheck-in period\nFrom:\n15/06/2026 15:00\nTo:\n28/06/2026 02:00\nLocation\nHội trường B\nSlot available\nStudent: 97\nDetailed content\nShare event\nKhoa CNTT với thông tin như sau:\n\nĐối tượng: sinh viên đang học tập tại cơ sở Thủ Đức\n\nThời gian: 8g30 - 11g00 thứ sáu ngày 16/06/2023\n\nĐịa điểm: Hội trường B, Trường ĐH KHTN, ĐHQG-HCM (Thủ Đức)\n\nLink đăng ký: tại đây\n\nThời hạn đăng ký: đến ngày 12/06/2023\n\nMọi thắc mắc liên quan vui lòng liên hệ tlsv@fit.hcmus.edu.vn\nRegistration roles\nSelected 0/1 student roles\nStudent roles\n\nSinh viên tham dự\nTheo dõi chương trình và tham gia trao đổi\n\nRegistered\n1/80\nPending\n0\nConfirmed\n1\nWaitlisted\n0\n\nSinh viên đặt câu hỏi trực tiếp\nChuẩn bị câu hỏi và trao đổi với Ban chủ nhiệm\n\nRegistered\n2/15\nPending\n0\nConfirmed\n2\nWaitlisted\n0\n\nTình nguyện viên hỗ trợ\nCheck-in, thu thập câu hỏi và hỗ trợ hội trường\n\nRegistered\n0/5\nPending\n0\nConfirmed\n0\nWaitlisted\n0\nEvent registration period has ended\nRating summary\n\n4.3\n(3)\n5\n2\n(67%)\n4\n0\n(0%)\n3\n1\n(33%)\n2\n0\n(0%)\n1\n0\n(0%)\n",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/events/2",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B2_C10.png"
+  }
+]

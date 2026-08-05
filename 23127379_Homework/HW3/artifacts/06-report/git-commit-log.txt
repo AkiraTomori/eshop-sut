@@ -1,0 +1,660 @@
+* commit 96b24d8e5b505b0149b956408c63f2cdabbf0ad8
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sat Aug 1 09:45:00 2026 +0700
+| 
+|     feat: add project README and resolve submission blockers by providing timestamps, demo links, and audit confirmations
+| 
+|  README.md                                 | 105 ++++++++++++++++++++++++++++
+|  artifacts/06-report/README.md             |   2 +-
+|  artifacts/06-report/completeness-check.md |  21 +++---
+|  artifacts/06-report/main-report.md        |   2 +-
+|  4 files changed, 118 insertions(+), 12 deletions(-)
+| 
+* commit 534e33e28dff939948a3c58a7599686211043dae
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sat Aug 1 09:35:50 2026 +0700
+| 
+|     docs: update findings log to include actual student form submission timestamps
+| 
+|  artifacts/06-report/findings-log.md | 92 +++++++++++++++++------------------
+|  1 file changed, 46 insertions(+), 46 deletions(-)
+| 
+* commit c4ced512e3a403a888a0ae00ab584c6d95a168f3
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Jul 31 22:13:22 2026 +0700
+| 
+|     docs: update interaction count and remove word count warning in main report
+| 
+|  artifacts/06-report/main-report.md | 4 ++--
+|  1 file changed, 2 insertions(+), 2 deletions(-)
+| 
+* commit 6c90dc599c25efa3beadfae86b19180bff315ffd
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Jul 31 22:07:15 2026 +0700
+| 
+|     feat: update audit report and expand ai-critique to cover all project stages
+| 
+|  artifacts/05-audit/ai-audit-report.md | 19 +++++++++++++++++--
+|  artifacts/05-audit/ai-critique.md     | 26 ++++++++++++++------------
+|  2 files changed, 31 insertions(+), 14 deletions(-)
+| 
+* commit ff74cf647cf244622e9313dfce59d32fce70f08d
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 22:56:19 2026 +0700
+| 
+|     Refactor main report formatting and clarify B2 source summary reconciliation
+|     
+|     - Adjusted formatting for student, group, and date sections for improved readability.
+|     - Clarified the reconciliation of the B2 source summary with row-level data, ensuring consistency in reported values.
+| 
+|  artifacts/05-audit/ai-audit-report.md     |  71 ++-
+|  artifacts/06-report/README.md             |  31 +-
+|  artifacts/06-report/completeness-check.md |  29 +-
+|  artifacts/06-report/findings-log.md       |   6 +-
+|  artifacts/06-report/git-commit-log.txt    | 681 ++++++++++++++++++++++++----
+|  artifacts/06-report/main-report.md        |  11 +-
+|  6 files changed, 702 insertions(+), 127 deletions(-)
+| 
+* commit 498d3deec435ff9aa4ca6369a577cb6f75f9ea99
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 22:44:10 2026 +0700
+| 
+|     fix: update B2 execution results and correct pass rates in execution summary
+| 
+|  README.md                                        | 89 ----------------------
+|  artifacts/02-execution/checklist-execution-B2.md | 13 ++--
+|  artifacts/02-execution/execution-summary.md      | 22 +++---
+|  3 files changed, 18 insertions(+), 106 deletions(-)
+| 
+* commit 39f760167d6a1a1132486378dc494c09b343c13d
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 21:49:41 2026 +0700
+| 
+|     feat: assemble final HW03 report package
+| 
+|  README.md                                 |  89 +++++++++++++++
+|  artifacts/06-report/README.md             |  94 ++++++++++++++++
+|  artifacts/06-report/completeness-check.md |  74 +++++++++++++
+|  artifacts/06-report/findings-log.md       |  63 +++++++++++
+|  artifacts/06-report/git-commit-log.txt    |  78 ++++++++++++++
+|  artifacts/06-report/main-report.md        | 161 ++++++++++++++++++++++++++++
+|  project-config.md                         |   4 +-
+|  7 files changed, 561 insertions(+), 2 deletions(-)
+| 
+* commit 77f0fb08fa97bc936ddd7eb5e047790c9637418e
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 21:40:07 2026 +0700
+| 
+|     feat: finalize Task 3 cross-platform report
+| 
+|  .../04-cross-platform/B4-cross-platform-report.md |  6 +--
+|  .../04-cross-platform/cross-platform-report.md    | 47 +++++++++++++++++----
+|  artifacts/05-audit/ai-audit-report.md             | 24 +++++++++--
+|  project-config.md                                 |  2 +-
+|  4 files changed, 64 insertions(+), 15 deletions(-)
+| 
+* commit db9c243e102e71c6d28b2eecd5c5d31697729d37
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 21:35:19 2026 +0700
+| 
+|     feat: update cross-platform testing status to reflect approval for all screens
+| 
+|  project-config.md | 2 +-
+|  1 file changed, 1 insertion(+), 1 deletion(-)
+| 
+* commit dc4d96d1d4b95642db33f432123310000a4b490d
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 21:34:52 2026 +0700
+| 
+|     Add B4 Cross-Platform Compatibility Test Report and update related documentation
+|     
+|     - Created a detailed report for B4 Registration / Check-in QR testing, including test procedures, results, and findings.
+|     - Updated the main cross-platform report to include results from B4, reflecting provisional pass rates and coverage.
+|     - Added screenshots and diagnostic images for B4 testing results.
+|     - Enhanced the browserstack_capture.py script to support B4 screen execution and QR dialog activation.
+|     - Updated AI audit report to include interactions related to B4 testing and findings.
+| 
+|  .../B4-browserstack-results.json                  | 1254 +++++++++++++++++++
+|  .../04-cross-platform/B4-cross-platform-report.md |  188 +++
+|  .../04-cross-platform/cross-platform-report.md    |   83 +-
+|  .../04-cross-platform/screenshots/B4_C01.png      |  Bin 0 -> 167083 bytes
+|  .../04-cross-platform/screenshots/B4_C02.png      |  Bin 0 -> 159854 bytes
+|  .../04-cross-platform/screenshots/B4_C03.png      |  Bin 0 -> 86691 bytes
+|  .../04-cross-platform/screenshots/B4_C04.png      |  Bin 0 -> 236183 bytes
+|  .../04-cross-platform/screenshots/B4_C05.png      |  Bin 0 -> 122406 bytes
+|  .../04-cross-platform/screenshots/B4_C06.png      |  Bin 0 -> 113969 bytes
+|  .../04-cross-platform/screenshots/B4_C07.png      |  Bin 0 -> 90656 bytes
+|  .../04-cross-platform/screenshots/B4_C08.png      |  Bin 0 -> 90003 bytes
+|  .../04-cross-platform/screenshots/B4_C09.png      |  Bin 0 -> 435885 bytes
+|  .../04-cross-platform/screenshots/B4_C10.png      |  Bin 0 -> 464735 bytes
+|  .../screenshots/diagnostics/B4_C05_error.png      |  Bin 0 -> 135749 bytes
+|  .../B4_C10_native_activation_error.png            |  Bin 0 -> 926561 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C01.png  |  Bin 0 -> 167105 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C02.png  |  Bin 0 -> 195404 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C03.png  |  Bin 0 -> 101424 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C04.png  |  Bin 0 -> 320474 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C05.png  |  Bin 0 -> 135749 bytes
+|  .../screenshots/raw/B4_C05_error.png              |  Bin 0 -> 135749 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C06.png  |  Bin 0 -> 130398 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C07.png  |  Bin 0 -> 84744 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C08.png  |  Bin 0 -> 86183 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C09.png  |  Bin 0 -> 436068 bytes
+|  .../04-cross-platform/screenshots/raw/B4_C10.png  |  Bin 0 -> 661987 bytes
+|  .../screenshots/raw/B4_C10_error.png              |  Bin 0 -> 926561 bytes
+|  .../scripts/browserstack_capture.py               |   82 +-
+|  artifacts/05-audit/ai-audit-report.md             |   29 +-
+|  29 files changed, 1612 insertions(+), 24 deletions(-)
+| 
+* commit 1179ecb4803abf59132138dd7c9dded7b621ff38
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 21:03:33 2026 +0700
+| 
+|     Add B2 Cross-Platform Compatibility Test Report and update related artifacts
+|     
+|     - Created B2-cross-platform-report.md detailing test results for Event Detail screen.
+|     - Updated cross-platform-report.md to include B2 results and evidence.
+|     - Added screenshots and diagnostic images for B2 testing.
+|     - Enhanced scripts for capturing screenshots and adding overlays to support B2.
+|     - Updated AI audit report to reflect B2 testing and findings.
+| 
+|  .../B2-browserstack-results.json                  | 1216 +++++++++++++++++++
+|  .../04-cross-platform/B2-cross-platform-report.md |  173 +++
+|  .../04-cross-platform/cross-platform-report.md    |   83 +-
+|  .../04-cross-platform/screenshots/B2_C01.png      |  Bin 0 -> 501092 bytes
+|  .../04-cross-platform/screenshots/B2_C02.png      |  Bin 0 -> 484316 bytes
+|  .../04-cross-platform/screenshots/B2_C03.png      |  Bin 0 -> 443641 bytes
+|  .../04-cross-platform/screenshots/B2_C04.png      |  Bin 0 -> 651556 bytes
+|  .../04-cross-platform/screenshots/B2_C05.png      |  Bin 0 -> 122406 bytes
+|  .../04-cross-platform/screenshots/B2_C06.png      |  Bin 0 -> 522482 bytes
+|  .../04-cross-platform/screenshots/B2_C07.png      |  Bin 0 -> 468665 bytes
+|  .../04-cross-platform/screenshots/B2_C08.png      |  Bin 0 -> 448067 bytes
+|  .../04-cross-platform/screenshots/B2_C09.png      |  Bin 0 -> 655173 bytes
+|  .../04-cross-platform/screenshots/B2_C10.png      |  Bin 0 -> 1186779 bytes
+|  .../screenshots/diagnostics/B2_C05_error.png      |  Bin 0 -> 135749 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C01.png  |  Bin 0 -> 517722 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C02.png  |  Bin 0 -> 706766 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C03.png  |  Bin 0 -> 453616 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C04.png  |  Bin 0 -> 1027654 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C05.png  |  Bin 0 -> 135749 bytes
+|  .../screenshots/raw/B2_C05_error.png              |  Bin 0 -> 135749 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C06.png  |  Bin 0 -> 557384 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C07.png  |  Bin 0 -> 480869 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C08.png  |  Bin 0 -> 439971 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C09.png  |  Bin 0 -> 685376 bytes
+|  .../04-cross-platform/screenshots/raw/B2_C10.png  |  Bin 0 -> 1444875 bytes
+|  .../04-cross-platform/scripts/add_overlay.py      |   15 +-
+|  .../scripts/browserstack_capture.py               |   73 +-
+|  artifacts/05-audit/ai-audit-report.md             |   27 +-
+|  28 files changed, 1551 insertions(+), 36 deletions(-)
+| 
+* commit b863151d9aa961300cae82d17e294356ca24b211
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 20:15:27 2026 +0700
+| 
+|     feat: update human review status for B1 in audit report and project config
+| 
+|  artifacts/05-audit/ai-audit-report.md | 4 ++--
+|  project-config.md                     | 2 +-
+|  2 files changed, 3 insertions(+), 3 deletions(-)
+| 
+* commit c2be970ddcdbc10625148421b7f70f1d585a6ba8
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 20:12:41 2026 +0700
+| 
+|     feat: Implement cross-platform testing for B1 with BrowserStack
+|     
+|     - Added scripts for capturing screenshots and overlaying MSSV email on raw images.
+|     - Documented post-approval execution notes regarding deviations in browser availability.
+|     - Captured and stored screenshots for B1 across various configurations.
+|     - Updated AI audit report with new tasks and interactions related to B1 execution.
+|     - Revised project configuration to reflect the completion status of Stage 4.
+| 
+|  .../cross-platform-matrix-generator/SKILL.md      |    1 +
+|  .../B1-browserstack-results.json                  | 1360 +++++++++++++++++++
+|  .../04-cross-platform/B1-cross-platform-report.md |  328 +++++
+|  .../04-cross-platform/cross-platform-report.md    |  135 ++
+|  .../04-cross-platform/phase-0-matrix-setup.md     |   12 +
+|  .../04-cross-platform/screenshots/B1_C01.png      |  Bin 0 -> 716056 bytes
+|  .../04-cross-platform/screenshots/B1_C02.png      |  Bin 0 -> 623800 bytes
+|  .../04-cross-platform/screenshots/B1_C03.png      |  Bin 0 -> 340445 bytes
+|  .../04-cross-platform/screenshots/B1_C04.png      |  Bin 0 -> 964479 bytes
+|  .../04-cross-platform/screenshots/B1_C05.png      |  Bin 0 -> 122406 bytes
+|  .../04-cross-platform/screenshots/B1_C06.png      |  Bin 0 -> 363494 bytes
+|  .../04-cross-platform/screenshots/B1_C07.png      |  Bin 0 -> 1179026 bytes
+|  .../04-cross-platform/screenshots/B1_C08.png      |  Bin 0 -> 1131048 bytes
+|  .../04-cross-platform/screenshots/B1_C09.png      |  Bin 0 -> 463823 bytes
+|  .../04-cross-platform/screenshots/B1_C10.png      |  Bin 0 -> 1777533 bytes
+|  .../screenshots/diagnostics/B1_C01_error.png      |  Bin 0 -> 733295 bytes
+|  .../screenshots/diagnostics/B1_C02_error.png      |  Bin 0 -> 260481 bytes
+|  .../screenshots/diagnostics/B1_C05_error.png      |  Bin 0 -> 135749 bytes
+|  .../screenshots/diagnostics/B1_C07_error.png      |  Bin 0 -> 318208 bytes
+|  .../screenshots/diagnostics/B1_C08_error.png      |  Bin 0 -> 324663 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C01.png  |  Bin 0 -> 733312 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C02.png  |  Bin 0 -> 829869 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C03.png  |  Bin 0 -> 348388 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C04.png  |  Bin 0 -> 1321921 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C05.png  |  Bin 0 -> 135749 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C06.png  |  Bin 0 -> 368982 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C07.png  |  Bin 0 -> 1208961 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C08.png  |  Bin 0 -> 1114291 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C09.png  |  Bin 0 -> 467354 bytes
+|  .../04-cross-platform/screenshots/raw/B1_C10.png  |  Bin 0 -> 2438099 bytes
+|  .../04-cross-platform/scripts/add_overlay.py      |   71 +
+|  .../scripts/browserstack_capture.py               |  480 +++++++
+|  artifacts/05-audit/ai-audit-report.md             |   75 +-
+|  project-config.md                                 |    2 +-
+|  34 files changed, 2459 insertions(+), 5 deletions(-)
+| 
+* commit ca8457ec8d542526b48c61642f46253559517172
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 20:03:56 2026 +0700
+| 
+|     feat: update cross-platform matrix generator to present per-screen results for user approval
+| 
+|  .../cross-platform-matrix-generator/SKILL.md      | 32 +++++++++++++++++++--
+|  AGENTS.md                                         | 10 +++++--
+|  2 files changed, 37 insertions(+), 5 deletions(-)
+| 
+* commit 9a27dc2f68b393a3423f319f981e0b36f84bb5b2
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 19:21:01 2026 +0700
+| 
+|     feat: add Phase 0 cross-platform matrix setup documentation and update project config status
+| 
+|  .../04-cross-platform/phase-0-matrix-setup.md     | 107 ++++++++++++++++++++
+|  project-config.md                                 |   2 +-
+|  2 files changed, 108 insertions(+), 1 deletion(-)
+| 
+* commit e0ae4ec1bac6bf8f0416d873f0d408d65bbc5db7
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 19:15:41 2026 +0700
+| 
+|     feat: enhance agent workflow documentation for cross-platform testing phases and execution flow
+| 
+|  .../cross-platform-matrix-generator/SKILL.md      | 522 +++++++++++---------
+|  AGENTS.md                                         |  86 +++-
+|  2 files changed, 366 insertions(+), 242 deletions(-)
+| 
+* commit 14b95c8133ec9832ea357ff7a94720bd803c9392
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 18:59:42 2026 +0700
+| 
+|     feat: enhance cross-platform testing documentation and clarify agent execution modes
+| 
+|  .../cross-platform-matrix-generator/SKILL.md      | 467 +++++++++++++-------
+|  AGENTS.md                                         |  93 ++--
+|  2 files changed, 376 insertions(+), 184 deletions(-)
+| 
+* commit 7c1214dc105ed99f6e1a06a39a1290a81169944d
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 18:34:14 2026 +0700
+| 
+|     feat: remove supplemental EMS interface screenshots from README and update links
+| 
+|  artifacts/03-usability/screenshots/README.md |   7 -------
+|  artifacts/03-usability/screenshots/UF5.jpeg  | Bin 124431 -> 68997 bytes
+|  2 files changed, 7 deletions(-)
+| 
+* commit a8f9cd6287621d516df2188d41b1d64ee449bf40
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 18:31:07 2026 +0700
+| 
+|     feat: remove evidence limitations section from usability findings
+| 
+|  artifacts/03-usability/usability-findings.md | 4 ----
+|  1 file changed, 4 deletions(-)
+| 
+* commit 0051389fc38b824367ff52dfe3e30948dff6c604
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 18:28:58 2026 +0700
+| 
+|     feat: update human review statuses to approved for usability analysis tasks
+| 
+|  artifacts/05-audit/ai-audit-report.md | 8 ++++----
+|  1 file changed, 4 insertions(+), 4 deletions(-)
+| 
+* commit 3c2ce05d6c486da1c0016485ad33d7743dfdc4b5
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 18:26:00 2026 +0700
+| 
+|     feat: update participant contacts to masked form and correct usability findings screenshots
+| 
+|  artifacts/03-usability/data-collection-sheet.md |  6 ++---
+|  artifacts/03-usability/participant-sheet.md     |  2 +-
+|  artifacts/03-usability/usability-findings.md    |  2 +-
+|  artifacts/03-usability/usability-report.md      | 15 ++---------
+|  artifacts/05-audit/ai-audit-report.md           | 32 +++++++++++++++++++++--
+|  5 files changed, 36 insertions(+), 21 deletions(-)
+| 
+* commit 8aa7ee3eeb6a79b910d4feded227eed53276d166
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 18:14:22 2026 +0700
+| 
+|     feat: update participant data and add screenshots for usability findings
+| 
+|  artifacts/03-usability/participant-sheet.md  |   2 +-
+|  artifacts/03-usability/screenshots/README.md |   3 +--
+|  artifacts/03-usability/screenshots/UF1.png   | Bin 0 -> 880184 bytes
+|  artifacts/03-usability/screenshots/UF2.png   | Bin 0 -> 135773 bytes
+|  artifacts/03-usability/screenshots/UF3.png   | Bin 0 -> 35055 bytes
+|  artifacts/03-usability/screenshots/UF5.jpeg  | Bin 0 -> 124431 bytes
+|  artifacts/03-usability/usability-findings.md |  10 +++++-----
+|  7 files changed, 7 insertions(+), 8 deletions(-)
+| 
+* commit de5acc55cde7b48e4fde688a30b1e532f3b6fd9d
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 16:52:48 2026 +0700
+| 
+|     docs: update total bugs count in bug reports to reflect recent findings
+| 
+|  artifacts/02-execution/bug-reports.md | 2 +-
+|  1 file changed, 1 insertion(+), 1 deletion(-)
+| 
+* commit ead947bbd7aec482ed819fdfba1553bba5215558
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 16:51:49 2026 +0700
+| 
+|     feat: complete phase 3 usability analysis
+| 
+|  artifacts/03-usability/data-collection-sheet.md |   5 +-
+|  artifacts/03-usability/participant-sheet.md     |  11 +-
+|  artifacts/03-usability/screenshots/README.md    |  12 ++
+|  artifacts/03-usability/session-notes-P1.md      |   4 +-
+|  artifacts/03-usability/session-notes-P2.md      |   4 +-
+|  artifacts/03-usability/session-notes-P3.md      |   4 +-
+|  artifacts/03-usability/session-notes-P4.md      |   4 +-
+|  artifacts/03-usability/session-notes-P5.md      |   4 +-
+|  artifacts/03-usability/usability-findings.md    |  38 ++++++
+|  artifacts/03-usability/usability-report.md      | 152 ++++++++++++++++++++++
+|  artifacts/05-audit/ai-audit-report.md           |  38 +++++-
+|  project-config.md                               |   2 +-
+|  12 files changed, 256 insertions(+), 22 deletions(-)
+| 
+* commit 599d1ec8071540e628ebc64f2ce9d72c2c5f89e2
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Jul 30 16:09:54 2026 +0700
+| 
+|     feat: phase 1 for task 2
+| 
+|  artifacts/03-usability/data-collection-sheet.md | 82 +++++++++++++----------
+|  artifacts/03-usability/participant-sheet.md     | 10 +--
+|  artifacts/03-usability/session-notes-P1.md      | 65 +++++++++---------
+|  artifacts/03-usability/session-notes-P2.md      | 65 +++++++++---------
+|  artifacts/03-usability/session-notes-P3.md      | 65 +++++++++---------
+|  artifacts/03-usability/session-notes-P4.md      | 65 +++++++++---------
+|  artifacts/03-usability/session-notes-P5.md      | 65 +++++++++---------
+|  project-config.md                               |  2 +-
+|  8 files changed, 212 insertions(+), 207 deletions(-)
+| 
+* commit 392cc5466fc28605ea427bd27672a7810cc6be67
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Wed Jul 29 17:23:26 2026 +0700
+| 
+|     docs: update task scenario with specific event name and pilot feedback details
+| 
+|  artifacts/03-usability/task-scenario.md | 12 ++++++------
+|  1 file changed, 6 insertions(+), 6 deletions(-)
+| 
+* commit 3cf12d13d01620e6a0966de0d244513f1271afd8
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Wed Jul 29 10:58:08 2026 +0700
+| 
+|     docs: update usability testing guidelines and references in English and Vietnamese documents; modify user-testing tasks and scenarios
+| 
+|  Reference/2026.HW03.GUI Usability EMS_En.md  |  38 ++++++++++++++++++-------
+|  Reference/2026.HW03.GUI Usability EMS_En.pdf | Bin 174078 -> 181499 bytes
+|  Reference/2026.HW03.GUI Usability EMS_Vi.md  |  38 ++++++++++++++++++-------
+|  Reference/2026.HW03.GUI Usability EMS_Vi.pdf | Bin 193061 -> 200642 bytes
+|  Reference/HW03_EMS_Intro_EN.pdf              | Bin 324604 -> 374372 bytes
+|  5 files changed, 54 insertions(+), 22 deletions(-)
+| 
+* commit 65c52066a61e9d55cf5e272e81e142a0096f7838
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Wed Jul 29 10:44:21 2026 +0700
+| 
+|     docs: add usability study artifacts including data collection sheet, participant recruitment sheet, session notes, task scenario, and SUS questionnaire
+| 
+|  artifacts/03-usability/data-collection-sheet.md |  82 +++++++++++
+|  artifacts/03-usability/participant-sheet.md     |  66 +++++++++
+|  artifacts/03-usability/session-notes-P1.md      |  92 ++++++++++++
+|  artifacts/03-usability/session-notes-P2.md      |  92 ++++++++++++
+|  artifacts/03-usability/session-notes-P3.md      |  92 ++++++++++++
+|  artifacts/03-usability/session-notes-P4.md      |  92 ++++++++++++
+|  artifacts/03-usability/session-notes-P5.md      |  92 ++++++++++++
+|  artifacts/03-usability/session-template.md      | 167 ++++++++++++++++++++++
+|  artifacts/03-usability/sus-questionnaire.md     |  87 +++++++++++
+|  artifacts/03-usability/task-scenario.md         |  74 ++++++++++
+|  project-config.md                               |   4 +-
+|  11 files changed, 938 insertions(+), 2 deletions(-)
+| 
+* commit e2724e9985dec23d6cca4585b7a98a25fe45b375
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Wed Jul 29 10:00:33 2026 +0700
+| 
+|     docs: update SKILL.md and AGENTS.md for user testing workflow; refine project-config.md screen justifications
+| 
+|  .../skills/heuristic-usability-evaluator/SKILL.md | 287 +++++++++++---------
+|  AGENTS.md                                         | 117 +++++---
+|  project-config.md                                 |   6 +-
+|  3 files changed, 245 insertions(+), 165 deletions(-)
+| 
+* commit 3e9c99506bca4a1773ec14dc0cb49c07f759f6b1
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Wed Jul 29 01:43:13 2026 +0700
+| 
+|     Add execution results for Screen B1 and update execution summary
+|     
+|     - Created checklist execution results for Screen B1: Home / Events List, detailing pass/fail status for 62 checklist items.
+|     - Updated execution summary to reflect completion of three screens (B1, B2, B4) with corresponding pass rates and failure analysis.
+|     - Added screenshots for failed checklist items related to accessibility and UI standards.
+|     - Revised project configuration to indicate Stage 2 completion status.
+|     - Documented AI tool usage and outputs for checklist execution on Screen B1.
+| 
+|  artifacts/02-execution/bug-reports.md             | 168 +++++++++++++++++-
+|  artifacts/02-execution/checklist-execution-B1.md  | 144 ++++++++++++++++
+|  artifacts/02-execution/execution-summary.md       | 179 +++++++++-----------
+|  .../screenshots/B1_IA-01-003_fail.png             | Bin 0 -> 2842728 bytes
+|  .../screenshots/B1_IA-01-004_fail.png             | Bin 0 -> 2842728 bytes
+|  .../screenshots/B1_IA-01-006_fail.png             | Bin 0 -> 2842728 bytes
+|  .../screenshots/B1_IA-01-007_fail.png             | Bin 0 -> 2842728 bytes
+|  .../screenshots/B1_IA-01-009_fail.png             | Bin 0 -> 625437 bytes
+|  .../screenshots/B1_IA-01-011_fail.png             | Bin 0 -> 2842728 bytes
+|  .../screenshots/B1_IA-01-015_fail.png             | Bin 0 -> 2991333 bytes
+|  .../screenshots/B1_IA-02-002_fail.png             | Bin 0 -> 2991333 bytes
+|  .../screenshots/B1_IA-04-009_fail.png             | Bin 0 -> 2673454 bytes
+|  .../screenshots/B1_IA-04-015_fail.png             | Bin 0 -> 5375028 bytes
+|  .../02-execution/screenshots/B1_overview.png      | Bin 0 -> 2842728 bytes
+|  artifacts/05-audit/ai-audit-report.md             |  35 +++-
+|  project-config.md                                 |   2 +-
+|  16 files changed, 411 insertions(+), 117 deletions(-)
+| 
+* commit 728e07cbd365ab93030b078b10a74709c450fe0d
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Wed Jul 29 01:40:57 2026 +0700
+| 
+|     docs: clarify review checkpoint requirements for screen testing in AGENTS.md
+| 
+|  AGENTS.md | 4 ++--
+|  1 file changed, 2 insertions(+), 2 deletions(-)
+| 
+* commit ab0eda7de42c1f4f8b7edfdc81bc208ab1083c3f
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Wed Jul 29 01:03:53 2026 +0700
+| 
+|     docs: add audit report, bug details, and screenshots for Screen B4 execution
+| 
+|  artifacts/02-execution/bug-reports.md             | 154 ++++++++++++++++-
+|  artifacts/02-execution/checklist-execution-B4.md  | 173 ++++++++++++++++++++
+|  artifacts/02-execution/execution-summary.md       |  36 +++-
+|  .../screenshots/B4_IA-01-003_fail.png             | Bin 0 -> 496789 bytes
+|  .../screenshots/B4_IA-01-006_fail.png             | Bin 0 -> 496789 bytes
+|  .../screenshots/B4_IA-01-009_fail.png             | Bin 0 -> 266331 bytes
+|  .../screenshots/B4_IA-01-011_fail.png             | Bin 0 -> 496789 bytes
+|  .../screenshots/B4_IA-01-013_fail.png             | Bin 0 -> 269828 bytes
+|  .../screenshots/B4_IA-01-015_fail.png             | Bin 0 -> 62289 bytes
+|  .../screenshots/B4_IA-02-002_fail.png             | Bin 0 -> 496789 bytes
+|  .../screenshots/B4_IA-02-007_fail.png             | Bin 0 -> 311434 bytes
+|  .../screenshots/B4_IA-04-015_fail.png             | Bin 0 -> 496789 bytes
+|  .../02-execution/screenshots/B4_QR_dialog.png     | Bin 0 -> 238986 bytes
+|  .../02-execution/screenshots/B4_overview.png      | Bin 0 -> 496789 bytes
+|  artifacts/05-audit/ai-audit-report.md             |  59 +++++--
+|  artifacts/05-audit/ai-critique.md                 |  25 +--
+|  16 files changed, 423 insertions(+), 24 deletions(-)
+| 
+* commit 04df2be11e263612926eff774ea5e856eef26522
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 22:28:18 2026 +0700
+| 
+|     docs: replace B5 post-event review test with B1 home and events list scope in project configuration
+| 
+|  project-config.md | 2 +-
+|  1 file changed, 1 insertion(+), 1 deletion(-)
+| 
+* commit ba13dc0e98e83f5bfda6bccd9e5d4f80dec44c26
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 22:26:14 2026 +0700
+| 
+|     docs: update project-config to replace Registration Form with My Registrations / Ticket screen justification
+| 
+|  project-config.md | 2 +-
+|  1 file changed, 1 insertion(+), 1 deletion(-)
+| 
+* commit e4cb12702491b10f07eb9b309905bd274ceec4f3
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 21:42:34 2026 +0700
+| 
+|     docs: remove redundant path note for checklist file in AGENTS.md
+| 
+|  AGENTS.md | 1 -
+|  1 file changed, 1 deletion(-)
+| 
+* commit 91a712fa7ba06a59b9c789154fd6f8ae136cf260
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 21:41:41 2026 +0700
+| 
+|     Stage 2: Checklist execution results for Screen B2 (Event Detail Page)
+|     
+|     - checklist-execution-B2.md: 63 items evaluated, 40 executed, 27 pass, 13 fail, 23 N/A (67.5% pass rate)
+|     - bug-reports.md: 11 structured bug reports (BUG-B2-001 through BUG-B2-011)
+|     - execution-summary.md: failure pattern analysis and recommended priority fixes
+|     - screenshots/: 16 evidence screenshots (pass and fail items)
+|     
+|     Key findings:
+|     - Missing breadcrumb trail navigation (IA-03-005)
+|     - Incomplete VI language translation for event content (IA-01-013, Severity 3)
+|     - Responsive layout breaks at 200% zoom (IA-01-015, Severity 3)
+|     - Form validation does not highlight individual role cards (IA-02-003, IA-02-005)
+|     - Toast notification lacks dismiss button and auto-dismisses too fast (IA-04-001)
+| 
+|  artifacts/02-execution/bug-reports.md             | 207 ++++++++++++++++++++
+|  artifacts/02-execution/checklist-execution-B2.md  | 178 +++++++++++++++++
+|  artifacts/02-execution/execution-summary.md       | 100 ++++++++++
+|  .../screenshots/B2_IA-01-001_pass.png             | Bin 0 -> 2239404 bytes
+|  .../screenshots/B2_IA-01-005_pass.png             | Bin 0 -> 2242430 bytes
+|  .../screenshots/B2_IA-01-008_fail.png             | Bin 0 -> 431207 bytes
+|  .../screenshots/B2_IA-01-013_fail.png             | Bin 0 -> 727328 bytes
+|  .../screenshots/B2_IA-02-003_fail.png             | Bin 0 -> 434710 bytes
+|  .../screenshots/B2_IA-02-015_pass.png             | Bin 0 -> 669744 bytes
+|  .../screenshots/B2_IA-03-001_pass.png             | Bin 0 -> 2242307 bytes
+|  .../screenshots/B2_IA-03-005_fail.png             | Bin 0 -> 2242770 bytes
+|  .../screenshots/B2_IA-04-001_fail.png             | Bin 0 -> 401236 bytes
+|  .../screenshots/B2_IA-04-005_pass.png             | Bin 0 -> 405084 bytes
+|  .../screenshots/B2_IA-04-006_pass.png             | Bin 0 -> 370704 bytes
+|  .../screenshots/B2_IA-04-009_pass.png             | Bin 0 -> 433440 bytes
+|  .../screenshots/B2_IA-04-009b_pass.png            | Bin 0 -> 2229763 bytes
+|  .../screenshots/B2_event_details_top.png          | Bin 0 -> 2239079 bytes
+|  .../02-execution/screenshots/B2_overview.png      | Bin 0 -> 3002096 bytes
+|  .../screenshots/B2_registration_roles_section.png | Bin 0 -> 429048 bytes
+|  19 files changed, 485 insertions(+)
+| 
+* commit 95d13fa1c95bde705d7c6fa363cec84879c82cce
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 09:27:07 2026 +0700
+| 
+|     update: update SUT URL, remove obsolete GUI checklist, and revise AGENTS reference docs
+| 
+|  AGENTS.md                                   |   9 +--
+|  Reference/2026.HW03.GUI Usability EMS_En.md |   2 +-
+|  Reference/2026.HW03.GUI Usability EMS_Vi.md |   2 +-
+|  shared-gui-checklist.md                     | 104 --------------------------
+|  4 files changed, 6 insertions(+), 111 deletions(-)
+| 
+* commit bfce715c23678d25941a535fec69fec1126abdd0
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 09:05:05 2026 +0700
+| 
+|     chore: update GUI testing checklist and add AI audit documentation
+| 
+|  artifacts/01-checklist/ai-missed-items.md      | 119 ++++++++++++
+|  artifacts/01-checklist/shared-gui-checklist.md | 221 ++++++++++-------------
+|  artifacts/05-audit/ai-critique.md              |  27 +++
+|  3 files changed, 238 insertions(+), 129 deletions(-)
+| 
+* commit a642f4ee07b8a22d1bb92e7fe03821d043935e75
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 08:58:40 2026 +0700
+| 
+|     feat: add EMS GUI testing artifacts including checklists and design references
+| 
+|  artifacts/01-checklist/checklist-prompts.md    |  86 +++++++++++++
+|  artifacts/01-checklist/checklist-references.md |  82 ++++++++++++
+|  artifacts/01-checklist/shared-gui-checklist.md | 153 +++++++++++++++++++++++
+|  artifacts/05-audit/ai-audit-report.md          | 135 ++++++++++++++++++++
+|  4 files changed, 456 insertions(+)
+| 
+* commit eb9afcdc9cc7fd91ae310722ba5c66036ac045ef
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 08:54:20 2026 +0700
+| 
+|     update agents.md
+| 
+|  AGENTS.md         | 4 +---
+|  project-config.md | 4 ++--
+|  2 files changed, 3 insertions(+), 5 deletions(-)
+| 
+* commit b07fdc8b1b192d7723149f3a452cc5eb985c922d
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 08:32:07 2026 +0700
+| 
+|     docs: update project URL with status note in project-config.md
+| 
+|  project-config.md | 2 +-
+|  1 file changed, 1 insertion(+), 1 deletion(-)
+| 
+* commit faaf37056cd79520a10e5a976298d32cfc97b58a
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Tue Jul 28 08:30:14 2026 +0700
+| 
+|     feat: setup HW3 project-config.md
+| 
+|  project-config.md | 52 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 52 insertions(+)
+| 
+* commit b694c12d246c72f6d378528ad116e698c9bbb1fe
+  Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+  Date:   Tue Jul 28 08:29:51 2026 +0700
+  
+      feat: initialize agent skill framework and add usability heuristic reference documentation
+  
+   .agents/skills/ai-audit-logger/SKILL.md           | 161 +++++++
+   .agents/skills/checklist-executor/SKILL.md        | 134 ++++++
+   .../examples/execution-result-template.md         |  94 ++++
+   .../cross-platform-matrix-generator/SKILL.md      | 206 +++++++++
+   .../examples/matrix-template.md                   | 116 +++++
+   .agents/skills/gui-checklist-builder/SKILL.md     | 125 ++++++
+   .../references/heuristics-summary.md              | 100 +++++
+   .../skills/heuristic-usability-evaluator/SKILL.md | 167 ++++++++
+   .../examples/usability-report-template.md         | 162 +++++++
+   .../references/nielsen-10-heuristics.md           | 208 +++++++++
+   .agents/skills/report-assembler/SKILL.md          | 252 +++++++++++
+   .../examples/report-structure-template.md         | 138 ++++++
+   AGENTS.md                                         | 452 ++++++++++++++++++++
+   Reference/2026.HW03.GUI Usability EMS_En.md       | 223 ++++++++++
+   Reference/2026.HW03.GUI Usability EMS_En.pdf      | Bin 0 -> 174078 bytes
+   Reference/2026.HW03.GUI Usability EMS_Vi.md       | 223 ++++++++++
+   Reference/2026.HW03.GUI Usability EMS_Vi.pdf      | Bin 0 -> 193061 bytes
+   ... Compatibility Testing AI-First (Combined).pdf | Bin 0 -> 2160677 bytes
+   Reference/HW03_EMS_Intro_EN.pdf                   | Bin 0 -> 324604 bytes
+   ...43n-E2E-Test-Flow-Lu\341\273\223ng-Admin.docx" | Bin 0 -> 1797692 bytes
+   shared-gui-checklist.md                           | 104 +++++
+   21 files changed, 2865 insertions(+)

@@ -1,0 +1,1254 @@
+[
+  {
+    "cell": "C01",
+    "target_os": "Windows 11",
+    "browser": "Chrome",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "10c7d60727af047e3efdbf32e8c751e1a16e9ce6",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/profile",
+      "title": "Hồ sơ cá nhân | HCMUS EMS",
+      "viewport": {
+        "width": 1904,
+        "height": 929,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1904,
+        "scrollWidth": 1889,
+        "scrollHeight": 1767
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "INPUT",
+          "text": "Search activities...",
+          "width": 175,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "text": "5\n10\n20\n50\n100",
+          "width": 46,
+          "height": 23
+        },
+        {
+          "tag": "INPUT",
+          "text": "Go to page",
+          "width": 102,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 157,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 172,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 223,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 66,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 166,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H4",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            895,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Góc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            679,
+            28
+          ]
+        }
+      ],
+      "dialog": {
+        "x": 721,
+        "y": 256,
+        "width": 448,
+        "height": 417,
+        "fullyWithinViewport": true
+      },
+      "qrVisual": {
+        "tag": "svg",
+        "width": 16,
+        "height": 16,
+        "visible": true
+      },
+      "lang": "en",
+      "mainText": "My Profile\nQR Code\nEdit Profile\nChange Password\nTMH\nThái Minh Huy\nStudent\n\nSTUDENT ID\n\n23127379\n\nEMAIL\n\n23127379@student.hcmus.edu.vn\n\nPHONE\n\n0901234567\n\nRegistered Activities\n\n3\n\nParticipated Activities\n\n1\n\nUpcoming Activities\n\n2\n\nMy Activities\nFilters\nExport\nUSING AI AGENT CONVERSATION\nDeclined\nStudent participation\nUpcoming\n01/08/2026 22:08 - 03/08/2026 22:08\nGD01\nRegistered at:\n29/07/2026 13:21\nChecked in at:\nNot checked in\nROLES:\nParticipant\nĐăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026\nApproved\nStudent participation\nUpcoming\n03/08/2026 11:00 - 07/08/2026 20:00\nTrường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:32\nChecked in at:\n29/07/2026 01:23\nROLES:\nHọc viên tham dự\nGóc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai\nPending review\nStudent participation\nOngoing\n06/07/2026 11:00 - 31/12/2026 21:00\nPhòng I.43, Tòa nhà I, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:15\nChecked in at:\nNot checked in\nROLES:\nSinh viên đăng ký tham vấn\nRows per page:\n5\n10\n20\n50\n100\n10\n1-3of3results\n/ 1\n1",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/profile",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C01.png"
+  },
+  {
+    "cell": "C02",
+    "target_os": "Windows 11",
+    "browser": "Firefox",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "69fec6477ca01f6d3d377e3051f523739183c85e",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/profile",
+      "title": "Hồ sơ cá nhân | HCMUS EMS",
+      "viewport": {
+        "width": 1904,
+        "height": 986,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1904,
+        "scrollWidth": 1904,
+        "scrollHeight": 1767
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "INPUT",
+          "text": "Search activities...",
+          "width": 175,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "text": "",
+          "width": 44,
+          "height": 21
+        },
+        {
+          "tag": "INPUT",
+          "text": "Go to page",
+          "width": 102,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 157,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 172,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 223,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 66,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 166,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H4",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            894,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Góc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            679,
+            28
+          ]
+        }
+      ],
+      "dialog": {
+        "x": 728,
+        "y": 285,
+        "width": 448,
+        "height": 417,
+        "fullyWithinViewport": true
+      },
+      "qrVisual": {
+        "tag": "svg",
+        "width": 16,
+        "height": 16,
+        "visible": true
+      },
+      "lang": "en",
+      "mainText": "My Profile\nQR Code\nEdit Profile\nChange Password\nTMH\nThái Minh Huy\nStudent\n\nSTUDENT ID\n\n23127379\n\nEMAIL\n\n23127379@student.hcmus.edu.vn\n\nPHONE\n\n0901234567\n\nRegistered Activities\n\n3\n\nParticipated Activities\n\n1\n\nUpcoming Activities\n\n2\n\nMy Activities\nFilters\nExport\nUSING AI AGENT CONVERSATION\nDeclined\nStudent participation\nUpcoming\n01/08/2026 22:08 - 03/08/2026 22:08\nGD01\nRegistered at:\n29/07/2026 13:21\nChecked in at:\nNot checked in\nROLES:\nParticipant\nĐăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026\nApproved\nStudent participation\nUpcoming\n03/08/2026 11:00 - 07/08/2026 20:00\nTrường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:32\nChecked in at:\n29/07/2026 01:23\nROLES:\nHọc viên tham dự\nGóc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai\nPending review\nStudent participation\nOngoing\n06/07/2026 11:00 - 31/12/2026 21:00\nPhòng I.43, Tòa nhà I, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:15\nChecked in at:\nNot checked in\nROLES:\nSinh viên đăng ký tham vấn\nRows per page:\n10\n1-3of3results\n/ 1\n1",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/profile",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C02.png"
+  },
+  {
+    "cell": "C03",
+    "target_os": "Windows 11",
+    "browser": "Edge",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "c6ab9d0ef5031ecb4d82d54b2b10f62a6dae5d21",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/profile",
+      "title": "Hồ sơ cá nhân | HCMUS EMS",
+      "viewport": {
+        "width": 1416,
+        "height": 733,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1416,
+        "scrollWidth": 1401,
+        "scrollHeight": 1767
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "INPUT",
+          "text": "Search activities...",
+          "width": 175,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "text": "5\n10\n20\n50\n100",
+          "width": 46,
+          "height": 23
+        },
+        {
+          "tag": "INPUT",
+          "text": "Go to page",
+          "width": 102,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 157,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 172,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 223,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 66,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 166,
+          "height": 21
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H4",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            895,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Góc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            679,
+            28
+          ]
+        }
+      ],
+      "dialog": {
+        "x": 477,
+        "y": 158,
+        "width": 448,
+        "height": 417,
+        "fullyWithinViewport": true
+      },
+      "qrVisual": {
+        "tag": "svg",
+        "width": 16,
+        "height": 16,
+        "visible": true
+      },
+      "lang": "en",
+      "mainText": "My Profile\nQR Code\nEdit Profile\nChange Password\nTMH\nThái Minh Huy\nStudent\n\nSTUDENT ID\n\n23127379\n\nEMAIL\n\n23127379@student.hcmus.edu.vn\n\nPHONE\n\n0901234567\n\nRegistered Activities\n\n3\n\nParticipated Activities\n\n1\n\nUpcoming Activities\n\n2\n\nMy Activities\nFilters\nExport\nUSING AI AGENT CONVERSATION\nDeclined\nStudent participation\nUpcoming\n01/08/2026 22:08 - 03/08/2026 22:08\nGD01\nRegistered at:\n29/07/2026 13:21\nChecked in at:\nNot checked in\nROLES:\nParticipant\nĐăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026\nApproved\nStudent participation\nUpcoming\n03/08/2026 11:00 - 07/08/2026 20:00\nTrường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:32\nChecked in at:\n29/07/2026 01:23\nROLES:\nHọc viên tham dự\nGóc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai\nPending review\nStudent participation\nOngoing\n06/07/2026 11:00 - 31/12/2026 21:00\nPhòng I.43, Tòa nhà I, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:15\nChecked in at:\nNot checked in\nROLES:\nSinh viên đăng ký tham vấn\nRows per page:\n5\n10\n20\n50\n100\n10\n1-3of3results\n/ 1\n1",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/profile",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C03.png"
+  },
+  {
+    "cell": "C04",
+    "target_os": "macOS Sequoia",
+    "browser": "Safari",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "d5e36a46e4fcd7cf8d3acb041c96db54402f15a8",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/profile",
+      "title": "Hồ sơ cá nhân | HCMUS EMS",
+      "viewport": {
+        "width": 1920,
+        "height": 1028,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1920,
+        "scrollWidth": 1920,
+        "scrollHeight": 1767
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "INPUT",
+          "text": "Search activities...",
+          "width": 175,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "text": "",
+          "width": 59,
+          "height": 21
+        },
+        {
+          "tag": "INPUT",
+          "text": "Go to page",
+          "width": 102,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 161,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 177,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 232,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 68,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 174,
+          "height": 18
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H4",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            896,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Góc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            682,
+            28
+          ]
+        }
+      ],
+      "dialog": {
+        "x": 736,
+        "y": 306,
+        "width": 448,
+        "height": 417,
+        "fullyWithinViewport": true
+      },
+      "qrVisual": {
+        "tag": "svg",
+        "width": 16,
+        "height": 16,
+        "visible": true
+      },
+      "lang": "en",
+      "mainText": "My Profile\nQR Code\nEdit Profile\nChange Password\nTMH\nThái Minh Huy\nStudent\nSTUDENT ID\n\n23127379\nEMAIL\n\n23127379@student.hcmus.edu.vn\nPHONE\n\n0901234567\nRegistered Activities\n3\nParticipated Activities\n1\nUpcoming Activities\n2\nMy Activities\n\n\nFilters\n\nExport\n\nUSING AI AGENT CONVERSATION\nDeclined\nStudent participation\nUpcoming\n01/08/2026 22:08 - 03/08/2026 22:08\nGD01\nRegistered at:\n29/07/2026 13:21\nChecked in at:\nNot checked in\nROLES:\nParticipant\n\nĐăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026\nApproved\nStudent participation\nUpcoming\n03/08/2026 11:00 - 07/08/2026 20:00\nTrường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:32\nChecked in at:\n29/07/2026 01:23\nROLES:\nHọc viên tham dự\n\nGóc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai\nPending review\nStudent participation\nOngoing\n06/07/2026 11:00 - 31/12/2026 21:00\nPhòng I.43, Tòa nhà I, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:15\nChecked in at:\nNot checked in\nROLES:\nSinh viên đăng ký tham vấn\nRows per page:\n\n\n10\n1-3of3results\n\n/ 1\n\n1\n\n",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/profile",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C04.png"
+  },
+  {
+    "cell": "C05",
+    "target_os": "macOS Mojave (Sequoia unavailable)",
+    "browser": "Opera 12.15",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "status": "error",
+    "stage": "login-and-navigation",
+    "session_id": "61046f03d767a80f3b1cdbb1bb36f9c9a64343f6",
+    "error_type": "TimeoutException",
+    "error": "Message: \n",
+    "current_url": "https://prod-dev.ems-fitus.cloud/login",
+    "page_title": "Error",
+    "body_excerpt": "Unable to complete secure transaction\nYou tried to access the address https://prod-dev.ems-fitus.cloud/login, which is currently unavailable. Please make sure that the web address (URL) is correctly spelled and punctuated, then try reloading the page.\nSecure connection: fatal error (40) from server.\nhttps://prod-dev.ems-fitus.cloud/login\nFailed to connect to server. The reason may be that the encryption methods supported by the server are not enabled in the security preferences.\nPlease note that some encryption methods are no longer supported, and that access will not be possible until the website has been upgraded to use strong encryption.\nMake sure your internet connection is active and check whether other applications that rely on the same connection are working.\nCheck that the setup of any internet security software is correct and does not interfere with ordinary web browsing.\nIf you are behind a firewall on a Local Area Network and think this may be causing problems, talk to your systems administrator.\nTry pressing the F12 key on your keyboard and disabling proxy servers, unless you know that you are required to use a proxy to connect to the internet. Reload the page.\nNeed help?\nOpen the Opera Help.\nGo to Opera's online support desk.",
+    "error_screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C05_error.png"
+  },
+  {
+    "cell": "C06",
+    "target_os": "macOS Sequoia",
+    "browser": "Chrome",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "bca4412ac4ff8f688af9cc64d9c307a4a28e64ab",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/profile",
+      "title": "Hồ sơ cá nhân | HCMUS EMS",
+      "viewport": {
+        "width": 1440,
+        "height": 757,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "scrollHeight": 1767
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "INPUT",
+          "text": "Search activities...",
+          "width": 175,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "text": "5\n10\n20\n50\n100",
+          "width": 47,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "Go to page",
+          "width": 102,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 161,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 177,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 232,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 68,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 174,
+          "height": 18
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H4",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            896,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Góc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai",
+          "client": [
+            640,
+            28
+          ],
+          "scroll": [
+            682,
+            28
+          ]
+        }
+      ],
+      "dialog": {
+        "x": 496,
+        "y": 170,
+        "width": 448,
+        "height": 417,
+        "fullyWithinViewport": true
+      },
+      "qrVisual": {
+        "tag": "svg",
+        "width": 16,
+        "height": 16,
+        "visible": true
+      },
+      "lang": "en",
+      "mainText": "My Profile\nQR Code\nEdit Profile\nChange Password\nTMH\nThái Minh Huy\nStudent\n\nSTUDENT ID\n\n23127379\n\nEMAIL\n\n23127379@student.hcmus.edu.vn\n\nPHONE\n\n0901234567\n\nRegistered Activities\n\n3\n\nParticipated Activities\n\n1\n\nUpcoming Activities\n\n2\n\nMy Activities\nFilters\nExport\nUSING AI AGENT CONVERSATION\nDeclined\nStudent participation\nUpcoming\n01/08/2026 22:08 - 03/08/2026 22:08\nGD01\nRegistered at:\n29/07/2026 13:21\nChecked in at:\nNot checked in\nROLES:\nParticipant\nĐăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026\nApproved\nStudent participation\nUpcoming\n03/08/2026 11:00 - 07/08/2026 20:00\nTrường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:32\nChecked in at:\n29/07/2026 01:23\nROLES:\nHọc viên tham dự\nGóc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai\nPending review\nStudent participation\nOngoing\n06/07/2026 11:00 - 31/12/2026 21:00\nPhòng I.43, Tòa nhà I, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 23:15\nChecked in at:\nNot checked in\nROLES:\nSinh viên đăng ký tham vấn\nRows per page:\n5\n10\n20\n50\n100\n10\n1-3of3results\n/ 1\n1",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/profile",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C06.png"
+  },
+  {
+    "cell": "C07",
+    "target_os": "Android 14",
+    "browser": "Chrome",
+    "device_class": "Phone",
+    "requested_viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "57e3ea359ef0cd53c4790d465f8e9c23ecbd3794",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/profile",
+      "title": "Hồ sơ cá nhân | HCMUS EMS",
+      "viewport": {
+        "width": 457,
+        "height": 822,
+        "dpr": 3
+      },
+      "document": {
+        "clientWidth": 360,
+        "scrollWidth": 457,
+        "scrollHeight": 3740
+      },
+      "horizontalOverflow": true,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "INPUT",
+          "text": "Search activities...",
+          "width": 155,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "text": "5\n10\n20\n50\n100",
+          "width": 47,
+          "height": 21
+        },
+        {
+          "tag": "INPUT",
+          "text": "Go to page",
+          "width": 102,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 140,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 152,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 198,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 58,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 147,
+          "height": 16
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H4",
+          "text": "USING AI AGENT CONVERSATION",
+          "client": [
+            228,
+            28
+          ],
+          "scroll": [
+            275,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            228,
+            28
+          ],
+          "scroll": [
+            852,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Góc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai",
+          "client": [
+            228,
+            28
+          ],
+          "scroll": [
+            648,
+            28
+          ]
+        }
+      ],
+      "dialog": {
+        "x": 4,
+        "y": 226,
+        "width": 352,
+        "height": 417,
+        "fullyWithinViewport": true
+      },
+      "qrVisual": {
+        "tag": "svg",
+        "width": 16,
+        "height": 16,
+        "visible": true
+      },
+      "lang": "en",
+      "mainText": "My Profile\nQR Code\nEdit Profile\nChange Password\nTMH\nThái Minh Huy\nStudent\n\nSTUDENT ID\n\n23127379\n\nEMAIL\n\n23127379@student.hcmus.edu.vn\n\nPHONE\n\n0901234567\n\nRegistered Activities\n\n3\n\nParticipated Activities\n\n1\n\nUpcoming Activities\n\n2\n\nMy Activities\nFilters\nExport\nUSING AI AGENT CONVERSATION\nDeclined\nStudent participation\nUpcoming\n01/08/2026 12:08 - 03/08/2026 12:08\nGD01\nRegistered at:\n29/07/2026 03:21\nChecked in at:\nNot checked in\nROLES:\nParticipant\nĐăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026\nApproved\nStudent participation\nUpcoming\n03/08/2026 01:00 - 07/08/2026 10:00\nTrường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 13:32\nChecked in at:\n28/07/2026 15:23\nROLES:\nHọc viên tham dự\nGóc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai\nPending review\nStudent participation\nOngoing\n06/07/2026 01:00 - 31/12/2026 10:00\nPhòng I.43, Tòa nhà I, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 13:15\nChecked in at:\nNot checked in\nROLES:\nSinh viên đăng ký tham vấn\nRows per page:\n5\n10\n20\n50\n100\n10\n1-3of3results\n/ 1\n1",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/profile",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C07.png"
+  },
+  {
+    "cell": "C08",
+    "target_os": "Android 14",
+    "browser": "Samsung Internet",
+    "device_class": "Phone",
+    "requested_viewport": {
+      "width": 360,
+      "height": 800
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "1358690d412ec12a7d55c4975090b6d6799d1c70",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/profile",
+      "title": "Hồ sơ cá nhân | HCMUS EMS",
+      "viewport": {
+        "width": 457,
+        "height": 772,
+        "dpr": 3
+      },
+      "document": {
+        "clientWidth": 360,
+        "scrollWidth": 457,
+        "scrollHeight": 3740
+      },
+      "horizontalOverflow": true,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "INPUT",
+          "text": "Search activities...",
+          "width": 155,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "text": "5\n10\n20\n50\n100",
+          "width": 47,
+          "height": 21
+        },
+        {
+          "tag": "INPUT",
+          "text": "Go to page",
+          "width": 102,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 140,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 152,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 198,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 58,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 147,
+          "height": 16
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H4",
+          "text": "USING AI AGENT CONVERSATION",
+          "client": [
+            228,
+            28
+          ],
+          "scroll": [
+            275,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            228,
+            28
+          ],
+          "scroll": [
+            852,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Góc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai",
+          "client": [
+            228,
+            28
+          ],
+          "scroll": [
+            648,
+            28
+          ]
+        }
+      ],
+      "dialog": {
+        "x": 4,
+        "y": 186,
+        "width": 352,
+        "height": 417,
+        "fullyWithinViewport": true
+      },
+      "qrVisual": {
+        "tag": "svg",
+        "width": 16,
+        "height": 16,
+        "visible": true
+      },
+      "lang": "en",
+      "mainText": "My Profile\nQR Code\nEdit Profile\nChange Password\nTMH\nThái Minh Huy\nStudent\n\nSTUDENT ID\n\n23127379\n\nEMAIL\n\n23127379@student.hcmus.edu.vn\n\nPHONE\n\n0901234567\n\nRegistered Activities\n\n3\n\nParticipated Activities\n\n1\n\nUpcoming Activities\n\n2\n\nMy Activities\nFilters\nExport\nUSING AI AGENT CONVERSATION\nDeclined\nStudent participation\nUpcoming\n01/08/2026 12:08 - 03/08/2026 12:08\nGD01\nRegistered at:\n29/07/2026 03:21\nChecked in at:\nNot checked in\nROLES:\nParticipant\nĐăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026\nApproved\nStudent participation\nUpcoming\n03/08/2026 01:00 - 07/08/2026 10:00\nTrường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 13:32\nChecked in at:\n28/07/2026 15:23\nROLES:\nHọc viên tham dự\nGóc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai\nPending review\nStudent participation\nOngoing\n06/07/2026 01:00 - 31/12/2026 10:00\nPhòng I.43, Tòa nhà I, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 13:15\nChecked in at:\nNot checked in\nROLES:\nSinh viên đăng ký tham vấn\nRows per page:\n5\n10\n20\n50\n100\n10\n1-3of3results\n/ 1\n1",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/profile",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C08.png"
+  },
+  {
+    "cell": "C09",
+    "target_os": "Android 14",
+    "browser": "Chrome",
+    "device_class": "Tablet",
+    "requested_viewport": {
+      "width": 820,
+      "height": 1180
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "6f9ca8283238e415d8cc81742a7b8591f22e3767",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/profile",
+      "title": "Hồ sơ cá nhân | HCMUS EMS",
+      "viewport": {
+        "width": 800,
+        "height": 1112,
+        "dpr": 1.5
+      },
+      "document": {
+        "clientWidth": 800,
+        "scrollWidth": 800,
+        "scrollHeight": 3641
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "INPUT",
+          "text": "Search activities...",
+          "width": 176,
+          "height": 20
+        },
+        {
+          "tag": "SELECT",
+          "text": "5\n10\n20\n50\n100",
+          "width": 47,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "Go to page",
+          "width": 103,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 160,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 174,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 227,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 67,
+          "height": 19
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 168,
+          "height": 19
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H4",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            653,
+            28
+          ],
+          "scroll": [
+            852,
+            28
+          ]
+        }
+      ],
+      "dialog": {
+        "x": 176,
+        "y": 348,
+        "width": 448,
+        "height": 417,
+        "fullyWithinViewport": true
+      },
+      "qrVisual": {
+        "tag": "svg",
+        "width": 16,
+        "height": 16,
+        "visible": true
+      },
+      "lang": "en",
+      "mainText": "My Profile\nQR Code\nEdit Profile\nChange Password\nTMH\nThái Minh Huy\nStudent\n\nSTUDENT ID\n\n23127379\n\nEMAIL\n\n23127379@student.hcmus.edu.vn\n\nPHONE\n\n0901234567\n\nRegistered Activities\n\n3\n\nParticipated Activities\n\n1\n\nUpcoming Activities\n\n2\n\nMy Activities\nFilters\nExport\nUSING AI AGENT CONVERSATION\nDeclined\nStudent participation\nUpcoming\n01/08/2026 12:08 - 03/08/2026 12:08\nGD01\nRegistered at:\n29/07/2026 03:21\nChecked in at:\nNot checked in\nROLES:\nParticipant\nĐăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026\nApproved\nStudent participation\nUpcoming\n03/08/2026 01:00 - 07/08/2026 10:00\nTrường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 13:32\nChecked in at:\n28/07/2026 15:23\nROLES:\nHọc viên tham dự\nGóc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai\nPending review\nStudent participation\nOngoing\n06/07/2026 01:00 - 31/12/2026 10:00\nPhòng I.43, Tòa nhà I, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 13:15\nChecked in at:\nNot checked in\nROLES:\nSinh viên đăng ký tham vấn\nRows per page:\n5\n10\n20\n50\n100\n10\n1-3of3results\n/ 1\n1",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/profile",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C09.png"
+  },
+  {
+    "cell": "C10",
+    "target_os": "iOS 17",
+    "browser": "Safari",
+    "device_class": "Phone",
+    "requested_viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "fcdffed2ed9e31dff4c0a1ca36f6d4c31926afa3",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/profile",
+      "title": "Hồ sơ cá nhân | HCMUS EMS",
+      "viewport": {
+        "width": 393,
+        "height": 659,
+        "dpr": 3
+      },
+      "document": {
+        "clientWidth": 393,
+        "scrollWidth": 471,
+        "scrollHeight": 3758
+      },
+      "horizontalOverflow": true,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "INPUT",
+          "text": "Search activities...",
+          "width": 155,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "Go to page",
+          "width": 102,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 143,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 157,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 207,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 61,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 155,
+          "height": 18
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Dismiss",
+          "width": 1,
+          "height": 1
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H4",
+          "text": "USING AI AGENT CONVERSATION",
+          "client": [
+            261,
+            28
+          ],
+          "scroll": [
+            290,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            261,
+            28
+          ],
+          "scroll": [
+            896,
+            28
+          ]
+        },
+        {
+          "tag": "H4",
+          "text": "Góc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai",
+          "client": [
+            261,
+            28
+          ],
+          "scroll": [
+            682,
+            28
+          ]
+        }
+      ],
+      "dialog": {
+        "x": 4,
+        "y": 238,
+        "width": 385,
+        "height": 417,
+        "fullyWithinViewport": true
+      },
+      "qrVisual": {
+        "tag": "CANVAS",
+        "width": 200,
+        "height": 200,
+        "visible": true
+      },
+      "lang": "en",
+      "mainText": "My Profile\nQR Code\nEdit Profile\nChange Password\nTMH\nThái Minh Huy\nStudent\nSTUDENT ID\n\n23127379\nEMAIL\n\n23127379@student.hcmus.edu.vn\nPHONE\n\n0901234567\nRegistered Activities\n3\nParticipated Activities\n1\nUpcoming Activities\n2\nMy Activities\n\n\nFilters\n\nExport\n\nUSING AI AGENT CONVERSATION\nDeclined\nStudent participation\nUpcoming\n01/08/2026 12:08 - 03/08/2026 12:08\nGD01\nRegistered at:\n29/07/2026 03:21\nChecked in at:\nNot checked in\nROLES:\nParticipant\n\nĐăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026\nApproved\nStudent participation\nUpcoming\n03/08/2026 01:00 - 07/08/2026 10:00\nTrường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 13:32\nChecked in at:\n28/07/2026 15:23\nROLES:\nHọc viên tham dự\n\nGóc Sẻ Chia - We Talk 2026: KHOA CNTT x LUMOS - Vững tâm lý, Sáng tương lai\nPending review\nStudent participation\nOngoing\n06/07/2026 01:00 - 31/12/2026 10:00\nPhòng I.43, Tòa nhà I, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM\nRegistered at:\n28/07/2026 13:15\nChecked in at:\nNot checked in\nROLES:\nSinh viên đăng ký tham vấn\nRows per page:\n\n\n10\n1-3of3results\n\n/ 1\n\n1\n\n",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "tested_url": "https://prod-dev.ems-fitus.cloud/profile",
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B4_C10.png"
+  }
+]

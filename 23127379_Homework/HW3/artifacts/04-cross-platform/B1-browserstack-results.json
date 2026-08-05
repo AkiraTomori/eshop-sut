@@ -1,0 +1,1360 @@
+[
+  {
+    "cell": "C01",
+    "target_os": "Windows 11",
+    "browser": "Chrome",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "4c6ec61fe4dfe618cd8e2a74dedd0473d6f993a1",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/dashboard",
+      "title": "Dashboard | HCMUS EMS",
+      "viewport": {
+        "width": 1904,
+        "height": 929,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1889,
+        "scrollWidth": 1889,
+        "scrollHeight": 3218
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "View details",
+          "width": 99,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "Search events by title...",
+          "width": 260,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 157,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 172,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 223,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 66,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 166,
+          "height": 21
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "SPAN",
+          "text": "Movement & Campaign Activities",
+          "client": [
+            130,
+            39
+          ],
+          "scroll": [
+            130,
+            58
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Career Orientation & Enterprise Networking",
+          "client": [
+            130,
+            39
+          ],
+          "scroll": [
+            130,
+            58
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            431,
+            20
+          ],
+          "scroll": [
+            431,
+            40
+          ]
+        },
+        {
+          "tag": "H3",
+          "text": "Đăng ký tham gia Seminar Human-AI Hybrid System in Algorithmic Trading: Introduction and Bachelor Thesis Topics",
+          "client": [
+            450,
+            48
+          ],
+          "scroll": [
+            450,
+            72
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            431,
+            20
+          ],
+          "scroll": [
+            431,
+            40
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Trong khuôn khổ Lễ Kỷ niệm 30 năm thành lập Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM, Không",
+          "client": [
+            450,
+            40
+          ],
+          "scroll": [
+            450,
+            80
+          ]
+        }
+      ],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B1_C01.png"
+  },
+  {
+    "cell": "C02",
+    "target_os": "Windows 11",
+    "browser": "Firefox",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "9735e308cad141471604dd2d09121ca419197b1d",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/dashboard",
+      "title": "Dashboard | HCMUS EMS",
+      "viewport": {
+        "width": 1904,
+        "height": 986,
+        "dpr": 1
+      },
+      "document": {
+        "clientWidth": 1904,
+        "scrollWidth": 1904,
+        "scrollHeight": 3229
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "View details",
+          "width": 99,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "Search events by title...",
+          "width": 260,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 157,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 172,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 223,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 66,
+          "height": 21
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 166,
+          "height": 21
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "SPAN",
+          "text": "Opens in 1d 12h",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            87,
+            16
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            436,
+            20
+          ],
+          "scroll": [
+            436,
+            40
+          ]
+        },
+        {
+          "tag": "H3",
+          "text": "Đăng ký tham gia Seminar Human-AI Hybrid System in Algorithmic Trading: Introduction and Bachelor Thesis Topics",
+          "client": [
+            455,
+            48
+          ],
+          "scroll": [
+            455,
+            72
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            436,
+            20
+          ],
+          "scroll": [
+            436,
+            40
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Trong khuôn khổ Lễ Kỷ niệm 30 năm thành lập Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM, Không",
+          "client": [
+            455,
+            40
+          ],
+          "scroll": [
+            455,
+            80
+          ]
+        }
+      ],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B1_C02.png"
+  },
+  {
+    "cell": "C03",
+    "target_os": "Windows 11",
+    "browser": "Edge",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "2d32ec5d7e2280e4e5dfa8e3081cfa4957df7733",
+    "analysis": {
+      "bodyTextHasVietnameseDiacritics": true,
+      "brokenImages": [],
+      "document": {
+        "clientWidth": 1401,
+        "scrollHeight": 3943,
+        "scrollWidth": 1401
+      },
+      "horizontalOverflow": false,
+      "lang": "en",
+      "smallTargets": [
+        {
+          "height": 20,
+          "tag": "A",
+          "text": "View details",
+          "width": 99
+        },
+        {
+          "height": 20,
+          "tag": "INPUT",
+          "text": "Search events by title...",
+          "width": 260
+        },
+        {
+          "height": 21,
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 157
+        },
+        {
+          "height": 21,
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 172
+        },
+        {
+          "height": 21,
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 223
+        },
+        {
+          "height": 21,
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 66
+        },
+        {
+          "height": 21,
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 166
+        }
+      ],
+      "title": "Dashboard | HCMUS EMS",
+      "truncatedText": [
+        {
+          "client": [
+            130,
+            39
+          ],
+          "scroll": [
+            130,
+            58
+          ],
+          "tag": "SPAN",
+          "text": "Movement & Campaign Activities"
+        },
+        {
+          "client": [
+            130,
+            39
+          ],
+          "scroll": [
+            130,
+            58
+          ],
+          "tag": "SPAN",
+          "text": "Career Orientation & Enterprise Networking"
+        },
+        {
+          "client": [
+            441,
+            20
+          ],
+          "scroll": [
+            441,
+            40
+          ],
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM"
+        },
+        {
+          "client": [
+            441,
+            20
+          ],
+          "scroll": [
+            441,
+            40
+          ],
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM"
+        },
+        {
+          "client": [
+            461,
+            40
+          ],
+          "scroll": [
+            461,
+            80
+          ],
+          "tag": "P",
+          "text": "Trong khuôn khổ Lễ Kỷ niệm 30 năm thành lập Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM, Không"
+        }
+      ],
+      "url": "https://prod-dev.ems-fitus.cloud/dashboard",
+      "viewport": {
+        "dpr": 1,
+        "height": 733,
+        "width": 1416
+      }
+    },
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B1_C03.png"
+  },
+  {
+    "cell": "C04",
+    "target_os": "macOS Sequoia",
+    "browser": "Safari",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "2c16e2635cc02cc8d3a3d0659f8dbffb82d7618d",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/dashboard",
+      "lang": "en",
+      "title": "Dashboard | HCMUS EMS",
+      "bodyTextHasVietnameseDiacritics": true,
+      "document": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "scrollHeight": 3241
+      },
+      "horizontalOverflow": false,
+      "smallTargets": [
+        {
+          "text": "View details",
+          "height": 20,
+          "width": 105,
+          "tag": "A"
+        },
+        {
+          "text": "Search events by title...",
+          "height": 20,
+          "width": 260,
+          "tag": "INPUT"
+        },
+        {
+          "text": "info@fit.hcmus.edu.vn",
+          "height": 18,
+          "width": 161,
+          "tag": "A"
+        },
+        {
+          "text": "LMS of Regular Program",
+          "height": 18,
+          "width": 177,
+          "tag": "A"
+        },
+        {
+          "text": "LMS of Project-based Programs",
+          "height": 18,
+          "width": 232,
+          "tag": "A"
+        },
+        {
+          "text": "Helpdesk",
+          "height": 18,
+          "width": 68,
+          "tag": "A"
+        },
+        {
+          "text": "Teaching at FIT-HCMUS",
+          "height": 18,
+          "width": 174,
+          "tag": "A"
+        }
+      ],
+      "brokenImages": [],
+      "truncatedText": [
+        {
+          "text": "Career Orientation & Enterprise Networking",
+          "client": [
+            155,
+            38
+          ],
+          "tag": "SPAN",
+          "scroll": [
+            155,
+            57
+          ]
+        },
+        {
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            441,
+            20
+          ],
+          "tag": "SPAN",
+          "scroll": [
+            441,
+            40
+          ]
+        },
+        {
+          "text": "Đăng ký tham gia Seminar Human-AI Hybrid System in Algorithmic Trading: Introduction and Bachelor Thesis Topics",
+          "client": [
+            461,
+            48
+          ],
+          "tag": "H3",
+          "scroll": [
+            461,
+            72
+          ]
+        },
+        {
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            441,
+            20
+          ],
+          "tag": "SPAN",
+          "scroll": [
+            441,
+            40
+          ]
+        },
+        {
+          "text": "Trong khuôn khổ Lễ Kỷ niệm 30 năm thành lập Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM, Không",
+          "client": [
+            461,
+            40
+          ],
+          "tag": "P",
+          "scroll": [
+            461,
+            80
+          ]
+        }
+      ],
+      "viewport": {
+        "width": 1920,
+        "dpr": 1,
+        "height": 1028
+      }
+    },
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B1_C04.png"
+  },
+  {
+    "cell": "C05",
+    "target_os": "macOS Mojave (Sequoia unavailable)",
+    "browser": "Opera 12.15",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "status": "error",
+    "stage": "login-and-navigation",
+    "session_id": "e86710c8a2aa3077222a12fa159153711e87e440",
+    "error_type": "TimeoutException",
+    "error": "Message: \n",
+    "current_url": "https://prod-dev.ems-fitus.cloud/login",
+    "page_title": "Error",
+    "body_excerpt": "Unable to complete secure transaction\nYou tried to access the address https://prod-dev.ems-fitus.cloud/login, which is currently unavailable. Please make sure that the web address (URL) is correctly spelled and punctuated, then try reloading the page.\nSecure connection: fatal error (40) from server.\nhttps://prod-dev.ems-fitus.cloud/login\nFailed to connect to server. The reason may be that the encryption methods supported by the server are not enabled in the security preferences.\nPlease note that some encryption methods are no longer supported, and that access will not be possible until the website has been upgraded to use strong encryption.\nMake sure your internet connection is active and check whether other applications that rely on the same connection are working.\nCheck that the setup of any internet security software is correct and does not interfere with ordinary web browsing.\nIf you are behind a firewall on a Local Area Network and think this may be causing problems, talk to your systems administrator.\nTry pressing the F12 key on your keyboard and disabling proxy servers, unless you know that you are required to use a proxy to connect to the internet. Reload the page.\nNeed help?\nOpen the Opera Help.\nGo to Opera's online support desk.",
+    "error_screenshot": "artifacts/04-cross-platform/screenshots/diagnostics/B1_C05_error.png",
+    "evidence_screenshot": "artifacts/04-cross-platform/screenshots/B1_C05.png"
+  },
+  {
+    "cell": "C06",
+    "target_os": "macOS Sequoia",
+    "browser": "Chrome",
+    "device_class": "Desktop",
+    "requested_viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "5cf1eaebc30835c8e25b93b363214dc3ad230fad",
+    "analysis": {
+      "bodyTextHasVietnameseDiacritics": true,
+      "brokenImages": [],
+      "document": {
+        "clientWidth": 1440,
+        "scrollHeight": 4002,
+        "scrollWidth": 1440
+      },
+      "horizontalOverflow": false,
+      "lang": "en",
+      "smallTargets": [
+        {
+          "height": 20,
+          "tag": "A",
+          "text": "View details",
+          "width": 105
+        },
+        {
+          "height": 20,
+          "tag": "INPUT",
+          "text": "Search events by title...",
+          "width": 260
+        },
+        {
+          "height": 18,
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 161
+        },
+        {
+          "height": 18,
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 177
+        },
+        {
+          "height": 18,
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 232
+        },
+        {
+          "height": 18,
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 68
+        },
+        {
+          "height": 18,
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 174
+        }
+      ],
+      "title": "Dashboard | HCMUS EMS",
+      "truncatedText": [
+        {
+          "client": [
+            155,
+            39
+          ],
+          "scroll": [
+            155,
+            58
+          ],
+          "tag": "SPAN",
+          "text": "Career Orientation & Enterprise Networking"
+        },
+        {
+          "client": [
+            460,
+            20
+          ],
+          "scroll": [
+            460,
+            40
+          ],
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM"
+        },
+        {
+          "client": [
+            460,
+            20
+          ],
+          "scroll": [
+            460,
+            40
+          ],
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM"
+        },
+        {
+          "client": [
+            480,
+            40
+          ],
+          "scroll": [
+            480,
+            80
+          ],
+          "tag": "P",
+          "text": "Trong khuôn khổ Lễ Kỷ niệm 30 năm thành lập Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM, Không"
+        }
+      ],
+      "url": "https://prod-dev.ems-fitus.cloud/dashboard",
+      "viewport": {
+        "dpr": 1,
+        "height": 757,
+        "width": 1440
+      }
+    },
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B1_C06.png"
+  },
+  {
+    "cell": "C07",
+    "target_os": "Android 14",
+    "browser": "Chrome",
+    "device_class": "Phone",
+    "requested_viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "5bd43245098b1f9e3d812ce4c351c98232a792d7",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/dashboard",
+      "title": "Dashboard | HCMUS EMS",
+      "viewport": {
+        "width": 360,
+        "height": 647,
+        "dpr": 3
+      },
+      "document": {
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "scrollHeight": 7635
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "View details",
+          "width": 97,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "Search events by title...",
+          "width": 191,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 140,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 152,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 198,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 58,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 147,
+          "height": 16
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H2",
+          "text": "Chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT",
+          "client": [
+            284,
+            60
+          ],
+          "scroll": [
+            284,
+            90
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Nhằm gặp gỡ, nắm bắt tâm tư, nguyện vọng của sinh viên, Khoa CNTT tổ chức chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ",
+          "client": [
+            284,
+            60
+          ],
+          "scroll": [
+            284,
+            80
+          ]
+        },
+        {
+          "tag": "H3",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            294,
+            48
+          ],
+          "scroll": [
+            294,
+            96
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Trường hè học thuật về Intelligent Agents và Agentic AI do Khoa Công nghệ Thông tin tổ chức.",
+          "client": [
+            294,
+            40
+          ],
+          "scroll": [
+            294,
+            60
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            278,
+            20
+          ],
+          "scroll": [
+            278,
+            40
+          ]
+        },
+        {
+          "tag": "H3",
+          "text": "Đăng ký tham gia Seminar Human-AI Hybrid System in Algorithmic Trading: Introduction and Bachelor Thesis Topics",
+          "client": [
+            294,
+            48
+          ],
+          "scroll": [
+            294,
+            72
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Seminar giới thiệu hệ thống lai Human-AI trong giao dịch thuật toán và các hướng đề tài khóa luận.",
+          "client": [
+            294,
+            40
+          ],
+          "scroll": [
+            294,
+            60
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            278,
+            20
+          ],
+          "scroll": [
+            278,
+            40
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Trong khuôn khổ Lễ Kỷ niệm 30 năm thành lập Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM, Không",
+          "client": [
+            294,
+            40
+          ],
+          "scroll": [
+            294,
+            140
+          ]
+        }
+      ],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B1_C07.png"
+  },
+  {
+    "cell": "C08",
+    "target_os": "Android 14",
+    "browser": "Samsung Internet",
+    "device_class": "Phone",
+    "requested_viewport": {
+      "width": 360,
+      "height": 800
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "599db892bf0824873b5677aec58ef3da3810afb0",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/dashboard",
+      "title": "Dashboard | HCMUS EMS",
+      "viewport": {
+        "width": 360,
+        "height": 607,
+        "dpr": 3
+      },
+      "document": {
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "scrollHeight": 7635
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "View details",
+          "width": 97,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "Search events by title...",
+          "width": 191,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 140,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 152,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 198,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 58,
+          "height": 16
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 147,
+          "height": 16
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H2",
+          "text": "Chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT",
+          "client": [
+            284,
+            60
+          ],
+          "scroll": [
+            284,
+            90
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Nhằm gặp gỡ, nắm bắt tâm tư, nguyện vọng của sinh viên, Khoa CNTT tổ chức chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ",
+          "client": [
+            284,
+            60
+          ],
+          "scroll": [
+            284,
+            80
+          ]
+        },
+        {
+          "tag": "H3",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            294,
+            48
+          ],
+          "scroll": [
+            294,
+            96
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Trường hè học thuật về Intelligent Agents và Agentic AI do Khoa Công nghệ Thông tin tổ chức.",
+          "client": [
+            294,
+            40
+          ],
+          "scroll": [
+            294,
+            60
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            278,
+            20
+          ],
+          "scroll": [
+            278,
+            40
+          ]
+        },
+        {
+          "tag": "H3",
+          "text": "Đăng ký tham gia Seminar Human-AI Hybrid System in Algorithmic Trading: Introduction and Bachelor Thesis Topics",
+          "client": [
+            294,
+            48
+          ],
+          "scroll": [
+            294,
+            72
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Seminar giới thiệu hệ thống lai Human-AI trong giao dịch thuật toán và các hướng đề tài khóa luận.",
+          "client": [
+            294,
+            40
+          ],
+          "scroll": [
+            294,
+            60
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            278,
+            20
+          ],
+          "scroll": [
+            278,
+            40
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Trong khuôn khổ Lễ Kỷ niệm 30 năm thành lập Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM, Không",
+          "client": [
+            294,
+            40
+          ],
+          "scroll": [
+            294,
+            140
+          ]
+        }
+      ],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B1_C08.png"
+  },
+  {
+    "cell": "C09",
+    "target_os": "Android 14",
+    "browser": "Chrome",
+    "device_class": "Tablet",
+    "requested_viewport": {
+      "width": 820,
+      "height": 1180
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "9a9f36dd54dd0c78260bef7fc3158ba7e1d67fe1",
+    "analysis": {
+      "bodyTextHasVietnameseDiacritics": true,
+      "brokenImages": [],
+      "document": {
+        "clientWidth": 800,
+        "scrollHeight": 8210,
+        "scrollWidth": 800
+      },
+      "horizontalOverflow": false,
+      "lang": "en",
+      "smallTargets": [
+        {
+          "height": 20,
+          "tag": "A",
+          "text": "View details",
+          "width": 99
+        },
+        {
+          "height": 20,
+          "tag": "INPUT",
+          "text": "Search events by title...",
+          "width": 600
+        },
+        {
+          "height": 19,
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 160
+        },
+        {
+          "height": 19,
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 174
+        },
+        {
+          "height": 19,
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 227
+        },
+        {
+          "height": 19,
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 67
+        },
+        {
+          "height": 19,
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 168
+        }
+      ],
+      "title": "Dashboard | HCMUS EMS",
+      "truncatedText": [
+        {
+          "client": [
+            409,
+            75
+          ],
+          "scroll": [
+            409,
+            113
+          ],
+          "tag": "H2",
+          "text": "Chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT"
+        },
+        {
+          "client": [
+            703,
+            40
+          ],
+          "scroll": [
+            703,
+            60
+          ],
+          "tag": "P",
+          "text": "Trong khuôn khổ Lễ Kỷ niệm 30 năm thành lập Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM, Không"
+        }
+      ],
+      "url": "https://prod-dev.ems-fitus.cloud/dashboard",
+      "viewport": {
+        "dpr": 1.5,
+        "height": 1112,
+        "width": 800
+      }
+    },
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B1_C09.png"
+  },
+  {
+    "cell": "C10",
+    "target_os": "iOS 17",
+    "browser": "Safari",
+    "device_class": "Phone",
+    "requested_viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": "captured",
+    "stage": "complete",
+    "session_id": "be44716f562106763bcd3fbf016574291c258702",
+    "analysis": {
+      "url": "https://prod-dev.ems-fitus.cloud/dashboard",
+      "title": "Dashboard | HCMUS EMS",
+      "viewport": {
+        "width": 393,
+        "height": 659,
+        "dpr": 3
+      },
+      "document": {
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "scrollHeight": 7842
+      },
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "smallTargets": [
+        {
+          "tag": "A",
+          "text": "View details",
+          "width": 103,
+          "height": 20
+        },
+        {
+          "tag": "INPUT",
+          "text": "Search events by title...",
+          "width": 219,
+          "height": 20
+        },
+        {
+          "tag": "A",
+          "text": "info@fit.hcmus.edu.vn",
+          "width": 143,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Regular Program",
+          "width": 157,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "LMS of Project-based Programs",
+          "width": 207,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Helpdesk",
+          "width": 61,
+          "height": 18
+        },
+        {
+          "tag": "A",
+          "text": "Teaching at FIT-HCMUS",
+          "width": 155,
+          "height": 18
+        }
+      ],
+      "truncatedText": [
+        {
+          "tag": "H2",
+          "text": "Chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ nhiệm Khoa CNTT",
+          "client": [
+            317,
+            60
+          ],
+          "scroll": [
+            317,
+            90
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Nhằm gặp gỡ, nắm bắt tâm tư, nguyện vọng của sinh viên, Khoa CNTT tổ chức chương trình: Gặp gỡ & Trò chuyện cùng Ban chủ",
+          "client": [
+            317,
+            60
+          ],
+          "scroll": [
+            317,
+            80
+          ]
+        },
+        {
+          "tag": "H3",
+          "text": "Đăng ký tham gia Trường hè FIT@HCMUS Summer School on Intelligent Agents and Agentic AI năm 2026",
+          "client": [
+            327,
+            48
+          ],
+          "scroll": [
+            327,
+            72
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            311,
+            20
+          ],
+          "scroll": [
+            311,
+            40
+          ]
+        },
+        {
+          "tag": "H3",
+          "text": "Đăng ký tham gia Seminar Human-AI Hybrid System in Algorithmic Trading: Introduction and Bachelor Thesis Topics",
+          "client": [
+            327,
+            48
+          ],
+          "scroll": [
+            327,
+            72
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Seminar giới thiệu hệ thống lai Human-AI trong giao dịch thuật toán và các hướng đề tài khóa luận.",
+          "client": [
+            327,
+            40
+          ],
+          "scroll": [
+            327,
+            60
+          ]
+        },
+        {
+          "tag": "SPAN",
+          "text": "Trường Đại học Khoa học Tự nhiên, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP.HCM",
+          "client": [
+            311,
+            20
+          ],
+          "scroll": [
+            311,
+            40
+          ]
+        },
+        {
+          "tag": "P",
+          "text": "Trong khuôn khổ Lễ Kỷ niệm 30 năm thành lập Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM, Không",
+          "client": [
+            327,
+            40
+          ],
+          "scroll": [
+            327,
+            120
+          ]
+        }
+      ],
+      "lang": "en",
+      "bodyTextHasVietnameseDiacritics": true
+    },
+    "screenshot": "artifacts/04-cross-platform/screenshots/raw/B1_C10.png"
+  }
+]
