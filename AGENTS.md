@@ -121,74 +121,107 @@ flowchart TD
 
 ## Slash Command Guide for HW05
 
-| Stage | Command | Why |
-|---|---|---|
-| Starting HW05 | `/plan` | Creates a complete step-by-step execution plan for all 3 groups |
-| Start of each group | `/grill-me` | Interactive Q&A to align on parameters, CSV accounts, and lockout strategy before any skill runs |
-| Group execution (Skill 3→7→4→8) | `/goal` | Keeps agent thorough and focused; prevents premature stopping |
-| Every Skill 10 review | `/teamwork-preview` | Spawns an independent agent with no memory of the reviewed content — eliminates AI self-defense bias |
-| After correcting AI errors | `/learn` | Persists the correction (e.g., "always use `elapsed` not `Latency` for p95") for future sessions |
-| Final phase (Skill 6→5→9) | `/goal` | Ensures all appendices are complete before stopping |
-
-### Command Examples
-
-```bash
-# ── Beginning HW05 ──────────────────────────────────────────────────────────
-/plan
-# Then type:
-"I am starting HW05 performance testing on EShop at http://localhost:3000.
-My machine: MacBook Pro M2, 16GB RAM, macOS 14. Student ID: 23127379.
-Create a step-by-step plan for all 3 endpoint groups."
-
-# ── Starting Group 1 ─────────────────────────────────────────────────────────
-/grill-me
-# Then type:
-"I am about to start Group 1 (Read-heavy). Ask me questions about my
-machine specs, baseline response time, and available product IDs before
-activating test-parameter-advisor."
-
-# ── Invoking Skill 1 ─────────────────────────────────────────────────────────
-"Activate skill test-parameter-advisor for Group 1 Read-heavy.
-Machine: MacBook Pro M2, 16GB RAM, macOS 14.
-SUT: http://localhost:3000. Advise Load Test parameters for
-GET /api/products and GET /api/products/:id."
-
-# ── After Skill 1 approved ───────────────────────────────────────────────────
-"Parameters approved. Activate skill test-plan-generator.
-Student ID: 23127379. Today: 20260806. Tool: JMeter.
-Generate 23127379_Load_20260806.jmx and products_data.csv."
-
-# ── Skill 10 review (ALWAYS in fresh context) ────────────────────────────────
-/teamwork-preview
-# In the new agent context:
-"Activate skill independent-reviewer.
-Source skill: Skill 2 (test-plan-generator), Version: v1, Group: 1 Load.
-Ground truth: [paste api_specification.md]
-Content to review: [paste generated JMX description or file content]"
-
-# ── Running full group execution ──────────────────────────────────────────────
-/goal
-"Run the full Group 2 execution sequence:
-Skill 3 (execute 23127379_Spike_20260806.jmx) →
-Skill 7 (reset lockout) →
-Skill 4 (analyze spike .jtl) →
-Skill 8 (draft bug reports).
-Do not stop until all 4 skills are complete and I have reviewed each checkpoint."
-
-# ── After all 3 groups complete ──────────────────────────────────────────────
-"All 3 groups complete. Activate skill ci-performance-pipeline-proposer.
-Real measurements:
-- Load p95: {X}ms, error: {Y}%, throughput: {Z} rps
-- Spike p95: {X}ms, recovery: {T}s
-- Stress p95: {X}ms, breaking point: {N} users
-- Endurance: {R} rps max stable, {M} MB memory ceiling"
-
-# ── After correcting a recurring AI error ─────────────────────────────────────
-/learn
-"The AI keeps computing p95 from the Latency column instead of the elapsed
-column in JTL files. Latency = time to first byte. Elapsed = full round-trip.
-Always use elapsed for all response time calculations."
+### 🟢 Before You Start (Once)
 ```
+/plan
+```
+> "Starting HW05 on EShop localhost:3000. Student ID: 23127379.
+> Machine: MacBook M2, 16GB RAM, macOS 14. Create a plan for all 3 groups."
+
+---
+
+### 📦 Group 1 — Read-heavy (`GET /api/products`)
+
+```
+/grill-me      → align on params before Skill 1
+```
+```
+               → "Activate skill test-parameter-advisor for Group 1 Read-heavy.
+                  Advise Load Test params for GET /api/products, GET /api/products/:id."
+```
+```
+/teamwork-preview  → Skill 10: review Skill 1 params (fresh context)
+/teamwork-preview  → Skill 10: review Skill 2 JMX (fresh context)
+```
+```
+/goal          → "Run Group 1: Skill 3 (execute Load JMX) → Skill 4 (analyze .jtl)
+                  → Skill 8 (draft bug reports). Do not stop early."
+```
+```
+/teamwork-preview  → Skill 10: review Skill 4 analysis (fresh context)
+```
+
+---
+
+### 📦 Group 2 — Auth-heavy (`POST /api/login`)
+
+```
+/grill-me      → align on Spike params + lockout account count before Skill 1
+```
+```
+               → "Activate skill test-parameter-advisor for Group 2 Auth-heavy.
+                  Advise Spike Test params for POST /api/login (lockout after 3 fails)."
+```
+```
+/teamwork-preview  → Skill 10: review Skill 1 params
+/teamwork-preview  → Skill 10: review Skill 2 JMX
+```
+```
+/goal          → "Run Group 2: Skill 3 (Spike JMX) → Skill 7 (reset lockout)
+                  → Skill 4 (analyze .jtl) → Skill 8 (bug reports). Do not stop early."
+```
+```
+/teamwork-preview  → Skill 10: review Skill 4 analysis
+```
+
+---
+
+### 📦 Group 3 — Transactional (`POST /api/cart` → `POST /api/checkout`)
+
+```
+/grill-me      → align on Stress params before Skill 1
+```
+```
+               → "Activate skill test-parameter-advisor for Group 3 Transactional.
+                  Advise Stress Test params for POST /api/cart → POST /api/checkout."
+```
+```
+/teamwork-preview  → Skill 10: review Skill 1 params
+/teamwork-preview  → Skill 10: review Skill 2 JMX
+```
+```
+/goal          → "Run Group 3: Skill 3 (Stress JMX) → Skill 7 (reset lockout if any)
+                  → Skill 4 (analyze .jtl, find breaking point) → Skill 8. Do not stop early."
+```
+```
+/teamwork-preview  → Skill 10: review Skill 4 analysis
+```
+
+---
+
+### 🏁 Final Phase (after all 3 groups)
+
+```
+               → "Activate skill ci-performance-pipeline-proposer.
+                  Load p95:{X}ms err:{Y}% | Spike p95:{X}ms recovery:{T}s
+                  | Stress p95:{X}ms breaking:{N}users | Endurance:{R}rps {M}MB"
+```
+```
+/teamwork-preview  → Skill 10: review CI proposal
+```
+```
+/goal          → "Run final phase: Skill 5 (AI Audit Report + Critique 200-300 words)
+                  → Skill 9 (compile README + submission checklist). Do not stop early."
+```
+
+---
+
+### 🛠 Anytime — After Correcting an AI Error
+```
+/learn
+```
+> Example: "AI keeps using Latency column for p95 instead of elapsed.
+> elapsed = full round-trip. Always use elapsed for all p95 calculations."
 
 ---
 
