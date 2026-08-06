@@ -187,6 +187,8 @@ Alternatively, you can watch the individual videos for workflow:
 - [Part 5](https://www.youtube.com/watch?v=2IxUkkGh148&list=PLFKmUDyIY8sc&index=5)
 - [Part 6](https://www.youtube.com/watch?v=RTrrBKdYq5A&list=PLFKmUDyIY8sc&index=6)
 
+Demo videos: [Demo](https://www.youtube.com/watch?v=VD_Xu0Yz9UA&list=PLFKmUDyIY8sc&index=8)
+
 DevOps Video to explain why Testing Process is now shift-left and how to run test with CI/CD pipeline:
 - [DevOps Video](https://www.youtube.com/watch?v=6ccDGcsMSgc&list=PLFKmUDyIY8sc&index=7)
 
