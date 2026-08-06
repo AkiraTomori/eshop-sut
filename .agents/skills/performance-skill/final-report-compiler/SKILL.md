@@ -24,8 +24,8 @@ following the exact structure required by the assignment.
 ## Pre-run Checklist
 
 Confirm all of the following exist before running:
-- [ ] Skills 1–2: 3 test plan files + 3 CSV files (correct naming convention)
-- [ ] Skill 3: 3 `.jtl` files + 3 HTML report folders
+- [ ] Skills 1–2: 3 test script files + 3 CSV files (`*.js` files, not `.jmx`)
+- [ ] Skill 3: 3 k6 CSV files + 3 `summary.json` + 3 HTML report folders
 - [ ] Skill 4: p95 / error rate / throughput data for all 3 scenarios
 - [ ] Skill 5: `ai_audit_report.md` + `ai_critique.md`
 - [ ] Skill 6: `ci_pipeline_proposal.md`
@@ -55,9 +55,9 @@ Confirm all of the following exist before running:
 
 | # | Scenario | Endpoint Group | Endpoints | Test Plan File | Status |
 |---|----------|----------------|-----------|----------------|--------|
-| 1 | Load Testing | Read-heavy | `GET /api/products`, `GET /api/products/:id` | `23127379_Load_{date}.jmx` | ✅ Complete |
-| 2 | Spike Testing | Auth-heavy | `POST /api/login` | `23127379_Spike_{date}.jmx` | ✅ Complete |
-| 3 | Stress Testing | Transactional | `POST /api/cart` → `POST /api/checkout` | `23127379_Stress_{date}.jmx` | ✅ Complete |
+| 1 | Load Testing | Read-heavy | `GET /api/products`, `GET /api/products/:id` | `23127379_Load_{date}.js` | ✅ Complete |
+| 2 | Spike Testing | Auth-heavy | `POST /api/login` | `23127379_Spike_{date}.js` | ✅ Complete |
+| 3 | Stress Testing | Transactional | `POST /api/cart` → `POST /api/checkout` | `23127379_Stress_{date}.js` | ✅ Complete |
 
 ### Endpoint Groups Covered
 
@@ -132,15 +132,16 @@ Confirm all of the following exist before running:
 ├── lockout_reset_log.md               ← Skill 7 lockout reset history
 ├── git_commit_log.txt                 ← required by HW05
 ├── test-plans/
-│   ├── 23127379_Load_{date}.jmx
-│   ├── 23127379_Spike_{date}.jmx
-│   ├── 23127379_Stress_{date}.jmx
+│   ├── 23127379_Load_{date}.js
+│   ├── 23127379_Spike_{date}.js
+│   ├── 23127379_Stress_{date}.js
 │   ├── products_data.csv
 │   ├── auth_credentials.csv
 │   └── order_payloads.csv
 ├── results/
 │   ├── 23127379_Load_{date}/
-│   │   ├── 23127379_Load_{date}.jtl
+│   │   ├── 23127379_Load_{date}.csv
+│   │   ├── summary.json
 │   │   ├── html_report/
 │   │   └── resource_usage.txt
 │   ├── 23127379_Spike_{date}/
@@ -222,9 +223,9 @@ cat "23127379_Homework/HW5/git_commit_log.txt"
 ### Required Files
 - [ ] hw05_report.md + PDF export
 - [ ] README.md with self-assessment table (FILL IN GRADES)
-- [ ] 3 test plans: 23127379_Load/Spike/Stress_{date}.jmx
-- [ ] 3 raw .jtl files (full, not truncated)
-- [ ] 3 HTML report folders (html_report/index.html)
+- [ ] 3 test scripts: 23127379_Load/Spike/Stress_{date}.js
+- [ ] 3 raw k6 CSV files + 3 summary.json (full, not truncated)
+- [ ] 3 HTML reports (via k6-html-reporter: html_report/index.html)
 - [ ] 3 CSV data files (products, auth, order)
 - [ ] resource_usage.txt for all 3 runs
 - [ ] screenshots/ (tool + resource monitor in same frame)

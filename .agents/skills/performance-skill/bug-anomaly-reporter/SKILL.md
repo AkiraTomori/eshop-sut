@@ -1,11 +1,11 @@
 ---
 name: bug-anomaly-reporter
 description: >-
-  Use this skill when .jtl results reveal actual bugs, errors, or performance
+  Use this skill when k6 CSV results reveal actual bugs, errors, or performance
   anomalies in EShop that warrant GitHub Issue reporting. Trigger phrases:
   "report bug", "create GitHub issue", "found an error", "report performance
   issue", "draft bug report", or after Skill 4 identifies 5xx errors, timeouts,
-  or functional regressions in the .jtl log. This skill compares actual .jtl
+  or functional regressions in the k6 CSV result. This skill compares actual k6
   observations against api_specification.md expected behavior, drafts GitHub
   Issue content for each real finding, and STOPS for human review before any
   issue is posted. Does NOT auto-post issues — human must post manually with
@@ -22,39 +22,49 @@ Draft GitHub Issue content for real bugs found in `.jtl` logs.
 
 ## Required Input
 
-- `[JTL_FILE]` — `.jtl` file from Skill 3
+- `[CSV_FILE]` — k6 CSV result file from Skill 3 (`{ID}_{Scenario}_{DATE}.csv`)
+- `[SUMMARY_JSON]` — `summary.json` from Skill 3
 - `[SCENARIO_TYPE]` — Load / Stress / Spike
 - `[EXPECTED_BEHAVIOR]` — from `api_specification.md` (read the source file)
 
 ---
 
-## Step 1 — Scan .jtl for Real Errors
+## Step 1 — Scan k6 CSV for Real Errors
 
 ```python
 import pandas as pd
 
-df = pd.read_csv('{JTL_FILE}')
+df = pd.read_csv('{CSV_FILE}')
 
-# 1. HTTP 5xx errors (genuine server bugs)
-errors_5xx = df[df['responseCode'].astype(str).str.startswith('5')]
-print(f"5xx Errors: {len(errors_5xx)}")
-print(errors_5xx[['timeStamp','label','responseCode','responseMessage','failureMessage']].to_string())
+# Filter HTTP duration metrics
+http_dur = df[df['metric_name'] == 'http_req_duration'].copy()
+http_dur['metric_value'] = pd.to_numeric(http_dur['metric_value'])
 
-# 2. Timeouts
-timeouts = df[
-    (df['elapsed'] > 10000) |
-    (df['responseMessage'].str.contains('timeout', case=False, na=False))
-]
-print(f"\nTimeouts: {len(timeouts)}")
+# 1. Failed HTTP requests (http_req_failed == 1.0)
+http_fail = df[(df['metric_name'] == 'http_req_failed') & (df['metric_value'].astype(float) == 1.0)]
+print(f"Failed requests: {len(http_fail)}")
+if 'url' in http_fail.columns:
+    print(http_fail[['timestamp', 'url', 'error', 'error_code', 'status']].head(20).to_string())
 
-# 3. Functional regressions (200 OK but assertion failed)
-func_failures = df[(df['responseCode'] == '200') & (df['success'] == False)]
-print(f"\nFunctional failures (200 OK but assertion failed): {len(func_failures)}")
-print(func_failures[['label','failureMessage']].drop_duplicates().to_string())
+# 2. Timeouts (duration > 10000ms or error contains 'timeout')
+timeouts = http_dur[http_dur['metric_value'] > 10000]
+print(f"\nTimeouts (>10s): {len(timeouts)}")
+
+# 3. Functional regressions (check() failures logged in k6 console)
+# Note: check() failures appear in k6 console output and summary.json 'checks' section
+import json
+try:
+    with open('{SUMMARY_JSON}') as f:
+        summary = json.load(f)
+    checks = summary.get('metrics', {}).get('checks', {}).get('values', {})
+    fail_rate = checks.get('fails', 0)
+    print(f"\ncheck() failures: {fail_rate}")
+except Exception as e:
+    print(f"\nCould not read summary.json: {e}")
 
 # 4. High latency (p95 > acceptable threshold)
-p95 = df['elapsed'].quantile(0.95)
-print(f"\np95: {p95}ms")
+p95 = http_dur['metric_value'].quantile(0.95)
+print(f"\np95: {p95:.1f}ms")
 if p95 > 3000:
     print("⚠️  p95 > 3s — may warrant a performance issue report")
 ```
@@ -103,10 +113,10 @@ concurrent load of {N} users.
 ## Environment
 - **EShop commit**: [insert git hash]
 - **Test date**: {date}
-- **Tool**: JMeter {version}
-- **Hardware**: {CPU}, {RAM}GB RAM, macOS/Windows/Linux {version}
-- **Concurrent users at time of error**: {N}
-- **Test plan**: `23127379_Stress_{date}.jmx`
+- **Tool**: Grafana k6 {version}
+- **Hardware**: {CPU}, {RAM}GB RAM, macOS {version}
+- **Concurrent VUs at time of error**: {N}
+- **Test script**: `23127379_Stress_{date}.js`
 
 ## Steps to Reproduce
 1. Start EShop: `bash run_servers.sh`
@@ -121,15 +131,15 @@ Per `api_specification.md` §4.3: `POST /api/checkout` should return 200 OK.
 HTTP 500: `{responseMessage from .jtl}`
 
 ## Evidence
-**Raw .jtl (row {line_number}):**
+**Raw k6 CSV (row {line_number}):**
 ```
-{paste exact .jtl row here}
+{paste exact CSV row here: metric_name,timestamp,metric_value,...}
 ```
 - Error count: {err_count} / {total} ({err_pct}%)
 - First occurrence: {first_timestamp}
 - Last occurrence: {last_timestamp}
 
-*[Screenshot — ATTACH MANUALLY: JMeter output + backend process in same frame]*
+*[Screenshot — ATTACH MANUALLY: k6 terminal output + backend process in same frame]*
 
 ## Possible Root Cause
 SQLite write lock under concurrent transactions. See Skill 4 analysis.
@@ -149,15 +159,15 @@ SQLite write lock under concurrent transactions. See Skill 4 analysis.
 Load Testing shows `GET /api/products` p95 = {p95}ms, exceeding
 acceptable threshold of {threshold}ms at {N} concurrent users.
 
-## Measurements (from raw .jtl)
-| Metric | Value | .jtl Source |
-|--------|-------|-------------|
-| p95 | {p95}ms | ~row {row} |
-| p99 | {p99}ms | ~row {row} |
-| Throughput | {t} req/s | Derived |
-| Error Rate | {err}% | {err_count}/{total} |
+## Measurements (from k6 CSV + summary.json)
+| Metric | Value | Source |
+|--------|-------|--------|
+| p95 | {p95}ms | http_req_duration p95 from CSV |
+| p99 | {p99}ms | http_req_duration p99 from CSV |
+| Throughput | {t} req/s | Derived: total_requests / duration |
+| Error Rate | {err}% | http_req_failed rate from summary.json |
 
-*[Screenshot of JMeter Aggregate Report — ATTACH MANUALLY]*
+*[Screenshot of k6 terminal summary + resource monitor — ATTACH MANUALLY]*
 
 ## Recommended Fixes
 1. [FEASIBLE] Enable SQLite WAL mode
@@ -178,8 +188,8 @@ deviating from spec which states 3 attempts.
 ## Expected (per api_specification.md §1.2)
 Account locked after exactly **3** failed login attempts → HTTP 403.
 
-## Actual (from .jtl)
-Account locked after {N} attempts (evidence: .jtl rows {rows}).
+## Actual (from k6 CSV)
+Account locked after {N} attempts (evidence: k6 CSV rows {rows}, lockoutCounter metric).
 
 *[Screenshot — ATTACH MANUALLY]*
 ```
@@ -207,7 +217,7 @@ Append to `hw05_audit_log.md`:
 
 ```markdown
 ## [SKILL-8] bug-anomaly-reporter — {timestamp}
-- **Input**: {jtl_file}
+- **Input**: {csv_file} + summary.json
 - **Bugs found**: {n_critical} critical, {n_high} high, {n_medium} medium
 - **Drafts created**: issue_draft_1.md ... issue_draft_{N}.md
 - **Posted by human**: [ ] pending

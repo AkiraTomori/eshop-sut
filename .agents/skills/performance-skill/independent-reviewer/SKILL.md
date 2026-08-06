@@ -101,26 +101,27 @@ cat "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW5/2026.HW05.Pe
 ## Review — Skill 2 Output (v{VERSION})
 
 ### File Naming
-- [ ] Filename follows: `23127379_{Scenario}_{YYYYMMDD}.jmx`?
+- [ ] Filename follows: `23127379_{Scenario}_{YYYYMMDD}.js`?
 - [ ] No lowercase scenario type? (must be `Load`, `Stress`, `Spike`)
 
-### JMX Structure
-- [ ] BASE_URL uses a User Defined Variable (not hardcoded `localhost:3000`)?
-- [ ] CSV Sharing Mode = `Current Thread` for auth-heavy? (CRITICAL)
-- [ ] Think-time values match approved params from Skill 1?
-- [ ] Thread count matches approved params?
-- [ ] Ramp-up duration matches approved params?
+### K6 Script Structure
+- [ ] `BASE_URL` uses `__ENV.BASE_URL || 'http://localhost:3000'` — not hardcoded?
+- [ ] Data loaded via `SharedArray` + `papaparse` (NOT plain `open()` in default fn)?
+- [ ] `stages` values match approved params from Skill 1?
+- [ ] `sleep()` think-time matches approved params?
+- [ ] `thresholds` match approved targets from Skill 1?
 
-### Assertions
+### check() Assertions
 - [ ] Both HTTP 200 (success) and expected errors (403 lockout) covered?
-- [ ] HTTP 200 assertion also checks response body content (not just status)?
+- [ ] HTTP 200 assertion also validates response body content (not just status)?
 - [ ] Checkout assertion verifies `order_id` in response body?
 
 ### Auth-heavy Specific
-- [ ] Each thread uses its own credentials (CSV `Current Thread` sharing)?
-- [ ] Lockout (403/401) logged but NOT counted as test failure?
-- [ ] JWT token extracted from login response?
-- [ ] Token passed as `Authorization: Bearer` header in cart/checkout?
+- [ ] Each VU uses its own credentials via `(__VU - 1) % credentials.length`?
+- [ ] Lockout (403/401) increments `lockoutCounter` but NOT counted as `http_req_failed`?
+- [ ] JWT token extracted from login response body?
+- [ ] Token passed as `Authorization: Bearer ${token}` header in cart/checkout?
+- [ ] `http_req_failed` threshold set to allow lockouts (e.g., `rate<0.30`), not `rate<0.05`?
 
 ### CSV Files
 - [ ] All required columns present?
@@ -128,6 +129,9 @@ cat "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW5/2026.HW05.Pe
   - auth: `email,password,expected_result`
   - order: `product_id,product_name,price,quantity,shipping_address`
 - [ ] Note to create real test accounts included?
+
+### handleSummary
+- [ ] `handleSummary()` exports `summary.json` for HTML report generation?
 
 ### Issues Found
 | # | Issue | Severity | Correct Value |
@@ -141,13 +145,15 @@ cat "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW5/2026.HW05.Pe
 ## Review — Skill 4 Output (v{VERSION})
 
 ### Metric Correctness
-- [ ] p95 computed from `elapsed` column? (NOT from `Latency` column)
-  - `elapsed` = full end-to-end response time
-  - `Latency` = time to first byte only (different metric!)
-- [ ] Error rate = (success == false) / total requests?
+- [ ] p95 computed from `http_req_duration` metric? (NOT from `http_req_waiting` or `http_req_connecting`)
+  - `http_req_duration` = full end-to-end response time ✅
+  - `http_req_waiting` = TTFB only ❌ (wrong metric for p95)
+  - `http_req_connecting` = connection time only ❌
+- [ ] Error rate = count of `http_req_failed` rows with `metric_value == 1.0` / total rows?
   - Note: 403 lockout may be expected behavior, not an error
-- [ ] Throughput = total requests / test duration in seconds?
-- [ ] Every metric cites a specific .jtl row or column?
+- [ ] Throughput = total `http_req_duration` rows / test duration in seconds?
+- [ ] CSV-computed p95 cross-checked against `summary.json` p95?
+- [ ] Every metric cites a specific CSV row or `summary.json` field?
 
 ### FEASIBLE / HALLUCINATED Labels
 - [ ] SQLite WAL mode: labeled [FEASIBLE] for EShop local? ✓
@@ -157,8 +163,8 @@ cat "/Users/thaiminhhuy/docs/Github/eshop-sut/23127379_Homework/HW5/2026.HW05.Pe
 - [ ] Each label accompanied by a clear justification?
 
 ### Issues Found
-| # | Issue | Severity | Correct Value | .jtl Row Evidence |
-|---|-------|----------|---------------|-------------------|
+| # | Issue | Severity | Correct Value | CSV Row Evidence |
+|---|-------|----------|---------------|------------------|
 | | | | | |
 ```
 
