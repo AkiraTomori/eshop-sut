@@ -1,7 +1,7 @@
 # HW05 Performance Testing — Agent Workflow Guide
 
 This file is the **root-level rule** for EShop HW05 performance testing.
-It is loaded automatically by Antigravity whenever you work in this repository.
+It is loaded automatically by Antigravity or any Agents whenever you work in this repository.
 
 > **Skill location**: `.agents/skills/performance-skill/`
 > **SUT base URL**: `http://localhost:3000`
@@ -17,11 +17,11 @@ It is loaded automatically by Antigravity whenever you work in this repository.
 This ensures test accounts, SUT state, and audit logs remain clean and traceable.
 
 ```
-Group 1 (Read-heavy)    → complete Skills 1→2→10→3→4→10→8 → ✅
-Group 2 (Auth-heavy)    → complete Skills 1→2→10→3→7→4→10→8 → ✅
-Group 3 (Transactional) → complete Skills 1→2→10→3→7→4→10→8 → ✅
-                          ↓
-            Final phase: Skill 6 → Skill 10 → Skill 5 → Skill 9
+Group 1 (Read-heavy)    -> complete Skills 1-2-10-3-4-10-8 -> done
+Group 2 (Auth-heavy)    -> complete Skills 1-2-10-3-4-10-8 -> done   (no lockout: skip Skill 7)
+Group 3 (Transactional) -> complete Skills 1-2-10-3-7-4-10-8 -> done
+                          |
+            Final phase: Skill 6 -> Skill 10 -> Skill 5 -> Skill 9
 ```
 
 ---
@@ -33,8 +33,8 @@ All skills live in `.agents/skills/performance-skill/`:
 | # | Skill Name | Skill Path | What It Does | When to Invoke |
 |---|-----------|-----------|-------------|---------------|
 | 1 | `test-parameter-advisor` | `.agents/skills/performance-skill/test-parameter-advisor/` | Recommends thread count, ramp-up, think-time | Start of each endpoint group |
-| 2 | `test-plan-generator` | `.agents/skills/performance-skill/test-plan-generator/` | Generates `.jmx` / k6 script + CSV data files | After Skill 1 is approved |
-| 3 | `test-execution-runner` | `.agents/skills/performance-skill/test-execution-runner/` | Runs test via CLI, exports `.jtl` + HTML report | After Skill 2 is approved |
+| 2 | `test-plan-generator` | `.agents/skills/performance-skill/test-plan-generator/` | Generates k6 script (`.js`) + CSV data files | After Skill 1 is approved |
+| 3 | `test-execution-runner` | `.agents/skills/performance-skill/test-execution-runner/` | Runs test via `k6 run` CLI, exports raw CSV log + HTML report | After Skill 2 is approved |
 | 4 | `jtl-log-analyzer` | `.agents/skills/performance-skill/jtl-log-analyzer/` | Computes p95/error rate, labels optimizations FEASIBLE/HALLUCINATED | After Skill 3 + evidence captured |
 | 5 | `postmortem-critique-generator` | `.agents/skills/performance-skill/postmortem-critique-generator/` | AI Audit Report + AI Critique (200–300 words) | After ALL 3 groups complete |
 | 6 | `ci-performance-pipeline-proposer` | `.agents/skills/performance-skill/ci-performance-pipeline-proposer/` | CI pipeline Mermaid flowchart + trade-off table | After ALL 3 groups analyzed |
@@ -49,9 +49,9 @@ All skills live in `.agents/skills/performance-skill/`:
 
 | Group | Endpoints | Scenario | CSV File |
 |---|---|---|---|
-| **Group 1** — Read-heavy | `GET /api/products`, `GET /api/products/:id` | Load Testing | `products_data.csv` |
-| **Group 2** — Auth-heavy | `POST /api/login` (lockout after 3 failed attempts) | Spike Testing | `auth_credentials.csv` |
-| **Group 3** — Transactional | `POST /api/cart` → `POST /api/checkout` | Stress Testing | `order_payloads.csv` |
+| **Group 1** — Read-heavy | `GET /api/products/:id` | Load Testing | `products_data.csv` |
+| **Group 2** — Auth-heavy | `PUT /api/users/me` (requires JWT — login first, then update profile) | Spike Testing | `auth_users.csv` |
+| **Group 3** — Transactional | `POST /api/cart` -> `POST /api/checkout` | Stress Testing | `order_payloads.csv` |
 
 ---
 
@@ -59,169 +59,439 @@ All skills live in `.agents/skills/performance-skill/`:
 
 ```mermaid
 flowchart TD
-    START([🚀 Start HW05\n/plan]) --> G1
+    START(["Start HW05"]) --> G1S1
 
-    subgraph G1["Group 1 — Read-heavy (GET /api/products)"]
-        G1S1["Skill 1: test-parameter-advisor\nLoad Test params\n/grill-me"] -->|Human approves| G1S10A
-        G1S10A["Skill 10: independent-reviewer\nReview params v1\n/teamwork-preview"] -->|Issues? Fix & re-review| G1S10A
-        G1S10A -->|Approved| G1S2
-        G1S2["Skill 2: test-plan-generator\n23127379_Load_DATE.jmx\nproducts_data.csv"] -->|Human reviews JMX| G1S10B
-        G1S10B["Skill 10: independent-reviewer\nReview JMX v1\n/teamwork-preview"] -->|Issues? Fix| G1S10B
-        G1S10B -->|Approved| G1S3
-        G1S3["Skill 3: test-execution-runner\nRun Load Test\nExport .jtl + HTML\n/goal"] -->|Human captures evidence| G1S4
-        G1S4["Skill 4: jtl-log-analyzer\nCompute p95, error rate\nFEASIBLE/HALLUCINATED"] -->|Human: misinterpretation hunt| G1S10C
-        G1S10C["Skill 10: independent-reviewer\nReview analysis v1\n/teamwork-preview"] -->|Issues? Fix| G1S10C
-        G1S10C -->|Approved| G1S8
-        G1S8["Skill 8: bug-anomaly-reporter\nDraft GitHub Issues\nHuman posts manually"] --> G1DONE
-        G1DONE(["✅ Group 1 Complete"])
+    subgraph G1["Group 1 - Read-heavy (GET /api/products/:id)"]
+        G1S1["Skill 1: test-parameter-advisor<br/>Load Test params<br/>/test-parameter-advisor"] --> G1R1{"Skill 10: review params<br/>/independent-reviewer"}
+        G1R1 -->|Issues found| G1S1
+        G1R1 -->|Approved| G1S2["Skill 2: test-plan-generator<br/>23127379_Load_DATE.js<br/>products_data.csv"]
+        G1S2 --> G1R2{"Skill 10: review script<br/>/independent-reviewer"}
+        G1R2 -->|Issues found| G1S2
+        G1R2 -->|Approved| G1S3["Skill 3: test-execution-runner<br/>Run Load Test<br/>Export CSV + HTML<br/>/test-execution-runner"]
+        G1S3 --> G1S4["Skill 4: jtl-log-analyzer<br/>p95, error rate<br/>FEASIBLE / HALLUCINATED"]
+        G1S4 --> G1R3{"Skill 10: review analysis<br/>/independent-reviewer"}
+        G1R3 -->|Issues found| G1S4
+        G1R3 -->|Approved| G1S8["Skill 8: bug-anomaly-reporter<br/>Draft GitHub Issues"]
+        G1S8 --> G1DONE(["Group 1 complete"])
     end
 
-    G1DONE --> G2
-
-    subgraph G2["Group 2 — Auth-heavy (POST /api/login)"]
-        G2S1["Skill 1: test-parameter-advisor\nSpike Test params\n/grill-me"] -->|Human approves| G2S10A
-        G2S10A["Skill 10: independent-reviewer\n/teamwork-preview"] -->|Approved| G2S2
-        G2S2["Skill 2: test-plan-generator\n23127379_Spike_DATE.jmx\nauth_credentials.csv"] -->|Human reviews| G2S10B
-        G2S10B["Skill 10: independent-reviewer\n/teamwork-preview"] -->|Approved| G2S3
-        G2S3["Skill 3: test-execution-runner\nRun Spike Test\n/goal"] --> G2S7
-        G2S7["Skill 7: lockout-reset-helper\nReset locked accounts"] --> G2S4
-        G2S4["Skill 4: jtl-log-analyzer\nSpike analysis"] -->|Human review| G2S10C
-        G2S10C["Skill 10: independent-reviewer\n/teamwork-preview"] -->|Approved| G2S8
-        G2S8["Skill 8: bug-anomaly-reporter"] --> G2DONE
-        G2DONE(["✅ Group 2 Complete"])
+    subgraph G2["Group 2 - Auth-heavy (PUT /api/users/me, JWT required)"]
+        G2S1["Skill 1: test-parameter-advisor<br/>Spike Test params<br/>/test-parameter-advisor"] --> G2R1{"Skill 10: review params<br/>/independent-reviewer"}
+        G2R1 -->|Issues found| G2S1
+        G2R1 -->|Approved| G2S2["Skill 2: test-plan-generator<br/>23127379_Spike_DATE.js<br/>auth_users.csv"]
+        G2S2 --> G2R2{"Skill 10: review script<br/>/independent-reviewer"}
+        G2R2 -->|Issues found| G2S2
+        G2R2 -->|Approved| G2S3["Skill 3: test-execution-runner<br/>Run Spike Test<br/>/test-execution-runner"]
+        G2S3 --> G2S4["Skill 4: jtl-log-analyzer<br/>Spike / recovery-time analysis"]
+        G2S4 --> G2R3{"Skill 10: review analysis<br/>/independent-reviewer"}
+        G2R3 -->|Issues found| G2S4
+        G2R3 -->|Approved| G2S8["Skill 8: bug-anomaly-reporter"]
+        G2S8 --> G2DONE(["Group 2 complete"])
     end
 
-    G2DONE --> G3
-
-    subgraph G3["Group 3 — Transactional (POST /api/cart + checkout)"]
-        G3S1["Skill 1: test-parameter-advisor\nStress Test params\n/grill-me"] -->|Human approves| G3S10A
-        G3S10A["Skill 10: independent-reviewer\n/teamwork-preview"] -->|Approved| G3S2
-        G3S2["Skill 2: test-plan-generator\n23127379_Stress_DATE.jmx\norder_payloads.csv"] -->|Human reviews| G3S10B
-        G3S10B["Skill 10: independent-reviewer\n/teamwork-preview"] -->|Approved| G3S3
-        G3S3["Skill 3: test-execution-runner\nRun Stress Test\n/goal"] --> G3S7
-        G3S7["Skill 7: lockout-reset-helper\nif lockout occurred"] --> G3S4
-        G3S4["Skill 4: jtl-log-analyzer\nStress analysis + breaking point"] -->|Human review| G3S10C
-        G3S10C["Skill 10: independent-reviewer\n/teamwork-preview"] -->|Approved| G3S8
-        G3S8["Skill 8: bug-anomaly-reporter"] --> G3DONE
-        G3DONE(["✅ Group 3 Complete"])
+    subgraph G3["Group 3 - Transactional (POST /api/cart -> POST /api/checkout)"]
+        G3S1["Skill 1: test-parameter-advisor<br/>Stress Test params<br/>/test-parameter-advisor"] --> G3R1{"Skill 10: review params<br/>/independent-reviewer"}
+        G3R1 -->|Issues found| G3S1
+        G3R1 -->|Approved| G3S2["Skill 2: test-plan-generator<br/>23127379_Stress_DATE.js<br/>order_payloads.csv"]
+        G3S2 --> G3R2{"Skill 10: review script<br/>/independent-reviewer"}
+        G3R2 -->|Issues found| G3S2
+        G3R2 -->|Approved| G3S3["Skill 3: test-execution-runner<br/>Run Stress Test<br/>/test-execution-runner"]
+        G3S3 --> G3S7["Skill 7: lockout-reset-helper<br/>if lockout occurred"]
+        G3S7 --> G3S4["Skill 4: jtl-log-analyzer<br/>Stress analysis + breaking point"]
+        G3S4 --> G3R3{"Skill 10: review analysis<br/>/independent-reviewer"}
+        G3R3 -->|Issues found| G3S4
+        G3R3 -->|Approved| G3S8["Skill 8: bug-anomaly-reporter"]
+        G3S8 --> G3DONE(["Group 3 complete"])
     end
 
-    G3DONE --> FINAL
-
-    subgraph FINAL["Final Phase — After all 3 groups"]
-        F6["Skill 6: ci-performance-pipeline-proposer\nMermaid flowchart + trade-offs\nAll 3 group measurements"] --> F10
-        F10["Skill 10: independent-reviewer\nReview CI proposal v1\n/teamwork-preview"] -->|Approved| F5
-        F5["Skill 5: postmortem-critique-generator\nAI Audit Report\nAI Critique 200–300 words\n/goal"] --> F9
-        F9["Skill 9: final-report-compiler\nREADME.md + main report\n+ submission checklist"] --> SUBMIT
-        SUBMIT(["📦 Submit to Moodle"])
+    subgraph FINAL["Final phase - after all 3 groups"]
+        F6["Skill 6: ci-performance-pipeline-proposer<br/>CI flowchart + trade-offs"] --> FR1{"Skill 10: review CI proposal<br/>/independent-reviewer"}
+        FR1 -->|Issues found| F6
+        FR1 -->|Approved| F5["Skill 5: postmortem-critique-generator<br/>AI Audit Report + AI Critique<br/>/postmortem-critique-generator"]
+        F5 --> F9["Skill 9: final-report-compiler<br/>README.md + main report + checklist"]
+        F9 --> SUBMIT(["Submit to Moodle"])
     end
+
+    G1DONE --> G2S1
+    G2DONE --> G3S1
+    G3DONE --> F6
 ```
 
 ---
 
-## Slash Command Guide for HW05
+## Skill Activation Guide for HW05
 
-### 🟢 Before You Start (Once)
+> **Principle**: Every step is named after the Skill it activates.
+> The slash command is just the trigger mechanism — **the prompt content is what actually
+> determines which Skill gets activated**.
+
+---
+
+### Startup (once)
+
+#### `/plan` — Overall plan
 ```
 /plan
 ```
 > "Starting HW05 on EShop localhost:3000. Student ID: 23127379.
-> Machine: MacBook M2, 16GB RAM, macOS 14. Create a plan for all 3 groups."
+> Machine: MacBook Air M5, 16GB RAM, macOS 26.4.1 Tahoe. Create a plan for all 3 groups
+> following the skill workflow: Skill 1->10->2->10->3->4->10->8 per group."
 
 ---
 
-### 📦 Group 1 — Read-heavy (`GET /api/products`)
+### Group 1 — Read-heavy (`GET /api/products/:id`)
 
+#### `test-parameter-advisor` (Skill 1) — `/test-parameter-advisor`
 ```
-/grill-me      → align on params before Skill 1
+/test-parameter-advisor
+```
+> Prompt to activate Skill 1:
+```
+"Activate skill test-parameter-advisor for Group 1 Read-heavy.
+Advise Load Test params for GET /api/products/:id.
+CSV: products_data.csv (list of valid product IDs).
+Machine: MacBook Air M5, 16GB RAM, macOS 26.4.1 Tahoe. SUT: http://localhost:3000."
+```
+> **Skill 1 stops** — review parameter table, reply `"approved"` to proceed.
+
+#### `independent-reviewer` (Skill 10) — `/independent-reviewer`
+```
+/independent-reviewer
+```
+> Prompt to activate Skill 10 (fresh context, no memory of the generating session):
+```
+"Review this Skill 1 output independently: [paste parameter table]
+Source skill: 1. Version: v1.
+Check: scenario mapping (Read->Load), VU count realistic for SQLite local,
+ramp-up >=30s, think-time > 0ms. Verify against api_specification.md."
+```
+> `NEEDS REVISION` -> fix Skill 1, re-review. `APPROVED` -> continue.
+
+#### `test-plan-generator` (Skill 2) — triggered by keyword `"Generate test plan"`
+> (After Skill 1 is approved) type:
+```
+"Generate test plan for Group 1. Approved params: [paste table].
+Student ID: 23127379. Scenario: Load. Date: YYYYMMDD.
+Endpoint: GET /api/products/:id only. CSV: products_data.csv."
+```
+> **Skill 2 stops** — open `23127379_Load_YYYYMMDD.js` + `products_data.csv`,
+> review them, then reply `"approved to run"` to proceed.
+
+#### `independent-reviewer` (Skill 10) — review Skill 2 script
+```
+/independent-reviewer
 ```
 ```
-               → "Activate skill test-parameter-advisor for Group 1 Read-heavy.
-                  Advise Load Test params for GET /api/products, GET /api/products/:id."
+"Review this Skill 2 output independently: [paste full script content]
+Source skill: 2. Version: v1.
+Check: filename = 23127379_Load_YYYYMMDD.js, BASE_URL uses __ENV,
+stages match approved params, check() covers status 200 + body content,
+handleSummary() exports summary.json."
+```
+> `NEEDS REVISION` -> regenerate v2. `APPROVED` -> continue.
+
+#### `test-execution-runner` (Skill 3) + `jtl-log-analyzer` (Skill 4) + `bug-anomaly-reporter` (Skill 8)
+```
+/test-execution-runner
 ```
 ```
-/teamwork-preview  → Skill 10: review Skill 1 params (fresh context)
-/teamwork-preview  → Skill 10: review Skill 2 JMX (fresh context)
+"Run Group 1 Load Test end-to-end:
+1. Activate skill test-execution-runner: execute 23127379_Load_YYYYMMDD.js,
+   export CSV + HTML report. Script path: [path].
+2. After test finishes: Activate skill jtl-log-analyzer: compute p95/error rate
+   from CSV using http_req_duration only. Label optimizations FEASIBLE/HALLUCINATED.
+3. Activate skill bug-anomaly-reporter: draft GitHub Issues for any real bugs.
+Do not stop early between skills."
+```
+> **Skill 3 stops** -> capture physical evidence (screenshot + video).
+> Reply `"analysis ready"` with CSV path to trigger Skill 4.
+> **Skill 4 stops** -> do the misinterpretation hunt on the numbers.
+> **Skill 8 stops** -> post issues manually to GitHub.
+
+#### `independent-reviewer` (Skill 10) — review Skill 4 analysis
+```
+/independent-reviewer
 ```
 ```
-/goal          → "Run Group 1: Skill 3 (execute Load JMX) → Skill 4 (analyze .jtl)
-                  → Skill 8 (draft bug reports). Do not stop early."
+"Review this Skill 4 output independently: [paste analysis table]
+Source skill: 4. Version: v1.
+Verify: p95 computed from http_req_duration (NOT http_req_waiting),
+error rate formula correct, FEASIBLE/HALLUCINATED labels match EShop SQLite backend,
+every number cites a CSV row or summary.json field."
+```
+> `NEEDS REVISION` -> fix analysis. `APPROVED` -> **Group 1 complete**.
+
+---
+
+### Group 2 — Auth-heavy (`PUT /api/users/me` — JWT required)
+
+#### `test-parameter-advisor` (Skill 1) — `/test-parameter-advisor`
+```
+/test-parameter-advisor
 ```
 ```
-/teamwork-preview  → Skill 10: review Skill 4 analysis (fresh context)
+"Activate skill test-parameter-advisor for Group 2 Auth-heavy.
+Advise Spike Test params for PUT /api/users/me (requires JWT token).
+Flow: POST /api/login to get token -> PUT /api/users/me (update name/phone/shipping_address).
+CSV: auth_users.csv (columns: email, password, name, phone, shipping_address).
+No lockout mechanism on PUT /api/users/me — skip Skill 7.
+Machine: MacBook Air M5, 16GB RAM, macOS 26.4.1 Tahoe. SUT: http://localhost:3000."
+```
+> **Skill 1 stops** — review params, reply `"approved"` to proceed.
+
+#### `independent-reviewer` (Skill 10) — review Skill 1 params
+```
+/independent-reviewer
+```
+```
+"Review this Skill 1 output independently: [paste table]
+Source skill: 1. Version: v1.
+Check: endpoint is PUT /api/users/me (NOT POST /api/login),
+Spike pattern = sudden 10-15x VU increase in <10s,
+no lockoutCounter metric needed (no lockout mechanism),
+JWT flow: login step must come first to extract token."
+```
+> `APPROVED` -> continue.
+
+#### `test-plan-generator` (Skill 2) — triggered by keyword `"Generate test plan"`
+```
+"Generate test plan for Group 2. Approved params: [paste table].
+Student ID: 23127379. Scenario: Spike. Date: YYYYMMDD.
+Flow: Step 1 = POST /api/login (extract JWT token from response body).
+Step 2 = PUT /api/users/me with Authorization: Bearer <token>.
+PUT body: {name, phone, shipping_address} from auth_users.csv.
+CSV: auth_users.csv (columns: email, password, name, phone, shipping_address).
+No lockoutCounter metric needed."
+```
+> **Skill 2 stops** — open `23127379_Spike_YYYYMMDD.js` + `auth_users.csv`.
+> Verify: JWT extracted from login -> passed as Bearer header -> PUT body correct.
+> Reply `"approved to run"` to proceed.
+
+#### `independent-reviewer` (Skill 10) — review Skill 2 script
+```
+/independent-reviewer
+```
+```
+"Review this Skill 2 output independently: [paste full script]
+Source skill: 2. Version: v1.
+Check: main endpoint is PUT /api/users/me (NOT POST /api/login as main load),
+login step exists only to get JWT token,
+token passed as Authorization: Bearer in PUT request header,
+PUT body has {name, phone, shipping_address} fields,
+no lockoutCounter (not needed for PUT endpoint),
+spike stages match approved params."
+```
+> `APPROVED` -> continue.
+
+#### `test-execution-runner` (Skill 3) + `jtl-log-analyzer` (Skill 4) + `bug-anomaly-reporter` (Skill 8)
+```
+/test-execution-runner
+```
+```
+"Run Group 2 Spike Test end-to-end:
+1. Activate skill test-execution-runner: execute 23127379_Spike_YYYYMMDD.js,
+   export CSV + HTML report. Script path: [path].
+   NOTE: No Skill 7 needed — PUT /api/users/me has no lockout mechanism.
+2. Activate skill jtl-log-analyzer: compute p95/error rate from CSV.
+   Analyze recovery time after spike drops back to baseline VU level.
+   Label optimizations FEASIBLE/HALLUCINATED.
+3. Activate skill bug-anomaly-reporter: draft GitHub Issues for any real bugs.
+Do not stop early between skills."
+```
+> **Skill 3 stops** -> capture evidence. Reply `"analysis ready"` with CSV path.
+> **Skill 4 stops** -> review numbers + FEASIBLE/HALLUCINATED labels.
+> **Skill 8 stops** -> post issues manually.
+
+#### `independent-reviewer` (Skill 10) — review Skill 4 analysis
+```
+/independent-reviewer
+```
+```
+"Review this Skill 4 output independently: [paste analysis]
+Source skill: 4. Version: v1.
+Spike test: check recovery time metric (time from peak back to baseline p95).
+Verify FEASIBLE/HALLUCINATED labels for PUT /api/users/me endpoint.
+Confirm p95 from http_req_duration only."
+```
+> `APPROVED` -> **Group 2 complete**.
+
+---
+
+### Group 3 — Transactional (`POST /api/checkout` is the primary focus)
+
+> **Note**: `POST /api/cart` is a **prerequisite** — it puts an item in the cart before checkout.
+> The analysis focus is **`POST /api/checkout`** — this is the endpoint that writes the order
+> record to the DB and carries the heaviest load.
+
+#### `test-parameter-advisor` (Skill 1) — `/test-parameter-advisor`
+```
+/test-parameter-advisor
+```
+```
+"Activate skill test-parameter-advisor for Group 3 Transactional.
+Advise Stress Test params for POST /api/checkout (primary endpoint).
+Full flow: POST /api/login (JWT) -> POST /api/cart (add item as prerequisite)
+           -> POST /api/checkout (primary — creates order record in SQLite).
+CSV: order_payloads.csv (product_id, product_name, price, quantity, shipping_address).
+Goal: find the breaking point (VU count where error rate > 10% or p95 > 5s).
+SQLite write lock on checkout is the main risk factor.
+Machine: MacBook Air M5, 16GB RAM, macOS 26.4.1 Tahoe. SUT: http://localhost:3000."
+```
+> **Skill 1 stops** — review params, reply `"approved"` to proceed.
+
+#### `independent-reviewer` (Skill 10) — review Skill 1 params
+```
+/independent-reviewer
+```
+```
+"Review this Skill 1 output independently: [paste table]
+Source skill: 1. Version: v1.
+Group 3 = stepped stress test to find breaking point on POST /api/checkout.
+POST /api/cart is prerequisite only — checkout is the measured endpoint.
+Check: VU escalation pattern realistic for SQLite write lock risk,
+thresholds: error > 10% OR p95 > 5s = breaking point."
+```
+> `APPROVED` -> continue.
+
+#### `test-plan-generator` (Skill 2) — triggered by keyword `"Generate test plan"`
+```
+"Generate test plan for Group 3. Approved params: [paste table].
+Student ID: 23127379. Scenario: Stress. Date: YYYYMMDD.
+Primary endpoint under test: POST /api/checkout.
+Full flow per VU iteration:
+  Step 1 = POST /api/login (extract JWT token).
+  Step 2 = POST /api/cart (prerequisite — add item to cart before checkout).
+           Body: {id, name, price, quantity} from CSV.
+  Step 3 = POST /api/checkout (PRIMARY — measure this endpoint's performance).
+           Body: {total_amount, shipping_address} from CSV.
+CSV: order_payloads.csv. Each VU/iteration must index its own CSV row
+(e.g. data[(exec.vu.idInTest + exec.scenario.iterationInTest) % data.length]) —
+never let multiple VUs share the same row.
+check() assertions must cover checkout response: status 200 + order_id present."
+```
+> **Skill 2 stops** — open `23127379_Stress_YYYYMMDD.js` + `order_payloads.csv`.
+> Verify: login -> cart (prerequisite) -> **checkout (primary)**, each VU indexes its own row.
+> Reply `"approved to run"` to proceed.
+
+#### `independent-reviewer` (Skill 10) — review Skill 2 script
+```
+/independent-reviewer
+```
+```
+"Review this Skill 2 output independently: [paste full script]
+Source skill: 2. Version: v1.
+Primary endpoint: POST /api/checkout (this is what Stress test targets).
+Check: cart body = {id, name, price, quantity},
+checkout body = {total_amount, shipping_address},
+checkout check() verifies both status 200 AND order_id in response body,
+each VU indexes its own CSV row (NOT shared across VUs),
+login step comes first to extract JWT token."
+```
+> `APPROVED` -> continue.
+
+#### `test-execution-runner` (Skill 3) + `lockout-reset-helper` (Skill 7) + `jtl-log-analyzer` (Skill 4) + `bug-anomaly-reporter` (Skill 8)
+```
+/test-execution-runner
+```
+```
+"Run Group 3 Stress Test end-to-end:
+1. Activate skill test-execution-runner: execute 23127379_Stress_YYYYMMDD.js,
+   export CSV + HTML report. Script path: [path].
+2. Activate skill lockout-reset-helper: if any accounts are locked post-test, reset them.
+3. Activate skill jtl-log-analyzer: compute p95/error rate.
+   Primary analysis target: POST /api/checkout performance.
+   Per-endpoint breakdown required: cart step vs checkout step separately.
+   Identify breaking point = stage where POST /api/checkout error rate first exceeds 10%.
+   Label optimizations FEASIBLE/HALLUCINATED.
+4. Activate skill bug-anomaly-reporter: draft GitHub Issues for any real bugs found
+   in POST /api/checkout (5xx, timeout, order_id missing in response).
+Do not stop early between skills."
+```
+> **Skill 3 stops** -> capture evidence. Reply `"analysis ready"` with CSV path.
+> **Skill 4 stops** -> confirm breaking point VU count on the checkout endpoint.
+> **Skill 8 stops** -> post issues manually.
+
+#### `independent-reviewer` (Skill 10) — review Skill 4 analysis
+```
+/independent-reviewer
+```
+```
+"Review this Skill 4 output independently: [paste analysis]
+Source skill: 4. Version: v1.
+Stress test — primary endpoint: POST /api/checkout.
+Confirm: per-endpoint breakdown shows cart step vs checkout step separately,
+breaking point identified on POST /api/checkout (not cart),
+FEASIBLE labels for SQLite WAL are correct for EShop,
+p95 from http_req_duration only."
+```
+> `APPROVED` -> **Group 3 complete**.
+
+---
+
+### Final Phase (after all 3 groups)
+
+#### `ci-performance-pipeline-proposer` (Skill 6) — triggered by keyword
+```
+"Activate skill ci-performance-pipeline-proposer.
+Results from all 3 groups:
+- Load (G1)  — GET /api/products/:id:  p95={X}ms, error rate={Y}%
+- Spike (G2) — PUT /api/users/me:      p95={X}ms, recovery time={T}s
+- Stress (G3)— POST /api/checkout:     p95={X}ms, breaking point={N} VUs
+Propose Mermaid CI flowchart + trade-off table for EShop SQLite backend."
+```
+> **Skill 6 stops** — review the Mermaid diagram, reply to proceed.
+
+#### `independent-reviewer` (Skill 10) — review Skill 6 CI proposal
+```
+/independent-reviewer
+```
+```
+"Review this Skill 6 output independently: [paste proposal]
+Source skill: 6. Version: v1.
+Check: thresholds sourced from Skill 4 actual measurements (not invented),
+Mermaid syntax renderable, EShop-specific false alarm sources mentioned
+(SQLite variance, cold start), trade-off table includes cost/benefit."
+```
+> `APPROVED` -> continue.
+
+#### `postmortem-critique-generator` (Skill 5) + `final-report-compiler` (Skill 9)
+```
+/postmortem-critique-generator
+```
+```
+"Run final phase end-to-end:
+1. Activate skill postmortem-critique-generator: generate AI Audit Report +
+   AI Critique (200-300 words). Reference all 3 group results and all review logs.
+2. Activate skill final-report-compiler: compile README.md, main report,
+   and submission checklist.
+Do not stop early between skills."
 ```
 
 ---
 
-### 📦 Group 2 — Auth-heavy (`POST /api/login`)
-
-```
-/grill-me      → align on Spike params + lockout account count before Skill 1
-```
-```
-               → "Activate skill test-parameter-advisor for Group 2 Auth-heavy.
-                  Advise Spike Test params for POST /api/login (lockout after 3 fails)."
-```
-```
-/teamwork-preview  → Skill 10: review Skill 1 params
-/teamwork-preview  → Skill 10: review Skill 2 JMX
-```
-```
-/goal          → "Run Group 2: Skill 3 (Spike JMX) → Skill 7 (reset lockout)
-                  → Skill 4 (analyze .jtl) → Skill 8 (bug reports). Do not stop early."
-```
-```
-/teamwork-preview  → Skill 10: review Skill 4 analysis
-```
-
----
-
-### 📦 Group 3 — Transactional (`POST /api/cart` → `POST /api/checkout`)
-
-```
-/grill-me      → align on Stress params before Skill 1
-```
-```
-               → "Activate skill test-parameter-advisor for Group 3 Transactional.
-                  Advise Stress Test params for POST /api/cart → POST /api/checkout."
-```
-```
-/teamwork-preview  → Skill 10: review Skill 1 params
-/teamwork-preview  → Skill 10: review Skill 2 JMX
-```
-```
-/goal          → "Run Group 3: Skill 3 (Stress JMX) → Skill 7 (reset lockout if any)
-                  → Skill 4 (analyze .jtl, find breaking point) → Skill 8. Do not stop early."
-```
-```
-/teamwork-preview  → Skill 10: review Skill 4 analysis
-```
-
----
-
-### 🏁 Final Phase (after all 3 groups)
-
-```
-               → "Activate skill ci-performance-pipeline-proposer.
-                  Load p95:{X}ms err:{Y}% | Spike p95:{X}ms recovery:{T}s
-                  | Stress p95:{X}ms breaking:{N}users | Endurance:{R}rps {M}MB"
-```
-```
-/teamwork-preview  → Skill 10: review CI proposal
-```
-```
-/goal          → "Run final phase: Skill 5 (AI Audit Report + Critique 200-300 words)
-                  → Skill 9 (compile README + submission checklist). Do not stop early."
-```
-
----
-
-### 🛠 Anytime — After Correcting an AI Error
+### Anytime — after correcting an AI mistake
 ```
 /learn
 ```
-> Example: "AI keeps using Latency column for p95 instead of elapsed.
-> elapsed = full round-trip. Always use elapsed for all p95 calculations."
+> Example: "AI used http_req_waiting instead of http_req_duration to compute p95.
+> http_req_duration = full round-trip. Always use http_req_duration for every p95."
+
+---
+
+### Quick Reference — Skill -> Slash Command Mapping
+
+| Skill | Skill Name | Slash Command | Trigger Keyword |
+|---|---|---|---|
+| 1 | `test-parameter-advisor` | `/test-parameter-advisor` | `"Activate skill test-parameter-advisor..."` |
+| 2 | `test-plan-generator` | `/test-plan-generator` | `"Generate test plan for Group N..."` |
+| 3 | `test-execution-runner` | `/test-execution-runner` | `"Activate skill test-execution-runner..."` |
+| 4 | `jtl-log-analyzer` | `/jtl-log-analyzer` | `"Activate skill jtl-log-analyzer..."` |
+| 5 | `postmortem-critique-generator` | `/postmortem-critique-generator` | `"Activate skill postmortem-critique-generator..."` |
+| 6 | `ci-performance-pipeline-proposer` | `/ci-performance-pipeline-proposer` | `"Activate skill ci-performance-pipeline-proposer..."` |
+| 7 | `lockout-reset-helper` | `/lockout-reset-helper` | `"Activate skill lockout-reset-helper..."` |
+| 8 | `bug-anomaly-reporter` | `/bug-anomaly-reporter` | `"Activate skill bug-anomaly-reporter..."` |
+| 9 | `final-report-compiler` | `/final-report-compiler` | `"Activate skill final-report-compiler..."` |
+| 10 | `independent-reviewer` | `/independent-reviewer` | `"Review this Skill N output independently..."` |
 
 ---
 
@@ -243,10 +513,12 @@ Every skill appends to: `23127379_Homework/HW5/hw05_audit_log.md`
 
 | File Type | Convention | Example |
 |---|---|---|
-| Load test plan | `{ID}_Load_{YYYYMMDD}.jmx` | `23127379_Load_20260806.jmx` |
-| Spike test plan | `{ID}_Spike_{YYYYMMDD}.jmx` | `23127379_Spike_20260806.jmx` |
-| Stress test plan | `{ID}_Stress_{YYYYMMDD}.jmx` | `23127379_Stress_20260806.jmx` |
-| Load raw log | `{ID}_Load_{YYYYMMDD}.jtl` | `23127379_Load_20260806.jtl` |
+| Load test plan (k6) | `{ID}_Load_{YYYYMMDD}.js` | `23127379_Load_20260806.js` |
+| Spike test plan (k6) | `{ID}_Spike_{YYYYMMDD}.js` | `23127379_Spike_20260806.js` |
+| Stress test plan (k6) | `{ID}_Stress_{YYYYMMDD}.js` | `23127379_Stress_20260806.js` |
+| Load raw log | `{ID}_Load_{YYYYMMDD}.csv` | `23127379_Load_20260806.csv` |
+| Spike raw log | `{ID}_Spike_{YYYYMMDD}.csv` | `23127379_Spike_20260806.csv` |
+| Stress raw log | `{ID}_Stress_{YYYYMMDD}.csv` | `23127379_Stress_20260806.csv` |
 | Submission ZIP | `{ID}_HW05_AI_Performance_{grade}.zip` | `23127379_HW05_AI_Performance_085.zip` |
 
 ---
@@ -257,7 +529,7 @@ Every skill appends to: `23127379_Homework/HW5/hw05_audit_log.md`
 |---|---|---|
 | Screenshot: tool + resource monitor in same frame | All 3 groups | Timestamp visible |
 | Hardware report (screenfetch / System Information) | Once | Hostname must match previous HW |
-| Demo video ≥ 6 min, Vietnamese narration | All 3 groups | Tool + resource monitor in same frame |
+| Demo video >= 6 min, Vietnamese narration | All 3 groups | Tool + resource monitor in same frame |
 | Real GitHub Issue posts with screenshots | If bugs found | Agent drafts only — human posts |
 | Self-assessment scores in README | Final submission | Human judgment required |
 | YouTube video link | Final submission | Human uploads |
@@ -268,10 +540,10 @@ Every skill appends to: `23127379_Homework/HW5/hw05_audit_log.md`
 
 | Mistake | Consequence | Prevention |
 |---|---|---|
-| CSV Sharing Mode = All Threads for auth-heavy | All threads lock the same account | Always use `Current Thread` |
-| p95 from `Latency` column | Wrong metric — time-to-first-byte ≠ full response time | Always use `elapsed` column |
-| Running Group 2 before Group 1 is complete | Mixed audit logs, incomplete evidence | Follow sequential rule strictly |
-| Marking 403 lockout as a test failure | Inflated error rate | Lockout is expected — log it, not fail it |
-| Accepting AI optimization labels without verifying | Redis/PostgreSQL suggested for SQLite app | Check FEASIBLE claims against actual backend code |
-| Skipping Skill 10 review | AI errors propagate undetected | Review every v1 output independently |
+| Sending `PUT /api/users/me` without JWT in Group 2 | 401 Unauthorized — all requests fail | Always add a login step before the profile update in the k6 script |
+| Every k6 VU/iteration reads the same CSV row in Group 3 | All VUs share the same cart/checkout payload, hides real transactional load | Index the CSV array per VU/iteration (e.g. `data[(exec.vu.idInTest + exec.scenario.iterationInTest) % data.length]`) |
+| p95 from `http_req_waiting` | Wrong metric — time-to-first-byte != full response time | Always use `http_req_duration` |
+| Running Group 2 before Group 1 is complete | Mixed audit logs, incomplete evidence | Follow the sequential rule strictly |
+| Accepting AI optimization labels without verifying | Redis/PostgreSQL suggested for a SQLite app | Check FEASIBLE claims against the actual backend code |
+| Skipping the Skill 10 review | AI errors propagate undetected | Review every v1 output independently |
 | Running Skill 5 before all groups complete | Incomplete audit data | Skill 5 is the very last content skill |
