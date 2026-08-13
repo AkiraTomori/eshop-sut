@@ -28,3 +28,10 @@ This index contains performance bottlenecks and structural defects discovered du
 ## Notes on expected behavior
 
 - **403 Lockout (Group 2)**: Account lockouts after 3 failed attempts are expected behavior per the system specification. These are logged for recovery time analysis but are NOT classified as system defects unless the mechanism fails.
+
+## Group 1 — Load Test (GET /api/products/:id) — 2026-08-13
+
+**Result:** No bugs found.
+- 0 failed requests | 0 timeouts | 0 check() failures | p95 = 2.286 ms
+- 11 WAL checkpoint outliers (max 44 ms) — informational only, not a defect
+- No GitHub Issues filed for Group 1.

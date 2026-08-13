@@ -101,5 +101,5 @@ At what VU count does p95 start climbing from ~8 ms toward the 2 s threshold?
 
 ## Review Status
 
-- [ ] Approved by human reviewer
-- [ ] Skill 10 independent review passed → see `skill10_review_params.md`
+- [x] Approved by human reviewer
+- [x] Skill 10 independent review passed → see `skill10_review_params.md`
