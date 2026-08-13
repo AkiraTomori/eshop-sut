@@ -1,0 +1,65 @@
+// 23127379_Load_Endurance_20260813.js
+// Group 1 — Read-heavy: GET /api/products/:id
+// Scenario: Endurance / Soak Testing (find hardware ceiling)
+// Student: 23127379 — Thai Minh Huy
+// Date: 2026-08-13
+// Goal: Run 15 min at sustained 100 VUs — identify memory/CPU ceiling on
+//       MacBook Air M5. Report: max stable RPS, memory ceiling at plateau.
+
+import http from 'k6/http';
+import { sleep, check } from 'k6';
+import { SharedArray } from 'k6/data';
+import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
+
+const BASE_URL = __ENV.BASE_URL || 'http://localhost:3000';
+
+const products = new SharedArray('products', function () {
+  return papaparse.parse(open('./products_data.csv'), { header: true }).data
+    .filter(row => row.product_id && row.product_id.trim() !== '');
+});
+
+export const options = {
+  stages: [
+    { duration: '2m',  target: 100 },  // ramp-up to soak level
+    { duration: '11m', target: 100 },  // sustained soak — find ceiling
+    { duration: '2m',  target: 0   },  // ramp-down
+  ],
+  thresholds: {
+    http_req_duration: ['p(95)<2000'],
+    http_req_failed:   ['rate<0.05'],
+  },
+};
+
+export default function () {
+  const row = products[(__VU - 1) % products.length];
+
+  const res = http.get(`${BASE_URL}/api/products/${row.product_id}`);
+
+  check(res, {
+    'GET /api/products/:id status 200': (r) => r.status === 200,
+    'GET /api/products/:id has id field': (r) => {
+      try {
+        const body = JSON.parse(r.body);
+        return body.id !== undefined && body.id !== null;
+      } catch {
+        return false;
+      }
+    },
+    'GET /api/products/:id has name field': (r) => {
+      try {
+        const body = JSON.parse(r.body);
+        return typeof body.name === 'string' && body.name.length > 0;
+      } catch {
+        return false;
+      }
+    },
+  });
+
+  sleep(Math.random() * 1 + 1); // think-time: 1–2s
+}
+
+export function handleSummary(data) {
+  return {
+    'summary.json': JSON.stringify(data),
+  };
+}
