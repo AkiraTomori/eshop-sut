@@ -177,3 +177,19 @@ This file records all AI tool interactions across the entire HW05 performance te
 - **Input**: Endpoint = `POST /api/checkout` (primary), prereq = `POST /api/cart`, auth = `POST /api/login`, Machine = MacBook Air M5, 16GB RAM, macOS 26.4.1 Tahoe, SUT = http://localhost:3000 (local SQLite). Context: Group 1 p95=2.286ms @ 150VU, Group 2 p95=5.744ms @ 150VU — both error-free.
 - **Logic**: Scenario mapping (Transactional → Stress Testing). Goal = find breaking point. SQLite exclusive write lock on INSERT is primary bottleneck. VU steps start at 10, pass through 150 (proven safe for reads), extend to 200 to find the actual ceiling.
 - **Output**: Stepped stress 10→30→60→100→150→200 VUs (30s ramp + 30s hold each), think-time 1–3 s between cart and checkout (not batched at end), thresholds p95<5000ms and error<10%, per-tag threshold on `checkout` requests, VU-deterministic row indexing. File: `Group-3_Stress_Checkout/skill1_parameters.md`
+
+## [SKILL-10] independent-reviewer (Skill 1 G3 v1) — 2026-08-14 21:48:08
+- **Group**: Group 3 — Transactional
+- **Input**: skill1_parameters.md v1
+- **Output**: skill1_g3_v1_review.md | verdict: NEEDS REVISION
+- **Issues**: 0 Critical, 1 High, 1 Medium, 0 Low
+  - H1: Endurance/soak test parameters missing (HW05 Task 1 mandatory)
+  - M1: Duration math error — 12×30s = 6 min + 1 min ramp-down = 7 min total (not 13 min)
+- **Decision**: Fix and resubmit as v2
+
+## [SKILL-1] test-parameter-advisor v2 — 2026-08-14 21:51:00
+- **Group**: Group 3 — Transactional
+- **Changes from v1**:
+  - Fixed total duration: 7 min (12 × 30 s + 1 min ramp-down) — not 13 min
+  - Added Endurance / Soak Test section: `23127379_Stress_Endurance_YYYYMMDD.js` @ 60 VUs × 15 min constant load; evidence captures at 0/5/10/15 min; reports max stable RPS + memory ceiling
+- **File**: `Group-3_Stress_Checkout/skill1_parameters.md` (updated in-place)

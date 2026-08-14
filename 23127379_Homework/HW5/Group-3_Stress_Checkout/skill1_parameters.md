@@ -46,7 +46,7 @@
 | **Scenario** | Stress Testing | Goal = find the breaking point via stepped VU escalation |
 | **VU steps** | 10 → 30 → 60 → 100 → 150 → 200 | Non-linear escalation; prior groups comfortable at 150 — step through it |
 | **Stage pattern** | 30 s ramp + 30 s hold per step | Plateau at each level to stabilise p95 before stepping up |
-| **Total duration** | ~13 min (12 × 30 s + 1 min ramp-down) | Long enough to saturate SQLite write lock at high VU counts |
+| **Total duration** | ~7 min (12 × 30 s stages + 1 min ramp-down) | Covers all 6 VU steps; p95 trend across steps is the analysis signal |
 | **Think-time** | `sleep(1 + Math.random() * 2)` → 1–3 s **between cart and checkout** | Simulates user reviewing cart before confirming order |
 | **No think-time after login** | `sleep(0.2 + Math.random() * 0.3)` → 0.2–0.5 s | Short pause between login and cart add (realistic navigation) |
 | **Threshold — p95** | `http_req_duration: ['p(95)<5000']` | > 5 s checkout p95 = breaking point |
@@ -164,6 +164,27 @@ Minimum rows: **50** (enough for 200 VUs × modulo indexing without collision wi
 Use the same 50-account CSV seeded for Group 2. Login credentials needed for JWT.
 
 ---
+
+## Endurance / Soak Test Parameters (HW05 Task 1 — mandatory)
+
+> HW05 Task 1 requires a short soak test (~10–15 min at sustained load) to find the hardware's endurance threshold. Run this **after** the main stress run to determine the stable VU ceiling.
+
+**Target VU count**: 60 VUs (step 3 of the stress test — expected to be below the breaking point; confirm from stress run results)
+
+| Parameter | Value | Justification |
+|---|---|---|
+| **Script filename** | `23127379_Stress_Endurance_YYYYMMDD.js` | Follows naming convention; separate script from main stress run |
+| **VUs** | 60 (constant) | Last step confirmed stable in stress run before breaking point |
+| **Duration** | 15 min constant load | Long enough to detect memory growth, GC pauses, WAL checkpoint accumulation |
+| **Think-time** | Same as main script: `sleep(1 + Math.random() * 2)` between cart/checkout | Consistent with stress run |
+| **Thresholds** | Same as main: `p(95)<5000`, `rate<0.10` | Monitor for degradation over time |
+| **Evidence to capture** | Activity Monitor screenshot at 0 min, 5 min, 10 min, 15 min | Shows memory growth / CPU stabilization |
+| **Report metric** | Maximum stable RPS + memory ceiling at 15-min mark | Required by HW05 as concrete endurance threshold number |
+
+**Note**: If the stress run shows the breaking point is at or below 60 VUs, adjust the endurance VU count to 30 VUs (step 2) — always use the last stable step.
+
+---
+
 
 ## Pre-test Checklist
 
