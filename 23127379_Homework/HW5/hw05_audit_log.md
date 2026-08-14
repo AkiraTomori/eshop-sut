@@ -101,3 +101,18 @@ This file records all AI tool interactions across the entire HW05 performance te
   - M1: Clarify that 50 accounts shared via modulo among 150 VUs is safe (no lockout on PUT) — noted in script docs
   - M2: Endurance parameters not included — accepted: Spike test doesn't require endurance variant for Group 2
 - **Decision**: Proceed to Skill 2 (test-plan-generator) for Group 2
+
+## [SKILL-2] test-plan-generator — 2026-08-14 09:35:00
+- **Group**: Group 2 — Auth-heavy
+- **Input**: Approved params from Skill 1 (VUs 10→150 spike, p95<3000ms, error<30%, think-time 0.25–0.75s)
+- **Output files**:
+  - `Group-2_Spike_Auth/23127379_Spike_20260814.js` (spike test, ~6 min)
+  - `Group-2_Spike_Auth/auth_users.csv` (50 accounts, already seeded in SUT)
+  - `Group-2_Spike_Auth/skill2_testplan_notes.md`
+- **Design decisions**:
+  - Primary endpoint: PUT /api/users/me (NOT login); login is prerequisite only
+  - No lockoutCounter (PUT has no lockout mechanism)
+  - custom Trend metric `recovery_time_ms` for spike recovery analysis
+  - Modulo VU-to-account mapping (50 accounts, 150 VUs) — safe, no lockout risk
+  - thresholds keyed to `put_profile` tag for per-endpoint p95 enforcement
+  - handleSummary: HTML + JSON + stdout (3 report views)
