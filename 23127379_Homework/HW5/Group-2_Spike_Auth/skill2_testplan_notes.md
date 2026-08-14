@@ -7,6 +7,23 @@
 
 ---
 
+## Run Commands
+
+```bash
+cd 23127379_Homework/HW5/Group-2_Spike_Auth
+
+# Spike test
+k6 run \
+  --out csv=results/23127379_Spike_20260814.csv \
+  --summary-export=results/summary_export.json \
+  -e BASE_URL=http://localhost:3000 \
+  23127379_Spike_20260814.js
+```
+
+> `handleSummary()` also auto-writes `results/summary.html` and `results/summary.json` at end of run.
+
+---
+
 ## Design Decisions
 
 ### Primary vs Prerequisite Endpoint
