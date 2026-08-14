@@ -193,3 +193,21 @@ This file records all AI tool interactions across the entire HW05 performance te
   - Fixed total duration: 7 min (12 × 30 s + 1 min ramp-down) — not 13 min
   - Added Endurance / Soak Test section: `23127379_Stress_Endurance_YYYYMMDD.js` @ 60 VUs × 15 min constant load; evidence captures at 0/5/10/15 min; reports max stable RPS + memory ceiling
 - **File**: `Group-3_Stress_Checkout/skill1_parameters.md` (updated in-place)
+
+## [SKILL-2] test-plan-generator — 2026-08-14 21:57:00
+- **Group**: Group 3 — Transactional
+- **Input**: Approved params from Skill 1 v2 (VUs 10→30→60→100→150→200, p95<5000ms, error<10%, think-time 1–3s between cart/checkout)
+- **Output files**:
+  - `Group-3_Stress_Checkout/23127379_Stress_20260814.js` (main stress test, 7 min)
+  - `Group-3_Stress_Checkout/23127379_Stress_Endurance_20260814.js` (soak test, 60 VUs × 15 min)
+  - `Group-3_Stress_Checkout/order_payloads.csv` (50 rows — 5 products × 10 address variants)
+  - `Group-3_Stress_Checkout/auth_users.csv` (copied from Group 2 — 50 spike_user accounts)
+  - `Group-3_Stress_Checkout/skill2_testplan_notes.md`
+- **Design decisions**:
+  - Primary endpoint: POST /api/checkout (tagged `{name:'checkout'}`); cart tagged `{name:'cart'}`
+  - Re-login per iteration (not in setup()) — prevents JWT expiry across 7–15 min runs
+  - Dual SharedArray: order rows indexed by `(vu.idInTest-1 + iterationInTest) % length`; user by `(vu.idInTest-1) % length`
+  - Per-tag threshold on `http_req_duration{name:checkout}` in addition to global threshold
+  - handleSummary: HTML + JSON + stdout (3 distinct report views per HW05 Task 1)
+  - Endurance script adds custom `checkout_latency_ms` Trend to detect degradation over time
+  - Data hygiene documented in notes (order accumulation may affect reproducibility)
