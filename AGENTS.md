@@ -33,7 +33,7 @@ All skills live in `.agents/skills/performance-skill/`:
 | # | Skill Name | Skill Path | What It Does | When to Invoke |
 |---|-----------|-----------|-------------|---------------|
 | 1 | `test-parameter-advisor` | `.agents/skills/performance-skill/test-parameter-advisor/` | Recommends thread count, ramp-up, think-time | Start of each endpoint group |
-| 2 | `test-plan-generator` | `.agents/skills/performance-skill/test-plan-generator/` | Generates k6 script (`.js`) + CSV data files | After Skill 1 is approved |
+| 2 | `test-plan-generator` | `.agents/skills/performance-skill/test-plan-generator/` | Generates k6 script (`.js`) + CSV data files, following the [k6 Script Best Practices](#k6-script-best-practices) below | After Skill 1 is approved |
 | 3 | `test-execution-runner` | `.agents/skills/performance-skill/test-execution-runner/` | Runs test via `k6 run` CLI, exports raw CSV log + HTML report | After Skill 2 is approved |
 | 4 | `jtl-log-analyzer` | `.agents/skills/performance-skill/jtl-log-analyzer/` | Computes p95/error rate, labels optimizations FEASIBLE/HALLUCINATED | After Skill 3 + evidence captured |
 | 5 | `postmortem-critique-generator` | `.agents/skills/performance-skill/postmortem-critique-generator/` | AI Audit Report + AI Critique (200–300 words) | After ALL 3 groups complete |
@@ -52,6 +52,100 @@ All skills live in `.agents/skills/performance-skill/`:
 | **Group 1** — Read-heavy | `GET /api/products/:id` | Load Testing | `products_data.csv` |
 | **Group 2** — Auth-heavy | `PUT /api/users/me` (requires JWT — login first, then update profile) | Spike Testing | `auth_users.csv` |
 | **Group 3** — Transactional | `POST /api/cart` -> `POST /api/checkout` | Stress Testing | `order_payloads.csv` |
+
+---
+
+## k6 Script Best Practices
+
+> **Skill 2 (`test-plan-generator`) must apply every rule below in every script it generates.
+> Skill 10 (`independent-reviewer`) must check every rule below when reviewing a Skill 2 output.**
+> A script that is only "data-driven via CSV" is not sufficient — CSV covers one requirement
+> (data-driven), the rules below cover the rest (assertions, report views, realistic load shape,
+> measurement accuracy).
+
+### 1. `thresholds` — turn pass/fail criteria into code, not eyeballing after the fact
+```js
+export const options = {
+  thresholds: {
+    http_req_duration: ['p(95)<5000'],
+    http_req_failed: ['rate<0.10'],
+  },
+};
+```
+Group 3's breaking-point definition (error rate > 10% or p95 > 5s) must be encoded here, not
+computed by hand after the run. k6 marks PASS/FAIL automatically in the summary output.
+
+### 2. `tags` on every request — required for per-endpoint breakdown
+```js
+http.post(`${BASE_URL}/api/cart`, payload, { tags: { name: 'cart' } });
+http.post(`${BASE_URL}/api/checkout`, payload, { tags: { name: 'checkout' } });
+```
+Without tags, the raw CSV log only has URLs — Skill 4 cannot separate "cart step" from
+"checkout step" performance for Group 3, which the workflow requires.
+
+### 3. `SharedArray` to load CSV — do not let every VU parse its own copy
+```js
+import { SharedArray } from 'k6/data';
+const data = new SharedArray('orders', function () {
+  return open('./order_payloads.csv').split('\n').slice(1).map(row => row.split(','));
+});
+```
+Without `SharedArray`, each VU keeps its own copy of the CSV in memory — under Stress test
+(many VUs) this inflates RAM usage and skews the "memory ceiling" endurance number.
+
+### 4. Custom metrics — measure exactly what the task asks for
+```js
+import { Trend } from 'k6/metrics';
+const recoveryTime = new Trend('recovery_time_ms');
+```
+k6 has no built-in "recovery time" metric — Group 2's Spike analysis (time to return to
+baseline p95 after the spike) requires a custom `Trend`/`Counter`/`Rate` as needed.
+
+### 5. `handleSummary()` — this is how k6 satisfies "3 distinct report views"
+```js
+import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
+import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
+
+export function handleSummary(data) {
+  return {
+    'summary.html': htmlReport(data),
+    'summary.json': JSON.stringify(data),
+    stdout: textSummary(data, { indent: ' ', enableColors: true }),
+  };
+}
+```
+HTML / JSON / console text = the k6 equivalent of JMeter's three distinct listener types
+required by the assignment. Every generated script must include this — not optional.
+
+### 6. `sleep()` placement — real think-time, not a delay tacked on at the end
+```js
+export default function () {
+  login();
+  sleep(1 + Math.random());
+  addToCart();
+  sleep(2 + Math.random());
+  checkout();
+}
+```
+Think-time belongs **between** actions of the same virtual user. A script that puts all
+`sleep()` calls at the end of the function produces artificially inflated throughput —
+exactly the kind of AI mistake Task 1 asks you to catch and correct.
+
+### 7. `check()` before trusting a response body
+```js
+const loginRes = http.post(`${BASE_URL}/api/login`, payload);
+check(loginRes, { 'login succeeded': (r) => r.status === 200 });
+const token = loginRes.json('token');
+```
+Under Stress test, the SUT is expected to return errors at high load. Extracting
+`.json('token')` from a failed response without a prior `check()` can crash the whole VU
+instead of recording the failure and continuing.
+
+### 8. Data hygiene across repeated runs
+`POST /api/checkout` writes a real order row into SQLite every run. Repeated Stress-test runs
+without cleanup accumulate order data, which can shift performance on later runs. Either add a
+cleanup step between runs, or document in the report that cleanup was not performed and why —
+this affects reproducibility of the breaking-point number.
 
 ---
 
@@ -172,7 +266,9 @@ ramp-up >=30s, think-time > 0ms. Verify against api_specification.md."
 ```
 "Generate test plan for Group 1. Approved params: [paste table].
 Student ID: 23127379. Scenario: Load. Date: YYYYMMDD.
-Endpoint: GET /api/products/:id only. CSV: products_data.csv."
+Endpoint: GET /api/products/:id only. CSV: products_data.csv.
+Apply all rules in the k6 Script Best Practices section: thresholds, tags,
+SharedArray, handleSummary(), correct sleep() placement, check() before use."
 ```
 > **Skill 2 stops** — open `23127379_Load_YYYYMMDD.js` + `products_data.csv`,
 > review them, then reply `"approved to run"` to proceed.
@@ -186,7 +282,9 @@ Endpoint: GET /api/products/:id only. CSV: products_data.csv."
 Source skill: 2. Version: v1.
 Check: filename = 23127379_Load_YYYYMMDD.js, BASE_URL uses __ENV,
 stages match approved params, check() covers status 200 + body content,
-handleSummary() exports summary.json."
+handleSummary() exports html/json/stdout (3 report views),
+thresholds block present (p95, error rate), requests tagged with `name`,
+CSV loaded via SharedArray, sleep() placed between actions (not batched at the end)."
 ```
 > `NEEDS REVISION` -> regenerate v2. `APPROVED` -> continue.
 
@@ -261,7 +359,9 @@ Flow: Step 1 = POST /api/login (extract JWT token from response body).
 Step 2 = PUT /api/users/me with Authorization: Bearer <token>.
 PUT body: {name, phone, shipping_address} from auth_users.csv.
 CSV: auth_users.csv (columns: email, password, name, phone, shipping_address).
-No lockoutCounter metric needed."
+No lockoutCounter metric needed.
+Apply all rules in the k6 Script Best Practices section, plus a custom Trend
+metric for spike recovery time (time to return to baseline p95 after the spike)."
 ```
 > **Skill 2 stops** — open `23127379_Spike_YYYYMMDD.js` + `auth_users.csv`.
 > Verify: JWT extracted from login -> passed as Bearer header -> PUT body correct.
@@ -279,7 +379,9 @@ login step exists only to get JWT token,
 token passed as Authorization: Bearer in PUT request header,
 PUT body has {name, phone, shipping_address} fields,
 no lockoutCounter (not needed for PUT endpoint),
-spike stages match approved params."
+spike stages match approved params,
+custom recovery_time_ms Trend metric present,
+thresholds/tags/SharedArray/handleSummary()/check() all present per Best Practices."
 ```
 > `APPROVED` -> continue.
 
@@ -367,7 +469,11 @@ Full flow per VU iteration:
 CSV: order_payloads.csv. Each VU/iteration must index its own CSV row
 (e.g. data[(exec.vu.idInTest + exec.scenario.iterationInTest) % data.length]) —
 never let multiple VUs share the same row.
-check() assertions must cover checkout response: status 200 + order_id present."
+check() assertions must cover checkout response: status 200 + order_id present.
+Apply all rules in the k6 Script Best Practices section: thresholds keyed to the
+breaking-point definition above, tags on both cart and checkout requests (needed
+for per-endpoint breakdown), SharedArray, handleSummary(), check() before any
+.json() extraction."
 ```
 > **Skill 2 stops** — open `23127379_Stress_YYYYMMDD.js` + `order_payloads.csv`.
 > Verify: login -> cart (prerequisite) -> **checkout (primary)**, each VU indexes its own row.
@@ -385,7 +491,10 @@ Check: cart body = {id, name, price, quantity},
 checkout body = {total_amount, shipping_address},
 checkout check() verifies both status 200 AND order_id in response body,
 each VU indexes its own CSV row (NOT shared across VUs),
-login step comes first to extract JWT token."
+login step comes first to extract JWT token,
+cart and checkout requests are tagged separately (name: 'cart' / name: 'checkout'),
+thresholds block encodes the breaking-point definition (p95<5000, error rate<0.10),
+handleSummary() present, sleep() placed between login/cart/checkout, not batched."
 ```
 > `APPROVED` -> continue.
 
@@ -400,7 +509,8 @@ login step comes first to extract JWT token."
 2. Activate skill lockout-reset-helper: if any accounts are locked post-test, reset them.
 3. Activate skill jtl-log-analyzer: compute p95/error rate.
    Primary analysis target: POST /api/checkout performance.
-   Per-endpoint breakdown required: cart step vs checkout step separately.
+   Per-endpoint breakdown required: cart step vs checkout step separately (use the
+   `name` tag from the script to split the CSV).
    Identify breaking point = stage where POST /api/checkout error rate first exceeds 10%.
    Label optimizations FEASIBLE/HALLUCINATED.
 4. Activate skill bug-anomaly-reporter: draft GitHub Issues for any real bugs found
@@ -543,6 +653,10 @@ Every skill appends to: `23127379_Homework/HW5/hw05_audit_log.md`
 | Sending `PUT /api/users/me` without JWT in Group 2 | 401 Unauthorized — all requests fail | Always add a login step before the profile update in the k6 script |
 | Every k6 VU/iteration reads the same CSV row in Group 3 | All VUs share the same cart/checkout payload, hides real transactional load | Index the CSV array per VU/iteration (e.g. `data[(exec.vu.idInTest + exec.scenario.iterationInTest) % data.length]`) |
 | p95 from `http_req_waiting` | Wrong metric — time-to-first-byte != full response time | Always use `http_req_duration` |
+| No `tags` on cart/checkout requests | Cannot produce the required per-endpoint breakdown for Group 3 | Tag every request with `{ tags: { name: '...' } }` |
+| CSV loaded without `SharedArray` | Inflated memory usage under Stress test, skews endurance numbers | Always load CSV data via `SharedArray` |
+| All `sleep()` calls placed at the end of the function | Artificially inflated throughput, unrealistic think-time | Place `sleep()` between each user action |
+| No `handleSummary()` in the script | Missing the "3 distinct report views" requirement | Always export html + json + stdout summary |
 | Running Group 2 before Group 1 is complete | Mixed audit logs, incomplete evidence | Follow the sequential rule strictly |
 | Accepting AI optimization labels without verifying | Redis/PostgreSQL suggested for a SQLite app | Check FEASIBLE claims against the actual backend code |
 | Skipping the Skill 10 review | AI errors propagate undetected | Review every v1 output independently |

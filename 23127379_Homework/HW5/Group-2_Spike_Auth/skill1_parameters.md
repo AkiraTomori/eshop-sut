@@ -117,5 +117,5 @@ system return to baseline p95 after absorbing a sudden burst? No lockout risk
 
 ## Review Status
 
-- [ ] Approved by human reviewer
-- [ ] Skill 10 independent review passed → see `skill10_review_params.md`
+- [x] Approved by human reviewer
+- [x] Skill 10 independent review passed → see `skill10_review_params.md`

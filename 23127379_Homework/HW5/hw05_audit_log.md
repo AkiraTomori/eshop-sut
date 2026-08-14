@@ -86,3 +86,18 @@ This file records all AI tool interactions across the entire HW05 performance te
 - **Drafts created**: None — no real bugs or performance issues detected
 - **Observations**: 11 WAL checkpoint outlier spikes (max 44ms) — informational
 - **Posted by human**: N/A (no issues to post)
+
+## [SKILL-1] test-parameter-advisor — 2026-08-14 09:17:44
+- **Group**: Group 2 — Auth-heavy
+- **Input**: Endpoint = `PUT /api/users/me` (JWT required via `POST /api/login` first), Machine = MacBook Air M5, 16GB RAM, macOS 26.4.1 Tahoe, SUT = http://localhost:3000 (local SQLite). No lockout on PUT endpoint (skip Skill 7).
+- **Logic**: Scenario mapping (Auth-heavy → Spike Testing) + domain heuristics from SKILL.md. Recovery time is the primary Spike metric. CSV: auth_users.csv (email, password, name, phone, shipping_address).
+- **Output**: Spike stages 10→150 VUs in 10s, hold 1m, recovery 30s, stabilize 2m, ramp-down 30s. Total ~6 min. Thresholds: p95<3000ms, error<30%. VU row: `(__VU - 1) % data.length`. Min 50 accounts needed.
+
+## [SKILL-10] independent-reviewer (Skill 1 G2 v1) — 2026-08-14 09:22:51
+- **Group**: Group 2 — Auth-heavy
+- **Input**: Skill 1 v1 parameter table for PUT /api/users/me Spike Test
+- **Output**: skill1_g2_v1_review.md | verdict: ✅ APPROVED WITH MINOR NOTES
+- **Issues**: 0 Critical, 0 High, 2 Medium, 0 Low
+  - M1: Clarify that 50 accounts shared via modulo among 150 VUs is safe (no lockout on PUT) — noted in script docs
+  - M2: Endurance parameters not included — accepted: Spike test doesn't require endurance variant for Group 2
+- **Decision**: Proceed to Skill 2 (test-plan-generator) for Group 2
