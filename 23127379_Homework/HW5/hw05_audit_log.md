@@ -138,3 +138,18 @@ This file records all AI tool interactions across the entire HW05 performance te
   - throughput = 76.39 req/s | iterations = 14,157 | iter/s = 38.19
   - max VUs reached = 150
 - **Human evidence**: [ ] screenshot  [ ] hardware report  [ ] video
+
+## [SKILL-4] jtl-log-analyzer — 2026-08-14 10:18:00
+- **Group**: Group 2 — Auth-heavy
+- **Input**: results/23127379_Spike_20260814.csv (382,979 rows) + summary.json
+- **Metric source**: http_req_duration ONLY (NOT http_req_waiting)
+- **Metrics**:
+  - Overall: p95=5.579ms | avg=2.653ms | error=0.00% | throughput=76.52 req/s
+  - PUT /api/users/me {put_profile}: p95=5.744ms | avg=2.740ms | max=94.848ms
+  - POST /api/login {login}: p95=5.399ms | avg=2.566ms | max=90.433ms
+  - recovery_time_ms: p95=6ms | avg=2.812ms | max=95ms
+- **CSV vs summary.json**: p95 exact match (5.579ms) | error rate exact match (0.0%)
+- **Outliers**: 32 rows > 26.515ms (p99×3) — all at timestamp 1786676551 (WAL checkpoint during VU drop, all HTTP 200)
+- **Recovery**: PUT p95 peaked at 7.698ms at 03:00, returned to 4.5ms by 03:04-03:05 (~2-4 min recovery)
+- **Optimizations**: 3 FEASIBLE (WAL, connection singleton, JWT cache) | 3 HALLUCINATED (Redis, scaling, pg-pool) | 1 UNCERTAIN (cluster mode)
+- **Analysis file**: Group-2_Spike_Auth/skill4_analysis.md
