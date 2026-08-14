@@ -146,8 +146,8 @@
 
 ## Review Status
 
-- [ ] Human misinterpretation hunt complete
-- [ ] Verified: p95 from `http_req_duration` (NOT `http_req_waiting`)
-- [ ] CSV p95 matches summary.json p95
-- [ ] FEASIBLE/HALLUCINATED labels reviewed
-- [ ] Skill 10 independent review passed → see `skill10_review_analysis.md`
+- [x] Human misinterpretation hunt complete
+- [x] Verified: p95 from `http_req_duration` (NOT `http_req_waiting`)
+- [x] CSV p95 matches summary.json p95
+- [x] FEASIBLE/HALLUCINATED labels reviewed
+- [x] Skill 10 independent review passed → see `skill10_review_analysis.md`
