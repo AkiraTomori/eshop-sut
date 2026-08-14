@@ -171,3 +171,9 @@ This file records all AI tool interactions across the entire HW05 performance te
 - **Anomaly**: 32 WAL checkpoint outliers (max 94.848ms, all HTTP 200) — informational only
 - **Drafts created**: None — no real bugs detected
 - **Posted by human**: N/A
+
+## [SKILL-1] test-parameter-advisor — 2026-08-14 21:27:00
+- **Group**: Group 3 — Transactional (official run — Groups 1 & 2 now complete)
+- **Input**: Endpoint = `POST /api/checkout` (primary), prereq = `POST /api/cart`, auth = `POST /api/login`, Machine = MacBook Air M5, 16GB RAM, macOS 26.4.1 Tahoe, SUT = http://localhost:3000 (local SQLite). Context: Group 1 p95=2.286ms @ 150VU, Group 2 p95=5.744ms @ 150VU — both error-free.
+- **Logic**: Scenario mapping (Transactional → Stress Testing). Goal = find breaking point. SQLite exclusive write lock on INSERT is primary bottleneck. VU steps start at 10, pass through 150 (proven safe for reads), extend to 200 to find the actual ceiling.
+- **Output**: Stepped stress 10→30→60→100→150→200 VUs (30s ramp + 30s hold each), think-time 1–3 s between cart and checkout (not batched at end), thresholds p95<5000ms and error<10%, per-tag threshold on `checkout` requests, VU-deterministic row indexing. File: `Group-3_Stress_Checkout/skill1_parameters.md`

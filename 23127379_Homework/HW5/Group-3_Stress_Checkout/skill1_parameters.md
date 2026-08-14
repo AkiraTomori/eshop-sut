@@ -2,9 +2,25 @@
 
 **Endpoint:** `POST /api/checkout` (primary); `POST /api/cart` (prerequisite)
 **Scenario:** Stress Testing
-**Generated:** 2026-08-13 21:50:00
+**Generated:** 2026-08-14 21:27:00
 **Machine:** MacBook Air M5, 16GB RAM, macOS 26.4.1 Tahoe
 **SUT:** http://localhost:3000 (local, SQLite backend)
+
+---
+
+## Context from Prior Groups
+
+| Group | p95 (no-load) | p95 (peak load) | Error rate | Throughput |
+|---|---|---|---|---|
+| Group 1 — GET /api/products/:id (Load, 150 VU) | ~3–8 ms baseline | 2.286 ms | 0.00% | 53.56 rps |
+| Group 2 — PUT /api/users/me (Spike, 150 VU) | — | 5.744 ms | 0.00% | 76.52 rps |
+
+**Observations for Group 3 planning:**
+- Both read and profile-update endpoints are very fast (< 6 ms p95) — SQLite performs well under read/simple-write load
+- Both prior groups passed all thresholds with no errors at 150 VUs
+- The checkout endpoint (SQLite exclusive INSERT to `orders` table) is categorically heavier than either prior endpoint
+- WAL checkpoint spikes seen in both groups (max 44–95 ms) confirm SQLite I/O pressure is real at high VU counts
+- Group 3 aims to actually **break** the system — start lower and step up aggressively
 
 ---
 
@@ -14,9 +30,9 @@
 |---|---|
 | Full flow | POST /api/login → POST /api/cart → POST /api/checkout |
 | Primary endpoint measured | `POST /api/checkout` (creates order record in DB) |
-| Auth required | Yes (JWT from login step) |
-| DB operation | SQLite INSERT into orders table — heaviest write in the system |
-| Breaking-point goal | VU count where error rate > 10% OR p95 > 5 s |
+| Auth required | Yes (JWT from login step, re-fetched each iteration) |
+| DB operation | SQLite INSERT into orders table — exclusive write lock per transaction |
+| Breaking-point goal | VU count where checkout error rate > 10% **OR** checkout p95 > 5 s |
 
 ---
 
@@ -25,47 +41,50 @@
 | Parameter | Value | Justification |
 |---|---|---|
 | **Primary endpoint** | `POST /api/checkout` | Creates order record — highest DB write cost in EShop |
-| **Prerequisite** | `POST /api/cart` (add item before checkout) | Cart must have item; checkout without cart item = 400 |
-| **Scenario** | Stress Testing | Goal is to find the breaking point via stepped VU escalation |
-| **VU steps** | 10 → 30 → 60 → 100 → 150 → 200 | Each step doubles or adds 50 VUs — reveals non-linear degradation |
-| **Stage pattern** | 30 s ramp-up + 30 s hold per step | Measure each plateau before stepping up |
-| **Total duration** | ~13 min (12 × 30 s steps + 1 min teardown) | Long enough to observe DB write-lock saturation at high VU counts |
-| **Think-time** | `sleep(Math.random() * 2 + 1)` → 1–3 s (between cart and checkout) | Simulates user reviewing cart before confirming — realistic for transactional flow |
-| **Threshold — errors** | `http_req_failed: ['rate<0.10']` | > 10% error rate on checkout = breaking point |
+| **Prerequisite step** | `POST /api/cart` body: `{id, name, price, quantity}` | Cart must have item; checkout with empty cart = 400 |
+| **Auth step** | `POST /api/login` body: `{email, password}` | JWT re-fetched per iteration to avoid expiry during 13-min run |
+| **Scenario** | Stress Testing | Goal = find the breaking point via stepped VU escalation |
+| **VU steps** | 10 → 30 → 60 → 100 → 150 → 200 | Non-linear escalation; prior groups comfortable at 150 — step through it |
+| **Stage pattern** | 30 s ramp + 30 s hold per step | Plateau at each level to stabilise p95 before stepping up |
+| **Total duration** | ~13 min (12 × 30 s + 1 min ramp-down) | Long enough to saturate SQLite write lock at high VU counts |
+| **Think-time** | `sleep(1 + Math.random() * 2)` → 1–3 s **between cart and checkout** | Simulates user reviewing cart before confirming order |
+| **No think-time after login** | `sleep(0.2 + Math.random() * 0.3)` → 0.2–0.5 s | Short pause between login and cart add (realistic navigation) |
 | **Threshold — p95** | `http_req_duration: ['p(95)<5000']` | > 5 s checkout p95 = breaking point |
-| **CSV input** | `order_payloads.csv` (product_id, product_name, price, quantity, shipping_address, total_amount) | Each VU iteration uses unique row to avoid cart conflicts |
-| **VU row indexing** | `data[(exec.vu.idInTest + exec.scenario.iterationInTest) % data.length]` | Ensures no two VUs share the same cart row in the same iteration |
-| **Checks — cart** | `status === 200` | Item added to cart successfully |
-| **Checks — checkout** | `status === 200` + `order_id` present in response body | Order created and ID returned; missing order_id = silent bug |
-| **Breaking point metric** | Stage where `POST /api/checkout` error rate first exceeds 10% | Report as "N VUs" breaking point |
-| **Per-endpoint breakdown** | Cart step vs checkout step analysed separately in Skill 4 | Identify whether cart or checkout is the bottleneck |
+| **Threshold — errors** | `http_req_failed: ['rate<0.10']` | > 10% error rate on checkout = breaking point |
+| **CSV input** | `order_payloads.csv` (columns: `product_id, product_name, price, quantity, shipping_address, total_amount`) | Each row = one product for cart body + checkout shipping |
+| **VU row indexing** | `data[(exec.vu.idInTest + exec.scenario.iterationInTest) % data.length]` | No two VUs share the same CSV row per iteration |
+| **Checks — login** | `status === 200` before extracting `.json('token')` | Guard against failed login at high load crashing VU |
+| **Checks — cart** | `status === 200` | Item added successfully |
+| **Checks — checkout** | `status === 200` **AND** `order_id` present in response body | Verify order was actually written; missing `order_id` = silent bug |
+| **Tags** | `{name: 'cart'}` and `{name: 'checkout'}` on respective requests | Required for per-endpoint breakdown in Skill 4 |
+| **Breaking-point metric** | Stage where `checkout` tagged requests first exceed 10% error rate | Report as "N VUs = breaking point" |
+| **Post-test cleanup** | Run Skill 7 (lockout-reset-helper) after test | Any failed logins at high VU may lock accounts |
 
 ---
 
 ## k6 Stages Snippet
 
-### Stress Test (`23127379_Stress_20260813.js`)
-
 ```javascript
 export const options = {
   stages: [
-    { duration: '30s', target: 10  },  // step 1 ramp
+    { duration: '30s', target: 10  },  // step 1 ramp-up
     { duration: '30s', target: 10  },  // step 1 hold
-    { duration: '30s', target: 30  },  // step 2 ramp
+    { duration: '30s', target: 30  },  // step 2 ramp-up
     { duration: '30s', target: 30  },  // step 2 hold
-    { duration: '30s', target: 60  },  // step 3 ramp
+    { duration: '30s', target: 60  },  // step 3 ramp-up
     { duration: '30s', target: 60  },  // step 3 hold
-    { duration: '30s', target: 100 },  // step 4 ramp
+    { duration: '30s', target: 100 },  // step 4 ramp-up
     { duration: '30s', target: 100 },  // step 4 hold
-    { duration: '30s', target: 150 },  // step 5 ramp
+    { duration: '30s', target: 150 },  // step 5 ramp-up (prior groups were OK here)
     { duration: '30s', target: 150 },  // step 5 hold
-    { duration: '30s', target: 200 },  // step 6 ramp
-    { duration: '30s', target: 200 },  // step 6 hold — likely breaking point
+    { duration: '30s', target: 200 },  // step 6 ramp-up — likely breaking point
+    { duration: '30s', target: 200 },  // step 6 hold
     { duration: '1m',  target: 0   },  // ramp-down
   ],
   thresholds: {
-    http_req_duration: ['p(95)<5000'],
-    http_req_failed:   ['rate<0.10'],
+    http_req_duration:               ['p(95)<5000'],  // global p95 guard
+    'http_req_duration{name:checkout}': ['p(95)<5000'],  // checkout-specific p95
+    http_req_failed:                 ['rate<0.10'],   // global error guard
   },
 };
 ```
@@ -76,64 +95,88 @@ export const options = {
 
 ```
 Step 1: POST /api/login
-  Body: { email, password }              ← from auth_users.csv (same seeded accounts)
-  Extract: response.json().token
+  Body: { email, password }             ← from auth_users.csv (re-login each iteration)
+  check: status === 200
+  Extract: response.json('token')       ← guard with check() first
+  sleep(0.2 + Math.random() * 0.3)     ← 0.2–0.5 s (navigation think-time)
 
-Step 2: POST /api/cart                   ← prerequisite (NOT the primary metric)
+Step 2: POST /api/cart                  ← prerequisite (tagged: {name: 'cart'})
   Header: Authorization: Bearer <token>
-  Body: { id, name, price, quantity }    ← from order_payloads.csv
+  Body: { id, name, price, quantity }   ← from order_payloads.csv row
+  check: status === 200
 
-  sleep(Math.random() * 2 + 1)          ← think-time: user reviews cart
+  sleep(1 + Math.random() * 2)         ← 1–3 s think-time between cart and checkout
 
-Step 3: POST /api/checkout               ← PRIMARY measured endpoint
+Step 3: POST /api/checkout              ← PRIMARY measured endpoint (tagged: {name: 'checkout'})
   Header: Authorization: Bearer <token>
-  Body: { total_amount, shipping_address } ← from order_payloads.csv
-  Assert: status === 200 AND order_id in response
+  Body: { total_amount, shipping_address } ← from order_payloads.csv row
+  check: status === 200 AND order_id present in response body
 ```
 
 ---
 
 ## Scenario Justification
 
-`POST /api/checkout` is the most write-intensive endpoint in EShop — it inserts
-an order record into SQLite, which holds an exclusive write lock for the duration
-of the INSERT. Under concurrent load, this serialises checkout operations.
+`POST /api/checkout` is the most write-intensive endpoint in EShop — it inserts an order
+record into SQLite under an exclusive write lock. Unlike reads (Group 1) and profile updates
+(Group 2), concurrent checkout requests must be serialised at the DB layer, meaning the
+system's throughput ceiling is fundamentally limited by SQLite's single-writer model.
 
-Stress Testing is correct because the goal is to **find the breaking point**:
-the VU count at which the system's error rate exceeds 10% or p95 exceeds 5 s.
-Unlike Load Testing (operating within capacity) and Spike Testing (recovery from
-shock), Stress Testing intentionally overwhelms the system to find its limits.
+**Stress Testing** is the correct scenario because:
+- Load Testing would only confirm normal operations — we already know the system handles 150 VUs on reads
+- Spike Testing focuses on recovery — not relevant when the mechanism is a write lock, not cold-start
+- Only Stress Testing (stepped VU escalation past capacity) reveals the breaking point
 
-The cart step is a prerequisite — it must succeed for checkout to be valid —
-but the analysis focus (Skill 4) is on `POST /api/checkout` performance.
+Evidence from prior groups that 150 VUs is a comfortable ceiling for reads/profile writes
+makes it important to include steps **above** 150 VUs to actually stress the checkout writer.
 
 ---
 
 ## Risks to Watch
 
-- **SQLite exclusive write lock:** Each checkout holds the SQLite write lock exclusively.
-  Under 100+ VUs, requests queue up — this is the primary breaking mechanism.
-- **SQLite WAL mode:** If WAL is not enabled, readers are also blocked during writes.
-  FEASIBLE optimisation to label in Skill 4.
-- **JWT expiry across long stress run:** 13-min run may exceed token TTL.
-  Re-fetch token at start of each VU iteration.
-- **Cart accumulation:** If the same user checks out repeatedly without clearing cart,
-  total_amount may be inflated. Use fixed total_amount from CSV regardless.
-- **Skill 7 prerequisite check:** Post-test, run lockout-reset-helper (Skill 7) to reset
-  any accounts locked due to failed login attempts during the stress run.
+| Risk | Likelihood | Mitigation |
+|---|---|---|
+| SQLite exclusive write lock serialises checkout at high VU | **HIGH** | This is the expected breaking mechanism — record the stage |
+| SQLite WAL mode absent → readers also blocked | Medium | FEASIBLE optimisation label in Skill 4 |
+| JWT expiry during 13-min run | Medium | Re-login at the start of every VU iteration (not once in `setup()`) |
+| Cart accumulation inflating total_amount | Low | Use fixed `total_amount` from CSV regardless of cart state |
+| Login failures locking accounts at peak VU | Low-Medium | check() on login; Skill 7 post-test; SUT lockout only triggers on repeated bad passwords |
+| Order data accumulation affecting reproducibility | Medium | Document if cleanup not performed between runs |
+
+---
+
+## Data Requirements
+
+### `order_payloads.csv` — required columns
+
+| Column | Example value | Used in |
+|---|---|---|
+| `product_id` | `1` | cart body `id` field |
+| `product_name` | `"Áo thun nam"` | cart body `name` field |
+| `price` | `150000` | cart body `price` field |
+| `quantity` | `1` | cart body `quantity` field |
+| `shipping_address` | `"123 Lê Lợi, Q1, TP.HCM"` | checkout body `shipping_address` |
+| `total_amount` | `150000` | checkout body `total_amount` |
+
+Minimum rows: **50** (enough for 200 VUs × modulo indexing without collision within a single iteration).
+
+### `auth_users.csv` — reuse from Group 2
+Use the same 50-account CSV seeded for Group 2. Login credentials needed for JWT.
 
 ---
 
 ## Pre-test Checklist
 
-- [ ] `auth_users.csv` and `order_payloads.csv` both populated
-- [ ] Confirm `POST /api/checkout` returns `order_id` in baseline curl test
-- [ ] Activity Monitor open before starting test (capture screenshot)
-- [ ] Skill 7 (lockout-reset-helper) ready to run post-test
+- [x] `order_payloads.csv` populated with ≥ 50 rows (valid product IDs from live SUT)
+- [x] `auth_users.csv` present with ≥ 50 accounts (reuse from Group 2)
+(Note: change gmail to @stress to indicate stress-test accounts, not real users)
+- [x] Confirm `POST /api/checkout` returns `order_id` in baseline `curl` test
+- [x] Activity Monitor open before starting test (screenshot for evidence)
+- [x] Skill 7 (lockout-reset-helper) ready to run post-test
 
 ---
 
 ## Review Status
 
-- [ ] Approved by human reviewer
-- [ ] Skill 10 independent review passed → see `skill10_review_params.md`
+- [x] Approved by human reviewer
+- [x] Skill 10 independent review passed → see `skill10_review_params_g3.md`
