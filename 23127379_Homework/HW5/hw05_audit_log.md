@@ -237,3 +237,7 @@ This file records all AI tool interactions across the entire HW05 performance te
 - **Bugs found**: 0 critical, 0 high, 0 medium
 - **Drafts created**: None
 - **Posted by human**: [ ] pending (N/A)
+## [SKILL-6] ci-performance-pipeline-proposer — 2026-08-16 11:25:00
+- **Input**: p95_load=2.286ms, error_rate=0.00%, throughput=53.56rps (from Skill 4)
+- **Output**: ci_pipeline_proposal.md (Mermaid flowchart + trade-off table)
+- **Strategies compared**: 5
