@@ -56,9 +56,19 @@
 
 ### Demo Video
 > [!IMPORTANT]
-> 🎥 **Demo Video**: *(fill in YouTube link manually)*
+> 🎥 **Demo Video**: https://www.youtube.com/playlist?list=PLJK2f6zFJvro
 > Duration: ~10 minutes | Language: Vietnamese narration
 
+Alternatively, you can view the individual scenario demos:
+- https://www.youtube.com/watch?v=0kUpL7fM7f0&list=PLJK2f6zFJvro&index=1&t=1s
+- https://www.youtube.com/watch?v=4EAFqtF-ylA&list=PLJK2f6zFJvro&index=2
+- https://www.youtube.com/watch?v=A9rvXhyaO8s&list=PLJK2f6zFJvro&index=3
+- https://www.youtube.com/watch?v=6EqVIwJVBUg&list=PLJK2f6zFJvro&index=4
+- https://www.youtube.com/watch?v=KmiJCaTnmQQ&list=PLJK2f6zFJvro&index=5
+- https://www.youtube.com/watch?v=4_q5Jh1yIKw&list=PLJK2f6zFJvro&index=6
+- https://www.youtube.com/watch?v=FAfYMj2GmyY&list=PLJK2f6zFJvro&index=7
+- https://www.youtube.com/watch?v=7tbZGI6zpfc&list=PLJK2f6zFJvro&index=8
+- https://www.youtube.com/watch?v=Goc4Id4BysQ&list=PLJK2f6zFJvro&index=9
 ---
 
 ## Self-Assessment

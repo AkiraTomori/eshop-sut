@@ -1,5 +1,6 @@
 # HW05 Performance Testing — Main Report
 **Student ID**: 23127379
+**Name**: Thái Minh Huy
 
 ## 1. Introduction
 The objective of this assignment is to conduct comprehensive performance testing on EShop (a local Node.js + SQLite backend) using Grafana k6. Three key scenarios were implemented: Load Testing for read-heavy operations, Spike Testing for auth-heavy operations, and Stress Testing for transactional workflows.

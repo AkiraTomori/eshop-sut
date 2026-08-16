@@ -1,0 +1,1881 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: 23127379_Homework/HW5/Group-1_Load_Products/23127379_Load_20260813.js
+        output: csv (23127379_Homework/HW5/Group-1_Load_Products/results_monitored_load/results.csv)
+
+     scenarios: (100.00%) 1 scenario, 150 max VUs, 9m30s max duration (incl. graceful stop):
+              * default: Up to 150 looping VUs for 9m0s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m01.0s), 001/150 VUs, 0 complete and 0 interrupted iterations
+default   [   0% ] 001/150 VUs  0m01.0s/9m00.0s
+
+running (0m02.0s), 002/150 VUs, 1 complete and 0 interrupted iterations
+default   [   0% ] 002/150 VUs  0m02.0s/9m00.0s
+
+running (0m03.0s), 003/150 VUs, 3 complete and 0 interrupted iterations
+default   [   1% ] 003/150 VUs  0m03.0s/9m00.0s
+
+running (0m04.0s), 004/150 VUs, 4 complete and 0 interrupted iterations
+default   [   1% ] 004/150 VUs  0m04.0s/9m00.0s
+
+running (0m05.0s), 005/150 VUs, 8 complete and 0 interrupted iterations
+default   [   1% ] 005/150 VUs  0m05.0s/9m00.0s
+
+running (0m06.0s), 005/150 VUs, 9 complete and 0 interrupted iterations
+default   [   1% ] 005/150 VUs  0m06.0s/9m00.0s
+
+running (0m07.0s), 006/150 VUs, 13 complete and 0 interrupted iterations
+default   [   1% ] 006/150 VUs  0m07.0s/9m00.0s
+
+running (0m08.0s), 007/150 VUs, 17 complete and 0 interrupted iterations
+default   [   1% ] 007/150 VUs  0m08.0s/9m00.0s
+
+running (0m09.0s), 008/150 VUs, 22 complete and 0 interrupted iterations
+default   [   2% ] 008/150 VUs  0m09.0s/9m00.0s
+
+running (0m10.0s), 009/150 VUs, 27 complete and 0 interrupted iterations
+default   [   2% ] 009/150 VUs  0m10.0s/9m00.0s
+
+running (0m11.0s), 009/150 VUs, 32 complete and 0 interrupted iterations
+default   [   2% ] 009/150 VUs  0m11.0s/9m00.0s
+
+running (0m12.0s), 010/150 VUs, 40 complete and 0 interrupted iterations
+default   [   2% ] 010/150 VUs  0m12.0s/9m00.0s
+
+running (0m13.0s), 011/150 VUs, 46 complete and 0 interrupted iterations
+default   [   2% ] 011/150 VUs  0m13.0s/9m00.0s
+
+running (0m14.0s), 012/150 VUs, 50 complete and 0 interrupted iterations
+default   [   3% ] 012/150 VUs  0m14.0s/9m00.0s
+
+running (0m15.0s), 013/150 VUs, 59 complete and 0 interrupted iterations
+default   [   3% ] 013/150 VUs  0m15.0s/9m00.0s
+
+running (0m16.0s), 014/150 VUs, 66 complete and 0 interrupted iterations
+default   [   3% ] 014/150 VUs  0m16.0s/9m00.0s
+
+running (0m17.0s), 014/150 VUs, 77 complete and 0 interrupted iterations
+default   [   3% ] 014/150 VUs  0m17.0s/9m00.0s
+
+running (0m18.0s), 015/150 VUs, 86 complete and 0 interrupted iterations
+default   [   3% ] 015/150 VUs  0m18.0s/9m00.0s
+
+running (0m19.0s), 016/150 VUs, 96 complete and 0 interrupted iterations
+default   [   4% ] 016/150 VUs  0m19.0s/9m00.0s
+
+running (0m20.0s), 017/150 VUs, 109 complete and 0 interrupted iterations
+default   [   4% ] 017/150 VUs  0m20.0s/9m00.0s
+
+running (0m21.0s), 018/150 VUs, 119 complete and 0 interrupted iterations
+default   [   4% ] 018/150 VUs  0m21.0s/9m00.0s
+
+running (0m22.0s), 018/150 VUs, 128 complete and 0 interrupted iterations
+default   [   4% ] 018/150 VUs  0m22.0s/9m00.0s
+
+running (0m23.0s), 019/150 VUs, 141 complete and 0 interrupted iterations
+default   [   4% ] 019/150 VUs  0m23.0s/9m00.0s
+
+running (0m24.0s), 020/150 VUs, 155 complete and 0 interrupted iterations
+default   [   4% ] 020/150 VUs  0m24.0s/9m00.0s
+
+running (0m25.0s), 021/150 VUs, 165 complete and 0 interrupted iterations
+default   [   5% ] 021/150 VUs  0m25.0s/9m00.0s
+
+running (0m26.0s), 022/150 VUs, 179 complete and 0 interrupted iterations
+default   [   5% ] 022/150 VUs  0m26.0s/9m00.0s
+
+running (0m27.0s), 023/150 VUs, 193 complete and 0 interrupted iterations
+default   [   5% ] 023/150 VUs  0m27.0s/9m00.0s
+
+running (0m28.0s), 023/150 VUs, 208 complete and 0 interrupted iterations
+default   [   5% ] 023/150 VUs  0m28.0s/9m00.0s
+
+running (0m29.0s), 024/150 VUs, 225 complete and 0 interrupted iterations
+default   [   5% ] 024/150 VUs  0m29.0s/9m00.0s
+
+running (0m30.0s), 025/150 VUs, 237 complete and 0 interrupted iterations
+default   [   6% ] 025/150 VUs  0m30.0s/9m00.0s
+
+running (0m31.0s), 026/150 VUs, 256 complete and 0 interrupted iterations
+default   [   6% ] 026/150 VUs  0m31.0s/9m00.0s
+
+running (0m32.0s), 027/150 VUs, 273 complete and 0 interrupted iterations
+default   [   6% ] 027/150 VUs  0m32.0s/9m00.0s
+
+running (0m33.0s), 027/150 VUs, 289 complete and 0 interrupted iterations
+default   [   6% ] 027/150 VUs  0m33.0s/9m00.0s
+
+running (0m34.0s), 028/150 VUs, 309 complete and 0 interrupted iterations
+default   [   6% ] 028/150 VUs  0m34.0s/9m00.0s
+
+running (0m35.0s), 029/150 VUs, 330 complete and 0 interrupted iterations
+default   [   6% ] 029/150 VUs  0m35.0s/9m00.0s
+
+running (0m36.0s), 030/150 VUs, 347 complete and 0 interrupted iterations
+default   [   7% ] 030/150 VUs  0m36.0s/9m00.0s
+
+running (0m37.0s), 031/150 VUs, 368 complete and 0 interrupted iterations
+default   [   7% ] 031/150 VUs  0m37.0s/9m00.0s
+
+running (0m38.0s), 032/150 VUs, 387 complete and 0 interrupted iterations
+default   [   7% ] 032/150 VUs  0m38.0s/9m00.0s
+
+running (0m39.0s), 032/150 VUs, 407 complete and 0 interrupted iterations
+default   [   7% ] 032/150 VUs  0m39.0s/9m00.0s
+
+running (0m40.0s), 033/150 VUs, 428 complete and 0 interrupted iterations
+default   [   7% ] 033/150 VUs  0m40.0s/9m00.0s
+
+running (0m41.0s), 034/150 VUs, 450 complete and 0 interrupted iterations
+default   [   8% ] 034/150 VUs  0m41.0s/9m00.0s
+
+running (0m42.0s), 035/150 VUs, 470 complete and 0 interrupted iterations
+default   [   8% ] 035/150 VUs  0m42.0s/9m00.0s
+
+running (0m43.0s), 036/150 VUs, 495 complete and 0 interrupted iterations
+default   [   8% ] 036/150 VUs  0m43.0s/9m00.0s
+
+running (0m44.0s), 036/150 VUs, 522 complete and 0 interrupted iterations
+default   [   8% ] 036/150 VUs  0m44.0s/9m00.0s
+
+running (0m45.0s), 037/150 VUs, 545 complete and 0 interrupted iterations
+default   [   8% ] 037/150 VUs  0m45.0s/9m00.0s
+
+running (0m46.0s), 038/150 VUs, 567 complete and 0 interrupted iterations
+default   [   9% ] 038/150 VUs  0m46.0s/9m00.0s
+
+running (0m47.0s), 039/150 VUs, 597 complete and 0 interrupted iterations
+default   [   9% ] 039/150 VUs  0m47.0s/9m00.0s
+
+running (0m48.0s), 040/150 VUs, 620 complete and 0 interrupted iterations
+default   [   9% ] 040/150 VUs  0m48.0s/9m00.0s
+
+running (0m49.0s), 040/150 VUs, 646 complete and 0 interrupted iterations
+default   [   9% ] 040/150 VUs  0m49.0s/9m00.0s
+
+running (0m50.0s), 041/150 VUs, 673 complete and 0 interrupted iterations
+default   [   9% ] 041/150 VUs  0m50.0s/9m00.0s
+
+running (0m51.0s), 042/150 VUs, 702 complete and 0 interrupted iterations
+default   [   9% ] 042/150 VUs  0m51.0s/9m00.0s
+
+running (0m52.0s), 043/150 VUs, 728 complete and 0 interrupted iterations
+default   [  10% ] 043/150 VUs  0m52.0s/9m00.0s
+
+running (0m53.0s), 044/150 VUs, 756 complete and 0 interrupted iterations
+default   [  10% ] 044/150 VUs  0m53.0s/9m00.0s
+
+running (0m54.0s), 045/150 VUs, 781 complete and 0 interrupted iterations
+default   [  10% ] 045/150 VUs  0m54.0s/9m00.0s
+
+running (0m55.0s), 045/150 VUs, 815 complete and 0 interrupted iterations
+default   [  10% ] 045/150 VUs  0m55.0s/9m00.0s
+
+running (0m56.0s), 046/150 VUs, 841 complete and 0 interrupted iterations
+default   [  10% ] 046/150 VUs  0m56.0s/9m00.0s
+
+running (0m57.0s), 047/150 VUs, 875 complete and 0 interrupted iterations
+default   [  11% ] 047/150 VUs  0m57.0s/9m00.0s
+
+running (0m58.0s), 048/150 VUs, 907 complete and 0 interrupted iterations
+default   [  11% ] 048/150 VUs  0m58.0s/9m00.0s
+
+running (0m59.0s), 049/150 VUs, 944 complete and 0 interrupted iterations
+default   [  11% ] 049/150 VUs  0m59.0s/9m00.0s
+
+running (1m00.0s), 049/150 VUs, 967 complete and 0 interrupted iterations
+default   [  11% ] 049/150 VUs  1m00.0s/9m00.0s
+
+running (1m01.0s), 050/150 VUs, 1007 complete and 0 interrupted iterations
+default   [  11% ] 050/150 VUs  1m01.0s/9m00.0s
+
+running (1m02.0s), 050/150 VUs, 1038 complete and 0 interrupted iterations
+default   [  11% ] 050/150 VUs  1m02.0s/9m00.0s
+
+running (1m03.0s), 050/150 VUs, 1069 complete and 0 interrupted iterations
+default   [  12% ] 050/150 VUs  1m03.0s/9m00.0s
+
+running (1m04.0s), 050/150 VUs, 1103 complete and 0 interrupted iterations
+default   [  12% ] 050/150 VUs  1m04.0s/9m00.0s
+
+running (1m05.0s), 050/150 VUs, 1134 complete and 0 interrupted iterations
+default   [  12% ] 050/150 VUs  1m05.0s/9m00.0s
+
+running (1m06.0s), 050/150 VUs, 1173 complete and 0 interrupted iterations
+default   [  12% ] 050/150 VUs  1m06.0s/9m00.0s
+
+running (1m07.0s), 051/150 VUs, 1206 complete and 0 interrupted iterations
+default   [  12% ] 051/150 VUs  1m07.0s/9m00.0s
+
+running (1m08.0s), 051/150 VUs, 1240 complete and 0 interrupted iterations
+default   [  13% ] 051/150 VUs  1m08.0s/9m00.0s
+
+running (1m09.0s), 051/150 VUs, 1276 complete and 0 interrupted iterations
+default   [  13% ] 051/150 VUs  1m09.0s/9m00.0s
+
+running (1m10.0s), 051/150 VUs, 1307 complete and 0 interrupted iterations
+default   [  13% ] 051/150 VUs  1m10.0s/9m00.0s
+
+running (1m11.0s), 051/150 VUs, 1339 complete and 0 interrupted iterations
+default   [  13% ] 051/150 VUs  1m11.0s/9m00.0s
+
+running (1m12.0s), 051/150 VUs, 1376 complete and 0 interrupted iterations
+default   [  13% ] 051/150 VUs  1m12.0s/9m00.0s
+
+running (1m13.0s), 052/150 VUs, 1402 complete and 0 interrupted iterations
+default   [  14% ] 052/150 VUs  1m13.0s/9m00.0s
+
+running (1m14.0s), 052/150 VUs, 1445 complete and 0 interrupted iterations
+default   [  14% ] 052/150 VUs  1m14.0s/9m00.0s
+
+running (1m15.0s), 052/150 VUs, 1483 complete and 0 interrupted iterations
+default   [  14% ] 052/150 VUs  1m15.0s/9m00.0s
+
+running (1m16.0s), 052/150 VUs, 1513 complete and 0 interrupted iterations
+default   [  14% ] 052/150 VUs  1m16.0s/9m00.0s
+
+running (1m17.0s), 052/150 VUs, 1551 complete and 0 interrupted iterations
+default   [  14% ] 052/150 VUs  1m17.0s/9m00.0s
+
+running (1m18.0s), 052/150 VUs, 1582 complete and 0 interrupted iterations
+default   [  14% ] 052/150 VUs  1m18.0s/9m00.0s
+
+running (1m19.0s), 053/150 VUs, 1615 complete and 0 interrupted iterations
+default   [  15% ] 053/150 VUs  1m19.0s/9m00.0s
+
+running (1m20.0s), 053/150 VUs, 1655 complete and 0 interrupted iterations
+default   [  15% ] 053/150 VUs  1m20.0s/9m00.0s
+
+running (1m21.0s), 053/150 VUs, 1690 complete and 0 interrupted iterations
+default   [  15% ] 053/150 VUs  1m21.0s/9m00.0s
+
+running (1m22.0s), 053/150 VUs, 1724 complete and 0 interrupted iterations
+default   [  15% ] 053/150 VUs  1m22.0s/9m00.0s
+
+running (1m23.0s), 053/150 VUs, 1763 complete and 0 interrupted iterations
+default   [  15% ] 053/150 VUs  1m23.0s/9m00.0s
+
+running (1m24.0s), 053/150 VUs, 1794 complete and 0 interrupted iterations
+default   [  16% ] 053/150 VUs  1m24.0s/9m00.0s
+
+running (1m25.0s), 054/150 VUs, 1831 complete and 0 interrupted iterations
+default   [  16% ] 054/150 VUs  1m25.0s/9m00.0s
+
+running (1m26.0s), 054/150 VUs, 1871 complete and 0 interrupted iterations
+default   [  16% ] 054/150 VUs  1m26.0s/9m00.0s
+
+running (1m27.0s), 054/150 VUs, 1901 complete and 0 interrupted iterations
+default   [  16% ] 054/150 VUs  1m27.0s/9m00.0s
+
+running (1m28.0s), 054/150 VUs, 1940 complete and 0 interrupted iterations
+default   [  16% ] 054/150 VUs  1m28.0s/9m00.0s
+
+running (1m29.0s), 054/150 VUs, 1977 complete and 0 interrupted iterations
+default   [  16% ] 054/150 VUs  1m29.0s/9m00.0s
+
+running (1m30.0s), 054/150 VUs, 2008 complete and 0 interrupted iterations
+default   [  17% ] 054/150 VUs  1m30.0s/9m00.0s
+
+running (1m31.0s), 055/150 VUs, 2050 complete and 0 interrupted iterations
+default   [  17% ] 055/150 VUs  1m31.0s/9m00.0s
+
+running (1m32.0s), 055/150 VUs, 2089 complete and 0 interrupted iterations
+default   [  17% ] 055/150 VUs  1m32.0s/9m00.0s
+
+running (1m33.0s), 055/150 VUs, 2124 complete and 0 interrupted iterations
+default   [  17% ] 055/150 VUs  1m33.0s/9m00.0s
+
+running (1m34.0s), 055/150 VUs, 2154 complete and 0 interrupted iterations
+default   [  17% ] 055/150 VUs  1m34.0s/9m00.0s
+
+running (1m35.0s), 055/150 VUs, 2199 complete and 0 interrupted iterations
+default   [  18% ] 055/150 VUs  1m35.0s/9m00.0s
+
+running (1m36.0s), 055/150 VUs, 2230 complete and 0 interrupted iterations
+default   [  18% ] 055/150 VUs  1m36.0s/9m00.0s
+
+running (1m37.0s), 056/150 VUs, 2270 complete and 0 interrupted iterations
+default   [  18% ] 056/150 VUs  1m37.0s/9m00.0s
+
+running (1m38.0s), 056/150 VUs, 2307 complete and 0 interrupted iterations
+default   [  18% ] 056/150 VUs  1m38.0s/9m00.0s
+
+running (1m39.0s), 056/150 VUs, 2343 complete and 0 interrupted iterations
+default   [  18% ] 056/150 VUs  1m39.0s/9m00.0s
+
+running (1m40.0s), 056/150 VUs, 2383 complete and 0 interrupted iterations
+default   [  19% ] 056/150 VUs  1m40.0s/9m00.0s
+
+running (1m41.0s), 056/150 VUs, 2422 complete and 0 interrupted iterations
+default   [  19% ] 056/150 VUs  1m41.0s/9m00.0s
+
+running (1m42.0s), 056/150 VUs, 2455 complete and 0 interrupted iterations
+default   [  19% ] 056/150 VUs  1m42.0s/9m00.0s
+
+running (1m43.0s), 057/150 VUs, 2494 complete and 0 interrupted iterations
+default   [  19% ] 057/150 VUs  1m43.0s/9m00.0s
+
+running (1m44.0s), 057/150 VUs, 2534 complete and 0 interrupted iterations
+default   [  19% ] 057/150 VUs  1m44.0s/9m00.0s
+
+running (1m45.0s), 057/150 VUs, 2570 complete and 0 interrupted iterations
+default   [  19% ] 057/150 VUs  1m45.0s/9m00.0s
+
+running (1m46.0s), 057/150 VUs, 2609 complete and 0 interrupted iterations
+default   [  20% ] 057/150 VUs  1m46.0s/9m00.0s
+
+running (1m47.0s), 057/150 VUs, 2647 complete and 0 interrupted iterations
+default   [  20% ] 057/150 VUs  1m47.0s/9m00.0s
+
+running (1m48.0s), 057/150 VUs, 2686 complete and 0 interrupted iterations
+default   [  20% ] 057/150 VUs  1m48.0s/9m00.0s
+
+running (1m49.0s), 058/150 VUs, 2727 complete and 0 interrupted iterations
+default   [  20% ] 058/150 VUs  1m49.0s/9m00.0s
+
+running (1m50.0s), 058/150 VUs, 2766 complete and 0 interrupted iterations
+default   [  20% ] 058/150 VUs  1m50.0s/9m00.0s
+
+running (1m51.0s), 058/150 VUs, 2800 complete and 0 interrupted iterations
+default   [  21% ] 058/150 VUs  1m51.0s/9m00.0s
+
+running (1m52.0s), 058/150 VUs, 2839 complete and 0 interrupted iterations
+default   [  21% ] 058/150 VUs  1m52.0s/9m00.0s
+
+running (1m53.0s), 058/150 VUs, 2876 complete and 0 interrupted iterations
+default   [  21% ] 058/150 VUs  1m53.0s/9m00.0s
+
+running (1m54.0s), 058/150 VUs, 2918 complete and 0 interrupted iterations
+default   [  21% ] 058/150 VUs  1m54.0s/9m00.0s
+
+running (1m55.0s), 059/150 VUs, 2956 complete and 0 interrupted iterations
+default   [  21% ] 059/150 VUs  1m55.0s/9m00.0s
+
+running (1m56.0s), 059/150 VUs, 2997 complete and 0 interrupted iterations
+default   [  21% ] 059/150 VUs  1m56.0s/9m00.0s
+
+running (1m57.0s), 059/150 VUs, 3035 complete and 0 interrupted iterations
+default   [  22% ] 059/150 VUs  1m57.0s/9m00.0s
+
+running (1m58.0s), 059/150 VUs, 3080 complete and 0 interrupted iterations
+default   [  22% ] 059/150 VUs  1m58.0s/9m00.0s
+
+running (1m59.0s), 059/150 VUs, 3113 complete and 0 interrupted iterations
+default   [  22% ] 059/150 VUs  1m59.0s/9m00.0s
+
+running (2m00.0s), 059/150 VUs, 3158 complete and 0 interrupted iterations
+default   [  22% ] 059/150 VUs  2m00.0s/9m00.0s
+
+running (2m01.0s), 060/150 VUs, 3196 complete and 0 interrupted iterations
+default   [  22% ] 060/150 VUs  2m01.0s/9m00.0s
+
+running (2m02.0s), 060/150 VUs, 3232 complete and 0 interrupted iterations
+default   [  23% ] 060/150 VUs  2m02.0s/9m00.0s
+
+running (2m03.0s), 060/150 VUs, 3274 complete and 0 interrupted iterations
+default   [  23% ] 060/150 VUs  2m03.0s/9m00.0s
+
+running (2m04.0s), 060/150 VUs, 3316 complete and 0 interrupted iterations
+default   [  23% ] 060/150 VUs  2m04.0s/9m00.0s
+
+running (2m05.0s), 060/150 VUs, 3351 complete and 0 interrupted iterations
+default   [  23% ] 060/150 VUs  2m05.0s/9m00.0s
+
+running (2m06.0s), 060/150 VUs, 3393 complete and 0 interrupted iterations
+default   [  23% ] 060/150 VUs  2m06.0s/9m00.0s
+
+running (2m07.0s), 061/150 VUs, 3436 complete and 0 interrupted iterations
+default   [  24% ] 061/150 VUs  2m07.0s/9m00.0s
+
+running (2m08.0s), 061/150 VUs, 3474 complete and 0 interrupted iterations
+default   [  24% ] 061/150 VUs  2m08.0s/9m00.0s
+
+running (2m09.0s), 061/150 VUs, 3515 complete and 0 interrupted iterations
+default   [  24% ] 061/150 VUs  2m09.0s/9m00.0s
+
+running (2m10.0s), 061/150 VUs, 3559 complete and 0 interrupted iterations
+default   [  24% ] 061/150 VUs  2m10.0s/9m00.0s
+
+running (2m11.0s), 061/150 VUs, 3602 complete and 0 interrupted iterations
+default   [  24% ] 061/150 VUs  2m11.0s/9m00.0s
+
+running (2m12.0s), 061/150 VUs, 3641 complete and 0 interrupted iterations
+default   [  24% ] 061/150 VUs  2m12.0s/9m00.0s
+
+running (2m13.0s), 062/150 VUs, 3682 complete and 0 interrupted iterations
+default   [  25% ] 062/150 VUs  2m13.0s/9m00.0s
+
+running (2m14.0s), 062/150 VUs, 3728 complete and 0 interrupted iterations
+default   [  25% ] 062/150 VUs  2m14.0s/9m00.0s
+
+running (2m15.0s), 062/150 VUs, 3770 complete and 0 interrupted iterations
+default   [  25% ] 062/150 VUs  2m15.0s/9m00.0s
+
+running (2m16.0s), 062/150 VUs, 3811 complete and 0 interrupted iterations
+default   [  25% ] 062/150 VUs  2m16.0s/9m00.0s
+
+running (2m17.0s), 062/150 VUs, 3856 complete and 0 interrupted iterations
+default   [  25% ] 062/150 VUs  2m17.0s/9m00.0s
+
+running (2m18.0s), 062/150 VUs, 3894 complete and 0 interrupted iterations
+default   [  26% ] 062/150 VUs  2m18.0s/9m00.0s
+
+running (2m19.0s), 063/150 VUs, 3937 complete and 0 interrupted iterations
+default   [  26% ] 063/150 VUs  2m19.0s/9m00.0s
+
+running (2m20.0s), 063/150 VUs, 3981 complete and 0 interrupted iterations
+default   [  26% ] 063/150 VUs  2m20.0s/9m00.0s
+
+running (2m21.0s), 063/150 VUs, 4023 complete and 0 interrupted iterations
+default   [  26% ] 063/150 VUs  2m21.0s/9m00.0s
+
+running (2m22.0s), 063/150 VUs, 4068 complete and 0 interrupted iterations
+default   [  26% ] 063/150 VUs  2m22.0s/9m00.0s
+
+running (2m23.0s), 063/150 VUs, 4113 complete and 0 interrupted iterations
+default   [  26% ] 063/150 VUs  2m23.0s/9m00.0s
+
+running (2m24.0s), 063/150 VUs, 4144 complete and 0 interrupted iterations
+default   [  27% ] 063/150 VUs  2m24.0s/9m00.0s
+
+running (2m25.0s), 064/150 VUs, 4197 complete and 0 interrupted iterations
+default   [  27% ] 064/150 VUs  2m25.0s/9m00.0s
+
+running (2m26.0s), 064/150 VUs, 4235 complete and 0 interrupted iterations
+default   [  27% ] 064/150 VUs  2m26.0s/9m00.0s
+
+running (2m27.0s), 064/150 VUs, 4281 complete and 0 interrupted iterations
+default   [  27% ] 064/150 VUs  2m27.0s/9m00.0s
+
+running (2m28.0s), 064/150 VUs, 4321 complete and 0 interrupted iterations
+default   [  27% ] 064/150 VUs  2m28.0s/9m00.0s
+
+running (2m29.0s), 064/150 VUs, 4360 complete and 0 interrupted iterations
+default   [  28% ] 064/150 VUs  2m29.0s/9m00.0s
+
+running (2m30.0s), 064/150 VUs, 4409 complete and 0 interrupted iterations
+default   [  28% ] 064/150 VUs  2m30.0s/9m00.0s
+
+running (2m31.0s), 065/150 VUs, 4451 complete and 0 interrupted iterations
+default   [  28% ] 065/150 VUs  2m31.0s/9m00.0s
+
+running (2m32.0s), 065/150 VUs, 4490 complete and 0 interrupted iterations
+default   [  28% ] 065/150 VUs  2m32.0s/9m00.0s
+
+running (2m33.0s), 065/150 VUs, 4534 complete and 0 interrupted iterations
+default   [  28% ] 065/150 VUs  2m33.0s/9m00.0s
+
+running (2m34.0s), 065/150 VUs, 4575 complete and 0 interrupted iterations
+default   [  29% ] 065/150 VUs  2m34.0s/9m00.0s
+
+running (2m35.0s), 065/150 VUs, 4618 complete and 0 interrupted iterations
+default   [  29% ] 065/150 VUs  2m35.0s/9m00.0s
+
+running (2m36.0s), 065/150 VUs, 4664 complete and 0 interrupted iterations
+default   [  29% ] 065/150 VUs  2m36.0s/9m00.0s
+
+running (2m37.0s), 066/150 VUs, 4707 complete and 0 interrupted iterations
+default   [  29% ] 066/150 VUs  2m37.0s/9m00.0s
+
+running (2m38.0s), 066/150 VUs, 4748 complete and 0 interrupted iterations
+default   [  29% ] 066/150 VUs  2m38.0s/9m00.0s
+
+running (2m39.0s), 066/150 VUs, 4794 complete and 0 interrupted iterations
+default   [  29% ] 066/150 VUs  2m39.0s/9m00.0s
+
+running (2m40.0s), 066/150 VUs, 4840 complete and 0 interrupted iterations
+default   [  30% ] 066/150 VUs  2m40.0s/9m00.0s
+
+running (2m41.0s), 066/150 VUs, 4880 complete and 0 interrupted iterations
+default   [  30% ] 066/150 VUs  2m41.0s/9m00.0s
+
+running (2m42.0s), 066/150 VUs, 4925 complete and 0 interrupted iterations
+default   [  30% ] 066/150 VUs  2m42.0s/9m00.0s
+
+running (2m43.0s), 067/150 VUs, 4971 complete and 0 interrupted iterations
+default   [  30% ] 067/150 VUs  2m43.0s/9m00.0s
+
+running (2m44.0s), 067/150 VUs, 5004 complete and 0 interrupted iterations
+default   [  30% ] 067/150 VUs  2m44.0s/9m00.0s
+
+running (2m45.0s), 067/150 VUs, 5055 complete and 0 interrupted iterations
+default   [  31% ] 067/150 VUs  2m45.0s/9m00.0s
+
+running (2m46.0s), 067/150 VUs, 5108 complete and 0 interrupted iterations
+default   [  31% ] 067/150 VUs  2m46.0s/9m00.0s
+
+running (2m47.0s), 067/150 VUs, 5142 complete and 0 interrupted iterations
+default   [  31% ] 067/150 VUs  2m47.0s/9m00.0s
+
+running (2m48.0s), 067/150 VUs, 5192 complete and 0 interrupted iterations
+default   [  31% ] 067/150 VUs  2m48.0s/9m00.0s
+
+running (2m49.0s), 068/150 VUs, 5238 complete and 0 interrupted iterations
+default   [  31% ] 068/150 VUs  2m49.0s/9m00.0s
+
+running (2m50.0s), 068/150 VUs, 5278 complete and 0 interrupted iterations
+default   [  31% ] 068/150 VUs  2m50.0s/9m00.0s
+
+running (2m51.0s), 068/150 VUs, 5326 complete and 0 interrupted iterations
+default   [  32% ] 068/150 VUs  2m51.0s/9m00.0s
+
+running (2m52.0s), 068/150 VUs, 5367 complete and 0 interrupted iterations
+default   [  32% ] 068/150 VUs  2m52.0s/9m00.0s
+
+running (2m53.0s), 068/150 VUs, 5414 complete and 0 interrupted iterations
+default   [  32% ] 068/150 VUs  2m53.0s/9m00.0s
+
+running (2m54.0s), 068/150 VUs, 5460 complete and 0 interrupted iterations
+default   [  32% ] 068/150 VUs  2m54.0s/9m00.0s
+
+running (2m55.0s), 069/150 VUs, 5509 complete and 0 interrupted iterations
+default   [  32% ] 069/150 VUs  2m55.0s/9m00.0s
+
+running (2m56.0s), 069/150 VUs, 5552 complete and 0 interrupted iterations
+default   [  33% ] 069/150 VUs  2m56.0s/9m00.0s
+
+running (2m57.0s), 069/150 VUs, 5604 complete and 0 interrupted iterations
+default   [  33% ] 069/150 VUs  2m57.0s/9m00.0s
+
+running (2m58.0s), 069/150 VUs, 5645 complete and 0 interrupted iterations
+default   [  33% ] 069/150 VUs  2m58.0s/9m00.0s
+
+running (2m59.0s), 069/150 VUs, 5690 complete and 0 interrupted iterations
+default   [  33% ] 069/150 VUs  2m59.0s/9m00.0s
+
+running (3m00.0s), 069/150 VUs, 5741 complete and 0 interrupted iterations
+default   [  33% ] 069/150 VUs  3m00.0s/9m00.0s
+
+running (3m01.0s), 070/150 VUs, 5782 complete and 0 interrupted iterations
+default   [  34% ] 070/150 VUs  3m01.0s/9m00.0s
+
+running (3m02.0s), 070/150 VUs, 5829 complete and 0 interrupted iterations
+default   [  34% ] 070/150 VUs  3m02.0s/9m00.0s
+
+running (3m03.0s), 070/150 VUs, 5880 complete and 0 interrupted iterations
+default   [  34% ] 070/150 VUs  3m03.0s/9m00.0s
+
+running (3m04.0s), 070/150 VUs, 5921 complete and 0 interrupted iterations
+default   [  34% ] 070/150 VUs  3m04.0s/9m00.0s
+
+running (3m05.0s), 070/150 VUs, 5966 complete and 0 interrupted iterations
+default   [  34% ] 070/150 VUs  3m05.0s/9m00.0s
+
+running (3m06.0s), 070/150 VUs, 6021 complete and 0 interrupted iterations
+default   [  34% ] 070/150 VUs  3m06.0s/9m00.0s
+
+running (3m07.0s), 071/150 VUs, 6066 complete and 0 interrupted iterations
+default   [  35% ] 071/150 VUs  3m07.0s/9m00.0s
+
+running (3m08.0s), 071/150 VUs, 6110 complete and 0 interrupted iterations
+default   [  35% ] 071/150 VUs  3m08.0s/9m00.0s
+
+running (3m09.0s), 071/150 VUs, 6159 complete and 0 interrupted iterations
+default   [  35% ] 071/150 VUs  3m09.0s/9m00.0s
+
+running (3m10.0s), 071/150 VUs, 6208 complete and 0 interrupted iterations
+default   [  35% ] 071/150 VUs  3m10.0s/9m00.0s
+
+running (3m11.0s), 071/150 VUs, 6257 complete and 0 interrupted iterations
+default   [  35% ] 071/150 VUs  3m11.0s/9m00.0s
+
+running (3m12.0s), 071/150 VUs, 6301 complete and 0 interrupted iterations
+default   [  36% ] 071/150 VUs  3m12.0s/9m00.0s
+
+running (3m13.0s), 072/150 VUs, 6347 complete and 0 interrupted iterations
+default   [  36% ] 072/150 VUs  3m13.0s/9m00.0s
+
+running (3m14.0s), 072/150 VUs, 6399 complete and 0 interrupted iterations
+default   [  36% ] 072/150 VUs  3m14.0s/9m00.0s
+
+running (3m15.0s), 072/150 VUs, 6444 complete and 0 interrupted iterations
+default   [  36% ] 072/150 VUs  3m15.0s/9m00.0s
+
+running (3m16.0s), 072/150 VUs, 6495 complete and 0 interrupted iterations
+default   [  36% ] 072/150 VUs  3m16.0s/9m00.0s
+
+running (3m17.0s), 072/150 VUs, 6542 complete and 0 interrupted iterations
+default   [  36% ] 072/150 VUs  3m17.0s/9m00.0s
+
+running (3m18.0s), 072/150 VUs, 6588 complete and 0 interrupted iterations
+default   [  37% ] 072/150 VUs  3m18.0s/9m00.0s
+
+running (3m19.0s), 073/150 VUs, 6632 complete and 0 interrupted iterations
+default   [  37% ] 073/150 VUs  3m19.0s/9m00.0s
+
+running (3m20.0s), 073/150 VUs, 6685 complete and 0 interrupted iterations
+default   [  37% ] 073/150 VUs  3m20.0s/9m00.0s
+
+running (3m21.0s), 073/150 VUs, 6730 complete and 0 interrupted iterations
+default   [  37% ] 073/150 VUs  3m21.0s/9m00.0s
+
+running (3m22.0s), 073/150 VUs, 6782 complete and 0 interrupted iterations
+default   [  37% ] 073/150 VUs  3m22.0s/9m00.0s
+
+running (3m23.0s), 073/150 VUs, 6823 complete and 0 interrupted iterations
+default   [  38% ] 073/150 VUs  3m23.0s/9m00.0s
+
+running (3m24.0s), 073/150 VUs, 6877 complete and 0 interrupted iterations
+default   [  38% ] 073/150 VUs  3m24.0s/9m00.0s
+
+running (3m25.0s), 074/150 VUs, 6925 complete and 0 interrupted iterations
+default   [  38% ] 074/150 VUs  3m25.0s/9m00.0s
+
+running (3m26.0s), 074/150 VUs, 6969 complete and 0 interrupted iterations
+default   [  38% ] 074/150 VUs  3m26.0s/9m00.0s
+
+running (3m27.0s), 074/150 VUs, 7022 complete and 0 interrupted iterations
+default   [  38% ] 074/150 VUs  3m27.0s/9m00.0s
+
+running (3m28.0s), 074/150 VUs, 7072 complete and 0 interrupted iterations
+default   [  39% ] 074/150 VUs  3m28.0s/9m00.0s
+
+running (3m29.0s), 074/150 VUs, 7119 complete and 0 interrupted iterations
+default   [  39% ] 074/150 VUs  3m29.0s/9m00.0s
+
+running (3m30.0s), 074/150 VUs, 7169 complete and 0 interrupted iterations
+default   [  39% ] 074/150 VUs  3m30.0s/9m00.0s
+
+running (3m31.0s), 075/150 VUs, 7219 complete and 0 interrupted iterations
+default   [  39% ] 075/150 VUs  3m31.0s/9m00.0s
+
+running (3m32.0s), 075/150 VUs, 7271 complete and 0 interrupted iterations
+default   [  39% ] 075/150 VUs  3m32.0s/9m00.0s
+
+running (3m33.0s), 075/150 VUs, 7322 complete and 0 interrupted iterations
+default   [  39% ] 075/150 VUs  3m33.0s/9m00.0s
+
+running (3m34.0s), 075/150 VUs, 7369 complete and 0 interrupted iterations
+default   [  40% ] 075/150 VUs  3m34.0s/9m00.0s
+
+running (3m35.0s), 075/150 VUs, 7421 complete and 0 interrupted iterations
+default   [  40% ] 075/150 VUs  3m35.0s/9m00.0s
+
+running (3m36.0s), 075/150 VUs, 7471 complete and 0 interrupted iterations
+default   [  40% ] 075/150 VUs  3m36.0s/9m00.0s
+
+running (3m37.0s), 076/150 VUs, 7522 complete and 0 interrupted iterations
+default   [  40% ] 076/150 VUs  3m37.0s/9m00.0s
+
+running (3m38.0s), 076/150 VUs, 7572 complete and 0 interrupted iterations
+default   [  40% ] 076/150 VUs  3m38.0s/9m00.0s
+
+running (3m39.0s), 076/150 VUs, 7629 complete and 0 interrupted iterations
+default   [  41% ] 076/150 VUs  3m39.0s/9m00.0s
+
+running (3m40.0s), 076/150 VUs, 7672 complete and 0 interrupted iterations
+default   [  41% ] 076/150 VUs  3m40.0s/9m00.0s
+
+running (3m41.0s), 076/150 VUs, 7724 complete and 0 interrupted iterations
+default   [  41% ] 076/150 VUs  3m41.0s/9m00.0s
+
+running (3m42.0s), 076/150 VUs, 7778 complete and 0 interrupted iterations
+default   [  41% ] 076/150 VUs  3m42.0s/9m00.0s
+
+running (3m43.0s), 077/150 VUs, 7829 complete and 0 interrupted iterations
+default   [  41% ] 077/150 VUs  3m43.0s/9m00.0s
+
+running (3m44.0s), 077/150 VUs, 7885 complete and 0 interrupted iterations
+default   [  41% ] 077/150 VUs  3m44.0s/9m00.0s
+
+running (3m45.0s), 077/150 VUs, 7938 complete and 0 interrupted iterations
+default   [  42% ] 077/150 VUs  3m45.0s/9m00.0s
+
+running (3m46.0s), 077/150 VUs, 7978 complete and 0 interrupted iterations
+default   [  42% ] 077/150 VUs  3m46.0s/9m00.0s
+
+running (3m47.0s), 077/150 VUs, 8038 complete and 0 interrupted iterations
+default   [  42% ] 077/150 VUs  3m47.0s/9m00.0s
+
+running (3m48.0s), 077/150 VUs, 8096 complete and 0 interrupted iterations
+default   [  42% ] 077/150 VUs  3m48.0s/9m00.0s
+
+running (3m49.0s), 078/150 VUs, 8138 complete and 0 interrupted iterations
+default   [  42% ] 078/150 VUs  3m49.0s/9m00.0s
+
+running (3m50.0s), 078/150 VUs, 8190 complete and 0 interrupted iterations
+default   [  43% ] 078/150 VUs  3m50.0s/9m00.0s
+
+running (3m51.0s), 078/150 VUs, 8245 complete and 0 interrupted iterations
+default   [  43% ] 078/150 VUs  3m51.0s/9m00.0s
+
+running (3m52.0s), 078/150 VUs, 8293 complete and 0 interrupted iterations
+default   [  43% ] 078/150 VUs  3m52.0s/9m00.0s
+
+running (3m53.0s), 078/150 VUs, 8344 complete and 0 interrupted iterations
+default   [  43% ] 078/150 VUs  3m53.0s/9m00.0s
+
+running (3m54.0s), 078/150 VUs, 8397 complete and 0 interrupted iterations
+default   [  43% ] 078/150 VUs  3m54.0s/9m00.0s
+
+running (3m55.0s), 079/150 VUs, 8449 complete and 0 interrupted iterations
+default   [  44% ] 079/150 VUs  3m55.0s/9m00.0s
+
+running (3m56.0s), 079/150 VUs, 8498 complete and 0 interrupted iterations
+default   [  44% ] 079/150 VUs  3m56.0s/9m00.0s
+
+running (3m57.0s), 079/150 VUs, 8552 complete and 0 interrupted iterations
+default   [  44% ] 079/150 VUs  3m57.0s/9m00.0s
+
+running (3m58.0s), 079/150 VUs, 8607 complete and 0 interrupted iterations
+default   [  44% ] 079/150 VUs  3m58.0s/9m00.0s
+
+running (3m59.0s), 079/150 VUs, 8661 complete and 0 interrupted iterations
+default   [  44% ] 079/150 VUs  3m59.0s/9m00.0s
+
+running (4m00.0s), 079/150 VUs, 8709 complete and 0 interrupted iterations
+default   [  44% ] 079/150 VUs  4m00.0s/9m00.0s
+
+running (4m01.0s), 080/150 VUs, 8765 complete and 0 interrupted iterations
+default   [  45% ] 080/150 VUs  4m01.0s/9m00.0s
+
+running (4m02.0s), 080/150 VUs, 8818 complete and 0 interrupted iterations
+default   [  45% ] 080/150 VUs  4m02.0s/9m00.0s
+
+running (4m03.0s), 080/150 VUs, 8871 complete and 0 interrupted iterations
+default   [  45% ] 080/150 VUs  4m03.0s/9m00.0s
+
+running (4m04.0s), 080/150 VUs, 8927 complete and 0 interrupted iterations
+default   [  45% ] 080/150 VUs  4m04.0s/9m00.0s
+
+running (4m05.0s), 080/150 VUs, 8971 complete and 0 interrupted iterations
+default   [  45% ] 080/150 VUs  4m05.0s/9m00.0s
+
+running (4m06.0s), 080/150 VUs, 9032 complete and 0 interrupted iterations
+default   [  46% ] 080/150 VUs  4m06.0s/9m00.0s
+
+running (4m07.0s), 081/150 VUs, 9085 complete and 0 interrupted iterations
+default   [  46% ] 081/150 VUs  4m07.0s/9m00.0s
+
+running (4m08.0s), 081/150 VUs, 9142 complete and 0 interrupted iterations
+default   [  46% ] 081/150 VUs  4m08.0s/9m00.0s
+
+running (4m09.0s), 081/150 VUs, 9190 complete and 0 interrupted iterations
+default   [  46% ] 081/150 VUs  4m09.0s/9m00.0s
+
+running (4m10.0s), 081/150 VUs, 9244 complete and 0 interrupted iterations
+default   [  46% ] 081/150 VUs  4m10.0s/9m00.0s
+
+running (4m11.0s), 081/150 VUs, 9301 complete and 0 interrupted iterations
+default   [  46% ] 081/150 VUs  4m11.0s/9m00.0s
+
+running (4m12.0s), 081/150 VUs, 9358 complete and 0 interrupted iterations
+default   [  47% ] 081/150 VUs  4m12.0s/9m00.0s
+
+running (4m13.0s), 082/150 VUs, 9408 complete and 0 interrupted iterations
+default   [  47% ] 082/150 VUs  4m13.0s/9m00.0s
+
+running (4m14.0s), 082/150 VUs, 9465 complete and 0 interrupted iterations
+default   [  47% ] 082/150 VUs  4m14.0s/9m00.0s
+
+running (4m15.0s), 082/150 VUs, 9513 complete and 0 interrupted iterations
+default   [  47% ] 082/150 VUs  4m15.0s/9m00.0s
+
+running (4m16.0s), 082/150 VUs, 9571 complete and 0 interrupted iterations
+default   [  47% ] 082/150 VUs  4m16.0s/9m00.0s
+
+running (4m17.0s), 082/150 VUs, 9632 complete and 0 interrupted iterations
+default   [  48% ] 082/150 VUs  4m17.0s/9m00.0s
+
+running (4m18.0s), 082/150 VUs, 9675 complete and 0 interrupted iterations
+default   [  48% ] 082/150 VUs  4m18.0s/9m00.0s
+
+running (4m19.0s), 083/150 VUs, 9739 complete and 0 interrupted iterations
+default   [  48% ] 083/150 VUs  4m19.0s/9m00.0s
+
+running (4m20.0s), 083/150 VUs, 9794 complete and 0 interrupted iterations
+default   [  48% ] 083/150 VUs  4m20.0s/9m00.0s
+
+running (4m21.0s), 083/150 VUs, 9844 complete and 0 interrupted iterations
+default   [  48% ] 083/150 VUs  4m21.0s/9m00.0s
+
+running (4m22.0s), 083/150 VUs, 9903 complete and 0 interrupted iterations
+default   [  49% ] 083/150 VUs  4m22.0s/9m00.0s
+
+running (4m23.0s), 083/150 VUs, 9965 complete and 0 interrupted iterations
+default   [  49% ] 083/150 VUs  4m23.0s/9m00.0s
+
+running (4m24.0s), 083/150 VUs, 10011 complete and 0 interrupted iterations
+default   [  49% ] 083/150 VUs  4m24.0s/9m00.0s
+
+running (4m25.0s), 084/150 VUs, 10069 complete and 0 interrupted iterations
+default   [  49% ] 084/150 VUs  4m25.0s/9m00.0s
+
+running (4m31.0s), 084/150 VUs, 10115 complete and 0 interrupted iterations
+default   [  49% ] 084/150 VUs  4m26.0s/9m00.0s
+
+running (4m31.9s), 084/150 VUs, 10179 complete and 0 interrupted iterations
+default   [  49% ] 084/150 VUs  4m27.0s/9m00.0s
+
+running (4m32.9s), 084/150 VUs, 10236 complete and 0 interrupted iterations
+default   [  50% ] 084/150 VUs  4m28.0s/9m00.0s
+
+running (4m33.9s), 084/150 VUs, 10284 complete and 0 interrupted iterations
+default   [  50% ] 084/150 VUs  4m29.0s/9m00.0s
+
+running (4m34.9s), 084/150 VUs, 10345 complete and 0 interrupted iterations
+default   [  50% ] 084/150 VUs  4m30.0s/9m00.0s
+
+running (4m35.9s), 085/150 VUs, 10399 complete and 0 interrupted iterations
+default   [  50% ] 085/150 VUs  4m31.0s/9m00.0s
+
+running (4m36.9s), 085/150 VUs, 10455 complete and 0 interrupted iterations
+default   [  50% ] 085/150 VUs  4m32.0s/9m00.0s
+
+running (4m37.9s), 085/150 VUs, 10513 complete and 0 interrupted iterations
+default   [  51% ] 085/150 VUs  4m33.0s/9m00.0s
+
+running (4m38.9s), 085/150 VUs, 10566 complete and 0 interrupted iterations
+default   [  51% ] 085/150 VUs  4m34.0s/9m00.0s
+
+running (4m39.9s), 085/150 VUs, 10623 complete and 0 interrupted iterations
+default   [  51% ] 085/150 VUs  4m35.0s/9m00.0s
+
+running (4m40.9s), 085/150 VUs, 10680 complete and 0 interrupted iterations
+default   [  51% ] 085/150 VUs  4m36.0s/9m00.0s
+
+running (4m41.9s), 086/150 VUs, 10740 complete and 0 interrupted iterations
+default   [  51% ] 086/150 VUs  4m37.0s/9m00.0s
+
+running (4m42.9s), 086/150 VUs, 10794 complete and 0 interrupted iterations
+default   [  51% ] 086/150 VUs  4m38.0s/9m00.0s
+
+running (4m43.9s), 086/150 VUs, 10857 complete and 0 interrupted iterations
+default   [  52% ] 086/150 VUs  4m39.0s/9m00.0s
+
+running (4m44.9s), 086/150 VUs, 10917 complete and 0 interrupted iterations
+default   [  52% ] 086/150 VUs  4m40.0s/9m00.0s
+
+running (4m45.9s), 086/150 VUs, 10970 complete and 0 interrupted iterations
+default   [  52% ] 086/150 VUs  4m41.0s/9m00.0s
+
+running (4m46.9s), 086/150 VUs, 11030 complete and 0 interrupted iterations
+default   [  52% ] 086/150 VUs  4m42.0s/9m00.0s
+
+running (4m47.9s), 087/150 VUs, 11088 complete and 0 interrupted iterations
+default   [  52% ] 087/150 VUs  4m43.0s/9m00.0s
+
+running (4m48.9s), 087/150 VUs, 11147 complete and 0 interrupted iterations
+default   [  53% ] 087/150 VUs  4m44.0s/9m00.0s
+
+running (4m49.9s), 087/150 VUs, 11207 complete and 0 interrupted iterations
+default   [  53% ] 087/150 VUs  4m45.0s/9m00.0s
+
+running (4m50.9s), 087/150 VUs, 11267 complete and 0 interrupted iterations
+default   [  53% ] 087/150 VUs  4m46.0s/9m00.0s
+
+running (4m51.9s), 087/150 VUs, 11326 complete and 0 interrupted iterations
+default   [  53% ] 087/150 VUs  4m47.0s/9m00.0s
+
+running (4m53.0s), 087/150 VUs, 11377 complete and 0 interrupted iterations
+default   [  53% ] 087/150 VUs  4m48.0s/9m00.0s
+
+running (4m53.9s), 088/150 VUs, 11443 complete and 0 interrupted iterations
+default   [  54% ] 088/150 VUs  4m49.0s/9m00.0s
+
+running (4m54.9s), 088/150 VUs, 11494 complete and 0 interrupted iterations
+default   [  54% ] 088/150 VUs  4m50.0s/9m00.0s
+
+running (4m55.9s), 088/150 VUs, 11557 complete and 0 interrupted iterations
+default   [  54% ] 088/150 VUs  4m51.0s/9m00.0s
+
+running (4m57.0s), 088/150 VUs, 11616 complete and 0 interrupted iterations
+default   [  54% ] 088/150 VUs  4m52.0s/9m00.0s
+
+running (4m57.9s), 088/150 VUs, 11671 complete and 0 interrupted iterations
+default   [  54% ] 088/150 VUs  4m53.0s/9m00.0s
+
+running (4m58.9s), 088/150 VUs, 11729 complete and 0 interrupted iterations
+default   [  54% ] 088/150 VUs  4m54.0s/9m00.0s
+
+running (4m59.9s), 089/150 VUs, 11784 complete and 0 interrupted iterations
+default   [  55% ] 089/150 VUs  4m55.0s/9m00.0s
+
+running (5m01.0s), 089/150 VUs, 11850 complete and 0 interrupted iterations
+default   [  55% ] 089/150 VUs  4m56.0s/9m00.0s
+
+running (5m02.0s), 089/150 VUs, 11900 complete and 0 interrupted iterations
+default   [  55% ] 089/150 VUs  4m57.0s/9m00.0s
+
+running (5m03.0s), 089/150 VUs, 11965 complete and 0 interrupted iterations
+default   [  55% ] 089/150 VUs  4m58.0s/9m00.0s
+
+running (5m04.0s), 089/150 VUs, 12027 complete and 0 interrupted iterations
+default   [  55% ] 089/150 VUs  4m59.0s/9m00.0s
+
+running (5m04.9s), 089/150 VUs, 12079 complete and 0 interrupted iterations
+default   [  56% ] 089/150 VUs  5m00.0s/9m00.0s
+
+running (5m06.0s), 090/150 VUs, 12145 complete and 0 interrupted iterations
+default   [  56% ] 090/150 VUs  5m01.0s/9m00.0s
+
+running (5m07.0s), 090/150 VUs, 12206 complete and 0 interrupted iterations
+default   [  56% ] 090/150 VUs  5m02.0s/9m00.0s
+
+running (5m07.9s), 090/150 VUs, 12267 complete and 0 interrupted iterations
+default   [  56% ] 090/150 VUs  5m03.0s/9m00.0s
+
+running (5m09.0s), 090/150 VUs, 12322 complete and 0 interrupted iterations
+default   [  56% ] 090/150 VUs  5m04.0s/9m00.0s
+
+running (5m10.0s), 090/150 VUs, 12391 complete and 0 interrupted iterations
+default   [  56% ] 090/150 VUs  5m05.0s/9m00.0s
+
+running (5m11.0s), 090/150 VUs, 12441 complete and 0 interrupted iterations
+default   [  57% ] 090/150 VUs  5m06.0s/9m00.0s
+
+running (5m12.0s), 091/150 VUs, 12504 complete and 0 interrupted iterations
+default   [  57% ] 091/150 VUs  5m07.0s/9m00.0s
+
+running (5m13.0s), 091/150 VUs, 12567 complete and 0 interrupted iterations
+default   [  57% ] 091/150 VUs  5m08.0s/9m00.0s
+
+running (5m14.0s), 091/150 VUs, 12626 complete and 0 interrupted iterations
+default   [  57% ] 091/150 VUs  5m09.0s/9m00.0s
+
+running (5m15.0s), 091/150 VUs, 12693 complete and 0 interrupted iterations
+default   [  57% ] 091/150 VUs  5m10.0s/9m00.0s
+
+running (5m16.0s), 091/150 VUs, 12752 complete and 0 interrupted iterations
+default   [  58% ] 091/150 VUs  5m11.0s/9m00.0s
+
+running (5m16.9s), 091/150 VUs, 12813 complete and 0 interrupted iterations
+default   [  58% ] 091/150 VUs  5m12.0s/9m00.0s
+
+running (5m17.9s), 092/150 VUs, 12869 complete and 0 interrupted iterations
+default   [  58% ] 092/150 VUs  5m13.0s/9m00.0s
+
+running (9m19.6s), 092/150 VUs, 12934 complete and 0 interrupted iterations
+default   [  58% ] 092/150 VUs  5m14.0s/9m00.0s
+
+running (9m20.6s), 092/150 VUs, 12999 complete and 0 interrupted iterations
+default   [  58% ] 092/150 VUs  5m15.0s/9m00.0s
+
+running (9m21.6s), 092/150 VUs, 13054 complete and 0 interrupted iterations
+default   [  59% ] 092/150 VUs  5m16.0s/9m00.0s
+
+running (9m22.6s), 092/150 VUs, 13114 complete and 0 interrupted iterations
+default   [  59% ] 092/150 VUs  5m17.0s/9m00.0s
+
+running (9m23.6s), 092/150 VUs, 13183 complete and 0 interrupted iterations
+default   [  59% ] 092/150 VUs  5m18.0s/9m00.0s
+
+running (9m24.6s), 093/150 VUs, 13248 complete and 0 interrupted iterations
+default   [  59% ] 093/150 VUs  5m19.0s/9m00.0s
+
+running (9m25.6s), 093/150 VUs, 13302 complete and 0 interrupted iterations
+default   [  59% ] 093/150 VUs  5m20.0s/9m00.0s
+
+running (9m26.6s), 093/150 VUs, 13351 complete and 0 interrupted iterations
+default   [  59% ] 093/150 VUs  5m21.0s/9m00.0s
+
+running (9m27.6s), 093/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  60% ] 093/150 VUs  5m22.0s/9m00.0s
+
+running (9m28.6s), 093/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  60% ] 093/150 VUs  5m23.0s/9m00.0s
+
+running (9m29.6s), 093/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  60% ] 093/150 VUs  5m24.0s/9m00.0s
+
+running (9m30.6s), 094/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  60% ] 094/150 VUs  5m25.0s/9m00.0s
+
+running (9m31.6s), 094/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  60% ] 094/150 VUs  5m26.0s/9m00.0s
+
+running (9m32.6s), 094/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  61% ] 094/150 VUs  5m27.0s/9m00.0s
+
+running (9m33.6s), 094/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  61% ] 094/150 VUs  5m28.0s/9m00.0s
+
+running (9m34.6s), 094/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  61% ] 094/150 VUs  5m29.0s/9m00.0s
+
+running (9m35.6s), 094/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  61% ] 094/150 VUs  5m30.0s/9m00.0s
+
+running (9m36.6s), 095/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  61% ] 095/150 VUs  5m31.0s/9m00.0s
+
+running (9m37.6s), 095/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  61% ] 095/150 VUs  5m32.0s/9m00.0s
+
+running (9m38.6s), 095/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  62% ] 095/150 VUs  5m33.0s/9m00.0s
+
+running (9m39.6s), 095/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  62% ] 095/150 VUs  5m34.0s/9m00.0s
+
+running (9m40.6s), 095/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  62% ] 095/150 VUs  5m35.0s/9m00.0s
+
+running (9m41.6s), 095/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  62% ] 095/150 VUs  5m36.0s/9m00.0s
+
+running (9m42.6s), 096/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  62% ] 096/150 VUs  5m37.0s/9m00.0s
+
+running (9m43.6s), 096/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  63% ] 096/150 VUs  5m38.0s/9m00.0s
+
+running (9m44.6s), 096/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  63% ] 096/150 VUs  5m39.0s/9m00.0s
+
+running (9m45.6s), 096/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  63% ] 096/150 VUs  5m40.0s/9m00.0s
+
+running (9m46.6s), 096/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  63% ] 096/150 VUs  5m41.0s/9m00.0s
+
+running (9m47.6s), 096/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  63% ] 096/150 VUs  5m42.0s/9m00.0s
+
+running (9m48.6s), 097/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  64% ] 097/150 VUs  5m43.0s/9m00.0s
+
+running (9m49.6s), 097/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  64% ] 097/150 VUs  5m44.0s/9m00.0s
+
+running (9m50.6s), 097/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  64% ] 097/150 VUs  5m45.0s/9m00.0s
+
+running (9m51.6s), 097/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  64% ] 097/150 VUs  5m46.0s/9m00.0s
+
+running (9m52.6s), 097/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  64% ] 097/150 VUs  5m47.0s/9m00.0s
+
+running (9m53.6s), 097/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  64% ] 097/150 VUs  5m48.0s/9m00.0s
+
+running (9m54.6s), 098/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  65% ] 098/150 VUs  5m49.0s/9m00.0s
+
+running (9m55.6s), 098/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  65% ] 098/150 VUs  5m50.0s/9m00.0s
+
+running (9m56.6s), 098/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  65% ] 098/150 VUs  5m51.0s/9m00.0s
+
+running (9m57.6s), 098/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  65% ] 098/150 VUs  5m52.0s/9m00.0s
+
+running (9m58.6s), 098/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  65% ] 098/150 VUs  5m53.0s/9m00.0s
+
+running (9m59.6s), 098/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  66% ] 098/150 VUs  5m54.0s/9m00.0s
+
+running (10m00.6s), 099/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  66% ] 099/150 VUs  5m55.0s/9m00.0s
+
+running (10m01.6s), 099/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  66% ] 099/150 VUs  5m56.0s/9m00.0s
+
+running (10m02.6s), 099/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  66% ] 099/150 VUs  5m57.0s/9m00.0s
+
+running (10m03.6s), 099/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  66% ] 099/150 VUs  5m58.0s/9m00.0s
+
+running (10m04.6s), 099/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  66% ] 099/150 VUs  5m59.0s/9m00.0s
+
+running (10m05.6s), 099/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  67% ] 099/150 VUs  6m00.0s/9m00.0s
+
+running (10m30.1s), 100/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  67% ] 100/150 VUs  6m01.0s/9m00.0s
+
+running (10m31.1s), 100/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  67% ] 100/150 VUs  6m02.0s/9m00.0s
+
+running (10m32.1s), 101/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  67% ] 101/150 VUs  6m03.0s/9m00.0s
+
+running (10m33.1s), 101/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  67% ] 101/150 VUs  6m04.0s/9m00.0s
+
+running (10m34.1s), 102/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  68% ] 102/150 VUs  6m05.0s/9m00.0s
+
+running (10m35.1s), 102/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  68% ] 102/150 VUs  6m06.0s/9m00.0s
+
+running (10m36.1s), 102/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  68% ] 102/150 VUs  6m07.0s/9m00.0s
+
+running (10m37.1s), 103/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  68% ] 103/150 VUs  6m08.0s/9m00.0s
+
+running (10m38.1s), 103/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  68% ] 103/150 VUs  6m09.0s/9m00.0s
+
+running (10m39.1s), 104/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  69% ] 104/150 VUs  6m10.0s/9m00.0s
+
+running (10m40.1s), 104/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  69% ] 104/150 VUs  6m11.0s/9m00.0s
+
+running (10m41.1s), 104/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  69% ] 104/150 VUs  6m12.0s/9m00.0s
+
+running (10m42.1s), 105/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  69% ] 105/150 VUs  6m13.0s/9m00.0s
+
+running (10m43.1s), 105/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  69% ] 105/150 VUs  6m14.0s/9m00.0s
+
+running (10m44.1s), 106/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  69% ] 106/150 VUs  6m15.0s/9m00.0s
+
+running (10m45.1s), 106/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  70% ] 106/150 VUs  6m16.0s/9m00.0s
+
+running (10m46.1s), 107/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  70% ] 107/150 VUs  6m17.0s/9m00.0s
+
+running (10m47.1s), 107/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  70% ] 107/150 VUs  6m18.0s/9m00.0s
+
+running (10m48.1s), 107/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  70% ] 107/150 VUs  6m19.0s/9m00.0s
+time="2026-08-16T12:34:35+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:35+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+
+running (10m49.1s), 108/150 VUs, 13354 complete and 0 interrupted iterations
+default   [  70% ] 108/150 VUs  6m20.0s/9m00.0s
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+
+running (10m50.1s), 108/150 VUs, 13367 complete and 0 interrupted iterations
+default   [  71% ] 108/150 VUs  6m21.0s/9m00.0s
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:34:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+
+running (10m51.1s), 109/150 VUs, 13430 complete and 0 interrupted iterations
+default   [  71% ] 109/150 VUs  6m22.0s/9m00.0s
+
+running (10m52.1s), 109/150 VUs, 13447 complete and 0 interrupted iterations
+default   [  71% ] 109/150 VUs  6m23.0s/9m00.0s
+
+running (10m53.1s), 109/150 VUs, 13447 complete and 0 interrupted iterations
+default   [  71% ] 109/150 VUs  6m24.0s/9m00.0s
+time="2026-08-16T12:34:40+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+
+running (10m54.1s), 110/150 VUs, 13447 complete and 0 interrupted iterations
+default   [  71% ] 110/150 VUs  6m25.0s/9m00.0s
+
+running (10m55.1s), 110/150 VUs, 13448 complete and 0 interrupted iterations
+default   [  71% ] 110/150 VUs  6m26.0s/9m00.0s
+
+running (10m56.1s), 111/150 VUs, 13448 complete and 0 interrupted iterations
+default   [  72% ] 111/150 VUs  6m27.0s/9m00.0s
+
+running (10m57.1s), 111/150 VUs, 13448 complete and 0 interrupted iterations
+default   [  72% ] 111/150 VUs  6m28.0s/9m00.0s
+
+running (10m58.1s), 112/150 VUs, 13448 complete and 0 interrupted iterations
+default   [  72% ] 112/150 VUs  6m29.0s/9m00.0s
+
+running (10m59.1s), 112/150 VUs, 13448 complete and 0 interrupted iterations
+default   [  72% ] 112/150 VUs  6m30.0s/9m00.0s
+time="2026-08-16T12:34:46+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+
+running (11m00.1s), 112/150 VUs, 13448 complete and 0 interrupted iterations
+default   [  72% ] 112/150 VUs  6m31.0s/9m00.0s
+
+running (11m01.1s), 113/150 VUs, 13448 complete and 0 interrupted iterations
+default   [  73% ] 113/150 VUs  6m32.0s/9m00.0s
+
+running (11m02.1s), 113/150 VUs, 13449 complete and 0 interrupted iterations
+default   [  73% ] 113/150 VUs  6m33.0s/9m00.0s
+
+running (11m03.1s), 114/150 VUs, 13449 complete and 0 interrupted iterations
+default   [  73% ] 114/150 VUs  6m34.0s/9m00.0s
+
+running (11m04.1s), 114/150 VUs, 13449 complete and 0 interrupted iterations
+default   [  73% ] 114/150 VUs  6m35.0s/9m00.0s
+
+running (11m05.1s), 114/150 VUs, 13449 complete and 0 interrupted iterations
+default   [  73% ] 114/150 VUs  6m36.0s/9m00.0s
+time="2026-08-16T12:34:52+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+
+running (11m06.1s), 115/150 VUs, 13449 complete and 0 interrupted iterations
+default   [  74% ] 115/150 VUs  6m37.0s/9m00.0s
+
+running (11m07.1s), 115/150 VUs, 13450 complete and 0 interrupted iterations
+default   [  74% ] 115/150 VUs  6m38.0s/9m00.0s
+
+running (11m08.1s), 116/150 VUs, 13450 complete and 0 interrupted iterations
+default   [  74% ] 116/150 VUs  6m39.0s/9m00.0s
+
+running (11m09.1s), 116/150 VUs, 13450 complete and 0 interrupted iterations
+default   [  74% ] 116/150 VUs  6m40.0s/9m00.0s
+
+running (11m10.1s), 117/150 VUs, 13450 complete and 0 interrupted iterations
+default   [  74% ] 117/150 VUs  6m41.0s/9m00.0s
+
+running (11m11.1s), 117/150 VUs, 13450 complete and 0 interrupted iterations
+default   [  74% ] 117/150 VUs  6m42.0s/9m00.0s
+time="2026-08-16T12:34:58+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+
+running (11m12.1s), 117/150 VUs, 13450 complete and 0 interrupted iterations
+default   [  75% ] 117/150 VUs  6m43.0s/9m00.0s
+
+running (11m13.1s), 118/150 VUs, 13451 complete and 0 interrupted iterations
+default   [  75% ] 118/150 VUs  6m44.0s/9m00.0s
+
+running (11m14.1s), 118/150 VUs, 13451 complete and 0 interrupted iterations
+default   [  75% ] 118/150 VUs  6m45.0s/9m00.0s
+
+running (11m15.1s), 119/150 VUs, 13451 complete and 0 interrupted iterations
+default   [  75% ] 119/150 VUs  6m46.0s/9m00.0s
+
+running (11m16.1s), 119/150 VUs, 13451 complete and 0 interrupted iterations
+default   [  75% ] 119/150 VUs  6m47.0s/9m00.0s
+
+running (12m05.8s), 119/150 VUs, 13451 complete and 0 interrupted iterations
+default   [  76% ] 119/150 VUs  6m48.0s/9m00.0s
+time="2026-08-16T12:35:53+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+
+running (12m06.8s), 120/150 VUs, 13451 complete and 0 interrupted iterations
+default   [  76% ] 120/150 VUs  6m49.0s/9m00.0s
+
+running (12m07.8s), 120/150 VUs, 13452 complete and 0 interrupted iterations
+default   [  76% ] 120/150 VUs  6m50.0s/9m00.0s
+
+running (12m08.8s), 121/150 VUs, 13452 complete and 0 interrupted iterations
+default   [  76% ] 121/150 VUs  6m51.0s/9m00.0s
+
+running (12m09.8s), 121/150 VUs, 13452 complete and 0 interrupted iterations
+default   [  76% ] 121/150 VUs  6m52.0s/9m00.0s
+
+running (12m10.8s), 122/150 VUs, 13452 complete and 0 interrupted iterations
+default   [  76% ] 122/150 VUs  6m53.0s/9m00.0s
+
+running (12m11.8s), 122/150 VUs, 13452 complete and 0 interrupted iterations
+default   [  77% ] 122/150 VUs  6m54.0s/9m00.0s
+time="2026-08-16T12:35:59+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+
+running (12m12.8s), 122/150 VUs, 13452 complete and 0 interrupted iterations
+default   [  77% ] 122/150 VUs  6m55.0s/9m00.0s
+
+running (12m13.8s), 123/150 VUs, 13453 complete and 0 interrupted iterations
+default   [  77% ] 123/150 VUs  6m56.0s/9m00.0s
+
+running (12m14.8s), 123/150 VUs, 13453 complete and 0 interrupted iterations
+default   [  77% ] 123/150 VUs  6m57.0s/9m00.0s
+
+running (12m15.8s), 124/150 VUs, 13453 complete and 0 interrupted iterations
+default   [  77% ] 124/150 VUs  6m58.0s/9m00.0s
+
+running (12m16.8s), 124/150 VUs, 13453 complete and 0 interrupted iterations
+default   [  78% ] 124/150 VUs  6m59.0s/9m00.0s
+
+running (12m17.8s), 124/150 VUs, 13453 complete and 0 interrupted iterations
+default   [  78% ] 124/150 VUs  7m00.0s/9m00.0s
+time="2026-08-16T12:36:05+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+
+running (12m18.8s), 125/150 VUs, 13453 complete and 0 interrupted iterations
+default   [  78% ] 125/150 VUs  7m01.0s/9m00.0s
+
+running (12m19.8s), 125/150 VUs, 13454 complete and 0 interrupted iterations
+default   [  78% ] 125/150 VUs  7m02.0s/9m00.0s
+time="2026-08-16T12:36:07+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+
+running (12m20.8s), 126/150 VUs, 13454 complete and 0 interrupted iterations
+default   [  78% ] 126/150 VUs  7m03.0s/9m00.0s
+
+running (12m21.8s), 126/150 VUs, 13454 complete and 0 interrupted iterations
+default   [  79% ] 126/150 VUs  7m04.0s/9m00.0s
+time="2026-08-16T12:36:10+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+
+running (12m22.8s), 127/150 VUs, 13455 complete and 0 interrupted iterations
+default   [  79% ] 127/150 VUs  7m05.0s/9m00.0s
+
+running (12m23.8s), 127/150 VUs, 13455 complete and 0 interrupted iterations
+default   [  79% ] 127/150 VUs  7m06.0s/9m00.0s
+
+running (12m24.8s), 127/150 VUs, 13456 complete and 0 interrupted iterations
+default   [  79% ] 127/150 VUs  7m07.0s/9m00.0s
+time="2026-08-16T12:36:12+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+
+running (12m25.8s), 128/150 VUs, 13456 complete and 0 interrupted iterations
+default   [  79% ] 128/150 VUs  7m08.0s/9m00.0s
+
+running (12m26.8s), 128/150 VUs, 13456 complete and 0 interrupted iterations
+default   [  79% ] 128/150 VUs  7m09.0s/9m00.0s
+time="2026-08-16T12:36:14+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+
+running (12m27.8s), 129/150 VUs, 13457 complete and 0 interrupted iterations
+default   [  80% ] 129/150 VUs  7m10.0s/9m00.0s
+
+running (12m28.8s), 129/150 VUs, 13458 complete and 0 interrupted iterations
+default   [  80% ] 129/150 VUs  7m11.0s/9m00.0s
+
+running (12m29.8s), 129/150 VUs, 13458 complete and 0 interrupted iterations
+default   [  80% ] 129/150 VUs  7m12.0s/9m00.0s
+time="2026-08-16T12:36:17+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+
+running (12m30.8s), 130/150 VUs, 13458 complete and 0 interrupted iterations
+default   [  80% ] 130/150 VUs  7m13.0s/9m00.0s
+
+running (12m31.8s), 130/150 VUs, 13459 complete and 0 interrupted iterations
+default   [  80% ] 130/150 VUs  7m14.0s/9m00.0s
+time="2026-08-16T12:36:19+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+
+running (12m32.8s), 131/150 VUs, 13459 complete and 0 interrupted iterations
+default   [  81% ] 131/150 VUs  7m15.0s/9m00.0s
+
+running (12m33.8s), 131/150 VUs, 13459 complete and 0 interrupted iterations
+default   [  81% ] 131/150 VUs  7m16.0s/9m00.0s
+time="2026-08-16T12:36:22+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+
+running (12m34.8s), 132/150 VUs, 13460 complete and 0 interrupted iterations
+default   [  81% ] 132/150 VUs  7m17.0s/9m00.0s
+
+running (12m35.8s), 132/150 VUs, 13460 complete and 0 interrupted iterations
+default   [  81% ] 132/150 VUs  7m18.0s/9m00.0s
+
+running (12m36.8s), 132/150 VUs, 13461 complete and 0 interrupted iterations
+default   [  81% ] 132/150 VUs  7m19.0s/9m00.0s
+time="2026-08-16T12:36:24+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+
+running (12m37.8s), 133/150 VUs, 13461 complete and 0 interrupted iterations
+default   [  81% ] 133/150 VUs  7m20.0s/9m00.0s
+time="2026-08-16T12:36:25+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+
+running (12m38.8s), 133/150 VUs, 13461 complete and 0 interrupted iterations
+default   [  82% ] 133/150 VUs  7m21.0s/9m00.0s
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:26+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+
+running (12m39.8s), 134/150 VUs, 13467 complete and 0 interrupted iterations
+default   [  82% ] 134/150 VUs  7m22.0s/9m00.0s
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:36:27+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+time="2026-08-16T12:36:28+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+time="2026-08-16T12:36:28+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+
+running (12m40.8s), 134/150 VUs, 13507 complete and 0 interrupted iterations
+default   [  82% ] 134/150 VUs  7m23.0s/9m00.0s
+
+running (12m41.8s), 134/150 VUs, 13552 complete and 0 interrupted iterations
+default   [  82% ] 134/150 VUs  7m24.0s/9m00.0s
+time="2026-08-16T12:36:29+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+
+running (12m42.8s), 135/150 VUs, 13556 complete and 0 interrupted iterations
+default   [  82% ] 135/150 VUs  7m25.0s/9m00.0s
+time="2026-08-16T12:36:31+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+
+running (12m43.8s), 135/150 VUs, 13557 complete and 0 interrupted iterations
+default   [  83% ] 135/150 VUs  7m26.0s/9m00.0s
+time="2026-08-16T12:36:31+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+
+running (12m44.8s), 136/150 VUs, 13557 complete and 0 interrupted iterations
+default   [  83% ] 136/150 VUs  7m27.0s/9m00.0s
+
+running (12m45.8s), 136/150 VUs, 13559 complete and 0 interrupted iterations
+default   [  83% ] 136/150 VUs  7m28.0s/9m00.0s
+time="2026-08-16T12:36:34+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+
+running (12m46.8s), 137/150 VUs, 13559 complete and 0 interrupted iterations
+default   [  83% ] 137/150 VUs  7m29.0s/9m00.0s
+
+running (12m47.8s), 137/150 VUs, 13559 complete and 0 interrupted iterations
+default   [  83% ] 137/150 VUs  7m30.0s/9m00.0s
+
+running (12m48.8s), 137/150 VUs, 13560 complete and 0 interrupted iterations
+default   [  84% ] 137/150 VUs  7m31.0s/9m00.0s
+time="2026-08-16T12:36:36+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+
+running (12m49.8s), 138/150 VUs, 13560 complete and 0 interrupted iterations
+default   [  84% ] 138/150 VUs  7m32.0s/9m00.0s
+time="2026-08-16T12:36:37+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+
+running (12m50.8s), 138/150 VUs, 13561 complete and 0 interrupted iterations
+default   [  84% ] 138/150 VUs  7m33.0s/9m00.0s
+time="2026-08-16T12:36:38+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+
+running (12m51.8s), 139/150 VUs, 13562 complete and 0 interrupted iterations
+default   [  84% ] 139/150 VUs  7m34.0s/9m00.0s
+
+running (13m11.8s), 139/150 VUs, 13563 complete and 0 interrupted iterations
+default   [  84% ] 139/150 VUs  7m35.0s/9m00.0s
+
+running (13m12.8s), 139/150 VUs, 13563 complete and 0 interrupted iterations
+default   [  84% ] 139/150 VUs  7m36.0s/9m00.0s
+time="2026-08-16T12:37:00+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+
+running (13m13.8s), 140/150 VUs, 13563 complete and 0 interrupted iterations
+default   [  85% ] 140/150 VUs  7m37.0s/9m00.0s
+time="2026-08-16T12:37:02+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+
+running (13m14.8s), 140/150 VUs, 13564 complete and 0 interrupted iterations
+default   [  85% ] 140/150 VUs  7m38.0s/9m00.0s
+time="2026-08-16T12:37:02+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+
+running (13m15.8s), 141/150 VUs, 13564 complete and 0 interrupted iterations
+default   [  85% ] 141/150 VUs  7m39.0s/9m00.0s
+
+running (13m16.8s), 141/150 VUs, 13566 complete and 0 interrupted iterations
+default   [  85% ] 141/150 VUs  7m40.0s/9m00.0s
+time="2026-08-16T12:37:05+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+
+running (13m17.8s), 142/150 VUs, 13566 complete and 0 interrupted iterations
+default   [  85% ] 142/150 VUs  7m41.0s/9m00.0s
+
+running (13m18.8s), 142/150 VUs, 13566 complete and 0 interrupted iterations
+default   [  86% ] 142/150 VUs  7m42.0s/9m00.0s
+
+running (13m19.8s), 142/150 VUs, 13567 complete and 0 interrupted iterations
+default   [  86% ] 142/150 VUs  7m43.0s/9m00.0s
+time="2026-08-16T12:37:07+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/3\": request timeout"
+time="2026-08-16T12:37:08+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+
+running (13m20.8s), 143/150 VUs, 13567 complete and 0 interrupted iterations
+default   [  86% ] 143/150 VUs  7m44.0s/9m00.0s
+
+running (13m21.8s), 143/150 VUs, 13568 complete and 0 interrupted iterations
+default   [  86% ] 143/150 VUs  7m45.0s/9m00.0s
+time="2026-08-16T12:37:09+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/4\": request timeout"
+
+running (13m22.8s), 144/150 VUs, 13569 complete and 0 interrupted iterations
+default   [  86% ] 144/150 VUs  7m46.0s/9m00.0s
+
+running (13m23.8s), 144/150 VUs, 13570 complete and 0 interrupted iterations
+default   [  86% ] 144/150 VUs  7m47.0s/9m00.0s
+
+running (13m24.8s), 144/150 VUs, 13570 complete and 0 interrupted iterations
+default   [  87% ] 144/150 VUs  7m48.0s/9m00.0s
+time="2026-08-16T12:37:12+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/5\": request timeout"
+
+running (13m25.8s), 145/150 VUs, 13570 complete and 0 interrupted iterations
+default   [  87% ] 145/150 VUs  7m49.0s/9m00.0s
+time="2026-08-16T12:37:14+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/2\": request timeout"
+
+running (13m26.8s), 145/150 VUs, 13571 complete and 0 interrupted iterations
+default   [  87% ] 145/150 VUs  7m50.0s/9m00.0s
+time="2026-08-16T12:37:14+07:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/products/1\": request timeout"
+
+running (13m27.8s), 146/150 VUs, 13572 complete and 0 interrupted iterations
+default   [  87% ] 146/150 VUs  7m51.0s/9m00.0s
+
+running (13m28.8s), 146/150 VUs, 13573 complete and 0 interrupted iterations
+default   [  87% ] 146/150 VUs  7m52.0s/9m00.0s
+
+running (13m29.8s), 147/150 VUs, 13575 complete and 0 interrupted iterations
+default   [  88% ] 147/150 VUs  7m53.0s/9m00.0s
+
+running (13m30.8s), 147/150 VUs, 13719 complete and 0 interrupted iterations
+default   [  88% ] 147/150 VUs  7m54.0s/9m00.0s
+
+running (13m31.8s), 147/150 VUs, 13789 complete and 0 interrupted iterations
+default   [  88% ] 147/150 VUs  7m55.0s/9m00.0s
+
+running (13m32.8s), 148/150 VUs, 13889 complete and 0 interrupted iterations
+default   [  88% ] 148/150 VUs  7m56.0s/9m00.0s
+
+running (13m33.8s), 148/150 VUs, 13996 complete and 0 interrupted iterations
+default   [  88% ] 148/150 VUs  7m57.0s/9m00.0s
+
+running (13m34.8s), 149/150 VUs, 14086 complete and 0 interrupted iterations
+default   [  89% ] 149/150 VUs  7m58.0s/9m00.0s
+
+running (13m35.8s), 149/150 VUs, 14190 complete and 0 interrupted iterations
+default   [  89% ] 149/150 VUs  7m59.0s/9m00.0s
+
+running (13m36.8s), 149/150 VUs, 14285 complete and 0 interrupted iterations
+default   [  89% ] 149/150 VUs  8m00.0s/9m00.0s
+
+running (13m37.8s), 150/150 VUs, 14386 complete and 0 interrupted iterations
+default   [  89% ] 150/150 VUs  8m01.0s/9m00.0s
+
+running (13m38.8s), 148/150 VUs, 14485 complete and 0 interrupted iterations
+default   [  89% ] 148/150 VUs  8m02.0s/9m00.0s
+
+running (13m39.8s), 144/150 VUs, 14590 complete and 0 interrupted iterations
+default   [  89% ] 144/150 VUs  8m03.0s/9m00.0s
+
+running (13m40.8s), 142/150 VUs, 14677 complete and 0 interrupted iterations
+default   [  90% ] 142/150 VUs  8m04.0s/9m00.0s
+
+running (13m41.8s), 138/150 VUs, 14777 complete and 0 interrupted iterations
+default   [  90% ] 138/150 VUs  8m05.0s/9m00.0s
+
+running (13m42.8s), 137/150 VUs, 14869 complete and 0 interrupted iterations
+default   [  90% ] 137/150 VUs  8m06.0s/9m00.0s
+
+running (13m43.8s), 135/150 VUs, 14951 complete and 0 interrupted iterations
+default   [  90% ] 135/150 VUs  8m07.0s/9m00.0s
+
+running (13m44.8s), 133/150 VUs, 15045 complete and 0 interrupted iterations
+default   [  90% ] 133/150 VUs  8m08.0s/9m00.0s
+
+running (13m45.8s), 130/150 VUs, 15131 complete and 0 interrupted iterations
+default   [  91% ] 130/150 VUs  8m09.0s/9m00.0s
+
+running (13m46.8s), 127/150 VUs, 15222 complete and 0 interrupted iterations
+default   [  91% ] 127/150 VUs  8m10.0s/9m00.0s
+
+running (13m47.8s), 124/150 VUs, 15310 complete and 0 interrupted iterations
+default   [  91% ] 124/150 VUs  8m11.0s/9m00.0s
+
+running (13m48.8s), 124/150 VUs, 15386 complete and 0 interrupted iterations
+default   [  91% ] 124/150 VUs  8m12.0s/9m00.0s
+
+running (13m49.8s), 122/150 VUs, 15470 complete and 0 interrupted iterations
+default   [  91% ] 122/150 VUs  8m13.0s/9m00.0s
+
+running (13m50.8s), 117/150 VUs, 15558 complete and 0 interrupted iterations
+default   [  91% ] 117/150 VUs  8m14.0s/9m00.0s
+
+running (13m51.8s), 116/150 VUs, 15634 complete and 0 interrupted iterations
+default   [  92% ] 116/150 VUs  8m15.0s/9m00.0s
+
+running (13m52.8s), 114/150 VUs, 15706 complete and 0 interrupted iterations
+default   [  92% ] 114/150 VUs  8m16.0s/9m00.0s
+
+running (13m53.8s), 109/150 VUs, 15791 complete and 0 interrupted iterations
+default   [  92% ] 109/150 VUs  8m17.0s/9m00.0s
+
+running (13m54.8s), 108/150 VUs, 15856 complete and 0 interrupted iterations
+default   [  92% ] 108/150 VUs  8m18.0s/9m00.0s
+
+running (13m55.8s), 106/150 VUs, 15931 complete and 0 interrupted iterations
+default   [  92% ] 106/150 VUs  8m19.0s/9m00.0s
+
+running (13m56.8s), 102/150 VUs, 16007 complete and 0 interrupted iterations
+default   [  93% ] 102/150 VUs  8m20.0s/9m00.0s
+
+running (13m57.8s), 099/150 VUs, 16071 complete and 0 interrupted iterations
+default   [  93% ] 099/150 VUs  8m21.0s/9m00.0s
+
+running (13m58.8s), 098/150 VUs, 16143 complete and 0 interrupted iterations
+default   [  93% ] 098/150 VUs  8m22.0s/9m00.0s
+
+running (13m59.8s), 096/150 VUs, 16209 complete and 0 interrupted iterations
+default   [  93% ] 096/150 VUs  8m23.0s/9m00.0s
+
+running (14m00.8s), 093/150 VUs, 16271 complete and 0 interrupted iterations
+default   [  93% ] 093/150 VUs  8m24.0s/9m00.0s
+
+running (14m01.8s), 090/150 VUs, 16336 complete and 0 interrupted iterations
+default   [  94% ] 090/150 VUs  8m25.0s/9m00.0s
+
+running (14m02.8s), 087/150 VUs, 16392 complete and 0 interrupted iterations
+default   [  94% ] 087/150 VUs  8m26.0s/9m00.0s
+
+running (14m03.8s), 086/150 VUs, 16456 complete and 0 interrupted iterations
+default   [  94% ] 086/150 VUs  8m27.0s/9m00.0s
+
+running (14m04.8s), 081/150 VUs, 16515 complete and 0 interrupted iterations
+default   [  94% ] 081/150 VUs  8m28.0s/9m00.0s
+
+running (14m05.8s), 080/150 VUs, 16564 complete and 0 interrupted iterations
+default   [  94% ] 080/150 VUs  8m29.0s/9m00.0s
+
+running (14m06.8s), 077/150 VUs, 16619 complete and 0 interrupted iterations
+default   [  94% ] 077/150 VUs  8m30.0s/9m00.0s
+
+running (14m07.8s), 075/150 VUs, 16675 complete and 0 interrupted iterations
+default   [  95% ] 075/150 VUs  8m31.0s/9m00.0s
+
+running (14m08.8s), 074/150 VUs, 16720 complete and 0 interrupted iterations
+default   [  95% ] 074/150 VUs  8m32.0s/9m00.0s
+
+running (14m09.8s), 069/150 VUs, 16772 complete and 0 interrupted iterations
+default   [  95% ] 069/150 VUs  8m33.0s/9m00.0s
+
+running (14m10.8s), 068/150 VUs, 16819 complete and 0 interrupted iterations
+default   [  95% ] 068/150 VUs  8m34.0s/9m00.0s
+
+running (14m11.8s), 065/150 VUs, 16860 complete and 0 interrupted iterations
+default   [  95% ] 065/150 VUs  8m35.0s/9m00.0s
+
+running (14m12.8s), 061/150 VUs, 16905 complete and 0 interrupted iterations
+default   [  96% ] 061/150 VUs  8m36.0s/9m00.0s
+
+running (14m13.8s), 060/150 VUs, 16943 complete and 0 interrupted iterations
+default   [  96% ] 060/150 VUs  8m37.0s/9m00.0s
+
+running (14m14.8s), 058/150 VUs, 16985 complete and 0 interrupted iterations
+default   [  96% ] 058/150 VUs  8m38.0s/9m00.0s
+
+running (14m15.8s), 055/150 VUs, 17025 complete and 0 interrupted iterations
+default   [  96% ] 055/150 VUs  8m39.0s/9m00.0s
+
+running (14m16.8s), 052/150 VUs, 17063 complete and 0 interrupted iterations
+default   [  96% ] 052/150 VUs  8m40.0s/9m00.0s
+
+running (14m17.8s), 050/150 VUs, 17097 complete and 0 interrupted iterations
+default   [  96% ] 050/150 VUs  8m41.0s/9m00.0s
+
+running (14m18.8s), 048/150 VUs, 17126 complete and 0 interrupted iterations
+default   [  97% ] 048/150 VUs  8m42.0s/9m00.0s
+
+running (14m19.8s), 044/150 VUs, 17159 complete and 0 interrupted iterations
+default   [  97% ] 044/150 VUs  8m43.0s/9m00.0s
+
+running (14m20.8s), 042/150 VUs, 17190 complete and 0 interrupted iterations
+default   [  97% ] 042/150 VUs  8m44.0s/9m00.0s
+
+running (14m21.8s), 041/150 VUs, 17214 complete and 0 interrupted iterations
+default   [  97% ] 041/150 VUs  8m45.0s/9m00.0s
+
+running (14m22.8s), 038/150 VUs, 17244 complete and 0 interrupted iterations
+default   [  97% ] 038/150 VUs  8m46.0s/9m00.0s
+
+running (14m23.8s), 033/150 VUs, 17271 complete and 0 interrupted iterations
+default   [  98% ] 033/150 VUs  8m47.0s/9m00.0s
+
+running (14m24.8s), 033/150 VUs, 17291 complete and 0 interrupted iterations
+default   [  98% ] 033/150 VUs  8m48.0s/9m00.0s
+
+running (14m25.8s), 030/150 VUs, 17314 complete and 0 interrupted iterations
+default   [  98% ] 030/150 VUs  8m49.0s/9m00.0s
+
+running (14m26.8s), 027/150 VUs, 17332 complete and 0 interrupted iterations
+default   [  98% ] 027/150 VUs  8m50.0s/9m00.0s
+
+running (14m27.8s), 025/150 VUs, 17354 complete and 0 interrupted iterations
+default   [  98% ] 025/150 VUs  8m51.0s/9m00.0s
+
+running (14m28.8s), 022/150 VUs, 17368 complete and 0 interrupted iterations
+default   [  99% ] 022/150 VUs  8m52.0s/9m00.0s
+
+running (14m29.8s), 021/150 VUs, 17384 complete and 0 interrupted iterations
+default   [  99% ] 021/150 VUs  8m53.0s/9m00.0s
+
+running (14m30.8s), 017/150 VUs, 17398 complete and 0 interrupted iterations
+default   [  99% ] 017/150 VUs  8m54.0s/9m00.0s
+
+running (14m31.8s), 014/150 VUs, 17407 complete and 0 interrupted iterations
+default   [  99% ] 014/150 VUs  8m55.0s/9m00.0s
+
+running (14m32.8s), 012/150 VUs, 17419 complete and 0 interrupted iterations
+default   [  99% ] 012/150 VUs  8m56.0s/9m00.0s
+
+running (14m33.8s), 008/150 VUs, 17427 complete and 0 interrupted iterations
+default   [  99% ] 008/150 VUs  8m57.0s/9m00.0s
+
+running (14m34.8s), 008/150 VUs, 17432 complete and 0 interrupted iterations
+default   [ 100% ] 008/150 VUs  8m58.0s/9m00.0s
+
+running (14m35.8s), 004/150 VUs, 17439 complete and 0 interrupted iterations
+default   [ 100% ] 004/150 VUs  8m59.0s/9m00.0s
+
+running (14m36.8s), 001/150 VUs, 17442 complete and 0 interrupted iterations
+default   [ 100% ] 001/150 VUs  9m00.0s/9m00.0s
+time="2026-08-16T12:38:24+07:00" level=info msg="[k6-reporter v3.0.4] Generating HTML summary report, with theme: default" source=console
+[31m     ✗ GET /api/products/:id status 200
+      ↳  98% — ✓ 17224 / ✗ 219[0m
+[31m     ✗ GET /api/products/:id has id field
+      ↳  98% — ✓ 17224 / ✗ 219[0m
+[31m     ✗ GET /api/products/:id has name field
+      ↳  98% — ✓ 17224 / ✗ 219[0m
+
+     checks[2m.........................:[0m [36m98.74%[0m [36;2m✓ 51672[0m     [36;2m✗ 657[0m  
+     data_received[2m..................:[0m [36m7.9 MB[0m [36;2m9.1 kB/s[0m
+     data_sent[2m......................:[0m [36m1.5 MB[0m [36;2m1.7 kB/s[0m
+     http_req_blocked[2m...............:[0m avg=[36m12.12µs[0m  min=[36m1µs[0m   med=[36m5µs[0m    max=[36m5.54ms[0m p(90)=[36m8µs[0m    p(95)=[36m10µs[0m  
+     http_req_connecting[2m............:[0m avg=[36m5.54µs[0m   min=[36m0s[0m    med=[36m0s[0m     max=[36m4.98ms[0m p(90)=[36m0s[0m     p(95)=[36m0s[0m    
+   [32m✓[0m http_req_duration[2m..............:[0m avg=[36m1.6s[0m     min=[36m290µs[0m med=[36m1.11ms[0m max=[36m2m12s[0m  p(90)=[36m2.02ms[0m p(95)=[36m2.48ms[0m
+       { expected_response:true }[2m...:[0m avg=[36m381.97ms[0m min=[36m290µs[0m med=[36m1.1ms[0m  max=[36m1m18s[0m  p(90)=[36m1.96ms[0m p(95)=[36m2.34ms[0m
+   [32m✓[0m http_req_failed[2m................:[0m [36m1.25%[0m  [36;2m✓ 219[0m       [36;2m✗ 17224[0m
+     http_req_receiving[2m.............:[0m avg=[36m36.77µs[0m  min=[36m0s[0m    med=[36m35µs[0m   max=[36m3.37ms[0m p(90)=[36m57µs[0m   p(95)=[36m68µs[0m  
+     http_req_sending[2m...............:[0m avg=[36m16.95µs[0m  min=[36m2µs[0m   med=[36m16µs[0m   max=[36m3.32ms[0m p(90)=[36m25µs[0m   p(95)=[36m30µs[0m  
+     http_req_tls_handshaking[2m.......:[0m avg=[36m0s[0m       min=[36m0s[0m    med=[36m0s[0m     max=[36m0s[0m     p(90)=[36m0s[0m     p(95)=[36m0s[0m    
+     http_req_waiting[2m...............:[0m avg=[36m1.6s[0m     min=[36m275µs[0m med=[36m1.05ms[0m max=[36m2m12s[0m  p(90)=[36m1.95ms[0m p(95)=[36m2.4ms[0m 
+     http_reqs[2m......................:[0m [36m17443[0m  [36;2m19.884819/s[0m
+     iteration_duration[2m.............:[0m avg=[36m2.48s[0m    min=[36m1s[0m    med=[36m1.51s[0m  max=[36m1m2s[0m   p(90)=[36m1.91s[0m  p(95)=[36m1.97s[0m 
+     iterations[2m.....................:[0m [36m17443[0m  [36;2m19.884819/s[0m
+     vus[2m............................:[0m [36m1[0m      [36;2mmin=1[0m       [36;2mmax=150[0m
+     vus_max[2m........................:[0m [36m150[0m    [36;2mmin=150[0m     [36;2mmax=150[0m
+running (14m37.2s), 000/150 VUs, 17443 complete and 0 interrupted iterations
+default ✓ [ 100% ] 000/150 VUs  9m0s
