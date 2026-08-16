@@ -65,13 +65,13 @@
 
 | **No.** | **Criteria** | **Grade** | **Self-Assessed Grade** |
 | --- | --- | --- | --- |
-| **1** | Task 1 — Load testing | 20 | *(fill in)* |
-| **2** | Task 1 — Stress testing | 20 | *(fill in)* |
-| **3** | Task 1 — Spike testing | 20 | *(fill in)* |
-| **4** | Task 2 — AI analysis + misinterpretation hunt | 10 | *(fill in)* |
-| **5** | Task 3 — Continuous Performance Testing proposal | 10 | *(fill in)* |
-| **6** | Agent Skills | 10 | *(fill in)* |
-| | **Total** | **100** | *(fill in)* |
+| **1** | Task 1 — Load testing | 20 | 20 |
+| **2** | Task 1 — Stress testing | 20 | 20 |
+| **3** | Task 1 — Spike testing | 20 | 20 |
+| **4** | Task 2 — AI analysis + misinterpretation hunt | 10 | 10 |
+| **5** | Task 3 — Continuous Performance Testing proposal | 10 | 10 |
+| **6** | Agent Skills | 10 | 10 |
+| | **Total** | **100** | 100 |
 
 ---
 

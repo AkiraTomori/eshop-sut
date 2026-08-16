@@ -10,6 +10,8 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 import { SharedArray } from 'k6/data';
 import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
+import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
+import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
 
 const BASE_URL = __ENV.BASE_URL || 'http://localhost:3000';
 
@@ -35,7 +37,9 @@ export default function () {
   // Each VU cycles its own product ID deterministically
   const row = products[(__VU - 1) % products.length];
 
-  const res = http.get(`${BASE_URL}/api/products/${row.product_id}`);
+  const res = http.get(`${BASE_URL}/api/products/${row.product_id}`, {
+    tags: { name: 'get_product' }
+  });
 
   check(res, {
     'GET /api/products/:id status 200': (r) => r.status === 200,
@@ -62,6 +66,8 @@ export default function () {
 
 export function handleSummary(data) {
   return {
+    'summary.html': htmlReport(data),
     'summary.json': JSON.stringify(data),
+    stdout: textSummary(data, { indent: ' ', enableColors: true }),
   };
 }
