@@ -1,0 +1,19 @@
+0aeb110 feat(HW5): Add AI audit report and critique documents; document AI interactions and errors
+1351e45 feat(HW5): Update CI performance pipeline proposal and add review log for Skill 6
+bbdb145 feat(HW5): execute stress test
+c2aa05e feat(HW5): Add stress and endurance test scripts; include order payloads and test plan notes
+dbff779 feat(HW5): Update Skill 1 parameters and review log; add endurance test requirements
+bc057cd feat(HW5): complete requriment for stress tessting
+fda9323 feat(HW5): Evidence for Group 1, Group 2
+9396f18 feat: Update test plan notes with enhanced run commands and summary export options
+eef9035 feat: Add hardware specification for performance testing
+cd13809 feat: Update skill 4 analysis and review logs; add bug report for skill 8
+e62ca39 feat: Add JTL log analysis entry for Group 2 Spike Test (Auth-heavy)
+c665fea feat: Add performance test results and review documentation for Group 2 Spike Testing
+ede2a5e feat: Add spike testing script and test plan notes for Group 2 Auth-heavy scenario
+452f102 feat: Add user account seeding script and CSV for Group 2 Spike Test
+4690e24 feat: Update skill2 test plan notes and add execution logs for skills 3 and 4
+3589260 Add load and endurance testing scripts for Group 1 (Read-heavy)
+d7b2c55 Refactor performance testing skills to use Grafana k6
+4eabefc feat(HW5): template placeholder
+ad7a6aa feat: HW3 (Archived) and HW5 requirements
