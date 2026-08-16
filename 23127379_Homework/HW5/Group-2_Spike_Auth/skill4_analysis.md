@@ -26,7 +26,7 @@
 | p99 | 8.838 ms | 99th percentile of `http_req_duration` |
 | Max response time | 94.848 ms | `http_req_duration` metric_value max |
 | Error count | **0** | `http_req_failed` metric_value == 1.0, sum = 0 |
-| Error rate | **0.0000%** | 0 / 28,314 × 100 |
+| Error rate | **0.00%** ** | ✅ PASSED|
 | Total iterations | 14,157 | login + PUT = 14,157 × 2 = 28,314 requests |
 
 ---

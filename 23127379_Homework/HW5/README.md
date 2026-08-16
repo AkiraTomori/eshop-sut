@@ -1,9 +1,9 @@
 # HW05 — Performance Testing Report
-**Student ID**: 23127379
-**Course**: Software Testing — HCMUS
-**Submission Date**: 2026-08-16
-**EShop SUT**: http://localhost:3000 | [Repository](https://github.com/ttbhanh/eshop-sut)
-
+- **Student ID**: 23127379
+- **Course**: Software Testing — HCMUS
+- **Submission Date**: 2026-08-16
+- **EShop SUT**: http://localhost:3000 | [Repository](https://github.com/AkiraTomori/eshop-sut)
+- **Note**: Student use first version of HW5 (Mr. Lâm Quang Vũ's version)
 ---
 
 ## Test Summary Report
@@ -24,27 +24,27 @@
 | Auth-heavy | Spike Testing | `POST /api/login`, `PUT /api/users/me` (incl. account lockout) |
 | Transactional | Stress Testing | `POST /api/cart`, `POST /api/checkout` |
 
-### Performance Results Summary
+### Performance Results Summary (UPDATED AFTER RE-RUN)
 
 | Scenario | p95 (ms) | Error Rate | Throughput | Notes |
 |----------|----------|------------|------------|-------|
-| Load Test | 2.286ms | 0.00% | 53.56 req/s | Perfect stability up to 150 VUs |
-| Spike Test | 5.744ms | 0.00% | 76.52 req/s | Recovery time: ~120s |
-| Stress Test | 34.70ms | 0.00% | 108.08 req/s | Breaking point: > 200 users |
+| Load Test | 1.92ms | 0.00% | 53.56 req/s | Excellent stability for read-heavy operations |
+| Spike Test | 5.84ms | 0.00% | 76.52 req/s | Absorbed huge auth spikes flawlessly |
+| Stress Test | 27.88ms | 0.00% | 108.08 req/s | Perfect stability up to 200 VUs, database fully recovered |
 
 ### Endurance Threshold (Soak Test)
 - **Test duration**: 15 minutes at sustained load
-- **Maximum stable RPS**: 55 req/s
-- **Memory ceiling**: 120 MB
-- **Hardware**: Apple M5, 16GB RAM, macOS
+- **Load Test Endurance**: p95 remained excellent at 1.85ms, with a perfect 0.00% error rate.
+- **Stress Test Endurance**: Completed successfully with 0.00% error rate, system remained stable over 15 minutes.
+- **Hardware**: Apple M5, 16GB RAM, macOS (Resource usage strictly monitored via `top` and `ps`)
 
 ### Report Views Used
 
 | # | Report Type | Scenario |
 |---|---|---|
-| 1 | CSV Raw Export (`--out csv`) | Load Testing |
-| 2 | HTML Summary Report (`k6-reporter`) | Spike Testing |
-| 3 | JSON Summary (`--summary-export`) | Stress Testing |
+| 1 | CSV Raw Export (`--out csv`) | All 3 Groups |
+| 2 | HTML Summary Report (`k6-reporter`) | All 3 Groups (Standardized `report.html`) |
+| 3 | JSON Summary (`--summary-export`) | All 3 Groups |
 
 ### Bugs & Performance Issues Found
 
@@ -56,19 +56,19 @@
 
 ### Demo Video
 > [!IMPORTANT]
-> 🎥 **Demo Video**: https://www.youtube.com/playlist?list=PLJK2f6zFJvro
+> 🎥 **Demo Video**: [Playlist](https://www.youtube.com/playlist?list=PLJK2f6zFJvro)
 > Duration: ~10 minutes | Language: Vietnamese narration
 
 Alternatively, you can view the individual scenario demos:
-- https://www.youtube.com/watch?v=0kUpL7fM7f0&list=PLJK2f6zFJvro&index=1&t=1s
-- https://www.youtube.com/watch?v=4EAFqtF-ylA&list=PLJK2f6zFJvro&index=2
-- https://www.youtube.com/watch?v=A9rvXhyaO8s&list=PLJK2f6zFJvro&index=3
-- https://www.youtube.com/watch?v=6EqVIwJVBUg&list=PLJK2f6zFJvro&index=4
-- https://www.youtube.com/watch?v=KmiJCaTnmQQ&list=PLJK2f6zFJvro&index=5
-- https://www.youtube.com/watch?v=4_q5Jh1yIKw&list=PLJK2f6zFJvro&index=6
-- https://www.youtube.com/watch?v=FAfYMj2GmyY&list=PLJK2f6zFJvro&index=7
-- https://www.youtube.com/watch?v=7tbZGI6zpfc&list=PLJK2f6zFJvro&index=8
-- https://www.youtube.com/watch?v=Goc4Id4BysQ&list=PLJK2f6zFJvro&index=9
+- [Part 1](https://www.youtube.com/watch?v=0kUpL7fM7f0&list=PLJK2f6zFJvro&index=1&t=1s)
+- [Part 2](https://www.youtube.com/watch?v=4EAFqtF-ylA&list=PLJK2f6zFJvro&index=2)
+- [Part 3](https://www.youtube.com/watch?v=A9rvXhyaO8s&list=PLJK2f6zFJvro&index=3)
+- [Part 4](https://www.youtube.com/watch?v=6EqVIwJVBUg&list=PLJK2f6zFJvro&index=4)
+- [Part 5](https://www.youtube.com/watch?v=KmiJCaTnmQQ&list=PLJK2f6zFJvro&index=5)
+- [Part 6](https://www.youtube.com/watch?v=4_q5Jh1yIKw&list=PLJK2f6zFJvro&index=6)
+- [Part 7](https://www.youtube.com/watch?v=FAfYMj2GmyY&list=PLJK2f6zFJvro&index=7)
+- [Part 8](https://www.youtube.com/watch?v=7tbZGI6zpfc&list=PLJK2f6zFJvro&index=8)
+- [Part 9](https://www.youtube.com/watch?v=Goc4Id4BysQ&list=PLJK2f6zFJvro&index=9)
 ---
 
 ## Self-Assessment
@@ -89,8 +89,8 @@ Alternatively, you can view the individual scenario demos:
 
 ```text
 23127379_Homework/HW5/
-├── README.md
-├── hw05_report.md                     ← main report
+├── README.md                          ← main project file
+├── hw05_report.md                     ← main analytical report
 ├── hw05_audit_log.md                  ← full AI interaction log
 ├── ai_audit_report.md                 ← Appendix A: AI Audit Report
 ├── ai_critique.md                     ← Appendix B: AI Critique (200–300 words)
@@ -98,16 +98,11 @@ Alternatively, you can view the individual scenario demos:
 ├── lockout_reset_log.md               ← Skill 7 lockout reset history
 ├── git_commit_log.txt                 ← required by HW05
 ├── Group-1_Load_Products/
-│   ├── 23127379_Load_20260813.js
-│   ├── products_data.csv
-│   └── results/
+│   ├── results-load-test/             ← Fresh reports + resource_usage.txt
+│   └── result-endurance-test/         ← Fresh reports + resource_usage.txt
 ├── Group-2_Spike_Auth/
-│   ├── 23127379_Spike_20260814.js
-│   ├── auth_users.csv
-│   └── results/
+│   └── results/                       ← Fresh reports + resource_usage.txt
 ├── Group-3_Stress_Checkout/
-│   ├── 23127379_Stress_20260814.js
-│   ├── order_payloads.csv
-│   └── results/
+│   └── result-stress/                 ← Fresh reports + resource_usage.txt
 └── review_history/
 ```

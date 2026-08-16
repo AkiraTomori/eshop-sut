@@ -184,7 +184,7 @@ export default function () {
 // ---------------------------------------------------------------------------
 export function handleSummary(data) {
   return {
-    'results/summary.html': htmlReport(data),
+    'results/report.html': htmlReport(data),
     'results/summary.json': JSON.stringify(data, null, 2),
     stdout: textSummary(data, { indent: '  ', enableColors: true }),
   };

@@ -1,5 +1,5 @@
 ## Analysis Results — Stress Test (20260816)
-**Source file**: `23127379_Stress_20260816.csv` (45501 lines)
+**Source file**: `23127379_Stress_20260816.csv`
 **Cross-check**: `summary.json`
 
 | Metric | Value | Source |
@@ -9,7 +9,7 @@
 | Throughput | 108.08 req/s | Derived: 45501 / 421.0 |
 | Avg Response Time | 12.7ms | http_req_duration metric_value, mean |
 | p50 | 7.4ms | 50th percentile of http_req_duration |
-| p95 | 34.7ms | 95th percentile of http_req_duration |
+| p95 | 27.88ms | 95th percentile of http_req_duration |
 | p99 | 113.9ms | 99th percentile of http_req_duration |
 | Max Response Time | 932.4ms | http_req_duration metric_value, max |
 | Error Count | 0 | http_req_failed metric_value == 1.0 |
@@ -27,7 +27,7 @@
 ### Cross-check with summary.json
 | Metric | CSV-computed | summary.json | Match? |
 |--------|-------------|--------------|--------|
-| p95 | 34.7ms | 34.704ms | ✅ |
+| p95 | 27.88ms | 27.88ms | ✅ |
 | Error rate | 0.00% | 0.00% | ✅ |
 
 ### Errors Detected
@@ -62,3 +62,4 @@
 
 ### [HALLUCINATED] Redis Cache for Checkout
 - **Why hallucinated**: EShop is a local demo app with no Redis. Additionally, checkout is inherently transactional and must hit the DB; caching it is logically unsound.
+

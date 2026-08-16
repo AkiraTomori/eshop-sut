@@ -131,8 +131,8 @@ export default function () {
 // handleSummary — 3 distinct report views
 export function handleSummary(data) {
   return {
-    'results/endurance_summary.html': htmlReport(data),
-    'results/endurance_summary.json': JSON.stringify(data, null, 2),
+    'result-endurance/report.html': htmlReport(data),
+    'result-endurance/summary.json': JSON.stringify(data, null, 2),
     stdout: textSummary(data, { indent: '  ', enableColors: true }),
   };
 }

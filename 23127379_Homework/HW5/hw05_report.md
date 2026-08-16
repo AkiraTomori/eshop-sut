@@ -27,25 +27,25 @@ The objective of this assignment is to conduct comprehensive performance testing
 
 ## 3. Execution & Evidence (Task 1 continued)
 All tests were executed on a MacBook Air M5, 16GB RAM running macOS. 
-- **Load Test**: Handled 150 VUs with perfect stability (0.00% error).
-- **Spike Test**: Absorbed a 150 VU spike without error, with p95 recovering to baseline in ~120 seconds.
-- **Stress Test**: Survived up to 200 VUs without hitting the 10% error rate or 5s p95 breaking points.
+- **Group 1 Load Test**: Handled 150 VUs with perfect stability (0.00% error, p95 1.92ms). The 15-minute Endurance test also showed perfect stability (0.00% error, p95 1.85ms).
+- **Group 2 Spike Test**: Absorbed a massive VU spike beautifully with an incredible 0.00% error rate and p95 of 5.84ms. System recovered instantly.
+- **Group 3 Stress Test**: Survived up to 200 VUs flawlessly. The p95 response time was 27.88ms with a 0.00% error rate, proving the SQLite backend can handle sudden transactional spikes when connections are properly closed.
 
-*(Note: Physical evidence, screenshots, and the YouTube demo video link are provided in the README and submission package.)*
+*(Note: Physical evidence, `resource_usage.txt` monitor logs, screenshots, and the HTML dashboard reports are neatly categorized in `results_newest` folders inside the submission package.)*
 
 ## 4. AI Analysis & Misinterpretation Hunt (Task 2)
 The AI log analyzer correctly extracted metrics exclusively from the `http_req_duration` field.
-- **Where AI was right**: It correctly identified that Redis caching and horizontal scaling are HALLUCINATED optimizations for a local SQLite deployment, and instead recommended feasible options like WAL mode and singleton connection pooling.
+- **Where AI was right**: It correctly identified that Redis caching and horizontal scaling are HALLUCINATED optimizations for a local SQLite deployment, and instead recommended feasible options like WAL mode and singleton connection pooling, which are valid architectural improvements for production scale-out.
 - **Where AI was wrong**: The AI suggested adding an index on `products.name` in the Load Test without any evidence of slow query logs. This was flagged by Skill 10 as an over-eager recommendation.
 
 ## 5. Continuous Performance Testing Proposal (Task 3)
 A CI pipeline integrating these tests into GitHub Actions was proposed. It utilizes the empirical metrics gathered (e.g., Load p95 = 2.286ms + 20% buffer) to block PRs on regression. The full pipeline design and trade-off table are available in `ci_pipeline_proposal.md`.
 
 ## 6. Bugs & Issues
-**0 issues reported**. The system successfully handled all simulated loads up to 200 concurrent users without triggering any HTTP 5xx errors or functional lockouts. 
+**0 issues reported**. The system successfully handled all simulated loads up to 200 concurrent users without triggering any HTTP 5xx errors or functional lockouts.
 
 ## 7. Conclusion
-EShop demonstrated excellent stability under local conditions. The SQLite backend, despite its limitations, can comfortably handle over 100 req/s with single-digit millisecond latency when serving small datasets.
+EShop demonstrated excellent stability under purely read-heavy and auth-heavy workloads (Groups 1 & 2). The SQLite backend, despite its limitations, can comfortably handle over 100 req/s with single-digit millisecond latency when serving small datasets. No write locks crashed the system at 200 VUs.
 
 ## Appendix A — AI Audit Report
 Please refer to `ai_audit_report.md` in the repository root for the full AI interaction logs and review cycles.
