@@ -1,0 +1,525 @@
+* commit 6edec47e36824d41c93e33261606104c7a5d8fca
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sun Aug 16 22:13:16 2026 +0700
+| 
+|     Refactor performance testing reports and analysis
+|     
+|     - Updated summary.json with new metrics and corrected values for stress test results.
+|     - Revised skill4_analysis.md to reflect accurate p95 response times and improved clarity.
+|     - Enhanced README.md with updated performance results and links to demo videos.
+|     - Improved hw05_report.md with detailed execution evidence and clarified AI analysis findings.
+|     - Removed run_all_monitored.sh script as it is no longer needed for the current testing setup.
+| 
+|  .../23127379_Load_20260813.js                     |       4 +-
+|  .../23127379_Load_Endurance_20260813.js           |       4 +-
+|  .../result-endurance-test/k6_console.txt          |    3661 +-
+|  .../result-endurance-test/report.html             |     155 +-
+|  .../result-endurance-test/resource_usage.txt      |    9902 +-
+|  .../result-endurance-test/results.csv             | 1114738 ++++++++++----
+|  .../result-endurance-test/summary.json            |     192 +-
+|  .../results-load-test/k6_console.txt              |    3416 +-
+|  .../results-load-test/report.html                 |     153 +-
+|  .../results-load-test/resource_usage.txt          |    9880 +-
+|  .../results-load-test/results.csv                 | 1232544 ++++++----------
+|  .../results-load-test/summary.json                |     236 +-
+|  .../Group-2_Spike_Auth/23127379_Spike_20260814.js |       2 +-
+|  .../HW5/Group-2_Spike_Auth/resource_monitor.sh    |      20 -
+|  .../HW5/Group-2_Spike_Auth/results/k6_console.txt |     796 +-
+|  .../HW5/Group-2_Spike_Auth/results/report.html    |     132 +-
+|  .../Group-2_Spike_Auth/results/resource_usage.txt |    5034 +-
+|  .../HW5/Group-2_Spike_Auth/results/results.csv    |  753358 +++++-----
+|  .../HW5/Group-2_Spike_Auth/results/summary.json   |     282 +-
+|  .../HW5/Group-2_Spike_Auth/seed_accounts.sh       |      45 -
+|  .../HW5/Group-2_Spike_Auth/skill4_analysis.md     |       2 +-
+|  .../23127379_Stress_Endurance_20260814.js         |       4 +-
+|  .../result-endurance/k6_console.txt               |    2744 +
+|  .../result-endurance/report.html                  |     910 +
+|  .../resource_usage.txt                            |   12164 +-
+|  .../result-endurance/results.csv                  |  789679 ++++++++++
+|  .../result-endurance/summary.json                 |     183 +
+|  .../result-stress-endurance/k6_console.txt        |    2896 -
+|  .../result-stress-endurance/results.csv           |  686809 ---------
+|  .../result-stress-endurance/summary.json          |     183 -
+|  .../result-stress/k6_console.txt                  |    2882 +-
+|  .../result-stress/report.html                     |     183 +-
+|  .../result-stress/resource_usage.txt              |    5731 +-
+|  .../result-stress/results.csv                     |  558916 ++++++-
+|  .../result-stress/summary.json                    |     280 +-
+|  .../Group-3_Stress_Checkout/skill4_analysis.md    |       7 +-
+|  23127379_Homework/HW5/README.md                   |      67 +-
+|  23127379_Homework/HW5/hw05_report.md              |      14 +-
+|  run_all_monitored.sh                              |      42 -
+|  39 files changed, 3047662 insertions(+), 2150588 deletions(-)
+| 
+* commit 3f4bea647c79a64dea0b78b29a180f3257ba16cd
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sun Aug 16 20:23:02 2026 +0700
+| 
+|     Refactor performance testing scripts and documentation
+|     
+|     - Deleted obsolete summary.json file from Group-3 Stress Checkout results.
+|     - Updated README.md with demo video links and individual scenario demos.
+|     - Added student name to hw05_report.md.
+|     - Removed main_report.md as it was redundant.
+|     - Updated video demo link in group3 video-demo.md.
+|     - Revised submission checklist to reflect completed tasks.
+|     - Introduced run_all_monitored.sh script to streamline test execution and resource monitoring.
+|     - Removed deprecated run_stress.sh script.
+| 
+|  .../result-endurance-test/k6_console.txt          |   1881 +
+|  .../report.html}                                  |    104 +-
+|  .../result-endurance-test/resource_usage.txt      |   3574 +
+|  .../result-endurance-test/results.csv             | 280169 ++++++
+|  .../result-endurance-test/summary.json            |    147 +
+|  .../results-load-test/k6_console.txt              |   2860 +
+|  .../report.html}                                  |    157 +-
+|  .../results-load-test/resource_usage.txt          |   6106 +
+|  .../results-load-test/results.csv                 | 769159 +++++++++++++++
+|  .../results-load-test/summary.json                |    147 +
+|  .../results_endurance/endurance_results.csv       | 832697 -----------------
+|  .../results_endurance/k6_console.txt              |   2739 -
+|  .../results_endurance/summary.json                |    147 -
+|  .../results_load_run2/k6_console.txt              |   1662 -
+|  .../results_load_run2/load_results.csv            | 462907 ---------
+|  .../results_load_run2/summary.json                |    147 -
+|  .../results/23127379_Spike_20260814.csv           | 382980 --------
+|  .../HW5/Group-2_Spike_Auth/results/k6_console.txt |    802 +-
+|  .../results/{summary.html => report.html}         |    130 +-
+|  .../results/resource_usage.txt                    |   4855 +-
+|  .../HW5/Group-2_Spike_Auth/results/results.csv    | 369948 ++++++++
+|  .../HW5/Group-2_Spike_Auth/results/summary.json   |    429 +-
+|  .../results/summary_export.json                   |    173 -
+|  .../result-stress-endurance/k6_console.txt        |   2896 +
+|  .../result-stress-endurance/resource_usage.txt    |   5958 +
+|  .../result-stress-endurance/results.csv           | 686809 ++++++++++++++
+|  .../result-stress-endurance/summary.json          |    183 +
+|  .../result-stress/k6_console.txt                  |   2944 +
+|  .../summary.html => result-stress/report.html}    |    164 +-
+|  .../result-stress/resource_usage.txt              |   2887 +
+|  .../result-stress/results.csv                     |  13217 +
+|  .../result-stress/summary.json                    |    172 +
+|  .../results/23127379_Stress_20260816.csv          | 546855 -----------
+|  .../results/k6_console.txt                        |   1306 -
+|  .../results/lockout_reset_log.md                  |     21 -
+|  .../Group-3_Stress_Checkout/results/summary.json  |    172 -
+|  .../results_endurance/endurance_results.csv       | 788536 ----------------
+|  .../results_endurance/k6_console.txt              |   2751 -
+|  .../results_endurance/report.html                 |     73 -
+|  .../results_endurance/summary.html                |    901 -
+|  .../results_endurance/summary.json                |    183 -
+|  23127379_Homework/HW5/README.md                   |     12 +-
+|  23127379_Homework/HW5/hw05_report.md              |      1 +
+|  23127379_Homework/HW5/main_report.md              |     76 -
+|  .../HW5/screenshots/group3/video-demo.md          |      2 +-
+|  23127379_Homework/HW5/submission_checklist.md     |     40 +-
+|  run_all_monitored.sh                              |     42 +
+|  run_stress.sh                                     |     51 -
+|  48 files changed, 2152387 insertions(+), 3027785 deletions(-)
+| 
+* commit c80444fc6add757ebfdc3d6c171717b7b4dd8f00
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sun Aug 16 12:09:17 2026 +0700
+| 
+|     feat(HW5): Remove summary JSON files and git commit log evidence for Group 1 Load Products
+| 
+|  .../results/23127379_Load_20260813.csv            | 463001 -----------------
+|  .../results/html_report/report.html               |    121 -
+|  .../Group-1_Load_Products/results/k6_console.txt  |   1638 -
+|  .../Group-1_Load_Products/results/summary.json    |    147 -
+|  .../HW5/Group-1_Load_Products/summary.json        |    236 -
+|  23127379_Homework/HW5/git-commit-log.txt          |      3 -
+|  23127379_Homework/HW5/git_commit_log.txt          |     19 -
+|  7 files changed, 465165 deletions(-)
+| 
+* commit 74eb32a699de44c55b5d12ea82acd23038d0694e
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sun Aug 16 12:07:39 2026 +0700
+| 
+|     Add performance testing results and summary files
+|     
+|     - Created summary.html for detailed performance test report with metrics and visualizations.
+|     - Added summary.json containing structured performance metrics data.
+|     - Updated README.md with self-assessed grades for tasks.
+|     - Removed draft critique document and parse_k6_csv.py script as they are no longer needed.
+| 
+|  .../23127379_Load_20260813.js                     |      8 +-
+|  .../23127379_Load_Endurance_20260813.js           |      8 +-
+|  .../results_endurance/endurance_results.csv       | 832697 +++++++++++++++++
+|  .../results_endurance/k6_console.txt              |   2739 +
+|  .../results_endurance/summary.html                |    862 +
+|  .../results_endurance/summary.json                |    147 +
+|  .../results_load_run2/k6_console.txt              |   1662 +
+|  .../results_load_run2/load_results.csv            | 462907 +++++++++
+|  .../results_load_run2/summary.html                |    853 +
+|  .../results_load_run2/summary.json                |    147 +
+|  .../results_endurance/endurance_results.csv       | 788536 ++++++++++++++++
+|  .../results_endurance/k6_console.txt              |   2751 +
+|  .../results_endurance/report.html                 |     73 +
+|  .../results_endurance/summary.html                |    901 +
+|  .../results_endurance/summary.json                |    183 +
+|  23127379_Homework/HW5/README.md                   |     14 +-
+|  draft_critique.md                                 |     21 -
+|  parse_k6_csv.py                                   |     79 -
+|  18 files changed, 2094479 insertions(+), 109 deletions(-)
+| 
+* commit d2643f0129b5c69ea18318498849efcd2c3e136b
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sun Aug 16 11:37:46 2026 +0700
+| 
+|     feat(HW5): Update README and add performance testing report; include submission checklist
+| 
+|  23127379_Homework/HW5/README.md               | 178 +++++++++++-------------
+|  23127379_Homework/HW5/git_commit_log.txt      |  19 +++
+|  23127379_Homework/HW5/hw05_report.md          |  53 +++++++
+|  23127379_Homework/HW5/submission_checklist.md |  29 ++++
+|  4 files changed, 181 insertions(+), 98 deletions(-)
+| 
+* commit 0aeb1109ff9b3452384813d279655b3c2f0aff2a
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sun Aug 16 11:36:06 2026 +0700
+| 
+|     feat(HW5): Add AI audit report and critique documents; document AI interactions and errors
+| 
+|  23127379_Homework/HW5/ai_audit_report.md | 54 ++++++++++++++++++++++++++++++
+|  23127379_Homework/HW5/ai_critique.md     | 20 +++++++++--
+|  23127379_Homework/HW5/hw05_audit_log.md  |  5 +++
+|  draft_critique.md                        | 21 ++++++++++++
+|  4 files changed, 97 insertions(+), 3 deletions(-)
+| 
+* commit 1351e454a2f7af9b78b916de7f0e5aa86746b621
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sun Aug 16 11:31:17 2026 +0700
+| 
+|     feat(HW5): Update CI performance pipeline proposal and add review log for Skill 6
+| 
+|  23127379_Homework/HW5/ci_pipeline_proposal.md     | 162 +++++++++++++++++---
+|  23127379_Homework/HW5/hw05_audit_log.md           |   4 +
+|  .../HW5/review_history/review_summary.md          |   1 +
+|  .../HW5/review_history/skill6_v1_review.md        |  30 ++++
+|  4 files changed, 175 insertions(+), 22 deletions(-)
+| 
+* commit bbdb145abc938eb3621a6343f90f01e6982e74b0
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Sun Aug 16 11:23:58 2026 +0700
+| 
+|     feat(HW5): execute stress test
+| 
+|  .../results/23127379_Stress_20260816.csv          | 546855 +++++++++++++++++
+|  .../results/k6_console.txt                        |   1306 +
+|  .../results/lockout_reset_log.md                  |     21 +
+|  .../results/resource_usage.txt                    |   2449 +
+|  .../Group-3_Stress_Checkout/results/summary.html  |    893 +
+|  .../Group-3_Stress_Checkout/results/summary.json  |    172 +
+|  .../Group-3_Stress_Checkout/skill4_analysis.md    |     64 +
+|  23127379_Homework/HW5/hw05_audit_log.md           |     26 +
+|  .../HW5/review_history/review_summary.md          |      4 +-
+|  .../HW5/review_history/skill2_g3_v1_review.md     |     31 +
+|  .../HW5/review_history/skill4_g3_v1_review.md     |     29 +
+|  .../HW5/screenshots/group3/hardware_spec.md       |      5 +
+|  .../HW5/screenshots/group3/strees-test.png        |    Bin 0 -> 1387706 bytes
+|  .../HW5/screenshots/group3/video-demo.md          |      2 +
+|  parse_k6_csv.py                                   |     79 +
+|  run_stress.sh                                     |     51 +
+|  16 files changed, 551985 insertions(+), 2 deletions(-)
+| 
+* commit c2aa05e6e063070d57c7e0b488febf3c7c29c132
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 22:09:43 2026 +0700
+| 
+|     feat(HW5): Add stress and endurance test scripts; include order payloads and test plan notes
+| 
+|  .../23127379_Stress_20260814.js                   | 174 ++++++++++++++++++++
+|  .../23127379_Stress_Endurance_20260814.js         | 138 ++++++++++++++++
+|  .../Group-3_Stress_Checkout/order_payloads.csv    |  51 ++++++
+|  .../skill2_testplan_notes.md                      |  97 +++++++++++
+|  23127379_Homework/HW5/hw05_audit_log.md           |  18 ++
+|  5 files changed, 478 insertions(+)
+| 
+* commit dbff779a4d3caf928ed60375315a188e2f94e571
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 21:55:33 2026 +0700
+| 
+|     feat(HW5): Update Skill 1 parameters and review log; add endurance test requirements
+| 
+|  .../Group-3_Stress_Checkout/skill1_parameters.md  | 23 +++++++++++++-
+|  23127379_Homework/HW5/hw05_audit_log.md           | 16 ++++++++++
+|  .../HW5/review_history/review_summary.md          |  4 +++
+|  .../HW5/review_history/skill1_g3_v1_review.md     | 34 +++++++++++++++++++++
+|  4 files changed, 76 insertions(+), 1 deletion(-)
+| 
+* commit bc057cdb3b6b78889b7e727c05615238ed8f542b
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 21:47:11 2026 +0700
+| 
+|     feat(HW5): complete requriment for stress tessting
+| 
+|  .../HW5/Group-3_Stress_Checkout/auth_users.csv    |  51 ++++++
+|  .../Group-3_Stress_Checkout/skill1_parameters.md  | 165 ++++++++++++--------
+|  23127379_Homework/HW5/hw05_audit_log.md           |   6 +
+|  3 files changed, 161 insertions(+), 61 deletions(-)
+| 
+* commit fda9323546f2a91e74deca100fa26ebdff77d53c
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 21:18:43 2026 +0700
+| 
+|     feat(HW5): Evidence for Group 1, Group 2
+| 
+|  .../HW5/screenshots/group1/hardware_spec.md         |   5 +++++
+|  .../HW5/screenshots/group1/load-test.png            | Bin 0 -> 1354732 bytes
+|  .../HW5/screenshots/group1/video-demo.md            |   2 ++
+|  .../HW5/screenshots/group2/hardware_spec.md         |   5 +++++
+|  .../HW5/screenshots/group2/spike-test.png           | Bin 0 -> 1518535 bytes
+|  .../HW5/screenshots/group2/video-demo.md            |   2 ++
+|  6 files changed, 14 insertions(+)
+| 
+* commit 9396f187a01536c695a4893aea0804d78bbdf1f2
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 18:05:18 2026 +0700
+| 
+|     feat: Update test plan notes with enhanced run commands and summary export options
+| 
+|  .../HW5/Group-2_Spike_Auth/skill2_testplan_notes.md   | 17 +++++++++++++++++
+|  1 file changed, 17 insertions(+)
+| 
+* commit eef9035387d81fa14990c421b49135e09bb282a5
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 17:55:41 2026 +0700
+| 
+|     feat: Add hardware specification for performance testing
+| 
+|  23127379_Homework/HW5/hardware_spec.md | 5 +++++
+|  1 file changed, 5 insertions(+)
+| 
+* commit cd138098707bcea281652cf5f5838c9c8cb0c575
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 10:56:24 2026 +0700
+| 
+|     feat: Update skill 4 analysis and review logs; add bug report for skill 8
+| 
+|  .../HW5/Group-1_Load_Products/skill4_analysis.md  | 10 ++--
+|  .../HW5/Group-2_Spike_Auth/skill8_bug_report.md   | 59 +++++++++++++++++++++
+|  23127379_Homework/HW5/hw05_audit_log.md           | 18 +++++++
+|  .../HW5/review_history/review_summary.md          |  1 +
+|  .../HW5/review_history/skill4_g2_v1_review.md     | 40 ++++++++++++++
+|  5 files changed, 123 insertions(+), 5 deletions(-)
+| 
+* commit e62ca3987ba4910a3154af5bce2f70ff7dc9a832
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 10:36:54 2026 +0700
+| 
+|     feat: Add JTL log analysis entry for Group 2 Spike Test (Auth-heavy)
+| 
+|  .../HW5/Group-2_Spike_Auth/skill4_analysis.md     | 180 ++++++++++++++++++++
+|  23127379_Homework/HW5/hw05_audit_log.md           |  15 ++
+|  2 files changed, 195 insertions(+)
+| 
+* commit c665feaffc0d46ccec9a1170e3276992986ff87f
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 10:14:44 2026 +0700
+| 
+|     feat: Add performance test results and review documentation for Group 2 Spike Testing
+|     
+|     - Create summary.json and summary_export.json files to store detailed performance metrics and results.
+|     - Update hw05_audit_log.md with new review entries and performance test outcomes.
+|     - Modify review_summary.md to include the latest review status for Skill 2 (G2).
+|     - Add skill2_g2_v1_review.md to document the review findings and approval for the script.
+| 
+|  .../HW5/Group-2_Spike_Auth/resource_monitor.sh    |     20 +
+|  .../results/23127379_Spike_20260814.csv           | 382980 +++++++++++++++++
+|  .../HW5/Group-2_Spike_Auth/results/k6_console.txt |   1152 +
+|  .../HW5/Group-2_Spike_Auth/results/summary.html   |    903 +
+|  .../HW5/Group-2_Spike_Auth/results/summary.json   |    272 +
+|  .../results/summary_export.json                   |    173 +
+|  23127379_Homework/HW5/hw05_audit_log.md           |     22 +
+|  .../HW5/review_history/review_summary.md          |      1 +
+|  .../HW5/review_history/skill2_g2_v1_review.md     |     35 +
+|  9 files changed, 385558 insertions(+)
+| 
+* commit ede2a5e73fea2023cfeaabba6c0aa3f1da9ef10d
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 09:57:42 2026 +0700
+| 
+|     feat: Add spike testing script and test plan notes for Group 2 Auth-heavy scenario
+| 
+|  .../Group-2_Spike_Auth/23127379_Spike_20260814.js | 191 ++++++++++++++++++++
+|  .../Group-2_Spike_Auth/skill2_testplan_notes.md   |  70 +++++++
+|  23127379_Homework/HW5/hw05_audit_log.md           |  15 ++
+|  3 files changed, 276 insertions(+)
+| 
+* commit 452f10212d7837620689ee2da961943de252bb72
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 14 09:33:27 2026 +0700
+| 
+|     feat: Add user account seeding script and CSV for Group 2 Spike Test
+| 
+|  .../HW5/Group-2_Spike_Auth/auth_users.csv         |  51 ++++++++
+|  .../HW5/Group-2_Spike_Auth/seed_accounts.sh       |  45 +++++++
+|  .../HW5/Group-2_Spike_Auth/skill1_parameters.md   |   4 +-
+|  23127379_Homework/HW5/hw05_audit_log.md           |  15 +++
+|  .../HW5/review_history/review_summary.md          |   1 +
+|  .../HW5/review_history/skill1_g2_v1_review.md     |  34 +++++
+|  AGENTS.md                                         | 130 ++++++++++++++++++--
+|  7 files changed, 270 insertions(+), 10 deletions(-)
+| 
+* commit 4690e247a458189d27d381fcd7d7bdc084f07d6b
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Aug 13 22:55:03 2026 +0700
+| 
+|     feat: Update skill2 test plan notes and add execution logs for skills 3 and 4
+|     
+|     - Marked skill 2 test plan as approved by human reviewer.
+|     - Created skill 3 execution log detailing performance metrics and observations from the read-heavy load test.
+|     - Added skill 4 analysis report with detailed metrics, threshold evaluations, and optimization recommendations.
+|     - Introduced skill 8 bug and anomaly report confirming no issues found during load testing.
+|     - Added summary.json file capturing detailed test results and metrics.
+|     - Updated bug report to reflect findings from Group 1 load test.
+|     - Enhanced audit log with detailed execution records for skills 3, 4, 8, and 10.
+|     - Created a new script for generating HTML reports from CSV and summary.json outputs.
+| 
+|  .../results/23127379_Load_20260813.csv            | 463001 +++++++++++++++++
+|  .../results/html_report/report.html               |    121 +
+|  .../Group-1_Load_Products/results/k6_console.txt  |   1638 +
+|  .../Group-1_Load_Products/results/summary.json    |    147 +
+|  .../skill10_review_analysis.md                    |     31 +
+|  .../Group-1_Load_Products/skill1_parameters.md    |      4 +-
+|  .../skill2_testplan_notes.md                      |      4 +-
+|  .../Group-1_Load_Products/skill3_execution_log.md |     59 +
+|  .../HW5/Group-1_Load_Products/skill4_analysis.md  |    153 +
+|  .../HW5/Group-1_Load_Products/skill8_bugs.md      |     64 +
+|  .../HW5/Group-1_Load_Products/summary.json        |    236 +
+|  23127379_Homework/HW5/bug_report.md               |      7 +
+|  23127379_Homework/HW5/hw05_audit_log.md           |     32 +
+|  .../HW5/review_history/review_summary.md          |      1 +
+|  .../HW5/review_history/skill4_v1_review.md        |     31 +
+|  .../HW5/scripts/generate_html_report.py           |    265 +
+|  16 files changed, 465790 insertions(+), 4 deletions(-)
+| 
+* commit 35892602d7b011bcc7e4ca5fd775b8bf89927097
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Aug 13 22:08:57 2026 +0700
+| 
+|     Add load and endurance testing scripts for Group 1 (Read-heavy)
+|     
+|     - Created `23127379_Load_20260813.js` for load testing with stages of 50→100→150 VUs.
+|     - Implemented checks for response status and JSON body validation.
+|     - Added `23127379_Load_Endurance_20260813.js` for endurance testing at a sustained 100 VUs.
+|     - Introduced `products_data.csv` containing product IDs for testing.
+|     - Updated review logs and parameter recommendations for Skill 1 and Skill 2.
+|     - Enhanced checks to verify JSON fields instead of relying on string length.
+| 
+|  .../23127379_Load_20260813.js                     |  67 ++++++++++
+|  .../23127379_Load_Endurance_20260813.js           |  65 +++++++++
+|  .../HW5/Group-1_Load_Products/products_data.csv   |   6 +
+|  .../skill10_review_params.md                      |  32 +++++
+|  .../skill10_review_script.md                      |  30 +++++
+|  .../Group-1_Load_Products/skill1_parameters.md    | 105 +++++++++++++++
+|  .../skill2_testplan_notes.md                      |  58 ++++++++
+|  .../HW5/Group-2_Spike_Auth/skill1_parameters.md   | 121 +++++++++++++++++
+|  .../Group-3_Stress_Checkout/skill1_parameters.md  | 139 ++++++++++++++++++++
+|  23127379_Homework/HW5/hw05_audit_log.md           |  40 +++++-
+|  .../HW5/review_history/review_summary.md          |   6 +
+|  .../HW5/review_history/skill1_v1_review.md        |  32 +++++
+|  .../HW5/review_history/skill2_v1_review.md        |  30 +++++
+|  13 files changed, 730 insertions(+), 1 deletion(-)
+| 
+* commit 87f326a857872cb4d63881cda7b26c097a7c4a7e
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Aug 13 21:38:45 2026 +0700
+| 
+|     feat: add HW06 API Testing documentation with guidelines and requirements
+| 
+|  23127379_Homework/HW6/2026.HW06.API Testing_En.md | 186 ++++++++++++++++++++
+|  1 file changed, 186 insertions(+)
+| 
+* commit 8fdd39dd782a84a90aa1fd8f57bade451cc47a71
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Fri Aug 7 10:20:59 2026 +0700
+| 
+|     fix: update agent workflow guide for performance testing skills and clarify endpoint details
+| 
+|  AGENTS.md | 496 ++++++++++++++++++++++++++++++++++++++++++++++--------------
+|  1 file changed, 384 insertions(+), 112 deletions(-)
+| 
+* commit d7b2c554d8f88b846da548f06fada8aaac717db7
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Aug 6 21:18:34 2026 +0700
+| 
+|     Refactor performance testing skills to use Grafana k6
+|     
+|     - Updated test-execution-runner skill to execute approved k6 scripts instead of JMeter plans, including changes to input parameters, output formats, and reporting.
+|     - Revised test-parameter-advisor skill to recommend k6-specific parameters and configurations for performance testing.
+|     - Modified test-plan-generator skill to generate k6 scripts instead of JMeter plans, ensuring proper naming conventions and structure.
+|     - Updated README to reflect changes in framework from JMeter to Grafana k6, including file naming and output expectations.
+| 
+|  .../bug-anomaly-reporter/SKILL.md                 |  94 ++---
+|  .../final-report-compiler/SKILL.md                |  25 +-
+|  .../independent-reviewer/SKILL.md                 |  48 +--
+|  .../performance-skill/jtl-log-analyzer/SKILL.md   | 221 ++++++++----
+|  .../test-execution-runner/SKILL.md                | 162 +++++----
+|  .../test-parameter-advisor/SKILL.md               |  62 ++--
+|  .../test-plan-generator/SKILL.md                  | 378 ++++++++++++++------
+|  23127379_Homework/HW5/README.md                   |  29 +-
+|  8 files changed, 638 insertions(+), 381 deletions(-)
+| 
+* commit 64b7781c830400103c6a9eb79d0685cbd5aa324c
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Aug 6 17:44:35 2026 +0700
+| 
+|     feat: update FR-06 run summary and add demo video link (HW4)
+| 
+|  .../HW4/Pool-A_FR06/fr06-run-summary.md           |  26 +++++++++++---------
+|  23127379_Homework/HW4/README.md                   |   2 ++
+|  backend/database.sqlite                           | Bin 36864 -> 36864 bytes
+|  3 files changed, 17 insertions(+), 11 deletions(-)
+| 
+* commit 4eabefcee491fa6ef79f3d9aaa68f28bd20852a4
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Aug 6 16:11:40 2026 +0700
+| 
+|     feat(HW5): template placeholder
+| 
+|  23127379_Homework/HW5/AI-Audit-Report.md      |   8 ++
+|  23127379_Homework/HW5/README.md               | 120 ++++++++++++++++++
+|  23127379_Homework/HW5/ai_critique.md          |   7 ++
+|  23127379_Homework/HW5/bug_report.md           |  30 +++++
+|  23127379_Homework/HW5/ci_pipeline_proposal.md |  34 +++++
+|  23127379_Homework/HW5/git-commit-log.txt      |   3 +
+|  23127379_Homework/HW5/hw05_audit_log.md       |  18 +++
+|  23127379_Homework/HW5/main_report.md          |  76 +++++++++++
+|  AGENTS.md                                     | 161 ++++++++++++++----------
+|  9 files changed, 393 insertions(+), 64 deletions(-)
+| 
+* commit 696d6fedb1d04c171f37b6d945c14dfbb4ea4e0a
+| Author: AkiraTomori <ThaiMinhHuy1407@gmail.com>
+| Date:   Thu Aug 6 15:55:23 2026 +0700
+| 
+|     feat(performance-skill): add k6 test runner script and parameter advisor documentation
+|     
+|     - Implemented run_k6.sh script for executing k6 performance tests with resource monitoring and output handling.
+|     - Created SKILL.md for test-parameter-advisor, detailing parameter recommendations for EShop HW05 performance testing.
+|     - Added endpoint_groups.md reference for endpoint characteristics and testing rationale.
+|     - Developed SKILL.md for test-plan-generator, outlining the generation of JMeter and k6 test plans from approved parameters.
+|     - Established naming_convention.md for consistent file naming across test plans and CSV data files.
+|     - Updated AGENTS.md to include a comprehensive workflow guide for HW05 performance testing, detailing skill execution and command usage.
+| 
+|  .../bug-anomaly-reporter/SKILL.md                 | 239 +++++++++++++++
+|  .../resources/github_issue_template.md            | 138 +++++++++
+|  .../ci-performance-pipeline-proposer/SKILL.md     | 250 +++++++++++++++
+|  .../final-report-compiler/SKILL.md                | 275 +++++++++++++++++
+|  .../independent-reviewer/SKILL.md                 | 306 +++++++++++++++++++
+|  .../references/review_criteria.md                 | 127 ++++++++
+|  .../performance-skill/jtl-log-analyzer/SKILL.md   | 239 +++++++++++++++
+|  .../jtl-log-analyzer/scripts/parse_jtl.py         | 318 ++++++++++++++++++++
+|  .../lockout-reset-helper/SKILL.md                 | 218 ++++++++++++++
+|  .../lockout-reset-helper/scripts/reset_lockout.sh | 235 +++++++++++++++
+|  .../postmortem-critique-generator/SKILL.md        | 182 +++++++++++
+|  .../test-execution-runner/SKILL.md                | 243 +++++++++++++++
+|  .../test-execution-runner/scripts/run_jmeter.sh   | 183 +++++++++++
+|  .../test-execution-runner/scripts/run_k6.sh       |  76 +++++
+|  .../test-parameter-advisor/SKILL.md               | 167 ++++++++++
+|  .../references/endpoint_groups.md                 |  74 +++++
+|  .../test-plan-generator/SKILL.md                  | 257 ++++++++++++++++
+|  .../references/naming_convention.md               |  54 ++++
+|  AGENTS.md                                         | 245 ++++++++++++++-
+|  19 files changed, 3825 insertions(+), 1 deletion(-)
+| 

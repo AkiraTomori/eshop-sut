@@ -1,7 +1,7 @@
 ## Pre-Submission Checklist
 
 ### Required Files
-- [ ] hw05_report.md + PDF export
+- [x] hw05_report.md + PDF export
 - [x] README.md with self-assessment table (FILL IN GRADES)
 - [x] 3 test scripts: 23127379_Load/Spike/Stress_{date}.js
 - [x] 3 raw k6 CSV files + 3 summary.json (full, not truncated)
