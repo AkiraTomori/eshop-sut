@@ -211,3 +211,29 @@ This file records all AI tool interactions across the entire HW05 performance te
   - handleSummary: HTML + JSON + stdout (3 distinct report views per HW05 Task 1)
   - Endurance script adds custom `checkout_latency_ms` Trend to detect degradation over time
   - Data hygiene documented in notes (order accumulation may affect reproducibility)
+
+## [SKILL-3] test-execution-runner — 2026-08-16 11:17:00
+- **Test script**: 23127379_Homework/HW5/Group-3_Stress_Checkout/23127379_Stress_20260814.js
+- **Start time**: 2026-08-16 11:09:00
+- **End time**: 2026-08-16 11:16:00
+- **Exit code**: 0
+- **Output**: 23127379_Stress_20260816.csv, summary.json, summary.html
+- **Resource log**: resource_usage.txt
+- **Human evidence captured**: [ ] screenshot, [ ] hardware, [ ] video
+## [SKILL-7] lockout-reset-helper — 2026-08-16 11:20:00
+- **Triggered by**: Stress test
+- **Accounts locked**: 0
+- **Reset method**: None
+- **Reset success**: ✅
+- **Time taken**: 0s
+## [SKILL-4] jtl-log-analyzer — 2026-08-16 11:20:00
+- **Input**: 23127379_Stress_20260816.csv (46MB, 45501 rows) + summary.json
+- **Metrics**: p95=34.7ms, error_rate=0.00%, throughput=108.08rps
+- **Threshold proposed**: p95 < 65.0ms
+- **Optimizations**: 2 feasible, 3 hallucinated
+- **Source citations**: all numbers traced to CSV rows or summary.json
+## [SKILL-8] bug-anomaly-reporter — 2026-08-16 11:21:00
+- **Input**: 23127379_Stress_20260816.csv + summary.json
+- **Bugs found**: 0 critical, 0 high, 0 medium
+- **Drafts created**: None
+- **Posted by human**: [ ] pending (N/A)
