@@ -96,41 +96,49 @@ If an approved artifact from a previous stage is not present in the active conte
 
 ```mermaid
 flowchart TD
-    A[Bootstrap and /status] --> B[Stage 1: run every technique required by the active pool]
-    B --> C{All Stage 1 outputs confirmed?}
-    C -- No: revise or run missing technique --> B
-    C -- Yes --> D[Stage 2: /audit active pool]
-    D --> E{confirm stage 2?}
-    E -- No: user edits/reviews --> D
-    E -- Yes --> F[Stage 3: /extend active pool]
-    F --> G{confirm stage 3?}
-    G -- No: review missing cases --> F
-    G -- Yes --> H[Stage 4: /build-postman active pool]
-    H --> I{confirm stage 4 with artifacts/evidence?}
-    I -- No: fix artifacts or supply manual-run evidence --> H
-    I -- Yes --> J[Stage 5: /bug-report active pool]
-    J --> K{confirm stage 5?}
-    K -- No: review triage/reports --> J
-    K -- Yes --> L[Review every row in the Pool-local AI audit]
-    L --> V{confirm pool audit?}
-    V -- No: revise decisions/notes --> L
-    V -- Yes --> W[Mark pool DONE]
-    W --> M{Pool C complete?}
-    M -- No --> N[/next-pool proposes transition]
-    N --> X{confirm next pool?}
-    X -- No --> N
-    X -- Yes --> A
-    M -- Yes --> O[/cicd-setup plus two real pipeline runs]
-    O --> P{confirm ci/cd?}
-    P -- No: fix workflow or evidence --> O
-    P -- Yes --> Q[/critique]
-    Q --> R{confirm critique?}
-    R -- No: correct evidence or wording --> Q
-    R -- Yes --> S[/finalize]
-    S --> T{confirm finalization?}
-    T -- No: resolve submission gaps --> S
-    T -- Yes --> U[Submission package ready for human-owned final actions]
-    
+    A["Bootstrap and /status"] --> B["Stage 1: run every technique required by the active pool"]
+    B --> C{"All Stage 1 outputs confirmed?"}
+    C -- "No: revise or run missing technique" --> B
+    C -- "Yes" --> D["Stage 2: /audit active pool"]
+
+    D --> E{"Confirm Stage 2?"}
+    E -- "No: user edits/reviews" --> D
+    E -- "Yes" --> F["Stage 3: /extend active pool"]
+
+    F --> G{"Confirm Stage 3?"}
+    G -- "No: review missing cases" --> F
+    G -- "Yes" --> H["Stage 4: /build-postman active pool"]
+
+    H --> I{"Confirm Stage 4 with artifacts/evidence?"}
+    I -- "No: fix artifacts or supply manual-run evidence" --> H
+    I -- "Yes" --> J["Stage 5: /bug-report active pool"]
+
+    J --> K{"Confirm Stage 5?"}
+    K -- "No: review triage/reports" --> J
+    K -- "Yes" --> L["Review every row in the Pool-local AI audit"]
+
+    L --> V{"Confirm pool audit?"}
+    V -- "No: revise decisions/notes" --> L
+    V -- "Yes" --> W["Mark pool DONE"]
+
+    W --> M{"Pool C complete?"}
+    M -- "No" --> N["/next-pool proposes transition"]
+    N --> X{"Confirm next pool?"}
+    X -- "No" --> N
+    X -- "Yes" --> A
+
+    M -- "Yes" --> O["/cicd-setup plus two real pipeline runs"]
+    O --> P{"Confirm CI/CD?"}
+    P -- "No: fix workflow or evidence" --> O
+    P -- "Yes" --> Q["/critique"]
+
+    Q --> R{"Confirm critique?"}
+    R -- "No: correct evidence or wording" --> Q
+    R -- "Yes" --> S["/finalize"]
+
+    S --> T{"Confirm finalization?"}
+    T -- "No: resolve submission gaps" --> S
+    T -- "Yes" --> U["Submission package ready for human-owned final actions"]
 ```
 
 ### 6.3 Practical operating sequence

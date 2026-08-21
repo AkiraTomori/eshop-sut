@@ -5,7 +5,7 @@ Current Pool: Pool A
 ## Pool A — IN_PROGRESS
 
 - [ ] Stage 1 — Generate
-  - [ ] Domain Testing
+  - [x] Domain Testing
   - [ ] State Transition Testing
   - [ ] Security/Schema Checklist
 - [ ] Stage 2 — Audit

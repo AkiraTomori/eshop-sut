@@ -162,4 +162,4 @@ For every reset case, create a fresh `T1` unless the objective intentionally cha
 - No GET request, API execution, Newman run, progress update, or next-stage action occurred.
 - Human clarification is needed before later automation can assert: the reset success status/schema, all error statuses/schemas, OTP lifetime, confirmation-password API field, and normalization/maximum-length behavior.
 
-Status: PROPOSED — pending user confirmation; not approved as automatic input for the next stage.
+Status: Approved
