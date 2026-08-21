@@ -24,7 +24,7 @@ Pool A is one selected API unit implemented as a two-step workflow. No GET endpo
 2. **No GET tests:** Never design, add, or execute a GET request as an HW06 test or health check. A local readiness check must use TCP port 3000 rather than HTTP GET.
 3. **Coverage:** Produce at least 35 reviewed test cases for each API unit. Domain Testing must inventory and partition every relevant API parameter. Use the taught techniques in separate steps; never generate an entire API suite with one undifferentiated prompt.
 4. **Specification grounding:** Derive assignment obligations from the HW06 assignment, business constraints from `README.md`, and endpoint contracts from `api_specification.md`. Preserve FR/SEC/API traceability and label unspecified contracts explicitly.
-5. **Human confirmation gate:** Every generated output is a proposal. For Stages 1–5, stop and wait for the exact confirmation `confirm stage N`. After Stage 5, every row in the current Pool's local AI audit must be reviewed and the user must enter `confirm pool audit` before the Pool becomes `DONE` or `/next-pool` can advance. Post-pipeline outputs require `confirm ci/cd`, `confirm critique`, and `confirm finalization`. Never mark work complete, alter user labels, advance the pipeline, change pools, post an issue, commit, or trigger the next command before the applicable confirmation.
+5. **Human confirmation gate:** Every generated output is a proposal. For Stages 1–5, stop and wait for the exact confirmation `confirm stage N`. After Stage 5, every row in the current Pool's local AI audit must be reviewed and the user must enter `confirm pool audit` before the Pool becomes `DONE`. `/next-pool` proposes a transition and waits for `confirm next pool`. Post-pipeline outputs require `confirm ci/cd`, `confirm critique`, and `confirm finalization`. Never mark work complete, alter user labels, advance the pipeline, change pools, post an issue, commit, or trigger the next command before the applicable confirmation.
 6. **Student header:** Every Postman/Newman request must receive `X-Student-Id: {StudentID}` through a collection-level pre-request script using the `StudentID` environment variable. Never hard-code the real student ID in command templates or commit secrets/tokens.
 7. **AI audit:** Each Pool-scoped AI skill invocation must append exactly one redacted row to that Pool's `ai_audit_report.md`, including an audit ID, Tool/Model, Timestamp, Pool/Stage, Prompt, Output, and `Human Review = PENDING`. Cross-pipeline invocations append under `Cross-pipeline AI interactions` in `23127379_Homework/HW6/ai_audit_report.md`. Do not log the logger's own operation. The root AI Audit Report is a later consolidation of the three human-reviewed Pool reports plus attributable cross-pipeline records; it is not the operational source for Pool rows.
 8. **Sequential workflow:** Complete Pools A → B → C. Within a pool, complete Stages 1 → 2 → 3 → 4 → 5 → local AI-audit human review. `/next-pool` is the only command allowed to advance the active pool. After Pool C, complete CI/CD evidence → critique/audit compilation → final report compilation.
@@ -67,7 +67,7 @@ The `/command-name` notation below is a logical workflow identifier. It does not
 | `/build-postman` | `postman-collection-builder` | Stage 4; confirmed Stages 1–3 required |
 | `/bug-report` | `bug-report-drafter` | Stage 5; confirmed Stage 4 required |
 | `/cicd-setup` | `cicd-pipeline-generator` | Post-pipeline after all pools and approved collection artifacts |
-| `/next-pool` | `state/progress.md` | Current pool must have all five stages and its local AI-audit review DONE |
+| `/next-pool` | `state/progress.md` | Current Pool DONE; wait for exact `confirm next pool` before changing state |
 | `/status` | `state/progress.md` | Read-only |
 | `/audit-log` | Pool-local `ai_audit_report.md` or root aggregate | Read-only; current Pool by default |
 | `/review-pool-audit` | Active Pool's `ai_audit_report.md` | After Stage 5; human-owned decisions; no recursive audit row |
@@ -116,8 +116,10 @@ flowchart TD
     V -- No: revise decisions/notes --> L
     V -- Yes --> W[Mark pool DONE]
     W --> M{Pool C complete?}
-    M -- No --> N["/next-pool after confirmation"]
-    N --> A
+    M -- No --> N[/next-pool proposes transition]
+    N --> X{confirm next pool?}
+    X -- No --> N
+    X -- Yes --> A
     M -- Yes --> O[/cicd-setup plus two real pipeline runs]
     O --> P{confirm ci/cd?}
     P -- No: fix workflow or evidence --> O
@@ -142,17 +144,17 @@ flowchart TD
 7. **Build/execute Stage 4:** invoke `/build-postman <active-pool>`. Review the collection, environment, data file, folder structure, test scripts, and collection-level `X-Student-Id` pre-request script. If local Newman execution is unavailable, the user runs the provided manual command and returns the real report. Enter `confirm stage 4` only after artifacts and available execution evidence are accepted.
 8. **Triage/report Stage 5:** invoke `/bug-report <active-pool>` with real Newman failures. Separate SUT defects from false positives and require real evidence. Review every draft and attach screenshots manually. If no SUT defect exists, preserve that explicit result. Enter `confirm stage 5` to mark Stage 5 DONE; do not mark the Pool DONE yet.
 9. **Review the Pool AI audit:** invoke `/review-pool-audit <active-pool>` to open the current Pool's `ai_audit_report.md`, review every AI interaction, set each decision to `CONFIRMED`, `REVISED`, or `REJECTED`, and append correction notes where needed. Enter `confirm pool audit` to accept every remaining pending row only after reviewing them. Then mark the Pool AI Audit checkbox and Pool status DONE; do not start `/next-pool` automatically.
-10. **Advance:** invoke `/next-pool`. It must refuse to advance unless all five current-pool stages and the Pool AI Audit review are DONE. After the user confirms the proposed transition, begin the next pool at Stage 1. After Pool C, report that all pools are complete instead of creating another pool.
+10. **Advance:** invoke `/next-pool`. It must refuse to advance unless all five current-Pool stages and the Pool AI Audit review are DONE. Enter `confirm next pool` to accept the proposed transition; only then begin the next Pool at Stage 1. After Pool C, report that all Pools are complete instead of creating another Pool.
 11. **Prepare and evidence CI/CD:** after all approved collection artifacts are available, invoke `/cicd-setup`. Review the proposed workflow, then the user creates the required two sample commits/runs: one all passing and one with exactly one failed case. Supply real run URLs and screenshots, then enter `confirm ci/cd`. The agent must not push commits or trigger the workflow automatically.
-12. **Compile audit and critique:** invoke `/critique` only after every Pool-local AI audit and CI/CD evidence are confirmed. Reconcile and aggregate the three local reports into root `ai_audit_report.md` without rewriting their facts or human decisions, preserve real cross-pipeline rows, then draft the evidence matrix and 200–300 word critique. Enter `confirm critique` only when every source row, mistake, and correction is real.
+12. **Compile audit and critique:** invoke `/critique` only after every Pool-local AI audit and CI/CD evidence are confirmed. Reconcile and aggregate the three local reports into root `ai_audit_report.md` without rewriting their facts or human decisions, preserve and present every cross-pipeline row, then draft the evidence matrix and 200–300 word critique. Enter `confirm critique` only when every source row, cross-pipeline interaction, mistake, and correction is real; that confirmation accepts all still-pending `POST-AI-*` rows shown during this review.
 13. **Finalize the submission:** invoke `/finalize` last. Resolve every completeness-matrix gap, especially the Excel cases, Postman feature list, PDFs, screenshots, Git history, issue links, and student-drawn generator diagram. Enter `confirm finalization` only after the compiled package is accurate. The user remains responsible for ZIP creation and Moodle submission.
 
 ### 6.4 Pool-specific command order
 
 | Pool | Stage 1 command order | Common continuation |
 |---|---|---|
-| Pool A | `/domain-test pool-a` → `/state-transition pool-a` → `/security-check pool-a` | `/audit pool-a` → `/extend pool-a` → `/build-postman pool-a` → `/bug-report pool-a` → `/review-pool-audit pool-a` → `confirm pool audit` → `/next-pool` |
-| Pool B | `/domain-test pool-b` → `/decision-table pool-b` → `/security-check pool-b` | `/audit pool-b` → `/extend pool-b` → `/build-postman pool-b` → `/bug-report pool-b` → `/review-pool-audit pool-b` → `confirm pool audit` → `/next-pool` |
+| Pool A | `/domain-test pool-a` → `/state-transition pool-a` → `/security-check pool-a` | `/audit pool-a` → `/extend pool-a` → `/build-postman pool-a` → `/bug-report pool-a` → `/review-pool-audit pool-a` → `confirm pool audit` → `/next-pool` → `confirm next pool` |
+| Pool B | `/domain-test pool-b` → `/decision-table pool-b` → `/security-check pool-b` | `/audit pool-b` → `/extend pool-b` → `/build-postman pool-b` → `/bug-report pool-b` → `/review-pool-audit pool-b` → `confirm pool audit` → `/next-pool` → `confirm next pool` |
 | Pool C | `/domain-test pool-c` → `/security-check pool-c` | `/audit pool-c` → `/extend pool-c` → `/build-postman pool-c` → `/bug-report pool-c` → `/review-pool-audit pool-c` → `confirm pool audit`; no successor pool |
 
 The Stage 1 command order is recommended for clarity. A pool's applicable Stage 1 techniques may be run in another order, but all must be confirmed before Stage 2.
@@ -195,7 +197,7 @@ The proposed report template must describe two sample runs: one in which all cas
 
 #### Post-pipeline critique and finalization
 
-- `/critique` requires all Pool outputs, human corrections, extension explanations, execution evidence, and all three confirmed Pool-local AI audits. It reconciles them into root `ai_audit_report.md`, together with real cross-pipeline rows. The 200–300 word critique must cite real failures/omissions and remain a proposal until `confirm critique`.
+- `/critique` requires all Pool outputs, human corrections, extension explanations, execution evidence, and all three confirmed Pool-local AI audits. It reconciles them into root `ai_audit_report.md`, together with real cross-pipeline rows, and presents every pending `POST-AI-*` row for human review. The 200–300 word critique must cite real failures/omissions and remain a proposal until `confirm critique`; that exact confirmation marks all presented pending cross-pipeline rows as `CONFIRMED` unless the user supplied a row-level `REVISED` or `REJECTED` decision.
 - `/finalize` requires the confirmed critique, CI/CD evidence, at least 35 final cases per API, Excel-compatible test cases, Postman/Newman artifacts, the Postman feature list, bug evidence, Git history, and the student-owned generator diagram. Missing evidence must remain visibly incomplete until `confirm finalization`.
 
 ## 7. State Files and Initial Progress Template

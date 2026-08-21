@@ -9,4 +9,4 @@ Obey every rule in `AGENTS.md` section 3. Use only real artifacts and reconciled
 
 Compile the proposed README, main report, summary tables, and submission checklist in the skill's format. Stop and wait for the exact input `confirm finalization`. After confirmation, mark only the evidence-backed Finalization checkboxes, set this invocation's `POST-AI-*` Human Review to `CONFIRMED`, and set Finalization to DONE only when all four are complete. Do not zip, commit, push, post issues, or submit automatically.
 
-Append exactly one redacted `POST-AI-*` row under `Cross-pipeline AI interactions` in the root `ai_audit_report.md`, with `Human Review = PENDING`.
+Before presenting the proposed final package and stopping, append exactly one redacted `POST-AI-*` row under `Cross-pipeline AI interactions` in the root `ai_audit_report.md`, with `Human Review = PENDING`.

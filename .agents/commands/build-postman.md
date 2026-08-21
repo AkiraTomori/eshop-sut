@@ -11,4 +11,4 @@ Build the `.postman_collection.json`, `.postman_environment.json`, and JSON/CSV 
 
 This is Stage 4 (Execute). Present artifacts and any real local result, then stop and wait for the exact input `confirm stage 4`. Only after confirmation, mark Stage 4 DONE in `.agents/skills/api-skill/state/progress.md`. Do not start Stage 5 automatically.
 
-Append exactly one redacted row to the active Pool's `ai_audit_report.md` using `ai-audit-logger` routing, with `Human Review = PENDING`.
+Before presenting the artifacts/results and stopping, append exactly one redacted row to the active Pool's `ai_audit_report.md` using `ai-audit-logger` routing, with `Human Review = PENDING`.

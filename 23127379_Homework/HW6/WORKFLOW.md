@@ -35,7 +35,7 @@ No GET endpoint may be designed or executed as an HW06 test.
 7. `/build-postman pool-a` → review artifacts/real local evidence → `confirm stage 4`.
 8. `/bug-report pool-a` → triage real failures → `confirm stage 5`.
 9. `/review-pool-audit pool-a` → review every local interaction → `confirm pool audit`.
-10. `/next-pool` after Pool A is DONE.
+10. `/next-pool` after Pool A is DONE → `confirm next pool`.
 
 ### Pool B
 
@@ -43,7 +43,7 @@ Use the same five stages with this Stage 1 order:
 
 `/domain-test pool-b` → `/decision-table pool-b` → `/security-check pool-b`
 
-Then continue with `/audit pool-b`, `/extend pool-b`, `/build-postman pool-b`, `/bug-report pool-b`, `/review-pool-audit pool-b`, `confirm pool audit`, and `/next-pool`.
+Then continue with `/audit pool-b`, `/extend pool-b`, `/build-postman pool-b`, `/bug-report pool-b`, `/review-pool-audit pool-b`, `confirm pool audit`, `/next-pool`, and `confirm next pool`.
 
 ### Pool C
 

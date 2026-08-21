@@ -26,6 +26,7 @@ CI/CD, critique, and finalization do not belong to one Pool. Append them here us
 | Audit ID | Tool/Model | Timestamp | Task | Prompt | Output | Human Review |
 |---|---|---|---|---|---|---|
 | POST-AI-001 | skill-creator / unknown | 2026-08-21T11:04:56+07:00 | HW06 audit-orchestration update | Add an authoritative AI audit per Pool with local Human Review, and make the root HW6 AI Audit Report consolidate the three Pool reports | Added Pool-local audit routing, review gate and command, root aggregation rules, templates, and progress checks; migrated the existing Domain Testing record to `PA-AI-001`; no API calls | PENDING |
+| POST-AI-002 | skill-creator / unknown | 2026-08-21T11:20:36+07:00 | HW06 slash-command consistency review | Review every slash command against the revised `AGENTS.md` and correct any audit-routing or confirmation-gate mismatch | Reviewed all 15 command files; added exact `confirm next pool`, made `confirm critique` review all presented pending cross-pipeline rows, and required audit writes before output-producing commands stop; validation passed; no API calls | PENDING |
 
 ## Cross-pipeline Human Review Notes
 

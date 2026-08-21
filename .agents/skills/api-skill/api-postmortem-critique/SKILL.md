@@ -24,11 +24,11 @@ If the evidence cannot support at least one concrete AI error or omission, stop 
 ## 2. Step-by-step process
 
 1. Verify that all pools are DONE and read the HW06 assignment sections on AI Audit, AI Critique, anti-cheat evidence, and submission contents.
-2. Reconcile each Pool report independently against that Pool's completed skill outputs. List missing, duplicate, unverifiable, unreviewed, or overly summarized interactions as gaps; never reconstruct them from memory.
+2. Reconcile each Pool report independently against that Pool's completed skill outputs. Then reconcile all existing `POST-AI-*` records and their Human Review Notes. List missing, duplicate, unverifiable, unreviewed, or overly summarized interactions as gaps; never reconstruct them from memory.
 3. Build an evidence matrix containing specific AI mistakes/omissions, the original output, the relevant specification or execution evidence, the human correction, and a defensible cause such as prompt scope, model limitation, or API complexity.
 4. Select the strongest two or more evidence-backed examples. Include at least one missed security/state/domain issue when the records support it, plus one useful AI contribution.
 5. Draft a 200–300 word critique that answers: what AI got wrong, biased, or incomplete; why it failed; what the human corrected; and what collaboration principle was learned. Count the critique body words and revise until it is within range.
-6. Aggregate the three confirmed Pool reports into the root AI Audit appendix, preserving every local audit ID, human decision, and source path exactly once. Preserve existing cross-pipeline rows, mark unresolved gaps, present both outputs as proposals, and stop for `confirm critique`. Do not invoke the final-report compiler automatically.
+6. Aggregate the three confirmed Pool reports into the root AI Audit appendix, preserving every local audit ID, human decision, and source path exactly once. Preserve existing cross-pipeline rows and append this invocation's `POST-AI-*` row before presenting the proposal. Present every pending cross-pipeline row for human review, mark unresolved gaps, and stop for `confirm critique`. That exact confirmation accepts all presented pending `POST-AI-*` rows as `CONFIRMED` unless the user supplied a row-level `REVISED` or `REJECTED` decision with notes. Do not invoke the final-report compiler automatically.
 
 Record this invocation as one `POST-AI-*` row under the root report's `Cross-pipeline AI interactions`; do not log the logger's own write as another interaction or copy this row into a Pool report.
 

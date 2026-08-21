@@ -9,4 +9,4 @@ Obey every rule in `AGENTS.md` section 3: generate no GET test; treat the output
 
 Output the FSM diagram, the complete state table containing every state × event combination including invalid transitions, and the test cases in the skill's required format. This is Stage 1 (Generate). Stop and wait for the exact input `confirm stage 1`. On confirmation, mark State Transition Testing confirmed for Pool A in `.agents/skills/api-skill/state/progress.md`; mark Stage 1 DONE only if every Pool A technique is already confirmed. Do not start another command.
 
-Append exactly one redacted row to Pool A's `ai_audit_report.md` using `ai-audit-logger` routing, with `Human Review = PENDING`.
+Before presenting the proposal and stopping, append exactly one redacted row to Pool A's `ai_audit_report.md` using `ai-audit-logger` routing, with `Human Review = PENDING`.
