@@ -1,49 +1,58 @@
 ---
 name: ai-audit-logger
-description: "Record one AI Audit Report row whenever another HW06 skill invokes AI, preserving the tool/model, timestamp, prompt summary, and output summary throughout the pipeline."
+description: "Route each HW06 AI interaction to the applicable Pool audit or the root cross-pipeline section, preserving traceability and a local human-review gate."
 ---
 
 # AI Audit Logger
 
-Run throughout the HW06 pipeline: after each invocation in which another skill calls AI and receives either a result or an error, record exactly one entry. Do not log the logger's own operation, which would cause recursion. Each log entry is a **proposed audit record pending user review**; it does not make the audit final or trigger another pipeline stage.
+Record exactly one proposed audit row after each invocation in which another HW06 skill calls AI and receives a result or error. Do not audit the logger itself. Pool-scoped work is reviewed in that Pool's own report; the root HW6 report later consolidates all three Pool reports.
 
-## 1. Expected input
+## 1. Audit routing
 
-- Name of the skill that invoked AI.
-- The tool and model names actually observed; use `unknown` when unavailable and never infer them.
-- Completion timestamp in ISO 8601 with a timezone, preferably `Asia/Ho_Chi_Minh`.
-- A prompt summary that excludes secrets, tokens, real OTPs, and sensitive data.
-- An output summary containing artifact or case counts, status, and any error.
-- Default log path: `.agents/skills/api-skill/state/ai-audit-log.md`, unless `AGENTS.md` specifies another file.
+| Scope | Append target | Audit-ID prefix |
+|---|---|---|
+| Pool A stages 1–5 | `23127379_Homework/HW6/Pool-A_FR03_Password_Reset/ai_audit_report.md` | `PA-AI-` |
+| Pool B stages 1–5 | `23127379_Homework/HW6/Pool-B_FR08_Checkout/ai_audit_report.md` | `PB-AI-` |
+| Pool C stages 1–5 | `23127379_Homework/HW6/Pool-C_FR15_Update_Product/ai_audit_report.md` | `PC-AI-` |
+| Cross-pool work (`cicd-pipeline-generator`, `api-postmortem-critique`, `api-final-report-compiler`) | `23127379_Homework/HW6/ai_audit_report.md`, section `Cross-pipeline AI interactions` | `POST-AI-` |
 
-## 2. Step-by-step process
+Never write a Pool interaction only to the legacy `.agents/skills/api-skill/state/ai-audit-log.md`. That file is retained solely as a migration pointer. Never duplicate one invocation across multiple Pool reports.
 
-1. Receive the event after the source skill finishes; do not block or modify the source skill's output.
-2. Verify that the record includes the tool/model, timestamp, prompt summary, and output summary. Never invent the model, timestamp, case count, or result.
-3. Redact credentials, JWTs, OTPs, passwords, and unnecessary PII while retaining enough detail to trace the purpose and artifact.
-4. Prevent duplicates using `skill + timestamp + prompt summary` as the key. Append exactly one row for every AI invocation, including failed invocations.
-5. Preserve chronological order and do not modify earlier records. If a correction is necessary, append a correction record that references the earlier row.
+## 2. Required input
 
-## 3. Output format
+- The invoking skill/task and its Pool or cross-pipeline scope.
+- The actual tool/model when observable; otherwise `unknown`.
+- An ISO 8601 completion timestamp with timezone, preferably `Asia/Ho_Chi_Minh`.
+- A redacted prompt summary.
+- A redacted output summary with artifact/case counts, proposal status, and errors when applicable.
 
-The log file must use this exact AI Audit Report table:
+Never infer a model, timestamp, count, or outcome. Remove credentials, JWTs, OTPs, passwords, sensitive data, and unnecessary PII.
+
+## 3. Append and review rules
+
+1. Resolve the target from the table above and verify that the Pool matches the active workflow state.
+2. Assign the next zero-padded ID in that target without renumbering existing records.
+3. Prevent duplicates using `scope + invoking skill + timestamp + prompt summary`.
+4. Append one row in chronological order with `Human Review` set to `PENDING`.
+5. Do not change prompt/output history. Only an explicit human decision may change `Human Review` to `CONFIRMED`, `REVISED`, or `REJECTED`; append corrections in the same file's Human Review Notes table.
+6. A Pool cannot become `DONE` or advance until every local row has a non-pending human decision and the user enters `confirm pool audit`.
+7. The root report is compiled from the three confirmed Pool reports. Preserve any real `POST-AI-*` rows already present when recompiling it.
+
+## 4. Pool audit format
 
 ```markdown
-# AI Audit Log — HW06
+# Pool <A|B|C> — AI Audit Report
 
-| Tool | Timestamp | Prompt | Output |
-|---|---|---|---|
-| domain-testing / gpt-x | 2026-08-21T10:30:00+07:00 | Deeply analyze all FR-15 parameters with EC/BVA | Proposed API-wide domain tables; not executed; pending review |
+> **Human review status:** PENDING
+
+| Audit ID | Tool/Model | Timestamp | Pool/Stage | Prompt | Output | Human Review |
+|---|---|---|---|---|---|---|
+| PA-AI-001 | domain-testing / unknown | 2026-08-21T10:30:00+07:00 | Pool A / Stage 1 | Propose FR-03 EC/BVA cases | 36 proposed cases; not executed | PENDING |
+
+## Human Review Notes
+
+| Audit ID | Decision | Correction/notes | Reviewed at | User confirmation |
+|---|---|---|---|---|
 ```
 
-In the `Tool` cell, use `<skill or tool> / <model>` when the model is known. The `Prompt` and `Output` cells must contain neutral summaries and must not claim an output is final before the user approves it.
-
-## 4. Short input → output example
-
-**Input:** Skill `security-schema-checklist`; model not observable; timestamp `2026-08-21T14:05:00+07:00`; prompt requests FR-15 role-check cases; output contains 8 proposed cases.
-
-**Output:**
-
-| Tool | Timestamp | Prompt | Output |
-|---|---|---|---|
-| security-schema-checklist / unknown | 2026-08-21T14:05:00+07:00 | Propose security/schema cases for the FR-15 role check | 8 proposed cases; no API calls; pending user review |
+The exact tool, timestamp, prompt summary, output summary, and decision must come from real records. A Pool report remains proposed until the human reviews every row.

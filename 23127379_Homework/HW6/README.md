@@ -74,9 +74,11 @@ See `bug_report.md`. GitHub Issue links and screenshots must be real and added m
 
 ## AI evidence
 
-- AI Audit Report: `ai_audit_report.md`
+- Pool A AI Audit: `Pool-A_FR03_Password_Reset/ai_audit_report.md` (authoritative Pool A source; human-reviewed before Pool completion)
+- Pool B AI Audit: `Pool-B_FR08_Checkout/ai_audit_report.md` (authoritative Pool B source; human-reviewed before Pool completion)
+- Pool C AI Audit: `Pool-C_FR15_Update_Product/ai_audit_report.md` (authoritative Pool C source; human-reviewed before Pool completion)
+- Consolidated AI Audit Report: `ai_audit_report.md` (aggregates the three reviewed Pool reports and cross-pipeline interactions)
 - AI Critique: `ai_critique.md` (mandatory 200–300 words)
-- Working audit source: `.agents/skills/api-skill/state/ai-audit-log.md`
 
 ## Self-assessment
 

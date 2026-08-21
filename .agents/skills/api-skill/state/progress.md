@@ -12,6 +12,7 @@ Current Pool: Pool A
 - [ ] Stage 3 — Extend
 - [ ] Stage 4 — Execute
 - [ ] Stage 5 — Report Bug
+- [ ] Pool AI Audit — human reviewed
 
 ## Pool B — NOT_STARTED
 
@@ -23,6 +24,7 @@ Current Pool: Pool A
 - [ ] Stage 3 — Extend
 - [ ] Stage 4 — Execute
 - [ ] Stage 5 — Report Bug
+- [ ] Pool AI Audit — human reviewed
 
 ## Pool C — NOT_STARTED
 
@@ -33,6 +35,7 @@ Current Pool: Pool A
 - [ ] Stage 3 — Extend
 - [ ] Stage 4 — Execute
 - [ ] Stage 5 — Report Bug
+- [ ] Pool AI Audit — human reviewed
 
 ## Finalization — NOT_STARTED
 

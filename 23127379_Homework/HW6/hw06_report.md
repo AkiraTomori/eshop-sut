@@ -35,6 +35,7 @@ List every AI tool/model and API-testing tool actually used. Do not list planned
 ### 3.6 Stage 3 — At least five human-added cases and why AI missed them
 ### 3.7 Stage 4 — Postman/Newman execution and evidence
 ### 3.8 Stage 5 — Failure triage and genuine bugs
+### 3.9 Pool A AI audit and human-review decisions
 
 | Metric | Value | Evidence source |
 |---|---:|---|
@@ -46,11 +47,11 @@ List every AI tool/model and API-testing tool actually used. Do not list planned
 
 ## 4. Pool B — FR-08 Checkout
 
-Use the same structure as Pool A, replacing state-transition analysis with the complete and reduced checkout Decision Table.
+Use the same structure as Pool A, replacing state-transition analysis with the complete and reduced checkout Decision Table. Link `Pool-B_FR08_Checkout/ai_audit_report.md` and summarize its human-review decisions.
 
 ## 5. Pool C — FR-15 Update Product
 
-Use the same structure as Pool A, covering API-wide Domain Testing plus applicable security/schema cases. Explain how tests verify that only the targeted product changes.
+Use the same structure as Pool A, covering API-wide Domain Testing plus applicable security/schema cases. Explain how tests verify that only the targeted product changes. Link `Pool-C_FR15_Update_Product/ai_audit_report.md` and summarize its human-review decisions.
 
 ## 6. Cross-pool test summary
 
@@ -94,7 +95,7 @@ State coverage achieved, important defects, limitations, and lessons without cla
 
 ## Appendix A — AI Audit Report
 
-See `ai_audit_report.md`.
+See consolidated `ai_audit_report.md`; its Pool rows must trace back to the three Pool-local `ai_audit_report.md` files without duplication.
 
 ## Appendix B — AI Critique
 

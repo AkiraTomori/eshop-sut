@@ -11,4 +11,4 @@ Obey every rule in `AGENTS.md` section 3: generate no GET test; treat every new 
 
 This is Stage 3 (Extend). Stop and wait for the exact input `confirm stage 3`. Only after confirmation, mark Stage 3 DONE in `.agents/skills/api-skill/state/progress.md`. Do not start Stage 4 automatically.
 
-Append one redacted AI Audit Report row per invoked skill to `.agents/skills/api-skill/state/ai-audit-log.md`.
+Append one redacted row per invoked skill to the active Pool's `ai_audit_report.md` using `ai-audit-logger` routing, with `Human Review = PENDING` on each row.

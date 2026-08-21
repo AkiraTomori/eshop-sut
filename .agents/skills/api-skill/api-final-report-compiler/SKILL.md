@@ -15,7 +15,7 @@ Compile only an **evidence-backed proposed submission package**. Run last, after
 - Postman collection, environment, runner data, Newman HTML reports, and the actual Postman-feature list.
 - Confirmed bugs/false-positive triage and GitHub Issue links when posted.
 - GitHub Actions workflow plus two real run links/screenshots: all passing and exactly one failure.
-- Confirmed `ai_audit_report.md` and 200–300 word `ai_critique.md`.
+- Confirmed root `ai_audit_report.md`, its three human-reviewed Pool source reports, and the 200–300 word `ai_critique.md`.
 - AI test-generator pseudocode and a placeholder/path for the student's self-drawn diagram.
 - Git commit history, repository link, optional demo link, and any PDFs/screenshots actually produced.
 
@@ -30,7 +30,7 @@ Missing human-only evidence is a gap, not permission to generate it.
 5. Produce a pre-submission checklist and proposed ZIP name. Leave self-assessment values, missing URLs, screenshots, PDF exports, and diagram evidence as explicit user placeholders.
 6. Present changed files, unresolved blockers, and the final verification table. Stop for `confirm finalization`; never zip, commit, push, post issues, or submit automatically.
 
-Record this invocation through `ai-audit-logger` when that logger is operating.
+Record this invocation as one `POST-AI-*` row under the root report's `Cross-pipeline AI interactions` when the logger is operating; do not copy it into a Pool report.
 
 ## 3. Output format
 

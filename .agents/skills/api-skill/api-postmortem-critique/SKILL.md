@@ -11,7 +11,9 @@ Create only **proposed final appendices** for user review. Run after Pools A, B,
 
 - `23127379_Homework/HW6/2026.HW06.API Testing_En.md`.
 - `.agents/skills/api-skill/state/progress.md` showing all three pools DONE.
-- `.agents/skills/api-skill/state/ai-audit-log.md` containing the actual interaction records.
+- The three authoritative Pool reports: `Pool-A_FR03_Password_Reset/ai_audit_report.md`, `Pool-B_FR08_Checkout/ai_audit_report.md`, and `Pool-C_FR15_Update_Product/ai_audit_report.md` under `23127379_Homework/HW6/`.
+- Each Pool report showing `Human review status: CONFIRMED`, no `PENDING` row, and attributable Human Review Notes for every revised or rejected interaction.
+- Existing real `POST-AI-*` rows in root `23127379_Homework/HW6/ai_audit_report.md`; these are cross-pipeline history and must survive recompilation.
 - Confirmed Stage 2 audit tables, including human label corrections and reasons.
 - Confirmed Stage 3 additions and every `Why AI missed it: ...` explanation.
 - Real Stage 4 Newman/Postman evidence and Stage 5 failure triage or bug reports.
@@ -22,13 +24,13 @@ If the evidence cannot support at least one concrete AI error or omission, stop 
 ## 2. Step-by-step process
 
 1. Verify that all pools are DONE and read the HW06 assignment sections on AI Audit, AI Critique, anti-cheat evidence, and submission contents.
-2. Reconcile the audit log against completed skill outputs. List missing, duplicate, unverifiable, or overly summarized interactions as gaps; never reconstruct them from memory.
+2. Reconcile each Pool report independently against that Pool's completed skill outputs. List missing, duplicate, unverifiable, unreviewed, or overly summarized interactions as gaps; never reconstruct them from memory.
 3. Build an evidence matrix containing specific AI mistakes/omissions, the original output, the relevant specification or execution evidence, the human correction, and a defensible cause such as prompt scope, model limitation, or API complexity.
 4. Select the strongest two or more evidence-backed examples. Include at least one missed security/state/domain issue when the records support it, plus one useful AI contribution.
 5. Draft a 200–300 word critique that answers: what AI got wrong, biased, or incomplete; why it failed; what the human corrected; and what collaboration principle was learned. Count the critique body words and revise until it is within range.
-6. Compile the AI Audit appendix from real records, mark unresolved gaps, present both outputs as proposals, and stop for `confirm critique`. Do not invoke the final-report compiler automatically.
+6. Aggregate the three confirmed Pool reports into the root AI Audit appendix, preserving every local audit ID, human decision, and source path exactly once. Preserve existing cross-pipeline rows, mark unresolved gaps, present both outputs as proposals, and stop for `confirm critique`. Do not invoke the final-report compiler automatically.
 
-Record this invocation through `ai-audit-logger`; do not log the logger's own write as another interaction.
+Record this invocation as one `POST-AI-*` row under the root report's `Cross-pipeline AI interactions`; do not log the logger's own write as another interaction or copy this row into a Pool report.
 
 ## 3. Output format
 
@@ -44,8 +46,8 @@ Record this invocation through `ai-audit-logger`; do not log the logger's own wr
 
 > I use AI tools for the following tasks:
 
-| # | Tool/Model | Date and time | Skill/Task | Prompt | Output | Human review status |
-|---|---|---|---|---|---|---|
+| Audit ID | Pool | Tool/Model | Date and time | Skill/Task | Prompt | Output | Human review decision | Source |
+|---|---|---|---|---|---|---|---|---|
 ```
 
 ### `23127379_Homework/HW6/ai_critique.md`
@@ -71,4 +73,3 @@ End with: `Status: PROPOSED CRITIQUE — evidence and wording require user confi
 | CRIT-001 | Pool A / Stages 2–3 | OTP reuse case omitted | SEC-07 requires one-time use | Added invalid transition from OTPUsed | Prompt emphasized field partitions over lifecycle state | `<confirmed Pool A artifacts>` |
 
 The critique may use this row only after the user confirms that the cited artifacts and correction are real.
-

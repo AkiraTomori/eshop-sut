@@ -78,7 +78,12 @@
 - User-posted GitHub Issue links: `<real links or none>`
 - User confirmation: `<timestamp/reference>`
 
-## AI audit references
+## Pool-local AI audit and human review
 
-List the corresponding rows from `.agents/skills/api-skill/state/ai-audit-log.md`.
+- Authoritative audit: `ai_audit_report.md` in this Pool directory.
+- Every Pool-scoped skill invocation has exactly one local audit row: `[ ]`
+- Every row has a Human Review decision (`CONFIRMED`, `REVISED`, or `REJECTED`): `[ ]`
+- Corrections/rejections have notes and timestamps: `[ ]`
+- Pool audit confirmation: `<timestamp/reference for confirm pool audit>`
 
+The root `../ai_audit_report.md` is only a consolidated view of the three reviewed Pool reports plus cross-pipeline interactions. Do not treat it as the source for this Pool's operational audit rows.

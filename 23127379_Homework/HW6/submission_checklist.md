@@ -34,7 +34,11 @@
 - [ ] Test-generator pseudocode is complete.
 - [ ] Generator diagram is self-drawn by the student and linked.
 - [ ] Optional skill demonstration video link is filled if submitted.
-- [ ] AI Audit Report reconciles all logged interactions.
+- [ ] Pool A AI Audit has no pending row and its human review is confirmed.
+- [ ] Pool B AI Audit has no pending row and its human review is confirmed.
+- [ ] Pool C AI Audit has no pending row and its human review is confirmed.
+- [ ] Root AI Audit Report reconciles the three Pool reports without missing or duplicate IDs.
+- [ ] Root AI Audit Report also reconciles all cross-pipeline interactions.
 - [ ] AI Critique contains 200–300 verified words and real evidence.
 
 ## Reports and submission

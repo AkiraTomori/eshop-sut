@@ -9,4 +9,4 @@ Obey every rule in `AGENTS.md` section 3: generate no GET test; treat the output
 
 Output the full `2^n` table, reduced table, and derived test cases in the skill's required order and format. This is Stage 1 (Generate). Stop and wait for the exact input `confirm stage 1`. On confirmation, mark Decision Table Testing confirmed for Pool B in `.agents/skills/api-skill/state/progress.md`; mark Stage 1 DONE only if every Pool B technique is already confirmed. Do not start another command.
 
-Append exactly one redacted row for this AI invocation to `.agents/skills/api-skill/state/ai-audit-log.md` using the AI Audit Report format.
+Append exactly one redacted row to Pool B's `ai_audit_report.md` using `ai-audit-logger` routing, with `Human Review = PENDING`.

@@ -20,5 +20,6 @@ Use `../templates/api-pipeline-template.md` as the detailed working format.
 - Pool C Newman HTML report
 - Pool C execution screenshot(s)
 - Pool C bug report/issue links, or explicit no-defect result
+- Pool-local AI audit: `ai_audit_report.md`, with every row human-reviewed before Pool completion
 
 Do not create or claim these artifacts before their confirmed stage.

@@ -9,6 +9,8 @@ This guide instantiates the tool-neutral workflow defined in the repository-root
 3. Repository-root `README.md` — SRS/business rules.
 4. Repository-root `api_specification.md` — endpoint contracts.
 5. `.agents/skills/api-skill/state/progress.md` — current workflow state.
+6. Each Pool's `ai_audit_report.md` — authoritative Pool-scoped AI interactions and human decisions.
+7. Root `ai_audit_report.md` — consolidated view of the three reviewed Pool reports plus cross-pipeline interactions.
 
 ## Selected APIs
 
@@ -32,7 +34,8 @@ No GET endpoint may be designed or executed as an HW06 test.
 6. `/extend pool-a` → review at least five new cases → `confirm stage 3`.
 7. `/build-postman pool-a` → review artifacts/real local evidence → `confirm stage 4`.
 8. `/bug-report pool-a` → triage real failures → `confirm stage 5`.
-9. `/next-pool` after Pool A is DONE.
+9. `/review-pool-audit pool-a` → review every local interaction → `confirm pool audit`.
+10. `/next-pool` after Pool A is DONE.
 
 ### Pool B
 
@@ -40,7 +43,7 @@ Use the same five stages with this Stage 1 order:
 
 `/domain-test pool-b` → `/decision-table pool-b` → `/security-check pool-b`
 
-Then continue with `/audit pool-b`, `/extend pool-b`, `/build-postman pool-b`, `/bug-report pool-b`, and `/next-pool`.
+Then continue with `/audit pool-b`, `/extend pool-b`, `/build-postman pool-b`, `/bug-report pool-b`, `/review-pool-audit pool-b`, `confirm pool audit`, and `/next-pool`.
 
 ### Pool C
 
@@ -48,13 +51,13 @@ Use this Stage 1 order:
 
 `/domain-test pool-c` → `/security-check pool-c`
 
-Then continue with `/audit pool-c`, `/extend pool-c`, `/build-postman pool-c`, and `/bug-report pool-c`. Pool C has no successor.
+Then continue with `/audit pool-c`, `/extend pool-c`, `/build-postman pool-c`, `/bug-report pool-c`, `/review-pool-audit pool-c`, and `confirm pool audit`. Pool C has no successor.
 
 ### Finalization
 
 1. `/cicd-setup` — propose the workflow; the user supplies two real runs and enters `confirm ci/cd`.
 2. Complete the self-drawn test-generator diagram and retain authorship evidence.
-3. `/critique` — compile real audit evidence and the 200–300 word critique → `confirm critique`.
+3. `/critique` — reconcile the three human-reviewed Pool audits into the root AI Audit Report and draft the 200–300 word critique → `confirm critique`.
 4. `/finalize` — reconcile every artifact and compile the final package → `confirm finalization`.
 
 ## Evidence boundaries
@@ -68,5 +71,4 @@ Then continue with `/audit pool-c`, `/extend pool-c`, `/build-postman pool-c`, a
 
 ## Per-pool handoff
 
-Each pool's `pipeline.md` is the working index. Store or link the confirmed Stage 1 tables, Stage 2 audit, Stage 3 additions, final Excel/CSV cases, Postman artifacts, Newman report, screenshots, and bug evidence there. A later stage may use only confirmed prior-stage artifacts.
-
+Each Pool's `pipeline.md` is the working index, and its `ai_audit_report.md` is the authoritative local AI record. Store or link the confirmed Stage 1 tables, Stage 2 test-case audit, Stage 3 additions, final Excel/CSV cases, Postman artifacts, Newman report, screenshots, bug evidence, and Pool audit confirmation there. A later stage may use only confirmed prior-stage artifacts.
