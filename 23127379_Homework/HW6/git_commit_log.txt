@@ -1,0 +1,7 @@
+[USER ACTION REQUIRED]
+Replace this placeholder with real HW06 Git history before submission.
+
+Suggested read-only generation command from the repository root:
+git log --oneline --all -- 23127379_Homework/HW6/ .agents/skills/api-skill/ .agents/commands/ > 23127379_Homework/HW6/git_commit_log.txt
+
+Do not claim this placeholder is commit evidence.

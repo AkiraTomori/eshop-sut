@@ -14,7 +14,7 @@ Run throughout the HW06 pipeline: after each invocation in which another skill c
 - Completion timestamp in ISO 8601 with a timezone, preferably `Asia/Ho_Chi_Minh`.
 - A prompt summary that excludes secrets, tokens, real OTPs, and sensitive data.
 - An output summary containing artifact or case counts, status, and any error.
-- Default log path: `.agents/skills/api-skill/HW06_AI_Audit_Report.md`, unless the user specifies another file.
+- Default log path: `.agents/skills/api-skill/state/ai-audit-log.md`, unless `AGENTS.md` specifies another file.
 
 ## 2. Step-by-step process
 
@@ -29,14 +29,14 @@ Run throughout the HW06 pipeline: after each invocation in which another skill c
 The log file must use this exact AI Audit Report table:
 
 ```markdown
-# HW06 AI Audit Report
+# AI Audit Log — HW06
 
-| Tool/Model | Date and time | Prompt | Output |
+| Tool | Timestamp | Prompt | Output |
 |---|---|---|---|
-| domain-testing / gpt-x | 2026-08-21T10:30:00+07:00 | Analyze EC/BVA for the FR-15 name field | Proposed 9 cases; not executed; pending review |
+| domain-testing / gpt-x | 2026-08-21T10:30:00+07:00 | Deeply analyze all FR-15 parameters with EC/BVA | Proposed API-wide domain tables; not executed; pending review |
 ```
 
-In the `Tool/Model` cell, use `<skill or tool> / <model>`. The `Prompt` and `Output` cells must contain neutral summaries and must not claim an output is final before the user approves it.
+In the `Tool` cell, use `<skill or tool> / <model>` when the model is known. The `Prompt` and `Output` cells must contain neutral summaries and must not claim an output is final before the user approves it.
 
 ## 4. Short input → output example
 
@@ -44,7 +44,6 @@ In the `Tool/Model` cell, use `<skill or tool> / <model>`. The `Prompt` and `Out
 
 **Output:**
 
-| Tool/Model | Date and time | Prompt | Output |
+| Tool | Timestamp | Prompt | Output |
 |---|---|---|---|
 | security-schema-checklist / unknown | 2026-08-21T14:05:00+07:00 | Propose security/schema cases for the FR-15 role check | 8 proposed cases; no API calls; pending user review |
-

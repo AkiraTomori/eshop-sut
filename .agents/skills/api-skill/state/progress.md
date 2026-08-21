@@ -34,3 +34,9 @@ Current Pool: Pool A
 - [ ] Stage 4 — Execute
 - [ ] Stage 5 — Report Bug
 
+## Finalization — NOT_STARTED
+
+- [ ] CI/CD workflow and two real run records confirmed
+- [ ] AI Audit Report and 200–300 word AI Critique confirmed
+- [ ] Test-generator pseudocode and student-drawn diagram evidence present
+- [ ] Final README, main report, summaries, and checklist confirmed
