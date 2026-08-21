@@ -1,0 +1,22 @@
+{
+  "capturedAt": "2026-08-21T16:26:04+07:00",
+  "container": "eshop-sut-backend-1",
+  "database": "/app/database.sqlite",
+  "rows": [
+    {
+      "fixture": "primary",
+      "passwordStorageType": "text",
+      "passwordLength": 8,
+      "equalsFinalExpectedRuntimePassword": true,
+      "resetTokenCleared": true
+    },
+    {
+      "fixture": "secondary",
+      "passwordStorageType": "text",
+      "passwordLength": 9,
+      "equalsUnchangedFixturePassword": true,
+      "resetTokenCleared": true
+    }
+  ],
+  "note": "Credential and token values are intentionally redacted. This snapshot was captured before deleting the disposable rows."
+}

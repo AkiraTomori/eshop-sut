@@ -1,0 +1,8 @@
+{
+  "capturedAt": "2026-08-21T16:15:28+07:00",
+  "container": "eshop-sut-backend-1",
+  "database": "/app/database.sqlite",
+  "fixtureEmailsChecked": 2,
+  "existingFixtureEmails": [],
+  "note": "Both narrowly scoped disposable fixture rows were absent before insertion. No credential values are recorded in this evidence file."
+}

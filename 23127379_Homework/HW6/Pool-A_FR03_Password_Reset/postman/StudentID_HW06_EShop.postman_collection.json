@@ -1,0 +1,259 @@
+{
+  "info": {
+    "_postman_id": "4f973ca6-a1f8-4df2-9a6f-0a34f37d0303",
+    "name": "StudentID HW06 EShop API Testing",
+    "description": "PROPOSED Pool A collection generated from the user-confirmed Stage 2 dispositions and approved Stage 3 extensions. Contains POST requests only. Runtime data selects the FR-03 endpoint and oracle. No real student ID, OTP, or mutable account password is stored in this artifact.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const studentId = pm.environment.get('StudentID');",
+          "if (!studentId || !String(studentId).trim()) {",
+          "  console.warn('StudentID is empty; refusing to send the HW06 request.');",
+          "  throw new Error('StudentID environment variable is required');",
+          "}",
+          "pm.request.headers.upsert({",
+          "  key: 'X-Student-Id',",
+          "  value: pm.environment.get('StudentID')",
+          "});",
+          "console.log('X-Student-Id injected:', studentId, 'for', (pm.iterationData.get('testCaseId') || pm.info.requestName));"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Pool A - FR-03 Password Reset",
+      "description": "One API unit implemented by POST /api/forgot-password and POST /api/reset-password. Run with StudentID_FR03_data.json. The three items cooperate per iteration: optional OTP setup, target case, and optional lifecycle follow-up.",
+      "item": [
+        {
+          "name": "Setup - POST /api/forgot-password when required",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const enabled = pm.iterationData.get('enabled') === true;",
+                  "  if (!enabled || pm.iterationData.get('setupMode') !== 'issueOtp') {",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const emailKey = pm.iterationData.get('setupEmailVariable') || 'registeredEmail';",
+                  "  const email = pm.environment.get(emailKey);",
+                  "  if (!email || !String(email).trim()) throw new Error(emailKey + ' environment variable is required');",
+                  "  pm.environment.unset('runtimeOtp');",
+                  "  pm.variables.set('runtimeSetupEmail', email);",
+                  "})();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "pm.test(id + ' setup - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "pm.test(id + ' setup - forgot-password status 200', function () { pm.response.to.have.status(200); });",
+                  "let body = {};",
+                  "pm.test(id + ' setup - JSON response', function () { body = pm.response.json(); pm.expect(body).to.be.an('object'); });",
+                  "pm.test(id + ' setup - exact documented fields', function () {",
+                  "  pm.expect(Object.keys(body).sort()).to.eql(['message', 'resetToken']);",
+                  "  pm.expect(body.message).to.eql('Mã đặt lại mật khẩu đã được tạo');",
+                  "  pm.expect(body.resetToken).to.be.a('string').and.match(/^[0-9]{6}$/);",
+                  "});",
+                  "if (body && typeof body.resetToken === 'string') pm.environment.set('runtimeOtp', body.resetToken);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{runtimeSetupEmail}}\"}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/forgot-password",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "forgot-password"]
+            },
+            "description": "Fixture setup only. It is skipped unless setupMode=issueOtp and still receives the collection-level X-Student-Id header. Captures runtimeOtp without logging it."
+          },
+          "response": []
+        },
+        {
+          "name": "Target - data-driven FR-03 case",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const path = pm.iterationData.get('targetPath');",
+                  "  const template = pm.iterationData.get('targetBodyTemplate');",
+                  "  if (!path || typeof template !== 'string') throw new Error('targetPath and targetBodyTemplate are required');",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(function (key) {",
+                  "    const value = pm.variables.get(key);",
+                  "    if (value === undefined || value === null || String(value).length === 0) throw new Error(key + ' local fixture variable is required for ' + pm.iterationData.get('testCaseId'));",
+                  "  });",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local fixture variable in target body for ' + pm.iterationData.get('testCaseId'));",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const schema = pm.iterationData.get('schemaOracle') || 'none';",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'none').split(',');",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'exact200') pm.test(id + ' - status 200', function () { pm.response.to.have.status(200); });",
+                  "else if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected HTTP class', function () { pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (e) { jsonBody = null; }",
+                  "if (schema === 'forgotSuccess') {",
+                  "  pm.test(id + ' - exact forgot-password schema', function () {",
+                  "    pm.expect(jsonBody).to.be.an('object');",
+                  "    pm.expect(Object.keys(jsonBody).sort()).to.eql(['message', 'resetToken']);",
+                  "    pm.expect(jsonBody.message).to.eql('Mã đặt lại mật khẩu đã được tạo');",
+                  "    pm.expect(jsonBody.resetToken).to.be.a('string').and.match(/^[0-9]{6}$/);",
+                  "  });",
+                  "}",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () { pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|UPDATE\\s+users/i); });",
+                  "if (security.includes('noDangerousReflection')) pm.test(id + ' - no dangerous raw script reflection', function () { pm.expect(text.toLowerCase()).not.to.include('<script>'); });",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (k) { return k.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'newpassword', 'password_hash', 'passwordhash'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "console.log(id + ' target actual status=' + pm.response.code + '; expectedSideEffect=' + pm.iterationData.get('expectedSideEffect'));",
+                  "if (!pm.iterationData.get('followupMode')) pm.environment.unset('runtimeOtp');"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}{{runtimeTargetPath}}",
+            "description": "Executes the iteration's POST endpoint. Dynamic test names preserve testCaseId. Assertions are added only for approved exact/high-level oracles; unspecified status/schema values are logged, never invented."
+          },
+          "response": []
+        },
+        {
+          "name": "Follow-up - lifecycle oracle when required",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  if (pm.iterationData.get('enabled') !== true || !pm.iterationData.get('followupMode')) {",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const path = pm.iterationData.get('followupPath');",
+                  "  const template = pm.iterationData.get('followupBodyTemplate');",
+                  "  const required = Array.from((template || '').matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(function (key) {",
+                  "    const value = pm.variables.get(key);",
+                  "    if (value === undefined || value === null || String(value).length === 0) throw new Error(key + ' local fixture variable is required for follow-up ' + pm.iterationData.get('testCaseId'));",
+                  "  });",
+                  "  const expanded = pm.variables.replaceIn(template || '');",
+                  "  if (!path || /\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Invalid follow-up configuration for ' + pm.iterationData.get('testCaseId'));",
+                  "  pm.variables.set('runtimeFollowupPath', path);",
+                  "  pm.variables.set('runtimeFollowupBody', expanded);",
+                  "})();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('followupStatusOracle');",
+                  "pm.test(id + ' follow-up - X-Student-Id injected', function () { pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID')); });",
+                  "if (oracle === 'exact200') pm.test(id + ' follow-up - status 200', function () { pm.response.to.have.status(200); });",
+                  "else if (oracle === 'success') pm.test(id + ' follow-up - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' follow-up - rejected HTTP class', function () { pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "else console.warn(id + ': follow-up status oracle unspecified; actual=' + pm.response.code);",
+                  "if (pm.iterationData.get('followupSchemaOracle') === 'forgotSuccess') pm.test(id + ' follow-up - exact forgot-password schema', function () {",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(Object.keys(body).sort()).to.eql(['message', 'resetToken']);",
+                  "  pm.expect(body.message).to.eql('Mã đặt lại mật khẩu đã được tạo');",
+                  "  pm.expect(body.resetToken).to.be.a('string').and.match(/^[0-9]{6}$/);",
+                  "});",
+                  "pm.environment.unset('runtimeOtp');"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeFollowupBody}}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}{{runtimeFollowupPath}}",
+            "description": "Optional third request for approved sequential lifecycle cases such as token reissue and replay. Concurrent, white-box, multi-account four-step, enumeration, and undefined-rate-limit extensions remain disabled for manual design completion."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "runtimeSetupEmail", "value": "" },
+    { "key": "runtimeTargetPath", "value": "" },
+    { "key": "runtimeTargetBody", "value": "" },
+    { "key": "runtimeFollowupPath", "value": "" },
+    { "key": "runtimeFollowupBody", "value": "" }
+  ]
+}

@@ -1,0 +1,2211 @@
+^D[0mnewman[0m
+
+[0mStudentID HW06 EShop API Testing[0m
+
+[90m[4mIteration 1/62[24m[39m
+
+❏ [0mPool A - FR-03 Password Reset[0m
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 26ms][39m
+[32m  ✓ [39m [90mFR03-ST-002 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-002 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-ST-002 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-ST-002 target actual status=400; expectedSi[39m
+[90m  [90m│[90m deEffect=No password change; remain NoOTP'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 2/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-004'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-004'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 4ms][39m
+[32m  ✓ [39m [90mFR03-ST-004 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-004 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-ST-004 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-ST-004 target actual status=400; expectedSi[39m
+[90m  [90m│[90m deEffect=No password change; remain NoOTP'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-004'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 3/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 14ms][39m
+[32m  ✓ [39m [90mFR03-DOM-001 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-001 - status 200[39m
+[31m[1m  1.[22m[39m [31m[1mFR03-DOM-001 - exact forgot-password schema[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-001 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-001 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=Issue a six-digit OTP bound to registeredEma[39m
+[90m  [90m│[90m il'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 4/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[404 Not Found, 300B, 4ms][39m
+[32m  ✓ [39m [90mFR03-DOM-002 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-002 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-002 - no database/internal disclosure[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-002 target actual status=404; expectedS[39m
+[90m  [90m│[90m ideEffect=No usable OTP is issued'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 5/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[400 Bad Request, 444B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-003 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-003 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-003 - no database/internal disclosure[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-003 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No usable OTP is issued'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 6/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-004'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-004'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[404 Not Found, 300B, 4ms][39m
+[32m  ✓ [39m [90mFR03-DOM-004 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-004 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-004 - no database/internal disclosure[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-004 target actual status=404; expectedS[39m
+[90m  [90m│[90m ideEffect=No usable OTP is issued'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-004'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 7/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-005'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-005'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[404 Not Found, 300B, 4ms][39m
+[32m  ✓ [39m [90mFR03-DOM-005 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-005 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-005 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-005 target actual status=404; expectedS[39m
+[90m  [90m│[90m ideEffect=No usable OTP is issued for unregisteredEmai[39m
+[90m  [90m│[90m l'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-005'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 8/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-006'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-006'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[404 Not Found, 300B, 2ms][39m
+[32m  ✓ [39m [90mFR03-DOM-006 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-006 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-006 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-006 target actual status=404; expectedS[39m
+[90m  [90m│[90m ideEffect=No usable OTP is issued'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-006'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 9/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-007'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-007'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[404 Not Found, 300B, 4ms][39m
+[32m  ✓ [39m [90mFR03-DOM-007 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-007 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-007 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-007 target actual status=404; expectedS[39m
+[90m  [90m│[90m ideEffect=No usable OTP is issued'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-007'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 10/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-008'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-008'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[404 Not Found, 300B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-008 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-008 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-008 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-008 target actual status=404; expectedS[39m
+[90m  [90m│[90m ideEffect=No usable OTP is issued'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-008'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 11/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-009'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-009'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[404 Not Found, 300B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-009 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-009 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-009 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-009 target actual status=404; expectedS[39m
+[90m  [90m│[90m ideEffect=No usable OTP is issued'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-009'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 12/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-010'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 10ms][39m
+[32m  ✓ [39m [90mFR03-DOM-010 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-010 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-010 setup - JSON response[39m
+[31m[1m  2.[22m[39m [31m[1mFR03-DOM-010 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-010'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 10ms][39m
+[32m  ✓ [39m [90mFR03-DOM-010 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-010 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-010 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-010 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=Password updates and runtimeOtp becomes used[39m
+[90m  [90m│[90m '[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-010'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 13/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-011'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 10ms][39m
+[32m  ✓ [39m [90mFR03-DOM-011 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-011 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-011 setup - JSON response[39m
+[31m[1m  3.[22m[39m [31m[1mFR03-DOM-011 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-011'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 7ms][39m
+[32m  ✓ [39m [90mFR03-DOM-011 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-011 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-011 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-011 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=Password updates and runtimeOtp becomes used[39m
+[90m  [90m│[90m '[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-011'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 14/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-012'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-012'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 4ms][39m
+[32m  ✓ [39m [90mFR03-DOM-012 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-012 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-012 - no database/internal disclosure[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-012 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-012'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 15/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-013'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-013'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 444B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-013 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-013 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-013 - no database/internal disclosure[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-013 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-013'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 16/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-014'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-014'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-014 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-014 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-014 - no database/internal disclosure[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-014 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-014'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 17/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-016'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-016'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 4ms][39m
+[32m  ✓ [39m [90mFR03-DOM-016 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-016 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-016 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-016 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-016'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 18/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-017'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-017'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 4ms][39m
+[32m  ✓ [39m [90mFR03-DOM-017 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-017 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-017 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-017 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-017'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 19/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-018'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-018'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-018 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-018 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-018 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-018 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-018'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 20/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-019'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-019'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 2ms][39m
+[32m  ✓ [39m [90mFR03-DOM-019 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-019 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-019 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-019 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-019'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 21/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-020'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-020'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-020 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-020 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-020 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-020 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-020'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 22/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-021'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-021'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-021 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-021 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-021 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-021 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-021'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 23/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-022'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-022'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-022 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-022 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-022 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-022 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-022'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 24/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-023'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-023'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-023 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-023 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-023 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-023 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-023'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 25/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-024'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-024'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 4ms][39m
+[32m  ✓ [39m [90mFR03-DOM-024 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-024 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-024 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-024 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-024'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 26/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-025'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-025'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-DOM-025 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-025 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-025 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-025 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-025'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 27/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-026'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-026'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 4ms][39m
+[32m  ✓ [39m [90mFR03-DOM-026 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-026 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-DOM-026 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-026 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-026'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 28/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-028'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 13ms][39m
+[32m  ✓ [39m [90mFR03-DOM-028 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-028 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-028 setup - JSON response[39m
+[31m[1m  4.[22m[39m [31m[1mFR03-DOM-028 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-028'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 13ms][39m
+[32m  ✓ [39m [90mFR03-DOM-028 - X-Student-Id injected[39m
+[31m[1m  5.[22m[39m [31m[1mFR03-DOM-028 - rejected HTTP class[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-028 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-028 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-028'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 29/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-029'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 13ms][39m
+[32m  ✓ [39m [90mFR03-DOM-029 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-029 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-029 setup - JSON response[39m
+[31m[1m  6.[22m[39m [31m[1mFR03-DOM-029 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-029'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 11ms][39m
+[32m  ✓ [39m [90mFR03-DOM-029 - X-Student-Id injected[39m
+[31m[1m  7.[22m[39m [31m[1mFR03-DOM-029 - rejected HTTP class[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-029 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-029 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-029'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 30/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-030'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 8ms][39m
+[32m  ✓ [39m [90mFR03-DOM-030 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-030 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-030 setup - JSON response[39m
+[31m[1m  8.[22m[39m [31m[1mFR03-DOM-030 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-030'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 16ms][39m
+[32m  ✓ [39m [90mFR03-DOM-030 - X-Student-Id injected[39m
+[31m[1m  9.[22m[39m [31m[1mFR03-DOM-030 - rejected HTTP class[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-030 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-030 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-030'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 31/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-031'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 13ms][39m
+[32m  ✓ [39m [90mFR03-DOM-031 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-031 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-031 setup - JSON response[39m
+[31m[1m 10.[22m[39m [31m[1mFR03-DOM-031 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-031'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 7ms][39m
+[32m  ✓ [39m [90mFR03-DOM-031 - X-Student-Id injected[39m
+[31m[1m 11.[22m[39m [31m[1mFR03-DOM-031 - rejected HTTP class[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-031 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-031 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-031'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 32/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-032'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 11ms][39m
+[32m  ✓ [39m [90mFR03-DOM-032 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-032 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-032 setup - JSON response[39m
+[31m[1m 12.[22m[39m [31m[1mFR03-DOM-032 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-032'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 12ms][39m
+[32m  ✓ [39m [90mFR03-DOM-032 - X-Student-Id injected[39m
+[31m[1m 13.[22m[39m [31m[1mFR03-DOM-032 - rejected HTTP class[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-032 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-032 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-032'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 33/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-033'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 12ms][39m
+[32m  ✓ [39m [90mFR03-DOM-033 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-033 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-033 setup - JSON response[39m
+[31m[1m 14.[22m[39m [31m[1mFR03-DOM-033 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-033'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 10ms][39m
+[32m  ✓ [39m [90mFR03-DOM-033 - X-Student-Id injected[39m
+[31m[1m 15.[22m[39m [31m[1mFR03-DOM-033 - rejected HTTP class[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-033 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-033 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-033'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 34/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-034'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 12ms][39m
+[32m  ✓ [39m [90mFR03-DOM-034 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-034 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-034 setup - JSON response[39m
+[31m[1m 16.[22m[39m [31m[1mFR03-DOM-034 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-034'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 10ms][39m
+[32m  ✓ [39m [90mFR03-DOM-034 - X-Student-Id injected[39m
+[31m[1m 17.[22m[39m [31m[1mFR03-DOM-034 - rejected HTTP class[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-034 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-034 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-034'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 35/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-035'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 11ms][39m
+[32m  ✓ [39m [90mFR03-DOM-035 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-035 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-035 setup - JSON response[39m
+[31m[1m 18.[22m[39m [31m[1mFR03-DOM-035 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-035'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 11ms][39m
+[32m  ✓ [39m [90mFR03-DOM-035 - X-Student-Id injected[39m
+[31m[1m 19.[22m[39m [31m[1mFR03-DOM-035 - rejected HTTP class[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-035 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-035 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-035'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 36/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-036'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 9ms][39m
+[32m  ✓ [39m [90mFR03-DOM-036 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-DOM-036 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-DOM-036 setup - JSON response[39m
+[31m[1m 20.[22m[39m [31m[1mFR03-DOM-036 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-036'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 12ms][39m
+[32m  ✓ [39m [90mFR03-DOM-036 - X-Student-Id injected[39m
+[31m[1m 21.[22m[39m [31m[1mFR03-DOM-036 - rejected HTTP class[22m[39m
+[32m  ✓ [39m [90mFR03-DOM-036 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-DOM-036 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-DOM-036'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 37/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 12ms][39m
+[32m  ✓ [39m [90mFR03-ST-001 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-001 - status 200[39m
+[31m[1m 22.[22m[39m [31m[1mFR03-ST-001 - exact forgot-password schema[22m[39m
+[32m  ✓ [39m [90mFR03-ST-001 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-ST-001 target actual status=200; expectedSi[39m
+[90m  [90m│[90m deEffect=NoOTP to OTPValid'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 38/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-008'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 13ms][39m
+[32m  ✓ [39m [90mFR03-ST-008 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-008 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-ST-008 setup - JSON response[39m
+[31m[1m 23.[22m[39m [31m[1mFR03-ST-008 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-008'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 9ms][39m
+[32m  ✓ [39m [90mFR03-ST-008 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-008 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-ST-008 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-ST-008 target actual status=200; expectedSi[39m
+[90m  [90m│[90m deEffect=OTPValid to OTPUsed; password updates'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-008'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 39/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-013'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 12ms][39m
+[32m  ✓ [39m [90mFR03-ST-013 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-013 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-ST-013 setup - JSON response[39m
+[31m[1m 24.[22m[39m [31m[1mFR03-ST-013 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-013'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 11ms][39m
+[32m  ✓ [39m [90mFR03-ST-013 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-013 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-ST-013 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-ST-013 target actual status=200; expectedSi[39m
+[90m  [90m│[90m deEffect=OTPUsed to OTPValid for a new lifecycle'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-013'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 10ms][39m
+[32m  ✓ [39m [90mFR03-ST-013 follow-up - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-013 follow-up - status 200[39m
+[31m[1m 25.[22m[39m [31m[1mFR03-ST-013 follow-up - exact forgot-password schema[22m[39m
+
+[90m[4mIteration 40/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-014'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 13ms][39m
+[32m  ✓ [39m [90mFR03-ST-014 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-014 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-ST-014 setup - JSON response[39m
+[31m[1m 26.[22m[39m [31m[1mFR03-ST-014 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-014'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 13ms][39m
+[32m  ✓ [39m [90mFR03-ST-014 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-014 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-ST-014 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-ST-014 target actual status=200; expectedSi[39m
+[90m  [90m│[90m deEffect=Replay rejected; password remains first value[39m
+[90m  [90m│[90m '[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-ST-014'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 2ms][39m
+[32m  ✓ [39m [90mFR03-ST-014 follow-up - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-ST-014 follow-up - rejected HTTP class[39m
+
+[90m[4mIteration 41/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[404 Not Found, 300B, 2ms][39m
+[32m  ✓ [39m [90mFR03-SEC-001 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-001 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-SEC-001 - no database/internal disclosure[39m
+[32m  ✓ [39m [90mFR03-SEC-001 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-SEC-001 target actual status=404; expectedS[39m
+[90m  [90m│[90m ideEffect=No query bypass and no OTP for another accou[39m
+[90m  [90m│[90m nt'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 42/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-SEC-003 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-003 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-SEC-003 - no database/internal disclosure[39m
+[32m  ✓ [39m [90mFR03-SEC-003 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-SEC-003 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No query bypass and no password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 43/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-005'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-005'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[404 Not Found, 300B, 3ms][39m
+[32m  ✓ [39m [90mFR03-SEC-005 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-005 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-SEC-005 - no dangerous raw script reflection[39m
+[32m  ✓ [39m [90mFR03-SEC-005 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-SEC-005 target actual status=404; expectedS[39m
+[90m  [90m│[90m ideEffect=No account or OTP state change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-005'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 44/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-008'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-008'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-SEC-008 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-008 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-SEC-008 - no database/internal disclosure[39m
+[32m  ✓ [39m [90mFR03-SEC-008 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-SEC-008 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-008'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 45/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-009'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-009'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 4ms][39m
+[32m  ✓ [39m [90mFR03-SEC-009 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-009 - rejected HTTP class[39m
+[32m  ✓ [39m [90mFR03-SEC-009 - no database/internal disclosure[39m
+[32m  ✓ [39m [90mFR03-SEC-009 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-SEC-009 target actual status=400; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-009'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 46/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-011'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 13ms][39m
+[32m  ✓ [39m [90mFR03-SEC-011 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-011 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-SEC-011 setup - JSON response[39m
+[31m[1m 27.[22m[39m [31m[1mFR03-SEC-011 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-011'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 10ms][39m
+[32m  ✓ [39m [90mFR03-SEC-011 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-011 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-SEC-011 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-SEC-011 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=Second reset rejected; first password remain[39m
+[90m  [90m│[90m s'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-011'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[400 Bad Request, 310B, 3ms][39m
+[32m  ✓ [39m [90mFR03-SEC-011 follow-up - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-011 follow-up - rejected HTTP class[39m
+
+[90m[4mIteration 47/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-012'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-012'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 12ms][39m
+[32m  ✓ [39m [90mFR03-SEC-012 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-012 - status 200[39m
+[31m[1m 28.[22m[39m [31m[1mFR03-SEC-012 - exact forgot-password schema[22m[39m
+[32m  ✓ [39m [90mFR03-SEC-012 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-SEC-012 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=Issue OTP bound to registeredEmail'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-012'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 48/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-014'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-014'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 12ms][39m
+[32m  ✓ [39m [90mFR03-SEC-014 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SEC-014 - status 200[39m
+[31m[1m 29.[22m[39m [31m[1mFR03-SEC-014 - exact forgot-password schema[22m[39m
+[32m  ✓ [39m [90mFR03-SEC-014 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-SEC-014 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=No password change'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SEC-014'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 49/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SCH-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SCH-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 13ms][39m
+[32m  ✓ [39m [90mFR03-SCH-001 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-SCH-001 - status 200[39m
+[31m[1m 30.[22m[39m [31m[1mFR03-SCH-001 - exact forgot-password schema[22m[39m
+[32m  ✓ [39m [90mFR03-SCH-001 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-SCH-001 target actual status=200; expectedS[39m
+[90m  [90m│[90m ideEffect=Issue OTP with exact documented response fie[39m
+[90m  [90m│[90m lds'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-SCH-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 50/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 6ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-001 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-001 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-001 setup - JSON response[39m
+[31m[1m 31.[22m[39m [31m[1mFR03-EXT-DOM-001 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 7ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-001 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-001 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-001 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-EXT-DOM-001 target actual status=200; expec[39m
+[90m  [90m│[90m tedSideEffect=Password updates using an at-sign specia[39m
+[90m  [90m│[90m l'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 51/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 9ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-002 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-002 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-002 setup - JSON response[39m
+[31m[1m 32.[22m[39m [31m[1mFR03-EXT-DOM-002 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 15ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-002 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-002 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-002 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-EXT-DOM-002 target actual status=200; expec[39m
+[90m  [90m│[90m tedSideEffect=Password updates using a dollar-sign spe[39m
+[90m  [90m│[90m cial'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 52/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 7ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-003 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-003 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-003 setup - JSON response[39m
+[31m[1m 33.[22m[39m [31m[1mFR03-EXT-DOM-003 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 10ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-003 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-003 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-003 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-EXT-DOM-003 target actual status=200; expec[39m
+[90m  [90m│[90m tedSideEffect=Password updates using a percent special[39m
+[90m  [90m│[90m '[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 53/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-004'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 12ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-004 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-004 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-004 setup - JSON response[39m
+[31m[1m 34.[22m[39m [31m[1mFR03-EXT-DOM-004 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-004'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 6ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-004 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-004 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-004 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-EXT-DOM-004 target actual status=200; expec[39m
+[90m  [90m│[90m tedSideEffect=Password updates using an asterisk speci[39m
+[90m  [90m│[90m al'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-004'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 54/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-005'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 9ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-005 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-005 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-005 setup - JSON response[39m
+[31m[1m 35.[22m[39m [31m[1mFR03-EXT-DOM-005 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-005'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 8ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-005 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-005 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-005 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-EXT-DOM-005 target actual status=200; expec[39m
+[90m  [90m│[90m tedSideEffect=Password updates using a question-mark s[39m
+[90m  [90m│[90m pecial'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-005'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 55/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-006'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/forgot-password[39m  [90m[200 OK, 350B, 10ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-006 setup - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-006 setup - forgot-password status 200[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-006 setup - JSON response[39m
+[31m[1m 36.[22m[39m [31m[1mFR03-EXT-DOM-006 setup - exact documented fields[22m[39m
+
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-006'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m  [90mPOST[39m [90mhttp://127.0.0.1:3000/api/reset-password[39m  [90m[200 OK, 308B, 10ms][39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-006 - X-Student-Id injected[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-006 - successful HTTP class[39m
+[32m  ✓ [39m [90mFR03-EXT-DOM-006 - no credential fields in JSON[39m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'FR03-EXT-DOM-006 target actual status=200; expec[39m
+[90m  [90m│[90m tedSideEffect=Password updates using an ampersand spec[39m
+[90m  [90m│[90m ial'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-006'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 56/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-007'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-007'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-DOM-007'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 57/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-ST-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-ST-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-ST-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 58/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-ST-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-ST-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-ST-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 59/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-ST-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-ST-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-ST-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 60/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-SEC-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-SEC-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-SEC-001'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 61/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-SEC-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-SEC-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-SEC-002'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m[4mIteration 62/62[24m[39m
+
+↳ [0mSetup - POST /api/forgot-password when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-SEC-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mTarget - data-driven FR-03 case[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-SEC-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+↳ [0mFollow-up - lifecycle oracle when required[0m
+[90m  ┌[39m
+[90m[39m[90m  [90m│[90m [90m'X-Student-Id injected:'[90m[37m, [90m[90m'23[39m
+[90m  [90m│[90m 127379'[90m[37m, [90m[90m'for'[90m[37m, [90m[9[39m
+[90m  [90m│[90m 0m'FR03-EXT-SEC-003'[90m[39m
+[90m[39m[90m  └[39m
+[90m[39m
+[90m┌─────────────────────────[39m[90m┬─────────────────[39m[90m┬─────────────────┐[39m
+[90m│[39m                         [90m│[39m        executed [90m│[39m          failed [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────[39m[90m┼─────────────────┤[39m
+[90m│[39m              [32miterations[39m [90m│[39m              62 [90m│[39m               0 [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────[39m[90m┼─────────────────┤[39m
+[90m│[39m                [32mrequests[39m [90m│[39m              79 [90m│[39m               0 [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────[39m[90m┼─────────────────┤[39m
+[90m│[39m            [32mtest-scripts[39m [90m│[39m              79 [90m│[39m               0 [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────[39m[90m┼─────────────────┤[39m
+[90m│[39m      [32mprerequest-scripts[39m [90m│[39m             372 [90m│[39m               0 [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────[39m[90m┼─────────────────┤[39m
+[90m│[39m              [31massertions[39m [90m│[39m             266 [90m│[39m              [31m36[39m [90m│[39m
+[90m├─────────────────────────┴─────────────────┴─────────────────┤[39m
+[90m│[39m total run duration: 2.5s                                    [90m│[39m
+[90m├─────────────────────────────────────────────────────────────┤[39m
+[90m│[39m total data received: 4.29kB (approx)                        [90m│[39m
+[90m├─────────────────────────────────────────────────────────────┤[39m
+[90m│[39m average response time: 8ms [min: 2ms, max: 26ms, s.d.: 4ms] [90m│[39m
+[90m└─────────────────────────────────────────────────────────────┘[39m
+
+[31m   [31m[4m#[24m[31m [39m[31m [31m[4mfailure[24m[31m        [39m[31m [31m[4mdetail[24m[31m                                                                                   [39m
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 01.  AssertionError  FR03-DOM-001 - exact forgot-password schema                                              
+      [90miteration: 3[39m    [90mexpected '3679' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:2 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 02.  AssertionError  FR03-DOM-010 setup - exact documented fields                                             
+      [90miteration: 12[39m   [90mexpected '8096' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 03.  AssertionError  FR03-DOM-011 setup - exact documented fields                                             
+      [90miteration: 13[39m   [90mexpected '3599' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 04.  AssertionError  FR03-DOM-028 setup - exact documented fields                                             
+      [90miteration: 28[39m   [90mexpected '6317' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 05.  AssertionError  FR03-DOM-028 - rejected HTTP class                                                       
+      [90miteration: 28[39m   [90mexpected 200 to be at least 400[39m                                                          
+                      [90mat assertion:1 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 06.  AssertionError  FR03-DOM-029 setup - exact documented fields                                             
+      [90miteration: 29[39m   [90mexpected '6035' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 07.  AssertionError  FR03-DOM-029 - rejected HTTP class                                                       
+      [90miteration: 29[39m   [90mexpected 200 to be at least 400[39m                                                          
+                      [90mat assertion:1 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 08.  AssertionError  FR03-DOM-030 setup - exact documented fields                                             
+      [90miteration: 30[39m   [90mexpected '4098' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 09.  AssertionError  FR03-DOM-030 - rejected HTTP class                                                       
+      [90miteration: 30[39m   [90mexpected 200 to be at least 400[39m                                                          
+                      [90mat assertion:1 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 10.  AssertionError  FR03-DOM-031 setup - exact documented fields                                             
+      [90miteration: 31[39m   [90mexpected '1416' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 11.  AssertionError  FR03-DOM-031 - rejected HTTP class                                                       
+      [90miteration: 31[39m   [90mexpected 200 to be at least 400[39m                                                          
+                      [90mat assertion:1 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 12.  AssertionError  FR03-DOM-032 setup - exact documented fields                                             
+      [90miteration: 32[39m   [90mexpected '9035' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 13.  AssertionError  FR03-DOM-032 - rejected HTTP class                                                       
+      [90miteration: 32[39m   [90mexpected 200 to be at least 400[39m                                                          
+                      [90mat assertion:1 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 14.  AssertionError  FR03-DOM-033 setup - exact documented fields                                             
+      [90miteration: 33[39m   [90mexpected '6229' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 15.  AssertionError  FR03-DOM-033 - rejected HTTP class                                                       
+      [90miteration: 33[39m   [90mexpected 200 to be at least 400[39m                                                          
+                      [90mat assertion:1 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 16.  AssertionError  FR03-DOM-034 setup - exact documented fields                                             
+      [90miteration: 34[39m   [90mexpected '6070' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 17.  AssertionError  FR03-DOM-034 - rejected HTTP class                                                       
+      [90miteration: 34[39m   [90mexpected 200 to be at least 400[39m                                                          
+                      [90mat assertion:1 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 18.  AssertionError  FR03-DOM-035 setup - exact documented fields                                             
+      [90miteration: 35[39m   [90mexpected '2455' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 19.  AssertionError  FR03-DOM-035 - rejected HTTP class                                                       
+      [90miteration: 35[39m   [90mexpected 200 to be at least 400[39m                                                          
+                      [90mat assertion:1 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 20.  AssertionError  FR03-DOM-036 setup - exact documented fields                                             
+      [90miteration: 36[39m   [90mexpected '3303' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 21.  AssertionError  FR03-DOM-036 - rejected HTTP class                                                       
+      [90miteration: 36[39m   [90mexpected 200 to be at least 400[39m                                                          
+                      [90mat assertion:1 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 22.  AssertionError  FR03-ST-001 - exact forgot-password schema                                               
+      [90miteration: 37[39m   [90mexpected '4405' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:2 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 23.  AssertionError  FR03-ST-008 setup - exact documented fields                                              
+      [90miteration: 38[39m   [90mexpected '8428' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 24.  AssertionError  FR03-ST-013 setup - exact documented fields                                              
+      [90miteration: 39[39m   [90mexpected '9056' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 25.  AssertionError  FR03-ST-013 follow-up - exact forgot-password schema                                     
+      [90miteration: 39[39m   [90mexpected '5955' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:2 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Follow-up - lifecycle oracle when required"[39m      
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 26.  AssertionError  FR03-ST-014 setup - exact documented fields                                              
+      [90miteration: 40[39m   [90mexpected '1163' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 27.  AssertionError  FR03-SEC-011 setup - exact documented fields                                             
+      [90miteration: 46[39m   [90mexpected '1714' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 28.  AssertionError  FR03-SEC-012 - exact forgot-password schema                                              
+      [90miteration: 47[39m   [90mexpected '7491' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:2 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 29.  AssertionError  FR03-SEC-014 - exact forgot-password schema                                              
+      [90miteration: 48[39m   [90mexpected '2288' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:2 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 30.  AssertionError  FR03-SCH-001 - exact forgot-password schema                                              
+      [90miteration: 49[39m   [90mexpected '6102' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:2 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Target - data-driven FR-03 case"[39m                 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 31.  AssertionError  FR03-EXT-DOM-001 setup - exact documented fields                                         
+      [90miteration: 50[39m   [90mexpected '1419' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 32.  AssertionError  FR03-EXT-DOM-002 setup - exact documented fields                                         
+      [90miteration: 51[39m   [90mexpected '6784' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 33.  AssertionError  FR03-EXT-DOM-003 setup - exact documented fields                                         
+      [90miteration: 52[39m   [90mexpected '6107' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 34.  AssertionError  FR03-EXT-DOM-004 setup - exact documented fields                                         
+      [90miteration: 53[39m   [90mexpected '3058' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 35.  AssertionError  FR03-EXT-DOM-005 setup - exact documented fields                                         
+      [90miteration: 54[39m   [90mexpected '7863' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
+[90m     [39m[90m                [39m[90m                                                                                          [39m
+ 36.  AssertionError  FR03-EXT-DOM-006 setup - exact documented fields                                         
+      [90miteration: 55[39m   [90mexpected '2070' to match /^[0-9]{6}$/[39m                                                    
+                      [90mat assertion:3 in test-script[39m[90m[39m                                                            
+                      [90minside "Pool A - FR-03 Password Reset / Setup - POST /api/forgot-password when required"[39m 
