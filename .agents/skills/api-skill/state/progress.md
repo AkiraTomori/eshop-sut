@@ -9,7 +9,7 @@ Current Pool: Pool A
   - [x] State Transition Testing
   - [x] Security/Schema Checklist
 - [x] Stage 2 — Audit
-- [ ] Stage 3 — Extend
+- [x] Stage 3 — Extend
 - [ ] Stage 4 — Execute
 - [ ] Stage 5 — Report Bug
 - [ ] Pool AI Audit — human reviewed
