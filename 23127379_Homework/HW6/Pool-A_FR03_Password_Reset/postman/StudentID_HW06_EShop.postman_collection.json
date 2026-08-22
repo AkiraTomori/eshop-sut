@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "4f973ca6-a1f8-4df2-9a6f-0a34f37d0303",
-    "name": "StudentID HW06 EShop API Testing",
+    "name": "23127379 HW06 EShop API Testing",
     "description": "PROPOSED Pool A collection generated from the user-confirmed Stage 2 dispositions and approved Stage 3 extensions. Contains POST requests only. Runtime data selects the FR-03 endpoint and oracle. No real student ID, OTP, or mutable account password is stored in this artifact.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },

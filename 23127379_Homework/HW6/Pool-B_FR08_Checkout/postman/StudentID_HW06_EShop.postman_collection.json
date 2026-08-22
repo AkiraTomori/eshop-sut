@@ -1,0 +1,149 @@
+{
+  "info": {
+    "_postman_id": "0b15dd68-571a-4aed-bf81-567483597bab",
+    "name": "23127379 HW06 EShop API Testing - Pool B",
+    "description": "PROPOSED Pool B collection generated from 35 user-approved Stage 2 VALID cases and 7 approved Stage 3 extensions. Contains only POST /api/checkout. Run with 23127379_FR08_data.json. No real student ID, JWT, or account credential is stored.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const studentId = pm.environment.get('23127379');",
+          "if (!studentId || !String(studentId).trim()) {",
+          "  console.warn('StudentID is empty; refusing to send the HW06 request.');",
+          "  throw new Error('StudentID environment variable is required');",
+          "}",
+          "const baseUrl = String(pm.environment.get('baseUrl') || '').replace(/\\/$/, '');",
+          "if (!/^http:\\/\\/(localhost|127\\.0\\.0\\.1):3000$/.test(baseUrl)) {",
+          "  throw new Error('Pool B execution is restricted to http://localhost:3000 or http://127.0.0.1:3000');",
+          "}",
+          "pm.request.headers.upsert({ key: 'X-Student-Id', value: studentId });",
+          "console.log('X-Student-Id injected for', (pm.iterationData.get('testCaseId') || pm.info.requestName));"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Pool B - FR-08 Checkout",
+      "description": "Exactly one data-driven request for the selected API unit POST /api/checkout. Disabled rows identify explicit fixture or token blockers and are not silently executed.",
+      "item": [
+        {
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}{{runtimeTargetPath}}",
+            "description": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "runtimeTargetPath", "value": "/api/checkout", "type": "string" },
+    { "key": "runtimeTargetBody", "value": "{}", "type": "string" }
+  ]
+}
