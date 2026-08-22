@@ -20,7 +20,7 @@ Current Pool: Pool B
   - [x] Domain Testing
   - [x] Decision Table Testing
   - [x] Security/Schema Checklist
-- [ ] Stage 2 — Audit
+- [x] Stage 2 — Audit
 - [ ] Stage 3 — Extend
 - [ ] Stage 4 — Execute
 - [ ] Stage 5 — Report Bug
