@@ -2,6 +2,18 @@
 
 > Scope: `POST /api/checkout` only. No request has been executed. No GET request is designed.
 
+## Fixture-role clarification added for execution
+
+The scored/test-target scope remains only `POST /api/checkout`. The following POST endpoints may be called solely as fixture infrastructure and do not become Pool B test targets:
+
+| Fixture endpoint | Infrastructure purpose | Checkout test case/assertion? | Counts toward Pool B ≥35? |
+|---|---|---|---|
+| `POST /api/register` | Create disposable `U1`/`U2` accounts when an isolated account does not yet exist | No; setup script only verifies that execution can continue | No |
+| `POST /api/login` | Obtain real bearer JWTs used to establish `H0` and the authenticated-subject partitions | No; the token is captured into environment variables for request chaining | No |
+| `POST /api/cart` | Establish `CART-M`, `CART-1`, `CART-Q`, the distinct-user carts, and the temporal stale-total cart state | No; it is fixture mutation only | No |
+
+`CART-0` is established by omitting cart setup for a fresh disposable account. Each cart-dependent checkout case uses a unique disposable subject so one successful checkout cannot contaminate another case. Setup responses are not evaluated as Register/Login/Cart requirements, no domain partitions are added for those endpoints, and their calls never appear in the 42-case checkout count. The collection-level `X-Student-Id` injection still applies to every fixture request. No GET request is permitted for setup, readiness, or observation; order effects use restricted SQLite snapshots, while cart-clearing remains explicitly unproven unless a separate approved non-GET oracle is available.
+
 ## Specification basis and interpretation rules
 
 - Assignment scope: `2026.HW06.API Testing_En.md` §§5–6 requires one Pool B API and domain partitions on every parameter, with at least 35 reviewed cases across the final API unit.

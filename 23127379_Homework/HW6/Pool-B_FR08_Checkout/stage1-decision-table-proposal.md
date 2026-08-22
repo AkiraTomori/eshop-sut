@@ -2,6 +2,21 @@
 
 > Scope: `POST /api/checkout` only. No request has been executed. No GET request is designed.
 
+## Fixture-role clarification added for execution
+
+The decision-table causes remain properties of the Checkout request and its pre-state; `POST /api/register`, `POST /api/login`, and `POST /api/cart` are not additional causes or scored API targets. They are user-authorized setup steps used to instantiate the concrete Y/N values:
+
+| Decision-table cause | Fixture realization |
+|---|---|
+| C1 logged in = Y | Register a disposable subject if necessary, call Login, and chain the returned JWT into the Checkout authorization header |
+| C1 logged in = N | Omit or mutate the Checkout authorization header; Login is skipped when no valid-token derivative is needed |
+| C2 cart empty = Y | Use a new disposable account and do not call Cart setup |
+| C2 cart empty = N | Call Cart setup with the exact independently known item/quantity fixture before Checkout |
+| C3 `T=C` / `T!=C` | Compute `C` from the setup item prices and quantities, then send the matching or intentionally mismatching client value `T` |
+| C4 address valid/invalid | Change only the Checkout body; fixture endpoints do not decide this cause |
+
+The temporal extension establishes `C-old`, mutates the same disposable cart to `C-new` through a second setup call, and only then sends the stale `T`. Setup calls have no decision-table assertions, do not produce extra rules/cases, and do not count toward the Pool B minimum. A separate `Setup / Fixtures` folder runs before the Checkout folder solely to realize preconditions. No GET request is used.
+
 ## Specification basis and interpretation rules
 
 - Root `README.md` §FR-08 requires authentication, backend total recomputation, and cart clearing after successful checkout.

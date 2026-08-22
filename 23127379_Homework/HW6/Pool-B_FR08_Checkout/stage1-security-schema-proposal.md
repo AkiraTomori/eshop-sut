@@ -2,6 +2,16 @@
 
 > Scope: `POST /api/checkout` only. No payload has been sent, no vulnerability is claimed, and no GET request is designed.
 
+## Fixture-role and credential-chain clarification added for execution
+
+`POST /api/register`, `POST /api/login`, and `POST /api/cart` are user-authorized fixture infrastructure, not Pool B security/schema test targets. They receive no Register/Login/Cart requirement assertions, create no additional SEC cases, and do not count toward the 42 approved Checkout cases. The execution collection places them in a separate `Setup / Fixtures` folder before `Pool B - FR-08 Checkout`.
+
+- Disposable `U1` and `U2` accounts are unique per cart-dependent iteration. Login responses are used only to capture `u1_token`/`u2_token` environment variables and decode the disposable subject IDs needed by the approved ownership cases.
+- Valid Checkout requests use the captured JWT for the intended subject. Invalid-signature and `alg:none` representatives are derived locally from test-controlled token material; the properly signed expired representative is generated only in the ignored local harness because the live Login endpoint issues a non-expiring token.
+- Cart setup calls create independently known price/quantity totals for `CART-M`, `CART-1`, `CART-Q`, distinct `U1`/`U2` carts, and the temporal `C-old → C-new` fixture. They are not assessed as Cart API behavior.
+- Secrets and disposable credentials stay in ignored local files and are redacted from reports. The collection-level `X-Student-Id` script applies to both fixture and target requests.
+- No GET request is used. Restricted SQLite before/after evidence may prove order ownership, total, status, literal address handling, role preservation, and cleanup. It cannot by itself prove the in-memory cart-clearing effect, so that oracle remains separately identified rather than falsely passed.
+
 ## Specification basis, fixtures, and safety rules
 
 - Business rules: root `README.md` §FR-08 requires authentication, server-side total recomputation, and cart clearing after successful checkout.

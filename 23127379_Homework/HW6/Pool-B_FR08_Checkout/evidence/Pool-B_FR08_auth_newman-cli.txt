@@ -1,0 +1,566 @@
+newman
+
+23127379 HW06 EShop API Testing - Pool B
+
+Iteration 1/42
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  │ 'FR08-DOM-001 skipped: Requires an approved fresh mult
+  │ i-item cart fixture, validTokenU1, and non-GET order/c
+  │ art evidence.'
+  └
+
+Iteration 2/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  │ 'FR08-DOM-002 skipped: Requires an approved disposable
+  │  one-item cart fixture, validTokenU1, and non-GET stat
+  │ e evidence.'
+  └
+
+Iteration 3/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  │ 'FR08-DOM-003 skipped: Requires an approved quantity-g
+  │ reater-than-one cart fixture, validTokenU1, and non-GE
+  │ T state evidence.'
+  └
+
+Iteration 4/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  │ 'FR08-DOM-006 skipped: Requires validTokenU1, an appro
+  │ ved fresh cart fixture, and non-GET proof that parser 
+  │ rejection creates no order and leaves the cart unchang
+  │ ed.'
+  └
+
+Iteration 5/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  │ 'FR08-DOM-007 skipped: Requires validTokenU1, an appro
+  │ ved fresh cart fixture, and non-GET state evidence.'
+  └
+
+Iteration 6/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 23ms]
+  ✓  FR08-DOM-008 - method and selected endpoint
+  ✓  FR08-DOM-008 - X-Student-Id injected
+  ✓  FR08-DOM-008 - rejected without server error
+  ✓  FR08-DOM-008 - no database/internal disclosure
+  ✓  FR08-DOM-008 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-008: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation rejection with no order/cart mutation; state po
+  │ rtion needs separate non-GET evidence.'
+  │ 'FR08-DOM-008 actual status=401; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 7/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 3ms]
+  ✓  FR08-DOM-009 - method and selected endpoint
+  ✓  FR08-DOM-009 - X-Student-Id injected
+  ✓  FR08-DOM-009 - rejected without server error
+  ✓  FR08-DOM-009 - no database/internal disclosure
+  ✓  FR08-DOM-009 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-009: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation rejection with no state mutation.'
+  │ 'FR08-DOM-009 actual status=401; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 8/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 2ms]
+  ✓  FR08-DOM-010 - method and selected endpoint
+  ✓  FR08-DOM-010 - X-Student-Id injected
+  ✓  FR08-DOM-010 - rejected without server error
+  ✓  FR08-DOM-010 - no database/internal disclosure
+  ✓  FR08-DOM-010 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-010: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he non-Bearer scheme with no state mutation.'
+  │ 'FR08-DOM-010 actual status=403; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 9/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 4ms]
+  ✓  FR08-DOM-011 - method and selected endpoint
+  ✓  FR08-DOM-011 - X-Student-Id injected
+  ✓  FR08-DOM-011 - rejected without server error
+  ✓  FR08-DOM-011 - no database/internal disclosure
+  ✓  FR08-DOM-011 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-011: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he tampered JWT; no state mutation.'
+  │ 'FR08-DOM-011 actual status=403; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 10/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 5ms]
+  ✓  FR08-DOM-012 - method and selected endpoint
+  ✓  FR08-DOM-012 - X-Student-Id injected
+  ✓  FR08-DOM-012 - rejected without server error
+  ✓  FR08-DOM-012 - no database/internal disclosure
+  ✓  FR08-DOM-012 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-012: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he expired JWT; no state mutation.'
+  │ 'FR08-DOM-012 actual status=403; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 11/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  │ 'FR08-DOM-015 skipped: Requires fresh U1 cart C=250000
+  │ , validTokenU1, recovery after acceptance, and non-GET
+  │  total/cart evidence.'
+  └
+
+Iteration 12/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  │ 'FR08-DOM-016 skipped: Requires fresh U1 cart C=250000
+  │ , validTokenU1, recovery after acceptance, and non-GET
+  │  state evidence.'
+  └
+
+Iteration 13/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  │ 'FR08-DOM-017 skipped: Requires fresh non-empty U1 car
+  │ t, validTokenU1, recovery after acceptance, and non-GE
+  │ T state evidence.'
+  └
+
+Iteration 14/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  │ 'FR08-DOM-018 skipped: Requires fresh non-empty U1 car
+  │ t, validTokenU1, recovery after acceptance, and non-GE
+  │ T state evidence.'
+  └
+
+Iteration 15/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  │ 'FR08-DOM-020 skipped: Requires fresh U1 cart C=250000
+  │ , validTokenU1, recovery after acceptance, and non-GET
+  │  state evidence.'
+  └
+
+Iteration 16/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  │ 'FR08-DOM-021 skipped: Requires fresh U1 cart C=250000
+  │ , validTokenU1, recovery after acceptance, and non-GET
+  │  state evidence.'
+  └
+
+Iteration 17/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  │ 'FR08-DOM-022 skipped: Requires fresh U1 cart C=250000
+  │ , validTokenU1, recovery after acceptance, and non-GET
+  │  state evidence.'
+  └
+
+Iteration 18/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  │ 'FR08-DOM-029 skipped: Requires fresh U1 cart, validTo
+  │ kenU1, recovery after acceptance, and non-GET protecte
+  │ d-state evidence.'
+  └
+
+Iteration 19/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 2ms]
+  ✓  FR08-DT-001 - method and selected endpoint
+  ✓  FR08-DT-001 - X-Student-Id injected
+  ✓  FR08-DT-001 - rejected without server error
+  ✓  FR08-DT-001 - no database/internal disclosure
+  ✓  FR08-DT-001 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DT-001: MANUAL_STATE_ORACLE_REQUIRED - Authentic
+  │ ation rejection dominates all cart/total/address condi
+  │ tions; no state mutation.'
+  │ 'FR08-DT-001 actual status=401; exact status/schema un
+  │ specified by contract'
+  └
+
+Iteration 20/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  │ 'FR08-DT-002 skipped: Requires fresh non-empty U1 cart
+  │ , validTokenU1, and a repeatable approved fixture/reco
+  │ very method.'
+  └
+
+Iteration 21/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  │ 'FR08-SEC-001 skipped: Requires validTokenU1, approved
+  │  fresh cart setup, and non-GET ownership/order/cart ev
+  │ idence.'
+  └
+
+Iteration 22/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 3ms]
+  ✓  FR08-SEC-002 - method and selected endpoint
+  ✓  FR08-SEC-002 - X-Student-Id injected
+  ✓  FR08-SEC-002 - rejected without server error
+  ✓  FR08-SEC-002 - no database/internal disclosure
+  ✓  FR08-SEC-002 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-002: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation rejection; no order/cart mutation or internal l
+  │ eakage.'
+  │ 'FR08-SEC-002 actual status=401; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 23/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 2ms]
+  ✓  FR08-SEC-003 - method and selected endpoint
+  ✓  FR08-SEC-003 - X-Student-Id injected
+  ✓  FR08-SEC-003 - rejected without server error
+  ✓  FR08-SEC-003 - no database/internal disclosure
+  ✓  FR08-SEC-003 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-003: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation rejection; no state mutation or token echo.'
+  │ 'FR08-SEC-003 actual status=401; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 24/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 2ms]
+  ✓  FR08-SEC-004 - method and selected endpoint
+  ✓  FR08-SEC-004 - X-Student-Id injected
+  ✓  FR08-SEC-004 - rejected without server error
+  ✓  FR08-SEC-004 - no database/internal disclosure
+  ✓  FR08-SEC-004 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-004: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he Basic scheme; no state mutation.'
+  │ 'FR08-SEC-004 actual status=403; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 25/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 3ms]
+  ✓  FR08-SEC-005 - method and selected endpoint
+  ✓  FR08-SEC-005 - X-Student-Id injected
+  ✓  FR08-SEC-005 - rejected without server error
+  ✓  FR08-SEC-005 - no database/internal disclosure
+  ✓  FR08-SEC-005 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-005: MANUAL_STATE_ORACLE_REQUIRED - Generic 
+  │ authentication failure; no internals or mutation.'
+  │ 'FR08-SEC-005 actual status=403; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 26/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 3ms]
+  ✓  FR08-SEC-006 - method and selected endpoint
+  ✓  FR08-SEC-006 - X-Student-Id injected
+  ✓  FR08-SEC-006 - rejected without server error
+  ✓  FR08-SEC-006 - no database/internal disclosure
+  ✓  FR08-SEC-006 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-006: MANUAL_STATE_ORACLE_REQUIRED - Reject a
+  │ ltered claims; no state mutation.'
+  │ 'FR08-SEC-006 actual status=403; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 27/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 4ms]
+  ✓  FR08-SEC-007 - method and selected endpoint
+  ✓  FR08-SEC-007 - X-Student-Id injected
+  ✓  FR08-SEC-007 - rejected without server error
+  ✓  FR08-SEC-007 - no database/internal disclosure
+  ✓  FR08-SEC-007 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-007: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation failure; no refresh, token echo, or state mutat
+  │ ion.'
+  │ 'FR08-SEC-007 actual status=403; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 28/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 3ms]
+  ✓  FR08-SEC-008 - method and selected endpoint
+  ✓  FR08-SEC-008 - X-Student-Id injected
+  ✓  FR08-SEC-008 - rejected without server error
+  ✓  FR08-SEC-008 - no database/internal disclosure
+  ✓  FR08-SEC-008 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-008: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he unsigned token and trust no claims.'
+  │ 'FR08-SEC-008 actual status=403; exact status/schema u
+  │ nspecified by contract'
+  └
+
+Iteration 29/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  │ 'FR08-SEC-009 skipped: Requires two approved distinct-
+  │ user cart fixtures, validTokenU2, user IDs, and non-GE
+  │ T cross-user evidence.'
+  └
+
+Iteration 30/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  │ 'FR08-SEC-010 skipped: Requires validTokenU1, userIdU2
+  │ , two-user fixtures, and non-GET ownership evidence.'
+  └
+
+Iteration 31/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  │ 'FR08-SEC-011 skipped: Requires fresh U1 cart C=250000
+  │ , validTokenU1, recovery after acceptance, and non-GET
+  │  state evidence.'
+  └
+
+Iteration 32/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  │ 'FR08-SEC-012 skipped: Requires fresh U1 cart, validTo
+  │ kenU1, account-role evidence, recovery after acceptanc
+  │ e, and non-GET state evidence.'
+  └
+
+Iteration 33/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  │ 'FR08-SEC-013 skipped: Requires fresh U1 cart, validTo
+  │ kenU1, order-status evidence, recovery after acceptanc
+  │ e, and non-GET state evidence.'
+  └
+
+Iteration 34/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  │ 'FR08-SEC-014 skipped: Requires fresh U1 cart, validTo
+  │ kenU1, disposable data, and non-GET database/order/car
+  │ t evidence.'
+  └
+
+Iteration 35/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  │ 'FR08-SCH-006 skipped: Requires fresh U1 cart, validTo
+  │ kenU1, and approved non-GET proof of the persisted ser
+  │ ver total.'
+  └
+
+Iteration 36/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  │ 'FR08-EXT-DOM-001 skipped: Requires fresh U1 cart C=25
+  │ 0000, validTokenU1, raw-body execution, recovery after
+  │  acceptance, and non-GET state evidence.'
+  └
+
+Iteration 37/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  │ 'FR08-EXT-DT-001 skipped: Requires an approved tempora
+  │ l cart-mutation fixture that establishes C-old=100000 
+  │ then C-new=150000 before this POST, plus validTokenU1 
+  │ and non-GET evidence.'
+  └
+
+Iteration 38/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  │ 'FR08-EXT-SEC-001 skipped: Requires fresh U1 cart C=25
+  │ 0000, validTokenU1, recovery after acceptance, and non
+  │ -GET line-item/order evidence.'
+  └
+
+Iteration 39/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  │ 'FR08-EXT-SEC-002 skipped: Requires fresh U1 cart C=25
+  │ 0000 with no coupon state, validTokenU1, recovery afte
+  │ r acceptance, and non-GET order/coupon evidence.'
+  └
+
+Iteration 40/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  │ 'FR08-EXT-SEC-003 skipped: Requires fresh U1 cart C=25
+  │ 0000, validTokenU1, recovery after acceptance, and non
+  │ -GET order/cart evidence.'
+  └
+
+Iteration 41/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  │ 'FR08-EXT-SEC-004 skipped: Requires fresh U1 cart C=25
+  │ 0000, validTokenU1, raw-body execution, recovery after
+  │  acceptance, and non-GET state evidence.'
+  └
+
+Iteration 42/42
+
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  │ 'FR08-EXT-SEC-005 skipped: Requires fresh U1 cart C=25
+  │ 0000, validTokenU1, recovery after success, and non-GE
+  │ T proof of literal address handling and cart/order sta
+  │ te.'
+  └
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │              42 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │              13 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │              13 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │              84 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │              65 │               0 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 451ms                                   │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 288B (approx)                          │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 4ms [min: 2ms, max: 23ms, s.d.: 5ms] │
+└─────────────────────────────────────────────────────────────┘

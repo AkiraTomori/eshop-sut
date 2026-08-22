@@ -1,0 +1,369 @@
+{
+  "capturedAt": "2026-08-22T03:30:56.153Z",
+  "totalUsers": 38,
+  "totalOrders": 28,
+  "fixtureUsers": 36,
+  "fixtureOrders": 28,
+  "records": [
+    {
+      "testCaseId": "FR08-DOM-001",
+      "subject": "U1",
+      "userId": 43,
+      "role": "user",
+      "orderId": 29,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-002",
+      "subject": "U1",
+      "userId": 44,
+      "role": "user",
+      "orderId": 30,
+      "orderTotal": 100000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-003",
+      "subject": "U1",
+      "userId": 45,
+      "role": "user",
+      "orderId": 31,
+      "orderTotal": 200000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-006",
+      "subject": "U1",
+      "userId": 46,
+      "role": "user",
+      "orderId": null,
+      "orderTotal": null,
+      "status": null,
+      "shippingAddress": null
+    },
+    {
+      "testCaseId": "FR08-DOM-007",
+      "subject": "U1",
+      "userId": 47,
+      "role": "user",
+      "orderId": 32,
+      "orderTotal": null,
+      "status": "pending",
+      "shippingAddress": null
+    },
+    {
+      "testCaseId": "FR08-DOM-011",
+      "subject": "U1",
+      "userId": 48,
+      "role": "user",
+      "orderId": null,
+      "orderTotal": null,
+      "status": null,
+      "shippingAddress": null
+    },
+    {
+      "testCaseId": "FR08-DOM-012",
+      "subject": "U1",
+      "userId": 49,
+      "role": "user",
+      "orderId": null,
+      "orderTotal": null,
+      "status": null,
+      "shippingAddress": null
+    },
+    {
+      "testCaseId": "FR08-DOM-015",
+      "subject": "U1",
+      "userId": 50,
+      "role": "user",
+      "orderId": 33,
+      "orderTotal": 249999,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-016",
+      "subject": "U1",
+      "userId": 51,
+      "role": "user",
+      "orderId": 34,
+      "orderTotal": 250001,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-017",
+      "subject": "U1",
+      "userId": 52,
+      "role": "user",
+      "orderId": 35,
+      "orderTotal": 0,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-018",
+      "subject": "U1",
+      "userId": 53,
+      "role": "user",
+      "orderId": 36,
+      "orderTotal": -1,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-020",
+      "subject": "U1",
+      "userId": 54,
+      "role": "user",
+      "orderId": 37,
+      "orderTotal": null,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-021",
+      "subject": "U1",
+      "userId": 55,
+      "role": "user",
+      "orderId": 38,
+      "orderTotal": null,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-022",
+      "subject": "U1",
+      "userId": 56,
+      "role": "user",
+      "orderId": 39,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DOM-029",
+      "subject": "U1",
+      "userId": 57,
+      "role": "user",
+      "orderId": 40,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-DT-002",
+      "subject": "U1",
+      "userId": 58,
+      "role": "user",
+      "orderId": 41,
+      "orderTotal": 1,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-SEC-001",
+      "subject": "U1",
+      "userId": 59,
+      "role": "user",
+      "orderId": 42,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-SEC-006",
+      "subject": "U1",
+      "userId": 60,
+      "role": "user",
+      "orderId": null,
+      "orderTotal": null,
+      "status": null,
+      "shippingAddress": null
+    },
+    {
+      "testCaseId": "FR08-SEC-007",
+      "subject": "U1",
+      "userId": 61,
+      "role": "user",
+      "orderId": null,
+      "orderTotal": null,
+      "status": null,
+      "shippingAddress": null
+    },
+    {
+      "testCaseId": "FR08-SEC-008",
+      "subject": "U1",
+      "userId": 62,
+      "role": "user",
+      "orderId": null,
+      "orderTotal": null,
+      "status": null,
+      "shippingAddress": null
+    },
+    {
+      "testCaseId": "FR08-SEC-009",
+      "subject": "U1",
+      "userId": 63,
+      "role": "user",
+      "orderId": null,
+      "orderTotal": null,
+      "status": null,
+      "shippingAddress": null
+    },
+    {
+      "testCaseId": "FR08-SEC-009",
+      "subject": "U2",
+      "userId": 64,
+      "role": "user",
+      "orderId": 43,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-SEC-010",
+      "subject": "U1",
+      "userId": 65,
+      "role": "user",
+      "orderId": 44,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-SEC-010",
+      "subject": "U2",
+      "userId": 66,
+      "role": "user",
+      "orderId": null,
+      "orderTotal": null,
+      "status": null,
+      "shippingAddress": null
+    },
+    {
+      "testCaseId": "FR08-SEC-011",
+      "subject": "U1",
+      "userId": 67,
+      "role": "user",
+      "orderId": 45,
+      "orderTotal": 1,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-SEC-012",
+      "subject": "U1",
+      "userId": 68,
+      "role": "user",
+      "orderId": 46,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-SEC-013",
+      "subject": "U1",
+      "userId": 69,
+      "role": "user",
+      "orderId": 47,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-SEC-014",
+      "subject": "U1",
+      "userId": 70,
+      "role": "user",
+      "orderId": 48,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "' OR '1'='1' --"
+    },
+    {
+      "testCaseId": "FR08-SCH-006",
+      "subject": "U1",
+      "userId": 71,
+      "role": "user",
+      "orderId": 49,
+      "orderTotal": 1,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-EXT-DOM-001",
+      "subject": "U1",
+      "userId": 72,
+      "role": "user",
+      "orderId": 50,
+      "orderTotal": null,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-EXT-DT-001",
+      "subject": "U1",
+      "userId": 73,
+      "role": "user",
+      "orderId": 51,
+      "orderTotal": 100000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-EXT-SEC-001",
+      "subject": "U1",
+      "userId": 74,
+      "role": "user",
+      "orderId": 52,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-EXT-SEC-002",
+      "subject": "U1",
+      "userId": 75,
+      "role": "user",
+      "orderId": 53,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-EXT-SEC-003",
+      "subject": "U1",
+      "userId": 76,
+      "role": "user",
+      "orderId": 54,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-EXT-SEC-004",
+      "subject": "U1",
+      "userId": 77,
+      "role": "user",
+      "orderId": 55,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "123 Le Loi, TP.HCM"
+    },
+    {
+      "testCaseId": "FR08-EXT-SEC-005",
+      "subject": "U1",
+      "userId": 78,
+      "role": "user",
+      "orderId": 56,
+      "orderTotal": 250000,
+      "status": "pending",
+      "shippingAddress": "12 O'Connor Street"
+    }
+  ]
+}

@@ -1,0 +1,4447 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "0b15dd68-571a-4aed-bf81-567483597bab"
+    },
+    "item": [
+      {
+        "id": "970a2d8a-4417-4b86-a2ef-6ab158605100",
+        "name": "Pool B - FR-08 Checkout",
+        "description": {
+          "content": "Exactly one data-driven request for the selected API unit POST /api/checkout. Disabled rows identify explicit fixture or token blockers and are not silently executed.",
+          "type": "text/plain"
+        },
+        "item": [
+          {
+            "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+            "name": "{{testCaseId}} - POST /api/checkout",
+            "request": {
+              "description": {
+                "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+                "type": "text/plain"
+              },
+              "url": {
+                "host": [
+                  "{{baseUrl}}{{runtimeTargetPath}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST",
+              "body": {
+                "mode": "raw",
+                "raw": "{{runtimeTargetBody}}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                  "type": "text/javascript",
+                  "exec": [
+                    "(function () {",
+                    "  const id = pm.iterationData.get('testCaseId');",
+                    "  if (pm.iterationData.get('enabled') !== true) {",
+                    "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                    "    pm.execution.skipRequest();",
+                    "    return;",
+                    "  }",
+                    "  const authMode = pm.iterationData.get('authMode');",
+                    "  pm.request.headers.remove('Authorization');",
+                    "  function requireEnvironment(key) {",
+                    "    const value = pm.environment.get(key);",
+                    "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                    "    return value;",
+                    "  }",
+                    "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                    "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                    "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                    "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                    "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                    "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                    "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                    "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                    "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                    "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                    "  const template = pm.iterationData.get('bodyTemplate');",
+                    "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                    "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                    "  required.forEach(requireEnvironment);",
+                    "  const expanded = pm.variables.replaceIn(template);",
+                    "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                    "  pm.variables.set('runtimeTargetPath', path);",
+                    "  pm.variables.set('runtimeTargetBody', expanded);",
+                    "})();"
+                  ],
+                  "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                  "type": "text/javascript",
+                  "exec": [
+                    "const id = pm.iterationData.get('testCaseId');",
+                    "const oracle = pm.iterationData.get('statusOracle');",
+                    "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                    "pm.test(id + ' - method and selected endpoint', function () {",
+                    "  pm.expect(pm.request.method).to.eql('POST');",
+                    "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                    "});",
+                    "pm.test(id + ' - X-Student-Id injected', function () {",
+                    "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                    "});",
+                    "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                    "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                    "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                    "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                    "let jsonBody = null;",
+                    "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                    "const text = pm.response.text();",
+                    "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                    "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                    "});",
+                    "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                    "  if (jsonBody && typeof jsonBody === 'object') {",
+                    "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                    "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                    "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                    "  }",
+                    "});",
+                    "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                    "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                    "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                    "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                    "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                    "    pm.expect(returnedTotal).to.be.a('number');",
+                    "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                    "  });",
+                    "}",
+                    "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                    "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                    "}",
+                    "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                  ],
+                  "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      }
+    ],
+    "event": [
+      {
+        "listen": "prerequest",
+        "script": {
+          "id": "1ffefa75-b3c2-4e8d-8c12-44acd392e027",
+          "type": "text/javascript",
+          "exec": [
+            "const studentId = pm.environment.get('StudentID');",
+            "if (!studentId || !String(studentId).trim()) {",
+            "  console.warn('StudentID is empty; refusing to send the HW06 request.');",
+            "  throw new Error('StudentID environment variable is required');",
+            "}",
+            "const baseUrl = String(pm.environment.get('baseUrl') || '').replace(/\\/$/, '');",
+            "if (!/^http:\\/\\/(localhost|127\\.0\\.0\\.1):3000$/.test(baseUrl)) {",
+            "  throw new Error('Pool B execution is restricted to http://localhost:3000 or http://127.0.0.1:3000');",
+            "}",
+            "pm.request.headers.upsert({ key: 'X-Student-Id', value: studentId });",
+            "console.log('X-Student-Id injected for', (pm.iterationData.get('testCaseId') || pm.info.requestName));"
+          ],
+          "_lastExecutionId": "bf070a78-25dd-4639-a4ca-22b20940212a"
+        }
+      }
+    ],
+    "variable": [
+      {
+        "type": "string",
+        "value": "/api/checkout",
+        "key": "runtimeTargetPath"
+      },
+      {
+        "type": "string",
+        "value": "{}",
+        "key": "runtimeTargetBody"
+      }
+    ],
+    "info": {
+      "_postman_id": "0b15dd68-571a-4aed-bf81-567483597bab",
+      "name": "23127379 HW06 EShop API Testing - Pool B",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": {
+        "content": "PROPOSED Pool B collection generated from 35 user-approved Stage 2 VALID cases and 7 approved Stage 3 extensions. Contains only POST /api/checkout. Run with 23127379_FR08_data.json. No real student ID, JWT, or account credential is stored.",
+        "type": "text/plain"
+      }
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment"
+    },
+    "id": "4f6aa423-b398-4db4-a86a-776bbedc8fd3",
+    "name": "StudentID HW06 EShop Local - Pool B",
+    "values": [
+      {
+        "type": "any",
+        "value": "http://127.0.0.1:3000",
+        "key": "baseUrl"
+      },
+      {
+        "type": "any",
+        "value": "23127379",
+        "key": "StudentID"
+      },
+      {
+        "type": "any",
+        "value": "<REDACTED_validTokenU1>",
+        "key": "validTokenU1"
+      },
+      {
+        "type": "any",
+        "value": "<REDACTED_validTokenU2>",
+        "key": "validTokenU2"
+      },
+      {
+        "type": "any",
+        "value": "<REDACTED_invalidSignatureToken>",
+        "key": "invalidSignatureToken"
+      },
+      {
+        "type": "any",
+        "value": "<REDACTED_expiredToken>",
+        "key": "expiredToken"
+      },
+      {
+        "type": "any",
+        "value": "<REDACTED_algNoneToken>",
+        "key": "algNoneToken"
+      },
+      {
+        "type": "any",
+        "value": "920081",
+        "key": "userIdU1"
+      },
+      {
+        "type": "any",
+        "value": "920082",
+        "key": "userIdU2"
+      }
+    ]
+  },
+  "globals": {
+    "id": "294700ba-ac37-4b45-b5d2-729175d69675",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 42,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 42,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 97,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 42,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 13,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 13,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 65,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 13,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 84,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 4.538461538461538,
+      "responseMin": 2,
+      "responseMax": 23,
+      "responseSd": 5.401073748166756,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1787367815298,
+      "completed": 1787367815749
+    },
+    "executions": [
+      {
+        "cursor": {
+          "ref": "720d1c67-5dfc-472f-bd12-a79b75fbdc80",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 5,
+          "cr": true,
+          "httpRequestId": "f948bf1a-df55-4996-a6e1-c228ee8589d1"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "306017a1-94b7-49f0-a865-4f4a16c46652",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "2afac863-06b5-4af0-b132-95d078f78d58",
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "24"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"18-XPDV80vbMk4yY1/PADG4jYM4rSI\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              85,
+              110,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              105,
+              122,
+              101,
+              100,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 23,
+          "responseSize": 24
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-DOM-008 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-008 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-008 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-008 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-008 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "a0aefc9e-906a-4810-a878-e944fa7654b8",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 6,
+          "cr": true,
+          "httpRequestId": "1f3a8a73-f796-40c7-9712-69afab158980"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer "
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "e690f719-6020-4147-8598-8904e14e8ca3",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "d4f9b945-2ccf-43ee-b5e3-563fbbb26771",
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "24"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"18-XPDV80vbMk4yY1/PADG4jYM4rSI\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              85,
+              110,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              105,
+              122,
+              101,
+              100,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 3,
+          "responseSize": 24
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-DOM-009 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-009 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-009 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-009 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-009 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "9b9cda27-42b7-44f1-a174-bc15a98be006",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 7,
+          "cr": true,
+          "httpRequestId": "9428fc22-71fb-4085-8157-504ac2be2a89"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Basic dGVzdDp0ZXN0"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "6d19bef2-a703-4e4e-9aaa-4391c1c80f99",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "9ad56325-7fc0-4688-a771-e3806039225e",
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "21"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"15-TLNzmZqKxaTuFdX/dVWWPBu44/c\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              70,
+              111,
+              114,
+              98,
+              105,
+              100,
+              100,
+              101,
+              110,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 2,
+          "responseSize": 21
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-DOM-010 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-010 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-010 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-010 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-010 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "cccea3a5-12d8-4736-97c4-80c7954a8b0f",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 8,
+          "cr": true,
+          "httpRequestId": "e59fa158-330a-40fb-98e7-9aa1d6b2d375"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer <REDACTED_invalidSignatureToken>"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "03034ad4-2689-48ae-adf3-479df5bf4f4a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "587cbcb4-5707-4bb1-a41e-0281416c2aa1",
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "21"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"15-TLNzmZqKxaTuFdX/dVWWPBu44/c\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              70,
+              111,
+              114,
+              98,
+              105,
+              100,
+              100,
+              101,
+              110,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 4,
+          "responseSize": 21
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-DOM-011 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-011 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-011 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-011 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-011 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "280f9102-cbe5-47d6-80e5-f4e5b3c98f05",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 9,
+          "cr": true,
+          "httpRequestId": "06dabd43-e060-4778-9e40-d842df42b503"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer <REDACTED_expiredToken>"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "d4c6d719-ef65-4356-8daf-f22a8946539a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "31a70487-d223-4c09-8911-006997cc39cc",
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "21"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"15-TLNzmZqKxaTuFdX/dVWWPBu44/c\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              70,
+              111,
+              114,
+              98,
+              105,
+              100,
+              100,
+              101,
+              110,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 5,
+          "responseSize": 21
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-DOM-012 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-012 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-012 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-012 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DOM-012 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "f5f5fb7c-77da-4cac-b8bc-a86be5ab8ec3",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 18,
+          "cr": true,
+          "httpRequestId": "5056dd1a-f5f3-4f00-8e74-14608593b56e"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "c4f23e18-318a-480c-959f-4d5eec531274",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "345160ce-81ca-45a1-a577-b3b013a00c6d",
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "24"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"18-XPDV80vbMk4yY1/PADG4jYM4rSI\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              85,
+              110,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              105,
+              122,
+              101,
+              100,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 2,
+          "responseSize": 24
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-DT-001 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DT-001 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DT-001 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DT-001 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-DT-001 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "b7a221e8-b499-456d-a7a6-7dd0c8abe9a8",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 21,
+          "cr": true,
+          "httpRequestId": "5d1b5a4b-17a4-4ccc-a130-8bf7f0d0351e"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "ba712a75-581f-4e8c-bb50-276e1ec8ba75",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "a3f31cf1-1b58-4169-9645-b523f950c270",
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "24"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"18-XPDV80vbMk4yY1/PADG4jYM4rSI\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              85,
+              110,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              105,
+              122,
+              101,
+              100,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 3,
+          "responseSize": 24
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-SEC-002 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-002 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-002 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-002 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-002 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "b941b3bd-df62-4cb9-a78b-6596600acb61",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 22,
+          "cr": true,
+          "httpRequestId": "ccbd7a26-5d5c-49d9-af77-b7e8b3fec0e2"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer "
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "846d44f1-da2b-48fa-9ede-b9116cc4ccee",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "cb39b386-72a2-4483-b339-68cac9cacb41",
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "24"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"18-XPDV80vbMk4yY1/PADG4jYM4rSI\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              85,
+              110,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              105,
+              122,
+              101,
+              100,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 2,
+          "responseSize": 24
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-SEC-003 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-003 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-003 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-003 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-003 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "9197b56e-6c99-47a9-a056-dced3c4f62e3",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 23,
+          "cr": true,
+          "httpRequestId": "b7be61e4-99fd-4f7b-8071-5ced85a27780"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Basic dGVzdDp0ZXN0"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "c97d8d71-792b-4973-9d85-a6250f08aa95",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "7ed987dc-c5d8-4923-94b1-2c4c19e9e197",
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "21"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"15-TLNzmZqKxaTuFdX/dVWWPBu44/c\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              70,
+              111,
+              114,
+              98,
+              105,
+              100,
+              100,
+              101,
+              110,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 2,
+          "responseSize": 21
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-SEC-004 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-004 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-004 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-004 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-004 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "63ef46e8-5a3d-4931-a4f9-1fa6f0aaa7c8",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 24,
+          "cr": true,
+          "httpRequestId": "b48397ee-825f-4be8-84c8-936a98c712e2"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer not-a-jwt"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "4e9a7684-bce0-4788-b56f-c95ad715aa80",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "6a98e3b4-4e74-44e4-81b5-8d1d8f113f6e",
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "21"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"15-TLNzmZqKxaTuFdX/dVWWPBu44/c\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              70,
+              111,
+              114,
+              98,
+              105,
+              100,
+              100,
+              101,
+              110,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 3,
+          "responseSize": 21
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-SEC-005 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-005 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-005 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-005 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-005 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "acd90db9-79a8-4c28-835f-6628c8ad4274",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 25,
+          "cr": true,
+          "httpRequestId": "b854daa6-aba4-44ee-ba16-354307a4f071"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer <REDACTED_invalidSignatureToken>"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "25909f85-3c5a-4b6e-bd8f-7b1461767353",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "72568022-db2f-4488-bb3f-ac84cfb05217",
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "21"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"15-TLNzmZqKxaTuFdX/dVWWPBu44/c\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              70,
+              111,
+              114,
+              98,
+              105,
+              100,
+              100,
+              101,
+              110,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 3,
+          "responseSize": 21
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-SEC-006 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-006 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-006 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-006 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-006 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "68d2bf81-2c37-4cfc-8eb3-35c6be8059bd",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 26,
+          "cr": true,
+          "httpRequestId": "ca957025-15ce-4214-9152-92dbbc1cae6c"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer <REDACTED_expiredToken>"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "861217e9-8692-4842-bf1f-439b04cb2f26",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "3cef6301-17bc-410f-b41b-f0ce7a6c9044",
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "21"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"15-TLNzmZqKxaTuFdX/dVWWPBu44/c\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              70,
+              111,
+              114,
+              98,
+              105,
+              100,
+              100,
+              101,
+              110,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 4,
+          "responseSize": 21
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-SEC-007 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-007 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-007 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-007 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-007 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "878272cd-2132-494c-97df-b791e94655d9",
+          "length": 1,
+          "cycles": 42,
+          "position": 0,
+          "iteration": 27,
+          "cr": true,
+          "httpRequestId": "29bf0c20-6369-4e6e-bdd6-806a7c564d09"
+        },
+        "item": {
+          "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+          "name": "{{testCaseId}} - POST /api/checkout",
+          "request": {
+            "description": {
+              "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "host": [
+                "{{baseUrl}}{{runtimeTargetPath}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{{runtimeTargetBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1e837e38-1753-4ca7-8f5b-54063b325199",
+                "type": "text/javascript",
+                "exec": [
+                  "(function () {",
+                  "  const id = pm.iterationData.get('testCaseId');",
+                  "  if (pm.iterationData.get('enabled') !== true) {",
+                  "    console.warn(id + ' skipped: ' + pm.iterationData.get('disabledReason'));",
+                  "    pm.execution.skipRequest();",
+                  "    return;",
+                  "  }",
+                  "  const authMode = pm.iterationData.get('authMode');",
+                  "  pm.request.headers.remove('Authorization');",
+                  "  function requireEnvironment(key) {",
+                  "    const value = pm.environment.get(key);",
+                  "    if (!value || !String(value).trim()) throw new Error(key + ' local environment value is required for ' + id);",
+                  "    return value;",
+                  "  }",
+                  "  if (authMode === 'emptyBearer') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' });",
+                  "  else if (authMode === 'basic') pm.request.headers.upsert({ key: 'Authorization', value: 'Basic dGVzdDp0ZXN0' });",
+                  "  else if (authMode === 'malformed') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "  else if (authMode === 'validU1') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU1') });",
+                  "  else if (authMode === 'validU2') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('validTokenU2') });",
+                  "  else if (authMode === 'invalidSignature') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('invalidSignatureToken') });",
+                  "  else if (authMode === 'expired') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('expiredToken') });",
+                  "  else if (authMode === 'algNone') pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + requireEnvironment('algNoneToken') });",
+                  "  else if (authMode !== 'missing') throw new Error('Unsupported authMode for ' + id + ': ' + authMode);",
+                  "  const path = pm.iterationData.get('targetPath') || '/api/checkout';",
+                  "  const template = pm.iterationData.get('bodyTemplate');",
+                  "  if (typeof template !== 'string') throw new Error('bodyTemplate is required for ' + id);",
+                  "  const required = Array.from(template.matchAll(/\\{\\{([^}]+)\\}\\}/g)).map(function (match) { return match[1]; });",
+                  "  required.forEach(requireEnvironment);",
+                  "  const expanded = pm.variables.replaceIn(template);",
+                  "  if (/\\{\\{[^}]+\\}\\}/.test(expanded)) throw new Error('Unresolved local variable in request body for ' + id);",
+                  "  pm.variables.set('runtimeTargetPath', path);",
+                  "  pm.variables.set('runtimeTargetBody', expanded);",
+                  "})();"
+                ],
+                "_lastExecutionId": "2299ee5d-9806-452a-ac2c-a85dbdf82030"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b263db95-d3df-4aa8-9eb7-2a4f93cf2207",
+                "type": "text/javascript",
+                "exec": [
+                  "const id = pm.iterationData.get('testCaseId');",
+                  "const oracle = pm.iterationData.get('statusOracle');",
+                  "const security = String(pm.iterationData.get('securityOracle') || 'noInternal,noSensitive').split(',');",
+                  "pm.test(id + ' - method and selected endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('POST');",
+                  "  pm.expect(pm.request.url.getPath()).to.eql('/api/checkout');",
+                  "});",
+                  "pm.test(id + ' - X-Student-Id injected', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(pm.environment.get('StudentID'));",
+                  "});",
+                  "if (oracle === 'success') pm.test(id + ' - successful HTTP class', function () { pm.expect(pm.response.code).to.be.within(200, 299); });",
+                  "else if (oracle === 'reject') pm.test(id + ' - rejected without server error', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                  "else if (oracle === 'branch') pm.test(id + ' - allowed accept/reject branch without server error', function () { pm.expect(pm.response.code).to.be.within(200, 499); });",
+                  "else console.warn(id + ': exact status oracle is unspecified; actual=' + pm.response.code);",
+                  "let jsonBody = null;",
+                  "try { jsonBody = pm.response.json(); } catch (error) { jsonBody = null; }",
+                  "const text = pm.response.text();",
+                  "if (security.includes('noInternal')) pm.test(id + ' - no database/internal disclosure', function () {",
+                  "  pm.expect(text).not.to.match(/SQLITE|stack trace|syntax error|SELECT\\s|INSERT\\s+INTO|UPDATE\\s+orders|node_modules\\//i);",
+                  "});",
+                  "if (security.includes('noSensitive')) pm.test(id + ' - no sensitive credential fields in JSON', function () {",
+                  "  if (jsonBody && typeof jsonBody === 'object') {",
+                  "    const keys = JSON.stringify(jsonBody).match(/\"[^\"]+\"(?=\\s*:)/g) || [];",
+                  "    const normalized = keys.map(function (key) { return key.replace(/\"/g, '').toLowerCase(); });",
+                  "    ['password', 'password_hash', 'passwordhash', 'jwt', 'token', 'secret'].forEach(function (key) { pm.expect(normalized).not.to.include(key); });",
+                  "  }",
+                  "});",
+                  "const expectedTotal = pm.iterationData.get('expectedServerTotal');",
+                  "if (pm.response.code >= 200 && pm.response.code < 300 && expectedTotal !== null && expectedTotal !== undefined && jsonBody && typeof jsonBody === 'object') {",
+                  "  const candidates = [jsonBody.total_amount, jsonBody.total, jsonBody.order && jsonBody.order.total_amount, jsonBody.order && jsonBody.order.total];",
+                  "  const returnedTotal = candidates.find(function (value) { return value !== undefined && value !== null; });",
+                  "  if (returnedTotal !== undefined) pm.test(id + ' - conditionally returned total is server-derived', function () {",
+                  "    pm.expect(returnedTotal).to.be.a('number');",
+                  "    pm.expect(returnedTotal).to.eql(expectedTotal);",
+                  "  });",
+                  "}",
+                  "if (pm.iterationData.get('manualStateEvidenceRequired') === true) {",
+                  "  console.warn(id + ': MANUAL_STATE_ORACLE_REQUIRED - ' + pm.iterationData.get('expectedSideEffect'));",
+                  "}",
+                  "console.log(id + ' actual status=' + pm.response.code + '; exact status/schema unspecified by contract');"
+                ],
+                "_lastExecutionId": "309e2094-71f9-4a44-8686-faf776a1f3a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Data-driven POST /api/checkout request. Assertions use only approved high-level or branch-aware oracles. Persistent order/cart/ownership effects require separately approved non-GET evidence.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "checkout"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127379"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer <REDACTED_algNoneToken>"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "601ec24f-c669-417b-91bd-58e9baaea97f",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"total_amount\":250000,\"shipping_address\":\"123 Le Loi, TP.HCM\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "67054c51-b2b3-4ba2-9036-6a9a6e107ace",
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "21"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"15-TLNzmZqKxaTuFdX/dVWWPBu44/c\""
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 22 Aug 2026 03:03:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              70,
+              111,
+              114,
+              98,
+              105,
+              100,
+              100,
+              101,
+              110,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 3,
+          "responseSize": 21
+        },
+        "id": "acfa32fe-6ccf-423a-8ad8-92214c7a660b",
+        "assertions": [
+          {
+            "assertion": "FR08-SEC-008 - method and selected endpoint",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-008 - X-Student-Id injected",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-008 - rejected without server error",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-008 - no database/internal disclosure",
+            "skipped": false
+          },
+          {
+            "assertion": "FR08-SEC-008 - no sensitive credential fields in JSON",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 288
+    },
+    "failures": [],
+    "error": null
+  }
+}

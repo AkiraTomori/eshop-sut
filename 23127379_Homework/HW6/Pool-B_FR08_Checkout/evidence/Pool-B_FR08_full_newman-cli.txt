@@ -1,0 +1,3190 @@
+newman
+
+23127379 HW06 EShop API Testing - Pool B
+
+Iteration 1/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 44ms]
+  ┌
+  │ 'FR08-DOM-001 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 7ms]
+  ┌
+  │ 'FR08-DOM-001 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-DOM-001 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-DOM-001 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 15ms]
+  ✓  FR08-DOM-001 - method and selected endpoint
+  ✓  FR08-DOM-001 - X-Student-Id injected
+  ✓  FR08-DOM-001 - successful HTTP class
+  ✓  FR08-DOM-001 - no database/internal disclosure
+  ✓  FR08-DOM-001 - no sensitive credential fields in JSON
+  ┌
+  │ "FR08-DOM-001: MANUAL_STATE_ORACLE_REQUIRED - Create o
+  │ nly U1's order at server cart total 250000 and clear o
+  │ nly U1's cart."
+  │ 'FR08-DOM-001 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 2/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 11ms]
+  ┌
+  │ 'FR08-DOM-002 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-DOM-002 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-DOM-002 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-002'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 15ms]
+  ✓  FR08-DOM-002 - method and selected endpoint
+  ✓  FR08-DOM-002 - X-Student-Id injected
+  ✓  FR08-DOM-002 - successful HTTP class
+  ✓  FR08-DOM-002 - no database/internal disclosure
+  ✓  FR08-DOM-002 - no sensitive credential fields in JSON
+  ┌
+  │ "FR08-DOM-002: MANUAL_STATE_ORACLE_REQUIRED - Create U
+  │ 1's order at 100000 and clear the one-item cart."
+  │ 'FR08-DOM-002 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 3/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 11ms]
+  ┌
+  │ 'FR08-DOM-003 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-DOM-003 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-DOM-003 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-003'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 10ms]
+  ✓  FR08-DOM-003 - method and selected endpoint
+  ✓  FR08-DOM-003 - X-Student-Id injected
+  ✓  FR08-DOM-003 - successful HTTP class
+  ✓  FR08-DOM-003 - no database/internal disclosure
+  ✓  FR08-DOM-003 - no sensitive credential fields in JSON
+  ┌
+  │ "FR08-DOM-003: MANUAL_STATE_ORACLE_REQUIRED - Create U
+  │ 1's order using price multiplied by quantity and clear
+  │  the cart."
+  │ 'FR08-DOM-003 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 4/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 6ms]
+  ┌
+  │ 'FR08-DOM-006 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-DOM-006 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-DOM-006 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-DOM-006 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-006'
+  └
+  POST http://127.0.0.1:3000/api/checkout [400 Bad Request, 444B, 2ms]
+  ✓  FR08-DOM-006 - method and selected endpoint
+  ✓  FR08-DOM-006 - X-Student-Id injected
+  ✓  FR08-DOM-006 - rejected without server error
+  ✓  FR08-DOM-006 - no database/internal disclosure
+  ✓  FR08-DOM-006 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-006: MANUAL_STATE_ORACLE_REQUIRED - No order
+  │ ; U1 cart unchanged; no parser or database internals d
+  │ isclosed.'
+  │ 'FR08-DOM-006 checkout actual status=400; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 5/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 11ms]
+  ┌
+  │ 'FR08-DOM-007 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-DOM-007 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-DOM-007 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-DOM-007 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-007'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 10ms]
+  ✓  FR08-DOM-007 - method and selected endpoint
+  ✓  FR08-DOM-007 - X-Student-Id injected
+  1. FR08-DOM-007 - rejected without server error
+  ✓  FR08-DOM-007 - no database/internal disclosure
+  ✓  FR08-DOM-007 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-007: MANUAL_STATE_ORACLE_REQUIRED - Reject n
+  │ on-object JSON; no order; U1 cart unchanged.'
+  │ 'FR08-DOM-007 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 6/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-008'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 2ms]
+  ✓  FR08-DOM-008 - method and selected endpoint
+  ✓  FR08-DOM-008 - X-Student-Id injected
+  ✓  FR08-DOM-008 - rejected without server error
+  ✓  FR08-DOM-008 - no database/internal disclosure
+  ✓  FR08-DOM-008 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-008: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation rejection with no order/cart mutation; state po
+  │ rtion needs separate non-GET evidence.'
+  │ 'FR08-DOM-008 checkout actual status=401; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 7/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-009'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 2ms]
+  ✓  FR08-DOM-009 - method and selected endpoint
+  ✓  FR08-DOM-009 - X-Student-Id injected
+  ✓  FR08-DOM-009 - rejected without server error
+  ✓  FR08-DOM-009 - no database/internal disclosure
+  ✓  FR08-DOM-009 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-009: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation rejection with no state mutation.'
+  │ 'FR08-DOM-009 checkout actual status=401; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 8/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-010'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 2ms]
+  ✓  FR08-DOM-010 - method and selected endpoint
+  ✓  FR08-DOM-010 - X-Student-Id injected
+  ✓  FR08-DOM-010 - rejected without server error
+  ✓  FR08-DOM-010 - no database/internal disclosure
+  ✓  FR08-DOM-010 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-010: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he non-Bearer scheme with no state mutation.'
+  │ 'FR08-DOM-010 checkout actual status=403; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 9/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 12ms]
+  ┌
+  │ 'FR08-DOM-011 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-DOM-011 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-011'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 3ms]
+  ✓  FR08-DOM-011 - method and selected endpoint
+  ✓  FR08-DOM-011 - X-Student-Id injected
+  ✓  FR08-DOM-011 - rejected without server error
+  ✓  FR08-DOM-011 - no database/internal disclosure
+  ✓  FR08-DOM-011 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-011: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he tampered JWT; no state mutation.'
+  │ 'FR08-DOM-011 checkout actual status=403; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 10/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 15ms]
+  ┌
+  │ 'FR08-DOM-012 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-DOM-012 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-012'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 3ms]
+  ✓  FR08-DOM-012 - method and selected endpoint
+  ✓  FR08-DOM-012 - X-Student-Id injected
+  ✓  FR08-DOM-012 - rejected without server error
+  ✓  FR08-DOM-012 - no database/internal disclosure
+  ✓  FR08-DOM-012 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-012: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he expired JWT; no state mutation.'
+  │ 'FR08-DOM-012 checkout actual status=403; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 11/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 12ms]
+  ┌
+  │ 'FR08-DOM-015 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-DOM-015 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-DOM-015 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-DOM-015 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-015'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 13ms]
+  ✓  FR08-DOM-015 - method and selected endpoint
+  ✓  FR08-DOM-015 - X-Student-Id injected
+  ✓  FR08-DOM-015 - allowed accept/reject branch without server error
+  ✓  FR08-DOM-015 - no database/internal disclosure
+  ✓  FR08-DOM-015 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-015: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or accept using C=250000; never create total 
+  │ 249999.'
+  │ 'FR08-DOM-015 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 12/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 8ms]
+  ┌
+  │ 'FR08-DOM-016 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 2ms]
+  ┌
+  │ 'FR08-DOM-016 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-DOM-016 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-DOM-016 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-016'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 8ms]
+  ✓  FR08-DOM-016 - method and selected endpoint
+  ✓  FR08-DOM-016 - X-Student-Id injected
+  ✓  FR08-DOM-016 - allowed accept/reject branch without server error
+  ✓  FR08-DOM-016 - no database/internal disclosure
+  ✓  FR08-DOM-016 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-016: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or accept using C=250000; never create total 
+  │ 250001.'
+  │ 'FR08-DOM-016 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 13/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 9ms]
+  ┌
+  │ 'FR08-DOM-017 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 2ms]
+  ┌
+  │ 'FR08-DOM-017 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-DOM-017 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 1ms]
+  ┌
+  │ 'FR08-DOM-017 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-017'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 9ms]
+  ✓  FR08-DOM-017 - method and selected endpoint
+  ✓  FR08-DOM-017 - X-Student-Id injected
+  ✓  FR08-DOM-017 - allowed accept/reject branch without server error
+  ✓  FR08-DOM-017 - no database/internal disclosure
+  ✓  FR08-DOM-017 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-017: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or accept using C=250000; never create a zero
+  │ -total order from the client value.'
+  │ 'FR08-DOM-017 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 14/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 11ms]
+  ┌
+  │ 'FR08-DOM-018 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 2ms]
+  ┌
+  │ 'FR08-DOM-018 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-DOM-018 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 1ms]
+  ┌
+  │ 'FR08-DOM-018 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-018'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 17ms]
+  ✓  FR08-DOM-018 - method and selected endpoint
+  ✓  FR08-DOM-018 - X-Student-Id injected
+  ✓  FR08-DOM-018 - allowed accept/reject branch without server error
+  ✓  FR08-DOM-018 - no database/internal disclosure
+  ✓  FR08-DOM-018 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-018: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or accept using C=250000; never create a nega
+  │ tive-total order.'
+  │ 'FR08-DOM-018 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 15/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 7ms]
+  ┌
+  │ 'FR08-DOM-020 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-DOM-020 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-DOM-020 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-DOM-020 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-020'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 18ms]
+  ✓  FR08-DOM-020 - method and selected endpoint
+  ✓  FR08-DOM-020 - X-Student-Id injected
+  ✓  FR08-DOM-020 - allowed accept/reject branch without server error
+  ✓  FR08-DOM-020 - no database/internal disclosure
+  ✓  FR08-DOM-020 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-020: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or accept using C=250000; omitted client tota
+  │ l is never authoritative.'
+  │ 'FR08-DOM-020 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 16/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 15ms]
+  ┌
+  │ 'FR08-DOM-021 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 5ms]
+  ┌
+  │ 'FR08-DOM-021 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-DOM-021 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-DOM-021 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-021'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 20ms]
+  ✓  FR08-DOM-021 - method and selected endpoint
+  ✓  FR08-DOM-021 - X-Student-Id injected
+  ✓  FR08-DOM-021 - allowed accept/reject branch without server error
+  ✓  FR08-DOM-021 - no database/internal disclosure
+  ✓  FR08-DOM-021 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-021: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or accept using C=250000; null client total i
+  │ s never authoritative.'
+  │ 'FR08-DOM-021 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 17/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 13ms]
+  ┌
+  │ 'FR08-DOM-022 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-DOM-022 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-DOM-022 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-DOM-022 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-022'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 12ms]
+  ✓  FR08-DOM-022 - method and selected endpoint
+  ✓  FR08-DOM-022 - X-Student-Id injected
+  ✓  FR08-DOM-022 - allowed accept/reject branch without server error
+  ✓  FR08-DOM-022 - no database/internal disclosure
+  ✓  FR08-DOM-022 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-022: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or accept using numeric C=250000; never trust
+  │  or coerce the client string as the order total.'
+  │ 'FR08-DOM-022 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 18/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 10ms]
+  ┌
+  │ 'FR08-DOM-029 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-DOM-029 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-DOM-029 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-DOM-029 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DOM-029'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 15ms]
+  ✓  FR08-DOM-029 - method and selected endpoint
+  ✓  FR08-DOM-029 - X-Student-Id injected
+  ✓  FR08-DOM-029 - allowed accept/reject branch without server error
+  ✓  FR08-DOM-029 - no database/internal disclosure
+  ✓  FR08-DOM-029 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DOM-029: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or ignore the unknown property; protected ord
+  │ er/cart state is unaffected by the sentinel.'
+  │ 'FR08-DOM-029 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 19/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-001'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 3ms]
+  ✓  FR08-DT-001 - method and selected endpoint
+  ✓  FR08-DT-001 - X-Student-Id injected
+  ✓  FR08-DT-001 - rejected without server error
+  ✓  FR08-DT-001 - no database/internal disclosure
+  ✓  FR08-DT-001 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DT-001: MANUAL_STATE_ORACLE_REQUIRED - Authentic
+  │ ation rejection dominates all cart/total/address condi
+  │ tions; no state mutation.'
+  │ 'FR08-DT-001 checkout actual status=401; exact status/
+  │ schema unspecified by contract'
+  └
+
+Iteration 20/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 12ms]
+  ┌
+  │ 'FR08-DT-002 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 705B, 5ms]
+  ┌
+  │ 'FR08-DT-002 fixture login U1 captured a token without
+  │  printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 5ms]
+  ┌
+  │ 'FR08-DT-002 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-DT-002 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-DT-002'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 13ms]
+  ✓  FR08-DT-002 - method and selected endpoint
+  ✓  FR08-DT-002 - X-Student-Id injected
+  ✓  FR08-DT-002 - successful HTTP class
+  ✓  FR08-DT-002 - no database/internal disclosure
+  ✓  FR08-DT-002 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-DT-002: MANUAL_STATE_ORACLE_REQUIRED - Recalcula
+  │ te from cart, create the correct U1 order, and clear U
+  │ 1 cart.'
+  │ 'FR08-DT-002 checkout actual status=200; exact status/
+  │ schema unspecified by contract'
+  └
+
+Iteration 21/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 13ms]
+  ┌
+  │ 'FR08-SEC-001 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 2ms]
+  ┌
+  │ 'FR08-SEC-001 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-SEC-001 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-SEC-001 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 13ms]
+  ✓  FR08-SEC-001 - method and selected endpoint
+  ✓  FR08-SEC-001 - X-Student-Id injected
+  ✓  FR08-SEC-001 - successful HTTP class
+  ✓  FR08-SEC-001 - no database/internal disclosure
+  ✓  FR08-SEC-001 - no sensitive credential fields in JSON
+  ┌
+  │ "FR08-SEC-001: MANUAL_STATE_ORACLE_REQUIRED - Create o
+  │ nly U1's correct order, clear only U1's cart, and disc
+  │ lose no secrets."
+  │ 'FR08-SEC-001 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 22/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-002'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 2ms]
+  ✓  FR08-SEC-002 - method and selected endpoint
+  ✓  FR08-SEC-002 - X-Student-Id injected
+  ✓  FR08-SEC-002 - rejected without server error
+  ✓  FR08-SEC-002 - no database/internal disclosure
+  ✓  FR08-SEC-002 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-002: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation rejection; no order/cart mutation or internal l
+  │ eakage.'
+  │ 'FR08-SEC-002 checkout actual status=401; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 23/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-003'
+  └
+  POST http://127.0.0.1:3000/api/checkout [401 Unauthorized, 301B, 1ms]
+  ✓  FR08-SEC-003 - method and selected endpoint
+  ✓  FR08-SEC-003 - X-Student-Id injected
+  ✓  FR08-SEC-003 - rejected without server error
+  ✓  FR08-SEC-003 - no database/internal disclosure
+  ✓  FR08-SEC-003 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-003: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation rejection; no state mutation or token echo.'
+  │ 'FR08-SEC-003 checkout actual status=401; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 24/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-004'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 2ms]
+  ✓  FR08-SEC-004 - method and selected endpoint
+  ✓  FR08-SEC-004 - X-Student-Id injected
+  ✓  FR08-SEC-004 - rejected without server error
+  ✓  FR08-SEC-004 - no database/internal disclosure
+  ✓  FR08-SEC-004 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-004: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he Basic scheme; no state mutation.'
+  │ 'FR08-SEC-004 checkout actual status=403; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 25/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-005'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 2ms]
+  ✓  FR08-SEC-005 - method and selected endpoint
+  ✓  FR08-SEC-005 - X-Student-Id injected
+  ✓  FR08-SEC-005 - rejected without server error
+  ✓  FR08-SEC-005 - no database/internal disclosure
+  ✓  FR08-SEC-005 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-005: MANUAL_STATE_ORACLE_REQUIRED - Generic 
+  │ authentication failure; no internals or mutation.'
+  │ 'FR08-SEC-005 checkout actual status=403; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 26/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 12ms]
+  ┌
+  │ 'FR08-SEC-006 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-SEC-006 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-006'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 3ms]
+  ✓  FR08-SEC-006 - method and selected endpoint
+  ✓  FR08-SEC-006 - X-Student-Id injected
+  ✓  FR08-SEC-006 - rejected without server error
+  ✓  FR08-SEC-006 - no database/internal disclosure
+  ✓  FR08-SEC-006 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-006: MANUAL_STATE_ORACLE_REQUIRED - Reject a
+  │ ltered claims; no state mutation.'
+  │ 'FR08-SEC-006 checkout actual status=403; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 27/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 13ms]
+  ┌
+  │ 'FR08-SEC-007 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-SEC-007 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-007'
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 3ms]
+  ✓  FR08-SEC-007 - method and selected endpoint
+  ✓  FR08-SEC-007 - X-Student-Id injected
+  ✓  FR08-SEC-007 - rejected without server error
+  ✓  FR08-SEC-007 - no database/internal disclosure
+  ✓  FR08-SEC-007 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-007: MANUAL_STATE_ORACLE_REQUIRED - Authenti
+  │ cation failure; no refresh, token echo, or state mutat
+  │ ion.'
+  │ 'FR08-SEC-007 checkout actual status=403; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 28/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 10ms]
+  ┌
+  │ 'FR08-SEC-008 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-SEC-008 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-008'
+  │ `Using "btoa" is deprecated. Use "require('btoa')" ins
+  │ tead.`
+  └
+  POST http://127.0.0.1:3000/api/checkout [403 Forbidden, 295B, 1ms]
+  ✓  FR08-SEC-008 - method and selected endpoint
+  ✓  FR08-SEC-008 - X-Student-Id injected
+  ✓  FR08-SEC-008 - rejected without server error
+  ✓  FR08-SEC-008 - no database/internal disclosure
+  ✓  FR08-SEC-008 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-008: MANUAL_STATE_ORACLE_REQUIRED - Reject t
+  │ he unsigned token and trust no claims.'
+  │ 'FR08-SEC-008 checkout actual status=403; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 29/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 11ms]
+  ┌
+  │ 'FR08-SEC-009 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 10ms]
+  ┌
+  │ 'FR08-SEC-009 fixture register U2 completed'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-SEC-009 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-SEC-009 fixture login U2 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-SEC-009 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-SEC-009 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-SEC-009 fixture cart U2 item 1 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-SEC-009 fixture cart U2 item 2 completed'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-009'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 12ms]
+  ✓  FR08-SEC-009 - method and selected endpoint
+  ✓  FR08-SEC-009 - X-Student-Id injected
+  ✓  FR08-SEC-009 - successful HTTP class
+  ✓  FR08-SEC-009 - no database/internal disclosure
+  ✓  FR08-SEC-009 - no sensitive credential fields in JSON
+  ┌
+  │ "FR08-SEC-009: MANUAL_STATE_ORACLE_REQUIRED - Use only
+  │  U2's cart and create only U2's order at C-U2=150000; 
+  │ leave U1 unchanged."
+  │ 'FR08-SEC-009 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 30/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 11ms]
+  ┌
+  │ 'FR08-SEC-010 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 9ms]
+  ┌
+  │ 'FR08-SEC-010 fixture register U2 completed'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-SEC-010 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 3ms]
+  ┌
+  │ 'FR08-SEC-010 fixture login U2 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-SEC-010 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-SEC-010 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-SEC-010 fixture cart U2 item 1 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-SEC-010 fixture cart U2 item 2 completed'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-010'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 14ms]
+  ✓  FR08-SEC-010 - method and selected endpoint
+  ✓  FR08-SEC-010 - X-Student-Id injected
+  ✓  FR08-SEC-010 - allowed accept/reject branch without server error
+  ✓  FR08-SEC-010 - no database/internal disclosure
+  ✓  FR08-SEC-010 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-010: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or ignore injected user_id; any order remains
+  │  U1-owned and U2 is untouched.'
+  │ 'FR08-SEC-010 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 31/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 10ms]
+  ┌
+  │ 'FR08-SEC-011 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-SEC-011 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-SEC-011 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-SEC-011 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-011'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 18ms]
+  ✓  FR08-SEC-011 - method and selected endpoint
+  ✓  FR08-SEC-011 - X-Student-Id injected
+  ✓  FR08-SEC-011 - allowed accept/reject branch without server error
+  ✓  FR08-SEC-011 - no database/internal disclosure
+  ✓  FR08-SEC-011 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-011: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or accept using C=250000; never create an ord
+  │ er total of 1.'
+  │ 'FR08-SEC-011 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 32/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 12ms]
+  ┌
+  │ 'FR08-SEC-012 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-SEC-012 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-SEC-012 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-SEC-012 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-012'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 16ms]
+  ✓  FR08-SEC-012 - method and selected endpoint
+  ✓  FR08-SEC-012 - X-Student-Id injected
+  ✓  FR08-SEC-012 - allowed accept/reject branch without server error
+  ✓  FR08-SEC-012 - no database/internal disclosure
+  ✓  FR08-SEC-012 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-012: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or ignore role; no role elevation; checkout i
+  │ nvariants preserved.'
+  │ 'FR08-SEC-012 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 33/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 11ms]
+  ┌
+  │ 'FR08-SEC-013 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 4ms]
+  ┌
+  │ 'FR08-SEC-013 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-SEC-013 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-SEC-013 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-013'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 14ms]
+  ✓  FR08-SEC-013 - method and selected endpoint
+  ✓  FR08-SEC-013 - X-Student-Id injected
+  ✓  FR08-SEC-013 - allowed accept/reject branch without server error
+  ✓  FR08-SEC-013 - no database/internal disclosure
+  ✓  FR08-SEC-013 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-013: MANUAL_STATE_ORACLE_REQUIRED - Reject u
+  │ nchanged or ignore status; no accepted order starts as
+  │  delivered.'
+  │ 'FR08-SEC-013 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 34/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 9ms]
+  ┌
+  │ 'FR08-SEC-014 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 5ms]
+  ┌
+  │ 'FR08-SEC-014 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-SEC-014 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-SEC-014 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SEC-014'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 19ms]
+  ✓  FR08-SEC-014 - method and selected endpoint
+  ✓  FR08-SEC-014 - X-Student-Id injected
+  ✓  FR08-SEC-014 - allowed accept/reject branch without server error
+  ✓  FR08-SEC-014 - no database/internal disclosure
+  ✓  FR08-SEC-014 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SEC-014: MANUAL_STATE_ORACLE_REQUIRED - Reject o
+  │ r treat address literally; no query error, bypass, or 
+  │ cross-user effect.'
+  │ 'FR08-SEC-014 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 35/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 14ms]
+  ┌
+  │ 'FR08-SCH-006 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 707B, 5ms]
+  ┌
+  │ 'FR08-SCH-006 fixture login U1 captured a token withou
+  │ t printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-SCH-006 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-SCH-006 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-SCH-006'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 16ms]
+  ✓  FR08-SCH-006 - method and selected endpoint
+  ✓  FR08-SCH-006 - X-Student-Id injected
+  ✓  FR08-SCH-006 - allowed accept/reject branch without server error
+  ✓  FR08-SCH-006 - no database/internal disclosure
+  ✓  FR08-SCH-006 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-SCH-006: MANUAL_STATE_ORACLE_REQUIRED - If a tot
+  │ al is returned it is numeric C=250000; any persisted c
+  │ reated order also uses C=250000.'
+  │ 'FR08-SCH-006 checkout actual status=200; exact status
+  │ /schema unspecified by contract'
+  └
+
+Iteration 36/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 13ms]
+  ┌
+  │ 'FR08-EXT-DOM-001 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 715B, 4ms]
+  ┌
+  │ 'FR08-EXT-DOM-001 fixture login U1 captured a token wi
+  │ thout printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-EXT-DOM-001 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-EXT-DOM-001 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DOM-001'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 13ms]
+  ✓  FR08-EXT-DOM-001 - method and selected endpoint
+  ✓  FR08-EXT-DOM-001 - X-Student-Id injected
+  ✓  FR08-EXT-DOM-001 - allowed accept/reject branch without server error
+  ✓  FR08-EXT-DOM-001 - no database/internal disclosure
+  ✓  FR08-EXT-DOM-001 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-EXT-DOM-001: MANUAL_STATE_ORACLE_REQUIRED - Reje
+  │ ct unchanged or accept using finite server C=250000; n
+  │ ever persist the runtime-extreme client value.'
+  │ 'FR08-EXT-DOM-001 checkout actual status=200; exact st
+  │ atus/schema unspecified by contract'
+  └
+
+Iteration 37/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 10ms]
+  ┌
+  │ 'FR08-EXT-DT-001 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 713B, 3ms]
+  ┌
+  │ 'FR08-EXT-DT-001 fixture login U1 captured a token wit
+  │ hout printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-EXT-DT-001 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-EXT-DT-001 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-DT-001'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 16ms]
+  ✓  FR08-EXT-DT-001 - method and selected endpoint
+  ✓  FR08-EXT-DT-001 - X-Student-Id injected
+  ✓  FR08-EXT-DT-001 - successful HTTP class
+  ✓  FR08-EXT-DT-001 - no database/internal disclosure
+  ✓  FR08-EXT-DT-001 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-EXT-DT-001: MANUAL_STATE_ORACLE_REQUIRED - Use c
+  │ urrent C-new=150000 rather than stale T=100000, includ
+  │ e current cart state, then clear U1 cart.'
+  │ 'FR08-EXT-DT-001 checkout actual status=200; exact sta
+  │ tus/schema unspecified by contract'
+  └
+
+Iteration 38/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 18ms]
+  ┌
+  │ 'FR08-EXT-SEC-001 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 715B, 4ms]
+  ┌
+  │ 'FR08-EXT-SEC-001 fixture login U1 captured a token wi
+  │ thout printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 5ms]
+  ┌
+  │ 'FR08-EXT-SEC-001 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 5ms]
+  ┌
+  │ 'FR08-EXT-SEC-001 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-001'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 14ms]
+  ✓  FR08-EXT-SEC-001 - method and selected endpoint
+  ✓  FR08-EXT-SEC-001 - X-Student-Id injected
+  ✓  FR08-EXT-SEC-001 - allowed accept/reject branch without server error
+  ✓  FR08-EXT-SEC-001 - no database/internal disclosure
+  ✓  FR08-EXT-SEC-001 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-EXT-SEC-001: MANUAL_STATE_ORACLE_REQUIRED - Reje
+  │ ct unchanged or ignore injected items; any order conta
+  │ ins only server-cart items and total C=250000.'
+  │ 'FR08-EXT-SEC-001 checkout actual status=200; exact st
+  │ atus/schema unspecified by contract'
+  └
+
+Iteration 39/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 14ms]
+  ┌
+  │ 'FR08-EXT-SEC-002 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 715B, 4ms]
+  ┌
+  │ 'FR08-EXT-SEC-002 fixture login U1 captured a token wi
+  │ thout printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-EXT-SEC-002 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-EXT-SEC-002 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-002'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 19ms]
+  ✓  FR08-EXT-SEC-002 - method and selected endpoint
+  ✓  FR08-EXT-SEC-002 - X-Student-Id injected
+  ✓  FR08-EXT-SEC-002 - allowed accept/reject branch without server error
+  ✓  FR08-EXT-SEC-002 - no database/internal disclosure
+  ✓  FR08-EXT-SEC-002 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-EXT-SEC-002: MANUAL_STATE_ORACLE_REQUIRED - Reje
+  │ ct unchanged or ignore discount; accepted order remain
+  │ s C=250000 and records no coupon usage.'
+  │ 'FR08-EXT-SEC-002 checkout actual status=200; exact st
+  │ atus/schema unspecified by contract'
+  └
+
+Iteration 40/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 9ms]
+  ┌
+  │ 'FR08-EXT-SEC-003 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 715B, 3ms]
+  ┌
+  │ 'FR08-EXT-SEC-003 fixture login U1 captured a token wi
+  │ thout printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 1ms]
+  ┌
+  │ 'FR08-EXT-SEC-003 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-EXT-SEC-003 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-003'
+  └
+  POST http://127.0.0.1:3000/api/checkout?total_amount=1 [200 OK, 313B, 14ms]
+  ✓  FR08-EXT-SEC-003 - method and selected endpoint
+  ✓  FR08-EXT-SEC-003 - X-Student-Id injected
+  ✓  FR08-EXT-SEC-003 - allowed accept/reject branch without server error
+  ✓  FR08-EXT-SEC-003 - no database/internal disclosure
+  ✓  FR08-EXT-SEC-003 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-EXT-SEC-003: MANUAL_STATE_ORACLE_REQUIRED - Reje
+  │ ct unchanged or ignore query pollution; any accepted o
+  │ rder uses server C=250000, never query value 1.'
+  │ 'FR08-EXT-SEC-003 checkout actual status=200; exact st
+  │ atus/schema unspecified by contract'
+  └
+
+Iteration 41/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 11ms]
+  ┌
+  │ 'FR08-EXT-SEC-004 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 715B, 4ms]
+  ┌
+  │ 'FR08-EXT-SEC-004 fixture login U1 captured a token wi
+  │ thout printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 3ms]
+  ┌
+  │ 'FR08-EXT-SEC-004 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 2ms]
+  ┌
+  │ 'FR08-EXT-SEC-004 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-004'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 15ms]
+  ✓  FR08-EXT-SEC-004 - method and selected endpoint
+  ✓  FR08-EXT-SEC-004 - X-Student-Id injected
+  ✓  FR08-EXT-SEC-004 - allowed accept/reject branch without server error
+  ✓  FR08-EXT-SEC-004 - no database/internal disclosure
+  ✓  FR08-EXT-SEC-004 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-EXT-SEC-004: MANUAL_STATE_ORACLE_REQUIRED - Reje
+  │ ct ambiguous JSON unchanged or accept using server C=2
+  │ 50000; disclose no parser internals.'
+  │ 'FR08-EXT-SEC-004 checkout actual status=200; exact st
+  │ atus/schema unspecified by contract'
+  └
+
+Iteration 42/42
+
+❏ Setup / Fixtures
+↳ Fixture only - Register U1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  └
+  POST http://127.0.0.1:3000/api/register [200 OK, 317B, 13ms]
+  ┌
+  │ 'FR08-EXT-SEC-005 fixture register U1 completed'
+  └
+
+↳ Fixture only - Register U2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  └
+
+↳ Fixture only - Login U1 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  └
+  POST http://127.0.0.1:3000/api/login [200 OK, 715B, 5ms]
+  ┌
+  │ 'FR08-EXT-SEC-005 fixture login U1 captured a token wi
+  │ thout printing it'
+  └
+
+↳ Fixture only - Login U2 and capture JWT
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  └
+
+↳ Fixture only - Seed U1 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-EXT-SEC-005 fixture cart U1 item 1 completed'
+  └
+
+↳ Fixture only - Seed U1 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  └
+  POST http://127.0.0.1:3000/api/cart [200 OK, 294B, 4ms]
+  ┌
+  │ 'FR08-EXT-SEC-005 fixture cart U1 item 2 completed'
+  └
+
+↳ Fixture only - Seed U2 cart item 1
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  └
+
+↳ Fixture only - Seed U2 cart item 2
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  └
+
+❏ Pool B - FR-08 Checkout
+↳ {{testCaseId}} - POST /api/checkout
+  ┌
+  │ 'X-Student-Id injected for', 'FR08-EXT-SEC-005'
+  └
+  POST http://127.0.0.1:3000/api/checkout [200 OK, 313B, 15ms]
+  ✓  FR08-EXT-SEC-005 - method and selected endpoint
+  ✓  FR08-EXT-SEC-005 - X-Student-Id injected
+  ✓  FR08-EXT-SEC-005 - successful HTTP class
+  ✓  FR08-EXT-SEC-005 - no database/internal disclosure
+  ✓  FR08-EXT-SEC-005 - no sensitive credential fields in JSON
+  ┌
+  │ 'FR08-EXT-SEC-005: MANUAL_STATE_ORACLE_REQUIRED - Chec
+  │ kout succeeds without SQL error/truncation; literal ad
+  │ dress is handled safely, order total is 250000, and ca
+  │ rt clears.'
+  │ 'FR08-EXT-SEC-005 checkout actual status=200; exact st
+  │ atus/schema unspecified by contract'
+  └
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │              42 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │             174 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │             174 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │             756 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │             210 │               1 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 4.6s                                    │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 20.95kB (approx)                       │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 6ms [min: 1ms, max: 44ms, s.d.: 5ms] │
+└─────────────────────────────────────────────────────────────┘
+
+[31m  # [39m[31m failure        [39m[31m detail                                                                 [39m
+[90m    [39m[90m                [39m[90m                                                                        [39m
+ 1.  AssertionError  FR08-DOM-007 - rejected without server error                           
+     iteration: 5    expected 200 to be within 400..499                                     
+                     at assertion:2 in test-script                                          
+                     inside "Pool B - FR-08 Checkout / {{testCaseId}} - POST /api/checkout" 
