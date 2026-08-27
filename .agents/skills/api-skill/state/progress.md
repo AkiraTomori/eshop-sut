@@ -28,9 +28,9 @@ Current Pool: Pool C
 
 ## Pool C — IN_PROGRESS
 
-- [ ] Stage 1 — Generate
+- [x] Stage 1 — Generate
   - [x] Domain Testing
-  - [ ] Security/Schema Checklist
+  - [x] Security/Schema Checklist
 - [ ] Stage 2 — Audit
 - [ ] Stage 3 — Extend
 - [ ] Stage 4 — Execute
