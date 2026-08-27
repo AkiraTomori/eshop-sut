@@ -1,6 +1,6 @@
 # HW06 API Testing Progress
 
-Current Pool: Pool B
+Current Pool: Pool C
 
 ## Pool A — DONE
 
@@ -26,10 +26,10 @@ Current Pool: Pool B
 - [x] Stage 5 — Report Bug
 - [x] Pool AI Audit — human reviewed
 
-## Pool C — NOT_STARTED
+## Pool C — IN_PROGRESS
 
 - [ ] Stage 1 — Generate
-  - [ ] Domain Testing
+  - [x] Domain Testing
   - [ ] Security/Schema Checklist
 - [ ] Stage 2 — Audit
 - [ ] Stage 3 — Extend
