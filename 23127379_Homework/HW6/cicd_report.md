@@ -1,36 +1,25 @@
-# HW06 Newman CI/CD Report
+# HW06 Newman CI/CD Report — Submission Reference
 
-> **Status:** TEMPLATE — workflow runs, commits, URLs, and screenshots must be real.
+> **Status:** STUDENT DECISION CONFIRMED WITH KNOWN DEVIATIONS.
 
-## 1. Pipeline configuration
+The complete canonical report is [`reports/HW06_CICD_Report.md`](../../reports/HW06_CICD_Report.md), and the workflow is [`.github/workflows/hw06-newman.yml`](../../.github/workflows/hw06-newman.yml).
 
-| Item | Value | Evidence |
+## Verified pipeline facts
+
+- Trigger: qualifying pushes to `main`/`master`.
+- Runtime: Node.js 20, backend `node server.js`, Newman 6.2.2.
+- Readiness: TCP port 3000 only; no HTTP GET health check.
+- Scope gate: rejects GET and out-of-scope request definitions and verifies collection-level `StudentID` header injection.
+- Execution: Pool A, B, and C Newman runs; CLI/JUnit evidence upload; preserved exit codes.
+- Real run: [Actions job 98890567631](https://github.com/AkiraTomori/eshop-sut/actions/runs/33183542319/job/98890567631), commit `61e0baea`, artifact `hw06-newman-33183542319-1`.
+- Real result: 159 cases, 96 passed, 63 failed; screenshot [`reports/CI-fail-sample-2.png`](../../reports/CI-fail-sample-2.png).
+
+## Required samples and deviation
+
+| Requirement | Evidence | Status |
 |---|---|---|
-| Workflow path | `<real .github/workflows path>` | `<repository link>` |
-| Trigger | `push` | `<workflow excerpt/link>` |
-| SUT startup | `<real command>` | `<workflow step>` |
-| Readiness check | `tcp:3000` or equivalent non-GET check | `<workflow step>` |
-| Newman version/command | `<real version and command>` | `<workflow step/log>` |
-| Collection/environment/data | `<real paths>` | `<artifact links>` |
-| Student header source | Collection-level pre-request script | `<screenshot/path>` |
-| Report retention | `<JUnit/HTML/CLI artifacts>` | `<artifact link>` |
+| All 159 cases pass | No run, URL, artifact, or screenshot exists | Literal requirement not met; student declined to modify the SUT or weaken reviewed tests |
+| Exactly one case fails (158/159) | No such run exists | Literal requirement not met; student substituted the real 96/63 failed run |
+| Instructor-approved exception | None supplied | User action required if formal acceptance of the substitution is needed |
 
-## 2. Workflow sequence
-
-Describe checkout → setup → SUT startup → TCP readiness → Newman data-driven runs → report upload → exit-code handling.
-
-## 3. Required real runs
-
-| Run | Commit | Workflow URL | Total | Passed | Failed | Failed case ID | Screenshot/artifact |
-|---|---|---|---:|---:|---:|---|---|
-| All passing | `<real commit>` | `<real URL>` | `<N>` | `<N>` | 0 | — | `<real evidence>` |
-| Exactly one failure | `<real commit>` | `<real URL>` | `<N>` | `<N-1>` | 1 | `<one real case ID>` | `<real evidence>` |
-
-## 4. Interpretation and cleanup
-
-- Explain why the deliberate failure occurred and how the suite was restored.
-- Confirm that the failing commit was not misrepresented as a product defect.
-- Record any cost, reliability, or local-SUT limitations.
-
-**Confirmation:** `<confirm ci/cd / pending>`
-
+The substitute proves that the workflow executes all suites, uploads evidence, and propagates test failure. It is not described as an all-pass or exactly-one-failure run.

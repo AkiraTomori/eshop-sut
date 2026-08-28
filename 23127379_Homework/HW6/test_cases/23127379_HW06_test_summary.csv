@@ -1,0 +1,5 @@
+"Pool","AI Generated","Audited VALID","Human Added","Final Approved","Executed","Passed","Failed","Genuine Defect Root Causes","Notes"
+"Pool A / FR-03","79","49","13","62","55","29","26","3","7 final rows are documented disabled; case verdicts from retained Newman assertions"
+"Pool B / FR-08","62","35","7","42","42","29","13","2","Final verdict includes 12 SQLite-only total-integrity failures; Newman-only result is 41 passed / 1 failed"
+"Pool C / FR-15","86","60","7","67","67","30","37","3","Two external-harness cases passed; bugs include 2 new drafts plus known Issue 52"
+"TOTAL","227","144","27","171","164","88","76","8","Local final-suite totals; CI uses a distinct 159-case tracked subset"
