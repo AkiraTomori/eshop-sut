@@ -31,7 +31,7 @@ Current Pool: Pool C
 - [x] Stage 1 — Generate
   - [x] Domain Testing
   - [x] Security/Schema Checklist
-- [ ] Stage 2 — Audit
+- [x] Stage 2 — Audit
 - [ ] Stage 3 — Extend
 - [ ] Stage 4 — Execute
 - [ ] Stage 5 — Report Bug
