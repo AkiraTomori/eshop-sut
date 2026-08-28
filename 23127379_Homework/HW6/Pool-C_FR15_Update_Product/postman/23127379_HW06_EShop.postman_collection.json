@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "23127379-pool-c-fr15-update-product",
-    "name": "StudentID HW06 EShop API Testing - Pool C",
+    "name": "23127379 HW06 EShop API Testing - Pool C",
     "description": "Pool C scored target: PUT /api/products/:id only. Contains 60 human-confirmed Stage 2 VALID rows and 7 human-confirmed Stage 3 extensions. Five external-fixture cases remain present but disabled. No GET request is included.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },

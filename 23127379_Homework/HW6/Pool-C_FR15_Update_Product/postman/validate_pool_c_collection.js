@@ -3,9 +3,9 @@ const fs = require('fs');
 const path = require('path');
 
 const poolDir = path.resolve(__dirname, '..');
-const collection = JSON.parse(fs.readFileSync(path.join(__dirname, 'StudentID_HW06_EShop.postman_collection.json')));
-const environment = JSON.parse(fs.readFileSync(path.join(__dirname, 'StudentID_HW06_EShop.postman_environment.json')));
-const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'StudentID_FR15_data.json')));
+const collection = JSON.parse(fs.readFileSync(path.join(__dirname, '23127379_HW06_EShop.postman_collection.json')));
+const environment = JSON.parse(fs.readFileSync(path.join(__dirname, '23127379_HW06_EShop.postman_environment.json')));
+const data = JSON.parse(fs.readFileSync(path.join(__dirname, '23127379_FR15_data.json')));
 const stage2 = fs.readFileSync(path.join(poolDir, 'stage2-audit-proposal.md'), 'utf8');
 const stage3 = fs.readFileSync(path.join(poolDir, 'stage3-extension-proposal.md'), 'utf8');
 
@@ -35,7 +35,7 @@ scripts.forEach((source, index) => {
 const env = Object.fromEntries(environment.values.map(variable => [variable.key, variable.value]));
 const serialized = JSON.stringify(collection);
 const trackedEmpty = [
-  'StudentID', 'adminToken', 'userToken', 'expiredToken', 'roleArrayToken',
+  'adminToken', 'userToken', 'expiredToken', 'roleArrayToken',
   'targetProductId', 'otherProductId', 'existingCategoryId', 'secondCategoryId'
 ];
 const checks = {
@@ -54,6 +54,7 @@ const checks = {
   collectionStudentIdLookup: serialized.includes("pm.environment.get('StudentID')"),
   collectionHeaderUpsert: serialized.includes("pm.request.headers.upsert({ key: 'X-Student-Id'"),
   localBaseUrl: env.baseUrl === 'http://localhost:3000',
+  studentIdConfigured: env.StudentID === '23127379',
   trackedRuntimeValuesEmpty: trackedEmpty.every(key => env[key] === ''),
   allScriptsCompile: scripts.length === 3,
   everyRowHasOracle: data.every(row => ['2xx', '4xx', '2xx|4xx'].includes(row.statusOracle) && row.stateOracle && row.evidenceRequired),

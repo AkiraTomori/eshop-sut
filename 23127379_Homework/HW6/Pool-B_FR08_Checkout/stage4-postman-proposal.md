@@ -42,9 +42,9 @@ StudentID HW06 EShop API Testing - Pool B
 
 | Artifact | Purpose |
 |---|---|
-| `postman/StudentID_HW06_EShop.postman_collection.json` | Collection v2.1 containing the fixture folder and the only scored Checkout folder |
-| `postman/StudentID_HW06_EShop.postman_environment.json` | Tracked environment template; runtime identifiers, passwords, user IDs, and JWTs are empty |
-| `postman/StudentID_FR08_data.json` | 42 enabled Checkout rows with fixture recipes and approved oracles |
+| `postman/23127379_HW06_EShop.postman_collection.json` | Collection v2.1 containing the fixture folder and the only scored Checkout folder |
+| `postman/23127379_HW06_EShop.postman_environment.json` | Tracked environment with `StudentID=23127379`; passwords, user IDs, JWTs, and fixture runtime values are empty |
+| `postman/23127379_FR08_data.json` | 42 enabled Checkout rows with fixture recipes and approved oracles |
 | `postman/.gitignore` | Excludes local environment/data copies containing ephemeral runtime values |
 | `postman/newman/Pool-B_FR08_full_report.json` | Redacted machine-readable full-run report |
 | `postman/newman/Pool-B_FR08_full_report.html` | Redacted htmlextra report |

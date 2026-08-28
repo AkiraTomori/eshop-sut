@@ -16,7 +16,7 @@ The tracked runner data intentionally remains conservative: 62 rows are enabled 
 ## 2. Final collection structure
 
 ```text
-StudentID HW06 EShop API Testing - Pool C
+23127379 HW06 EShop API Testing - Pool C
 └── Pool C - FR-15 Update Product
     └── {{testCaseId}} - PUT /api/products/:id
 ```
@@ -33,7 +33,7 @@ The collection-level pre-request script:
 2. Restricts `baseUrl` to exactly `http://localhost:3000` or `http://127.0.0.1:3000`.
 3. Uses `pm.request.headers.upsert` to attach `X-Student-Id` to every transmitted request.
 
-The tracked environment contains no real student ID, JWT, password, or mutable fixture ID. JWTs and IDs existed only in the ignored, permission-restricted local environment. All retained Newman report copies were redacted and scanned for JWT-shaped values.
+The tracked environment contains `StudentID=23127379` but no JWT, password, or mutable fixture ID. JWTs and fixture IDs existed only in the ignored, permission-restricted local environment. All retained Newman report copies were redacted and scanned for JWT-shaped values.
 
 | Header/method check | Result |
 |---|---:|
@@ -47,9 +47,9 @@ The tracked environment contains no real student ID, JWT, password, or mutable f
 
 | Artifact | Purpose |
 |---|---|
-| `postman/StudentID_HW06_EShop.postman_collection.json` | Corrected Collection v2.1 |
-| `postman/StudentID_HW06_EShop.postman_environment.json` | Empty-secret localhost environment template |
-| `postman/StudentID_FR15_data.json` | 67 approved rows; tracked default has 62 enabled and five fixture-gated |
+| `postman/23127379_HW06_EShop.postman_collection.json` | Corrected Collection v2.1 |
+| `postman/23127379_HW06_EShop.postman_environment.json` | Localhost environment with `StudentID=23127379` and empty secrets |
+| `postman/23127379_FR15_data.json` | 67 approved rows; tracked default has 62 enabled and five fixture-gated |
 | `postman/newman/Pool-C_FR15_report.json` | Redacted machine-readable clean main run |
 | `postman/newman/Pool-C_FR15_report.html` | Redacted htmlextra clean main run |
 | `evidence/Pool-C_FR15_fixture-before.json` | Disposable fixture baseline |
@@ -71,7 +71,7 @@ Static validation passed after the URL correction:
 - Collection v2.1, one Pool C folder, and one target definition;
 - method inventory contains exactly one PUT definition and no GET definition;
 - exact `StudentID` lookup and collection-level header upsert;
-- localhost-only base URL and empty tracked runtime values;
+- localhost-only base URL, `StudentID=23127379`, and empty tracked secret/runtime fixture values;
 - all Postman scripts compile;
 - every row has an approved HTTP-class oracle, state oracle, and evidence requirement.
 

@@ -236,7 +236,7 @@ const itemTests = [
 const collection = {
   info: {
     _postman_id: '23127379-pool-c-fr15-update-product',
-    name: 'StudentID HW06 EShop API Testing - Pool C',
+    name: '23127379 HW06 EShop API Testing - Pool C',
     description: 'Pool C scored target: PUT /api/products/:id only. Contains 60 human-confirmed Stage 2 VALID rows and 7 human-confirmed Stage 3 extensions. Five external-fixture cases remain present but disabled. No GET request is included.',
     schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json'
   },
@@ -267,7 +267,7 @@ const collection = {
 
 const values = [
   ['baseUrl', 'http://localhost:3000', true],
-  ['StudentID', '', true],
+  ['StudentID', '23127379', true],
   ['adminToken', '', true],
   ['userToken', '', true],
   ['expiredToken', '', true],
@@ -282,14 +282,14 @@ const values = [
 
 const environment = {
   id: '23127379-pool-c-local-template',
-  name: 'StudentID HW06 EShop Local - Pool C (template)',
+  name: '23127379 HW06 EShop Local - Pool C',
   values,
   _postman_variable_scope: 'environment',
   _postman_exported_using: 'Codex Stage 4 deterministic generator'
 };
 
 fs.mkdirSync(outDir, { recursive: true });
-fs.writeFileSync(path.join(outDir, 'StudentID_HW06_EShop.postman_collection.json'), JSON.stringify(collection, null, 2) + '\n');
-fs.writeFileSync(path.join(outDir, 'StudentID_HW06_EShop.postman_environment.json'), JSON.stringify(environment, null, 2) + '\n');
-fs.writeFileSync(path.join(outDir, 'StudentID_FR15_data.json'), JSON.stringify(cases, null, 2) + '\n');
+fs.writeFileSync(path.join(outDir, '23127379_HW06_EShop.postman_collection.json'), JSON.stringify(collection, null, 2) + '\n');
+fs.writeFileSync(path.join(outDir, '23127379_HW06_EShop.postman_environment.json'), JSON.stringify(environment, null, 2) + '\n');
+fs.writeFileSync(path.join(outDir, '23127379_FR15_data.json'), JSON.stringify(cases, null, 2) + '\n');
 console.log(JSON.stringify({ total: cases.length, enabled: cases.filter(c => c.enabled).length, disabled: cases.filter(c => !c.enabled).length }, null, 2));

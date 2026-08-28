@@ -17,9 +17,9 @@ The data file therefore contains exactly 62 unique IDs (`49 + 13`). Exclusion do
 
 | Artifact | Folder/API | Case count | Method/endpoint | Header script present? | User approval source | Status |
 |---|---|---:|---|---|---|---|
-| `postman/StudentID_HW06_EShop.postman_collection.json` | `Pool A - FR-03 Password Reset` | 62 data-driven records | POST `/api/forgot-password`; POST `/api/reset-password` | Yes, collection-level `pm.request.headers.upsert` with `StudentID`; empty value throws | Confirmed Stages 2–3 | Approved / static validation passed |
-| `postman/StudentID_HW06_EShop.postman_environment.json` | Pool A local environment | 16 variables | `baseUrl=http://localhost:3000`; all mutable/secret values local-only | Supplies `StudentID`; value intentionally empty | AGENTS.md §3.6; builder skill | Approved / secrets empty |
-| `postman/StudentID_FR03_data.json` | Pool A runner data | 62 total: 55 enabled, 7 disabled | 18 forgot targets; 44 reset targets | Every sent collection item inherits the collection script | Confirmed Stage 2 table + approved Stage 3 artifact | Approved / JSON valid |
+| `postman/23127379_HW06_EShop.postman_collection.json` | `Pool A - FR-03 Password Reset` | 62 data-driven records | POST `/api/forgot-password`; POST `/api/reset-password` | Yes, collection-level `pm.request.headers.upsert` with `StudentID`; empty value throws | Confirmed Stages 2–3 | Approved / static validation passed |
+| `postman/23127379_HW06_EShop.postman_environment.json` | Pool A local environment | 16 variables | `baseUrl=http://localhost:3000`; all mutable/secret values local-only | Supplies `StudentID=23127379` | AGENTS.md §3.6; builder skill | Approved / secrets empty |
+| `postman/23127379_FR03_data.json` | Pool A runner data | 62 total: 55 enabled, 7 disabled | 18 forgot targets; 44 reset targets | Every sent collection item inherits the collection script | Confirmed Stage 2 table + approved Stage 3 artifact | Approved / JSON valid |
 | `postman/.gitignore` | Local secret protection | 1 rule | Excludes `*.local.postman_environment.json` | N/A | Builder secret-handling rule | Approved |
 | `evidence/Pool-A_FR03_newman-cli.txt` | Real CLI transcript | 62 iterations | 79 POST requests | Logs runtime injection for student `23127379` | User-authorized local execution | Generated / 36 failures |
 | `postman/newman/Pool-A_FR03_report.json` | Machine-readable Newman evidence | 266 assertions | 230 passed; 36 failed | Request assertions verify the injected header | User-authorized local execution | Generated |
@@ -56,7 +56,7 @@ Dynamic test names preserve `testCaseId`. Exact `200`/schema assertions are used
 | Request methods | PASS: POST only |
 | Scoped endpoint paths | PASS: forgot-password/reset-password only through fixed or data-controlled paths |
 | Collection-level student header | PASS: upsert script present; empty `StudentID` throws before send |
-| Real student ID, OTP, or mutable password committed | PASS: none; local variables remain empty |
+| Student ID configured; OTP or mutable password committed | PASS: `StudentID=23127379`; OTP/password variables remain empty |
 | Exact assertions limited to approved oracles | PASS; unknown exact contracts are not asserted |
 
 ## Local Docker execution gate and result — 2026-08-21
@@ -99,7 +99,7 @@ npm install --global newman newman-reporter-htmlextra
 From `23127379_Homework/HW6/Pool-A_FR03_Password_Reset/postman`, copy the environment to the ignored local filename:
 
 ```bash
-cp StudentID_HW06_EShop.postman_environment.json StudentID_HW06_EShop.local.postman_environment.json
+cp 23127379_HW06_EShop.postman_environment.json 23127379_HW06_EShop.local.postman_environment.json
 ```
 
 Populate only the local copy with:
@@ -116,9 +116,9 @@ Then execute from the same `postman` directory:
 
 ```bash
 mkdir -p newman
-newman run StudentID_HW06_EShop.postman_collection.json \
-  --environment StudentID_HW06_EShop.local.postman_environment.json \
-  --iteration-data StudentID_FR03_data.json \
+newman run 23127379_HW06_EShop.postman_collection.json \
+  --environment 23127379_HW06_EShop.local.postman_environment.json \
+  --iteration-data 23127379_FR03_data.json \
   --folder "Pool A - FR-03 Password Reset" \
   --reporters cli,htmlextra \
   --reporter-htmlextra-export newman/Pool-A_FR03_report.html

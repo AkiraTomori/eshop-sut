@@ -28,7 +28,7 @@
   "item": [
     {
       "name": "Pool A - FR-03 Password Reset",
-      "description": "One API unit implemented by POST /api/forgot-password and POST /api/reset-password. Run with StudentID_FR03_data.json. The three items cooperate per iteration: optional OTP setup, target case, and optional lifecycle follow-up.",
+      "description": "One API unit implemented by POST /api/forgot-password and POST /api/reset-password. Run with 23127379_FR03_data.json. The three items cooperate per iteration: optional OTP setup, target case, and optional lifecycle follow-up.",
       "item": [
         {
           "name": "Setup - POST /api/forgot-password when required",

@@ -1,0 +1,300 @@
+name: HW06 Newman API Tests
+
+'on':
+  push:
+    branches: [main, master]
+    paths:
+      - '.github/workflows/hw06-newman.yml'
+      - 'backend/**'
+      - '23127379_Homework/HW6/**'
+      - 'reports/HW06_CICD_Report.md'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hw06-newman-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CI: 'true'
+  HW06_DIR: 23127379_Homework/HW6
+  HW06_RESULTS: 23127379_Homework/HW6/reports/newman-ci
+  NEWMAN_VERSION: 6.2.2
+
+jobs:
+  newman:
+    name: Postman collections with Newman
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install the SUT and pinned Newman runner
+        shell: bash
+        run: |
+          npm ci --prefix backend
+          npm install --global "newman@${NEWMAN_VERSION}"
+          newman --version
+
+      - name: Statically validate approved HW06 artifacts
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          const root = process.env.HW06_DIR;
+          const pools = [
+            {
+              id: 'Pool A / FR-03',
+              dir: 'Pool-A_FR03_Password_Reset',
+              collection: '23127379_HW06_EShop.postman_collection.json',
+              data: '23127379_FR03_data.json',
+              allowed: new Set([
+                'POST /api/forgot-password',
+                'POST /api/reset-password',
+                'POST {{runtimeTargetPath}}',
+                'POST {{runtimeFollowupPath}}',
+              ]),
+              allowedDataPath: (value) => ['/api/forgot-password', '/api/reset-password'].includes(value),
+            },
+            {
+              id: 'Pool B / FR-08',
+              dir: 'Pool-B_FR08_Checkout',
+              collection: '23127379_HW06_EShop.postman_collection.json',
+              data: '23127379_FR08_data.json',
+              allowed: new Set([
+                'POST /api/register',
+                'POST /api/login',
+                'POST /api/cart',
+                'POST /api/checkout',
+                'POST {{runtimeTargetPath}}',
+              ]),
+              allowedDataPath: (value) => ['/api/checkout', '/api/checkout?total_amount=1'].includes(value),
+            },
+            {
+              id: 'Pool C / FR-15',
+              dir: 'Pool-C_FR15_Update_Product',
+              collection: '23127379_HW06_EShop.postman_collection.json',
+              data: '23127379_FR15_data.json',
+              allowed: new Set(['PUT {{targetPath}}']),
+              allowedDataPath: (value) => typeof value === 'string' && value.startsWith('/api/products/'),
+            },
+          ];
+
+          function requestPath(request) {
+            if (request.url && typeof request.url === 'object' && Array.isArray(request.url.path)) {
+              return '/' + request.url.path.map((part) => String(part)).join('/');
+            }
+            const raw = typeof request.url === 'string' ? request.url : String(request.url?.raw || '');
+            const withoutBase = raw.replace(/^{{baseUrl}}/, '');
+            return withoutBase.replace(/{{targetProductId}}|{{missingProductId}}|{{otherProductId}}/g, ':id');
+          }
+
+          function collectRequests(items, output = []) {
+            for (const item of items || []) {
+              if (item.request) output.push(item.request);
+              collectRequests(item.item, output);
+            }
+            return output;
+          }
+
+          for (const pool of pools) {
+            const postmanDir = path.join(root, pool.dir, 'postman');
+            const collectionPath = path.join(postmanDir, pool.collection);
+            const dataPath = path.join(postmanDir, pool.data);
+            if (!fs.existsSync(collectionPath) || !fs.existsSync(dataPath)) {
+              throw new Error(`${pool.id}: approved collection or data file is missing`);
+            }
+
+            const collection = JSON.parse(fs.readFileSync(collectionPath, 'utf8'));
+            const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+            if (!Array.isArray(data) || data.length < 35) {
+              throw new Error(`${pool.id}: expected at least 35 approved data rows`);
+            }
+            const ids = data.map((row) => row.testCaseId);
+            if (ids.some((id) => !id) || new Set(ids).size !== ids.length) {
+              throw new Error(`${pool.id}: testCaseId values must be present and unique`);
+            }
+            for (const row of data) {
+              for (const key of ['targetPath', 'followupPath']) {
+                if (row[key] !== undefined && !pool.allowedDataPath(row[key])) {
+                  throw new Error(`${pool.id}: out-of-scope data path in ${row.testCaseId}: ${row[key]}`);
+                }
+              }
+            }
+
+            const requests = collectRequests(collection.item);
+            for (const request of requests) {
+              const method = String(request.method || '').toUpperCase();
+              if (method === 'GET') throw new Error(`${pool.id}: GET request found`);
+              const key = `${method} ${requestPath(request)}`;
+              if (!pool.allowed.has(key)) throw new Error(`${pool.id}: out-of-scope request ${key}`);
+            }
+
+            const collectionScripts = (collection.event || [])
+              .filter((event) => event.listen === 'prerequest')
+              .flatMap((event) => event.script?.exec || [])
+              .join('\n');
+            if (!collectionScripts.includes("pm.environment.get('StudentID')") ||
+                !collectionScripts.includes("key: 'X-Student-Id'")) {
+              throw new Error(`${pool.id}: collection-level StudentID header injection is missing`);
+            }
+          }
+
+          console.log('Static validation passed: approved row counts, scope, no GET, and collection-level student header.');
+          NODE
+
+      - name: Materialize reviewed local Postman environments
+        shell: bash
+        env:
+          HW06_POSTMAN_ENV_BUNDLE: ${{ secrets.HW06_POSTMAN_ENV_BUNDLE }}
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          if (!process.env.HW06_POSTMAN_ENV_BUNDLE) {
+            throw new Error('Repository secret HW06_POSTMAN_ENV_BUNDLE is required.');
+          }
+          let bundle;
+          try {
+            bundle = JSON.parse(process.env.HW06_POSTMAN_ENV_BUNDLE);
+          } catch {
+            throw new Error('HW06_POSTMAN_ENV_BUNDLE must be valid JSON.');
+          }
+
+          const destinations = {
+            poolA: path.join(process.env.RUNNER_TEMP, 'pool-a.environment.json'),
+            poolB: path.join(process.env.RUNNER_TEMP, 'pool-b.environment.json'),
+            poolC: path.join(process.env.RUNNER_TEMP, 'pool-c.environment.json'),
+          };
+          let sharedStudentId = null;
+          for (const [key, destination] of Object.entries(destinations)) {
+            const environment = bundle[key];
+            if (!environment || !Array.isArray(environment.values)) {
+              throw new Error(`${key} must be a complete reviewed Postman environment object.`);
+            }
+            const values = new Map(environment.values.map((entry) => [entry.key, entry.value]));
+            const studentId = String(values.get('StudentID') || '').trim();
+            const baseUrl = String(values.get('baseUrl') || '').replace(/\/$/, '');
+            if (!studentId) throw new Error(`${key}: non-empty StudentID environment value is required.`);
+            if (!/^http:\/\/(localhost|127\.0\.0\.1):3000$/.test(baseUrl)) {
+              throw new Error(`${key}: baseUrl must target localhost or 127.0.0.1 on port 3000.`);
+            }
+            if (sharedStudentId === null) sharedStudentId = studentId;
+            if (studentId !== sharedStudentId) throw new Error('StudentID must match across all three environments.');
+            if (key === 'poolB') {
+              const runId = `${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`;
+              const runIdEntry = environment.values.find((entry) => entry.key === 'fixtureRunId');
+              if (!runIdEntry) throw new Error('poolB: fixtureRunId variable is required.');
+              runIdEntry.value = runId;
+            }
+            fs.writeFileSync(destination, JSON.stringify(environment, null, 2), { mode: 0o600 });
+          }
+          console.log('Three runtime environments created in RUNNER_TEMP; sensitive values were not printed.');
+          NODE
+
+      - name: Start EShop backend
+        shell: bash
+        run: |
+          mkdir -p "${HW06_RESULTS}"
+          node server.js > "${GITHUB_WORKSPACE}/${HW06_RESULTS}/sut.log" 2>&1 &
+          echo "$!" > "${GITHUB_WORKSPACE}/${HW06_RESULTS}/sut.pid"
+        working-directory: backend
+
+      - name: Wait for TCP port 3000 without HTTP GET
+        shell: bash
+        run: |
+          for attempt in {1..60}; do
+            if node -e "const net=require('net');const socket=net.connect(3000,'127.0.0.1',()=>{socket.end();process.exit(0)});socket.on('error',()=>process.exit(1));setTimeout(()=>process.exit(1),900);"; then
+              echo 'TCP port 3000 is ready.'
+              exit 0
+            fi
+            sleep 1
+          done
+          echo 'Backend did not open TCP port 3000 within 60 seconds.' >&2
+          exit 1
+
+      - name: Run Pool A / FR-03
+        shell: bash
+        run: |
+          mkdir -p "${HW06_RESULTS}/pool-a"
+          set +e
+          newman run "${HW06_DIR}/Pool-A_FR03_Password_Reset/postman/23127379_HW06_EShop.postman_collection.json" \
+            --environment "${RUNNER_TEMP}/pool-a.environment.json" \
+            --iteration-data "${HW06_DIR}/Pool-A_FR03_Password_Reset/postman/23127379_FR03_data.json" \
+            --folder 'Pool A - FR-03 Password Reset' \
+            --reporters cli,junit \
+            --reporter-junit-export "${HW06_RESULTS}/pool-a/junit.xml" \
+            2>&1 | tee "${HW06_RESULTS}/pool-a/cli.txt"
+          status=${PIPESTATUS[0]}
+          set -e
+          echo "${status}" > "${HW06_RESULTS}/pool-a/exit-code.txt"
+
+      - name: Run Pool B / FR-08 with approved fixture folder
+        shell: bash
+        run: |
+          mkdir -p "${HW06_RESULTS}/pool-b"
+          set +e
+          newman run "${HW06_DIR}/Pool-B_FR08_Checkout/postman/23127379_HW06_EShop.postman_collection.json" \
+            --environment "${RUNNER_TEMP}/pool-b.environment.json" \
+            --iteration-data "${HW06_DIR}/Pool-B_FR08_Checkout/postman/23127379_FR08_data.json" \
+            --reporters cli,junit \
+            --reporter-junit-export "${HW06_RESULTS}/pool-b/junit.xml" \
+            2>&1 | tee "${HW06_RESULTS}/pool-b/cli.txt"
+          status=${PIPESTATUS[0]}
+          set -e
+          echo "${status}" > "${HW06_RESULTS}/pool-b/exit-code.txt"
+
+      - name: Run Pool C / FR-15
+        shell: bash
+        run: |
+          mkdir -p "${HW06_RESULTS}/pool-c"
+          set +e
+          newman run "${HW06_DIR}/Pool-C_FR15_Update_Product/postman/23127379_HW06_EShop.postman_collection.json" \
+            --environment "${RUNNER_TEMP}/pool-c.environment.json" \
+            --iteration-data "${HW06_DIR}/Pool-C_FR15_Update_Product/postman/23127379_FR15_data.json" \
+            --folder 'Pool C - FR-15 Update Product' \
+            --reporters cli,junit \
+            --reporter-junit-export "${HW06_RESULTS}/pool-c/junit.xml" \
+            2>&1 | tee "${HW06_RESULTS}/pool-c/cli.txt"
+          status=${PIPESTATUS[0]}
+          set -e
+          echo "${status}" > "${HW06_RESULTS}/pool-c/exit-code.txt"
+
+      - name: Upload Newman and SUT evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: hw06-newman-${{ github.run_id }}-${{ github.run_attempt }}
+          path: 23127379_Homework/HW6/reports/newman-ci/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Preserve Newman exit status
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          failed=0
+          for pool in pool-a pool-b pool-c; do
+            code_file="${HW06_RESULTS}/${pool}/exit-code.txt"
+            if [[ ! -f "${code_file}" ]]; then
+              echo "${pool}: missing Newman exit-code evidence" >&2
+              failed=1
+            elif [[ "$(<"${code_file}")" != '0' ]]; then
+              echo "${pool}: Newman failed with exit code $(<"${code_file}")" >&2
+              failed=1
+            fi
+          done
+          exit "${failed}"
