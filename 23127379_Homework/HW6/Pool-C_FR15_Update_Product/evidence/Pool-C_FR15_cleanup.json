@@ -1,0 +1,7 @@
+{
+  "observationMethod": "Parameterized DELETE of only disposable product IDs through the local Docker SQLite connection; no API or GET request.",
+  "removed": 2,
+  "removedProductIds": [101, 102],
+  "remainingDisposableRows": [],
+  "totalProductsAfterCleanup": 5
+}

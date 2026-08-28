@@ -1,0 +1,22 @@
+{
+  "observationMethod": "Docker SQLite copy and local sqlite3 query; no GET request.",
+  "productCount": 7,
+  "disposableProducts": [
+    {
+      "id": 101,
+      "name": "FR15 Baseline P1",
+      "price": 100000,
+      "description": "FR15 baseline target",
+      "imageUrl": "https://example.test/fr15-p1.png",
+      "category_id": 1
+    },
+    {
+      "id": 102,
+      "name": "FR15 Sentinel P2",
+      "price": 200000,
+      "description": "FR15 non-target sentinel",
+      "imageUrl": "https://example.test/fr15-p2.png",
+      "category_id": 2
+    }
+  ]
+}

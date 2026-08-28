@@ -1,0 +1,2396 @@
+{
+  "generatedAt": "2026-08-28T13:42:47.403Z",
+  "observationMethod": "Local Newman PUT plus docker-exec SQLite snapshot; no GET request.",
+  "disposableFixtures": [
+    {
+      "id": 101,
+      "name": "FR15 Baseline P1",
+      "price": 100000,
+      "description": "FR15 baseline target",
+      "imageUrl": "https://example.test/fr15-p1.png",
+      "category_id": 1
+    },
+    {
+      "id": 102,
+      "name": "FR15 Sentinel P2",
+      "price": 200000,
+      "description": "FR15 non-target sentinel",
+      "imageUrl": "https://example.test/fr15-p2.png",
+      "category_id": 2
+    }
+  ],
+  "caseCount": 65,
+  "summary": {
+    "requests": 65,
+    "statusCounts": {
+      "200": 63,
+      "400": 1,
+      "404": 1
+    },
+    "assertionFailureCases": [
+      "FR15-DOM-002",
+      "FR15-DOM-004",
+      "FR15-DOM-005",
+      "FR15-DOM-008",
+      "FR15-DOM-009",
+      "FR15-DOM-010",
+      "FR15-DOM-011",
+      "FR15-DOM-012",
+      "FR15-DOM-013",
+      "FR15-DOM-021",
+      "FR15-DOM-022",
+      "FR15-DOM-023",
+      "FR15-DOM-024",
+      "FR15-DOM-026",
+      "FR15-DOM-027",
+      "FR15-DOM-030",
+      "FR15-DOM-031",
+      "FR15-DOM-032",
+      "FR15-DOM-033",
+      "FR15-DOM-045",
+      "FR15-DOM-046",
+      "FR15-DOM-047",
+      "FR15-SEC-002",
+      "FR15-SEC-003",
+      "FR15-SEC-004",
+      "FR15-SEC-005",
+      "FR15-SEC-006",
+      "FR15-SEC-007",
+      "FR15-SEC-008",
+      "FR15-SEC-009",
+      "FR15-SEC-016",
+      "FR15-SEC-018",
+      "FR15-SEC-023",
+      "FR15-SCH-009",
+      "FR15-EXT-SEC-001",
+      "FR15-EXT-SEC-002",
+      "FR15-EXT-SEC-003"
+    ],
+    "allStudentHeadersPresentAndMatching": true,
+    "allMethodsPut": true,
+    "allNonTargetsUnchanged": true,
+    "allProductCountsUnchanged": true,
+    "rejectedOracleCasesThatMutatedTarget": [
+      "FR15-DOM-002",
+      "FR15-DOM-004",
+      "FR15-DOM-008",
+      "FR15-DOM-009",
+      "FR15-DOM-010",
+      "FR15-DOM-011",
+      "FR15-DOM-012",
+      "FR15-DOM-013",
+      "FR15-DOM-021",
+      "FR15-DOM-022",
+      "FR15-DOM-023",
+      "FR15-DOM-024",
+      "FR15-DOM-026",
+      "FR15-DOM-027",
+      "FR15-DOM-030",
+      "FR15-DOM-031",
+      "FR15-DOM-032",
+      "FR15-DOM-033",
+      "FR15-DOM-045",
+      "FR15-DOM-046",
+      "FR15-DOM-047",
+      "FR15-SEC-002",
+      "FR15-SEC-003",
+      "FR15-SEC-004",
+      "FR15-SEC-005",
+      "FR15-SEC-006",
+      "FR15-SEC-007",
+      "FR15-SEC-008",
+      "FR15-SEC-009",
+      "FR15-SEC-018",
+      "FR15-SEC-023",
+      "FR15-EXT-SEC-001",
+      "FR15-EXT-SEC-002",
+      "FR15-EXT-SEC-003"
+    ]
+  },
+  "cases": [
+    {
+      "testCaseId": "FR15-DOM-001",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-002",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": null,
+        "price": null,
+        "description": null,
+        "imageUrl": null,
+        "category_id": null
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-003",
+      "technique": "Domain Testing",
+      "statusCode": 400,
+      "statusOracle": "4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": true,
+      "targetAfter": {
+        "id": 101,
+        "name": "FR15 Baseline P1",
+        "price": 100000,
+        "description": "FR15 baseline target",
+        "imageUrl": "https://example.test/fr15-p1.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-004",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": null,
+        "price": null,
+        "description": null,
+        "imageUrl": null,
+        "category_id": null
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-005",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/999999",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": true,
+      "targetAfter": {
+        "id": 101,
+        "name": "FR15 Baseline P1",
+        "price": 100000,
+        "description": "FR15 baseline target",
+        "imageUrl": "https://example.test/fr15-p1.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-007",
+      "technique": "Domain Testing",
+      "statusCode": 404,
+      "statusOracle": "4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": true,
+      "targetAfter": {
+        "id": 101,
+        "name": "FR15 Baseline P1",
+        "price": 100000,
+        "description": "FR15 baseline target",
+        "imageUrl": "https://example.test/fr15-p1.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-008",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-009",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-010",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-011",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-012",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-013",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-017",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "A",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-018",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "AA",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-019",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-020",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-021",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-022",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": null,
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-023",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": null,
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-024",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "123",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-025",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "   ",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-026",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": -1,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-027",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 0,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-028",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 1,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-029",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 0.01,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-030",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": null,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-031",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": null,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-032",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-033",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 1,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-034",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Mô tả sản phẩm cập nhật",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-035",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-039",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "not-a-url",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-040",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-044",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 2
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-045",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 999999
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-046",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": null
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-DOM-047",
+      "technique": "Domain Testing",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": null
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-001",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-002",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-003",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-004",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-005",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-006",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-007",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-008",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-009",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-010",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "2xx|4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "If accepted, only the path-selected target may change; if rejected, no product may change.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-011",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "2xx|4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101?id=102",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "If accepted, only the path-selected target may change; if rejected, no product may change.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-012",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "2xx|4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "If accepted, only the path-selected target may change; if rejected, no product may change.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-013",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "2xx|4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Reject or ignore the extra role field; no account role or non-target product may change.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-016",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/%27%20OR%201%3D1--",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": true,
+      "targetAfter": {
+        "id": 101,
+        "name": "FR15 Baseline P1",
+        "price": 100000,
+        "description": "FR15 baseline target",
+        "imageUrl": "https://example.test/fr15-p1.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-017",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "2xx|4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Treat the name literally on the target or reject it; never update multiple rows or expose database internals.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "x', price=0 WHERE 1=1--",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-018",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": "1 OR 1=1"
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-019",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "O'Brien",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-023",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": "[object Object]"
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SEC-024",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "2xx|4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Reject or ignore method override; the target must never be deleted and no non-target product may change.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SCH-008",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-SCH-009",
+      "technique": "Security/Schema Checklist",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/%27%20OR%201%3D1--",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": true,
+      "targetAfter": {
+        "id": 101,
+        "name": "FR15 Baseline P1",
+        "price": 100000,
+        "description": "FR15 baseline target",
+        "imageUrl": "https://example.test/fr15-p1.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-EXT-DOM-001",
+      "technique": "Domain Testing gap analysis",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "ááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááááá",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-EXT-DOM-002",
+      "technique": "Domain Testing gap analysis",
+      "statusCode": 200,
+      "statusOracle": "2xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Only the target product may contain the submitted values; all non-target products remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 100,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-EXT-SEC-001",
+      "technique": "Security/Schema gap analysis",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-EXT-SEC-002",
+      "technique": "Security/Schema gap analysis",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-EXT-SEC-003",
+      "technique": "Security/Schema gap analysis",
+      "statusCode": 200,
+      "statusOracle": "4xx",
+      "assertionFailures": [
+        "expected [ '4xx' ] to include '2xx'"
+      ],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "The target and every non-target product remain unchanged.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": "0); DROP TABLE products;--",
+        "description": "Updated description",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-EXT-SEC-004",
+      "technique": "Security/Schema gap analysis",
+      "statusCode": 200,
+      "statusOracle": "2xx|4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Treat description as inert literal text on the target or reject it; never bulk-update, cross-update, or expose database internals.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "x', price=0 WHERE 1=1--",
+        "imageUrl": "https://example.test/updated.png",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    },
+    {
+      "testCaseId": "FR15-EXT-SEC-005",
+      "technique": "Security/Schema gap analysis",
+      "statusCode": 200,
+      "statusOracle": "2xx|4xx",
+      "assertionFailures": [],
+      "method": "PUT",
+      "url": "LOCAL_BASE_URL/api/products/101",
+      "studentHeaderPresent": true,
+      "studentHeaderMatches": true,
+      "stateOracle": "Treat imageUrl as inert literal text on the target or reject it; never bulk-update, cross-update, or expose database internals.",
+      "targetUnchanged": false,
+      "targetAfter": {
+        "id": 101,
+        "name": "Updated Product",
+        "price": 150000,
+        "description": "Updated description",
+        "imageUrl": "https://example.test/p.png?x=' OR 1=1--",
+        "category_id": 1
+      },
+      "nonTargetsUnchanged": true,
+      "productCountBefore": 7,
+      "productCountAfter": 7,
+      "nonTargetFingerprintBefore": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "nonTargetFingerprintAfter": "9f1025d6d3e2e53f27f695e9e3c50163bfb514c3256a93024d9c29898725a860",
+      "sentinelAfter": {
+        "id": 102,
+        "name": "FR15 Sentinel P2",
+        "price": 200000,
+        "description": "FR15 non-target sentinel",
+        "imageUrl": "https://example.test/fr15-p2.png",
+        "category_id": 2
+      }
+    }
+  ]
+}

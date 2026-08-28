@@ -1,0 +1,142 @@
+{
+  "info": {
+    "_postman_id": "23127379-pool-c-fr15-update-product",
+    "name": "StudentID HW06 EShop API Testing - Pool C",
+    "description": "Pool C scored target: PUT /api/products/:id only. Contains 60 human-confirmed Stage 2 VALID rows and 7 human-confirmed Stage 3 extensions. Five external-fixture cases remain present but disabled. No GET request is included.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const studentId = String(pm.environment.get('StudentID') || '').trim();",
+          "const baseUrl = String(pm.environment.get('baseUrl') || '').trim().replace(/\\/$/, '');",
+          "if (!studentId) { throw new Error('StudentID must be set in the active local environment.'); }",
+          "if (!/^http:\\/\\/(localhost|127\\.0\\.0\\.1):3000$/i.test(baseUrl)) { throw new Error('baseUrl must be http://localhost:3000 or http://127.0.0.1:3000.'); }",
+          "pm.request.headers.upsert({ key: 'X-Student-Id', value: studentId });"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Pool C - FR-15 Update Product",
+      "description": "The only scored API unit in this collection.",
+      "item": [
+        {
+          "name": "{{testCaseId}} - PUT /api/products/:id",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const enabled = pm.iterationData.get('enabled');",
+                  "if (enabled === false || String(enabled).toLowerCase() === 'false') { pm.execution.skipRequest(); return; }",
+                  "const caseId = String(pm.iterationData.get('testCaseId') || 'UNSET');",
+                  "pm.variables.set('activeTestCaseId', caseId);",
+                  "pm.variables.set('targetPath', String(pm.iterationData.get('targetPath') || ''));",
+                  "const numericVariables = new Set(['targetProductId','otherProductId','missingProductId','existingCategoryId','secondCategoryId','missingCategoryId']);",
+                  "function resolveValue(value) {",
+                  "  if (Array.isArray(value)) return value.map(resolveValue);",
+                  "  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k,v]) => [k, resolveValue(v)]));",
+                  "  if (typeof value !== 'string') return value;",
+                  "  const exact = value.match(/^{{([^{}]+)}}$/);",
+                  "  if (exact) {",
+                  "    const raw = pm.environment.get(exact[1]);",
+                  "    if (raw === undefined || raw === null || String(raw).trim() === '') throw new Error(caseId + ': missing environment fixture ' + exact[1]);",
+                  "    return numericVariables.has(exact[1]) ? Number(raw) : raw;",
+                  "  }",
+                  "  return pm.variables.replaceIn(value);",
+                  "}",
+                  "const bodyMode = String(pm.iterationData.get('bodyMode') || 'json');",
+                  "if (bodyMode === 'absent') pm.request.body.update('');",
+                  "else if (bodyMode === 'raw') pm.request.body.update(pm.variables.replaceIn(String(pm.iterationData.get('rawBody') || '')));",
+                  "else pm.request.body.update(JSON.stringify(resolveValue(pm.iterationData.get('bodyObject'))));",
+                  "pm.request.headers.upsert({ key: 'Content-Type', value: 'application/json' });",
+                  "pm.request.headers.remove('Authorization');",
+                  "pm.request.headers.remove('X-HTTP-Method-Override');",
+                  "const adminToken = String(pm.environment.get('adminToken') || '').trim();",
+                  "const userToken = String(pm.environment.get('userToken') || '').trim();",
+                  "const authMode = String(pm.iterationData.get('authMode') || 'validAdmin');",
+                  "function need(value, label) { if (!value) throw new Error(caseId + ': missing ' + label + ' in local environment'); return value; }",
+                  "function base64url(text) { return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text)).replace(/=+$/,'').replace(/\\+/g,'-').replace(/\\//g,'_'); }",
+                  "if (authMode === 'validAdmin') pm.request.headers.add({ key: 'Authorization', value: 'Bearer ' + need(adminToken, 'adminToken') });",
+                  "else if (authMode === 'validUser') pm.request.headers.add({ key: 'Authorization', value: 'Bearer ' + need(userToken, 'userToken') });",
+                  "else if (authMode === 'emptyBearer') pm.request.headers.add({ key: 'Authorization', value: 'Bearer ' });",
+                  "else if (authMode === 'basic') pm.request.headers.add({ key: 'Authorization', value: 'Basic abc' });",
+                  "else if (authMode === 'malformed') pm.request.headers.add({ key: 'Authorization', value: 'Bearer not-a-jwt' });",
+                  "else if (authMode === 'invalidSignature') { const token = need(adminToken, 'adminToken'); const parts = token.split('.'); if (parts.length !== 3) throw new Error(caseId + ': adminToken is not a three-part JWT'); parts[2] = (parts[2] || 'x').replace(/^./, c => c === 'a' ? 'b' : 'a'); pm.request.headers.add({ key: 'Authorization', value: 'Bearer ' + parts.join('.') }); }",
+                  "else if (authMode === 'expiredToken') pm.request.headers.add({ key: 'Authorization', value: 'Bearer ' + need(String(pm.environment.get('expiredToken') || '').trim(), 'expiredToken') });",
+                  "else if (authMode === 'roleArrayToken') pm.request.headers.add({ key: 'Authorization', value: 'Bearer ' + need(String(pm.environment.get('roleArrayToken') || '').trim(), 'roleArrayToken') });",
+                  "else if (authMode === 'algNone') { const token = need(adminToken, 'adminToken'); const parts = token.split('.'); if (parts.length !== 3) throw new Error(caseId + ': adminToken is not a three-part JWT'); pm.request.headers.add({ key: 'Authorization', value: 'Bearer ' + base64url(JSON.stringify({alg:'none',typ:'JWT'})) + '.' + parts[1] + '.' }); }",
+                  "else if (authMode === 'duplicateNonAdminMalformed') { pm.request.headers.add({ key: 'Authorization', value: 'Bearer ' + need(userToken, 'userToken') }); pm.request.headers.add({ key: 'Authorization', value: 'Bearer not-a-jwt' }); }",
+                  "else if (authMode !== 'none') throw new Error(caseId + ': unsupported authMode ' + authMode);",
+                  "const extraHeaders = pm.iterationData.get('extraHeaders') || {};",
+                  "Object.entries(extraHeaders).forEach(([key,value]) => pm.request.headers.upsert({ key, value: String(value) }));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const caseId = String(pm.iterationData.get('testCaseId'));",
+                  "const oracle = String(pm.iterationData.get('statusOracle'));",
+                  "const statusClass = Math.floor(pm.response.code / 100) + 'xx';",
+                  "pm.test(caseId + ' - approved HTTP class oracle: ' + oracle, function () {",
+                  "  const allowed = oracle.split('|');",
+                  "  pm.expect(allowed).to.include(statusClass);",
+                  "});",
+                  "pm.test(caseId + ' - response is never 5xx', function () { pm.expect(pm.response.code).to.be.below(500); });",
+                  "pm.test(caseId + ' - request remains the selected PUT product endpoint', function () {",
+                  "  pm.expect(pm.request.method).to.eql('PUT');",
+                  "  pm.expect(pm.request.url.getPath()).to.match(/^\\/api\\/products\\//);",
+                  "});",
+                  "pm.test(caseId + ' - mandatory student header is present', function () {",
+                  "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql(String(pm.environment.get('StudentID')).trim());",
+                  "});",
+                  "pm.test(caseId + ' - response discloses no credential or obvious internal detail', function () {",
+                  "  const text = pm.response.text();",
+                  "  pm.expect(text).not.to.match(/[\"']?(password|password_hash|jwt|token|secret)[\"']?\\s*:/i);",
+                  "  pm.expect(text).not.to.match(/(sqlite|sqlstate|node_modules|backend\\/server\\.js|stack trace)/i);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{{requestBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}{{targetPath}}",
+            "description": "Data-driven FR-15 request. Persistent-state oracles are verified through restricted non-GET datastore snapshots, never through a GET test."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

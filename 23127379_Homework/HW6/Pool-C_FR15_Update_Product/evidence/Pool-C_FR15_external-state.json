@@ -1,0 +1,85 @@
+{
+  "generatedAt": "2026-08-28T13:43:49.970Z",
+  "observationMethod": "Local Newman PUT concurrency/replay plus docker-exec SQLite snapshots; no GET request.",
+  "concurrency": {
+    "testCaseId": "FR15-SEC-025",
+    "requests": [
+      {
+        "statusCode": 200,
+        "method": "PUT",
+        "studentHeaderMatches": true,
+        "assertionFailures": []
+      },
+      {
+        "statusCode": 200,
+        "method": "PUT",
+        "studentHeaderMatches": true,
+        "assertionFailures": []
+      }
+    ],
+    "target101": {
+      "id": 101,
+      "name": "FR15 Concurrent A",
+      "price": 101000,
+      "description": "Concurrent target A",
+      "imageUrl": "https://example.test/concurrent-a.png",
+      "category_id": 1
+    },
+    "target102": {
+      "id": 102,
+      "name": "FR15 Concurrent B",
+      "price": 202000,
+      "description": "Concurrent target B",
+      "imageUrl": "https://example.test/concurrent-b.png",
+      "category_id": 2
+    },
+    "productCountBefore": 7,
+    "productCountAfter": 7,
+    "seededProductsUnchanged": true,
+    "distinctTargetsPreserved": true
+  },
+  "replay": {
+    "testCaseId": "FR15-SEC-026",
+    "firstRequest": {
+      "statusCode": 200,
+      "method": "PUT",
+      "studentHeaderMatches": true,
+      "assertionFailures": []
+    },
+    "secondRequest": {
+      "statusCode": 200,
+      "method": "PUT",
+      "studentHeaderMatches": true,
+      "assertionFailures": []
+    },
+    "targetAfterFirst": {
+      "id": 101,
+      "name": "FR15 Replay Target",
+      "price": 303000,
+      "description": "Replay target",
+      "imageUrl": "https://example.test/replay.png",
+      "category_id": 1
+    },
+    "targetAfterSecond": {
+      "id": 101,
+      "name": "FR15 Replay Target",
+      "price": 303000,
+      "description": "Replay target",
+      "imageUrl": "https://example.test/replay.png",
+      "category_id": 1
+    },
+    "productCountBefore": 7,
+    "productCountAfterFirst": 7,
+    "productCountAfterSecond": 7,
+    "seededProductsUnchanged": true,
+    "identicalStateAfterReplay": true
+  },
+  "summary": {
+    "requests": 4,
+    "allMethodsPut": true,
+    "allStudentHeadersMatch": true,
+    "allAssertionsPass": true,
+    "concurrencyPass": true,
+    "replayPass": true
+  }
+}
