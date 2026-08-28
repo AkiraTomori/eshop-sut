@@ -18,7 +18,7 @@ The tracked CI-enabled total is 159 cases (`55 + 42 + 62`), and each selected AP
 2. The job installs backend dependencies with `npm ci` and pins Newman to `6.2.2`.
 3. A static gate parses all approved collection/data artifacts, verifies at least 35 unique rows per Pool, rejects every GET request or out-of-scope request definition, and verifies collection-level `StudentID` header injection.
 4. The job reads the repository secret `HW06_POSTMAN_ENV_BUNDLE`, validates three complete reviewed Postman environments, enforces the same non-empty `StudentID`, enforces local port 3000, and writes permission-restricted runtime files under `RUNNER_TEMP`. Pool B's `fixtureRunId` is replaced with the GitHub run ID/attempt to avoid cross-run fixture collisions.
-5. The backend starts with the repository's real command, `node server.js`, from `backend/` after `npm ci`. Readiness is a TCP connection to `127.0.0.1:3000`; the workflow performs no HTTP GET health check.
+5. The workflow creates `${GITHUB_WORKSPACE}/${HW06_RESULTS}` explicitly, then starts the backend with the repository's real command, `node server.js`, from `backend/` after `npm ci`. Readiness is a TCP connection to `127.0.0.1:3000`; the workflow performs no HTTP GET health check.
 6. Newman executes Pool A, the complete Pool B collection (so its approved POST-only fixtures precede the scored Checkout folder), and Pool C in data-driven mode.
 7. Each run produces CLI and JUnit evidence. Exit codes are recorded separately so all three Pools run and evidence uploads even if assertions fail; the final step fails the job if any Newman exit code is non-zero.
 
@@ -34,6 +34,8 @@ Create one GitHub Actions repository secret named `HW06_POSTMAN_ENV_BUNDLE`. Its
 - contain no production credential; use disposable local fixtures only.
 
 The repository secret was created through the authenticated GitHub CLI at `2026-08-28T15:02:07Z`. Its three-environment bundle was generated in memory, structurally validated, and accepted by GitHub without printing or persisting the bundle in the repository. GitHub exposes only the secret name and update timestamp after creation, so human review remains pending. The workflow deliberately fails before starting the SUT when the secret is absent or malformed.
+
+The first post-secret run exposed a working-directory defect before the SUT started: `mkdir -p "${HW06_RESULTS}"` ran from `backend/`, but the log and PID redirects targeted `${GITHUB_WORKSPACE}/${HW06_RESULTS}`. The workflow now creates the absolute repository-root results directory. This correction changes no request, assertion, fixture, or readiness behavior and is not a successful sample run.
 
 ## 4. Two required real sample runs
 

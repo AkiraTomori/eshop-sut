@@ -208,7 +208,7 @@ jobs:
       - name: Start EShop backend
         shell: bash
         run: |
-          mkdir -p "${HW06_RESULTS}"
+          mkdir -p "${GITHUB_WORKSPACE}/${HW06_RESULTS}"
           node server.js > "${GITHUB_WORKSPACE}/${HW06_RESULTS}/sut.log" 2>&1 &
           echo "$!" > "${GITHUB_WORKSPACE}/${HW06_RESULTS}/sut.pid"
         working-directory: backend
