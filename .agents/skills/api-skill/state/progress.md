@@ -37,9 +37,9 @@ Current Pool: Pool C
 - [x] Stage 5 — Report Bug
 - [x] Pool AI Audit — human reviewed
 
-## Finalization — NOT_STARTED
+## Finalization — IN_PROGRESS
 
-- [ ] CI/CD workflow and two real run records confirmed
+- [x] CI/CD workflow and student-approved evidence substitution confirmed — literal two-run requirement documented as unmet
 - [ ] AI Audit Report and 200–300 word AI Critique confirmed
 - [ ] Test-generator pseudocode and student-drawn diagram evidence present
 - [ ] Final README, main report, summaries, and checklist confirmed
