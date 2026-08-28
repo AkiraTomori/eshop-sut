@@ -5,25 +5,33 @@
 ## Specification basis and interpretation rules
 
 - Assignment scope: `2026.HW06.API Testing_En.md` §§5–6 requires one Pool A API unit and domain partitions on every parameter.
+
 - Business rules: root `README.md` §FR-03; password rules inherited from §FR-01; OTP lifecycle requirement from §SEC-07.
+
 - Endpoint contracts: root `api_specification.md` §§1.3–1.4.
-- `email` is treated as a required JSON string because FR-03 requires a registered email and both API bodies name the field. Valid email syntax follows the SRS example `user@domain.com`; no email length, case-folding, or whitespace-normalization rule is specified.
+
+- `email` is treated as a required JSON string because FR-03 requires a registered email and both API bodies name the field. Valid email syntax follows the SRS example `user\@domain.com`; no email length, case-folding, or whitespace-normalization rule is specified.
+
 - `resetToken` is treated as a required JSON string of exactly six decimal digits because the API example quotes it and FR-03 calls it a 6-digit OTP. A live token value is always captured dynamically; `123456` below is notation or invalid-test data, never an assumed valid OTP.
-- `newPassword` is a required JSON string with a one-sided length boundary of 8 characters and all four required character classes. The only allowed special characters documented by FR-01 are `@`, `$`, `!`, `%`, `*`, `?`, and `&`. No maximum length is specified.
-- All negative-case status codes and response schemas are unspecified. The reset endpoint's success status and response schema are also unspecified. These cells therefore say `Not specified` rather than guessing `400`, `404`, or another code.
+
+- `newPassword` is a required JSON string with a one-sided length boundary of 8 characters and all four required character classes. The only allowed special characters documented by FR-01 are `@`, `$`, `!`, `%`, `\*`, `?`, and `&`. No maximum length is specified.
+
+- Status precision policy: API §1.3 explicitly specifies `200 OK` only for a successful Forgot Password request. A valid Reset Password request expects `2xx Success`; required parser, validation, token, and binding rejections expect `4xx Client Error`. For an unregistered Forgot Password email, either a generic `2xx` or a `4xx` is acceptable because account-enumeration behavior is undocumented. Exact numeric error codes and response schemas remain contract gaps.
+
 - The SRS requires a “confirm new password” UI value, but `api_specification.md` §1.4 does not define any confirmation field in the reset API request. No field name or server-side comparison behavior is invented.
+
 - FR-03's token-to-email binding and SEC-07's expiry/one-time-use behavior are cross-field/state rules. They are inventoried here, but full state/event coverage belongs to the separate Pool A State Transition proposal.
 
 ## Baseline fixtures and isolation policy
 
 | Fixture | Definition |
 |---|---|
-| `E1` | Registered default user `test@eshop.com` from root `README.md` |
-| `E2` | Different registered default user `admin@eshop.com` from root `README.md` |
-| `EU` | A test-controlled, verified-unregistered, well-formed address such as `hw06-unregistered@example.invalid` |
+| `E1` | Registered default user `test\@eshop.com` from root `README.md` |
+| `E2` | Different registered default user `admin\@eshop.com` from root `README.md` |
+| `EU` | A test-controlled, verified-unregistered, well-formed address such as `hw06-unregistered\@example.invalid` |
 | `T1` | Fresh six-digit token returned by a successful `POST /api/forgot-password` for `E1`; obtain a new token for every independent reset case |
-| `F0` | `{"email":"test@eshop.com"}` |
-| `R0` | `{"email":"test@eshop.com","resetToken":"<T1>","newPassword":"Aa1!bbbb"}`; password length is exactly 8 |
+| `F0` | `{"email":"test\@eshop.com"}` |
+| `R0` | `{"email":"test\@eshop.com","resetToken":"<T1>","newPassword":"Aa1!bbbb"}`; password length is exactly 8 |
 
 Each negative case changes one independent input partition from `F0` or `R0`. Reset-email negatives cannot have a semantically valid token bound to that invalid email by definition; they therefore exercise the documented email/token-pair dependency while keeping token type, length, and format valid. The table calls out this unavoidable dependency instead of pretending the fields are independent.
 
@@ -36,10 +44,10 @@ Each negative case changes one independent input partition from `F0` or `R0`. Re
 | PA-RST-ENV | `/api/reset-password` | request envelope | JSON body | JSON object | Yes, implied by documented body | Must contain the three documented request fields | `R0` | API spec §1.4 | EC covered; no size limit specified |
 | PA-RST-EMAIL | `/api/reset-password` | body | `email` | string | Yes | Syntactically valid, registered, and identical to the email for which the token was issued | `E1`, paired with `T1` | README §FR-03 steps 1–2; API spec §1.4 | Structural/domain ECs covered; pair-state matrix deferred to State Transition |
 | PA-RST-TOKEN | `/api/reset-password` | body | `resetToken` | string | Yes | Exactly 6 decimal digits; issued for the submitted email; unexpired and unused | `T1` | README §FR-03; §SEC-07; API spec §1.4 | Type/format/length EC and BVA covered; expiry/use states deferred |
-| PA-RST-PASSWORD | `/api/reset-password` | body | `newPassword` | string | Yes | Length ≥8; at least one uppercase, lowercase, digit, and one of `@$!%*?&` | `Aa1!bbbb` | README §FR-03 step 2 → §FR-01; API spec §1.4 | EC and lower-bound BVA covered; maximum unspecified |
-| PA-RST-CONFIRM | `/api/reset-password` | body/UI boundary | confirmation password | Not specified | Required by UI SRS; API inclusion unspecified | Two UI password values must match, but API spec defines no field name or comparison contract | Not specified | README §FR-03 step 2 versus API spec §1.4 | Contract gap; no assertable API domain case |
+| PA-RST-PASSWORD | `/api/reset-password` | body | `newPassword` | string | Yes | Length ≥8; at least one uppercase, lowercase, digit, and one of `@$!%\*?&` | `Aa1!bbbb` | README §FR-03 step 2 → §FR-01; API spec §1.4 | EC and lower-bound BVA covered; maximum unspecified |
+| PA-RST-CONFIRM | `/api/reset-password` | body/UI boundary | confirmation password | UI string; no API member is documented | Required by UI SRS; absent from the documented API body | Two UI password values must match, but API spec defines no field name or server-side comparison contract | UI value `Aa1!bbbb` matching `newPassword`; omit from API body until a field is specified | README §FR-03 step 2 versus API spec §1.4 | Contract gap stated explicitly; no assertable API domain case |
 | PA-SHARED-CTYPE | both endpoints | header | `Content-Type` | string | JSON media type implied, exact header contract unspecified | Bodies are documented as JSON; behavior for missing/wrong media type is not documented | `application/json` | API spec §§1.3–1.4 | Inventoried; no assertable invalid EC/status |
-| PA-SHARED-AUTH | both endpoints | auth context | `Authorization` | Not specified | No JWT requirement documented for Authentication endpoints | No Authorization header | API spec §1 (contrast explicit JWT note in §2) | Inference only; behavior with supplied/invalid JWT unspecified |
+| PA-SHARED-AUTH | both endpoints | auth context | `Authorization` | No authentication input is documented for these endpoints | No JWT requirement documented for Authentication endpoints | No Authorization header | API spec §1 (contrast explicit JWT note in §2) | Anonymous baseline inferred from endpoint placement; supplied/invalid-JWT behavior remains a contract gap |
 | PA-SHARED-STUDENT | both endpoints | harness header | `X-Student-Id` | string/environment value | Required for future HW06 execution, not an SUT business input | `{{StudentID}}` via collection pre-request script | Assignment §6; repository `AGENTS.md` §3.6 | Deferred to Stage 4; no domain partition |
 
 ## Equivalence classes
@@ -81,7 +89,7 @@ Each negative case changes one independent input partition from `F0` or `R0`. Re
 | PWD-I3 | PA-RST-PASSWORD | `newPassword` | must-be | No lowercase letter; all other rules met | No | `AA1!BBBB` | README §FR-01 |
 | PWD-I4 | PA-RST-PASSWORD | `newPassword` | must-be | No digit; all other rules met | No | `AaB!bbbb` | README §FR-01 |
 | PWD-I5 | PA-RST-PASSWORD | `newPassword` | must-be | No special character; all other rules met | No | `Aa1bbbbb` | README §FR-01 |
-| PWD-I6 | PA-RST-PASSWORD | `newPassword` | allowed set | Uses `#` as its only special character, not one of `@$!%*?&` | No | `Aa1#bbbb` | README §FR-01 |
+| PWD-I6 | PA-RST-PASSWORD | `newPassword` | allowed set | Uses `#` as its only special character, not one of `@$!%\*?&` | No | `Aa1#bbbb` | README §FR-01 |
 | PWD-I7 | PA-RST-PASSWORD | `newPassword` | missing | Field omitted | No | `newPassword` omitted from `R0` | API spec §1.4; README §FR-03 |
 | PWD-I8 | PA-RST-PASSWORD | `newPassword` | nullability | Explicit `null` | No | `newPassword:null` | Password string semantics in API spec §1.4 |
 | PWD-I9 | PA-RST-PASSWORD | `newPassword` | type | Non-string JSON value | No | `newPassword:12345678` | Password string semantics in API spec §1.4 |
@@ -102,41 +110,41 @@ For every reset case, create a fresh `T1` unless the objective intentionally cha
 | Test Case ID | Endpoint | Method | Objective | Preconditions | Input/body | Expected status | Expected response/side effect | EC/Partition tested | Source |
 |---|---|---|---|---|---|---|---|---|---|
 | FR03-DOM-001 | `/api/forgot-password` | POST | Accept registered, well-formed email | `E1` exists | `F0` | `200` | Exact documented message and a `resetToken` value; token generation side effect occurs | FENV-V1, FEM-V1 | README §FR-03; API spec §1.3 |
-| FR03-DOM-002 | `/api/forgot-password` | POST | Reject absent body | None | `<absent>` | Not specified | Must not issue a usable token; failure schema unspecified | FENV-I1 | API spec §1.3 |
-| FR03-DOM-003 | `/api/forgot-password` | POST | Reject malformed JSON | None | raw `{"email":` | Not specified | Must not issue a usable token; failure schema unspecified | FENV-I2 | API spec §1.3 |
-| FR03-DOM-004 | `/api/forgot-password` | POST | Reject non-object JSON body | None | `[]` | Not specified | Must not issue a usable token; failure schema unspecified | FENV-I3 | API spec §1.3 |
-| FR03-DOM-005 | `/api/forgot-password` | POST | Handle well-formed unregistered email | `EU` verified absent | `{"email":"hw06-unregistered@example.invalid"}` | Not specified | No token usable for `EU`; whether response is generic to prevent enumeration is unspecified here | FEM-I1 | README §FR-03 |
-| FR03-DOM-006 | `/api/forgot-password` | POST | Reject malformed email string | None | `{"email":"not-an-email"}` | Not specified | Must not issue a usable token; failure schema unspecified | FEM-I2 | README §FR-01/FR-03 |
-| FR03-DOM-007 | `/api/forgot-password` | POST | Reject missing email field | None | `{}` | Not specified | Must not issue a usable token; failure schema unspecified | FEM-I3 | README §FR-03; API spec §1.3 |
-| FR03-DOM-008 | `/api/forgot-password` | POST | Reject null email | None | `{"email":null}` | Not specified | Must not issue a usable token; failure schema unspecified | FEM-I4 | API spec §1.3 |
-| FR03-DOM-009 | `/api/forgot-password` | POST | Reject wrong email type | None | `{"email":42}` | Not specified | Must not issue a usable token; failure schema unspecified | FEM-I5 | API spec §1.3 |
-| FR03-DOM-010 | `/api/reset-password` | POST | Accept valid pair and password at length LB=8 | Fresh `T1` for `E1`; password differs from current | `R0` | Not specified | Password is updated; response schema unspecified; token invalidation is covered by State Transition/SEC-07 | RENV-V1, REM-V1, TOK-V1, PWD-V1; BVA 6 and 8 | README §FR-03; API spec §1.4 |
-| FR03-DOM-011 | `/api/reset-password` | POST | Accept valid password at LB+1=9 | Fresh `T1` for `E1` | `R0` with `newPassword:"Aa1!bbbbb"` | Not specified | Password is updated; response schema unspecified | PWD-V1; BVA 9 | README §FR-01/FR-03 |
-| FR03-DOM-012 | `/api/reset-password` | POST | Reject absent body | None | `<absent>` | Not specified | No password change; failure schema unspecified | RENV-I1 | API spec §1.4 |
-| FR03-DOM-013 | `/api/reset-password` | POST | Reject malformed JSON | None | raw `{"email":` | Not specified | No password change; failure schema unspecified | RENV-I2 | API spec §1.4 |
-| FR03-DOM-014 | `/api/reset-password` | POST | Reject non-object JSON body | None | `[]` | Not specified | No password change; failure schema unspecified | RENV-I3 | API spec §1.4 |
-| FR03-DOM-015 | `/api/reset-password` | POST | Reject token used with a different registered email | Fresh `T1` issued for `E1`; `E2` exists | `R0` with `email:"admin@eshop.com"` | Not specified | Neither account password changes; failure schema unspecified | REM-I1 (email/token dependency) | README §FR-03 |
-| FR03-DOM-016 | `/api/reset-password` | POST | Reject well-formed unregistered email | `EU` absent; use a six-digit string not issued for it | `R0` with `email:"hw06-unregistered@example.invalid"` | Not specified | No password change; failure schema unspecified | REM-I2 (membership/pair dependency) | README §FR-03 |
-| FR03-DOM-017 | `/api/reset-password` | POST | Reject malformed email | Use a six-digit string; no token can validly bind to malformed email | `R0` with `email:"not-an-email"` | Not specified | No password change; failure schema unspecified | REM-I3 (format/pair dependency) | README §FR-01/FR-03 |
-| FR03-DOM-018 | `/api/reset-password` | POST | Reject missing email | Fresh `T1` for `E1` | `R0` without `email` | Not specified | No password change; failure schema unspecified | REM-I4 (presence/pair dependency) | README §FR-03; API spec §1.4 |
-| FR03-DOM-019 | `/api/reset-password` | POST | Reject null email | Fresh `T1` for `E1` | `R0` with `email:null` | Not specified | No password change; failure schema unspecified | REM-I5 (null/pair dependency) | API spec §1.4 |
-| FR03-DOM-020 | `/api/reset-password` | POST | Reject wrong email type | Fresh `T1` for `E1` | `R0` with `email:42` | Not specified | No password change; failure schema unspecified | REM-I6 (type/pair dependency) | API spec §1.4 |
-| FR03-DOM-021 | `/api/reset-password` | POST | Reject token length LB-1=5 | `E1` exists | `R0` with `resetToken:"12345"` | Not specified | No password change; failure schema unspecified | TOK-I1; BVA 5 | README §FR-03 |
-| FR03-DOM-022 | `/api/reset-password` | POST | Reject token length UB+1=7 | `E1` exists | `R0` with `resetToken:"1234567"` | Not specified | No password change; failure schema unspecified | TOK-I2; BVA 7 | README §FR-03 |
-| FR03-DOM-023 | `/api/reset-password` | POST | Reject six-character token containing non-digit | `E1` exists | `R0` with `resetToken:"12345A"` | Not specified | No password change; failure schema unspecified | TOK-I3 | README §FR-03 |
-| FR03-DOM-024 | `/api/reset-password` | POST | Reject missing token | `E1` exists | `R0` without `resetToken` | Not specified | No password change; failure schema unspecified | TOK-I4 | README §FR-03; API spec §1.4 |
-| FR03-DOM-025 | `/api/reset-password` | POST | Reject null token | `E1` exists | `R0` with `resetToken:null` | Not specified | No password change; failure schema unspecified | TOK-I5 | API spec §1.4 |
-| FR03-DOM-026 | `/api/reset-password` | POST | Reject numeric token type | `E1` exists | `R0` with `resetToken:123456` | Not specified | No password change; failure schema unspecified | TOK-I6 | API spec §1.4 |
-| FR03-DOM-027 | `/api/reset-password` | POST | Reject correctly formatted but unissued token | Fresh `T1` exists; choose a different controlled six-digit value | `R0` with `resetToken:"<not-T1>"` | Not specified | No password change; failure schema unspecified | TOK-I7 | README §FR-03 |
-| FR03-DOM-028 | `/api/reset-password` | POST | Reject password at LB-1=7 while preserving all character classes | Fresh `T1` for `E1` | `R0` with `newPassword:"Aa1!bbb"` | Not specified | No password change; failure schema unspecified | PWD-I1; BVA 7 | README §FR-01/FR-03 |
-| FR03-DOM-029 | `/api/reset-password` | POST | Reject password without uppercase | Fresh `T1` for `E1` | `R0` with `newPassword:"aa1!bbbb"` | Not specified | No password change; failure schema unspecified | PWD-I2 | README §FR-01/FR-03 |
-| FR03-DOM-030 | `/api/reset-password` | POST | Reject password without lowercase | Fresh `T1` for `E1` | `R0` with `newPassword:"AA1!BBBB"` | Not specified | No password change; failure schema unspecified | PWD-I3 | README §FR-01/FR-03 |
-| FR03-DOM-031 | `/api/reset-password` | POST | Reject password without digit | Fresh `T1` for `E1` | `R0` with `newPassword:"AaB!bbbb"` | Not specified | No password change; failure schema unspecified | PWD-I4 | README §FR-01/FR-03 |
-| FR03-DOM-032 | `/api/reset-password` | POST | Reject password without special character | Fresh `T1` for `E1` | `R0` with `newPassword:"Aa1bbbbb"` | Not specified | No password change; failure schema unspecified | PWD-I5 | README §FR-01/FR-03 |
-| FR03-DOM-033 | `/api/reset-password` | POST | Reject password whose only special is outside allowed set | Fresh `T1` for `E1` | `R0` with `newPassword:"Aa1#bbbb"` | Not specified | No password change; failure schema unspecified | PWD-I6 | README §FR-01/FR-03 |
-| FR03-DOM-034 | `/api/reset-password` | POST | Reject missing new password | Fresh `T1` for `E1` | `R0` without `newPassword` | Not specified | No password change; failure schema unspecified | PWD-I7 | README §FR-03; API spec §1.4 |
-| FR03-DOM-035 | `/api/reset-password` | POST | Reject null new password | Fresh `T1` for `E1` | `R0` with `newPassword:null` | Not specified | No password change; failure schema unspecified | PWD-I8 | API spec §1.4 |
-| FR03-DOM-036 | `/api/reset-password` | POST | Reject non-string new password | Fresh `T1` for `E1` | `R0` with `newPassword:12345678` | Not specified | No password change; failure schema unspecified | PWD-I9 | API spec §1.4 |
+| FR03-DOM-002 | `/api/forgot-password` | POST | Reject absent body | None | `<absent>` | `4xx Client/Parser Error` — exact code not documented | Must not issue a usable token; failure schema unspecified | FENV-I1 | API spec §1.3 |
+| FR03-DOM-003 | `/api/forgot-password` | POST | Reject malformed JSON | None | raw `{"email":` | `4xx Client/Parser Error` — exact code not documented | Must not issue a usable token; failure schema unspecified | FENV-I2 | API spec §1.3 |
+| FR03-DOM-004 | `/api/forgot-password` | POST | Reject non-object JSON body | None | `[]` | `4xx Client/Parser Error` — exact code not documented | Must not issue a usable token; failure schema unspecified | FENV-I3 | API spec §1.3 |
+| FR03-DOM-005 | `/api/forgot-password` | POST | Handle well-formed unregistered email | `EU` verified absent | `{"email":"hw06-unregistered\@example.invalid"}` | `2xx Generic Success` or `4xx Client Error` — account-enumeration policy not documented | No token usable for `EU`; whether response is generic to prevent enumeration is unspecified here | FEM-I1 | README §FR-03 |
+| FR03-DOM-006 | `/api/forgot-password` | POST | Reject malformed email string | None | `{"email":"not-an-email"}` | `4xx Validation Error` — exact code not documented | Must not issue a usable token; failure schema unspecified | FEM-I2 | README §FR-01/FR-03 |
+| FR03-DOM-007 | `/api/forgot-password` | POST | Reject missing email field | None | `{}` | `4xx Validation Error` — exact code not documented | Must not issue a usable token; failure schema unspecified | FEM-I3 | README §FR-03; API spec §1.3 |
+| FR03-DOM-008 | `/api/forgot-password` | POST | Reject null email | None | `{"email":null}` | `4xx Validation Error` — exact code not documented | Must not issue a usable token; failure schema unspecified | FEM-I4 | API spec §1.3 |
+| FR03-DOM-009 | `/api/forgot-password` | POST | Reject wrong email type | None | `{"email":42}` | `4xx Validation Error` — exact code not documented | Must not issue a usable token; failure schema unspecified | FEM-I5 | API spec §1.3 |
+| FR03-DOM-010 | `/api/reset-password` | POST | Accept valid pair and password at length LB=8 | Fresh `T1` for `E1`; password differs from current | `R0` | `2xx Success` — exact code not documented | Password is updated; response schema unspecified; token invalidation is covered by State Transition/SEC-07 | RENV-V1, REM-V1, TOK-V1, PWD-V1; BVA 6 and 8 | README §FR-03; API spec §1.4 |
+| FR03-DOM-011 | `/api/reset-password` | POST | Accept valid password at LB+1=9 | Fresh `T1` for `E1` | `R0` with `newPassword:"Aa1!bbbbb"` | `2xx Success` — exact code not documented | Password is updated; response schema unspecified | PWD-V1; BVA 9 | README §FR-01/FR-03 |
+| FR03-DOM-012 | `/api/reset-password` | POST | Reject absent body | None | `<absent>` | `4xx Client/Parser Error` — exact code not documented | No password change; failure schema unspecified | RENV-I1 | API spec §1.4 |
+| FR03-DOM-013 | `/api/reset-password` | POST | Reject malformed JSON | None | raw `{"email":` | `4xx Client/Parser Error` — exact code not documented | No password change; failure schema unspecified | RENV-I2 | API spec §1.4 |
+| FR03-DOM-014 | `/api/reset-password` | POST | Reject non-object JSON body | None | `[]` | `4xx Client/Parser Error` — exact code not documented | No password change; failure schema unspecified | RENV-I3 | API spec §1.4 |
+| FR03-DOM-015 | `/api/reset-password` | POST | Reject token used with a different registered email | Fresh `T1` issued for `E1`; `E2` exists | `R0` with `email:"admin\@eshop.com"` | `4xx Token/Binding Validation Error` — exact code not documented | Neither account password changes; failure schema unspecified | REM-I1 (email/token dependency) | README §FR-03 |
+| FR03-DOM-016 | `/api/reset-password` | POST | Reject well-formed unregistered email | `EU` absent; use a six-digit string not issued for it | `R0` with `email:"hw06-unregistered\@example.invalid"` | `4xx Token/Binding Validation Error` — exact code not documented | No password change; failure schema unspecified | REM-I2 (membership/pair dependency) | README §FR-03 |
+| FR03-DOM-017 | `/api/reset-password` | POST | Reject malformed email | Use a six-digit string; no token can validly bind to malformed email | `R0` with `email:"not-an-email"` | `4xx Token/Binding Validation Error` — exact code not documented | No password change; failure schema unspecified | REM-I3 (format/pair dependency) | README §FR-01/FR-03 |
+| FR03-DOM-018 | `/api/reset-password` | POST | Reject missing email | Fresh `T1` for `E1` | `R0` without `email` | `4xx Token/Binding Validation Error` — exact code not documented | No password change; failure schema unspecified | REM-I4 (presence/pair dependency) | README §FR-03; API spec §1.4 |
+| FR03-DOM-019 | `/api/reset-password` | POST | Reject null email | Fresh `T1` for `E1` | `R0` with `email:null` | `4xx Token/Binding Validation Error` — exact code not documented | No password change; failure schema unspecified | REM-I5 (null/pair dependency) | API spec §1.4 |
+| FR03-DOM-020 | `/api/reset-password` | POST | Reject wrong email type | Fresh `T1` for `E1` | `R0` with `email:42` | `4xx Token/Binding Validation Error` — exact code not documented | No password change; failure schema unspecified | REM-I6 (type/pair dependency) | API spec §1.4 |
+| FR03-DOM-021 | `/api/reset-password` | POST | Reject token length LB-1=5 | `E1` exists | `R0` with `resetToken:"12345"` | `4xx Token Validation Error` — exact code not documented | No password change; failure schema unspecified | TOK-I1; BVA 5 | README §FR-03 |
+| FR03-DOM-022 | `/api/reset-password` | POST | Reject token length UB+1=7 | `E1` exists | `R0` with `resetToken:"1234567"` | `4xx Token Validation Error` — exact code not documented | No password change; failure schema unspecified | TOK-I2; BVA 7 | README §FR-03 |
+| FR03-DOM-023 | `/api/reset-password` | POST | Reject six-character token containing non-digit | `E1` exists | `R0` with `resetToken:"12345A"` | `4xx Token Validation Error` — exact code not documented | No password change; failure schema unspecified | TOK-I3 | README §FR-03 |
+| FR03-DOM-024 | `/api/reset-password` | POST | Reject missing token | `E1` exists | `R0` without `resetToken` | `4xx Token Validation Error` — exact code not documented | No password change; failure schema unspecified | TOK-I4 | README §FR-03; API spec §1.4 |
+| FR03-DOM-025 | `/api/reset-password` | POST | Reject null token | `E1` exists | `R0` with `resetToken:null` | `4xx Token Validation Error` — exact code not documented | No password change; failure schema unspecified | TOK-I5 | API spec §1.4 |
+| FR03-DOM-026 | `/api/reset-password` | POST | Reject numeric token type | `E1` exists | `R0` with `resetToken:123456` | `4xx Token Validation Error` — exact code not documented | No password change; failure schema unspecified | TOK-I6 | API spec §1.4 |
+| FR03-DOM-027 | `/api/reset-password` | POST | Reject correctly formatted but unissued token | Fresh `T1` exists; choose a different controlled six-digit value | `R0` with `resetToken:"<not-T1>"` | `4xx Token Validation Error` — exact code not documented | No password change; failure schema unspecified | TOK-I7 | README §FR-03 |
+| FR03-DOM-028 | `/api/reset-password` | POST | Reject password at LB-1=7 while preserving all character classes | Fresh `T1` for `E1` | `R0` with `newPassword:"Aa1!bbb"` | `4xx Password Validation Error` — exact code not documented | No password change; failure schema unspecified | PWD-I1; BVA 7 | README §FR-01/FR-03 |
+| FR03-DOM-029 | `/api/reset-password` | POST | Reject password without uppercase | Fresh `T1` for `E1` | `R0` with `newPassword:"aa1!bbbb"` | `4xx Password Validation Error` — exact code not documented | No password change; failure schema unspecified | PWD-I2 | README §FR-01/FR-03 |
+| FR03-DOM-030 | `/api/reset-password` | POST | Reject password without lowercase | Fresh `T1` for `E1` | `R0` with `newPassword:"AA1!BBBB"` | `4xx Password Validation Error` — exact code not documented | No password change; failure schema unspecified | PWD-I3 | README §FR-01/FR-03 |
+| FR03-DOM-031 | `/api/reset-password` | POST | Reject password without digit | Fresh `T1` for `E1` | `R0` with `newPassword:"AaB!bbbb"` | `4xx Password Validation Error` — exact code not documented | No password change; failure schema unspecified | PWD-I4 | README §FR-01/FR-03 |
+| FR03-DOM-032 | `/api/reset-password` | POST | Reject password without special character | Fresh `T1` for `E1` | `R0` with `newPassword:"Aa1bbbbb"` | `4xx Password Validation Error` — exact code not documented | No password change; failure schema unspecified | PWD-I5 | README §FR-01/FR-03 |
+| FR03-DOM-033 | `/api/reset-password` | POST | Reject password whose only special is outside allowed set | Fresh `T1` for `E1` | `R0` with `newPassword:"Aa1#bbbb"` | `4xx Password Validation Error` — exact code not documented | No password change; failure schema unspecified | PWD-I6 | README §FR-01/FR-03 |
+| FR03-DOM-034 | `/api/reset-password` | POST | Reject missing new password | Fresh `T1` for `E1` | `R0` without `newPassword` | `4xx Password Validation Error` — exact code not documented | No password change; failure schema unspecified | PWD-I7 | README §FR-03; API spec §1.4 |
+| FR03-DOM-035 | `/api/reset-password` | POST | Reject null new password | Fresh `T1` for `E1` | `R0` with `newPassword:null` | `4xx Password Validation Error` — exact code not documented | No password change; failure schema unspecified | PWD-I8 | API spec §1.4 |
+| FR03-DOM-036 | `/api/reset-password` | POST | Reject non-string new password | Fresh `T1` for `E1` | `R0` with `newPassword:12345678` | `4xx Password Validation Error` — exact code not documented | No password change; failure schema unspecified | PWD-I9 | API spec §1.4 |
 
 ## Coverage ledger
 
@@ -156,10 +164,17 @@ For every reset case, create a fresh `T1` unless the objective intentionally cha
 ## Completeness summary and open confirmations
 
 - Parameters/context inventoried: 10 entries across both endpoints, including the API/SRS confirmation-field mismatch and execution-only student header.
+
 - Equivalence classes: 39 total (6 valid, 33 invalid).
+
 - Proposed domain cases: 36 (3 positive, 33 negative); every independent invalid EC has its own case. Reset-email negatives are explicitly classified as email/token-pair cases because isolation from token binding is impossible by definition.
+
 - Supported BVA points: 6-digit token length represented at 5/6/7; password minimum represented at 7/8/9. No unsupported upper boundary is invented.
+
+- Expected-status completion: all 36 cases now have an actionable exact `200`, `2xx`, `4xx`, or documented policy-dependent branch oracle; no unresolved status cell remains.
+
 - No GET request, API execution, Newman run, progress update, or next-stage action occurred.
-- Human clarification is needed before later automation can assert: the reset success status/schema, all error statuses/schemas, OTP lifetime, confirmation-password API field, and normalization/maximum-length behavior.
+
+- Human clarification is still needed before later automation can assert: the exact numeric Reset Password success code, exact numeric error codes and response schemas, OTP lifetime, confirmation-password API field, and normalization/maximum-length behavior.
 
 Status: Approved
