@@ -1,6 +1,6 @@
 # Pool B / FR-08 — Stage 5 Bug Report Proposal
 
-> Scope: triage of the corrected full run for the scored target `POST /api/checkout`. Register, Login, and Cart were user-authorized fixture-only POST calls. No GET request was executed, and no GitHub Issue was created or posted.
+> Scope: triage of the corrected full run for the scored target `POST /api/checkout`. Register, Login, and Cart were user-authorized fixture-only POST calls, and no GET request was executed. `BUG-PB-001` was posted as Issue 71; `BUG-PB-002` was reconciled with existing Issue 28 instead of creating a duplicate. Both have redacted MSSV screenshot comments.
 
 ## Evidence and reproduction state
 
@@ -18,6 +18,7 @@
 | Primary evidence | `postman/newman/Pool-B_FR08_full_report.json`, `postman/newman/Pool-B_FR08_full_report.html`, `evidence/Pool-B_FR08_full_newman-cli.txt` |
 | State evidence | `evidence/Pool-B_FR08_full_db-before.json`, `evidence/Pool-B_FR08_full_db-after.json`, `evidence/Pool-B_FR08_full_db-cleanup.json` |
 | Secret handling | JWTs, fixture password, emails/run ID redacted from reports; tracked runtime values empty; ignored local runtime values cleared after cleanup |
+| Posted issue screenshots | `../evidence/github-issues/BUG-PB-001_23127379.png` and `BUG-PB-002_23127379.png`; each is embedded in its mapped GitHub Issue comment |
 
 ## False-positive exclusion
 
@@ -55,6 +56,8 @@ The final evidence supports two independent SUT root causes. They remain separat
 - Environment/SUT version: Local Docker `eshop-sut-backend-1`; repository HEAD `5b0b028790be0e1ee33faf1cfa82ff2a558cddc0`
 - Test Case ID: `FR08-DOM-007`
 - Requirement source: API specification §4.3; confirmed Stage 2 object-envelope oracle
+- GitHub Issue: [Issue 71](https://github.com/AkiraTomori/eshop-sut/issues/71)
+- Screenshot comment: [MSSV 23127379 evidence](https://github.com/AkiraTomori/eshop-sut/issues/71#issuecomment-5455296032)
 
 ## Preconditions
 
@@ -86,7 +89,7 @@ Authenticated clients can create malformed orders that violate the documented re
 - Newman CLI: `evidence/Pool-B_FR08_full_newman-cli.txt` — failure `FR08-DOM-007 - rejected without server error`
 - Newman JSON/HTML: `postman/newman/Pool-B_FR08_full_report.json`, `postman/newman/Pool-B_FR08_full_report.html`
 - Database mapping: `evidence/Pool-B_FR08_full_db-after.json`, record `FR08-DOM-007`
-- Screenshot: `[USER MUST ATTACH A REAL FAILURE-DETAIL SCREENSHOT]`
+- Screenshot: [BUG-PB-001_23127379.png](../evidence/github-issues/BUG-PB-001_23127379.png), embedded in [Issue 71 evidence comment](https://github.com/AkiraTomori/eshop-sut/issues/71#issuecomment-5455296032)
 
 ## GitHub Issue content
 
@@ -97,7 +100,7 @@ Authenticated clients can create malformed orders that violate the documented re
   - Expected: `4xx` rejection and no order; exact status/schema unspecified.
   - Actual: HTTP `200` and one U1 order with null total/address.
   - Impact: malformed persistent order records can be created through a contract-invalid envelope.
-  - Evidence: attach the redacted Newman case, database record, and `[USER MUST ATTACH A REAL FAILURE-DETAIL SCREENSHOT]`.
+  - Evidence: redacted Newman case, database record, and the [MSSV screenshot](../evidence/github-issues/BUG-PB-001_23127379.png) embedded in [Issue 71](https://github.com/AkiraTomori/eshop-sut/issues/71#issuecomment-5455296032).
 - **Proposed labels:** `bug`, `validation`, `data-integrity`, `FR-08`, `api`
 
 ---
@@ -109,6 +112,9 @@ Authenticated clients can create malformed orders that violate the documented re
 - Environment/SUT version: Local Docker `eshop-sut-backend-1`; repository HEAD `5b0b028790be0e1ee33faf1cfa82ff2a558cddc0`
 - Test Case ID: 12 cases listed under `PB-F-TOTAL-001`
 - Requirement source: README FR-08
+- GitHub Issue: existing [Issue 28](https://github.com/AkiraTomori/eshop-sut/issues/28); duplicate avoided
+- HW06 evidence update: [comment 5455165553](https://github.com/AkiraTomori/eshop-sut/issues/28#issuecomment-5455165553)
+- Screenshot comment: [MSSV 23127379 evidence](https://github.com/AkiraTomori/eshop-sut/issues/28#issuecomment-5455296208)
 
 ## Preconditions
 
@@ -141,7 +147,7 @@ An authenticated client can underpay, create zero/negative/null totals, overstat
 - CLI execution summary: `evidence/Pool-B_FR08_full_newman-cli.txt`
 - Persisted totals and subject ownership: `evidence/Pool-B_FR08_full_db-after.json`
 - Before/cleanup proof: `evidence/Pool-B_FR08_full_db-before.json`, `evidence/Pool-B_FR08_full_db-cleanup.json`
-- Screenshot: `[USER MUST ATTACH A REAL SCREENSHOT OF THE REDACTED NEWMAN CASE AND DATABASE TOTAL COMPARISON]`
+- Screenshot: [BUG-PB-002_23127379.png](../evidence/github-issues/BUG-PB-002_23127379.png), embedded in [Issue 28 evidence comment](https://github.com/AkiraTomori/eshop-sut/issues/28#issuecomment-5455296208)
 
 ## GitHub Issue content
 
@@ -152,7 +158,7 @@ An authenticated client can underpay, create zero/negative/null totals, overstat
   - Expected: reject unchanged or accept using server-recalculated `250000` under README FR-08.
   - Actual: HTTP `200`; persisted order total was `1`. Twelve isolated cases demonstrate the same root cause, including null, negative, stale, and distinct-user-cart totals.
   - Impact: client-controlled pricing permits underpayment and invalid financial records.
-  - Evidence: attach redacted Newman/database evidence and `[USER MUST ATTACH A REAL SCREENSHOT OF THE REDACTED TOTAL COMPARISON]`.
+  - Evidence: redacted Newman/database evidence and the [MSSV screenshot](../evidence/github-issues/BUG-PB-002_23127379.png) embedded in [Issue 28](https://github.com/AkiraTomori/eshop-sut/issues/28#issuecomment-5455296208).
 - **Proposed labels:** `bug`, `security`, `business-logic`, `data-integrity`, `FR-08`, `api`
 
 ## Historical evidence ledger
@@ -162,11 +168,10 @@ An authenticated client can underpay, create zero/negative/null totals, overstat
 - The user then explicitly authorized Register/Login/Cart as fixture-only infrastructure. The corrected full run supersedes the earlier evidence gap and supports the two proposals above.
 - No historical audit row or runner correction is reclassified as a SUT bug.
 
-## Human review and posting gate
+## Posting record
 
-- Review the two proposed classifications and severities.
-- Attach real failure-detail screenshots; none was fabricated.
-- Manually post only accepted GitHub Issues. The agent has not posted or applied labels.
-- Enter `confirm stage 5` only if this revised proposal is accepted. That confirmation marks only Stage 5 complete; Pool B remains `IN_PROGRESS` until the Pool-local AI audit is reviewed and `confirm pool audit` is entered.
+- `BUG-PB-001` → [Issue 71](https://github.com/AkiraTomori/eshop-sut/issues/71) and [screenshot comment](https://github.com/AkiraTomori/eshop-sut/issues/71#issuecomment-5455296032).
+- `BUG-PB-002` → existing [Issue 28](https://github.com/AkiraTomori/eshop-sut/issues/28), [HW06 evidence update](https://github.com/AkiraTomori/eshop-sut/issues/28#issuecomment-5455165553), and [screenshot comment](https://github.com/AkiraTomori/eshop-sut/issues/28#issuecomment-5455296208); no duplicate Issue was created.
+- Labels remain suggestions unless independently confirmed on GitHub.
 
-Status: Approved for Stage 5 submission. The two proposed GitHub Issues are supported by the final full-run evidence and meet the requirements of the assignment.
+Status: POSTED AND RECONCILED — Issue and screenshot URLs verified on 2026-08-28.

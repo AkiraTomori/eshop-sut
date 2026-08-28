@@ -1,6 +1,6 @@
 # Pool C / FR-15 — Stage 5 Bug Report Proposal
 
-> Scope: triage of the confirmed Stage 4 evidence for `PUT /api/products/:id`. No API was rerun, no GET request was designed or executed, no issue was posted, and no Stage 5/progress state was changed.
+> Scope: triage of the confirmed Stage 4 evidence for `PUT /api/products/:id`. No API was rerun and no GET request was designed or executed. The two accepted new findings were posted as Issues 72 and 73 with redacted MSSV screenshots; the missing-product behavior remains mapped to existing Issue 52.
 
 ## 1. Evidence and reproduction state
 
@@ -19,6 +19,7 @@
 | State evidence | `evidence/Pool-C_FR15_per-case-state.json`, `evidence/Pool-C_FR15_external-state.json` |
 | Fixture/cleanup evidence | `evidence/Pool-C_FR15_fixture-before.json`, `evidence/Pool-C_FR15_cleanup.json` |
 | Secret handling | JWTs were restricted to ignored runtime data; retained reports are redacted; runtime and raw temporary files were deleted |
+| Posted issue screenshots | `../evidence/github-issues/BUG-PC-001_23127379.png` and `BUG-PC-002_23127379.png`; each is embedded in its mapped GitHub Issue comment |
 
 ## 2. False-positive exclusion
 
@@ -33,7 +34,7 @@
 | SQLi triage | SQL-looking values caused no bulk update, table loss, SQL/stack disclosure, or non-target mutation. Parameterization held; these are not reported as SQL-injection execution. Wrong-type body values remain validation evidence. |
 | External cases | Concurrent distinct-target updates and identical sequential replay both passed; neither is included in a defect report. |
 | Cleanup | Only disposable IDs 101/102 were removed; the database returned to the original five-product count. |
-| Local known-issue search | The non-existent update target is already documented as HW2 `BUG-FR15-011` / GitHub Issue 52. It is classified as known rather than drafted again. |
+| Local known-issue search | The non-existent update target is already documented as HW2 `BUG-FR15-011` / [GitHub Issue 52](https://github.com/AkiraTomori/eshop-sut/issues/52). It is classified as known rather than drafted again. |
 
 ## 3. Failure classification table
 
@@ -41,7 +42,7 @@
 |---|---|---|---|---|---|
 | `PC-F-AUTH-001` | `FR15-DOM-008/009/010/011/012/013`; `FR15-SEC-002/003/004/005/006/007/008/009`; `FR15-EXT-SEC-001/002` | **Probable SUT defect** | All 16 returned `200`; isolated snapshots show target 101 changed for every missing, malformed, tampered, expired, unsigned, non-admin, array-role, and duplicate-header variant | README FR-12; SEC-02; SEC-03 | Valid admin JWT and exact admin role are explicit requirements. Token fixture variants were controlled and the positive admin control passed. |
 | `PC-F-VALID-001` | `FR15-DOM-002/004/021/022/023/024/026/027/030/031/032/033/045/046/047`; `FR15-SEC-018/023`; `FR15-EXT-SEC-003` | **Probable SUT defect** | All 18 returned `200`; state evidence persisted null/missing/wrong-type/overlength/non-positive/non-existent-category values on target 101 | README FR-15; API §3.3 | These are documented required fields, types, maximum length, positive-price, and existing-category rules—not unspecified behavior. |
-| `PC-F-NOTFOUND-001` | `FR15-DOM-005`, `FR15-SEC-016`, `FR15-SCH-009` | **Duplicate/known issue** | All three returned `200 {"message":"Product updated"}` while no product changed | README FR-15; API §3.3; confirmed `4xx` oracle | Same zero-matched-row symptom as HW2 `BUG-FR15-011`, already posted as GitHub Issue 52. The two SQL-looking path cases add representatives but not a new root cause. |
+| `PC-F-NOTFOUND-001` | `FR15-DOM-005`, `FR15-SEC-016`, `FR15-SCH-009` | **Duplicate/known issue** | All three returned `200 {"message":"Product updated"}` while no product changed | README FR-15; API §3.3; confirmed `4xx` oracle | Same zero-matched-row symptom as HW2 `BUG-FR15-011`, already posted as [GitHub Issue 52](https://github.com/AkiraTomori/eshop-sut/issues/52). The two SQL-looking path cases add representatives but not a new root cause. |
 | `PC-F-RUNNER-001` | Discarded first Stage 4 diagnostic | **Test script/data issue** | Generated URL contained `//api/products/...`; fixture database remained byte-identical | Collection implementation | Corrected to `{{baseUrl}}{{targetPath}}`, regenerated, validated, and rerun. Not SUT evidence. |
 | `PC-CONFORM-001` | `FR15-SEC-017/019/024/025/026`; `FR15-EXT-SEC-004/005` and other passing controls | **No failure / conforming observed portion** | Literal apostrophe/SQL text caused no cross-target effect; method override did not delete; concurrency/replay passed | README FR-15/SEC-05; API §3.3 | Only documented observable invariants are marked passed. No unproven response schema or SQLi claim is added. |
 
@@ -56,6 +57,8 @@ The 37 retained assertion failures are partitioned exactly once: 16 authenticati
 - Environment/SUT version: Local Docker `eshop-sut-backend-1`; repository HEAD `93f85686e85d00c2921b7dc38ae7633d8469f3a6`; backend commit `2905279438ecc8ec249e43963d14eb607be0f1a9`
 - Test Case IDs: 16 cases under `PC-F-AUTH-001`
 - Requirement source: README FR-12; SEC-02; SEC-03
+- GitHub Issue: [Issue 72](https://github.com/AkiraTomori/eshop-sut/issues/72)
+- Screenshot comment: [MSSV 23127379 evidence](https://github.com/AkiraTomori/eshop-sut/issues/72#issuecomment-5455296530)
 
 ## Preconditions
 
@@ -102,7 +105,7 @@ An anonymous or non-admin caller can change catalog product names, prices, descr
 - Human-readable report: `postman/newman/Pool-C_FR15_report.html`
 - Per-case mutation proof: `evidence/Pool-C_FR15_per-case-state.json`
 - Fixture and cleanup proof: `evidence/Pool-C_FR15_fixture-before.json`, `evidence/Pool-C_FR15_cleanup.json`
-- Screenshot: `[USER MUST ATTACH A REAL SCREENSHOT]`
+- Screenshot: [BUG-PC-001_23127379.png](../evidence/github-issues/BUG-PC-001_23127379.png), embedded in [Issue 72 evidence comment](https://github.com/AkiraTomori/eshop-sut/issues/72#issuecomment-5455296530)
 
 ## GitHub Issue content
 
@@ -113,7 +116,7 @@ An anonymous or non-admin caller can change catalog product names, prices, descr
   - Expected: `4xx` rejection and no product mutation under README FR-12/SEC-02/SEC-03; exact code/schema unspecified.
   - Actual: HTTP `200`, success message, and all submitted values persisted. Fifteen controlled token/role/header variants independently produced the same unauthorized mutation.
   - Impact: anonymous and non-admin callers can modify catalog data.
-  - Evidence: attach the redacted Newman/state evidence and `[USER MUST ATTACH A REAL SCREENSHOT]`.
+  - Evidence: redacted Newman/state evidence and the [MSSV screenshot](../evidence/github-issues/BUG-PC-001_23127379.png) embedded in [Issue 72](https://github.com/AkiraTomori/eshop-sut/issues/72#issuecomment-5455296530).
 - **Proposed labels:** `bug`, `security`, `authorization`, `authentication`, `data-integrity`, `FR-15`, `api`
 
 ---
@@ -125,7 +128,9 @@ An anonymous or non-admin caller can change catalog product names, prices, descr
 - Environment/SUT version: Local Docker `eshop-sut-backend-1`; repository HEAD `93f85686e85d00c2921b7dc38ae7633d8469f3a6`; backend commit `2905279438ecc8ec249e43963d14eb607be0f1a9`
 - Test Case IDs: 18 cases under `PC-F-VALID-001`
 - Requirement source: README FR-15; API specification §3.3
-- Related existing reports: GitHub Issues 42/43 cover zero/negative price on **POST create**, and Issue 55 covers UI validation feedback. The current proposal covers the distinct **PUT update** endpoint plus a broader required-field/type/category set.
+- GitHub Issue: [Issue 73](https://github.com/AkiraTomori/eshop-sut/issues/73)
+- Screenshot comment: [MSSV 23127379 evidence](https://github.com/AkiraTomori/eshop-sut/issues/73#issuecomment-5455296378)
+- Related existing reports: [Issue 42](https://github.com/AkiraTomori/eshop-sut/issues/42) and [Issue 43](https://github.com/AkiraTomori/eshop-sut/issues/43) cover zero/negative price on **POST create**, while [Issue 55](https://github.com/AkiraTomori/eshop-sut/issues/55) covers UI validation feedback. The current report covers the distinct **PUT update** endpoint plus a broader required-field/type/category set.
 
 ## Preconditions
 
@@ -168,7 +173,7 @@ An administrator—or any caller while BUG-PC-001 is present—can corrupt produ
 - Human-readable report: `postman/newman/Pool-C_FR15_report.html`
 - Per-case persisted values/non-target fingerprints: `evidence/Pool-C_FR15_per-case-state.json`
 - Fixture and cleanup proof: `evidence/Pool-C_FR15_fixture-before.json`, `evidence/Pool-C_FR15_cleanup.json`
-- Screenshot: `[USER MUST ATTACH A REAL SCREENSHOT]`
+- Screenshot: [BUG-PC-002_23127379.png](../evidence/github-issues/BUG-PC-002_23127379.png), embedded in [Issue 73 evidence comment](https://github.com/AkiraTomori/eshop-sut/issues/73#issuecomment-5455296378)
 
 ## GitHub Issue content
 
@@ -179,8 +184,8 @@ An administrator—or any caller while BUG-PC-001 is present—can corrupt produ
   - Expected: `4xx` rejection and no mutation under README FR-15; exact code/schema unspecified.
   - Actual: HTTP `200`, success message, and all product fields became null. Seventeen isolated invalid name/price/category/envelope cases also returned `200` and persisted invalid values.
   - Impact: contract-invalid and referentially invalid product state can enter the catalog.
-  - Related: Issues 42/43 (POST price validation) and Issue 55 (UI feedback) overlap partially but do not cover this PUT endpoint and full input set.
-  - Evidence: attach the redacted Newman/state evidence and `[USER MUST ATTACH A REAL SCREENSHOT]`.
+  - Related: [Issues 42](https://github.com/AkiraTomori/eshop-sut/issues/42)/[43](https://github.com/AkiraTomori/eshop-sut/issues/43) (POST price validation) and [Issue 55](https://github.com/AkiraTomori/eshop-sut/issues/55) (UI feedback) overlap partially but do not cover this PUT endpoint and full input set.
+  - Evidence: redacted Newman/state evidence and the [MSSV screenshot](../evidence/github-issues/BUG-PC-002_23127379.png) embedded in [Issue 73](https://github.com/AkiraTomori/eshop-sut/issues/73#issuecomment-5455296378).
 - **Proposed labels:** `bug`, `validation`, `data-integrity`, `FR-15`, `api`
 
 ---
@@ -189,16 +194,15 @@ An administrator—or any caller while BUG-PC-001 is present—can corrupt produ
 
 `FR15-DOM-005`, `FR15-SEC-016`, and `FR15-SCH-009` sent identifiers that matched no product. Each received HTTP `200` and `{"message":"Product updated"}`, while SQLite proved zero mutation and unchanged count/non-target fingerprints.
 
-This behavior matches HW2 `BUG-FR15-011` and existing [GitHub Issue 52](https://github.com/AkiraTomori/eshop-sut/issues/52): Edit Product returns success for a non-existent ID. No new issue is drafted. After human review, the current redacted Newman/SQLite evidence may be added manually to Issue 52 if desired.
+This behavior matches HW2 `BUG-FR15-011` and existing [GitHub Issue 52](https://github.com/AkiraTomori/eshop-sut/issues/52): Edit Product returns success for a non-existent ID. No duplicate issue was created.
 
 The SQL-looking path representatives are not reported as successful SQL injection: parameterization prevented cross-row effects and internal disclosure. Their only failed invariant is the known false-success response when no row matches.
 
-## 5. Human review and posting gate
+## 5. Posting record
 
-- Review the two proposed root-cause classifications and High severities.
-- Review the known-issue mapping to GitHub Issue 52 and the related-not-duplicate treatment of Issues 42/43/55.
-- Attach real screenshots; none was fabricated.
-- Manually post only accepted new issues and manually update Issue 52 if desired. The agent posted nothing and applied no labels.
-- Enter `confirm stage 5` only if this proposal is accepted. That confirmation marks only Stage 5 complete; Pool C remains `IN_PROGRESS` until the local AI audit is reviewed and `confirm pool audit` is entered.
+- `BUG-PC-001` → [Issue 72](https://github.com/AkiraTomori/eshop-sut/issues/72) and [screenshot comment](https://github.com/AkiraTomori/eshop-sut/issues/72#issuecomment-5455296530).
+- `BUG-PC-002` → [Issue 73](https://github.com/AkiraTomori/eshop-sut/issues/73) and [screenshot comment](https://github.com/AkiraTomori/eshop-sut/issues/73#issuecomment-5455296378).
+- `BUG-FR15-011` remains the known [Issue 52](https://github.com/AkiraTomori/eshop-sut/issues/52); no duplicate was created.
+- Labels remain suggestions unless independently confirmed on GitHub.
 
-Status: Approved for Stage 5 bug-report proposal. All 67 Stage 4 IDs are preserved with final `PASS / FAIL` labels and triage reasons.
+Status: POSTED AND RECONCILED — Issue and screenshot URLs verified on 2026-08-28. All 67 Stage 4 IDs remain preserved with final `PASS / FAIL` labels and triage reasons.

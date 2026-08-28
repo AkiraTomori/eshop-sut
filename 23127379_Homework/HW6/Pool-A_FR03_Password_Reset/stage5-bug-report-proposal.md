@@ -1,6 +1,6 @@
 # Pool A / FR-03 — Stage 5 Bug Report Proposal
 
-> Scope: real evidence from the confirmed Stage 4 run of `POST /api/forgot-password` and `POST /api/reset-password` only. No API was rerun for this triage, no GET request was added, and no GitHub issue was posted.
+> Scope: real evidence from the confirmed Stage 4 run of `POST /api/forgot-password` and `POST /api/reset-password` only. No API was rerun for this triage and no GET request was added. The three accepted findings were posted as GitHub Issues 68–70 on 2026-08-28, with redacted MSSV screenshots linked below.
 
 ## Evidence and reproduction state
 
@@ -15,6 +15,7 @@
 | Primary evidence | `postman/newman/Pool-A_FR03_report.json`, `postman/newman/Pool-A_FR03_report.html`, `evidence/Pool-A_FR03_newman-cli.txt` |
 | Database evidence | Redacted `evidence/Pool-A_FR03_fixture-snapshot-before.json` and `evidence/Pool-A_FR03_fixture-snapshot-after.json`; disposable rows were deleted after capture |
 | Existing screenshot | `evidence/image.png` is a real Newman dashboard screenshot showing 79 requests and 36 failures, but it does not show failure details |
+| Posted issue screenshots | `../evidence/github-issues/BUG-PA-001_23127379.png`, `BUG-PA-002_23127379.png`, and `BUG-PA-003_23127379.png`; each is embedded in its mapped GitHub Issue comment |
 
 ## False-positive exclusion
 
@@ -47,6 +48,8 @@ The 36 final assertion failures reduce to two response-level SUT defects. The ap
 - Environment/SUT version: Local Docker `eshop-sut-backend-1`; repository HEAD `f82ecf0a87aad4a9c11382b794509bf96ddc4a03`
 - Test Case ID: 27 failed assertions across the 26 cases listed under `PA-F-OTP-001`
 - Requirement source: README FR-03; README SEC-07; API specification §1.3
+- GitHub Issue: [Issue 68](https://github.com/AkiraTomori/eshop-sut/issues/68)
+- Screenshot comment: [MSSV 23127379 evidence](https://github.com/AkiraTomori/eshop-sut/issues/68#issuecomment-5455295856)
 
 ## Preconditions
 
@@ -76,7 +79,7 @@ The recovery token violates FR-03 and SEC-07 and has materially less search spac
 
 - Newman excerpt: `evidence/Pool-A_FR03_newman-cli.txt` — assertion failures beginning with `FR03-DOM-001 - exact forgot-password schema`
 - Machine-readable evidence: `postman/newman/Pool-A_FR03_report.json`
-- Screenshot: `[USER MUST ATTACH A REAL FAILURE-DETAIL SCREENSHOT; evidence/image.png currently shows only the run summary]`
+- Screenshot: [BUG-PA-001_23127379.png](../evidence/github-issues/BUG-PA-001_23127379.png), embedded in [Issue 68 evidence comment](https://github.com/AkiraTomori/eshop-sut/issues/68#issuecomment-5455295856)
 
 ## GitHub Issue content
 
@@ -87,7 +90,7 @@ The recovery token violates FR-03 and SEC-07 and has materially less search spac
   - Expected: six decimal digits under README FR-03/SEC-07 and API specification §1.3.
   - Actual: repeated responses returned four-digit decimal-string tokens; values are redacted.
   - Impact: reduced OTP entropy and non-compliance with the password-recovery contract.
-  - Evidence: attach the Newman JSON/HTML excerpt and `[USER MUST ATTACH A REAL FAILURE-DETAIL SCREENSHOT]`.
+  - Evidence: Newman JSON/HTML excerpt and the redacted [MSSV screenshot](../evidence/github-issues/BUG-PA-001_23127379.png) embedded in [Issue 68](https://github.com/AkiraTomori/eshop-sut/issues/68#issuecomment-5455295856).
 - **Proposed labels:** `bug`, `security`, `FR-03`, `api`
 
 ---
@@ -99,6 +102,8 @@ The recovery token violates FR-03 and SEC-07 and has materially less search spac
 - Environment/SUT version: Local Docker `eshop-sut-backend-1`; repository HEAD `f82ecf0a87aad4a9c11382b794509bf96ddc4a03`
 - Test Case ID: `FR03-DOM-028`–`FR03-DOM-036`
 - Requirement source: README FR-03 → FR-01; API specification §1.4
+- GitHub Issue: [Issue 70](https://github.com/AkiraTomori/eshop-sut/issues/70)
+- Screenshot comment: [MSSV 23127379 evidence](https://github.com/AkiraTomori/eshop-sut/issues/70#issuecomment-5455295653)
 
 ## Preconditions
 
@@ -128,7 +133,7 @@ Attackers or users can set passwords that violate the required minimum length, c
 
 - Newman excerpt: `evidence/Pool-A_FR03_newman-cli.txt` — `FR03-DOM-028` through `FR03-DOM-036`, each failing the rejection-class assertion
 - Machine-readable evidence: `postman/newman/Pool-A_FR03_report.json`
-- Screenshot: `[USER MUST ATTACH A REAL FAILURE-DETAIL SCREENSHOT; evidence/image.png currently shows only the run summary]`
+- Screenshot: [BUG-PA-002_23127379.png](../evidence/github-issues/BUG-PA-002_23127379.png), embedded in [Issue 70 evidence comment](https://github.com/AkiraTomori/eshop-sut/issues/70#issuecomment-5455295653)
 
 ## GitHub Issue content
 
@@ -139,7 +144,7 @@ Attackers or users can set passwords that violate the required minimum length, c
   - Expected: rejection and no password change under README FR-03 → FR-01.
   - Actual: all nine cases returned HTTP `200` and “Password reset successfully.”
   - Impact: the recovery path bypasses the specified strong-password policy and accepts malformed credential values.
-  - Evidence: attach the Newman JSON/HTML cases and `[USER MUST ATTACH A REAL FAILURE-DETAIL SCREENSHOT]`.
+  - Evidence: Newman JSON/HTML cases and the redacted [MSSV screenshot](../evidence/github-issues/BUG-PA-002_23127379.png) embedded in [Issue 70](https://github.com/AkiraTomori/eshop-sut/issues/70#issuecomment-5455295653).
 - **Proposed labels:** `bug`, `security`, `validation`, `FR-03`, `api`
 
 ---
@@ -151,6 +156,8 @@ Attackers or users can set passwords that violate the required minimum length, c
 - Environment/SUT version: Local Docker `eshop-sut-backend-1`; repository HEAD `f82ecf0a87aad4a9c11382b794509bf96ddc4a03`
 - Test Case ID: `FR03-EXT-SEC-001`
 - Requirement source: README SEC-01; README FR-03; API specification §1.4
+- GitHub Issue: [Issue 69](https://github.com/AkiraTomori/eshop-sut/issues/69)
+- Screenshot comment: [MSSV 23127379 evidence](https://github.com/AkiraTomori/eshop-sut/issues/69#issuecomment-5455295452)
 
 ## Preconditions
 
@@ -182,7 +189,7 @@ Database disclosure would directly expose usable account passwords. This violate
 - Before-state: `evidence/Pool-A_FR03_fixture-snapshot-before.json`
 - Redacted post-state: `evidence/Pool-A_FR03_fixture-snapshot-after.json`
 - Supporting Newman execution: `postman/newman/Pool-A_FR03_report.json`
-- Screenshot: `[USER MUST ATTACH A REAL SCREENSHOT OF THE REDACTED BOOLEAN DATABASE CHECK; never expose the password value]`
+- Screenshot: [BUG-PA-003_23127379.png](../evidence/github-issues/BUG-PA-003_23127379.png), embedded in [Issue 69 evidence comment](https://github.com/AkiraTomori/eshop-sut/issues/69#issuecomment-5455295452); no password value is exposed
 
 ## GitHub Issue content
 
@@ -193,14 +200,14 @@ Database disclosure would directly expose usable account passwords. This violate
   - Expected: stored credential does not equal plaintext; no specific hash format is assumed.
   - Actual: the redacted equality check returned true and storage type was text.
   - Impact: database compromise directly exposes usable credentials.
-  - Evidence: attach both redacted fixture snapshots and `[USER MUST ATTACH A REAL SCREENSHOT OF THE REDACTED BOOLEAN CHECK]`.
+  - Evidence: both redacted fixture snapshots and the redacted [MSSV screenshot](../evidence/github-issues/BUG-PA-003_23127379.png) embedded in [Issue 69](https://github.com/AkiraTomori/eshop-sut/issues/69#issuecomment-5455295452).
 - **Proposed labels:** `bug`, `security`, `critical`, `SEC-01`, `FR-03`, `api`
 
-## Human review and posting gate
+## Posting record
 
-- Review the three proposed classifications and severities.
-- Capture or attach failure-detail screenshots. The existing dashboard screenshot proves the aggregate run but not each defect's detail.
-- Manually post only the accepted GitHub Issues and later add the real issue URLs; the agent has not posted or applied labels.
-- Enter `confirm stage 5` only after accepting this proposal. That confirmation marks only Stage 5 complete; Pool A remains `IN_PROGRESS` until the Pool-local AI audit is reviewed and `confirm pool audit` is entered.
+- `BUG-PA-001` → [Issue 68](https://github.com/AkiraTomori/eshop-sut/issues/68) and [screenshot comment](https://github.com/AkiraTomori/eshop-sut/issues/68#issuecomment-5455295856).
+- `BUG-PA-002` → [Issue 70](https://github.com/AkiraTomori/eshop-sut/issues/70) and [screenshot comment](https://github.com/AkiraTomori/eshop-sut/issues/70#issuecomment-5455295653).
+- `BUG-PA-003` → [Issue 69](https://github.com/AkiraTomori/eshop-sut/issues/69) and [screenshot comment](https://github.com/AkiraTomori/eshop-sut/issues/69#issuecomment-5455295452).
+- Labels remain suggestions unless independently confirmed on GitHub.
 
-Status: Approved
+Status: POSTED AND RECONCILED — Issue and screenshot URLs verified on 2026-08-28.
