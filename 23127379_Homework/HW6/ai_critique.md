@@ -1,17 +1,35 @@
 # AI Critique — HW06 API Testing
 
-> **Status:** TEMPLATE — do not submit placeholder or generic text. Final body must be 200–300 words and grounded in real HW06 evidence.
+> **Status:** CONFIRMED — accepted through `confirm critique` on 2026-08-28T23:00:19+07:00.
 
-## Evidence selected
+## Evidence matrix
 
-| Evidence ID | What AI got wrong/missed | Ground truth | Human correction | Why it happened | Source path |
-|---|---|---|---|---|---|
+| Evidence ID | Pool/Stage | AI output or omission | Ground-truth evidence | Human correction | Why AI failed | Source path |
+|---|---|---|---|---|---|---|
+| CRIT-001 | Pool A / Stages 1–2 | The generated FSM included no-request wait rows and cases combining multiple invalid conditions | Human audit classified 12 of 79 cases `INVALID`, including non-observable waits and mixed-condition state cases | Removed no-op rows or converted them into executable POST checks; split cases so one invalid class/state condition is isolated | The transition-table expansion optimized combinatorial coverage without enforcing API executability and test isolation on every row | `Pool-A_FR03_Password_Reset/stage2-audit-proposal.md` |
+| CRIT-002 | Pool A / Stage 3 | Domain generation collapsed the documented password special-character set into one successful representative and omitted leading-zero OTP serialization | The SRS lists discrete allowed values; Stage 3 records a separate “Why AI missed it” explanation for each gap | Added six successful-reset representatives plus one conditional leading-zero token case | The model treated explicit discrete values as interchangeable and emphasized length/type boundaries | `Pool-A_FR03_Password_Reset/stage3-extension-proposal.md` |
+| CRIT-003 | Pool B / Stage 3 | Initial techniques omitted stale totals after cart mutation, nested item/discount injection, query/body pollution, duplicate JSON keys, and a benign apostrophe control | Stage 3 identified seven non-duplicate gaps with attributable explanations; the final run later proved client-controlled pricing across 12 isolated cases | Added one domain, one temporal decision-table, and five security cases | Static Boolean modeling missed temporal state; attack-oriented generation under-sampled parser differentials and positive false-positive controls | `Pool-B_FR08_Checkout/stage3-extension-proposal.md`; `Pool-B_FR08_Checkout/stage5-bug-report-proposal.md` |
+| CRIT-004 | Pool C / Stage 3 | Initial coverage omitted a multi-byte 255-character boundary, exponent numeric encoding, array-valued role claims, duplicate Authorization headers, and three field-specific SQL strings | The human-confirmed baseline and gap ledger supported seven new non-duplicate cases | Added two domain and five security representatives while preserving unspecified contracts | The model conflated equivalent semantic values/encodings and assumed shared parsing or binding behavior across fields | `Pool-C_FR15_Update_Product/stage3-extension-proposal.md` |
+| CRIT-005 | Pools A/B/C / Stage 4 | Generated automation contained double-slash request paths in Pools A/C, a `StudentId` versus `StudentID` mismatch in Pool B, and a serialized regex defect | Diagnostic runs showed route failures/header problems/assertion exceptions; corrected runs produced real Newman and state evidence | Discarded diagnostic results, corrected collection generation/scripts, reset disposable fixtures, reran, and classified runner defects separately from SUT defects | Code generation was syntactically plausible but not reliable across Postman URL serialization, case-sensitive variables, and escaped script text | `Pool-A_FR03_Password_Reset/stage4-postman-proposal.md`; `Pool-B_FR08_Checkout/stage4-postman-proposal.md`; `Pool-C_FR15_Update_Product/stage4-postman-proposal.md` |
+| CRIT-006 | Pools A/B/C / Stages 4–5 | Useful AI contribution: structured collections, evidence ledgers, and failure grouping | Corrected evidence recorded 36 Pool A assertion failures, two Pool B defect root causes, and 37 Pool C failures partitioned exactly once | Humans confirmed or rejected classifications, preserved evidence gaps, avoided duplicate Issue 52, and kept issue posting manual | Technique-specific prompts and traceable IDs made breadth, reconciliation, and repeatable triage effective | Each Pool's `stage4-postman-proposal.md`, `stage5-bug-report-proposal.md`, and local `ai_audit_report.md` |
+| CRIT-007 | Cross-pipeline / CI/CD | The initial CI proposal lacked configured runtime secret evidence and later contained a results-directory working-directory defect | Real Actions diagnostics exposed the missing bundle and startup-path problem; the retained run then produced 96 passed and 63 failed cases | Created the reviewed secret, corrected the absolute results path, preserved exit codes/artifacts, and documented the student's evidence substitution without claiming literal two-run compliance | Repository/environment assumptions were incomplete until tested in the actual CI runtime | `reports/HW06_CICD_Report.md`; root `ai_audit_report.md` rows `POST-AI-003`–`POST-AI-013` |
 
-## Critique body
+## Evidence gaps carried forward
 
-`[Write 200–300 words after /critique has reconciled real audit, audit-label, extension, execution, and bug-triage evidence. Address what was wrong, biased, or incomplete; why AI failed; what the human corrected; what AI did well; and the collaboration principle learned.]`
+- Pool Stage 5 reports still contain human-owned failure-detail screenshot placeholders; this critique does not claim those screenshots or issue posts exist.
+- The CI/CD report records a student-approved substitution: no 159/159 run exists, and the real failed run contains 63 failed cases rather than exactly one. Literal assignment compliance remains unmet unless the instructor accepts the deviation.
+- Existing `POST-AI-001`–`POST-AI-013` rows are marked `CONFIRMED`, but the root Cross-pipeline Human Review Notes table lacks attributable per-row review timestamps and commands. Their recorded decisions are preserved without invented notes.
 
-**Verified body word count:** `<200–300>`
+## Critique
 
-**User confirmation:** `<confirm critique / pending>`
+AI was most useful when it converted the specifications into separate domain, state, decision-table, security, and schema artifacts with traceable IDs. That structure supported data-driven Postman collections and disciplined triage. The final evidence linked AI-assisted tests to three Pool A defect drafts, two Pool B root causes, and two new Pool C reports plus one known issue.
 
+However, the first-pass output was not safe to accept unchanged. Pool A's generated FSM included no-request waits and cases combining two invalid conditions; human audit classified 12 cases INVALID and required removal or isolation. Its domain pass also collapsed six explicitly allowed password special characters into one representative. Stage 3 restored those cases and added concurrency, two-user token isolation, enumeration, and plaintext-persistence checks. Similar omissions appeared elsewhere: Pool B's static decision table missed a stale client total, while security generation omitted nested item injection, duplicate JSON keys, and a benign apostrophe control. Pool C missed multi-byte boundary behavior, exponent notation, array-valued roles, and duplicate Authorization headers.
+
+Automation introduced a second class of error. AI-generated URL serialization produced double-slash paths in Pools A and C; Pool B exposed a case-sensitive StudentID mismatch and a broken serialized regular expression. Humans treated these as runner defects, discarded their diagnostic results, corrected the artifacts, reset fixtures, and reran before classifying SUT failures.
+
+The central lesson is that AI is effective for breadth and repeatable structure, but not as an oracle. Specifications, state observability, generated scripts, and execution evidence must be reviewed independently. Keeping unspecified contracts explicit and separating runner failures from product defects made the collaboration defensible.
+
+**Word count:** 260
+
+Status: CONFIRMED CRITIQUE — accepted through `confirm critique`; evidence gaps remain explicitly carried forward.
