@@ -33,7 +33,7 @@ Create one GitHub Actions repository secret named `HW06_POSTMAN_ENV_BUNDLE`. Its
 - contain the Pool's reviewed runtime fixture values, including passwords or JWTs required by enabled rows;
 - contain no production credential; use disposable local fixtures only.
 
-The secret is currently `INCOMPLETE` until the repository owner creates and reviews it. The workflow deliberately fails before starting the SUT when it is absent or malformed. Secret values are not printed or uploaded.
+The repository secret was created through the authenticated GitHub CLI at `2026-08-28T15:02:07Z`. Its three-environment bundle was generated in memory, structurally validated, and accepted by GitHub without printing or persisting the bundle in the repository. GitHub exposes only the secret name and update timestamp after creation, so human review remains pending. The workflow deliberately fails before starting the SUT when the secret is absent or malformed.
 
 ## 4. Two required real sample runs
 
