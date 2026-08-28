@@ -26,7 +26,7 @@ Current Pool: Pool C
 - [x] Stage 5 — Report Bug
 - [x] Pool AI Audit — human reviewed
 
-## Pool C — IN_PROGRESS
+## Pool C — DONE
 
 - [x] Stage 1 — Generate
   - [x] Domain Testing
@@ -35,7 +35,7 @@ Current Pool: Pool C
 - [x] Stage 3 — Extend
 - [x] Stage 4 — Execute
 - [x] Stage 5 — Report Bug
-- [ ] Pool AI Audit — human reviewed
+- [x] Pool AI Audit — human reviewed
 
 ## Finalization — NOT_STARTED
 

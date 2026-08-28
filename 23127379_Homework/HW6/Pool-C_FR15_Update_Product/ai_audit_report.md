@@ -1,8 +1,8 @@
 # Pool C — AI Audit Report
 
 > **Scope:** FR-15 — `PUT /api/products/:id`  
-> **Human review status:** PENDING  
-> This local report is the authoritative AI-interaction record for Pool C and remains proposed until every row is reviewed.
+> **Human review status:** CONFIRMED
+> This local report is the authoritative, human-reviewed AI-interaction record for Pool C.
 
 | Audit ID | Tool/Model | Timestamp | Pool/Stage | Prompt | Output | Human Review |
 |---|---|---|---|---|---|---|
@@ -19,5 +19,6 @@
 
 | Audit ID | Decision | Correction/notes | Reviewed at | User confirmation |
 |---|---|---|---|---|
+| PC-AI-001–PC-AI-008 | CONFIRMED | Reviewed all eight chronological Pool C interactions; no row-level correction requested | 2026-08-28T20:59:21+07:00 | `confirm pool audit` |
 
-Use `CONFIRMED`, `REVISED`, or `REJECTED` only after real human review. Enter `confirm pool audit` only after all Pool C rows have a non-pending decision.
+Pool C AI-audit review completed through the required human confirmation gate.
