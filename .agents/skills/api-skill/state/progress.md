@@ -34,7 +34,7 @@ Current Pool: Pool C
 - [x] Stage 2 — Audit
 - [x] Stage 3 — Extend
 - [x] Stage 4 — Execute
-- [ ] Stage 5 — Report Bug
+- [x] Stage 5 — Report Bug
 - [ ] Pool AI Audit — human reviewed
 
 ## Finalization — NOT_STARTED
