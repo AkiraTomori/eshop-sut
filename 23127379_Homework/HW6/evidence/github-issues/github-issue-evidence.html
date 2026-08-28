@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HW06 GitHub Issue Evidence</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #151515;
+      color: #f3f4f6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      width: 1440px;
+      height: 900px;
+      margin: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 78% 12%, rgba(127, 29, 29, 0.24), transparent 34%),
+        linear-gradient(145deg, #111827, #18181b 58%, #0f172a);
+    }
+
+    main {
+      width: 100%;
+      height: 100%;
+      padding: 38px 54px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 22px;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #fca5a5;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 920px;
+      margin: 0;
+      font-size: 37px;
+      line-height: 1.16;
+      letter-spacing: -0.025em;
+    }
+
+    .student {
+      flex: 0 0 auto;
+      padding: 13px 18px;
+      border: 3px solid #fff;
+      border-radius: 10px;
+      background: #7f1d1d;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .metric {
+      min-height: 77px;
+      padding: 13px 16px;
+      border: 1px solid #4b5563;
+      border-radius: 9px;
+      background: rgba(55, 65, 81, 0.72);
+    }
+
+    .metric span {
+      display: block;
+      margin-bottom: 5px;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 20px;
+      min-height: 0;
+      padding: 24px;
+      border: 5px solid #facc15;
+      border-radius: 14px;
+      background: rgba(31, 41, 55, 0.95);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
+    }
+
+    .panel {
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid #4b5563;
+      border-radius: 10px;
+      background: #262f3d;
+    }
+
+    .panel h2 {
+      margin: 0 0 14px;
+      color: #e5e7eb;
+      font-size: 19px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .code {
+      min-height: 135px;
+      margin: 0;
+      padding: 18px;
+      border-left: 5px solid #dc2626;
+      border-radius: 6px;
+      background: #12161d;
+      color: #f8fafc;
+      font: 700 21px/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .result {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .result div {
+      padding: 14px;
+      border-radius: 8px;
+      background: #171d27;
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .result b {
+      display: block;
+      margin-bottom: 6px;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 13px;
+    }
+
+    .actual { border-top: 4px solid #ef4444; }
+    .expected { border-top: 4px solid #22c55e; }
+
+    .source {
+      margin: 0;
+      padding: 16px 18px;
+      border-radius: 8px;
+      background: #111827;
+      color: #d1d5db;
+      font: 600 16px/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .note {
+      margin: 14px 0 0;
+      color: #e5e7eb;
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+
+    footer strong { color: #fff; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow" id="pool"></p>
+        <h1 id="title"></h1>
+      </div>
+      <div class="student">MSSV: 23127379</div>
+    </header>
+
+    <section class="metrics" aria-label="Evidence summary">
+      <div class="metric"><span>Bug ID</span><strong id="bug"></strong></div>
+      <div class="metric"><span>Representative case</span><strong id="case"></strong></div>
+      <div class="metric"><span>HTTP method</span><strong id="method"></strong></div>
+      <div class="metric"><span>Coverage</span><strong id="coverage"></strong></div>
+    </section>
+
+    <section class="card">
+      <article class="panel">
+        <h2>Observed evidence</h2>
+        <pre class="code" id="observed"></pre>
+        <div class="result">
+          <div class="actual"><b>Actual</b><span id="actual"></span></div>
+          <div class="expected"><b>Expected</b><span id="expected"></span></div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>Evidence provenance</h2>
+        <pre class="source" id="source"></pre>
+        <p class="note" id="note"></p>
+      </article>
+    </section>
+
+    <footer>
+      <span><strong>HW06 API evidence</strong> — redacted, evidence-backed rendering</span>
+      <span>No OTP, password, bearer token, or personal email is displayed.</span>
+    </footer>
+  </main>
+
+  <script>
+    const evidence = {
+      "BUG-PA-001": {
+        pool: "Pool A · FR-03 password recovery",
+        title: "Forgot-password generates four-digit OTPs instead of six digits",
+        caseId: "FR03-DOM-001",
+        method: "POST /api/forgot-password",
+        coverage: "26 cases · 27 assertions",
+        observed: "resetToken = <REDACTED_4_DIGIT_OTP>\nassertion: value must match /^[0-9]{6}$/",
+        actual: "A four-digit decimal string was returned repeatedly.",
+        expected: "A random six-digit decimal-string resetToken.",
+        source: "Pool-A_FR03_Password_Reset/postman/newman/Pool-A_FR03_report.html\nPool-A_FR03_Password_Reset/evidence/Pool-A_FR03_newman-cli.txt",
+        note: "The final report contained 36 failed assertions. OTP values are intentionally redacted while preserving the failing length oracle."
+      },
+      "BUG-PA-002": {
+        pool: "Pool A · FR-03 password recovery",
+        title: "Reset-password accepts weak, missing, null, and non-string passwords",
+        caseId: "FR03-DOM-028",
+        method: "POST /api/reset-password",
+        coverage: "9 failed cases",
+        observed: "approved oracle: rejected HTTP class\nactual status class: 2xx\nexpected status class: 4xx",
+        actual: "HTTP 200 and Password reset successfully.",
+        expected: "Reject the invalid newPassword and preserve the account password.",
+        source: "Pool-A_FR03_Password_Reset/postman/newman/Pool-A_FR03_report.html\nPool-A_FR03_Password_Reset/postman/newman/Pool-A_FR03_report.json",
+        note: "Nine isolated password-policy and type representatives produced the same acceptance behavior; fresh tokens were used per case."
+      },
+      "BUG-PA-003": {
+        pool: "Pool A · FR-03 / SEC-01",
+        title: "Reset-password persists the new password as plaintext",
+        caseId: "FR03-EXT-SEC-001",
+        method: "POST /api/reset-password",
+        coverage: "Restricted persistence check",
+        observed: "passwordStorageType: \"text\"\nequalsFinalExpectedRuntimePassword: true\nresetTokenCleared: true",
+        actual: "The stored credential equals the runtime password value.",
+        expected: "A non-plaintext secure hash that does not equal the runtime password.",
+        source: "Pool-A_FR03_Password_Reset/evidence/Pool-A_FR03_fixture-snapshot-before.json\nPool-A_FR03_Password_Reset/evidence/Pool-A_FR03_fixture-snapshot-after.json",
+        note: "Only storage type and equality booleans are shown. Credential and token values were redacted before evidence capture."
+      },
+      "BUG-PB-001": {
+        pool: "Pool B · FR-08 checkout",
+        title: "JSON array body creates an order with null total and address",
+        caseId: "FR08-DOM-007",
+        method: "POST /api/checkout",
+        coverage: "1 failed case",
+        observed: "request body: []\nresponse status: 200\npersisted orderTotal: null\npersisted shippingAddress: null",
+        actual: "Checkout succeeded and created a malformed order row.",
+        expected: "4xx rejection and no persistent order mutation.",
+        source: "Pool-B_FR08_Checkout/postman/newman/Pool-B_FR08_full_report.html\nPool-B_FR08_Checkout/evidence/Pool-B_FR08_full_db-after.json",
+        note: "The Newman failure and restricted SQLite record independently identify the response failure and resulting null-valued order."
+      },
+      "BUG-PB-002": {
+        pool: "Pool B · FR-08 checkout",
+        title: "Checkout persists attacker-controlled total_amount instead of cart total",
+        caseId: "FR08-SEC-011",
+        method: "POST /api/checkout",
+        coverage: "12 failed cases",
+        observed: "fixture cart total C: 250000\nsubmitted total_amount: 1\nresponse status: 200\npersisted orderTotal: 1",
+        actual: "The persisted total matched the untrusted client value.",
+        expected: "Reject unchanged or persist the server-recalculated cart total C.",
+        source: "Pool-B_FR08_Checkout/postman/newman/Pool-B_FR08_full_report.json\nPool-B_FR08_Checkout/evidence/Pool-B_FR08_full_db-after.json",
+        note: "Twelve isolated lower, higher, zero, negative, null, stale, schema, and cross-user representatives reproduced the root cause."
+      },
+      "BUG-PC-001": {
+        pool: "Pool C · FR-15 update product",
+        title: "Missing, invalid, and non-admin credentials can update products",
+        caseId: "FR15-DOM-008",
+        method: "PUT /api/products/:id",
+        coverage: "16 failed cases",
+        observed: "Authorization header: absent\napproved oracle: 4xx\nactual status class: 2xx\nproduct 101 mutation: persisted",
+        actual: "HTTP 200 and submitted values were stored without admin authorization.",
+        expected: "4xx authentication/authorization rejection and no mutation.",
+        source: "Pool-C_FR15_Update_Product/postman/newman/Pool-C_FR15_report.html\nPool-C_FR15_Update_Product/evidence/Pool-C_FR15_per-case-state.json",
+        note: "Fifteen additional scheme, token, role, signature, expiry, and duplicate-header variants produced the same unauthorized mutation."
+      },
+      "BUG-PC-002": {
+        pool: "Pool C · FR-15 update product",
+        title: "Invalid required product fields are accepted and persisted",
+        caseId: "FR15-DOM-002",
+        method: "PUT /api/products/:id",
+        coverage: "18 failed cases",
+        observed: "request body: absent\napproved oracle: 4xx\nactual status class: 2xx\npersisted required fields: null",
+        actual: "HTTP 200 and null/invalid product state was persisted.",
+        expected: "4xx validation rejection and preservation of product 101.",
+        source: "Pool-C_FR15_Update_Product/postman/newman/Pool-C_FR15_report.html\nPool-C_FR15_Update_Product/evidence/Pool-C_FR15_per-case-state.json",
+        note: "Seventeen additional invalid name, price, category, type, length, reference, and envelope representatives reproduced the root cause."
+      }
+    };
+
+    const requested = new URLSearchParams(location.search).get("bug") || "BUG-PA-001";
+    const item = evidence[requested];
+    if (!item) throw new Error(`Unknown bug evidence key: ${requested}`);
+
+    document.title = `${requested} · HW06 Evidence · 23127379`;
+    document.getElementById("pool").textContent = item.pool;
+    document.getElementById("title").textContent = item.title;
+    document.getElementById("bug").textContent = requested;
+    document.getElementById("case").textContent = item.caseId;
+    document.getElementById("method").textContent = item.method;
+    document.getElementById("coverage").textContent = item.coverage;
+    document.getElementById("observed").textContent = item.observed;
+    document.getElementById("actual").textContent = item.actual;
+    document.getElementById("expected").textContent = item.expected;
+    document.getElementById("source").textContent = item.source;
+    document.getElementById("note").textContent = item.note;
+  </script>
+</body>
+</html>
