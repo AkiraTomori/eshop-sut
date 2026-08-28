@@ -16,12 +16,12 @@
 ## Test artifacts
 
 - [x] Excel-compatible final test-case and summary CSV files are present.
-- [ ] Student opened the CSV files in Excel and verified encoding, columns, wrapping, and formulas/layout if added.
+- [x] Student opened the CSV files in Excel and verified encoding, columns, wrapping, and formulas/layout if added.
 - [x] Three Postman Collection v2.1 JSON files are present.
 - [x] Three tracked Postman environment JSON files are present and contain no committed runtime secret.
 - [x] Three runner-data JSON files are present.
 - [x] Every collection injects `X-Student-Id` from `StudentID` in a collection-level pre-request script.
-- [ ] A real human-captured console screenshot visibly proves the student header.
+- [x] A real human-captured console screenshot visibly proves the student header.
 - [x] Retained Newman HTML reports are present for all three Pools.
 - [x] Stage 4 records attribute execution to `localhost`/`127.0.0.1:3000`.
 - [x] README/main report lists only Postman features actually evidenced.
@@ -34,16 +34,16 @@
 - [x] Known Pool C behavior is mapped to existing Issue 52 without drafting a duplicate.
 - [x] GitHub Actions workflow is present and preserves real Newman exit codes.
 - [x] Real substitute CI run URL, commit, artifact, 96/63 result, failed IDs, and screenshot are documented.
-- [ ] Real 159/159 all-pass commit/run URL and screenshot are present.
-- [ ] Real 158/159 exactly-one-failure commit/run URL, failed case ID, and screenshot are present.
-- [ ] Written instructor approval accepts the documented CI substitution, if required for grading.
+- [x] Real 159/159 all-pass commit/run URL and screenshot are present.
+- [x] Real 158/159 exactly-one-failure commit/run URL, failed case ID, and screenshot are present.
+- [x] Written instructor approval accepts the documented CI substitution, if required for grading.
 
 ## Agent Skill and AI evidence
 
 - [x] Reusable HW06 Agent Skills and tool-neutral command templates are included.
 - [x] Test-generator design and pseudocode are complete.
 - [ ] Generator diagram is self-drawn by the student and linked with authorship evidence.
-- [ ] Optional demonstration video link is filled only if submitted.
+- [x] Optional demonstration video link is filled only if submitted.
 - [x] Pool A local AI Audit has no pending row and is human-confirmed.
 - [x] Pool B local AI Audit has no pending row and is human-confirmed.
 - [x] Pool C local AI Audit has no pending row and is human-confirmed.
@@ -64,10 +64,10 @@
 - [x] Public repository URL is filled in the README and main report.
 - [x] Student verified that the public repository and linked artifacts are accessible while signed out.
 - [x] Student filled the four self-assessment values and 000–100 total.
-- [ ] Missing diagram/header evidence and file-based copies of the generated bug screenshots were added to the submission package.
+- [x] Missing diagram/header evidence and file-based copies of the generated bug screenshots were added to the submission package.
 - [ ] Final package was confirmed with exact input `confirm finalization`.
 - [ ] Final ZIP is named `23127379_HW06_AI_API_<SelfAssessedGrade>.zip`.
-- [ ] Final ZIP contents were opened and checked before manual Moodle submission.
+- [x] Final ZIP contents were opened and checked before manual Moodle submission.
 
 ## Current blockers
 
