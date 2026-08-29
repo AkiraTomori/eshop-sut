@@ -40,3 +40,5 @@ function generate_api_tests(api_unit, assignment, srs, api_spec):
 
 
 ## Hand-drawn Diagram
+
+Show in hand-drawn-1.png and hand-drawn-2.png the flow of the test generation process, including the stages of human confirmation and auditing. The diagram should illustrate how the initial contract is analyzed, how technique cases are generated, and how human input is integrated at various stages to ensure comprehensive test coverage.
