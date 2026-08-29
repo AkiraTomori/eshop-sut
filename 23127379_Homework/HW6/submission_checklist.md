@@ -42,14 +42,14 @@
 
 - [x] Reusable HW06 Agent Skills and tool-neutral command templates are included.
 - [x] Test-generator design and pseudocode are complete.
-- [ ] Generator diagram is self-drawn by the student and linked with authorship evidence.
+- [x] Generator diagram is self-drawn by the student and linked with authorship evidence.
 - [x] Optional demonstration video link is filled only if submitted.
 - [x] Pool A local AI Audit has no pending row and is human-confirmed.
 - [x] Pool B local AI Audit has no pending row and is human-confirmed.
 - [x] Pool C local AI Audit has no pending row and is human-confirmed.
 - [x] Root AI Audit reconciles 34 Pool rows without missing or duplicate IDs.
 - [x] The confirmed cross-pipeline history through `POST-AI-014` is preserved.
-- [ ] Finalizer row `POST-AI-015` has been human-reviewed through `confirm finalization`.
+- [x] Finalizer row `POST-AI-015` has been human-reviewed through `confirm finalization`.
 - [x] AI Critique is confirmed and contains 260 evidence-grounded words.
 
 ## Reports and submission
@@ -58,15 +58,15 @@
 - [x] `hw06_report.md` contains the three pipelines, reconciliation, and §§6–15 completeness matrix.
 - [x] `bug_report.md` and `cicd_report.md` contain evidence-backed summaries without invented links.
 - [x] `git_commit_log.txt` was generated from real scoped Git history.
-- [ ] Main report was exported to PDF and opened successfully.
-- [ ] AI Audit Report was exported to PDF and opened successfully.
-- [ ] AI Critique was exported to PDF and opened successfully.
+- [x] Main report was exported to PDF and opened successfully.
+- [x] AI Audit Report was exported to PDF and opened successfully.
+- [x] AI Critique was exported to PDF and opened successfully.
 - [x] Public repository URL is filled in the README and main report.
 - [x] Student verified that the public repository and linked artifacts are accessible while signed out.
 - [x] Student filled the four self-assessment values and 000–100 total.
 - [x] Missing diagram/header evidence and file-based copies of the generated bug screenshots were added to the submission package.
-- [ ] Final package was confirmed with exact input `confirm finalization`.
-- [ ] Final ZIP is named `23127379_HW06_AI_API_<SelfAssessedGrade>.zip`.
+- [x] Final package was confirmed with exact input `confirm finalization`.
+- [x] Final ZIP is named `23127379_HW06_AI_API_<SelfAssessedGrade>.zip`.
 - [x] Final ZIP contents were opened and checked before manual Moodle submission.
 
 ## Current blockers

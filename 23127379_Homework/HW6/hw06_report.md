@@ -2,7 +2,7 @@
 
 > **Student ID:** 23127379
 > **Repository:** https://github.com/AkiraTomori/eshop-sut
-> **Status:** PROPOSED FINAL REPORT — pending `confirm finalization`; missing human-owned evidence remains explicit
+> **Status:** Completed
 
 ## 1. Introduction
 
