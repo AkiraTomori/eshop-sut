@@ -8,6 +8,7 @@ name: HW06 Newman API Tests
       - 'backend/**'
       - '23127379_Homework/HW6/**'
       - 'reports/HW06_CICD_Report.md'
+  workflow_dispatch: 
 
 permissions:
   contents: read
